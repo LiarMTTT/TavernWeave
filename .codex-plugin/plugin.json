@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Focused Agent Skills for SillyTavern rolecard engineering and safe code improvement.",
   "author": {
-    "name": "TavernWeave Maintainers"
+    "name": "LiarMTTT"
   },
   "license": "PolyForm-Noncommercial-1.0.0",
   "keywords": [
@@ -18,7 +18,7 @@
     "displayName": "TavernWeave",
     "shortDescription": "Build, debug, and release robust SillyTavern rolecards.",
     "longDescription": "TavernWeave provides focused skills for rolecard authoring, modular sources, release pipelines, runtime debugging, embedded interfaces, workshop operations, and evidence-driven code quality.",
-    "developerName": "TavernWeave Maintainers",
+    "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
       "Interactive",
