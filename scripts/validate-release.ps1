@@ -70,7 +70,7 @@ if (-not (Test-Path -LiteralPath $licensePath -PathType Leaf)) {
 } else {
     $licenseText = Get-Content -LiteralPath $licensePath -Raw -Encoding UTF8
     if ($licenseText -notmatch '(?m)^# PolyForm Noncommercial License 1\.0\.0$' -or
-        $licenseText -notmatch '(?m)^Required Notice: Copyright 2026 TavernWeave Maintainers$') {
+        $licenseText -notmatch '(?m)^Required Notice: Copyright 2026 LiarMTTT$') {
         Add-ValidationError 'Repository license text or required notice does not match the declared noncommercial license.'
     }
 }

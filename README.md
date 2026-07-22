@@ -1,101 +1,48 @@
 # TavernWeave
 
-TavernWeave is a publishable Codex plugin containing focused Agent Skills for SillyTavern rolecard authoring, modular sources, build and release pipelines, runtime debugging, embedded UI work, workshop operations, and evidence-driven code quality.
+TavernWeave 是一套面向 Codex 的 SillyTavern 角色卡工程 Skill 阵列，覆盖角色卡设计、MVU 变量系统、模块化源码、构建发布、API 查证、真实运行时调试、嵌入式 UI、创意工坊运维与代码质量控制。
 
-The repository is the canonical public source. Project-specific skills and production coordinates stay in private workspaces and are never copied into Git history.
+> TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
-## Included skills
+## Skill 阵列
 
-- `tavern-card-builder` — design and author text or MVU rolecards.
-- `sillytavern-card-components` — safely decompose and maintain modular card sources.
-- `sillytavern-card-pipeline` — assemble, validate, package, and release cards.
-- `sillytavern-api-reference` — verify scripting APIs, events, macros, and runtime facts.
-- `sillytavern-runtime-debug` — reproduce and close issues in a real SillyTavern runtime.
-- `sillytavern-embedded-ui` — design and review opening pages, status bars, control centers, and dialogs.
-- `code-quality-workflow` — audit, gate, improve, and verify code without speculative rewrites.
-- `shadcn-tailwind-ui` — build accessible React interfaces with shadcn/ui, Radix, and Tailwind.
-- `rolecard-workshop-ops` — operate a configurable rolecard workshop publishing chain.
-
-## Why this is an array
-
-`tavern-card-builder` is the authoring front door. It delegates exact API facts,
-component ownership, packaging, runtime evidence, embedded UI, and infrastructure to
-focused skills. Keeping those boundaries separate reduces trigger ambiguity and keeps
-read-only diagnosis, local implementation, release, and production deployment from
-silently granting one another authority.
-
-The public migration is:
-
-| Previous private input | Public result |
+| Skill | 主要职责 |
 | --- | --- |
-| `card-components` | `sillytavern-card-components` |
-| `card-workflow` | `sillytavern-card-pipeline` |
-| Four code audit/optimization/refactor skills | `code-quality-workflow` |
-| `tavern-card-builder` | Upgraded public authoring front door |
-| `sillytavern-helper-dev` | `sillytavern-api-reference` for exact runtime facts |
-| `sillytavern-browser-debug` | `sillytavern-runtime-debug` |
-| `ui-review` | `sillytavern-embedded-ui` |
-| `ui-styling` | Clean public derivative `shadcn-tailwind-ui` |
-| Workshop backend and Gateway runbooks | Clean public derivative `rolecard-workshop-ops` |
-| Project-specific development adapters | Remain private; reusable rules live in the focused public skills |
+| `tavern-card-builder` | 设计文字卡或 MVU 变量卡，处理 schema、初始化、更新规则、世界书、提示词和开局协议 |
+| `sillytavern-card-components` | 无损拆卡、组件边界、依赖声明、registry/recipe 与往返一致性 |
+| `sillytavern-card-pipeline` | 从维护源码组装、验证、打包 JSON/PNG，并执行版本与发布门 |
+| `sillytavern-api-reference` | 查证 SillyTavern、Tavern Helper、STScript、EJS、宏和 MVU 的版本敏感 API |
+| `sillytavern-runtime-debug` | 在真实 SillyTavern 中复现问题，检查 iframe、控制台、DOM、样式、数据和生命周期 |
+| `sillytavern-embedded-ui` | 设计或审查开局页、状态栏、控制中心、抽屉和弹窗 |
+| `code-quality-workflow` | 统一执行代码审计、重构门控、最小修复、优化与回归验证 |
+| `shadcn-tailwind-ui` | 使用 React、shadcn/ui、Radix 和 Tailwind 构建可访问产品界面 |
+| `rolecard-workshop-ops` | 诊断与运维可配置的角色卡工坊发布链，同时保护生产坐标和凭据 |
 
-## Install for local development
+## 安装
 
-Clone the repository at the personal-marketplace source path:
+将仓库克隆到个人 marketplace 的标准插件路径：
 
 ```powershell
 $sourceRoot = Join-Path $env:USERPROFILE 'plugins\tavernweave-agent-skills'
-if (Test-Path -LiteralPath $sourceRoot) { throw "Target already exists: $sourceRoot" }
+if (Test-Path -LiteralPath $sourceRoot) {
+    throw "目标已存在：$sourceRoot"
+}
+
 git clone -- https://github.com/LiarMTTT/TavernWeave.git $sourceRoot
 Set-Location $sourceRoot
 powershell -File scripts/register-local.ps1
 codex plugin add tavernweave-agent-skills@personal
 ```
 
-`register-local.ps1` creates or updates only this entry in the default personal
-marketplace at `%USERPROFILE%\.agents\plugins\marketplace.json`; it preserves other
-entries. If the checkout lives elsewhere, create a directory junction at
-`%USERPROFILE%\plugins\tavernweave-agent-skills` first.
+`register-local.ps1` 只创建或更新 TavernWeave 在个人 marketplace 中的条目，不会覆盖其他插件。若仓库实际位于其他位置，可先在标准插件路径建立目录联接。
 
-After editing an already installed plugin, refresh the Codex cachebuster and reinstall:
+安装或更新后，请新建一个 Codex 任务再测试 Skill 触发。
+
+## 更新
 
 ```powershell
-powershell -File scripts/bootstrap-dev.ps1
-& .\.private\venv\Scripts\python.exe `
-  "$env:USERPROFILE\.codex\skills\.system\plugin-creator\scripts\update_plugin_cachebuster.py" `
-  .
+Set-Location "$env:USERPROFILE\plugins\tavernweave-agent-skills"
+git pull --ff-only
+powershell -File scripts/register-local.ps1
 codex plugin add tavernweave-agent-skills@personal
 ```
-
-Start a new Codex task before evaluating changed skill triggers.
-
-## Repository rules
-
-- Keep `SKILL.md` frontmatter to `name` and `description` only.
-- Keep skill packages free of READMEs, changelogs, release notes, and project incident logs.
-- Put repository-facing documentation at the repository root.
-- Keep API navigation pinned to public upstream commits; verify exact runtime facts against the installed versions.
-- Never commit production endpoints, credentials, private absolute paths, or private project data.
-- Treat offline validation as preparation; real runtime behavior still requires real SillyTavern acceptance.
-- Re-run the manual forward cases and refresh their skill fingerprints after changing a skill package.
-
-After every case in `tests/replay/` has been rerun with fresh agents, record that
-confirmation with `powershell -File scripts/refresh-replay-fingerprints.ps1 -ConfirmedManualReplay`.
-The release validator rejects stale fingerprints.
-
-Run `powershell -File scripts/validate-release.ps1` before packaging. For the official Codex validators, run `scripts/bootstrap-dev.ps1` once and then `scripts/validate-with-codex-tools.ps1`. Run `powershell -File scripts/package-release.ps1` only after validation passes.
-
-## License
-
-TavernWeave-authored material is available under the
-[PolyForm Noncommercial License 1.0.0](LICENSE). Personal study, research,
-experimentation, hobby projects, and other noncommercial uses are permitted
-under its terms. Commercial use is not granted and requires separate written
-permission from the copyright holder.
-
-This repository is source-available, not OSI Open Source. Independent upstream
-projects keep their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-
-## 中文说明
-
-本仓库是 TavernWeave 公共 skill 阵列的唯一真相源。项目专属适配、创意工坊生产坐标以及个人内置数据继续留在私有工作区；公开版只保留通用流程、配置合同和安全门。更新公开版时必须先通过脱敏、许可、结构与真实任务回放检查。TavernWeave 原创内容采用 PolyForm Noncommercial 1.0.0：允许个人与其他非商用用途，商业使用需另行取得书面授权。
