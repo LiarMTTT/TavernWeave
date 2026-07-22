@@ -10,4 +10,5 @@
 - Bind release tags to the manifest version and validate the exact staged archive contents.
 - Gate releases on Python tests plus fingerprinted manual forward/adversarial replay evidence.
 - Add a guarded personal-marketplace registration command and ESM-aware Tailwind config output.
+- Add Claude Code plugin and marketplace manifests without duplicating the Skill array.
 - License TavernWeave-authored material under PolyForm Noncommercial 1.0.0.

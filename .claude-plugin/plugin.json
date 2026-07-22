@@ -1,0 +1,18 @@
+{
+  "name": "tavernweave-agent-skills",
+  "version": "0.1.0",
+  "description": "Focused Agent Skills for SillyTavern rolecard engineering and safe code improvement.",
+  "author": {
+    "name": "LiarMTTT"
+  },
+  "homepage": "https://github.com/LiarMTTT/TavernWeave",
+  "repository": "https://github.com/LiarMTTT/TavernWeave",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "keywords": [
+    "agent-skills",
+    "sillytavern",
+    "rolecard",
+    "mvu",
+    "code-quality"
+  ]
+}

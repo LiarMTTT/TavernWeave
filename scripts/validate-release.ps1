@@ -50,6 +50,7 @@ function Get-SkillFingerprint([string]$Directory) {
     }
 }
 
+$manifest = $null
 $manifestPath = Join-Path $PluginRoot '.codex-plugin\plugin.json'
 if (-not (Test-Path -LiteralPath $manifestPath)) {
     Add-ValidationError "Missing plugin manifest: $manifestPath"
@@ -61,6 +62,46 @@ if (-not (Test-Path -LiteralPath $manifestPath)) {
         if ($manifest.license -ne 'PolyForm-Noncommercial-1.0.0') { Add-ValidationError 'Plugin license must remain PolyForm-Noncommercial-1.0.0.' }
     } catch {
         Add-ValidationError "Invalid plugin manifest JSON: $($_.Exception.Message)"
+    }
+}
+
+$claudeManifest = $null
+$claudeManifestPath = Join-Path $PluginRoot '.claude-plugin\plugin.json'
+if (-not (Test-Path -LiteralPath $claudeManifestPath -PathType Leaf)) {
+    Add-ValidationError "Missing Claude Code plugin manifest: $claudeManifestPath"
+} else {
+    try {
+        $claudeManifest = Get-Content -LiteralPath $claudeManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        if ($claudeManifest.name -ne 'tavernweave-agent-skills') { Add-ValidationError 'Claude Code plugin name must match the Codex plugin name.' }
+        if ($claudeManifest.author.name -ne 'LiarMTTT') { Add-ValidationError 'Claude Code plugin author must be LiarMTTT.' }
+        if ($claudeManifest.license -ne 'PolyForm-Noncommercial-1.0.0') { Add-ValidationError 'Claude Code plugin license must remain PolyForm-Noncommercial-1.0.0.' }
+        if ($manifest -and $claudeManifest.name -ne $manifest.name) { Add-ValidationError 'Codex and Claude Code plugin names do not match.' }
+        if ($manifest -and $claudeManifest.version -ne $manifest.version) { Add-ValidationError 'Codex and Claude Code plugin versions do not match.' }
+        if ($manifest -and $claudeManifest.license -ne $manifest.license) { Add-ValidationError 'Codex and Claude Code plugin licenses do not match.' }
+    } catch {
+        Add-ValidationError "Invalid Claude Code plugin manifest JSON: $($_.Exception.Message)"
+    }
+}
+
+$claudeMarketplacePath = Join-Path $PluginRoot '.claude-plugin\marketplace.json'
+if (-not (Test-Path -LiteralPath $claudeMarketplacePath -PathType Leaf)) {
+    Add-ValidationError "Missing Claude Code marketplace manifest: $claudeMarketplacePath"
+} else {
+    try {
+        $claudeMarketplace = Get-Content -LiteralPath $claudeMarketplacePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        if ($claudeMarketplace.name -ne 'tavernweave') { Add-ValidationError 'Claude Code marketplace name must be tavernweave.' }
+        if ($claudeMarketplace.owner.name -ne 'LiarMTTT') { Add-ValidationError 'Claude Code marketplace owner must be LiarMTTT.' }
+        $claudeEntries = @($claudeMarketplace.plugins | Where-Object { $_.name -eq 'tavernweave-agent-skills' })
+        if ($claudeEntries.Count -ne 1) {
+            Add-ValidationError 'Claude Code marketplace must contain exactly one TavernWeave plugin entry.'
+        } else {
+            $claudeSource = $claudeEntries[0].source
+            if ($claudeSource.source -ne 'github' -or $claudeSource.repo -ne 'LiarMTTT/TavernWeave') {
+                Add-ValidationError 'Claude Code marketplace source must point to LiarMTTT/TavernWeave on GitHub.'
+            }
+        }
+    } catch {
+        Add-ValidationError "Invalid Claude Code marketplace JSON: $($_.Exception.Message)"
     }
 }
 
