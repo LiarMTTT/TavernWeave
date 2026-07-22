@@ -1,6 +1,6 @@
 ---
 name: sillytavern-runtime-debug
-description: Reproduce, diagnose, collect execution evidence for, and close acceptance of rolecard behavior inside a real SillyTavern runtime using any capable browser driver. Use when the primary task requires live execution of opening-page, status-bar, control-center, popup, regex, worldbook, Tavern Helper iframe, MVU, import, console, responsive, or interaction checks that static previews cannot prove. Do not use as the primary skill for designing or implementing embedded UI source; hand those changes to sillytavern-embedded-ui, then resume runtime validation on the rebuilt artifact.
+description: Reproduce, diagnose, collect execution evidence for, and close acceptance of rolecard behavior inside a real SillyTavern runtime using any capable browser driver. Use when the primary task requires live execution of opening-page, status-bar, control-center, popup, regex, worldbook, Tavern Helper iframe, real-time listener or hot-reload, MVU, import, console, responsive, or interaction checks that static previews cannot prove. Do not use as the primary skill for designing or implementing embedded UI source; hand those changes to sillytavern-embedded-ui, then resume runtime validation on the rebuilt artifact.
 ---
 
 # SillyTavern Runtime Debug
@@ -29,6 +29,35 @@ Before starting, confirm the driver can perform the operations the test needs:
 - capture screenshots when visual evidence adds value.
 
 If a capability is absent, adapt the test or state the gap. Never pretend a screenshot proves console state or that top-frame evaluation proves iframe state.
+
+## Verify the real-time development chain
+
+When a project uses a source watcher plus Tavern Helper real-time editing, verify each
+link separately:
+
+```text
+source edit -> successful rebuild -> expected development output changed
+            -> listener connected -> intended iframe reloaded -> new behavior observed
+```
+
+Obtain the watcher command, output path, and rebuild receipt from
+`sillytavern-card-pipeline`. Detect the listener control and connection state from the
+installed Tavern Helper version; do not assume a settings label, URL, or port from a
+different version. Then:
+
+1. capture the current output identity and target iframe identity;
+2. wait for a successful rebuild after the source edit;
+3. observe the listener-triggered reload, or perform the declared manual
+   refresh/rebind fallback;
+4. confirm the rebuilt output is the one now executing using artifact identity,
+   frame replacement, a project-provided revision marker, or another direct signal;
+5. collect console, DOM, interaction, and data evidence from the reloaded runtime.
+
+If compilation fails or the listener disconnects, the page may still be running the
+previous successful artifact. Report that stale-artifact boundary instead of treating
+the new source as tested. Live reload accelerates iteration but does not close release
+acceptance: repeat the selected matrix against the exact production-built artifact,
+with a fresh import, chat, or binding when the feature lifecycle requires it.
 
 ## Establish the test boundary
 

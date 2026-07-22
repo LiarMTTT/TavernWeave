@@ -1,14 +1,16 @@
 ---
 name: sillytavern-card-pipeline
 description: >-
-  Orchestrate data-driven SillyTavern rolecard iteration, validation, JSON packaging,
-  PNG payload embedding, release auditing, and delivery by adapting to tools already
-  present in the target project. Use when creating or checking a profile, manifest,
-  operation plan, or contract; choosing validation from changed-file impact;
-  composing version components; packing or re-packing a card; generating final JSON
-  or PNG artifacts; verifying embedded payload parity; or preparing an explicit
-  checkpoint or public release. Do not use for exploratory card disassembly or shared
-  component-library design; use sillytavern-card-components instead.
+  Orchestrate data-driven SillyTavern rolecard live development, iteration,
+  validation, JSON packaging, PNG payload embedding, release auditing, and delivery
+  by adapting to tools already present in the target project. Use when discovering or
+  running a project-provided watch build for Tavern Helper real-time editing; creating
+  or checking a profile, manifest, operation plan, or contract; choosing validation
+  from changed-file impact; composing version components; packing or re-packing a
+  card; generating final JSON or PNG artifacts; verifying embedded payload parity; or
+  preparing an explicit checkpoint or public release. Do not use for exploratory card
+  disassembly or shared component-library design; use sillytavern-card-components
+  instead.
 ---
 
 # SillyTavern Card Pipeline
@@ -21,6 +23,8 @@ contract, and keep configuration, source, and artifacts in distinct layers.
 
 Classify the request before running any mutating command:
 
+- **live iteration**: run the project's verified watcher and rebuild development
+  output after source edits;
 - **iteration**: change source and run impact-based checks;
 - **checkpoint package**: create JSON or PNG required by the next stage;
 - **release candidate**: compose, package, embed, and run the full offline gate;
@@ -46,6 +50,32 @@ project tools.
 
 If a required capability is absent, report the missing adapter boundary. Do not claim
 that a bundled engine or fallback command exists.
+
+## Drive a live development loop
+
+Use live iteration only when the user asks for real-time compilation, watch mode, hot
+reload, or an equivalent development loop.
+
+1. Inspect the target project's package scripts, build configuration, and development
+   documentation. Do not assume the command is `pnpm watch` or that every watcher uses
+   the same output layout.
+2. Record the watcher command, working directory, source roots, exact outputs, initial
+   build-ready signal, rebuild success and failure signals, and stop procedure in the
+   adapter record.
+3. Confirm the output path is the one consumed by the card, regex, local server, or
+   Tavern Helper binding. A running process without a successful initial build is not
+   ready.
+4. Start one watcher, keep its output observable, and after each source edit wait for a
+   successful rebuild before asking `sillytavern-runtime-debug` to verify the listener
+   reload and new behavior in SillyTavern.
+5. Treat listener disconnects, compiler errors, and stale output as failed iterations.
+   Do not diagnose runtime behavior against the previous successful artifact as though
+   the new source were loaded.
+
+Watch output is a development candidate, even when the project writes it under
+`dist/`. Before checkpoint or release packaging, run the verified production build and
+artifact checks. Stop or isolate the watcher first when both commands can write the
+same targets.
 
 ## Resolve configuration truth
 
@@ -139,6 +169,8 @@ acceptance is complete.
 State:
 
 - the adapter capabilities and exact commands used;
+- for live iteration, the watcher readiness signal, output path, latest successful
+  rebuild, and whether real-SillyTavern reload was verified;
 - active profile, manifest, plan, and contract;
 - files written and preserved artifacts;
 - targeted, standard, and release checks with pass or fail results;

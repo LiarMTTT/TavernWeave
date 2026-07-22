@@ -39,6 +39,11 @@ Record these fields for every capability:
 | `success` | Exit code and expected validation summary. |
 | `provenance` | Documentation, schema, test, or source that proved the mapping. |
 
+For a long-running watcher, also record its initial ready signal, rebuild success and
+failure signals, output paths, observation method, and stop procedure. Do not reduce a
+watcher to a one-shot command whose only success criterion is that the process remains
+alive.
+
 Pass arguments as separate process arguments when possible. Avoid constructing shell
 strings from card paths or user content.
 
@@ -49,6 +54,7 @@ Map only capabilities the project actually provides:
 | Capability | Expected behavior |
 | --- | --- |
 | `inspect` | Resolve active configuration and targets without writing. |
+| `watch` | Continuously rebuild declared development outputs from maintained source and expose observable initial-build and rebuild results. |
 | `validate-config` | Validate profile, manifest, plan, and contract structure. |
 | `validate-source` | Run syntax, contract, field-chain, and targeted checks. |
 | `apply-plan` | Preview and apply guarded data-driven operations. |
@@ -75,6 +81,12 @@ Before invoking a write:
 - snapshot an explicitly replaceable artifact before writing;
 - know whether failure can leave partial output;
 - capture the command, exit code, and final output inventory.
+
+For `watch`, require an explicit live-development request, capture the first successful
+build before handing off to runtime testing, keep compiler output observable, and stop
+or isolate the process before another command writes the same outputs. Watch readiness
+does not prove Tavern Helper listener connectivity or real-SillyTavern reload; those
+belong to `sillytavern-runtime-debug`.
 
 An extraction command is unsafe for round-trip use if it accepts an explicit input but
 still writes to a live component directory through an implicit manifest. Rebind every

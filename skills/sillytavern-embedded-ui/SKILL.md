@@ -1,6 +1,6 @@
 ---
 name: sillytavern-embedded-ui
-description: Design, implement, or review framework-neutral embedded interfaces for SillyTavern rolecards, including opening pages, status bars, control centers, drawers, and popups. Use for HTML/CSS/JavaScript structure, interaction states, responsive behavior, accessibility, safe rendering, host-integration contracts, supporting checks, and defining the real-runtime handoff. Do not use as the primary skill to reproduce or close behavior in a live SillyTavern instance; hand that work to sillytavern-runtime-debug.
+description: Design, implement, or review framework-neutral embedded interfaces for SillyTavern rolecards, including opening pages, status bars, control centers, drawers, and popups. Use for HTML/CSS/JavaScript structure, interaction states, responsive behavior, accessibility, safe rendering, host-integration contracts, source-side real-time compilation loops, supporting checks, and defining the real-runtime handoff. Do not use as the primary skill to reproduce or close behavior in a live SillyTavern instance; hand that work to sillytavern-runtime-debug.
 ---
 
 # SillyTavern Embedded UI
@@ -95,6 +95,26 @@ For remote UI, prefer declarative HTML plus a trusted local binder. Enforce HTTP
 - Preserve unrelated user data and re-read after writes.
 
 SillyTavern may namespace classes in static message HTML. Dynamic DOM added later may not receive the same transformation. Verify raw class tokens and computed styles in the real runtime; do not infer correctness from an offline preview.
+
+## Use real-time compilation during implementation
+
+When the user requests real-time editing, keep source implementation here and use
+`sillytavern-card-pipeline` to discover and run the target project's existing watcher.
+Do not invent a universal `watch` command, port, local server, or output mapping.
+
+Before editing, record the maintained source, the exact development output consumed by
+the card, and the current successful build marker. After each edit:
+
+1. wait for a successful rebuild and stop on compiler errors;
+2. hand the new output identity to `sillytavern-runtime-debug`;
+3. verify that Tavern Helper reloaded the intended message or script iframe, or use the
+   project's declared manual refresh/rebind fallback when live listening is unavailable;
+4. inspect the resulting DOM, console, interaction, and data state before continuing.
+
+A connected listener does not prove the newest source compiled, and a successful watch
+build does not prove SillyTavern loaded it. Keep both receipts. Use the live loop to
+shorten implementation feedback, then run the production build and hand its exact
+artifact to the final runtime acceptance pass.
 
 ## Opening pages
 
