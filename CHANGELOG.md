@@ -7,7 +7,6 @@
 - Split rolecard authoring, components, pipeline, API, runtime, and embedded UI responsibilities.
 - Add publishable derivatives for shadcn/Tailwind UI work and rolecard workshop operations.
 - Pin API navigation to reproducible public upstream revisions without vendoring declarations.
-- Bind release tags to the manifest version and validate the exact staged archive contents.
 - Gate releases on Python tests plus fingerprinted manual forward/adversarial replay evidence.
 - Add a guarded personal-marketplace registration command and ESM-aware Tailwind config output.
 - Add Claude Code plugin and marketplace manifests without duplicating the Skill array.
