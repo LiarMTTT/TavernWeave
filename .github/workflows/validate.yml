@@ -1,0 +1,28 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  repository:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate public boundary and skill structure
+        shell: pwsh
+        run: ./scripts/validate-release.ps1
+      - name: Compile Python helpers
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem -LiteralPath ./skills -Filter *.py -File -Recurse
+          foreach ($file in $files) {
+            python -m py_compile $file.FullName
+          }
+      - name: Run bundled Python tests
+        shell: pwsh
+        run: |
+          $tests = Get-ChildItem -LiteralPath ./skills -Filter test_*.py -File -Recurse
+          foreach ($test in $tests) {
+            python $test.FullName
+          }

@@ -1,0 +1,146 @@
+---
+name: sillytavern-card-pipeline
+description: >-
+  Orchestrate data-driven SillyTavern rolecard iteration, validation, JSON packaging,
+  PNG payload embedding, release auditing, and delivery by adapting to tools already
+  present in the target project. Use when creating or checking a profile, manifest,
+  operation plan, or contract; choosing validation from changed-file impact;
+  composing version components; packing or re-packing a card; generating final JSON
+  or PNG artifacts; verifying embedded payload parity; or preparing an explicit
+  checkpoint or public release. Do not use for exploratory card disassembly or shared
+  component-library design; use sillytavern-card-components instead.
+---
+
+# SillyTavern Card Pipeline
+
+Drive the target repository's workflow without pretending this skill ships a build
+engine. Discover and verify the project's own tools, map them to a small adapter
+contract, and keep configuration, source, and artifacts in distinct layers.
+
+## Confirm the requested gate
+
+Classify the request before running any mutating command:
+
+- **iteration**: change source and run impact-based checks;
+- **checkpoint package**: create JSON or PNG required by the next stage;
+- **release candidate**: compose, package, embed, and run the full offline gate;
+- **accepted release**: complete remaining host checks and approve delivery.
+
+Package only when the user explicitly requests packing, re-packing, PNG generation,
+final artifacts, full workflow, delivery, release, or a checkpoint that requires a
+packed artifact. Do not package after every component edit.
+
+## Discover the project adapter
+
+Read [tool-adapter-contract.md](references/tool-adapter-contract.md) before invoking
+project tools.
+
+1. Read repository instructions and current build documentation.
+2. Detect the repository root, active configuration entrypoint, executable runtime,
+   and available workflow capabilities.
+3. Verify each capability from help output, schemas, tests, or source inspection; do
+   not infer behavior from a filename alone.
+4. Record commands, working directory, explicit inputs, explicit outputs, dry-run
+   support, side effects, and success criteria.
+5. Run a read-only information or validation capability first.
+
+If a required capability is absent, report the missing adapter boundary. Do not claim
+that a bundled engine or fallback command exists.
+
+## Resolve configuration truth
+
+Read [configuration-contracts.md](references/configuration-contracts.md) when creating,
+editing, or reconciling workflow data.
+
+Resolve the active files together:
+
+- **profile**: card-family identity, defaults, protocol, variable roots, recipe, and
+  configuration links;
+- **manifest**: exact version paths, component mapping, packaging policy,
+  deliverables, field chains, and release-specific behavior;
+- **plan**: a reviewable sequence of intended changes between known states;
+- **contract**: stable required and forbidden invariants.
+
+Re-probe the exact active profile and manifest instead of trusting a remembered
+version. Keep differences in data, not in copied card-name or version-specific tools.
+Make generated artifacts consume these declarations rather than duplicating protocol
+or version rules.
+
+## Prepare the change
+
+1. Inventory current source and existing artifacts without modifying them.
+2. Define the exact write scope and new artifact paths. Preserve earlier releases;
+   default to a new version or staging directory.
+3. Anchor a regression checklist for every already-working consumer in scope.
+4. Create or review a plan with precise operations, guarded replacements, collision
+   policy, and validation attached to each step.
+5. Validate profile, manifest, plan, and contract structure.
+6. Run the plan's dry-run and inspect the predicted writes before applying it.
+
+Do not copy an entire historical release when only source components should be
+derived. Do not extract an older JSON or PNG over components that are being edited.
+
+## Validate by impact
+
+Use the impact matrix in [release-gate.md](references/release-gate.md). Run the smallest
+check set that proves the changed contract, then widen only when the change crosses a
+boundary.
+
+Always validate a coupled variable field across initial data, schema, update rules,
+output format, context, groups, runtime readers, and examples. Keep model-visible text
+free of developer commentary. Validate runtime layers independently instead of
+assuming a worldbook, regex, helper script, or iframe shares APIs with another layer.
+
+Treat an incorrect check as a defect: contracts must lock stable behavior and include
+forbidden regressions, not encode a temporary implementation preference.
+
+## Compose and package
+
+1. Confirm source edits and targeted checks are complete.
+2. Compose only when the active profile selects generated components and the recipe
+   matches the current target. Do not overwrite manual component snapshots to make a
+   build pass.
+3. Compose into staging and verify required outputs, dependency resolution, syntax,
+   and component parity.
+4. Pack JSON from component sources into the manifest's staged target. Never inject a
+   fix after packing; first update the maintained source, then pack again.
+5. Validate the packed JSON before embedding it.
+6. Embed JSON into a copied or explicitly declared PNG shell according to manifest
+   policy. Preserve unrelated chunks and verify every emitted card payload decodes to
+   the packed JSON.
+7. Keep reverse extraction disabled by default. Use it only as a sandboxed round-trip
+   check after packing and embedding.
+
+If re-packing an existing target is explicitly required, snapshot and hash the current
+artifact first and report the replacement. Never silently replace an older release.
+
+## Pass the release gate
+
+Follow [release-gate.md](references/release-gate.md) for checkpoint, candidate, and
+acceptance criteria.
+
+At minimum, prove:
+
+- configuration and version alignment;
+- contract and forbidden-regression checks;
+- complete declared component and deliverable sets;
+- packed JSON validity and source parity;
+- PNG structure, payload cardinality, and semantic equality with JSON;
+- artifact paths, sizes, and hashes;
+- no unexpected writes outside the declared scope.
+
+Run the project's release audit only for a release candidate or when explicitly
+requested. Offline success does not close host-dependent UI, regex, bridge, import,
+new-chat, or interaction checks; record those as pending until real SillyTavern
+acceptance is complete.
+
+## Report the handoff
+
+State:
+
+- the adapter capabilities and exact commands used;
+- active profile, manifest, plan, and contract;
+- files written and preserved artifacts;
+- targeted, standard, and release checks with pass or fail results;
+- JSON and PNG hashes plus payload-parity result;
+- skipped gates and remaining real-host acceptance.

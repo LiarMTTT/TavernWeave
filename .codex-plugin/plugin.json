@@ -1,0 +1,33 @@
+{
+  "name": "tavernweave-agent-skills",
+  "version": "0.1.0",
+  "description": "Focused Agent Skills for SillyTavern rolecard engineering and safe code improvement.",
+  "author": {
+    "name": "TavernWeave Maintainers"
+  },
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "keywords": [
+    "agent-skills",
+    "sillytavern",
+    "rolecard",
+    "mvu",
+    "code-quality"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "TavernWeave",
+    "shortDescription": "Build, debug, and release robust SillyTavern rolecards.",
+    "longDescription": "TavernWeave provides focused skills for rolecard authoring, modular sources, release pipelines, runtime debugging, embedded interfaces, workshop operations, and evidence-driven code quality.",
+    "developerName": "TavernWeave Maintainers",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Design a maintainable SillyTavern rolecard and choose the right TavernWeave skill.",
+      "Audit this rolecard source and prepare the smallest safe release workflow.",
+      "Reproduce this rolecard UI issue in SillyTavern and identify the owning layer."
+    ]
+  }
+}

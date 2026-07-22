@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern Card Components"
+  short_description: "Safely extract and maintain modular rolecard sources"
+  default_prompt: "Use $sillytavern-card-components to safely disassemble this card in a sandbox and propose a registry-backed component layout."

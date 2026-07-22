@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "fixed-greeting-mvu",
+      "prompt": "Add three fixed alternate greetings with different starting state to this MVU card.",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Preserve the detected dialect, select per-greeting initialization, and retain a real-runtime acceptance gate."
+    },
+    {
+      "id": "safe-decompose",
+      "prompt": "Split this packaged rolecard JSON into reusable components without changing the original file.",
+      "expectedPrimarySkill": "sillytavern-card-components",
+      "expectedBehavior": "Snapshot the input, decompose in a sandbox, declare dependencies, and require roundtrip comparison."
+    },
+    {
+      "id": "release-package",
+      "prompt": "Assemble the maintained sources, validate them, and produce versioned JSON and PNG release artifacts.",
+      "expectedPrimarySkill": "sillytavern-card-pipeline",
+      "expectedBehavior": "Discover the project adapter, keep source and artifacts separate, and stop at explicit release gates."
+    },
+    {
+      "id": "exact-runtime-signature",
+      "prompt": "What is the exact event name and callback signature for this Tavern Helper MVU hook?",
+      "expectedPrimarySkill": "sillytavern-api-reference",
+      "expectedBehavior": "Verify an identified source/version and distinguish confirmed facts from inference."
+    },
+    {
+      "id": "blank-ui-runtime",
+      "prompt": "The status bar works offline but is blank after importing the card into SillyTavern. Diagnose it.",
+      "expectedPrimarySkill": "sillytavern-runtime-debug",
+      "expectedBehavior": "Reproduce in a real runtime and trace DOM, console, iframe, permissions, data, and render evidence."
+    },
+    {
+      "id": "embedded-control-center",
+      "prompt": "Review and improve this rolecard control center for mobile, accessibility, and safe state handling.",
+      "expectedPrimarySkill": "sillytavern-embedded-ui",
+      "expectedBehavior": "Review the embedded UI contract without introducing a React stack by default."
+    },
+    {
+      "id": "vague-cleanup",
+      "prompt": "Clean up and optimize this ugly but stable module.",
+      "expectedPrimarySkill": "code-quality-workflow",
+      "expectedBehavior": "Audit and gate first; do not edit without evidence and implementation authorization."
+    },
+    {
+      "id": "react-product-ui",
+      "prompt": "Build an accessible settings dashboard with React, shadcn/ui, Radix, and Tailwind.",
+      "expectedPrimarySkill": "shadcn-tailwind-ui",
+      "expectedBehavior": "Use the requested stack, detect the project setup, and guard all generated writes."
+    },
+    {
+      "id": "workshop-incident",
+      "prompt": "The rolecard workshop publish request now returns 502. Diagnose the chain before changing production.",
+      "expectedPrimarySkill": "rolecard-workshop-ops",
+      "expectedBehavior": "Trace the configurable public/gateway/storage chain read-only and require authorization before deploy or secret changes."
+    }
+  ]
+}

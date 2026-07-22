@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern API Reference"
+  short_description: "Verify SillyTavern scripting APIs and runtime facts"
+  default_prompt: "Use $sillytavern-api-reference to verify the exact API required by this script."

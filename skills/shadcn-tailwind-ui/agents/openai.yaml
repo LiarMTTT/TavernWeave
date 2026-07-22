@@ -1,0 +1,4 @@
+interface:
+  display_name: "shadcn + Tailwind UI"
+  short_description: "Build accessible React interfaces with shadcn and Tailwind"
+  default_prompt: "Use $shadcn-tailwind-ui to implement this accessible React interface with the project's existing shadcn and Tailwind conventions."

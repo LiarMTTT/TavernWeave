@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rolecard Workshop Ops"
+  short_description: "Diagnose safely and deploy rolecard workshop services"
+  default_prompt: "Use $rolecard-workshop-ops to diagnose this workshop read-only, then identify any separately authorized deployment step."

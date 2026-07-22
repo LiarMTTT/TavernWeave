@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Quality Workflow"
+  short_description: "Audit, gate, change, and verify code safely"
+  default_prompt: "Use $code-quality-workflow to audit this code, gate any proposed change, and verify only an explicitly authorized patch."

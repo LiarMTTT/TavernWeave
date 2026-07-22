@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern Runtime Debug"
+  short_description: "Reproduce and close issues in real SillyTavern"
+  default_prompt: "Use $sillytavern-runtime-debug to reproduce this issue, collect runtime evidence, and close acceptance in SillyTavern."
