@@ -1,0 +1,17 @@
+{
+  "name": "tavernweave",
+  "owner": {
+    "name": "LiarMTTT"
+  },
+  "description": "TavernWeave Agent Skills for SillyTavern rolecard engineering.",
+  "plugins": [
+    {
+      "name": "tavernweave-agent-skills",
+      "source": {
+        "source": "github",
+        "repo": "LiarMTTT/TavernWeave"
+      },
+      "description": "Build, debug, review, and release maintainable SillyTavern rolecards."
+    }
+  ]
+}

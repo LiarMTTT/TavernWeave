@@ -1,6 +1,6 @@
 # TavernWeave
 
-TavernWeave 是一套面向 Codex 的 SillyTavern 角色卡工程 Skill 阵列，覆盖角色卡设计、MVU 变量系统、模块化源码、构建发布、API 查证、真实运行时调试、嵌入式 UI、创意工坊运维与代码质量控制。
+TavernWeave 是一套面向 Codex 与 Claude Code 的 SillyTavern 角色卡工程 Skill 阵列，覆盖角色卡设计、MVU 变量系统、模块化源码、构建发布、API 查证、真实运行时调试、嵌入式 UI、创意工坊运维与代码质量控制。
 
 > TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
@@ -20,29 +20,18 @@ TavernWeave 是一套面向 Codex 的 SillyTavern 角色卡工程 Skill 阵列�
 
 ## 安装
 
-将仓库克隆到个人 marketplace 的标准插件路径：
+把仓库链接交给 Codex 或 Claude Code，并让 Agent 安装、启用 TavernWeave：
 
-```powershell
-$sourceRoot = Join-Path $env:USERPROFILE 'plugins\tavernweave-agent-skills'
-if (Test-Path -LiteralPath $sourceRoot) {
-    throw "目标已存在：$sourceRoot"
-}
-
-git clone -- https://github.com/LiarMTTT/TavernWeave.git $sourceRoot
-Set-Location $sourceRoot
-powershell -File scripts/register-local.ps1
-codex plugin add tavernweave-agent-skills@personal
+```text
+请安装并启用这个 Skill 仓库：
+https://github.com/LiarMTTT/TavernWeave
 ```
 
-`register-local.ps1` 只创建或更新 TavernWeave 在个人 marketplace 中的条目，不会覆盖其他插件。若仓库实际位于其他位置，可先在标准插件路径建立目录联接。
-
-安装或更新后，请新建一个 Codex 任务再测试 Skill 触发。
+Agent 会根据当前环境选择 Codex 或 Claude Code 的安装入口。安装完成后，新建任务或会话再使用 Skill。
 
 ## 更新
 
-```powershell
-Set-Location "$env:USERPROFILE\plugins\tavernweave-agent-skills"
-git pull --ff-only
-powershell -File scripts/register-local.ps1
-codex plugin add tavernweave-agent-skills@personal
+```text
+请把已安装的 TavernWeave 更新到这个仓库的最新版本：
+https://github.com/LiarMTTT/TavernWeave
 ```
