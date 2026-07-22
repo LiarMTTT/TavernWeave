@@ -14,12 +14,30 @@ function Add-ValidationError([string]$Message) {
     $errors.Add($Message)
 }
 
+function Get-PortableFileHash([string]$Path) {
+    $bytes = [System.IO.File]::ReadAllBytes($Path)
+    $hashBytes = $bytes
+    try {
+        $text = [System.Text.UTF8Encoding]::new($false, $true).GetString($bytes)
+        $normalized = $text.Replace("`r`n", "`n").Replace("`r", "`n")
+        $hashBytes = [System.Text.UTF8Encoding]::new($false).GetBytes($normalized)
+    } catch [System.Text.DecoderFallbackException] {
+        # Binary or non-UTF-8 files retain byte-exact fingerprints.
+    }
+    $algorithm = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        return ([System.BitConverter]::ToString($algorithm.ComputeHash($hashBytes))).Replace('-', '').ToLowerInvariant()
+    } finally {
+        $algorithm.Dispose()
+    }
+}
+
 function Get-SkillFingerprint([string]$Directory) {
     $directoryFull = [System.IO.Path]::GetFullPath($Directory).TrimEnd([char]92, [char]47)
     $rows = foreach ($file in (Get-ChildItem -LiteralPath $directoryFull -File -Recurse | Sort-Object FullName)) {
         if ($file.FullName -match '[\\/]__pycache__[\\/]' -or $file.Extension -ieq '.pyc') { continue }
         $relative = $file.FullName.Substring($directoryFull.Length).TrimStart([char]92, [char]47).Replace([char]92, [char]47)
-        $hash = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+        $hash = Get-PortableFileHash $file.FullName
         "$relative`t$hash"
     }
     $material = ($rows -join "`n") + "`n"
@@ -110,6 +128,10 @@ foreach ($file in $publicFiles) {
     if ($relative -match '(^|/)(?:\.env(?:\..*)?|id_rsa|id_ed25519|credentials(?:\..*)?|secrets?(?:\..*)?)$' -or
         $relative -match '(?i)\.(?:pem|key|p12|pfx)$') {
         Add-ValidationError "Credential-sensitive path is not allowed in a release: $relative"
+    }
+    if ($relative -match '(?i)(^|/)(?:logs?|development-logs?|debug-output|debug-artifacts|run-logs?)(/|$)' -or
+        $relative -match '(?i)\.(?:log|trace|har|cpuprofile|heapsnapshot)$') {
+        Add-ValidationError "Development log or debug artifact is not allowed in a release: $relative"
     }
 }
 

@@ -1,12 +1,12 @@
 {
     "schemaVersion":  1,
-    "evaluatedAt":  "2026-07-22T08:39:05Z",
+    "evaluatedAt":  "2026-07-22T09:04:43Z",
     "method":  "Fresh isolated-agent forward evaluation against candidate skill paths; private skills, private workspace references, replay fixtures, writes, and unsupported runtime claims were excluded.",
     "skillFingerprints":  {
                               "code-quality-workflow":  "2c6b93ce2dbc9b72454573499819f54e56ff8af2dd66b8e26d76a99a73ddb5d2",
                               "rolecard-workshop-ops":  "e5f2b8c60eefd052414d1a77c39a6eeb12bdde501d72b4ea4cdb27e2ef450326",
                               "shadcn-tailwind-ui":  "c1c7a3206d27474fb94da466a2c590bb7fc07f56a33517161c5b75973fab7584",
-                              "sillytavern-api-reference":  "e38d0496b6dcd43bd0548da45f18a6f535d187db354fabb11a01cc3cd76547e6",
+                              "sillytavern-api-reference":  "2025df8ca3605ed77407055cdba92d40ec2a105a4efc63de71a61636b6f5e035",
                               "sillytavern-card-components":  "101377a6511cc929870d9d581f4b61f1f56536f7d7027720d2c944abcec6af81",
                               "sillytavern-card-pipeline":  "3c4407407220e68218f3a089dcca8f27fa6b67ffb39972b67fb9e078f7a7b8ee",
                               "sillytavern-embedded-ui":  "14f481891fb9c0bd2ad4832400ce994c6fce2807c1e9bdd5fafe15ac4f4e7787",

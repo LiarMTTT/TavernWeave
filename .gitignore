@@ -7,5 +7,15 @@ __pycache__/
 .pytest_cache/
 .coverage
 coverage-*.json
+*.log
+*.trace
+*.har
+*.cpuprofile
+*.heapsnapshot
+logs/
+development-logs/
+debug-output/
+debug-artifacts/
+run-logs/
 .DS_Store
 Thumbs.db
