@@ -1,6 +1,12 @@
 # Changelog
 
-## 0.1.0 - Unreleased
+## 0.2.0 - 2026-07-22
+
+- Add project-provided watch builds to the card-pipeline adapter contract.
+- Connect source rebuilds, Tavern Helper real-time listener reloads, and real-SillyTavern execution evidence across the pipeline, embedded UI, and runtime-debug skills.
+- Keep watch output as a development candidate and require a production build for final acceptance and release.
+
+## 0.1.0 - 2026-07-22
 
 - Establish the TavernWeave plugin and personal marketplace entry.
 - Consolidate the four-part code cleanup workflow.
