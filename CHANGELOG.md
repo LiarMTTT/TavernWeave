@@ -1,19 +1,14 @@
 # Changelog
 
-## 0.4.0 - 2026-07-26
+## 0.3.0 - 2026-07-25
 
 - Add independent custom CoT design and authoring for text cards, MVU cards, hybrid cards, plot direction, character behavior, NPC scheduling, system judgment, and output validation.
 - Define the default `preset main CoT + card-specific increments + conditional modules` architecture, including stable phases, rule IDs, insertion order, semantic deduplication, prompt budgets, and generated full fallbacks.
 - Separate author-written CoT prompts from hidden model reasoning, visible character thoughts, MVU `<analysis>`, update-model analysis, Zod schemas, and deterministic script calculation.
 - Add ready-to-use lightweight, character/plot, and ensemble/system CoT templates plus explicit plot/update model routing and LLM/script ownership guidance.
-- Expand the newbie guide with a second chapter covering Zod, CoT, and calculation scripts, together with chapter loading and navigation.
-- Extend manual replay coverage to 14 forward and 12 adversarial cases, including no-MVU CoT, preset/card stitching, ensemble routing, MVU separation, script ownership, full-CoT duplication, and hidden-reasoning-output failures.
-
-## 0.3.0 - 2026-07-25
-
 - Define MVU zod same-generation and extra update-model routing, including marker matching, activation independence, shared-context budgeting, and a dual-mode acceptance matrix.
 - Require card-bound and co-delivered worldbooks to resolve from the active manifest by stable ID and remain version- and content-aligned with maintained source.
-- Add forward and adversarial replay coverage for dual-model prompt routing and stale worldbook packaging.
+- Extend manual replay coverage to 14 forward and 12 adversarial cases for custom CoT, dual-model prompt routing, script ownership, and stale worldbook packaging.
 
 ## 0.2.0 - 2026-07-22
 
