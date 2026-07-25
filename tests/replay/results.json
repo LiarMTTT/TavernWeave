@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
-    "evaluatedAt":  "2026-07-25T07:54:10Z",
-    "method":  "Manual replay of every forward and adversarial prompt against the candidate skill paths; each route, required behavior, and prohibited regression was checked from the candidate files, with writes and unsupported runtime claims excluded.",
+    "evaluatedAt":  "2026-07-25T17:35:11Z",
+    "method":  "Manual replay of every forward and adversarial prompt against the candidate skill paths, including the no-MVU CoT, preset/card stitching, ensemble routing, MVU separation, and script-ownership cases; each route, required behavior, and prohibited regression was checked from the candidate files, with writes and unsupported runtime claims excluded.",
     "skillFingerprints":  {
                               "code-quality-workflow":  "2c6b93ce2dbc9b72454573499819f54e56ff8af2dd66b8e26d76a99a73ddb5d2",
                               "rolecard-workshop-ops":  "e5f2b8c60eefd052414d1a77c39a6eeb12bdde501d72b4ea4cdb27e2ef450326",
@@ -11,7 +11,7 @@
                               "sillytavern-card-pipeline":  "862780745b3c7f5d8a1180476121d1dddc5c60c95e37495cafaf56c095cc5b46",
                               "sillytavern-embedded-ui":  "9c8cf62a388f511e32b8f81b849b9cb1017ce28686b76fa6c6a00d1be83efeaf",
                               "sillytavern-runtime-debug":  "e2a77f6b7502ddfc3e0ef9c32db05f9350f46efe9abcb9f38ddc47ed8a47f458",
-                              "tavern-card-builder":  "c9def33b1fb913dd450b52d3b0ad9a97c583e450e6cee5b252761f8065c45e29"
+                              "tavern-card-builder":  "7bd9b8651bf00e0ab551d220bed27846864e515b6de3ba5ca72dc5cac481cd2e"
                           },
     "caseResults":  [
                         {
@@ -23,6 +23,21 @@
                             "id":  "mvu-dual-update-routing",
                             "pass":  true,
                             "evidence":  "Verified the installed runtime before applying markers, kept only shared state unmarked, routed plot-only and update-only entries separately, preserved activation semantics, and required acceptance in both update modes."
+                        },
+                        {
+                            "id":  "text-card-custom-cot",
+                            "pass":  true,
+                            "evidence":  "Routed to the independent CoT authoring reference, selected the no-MVU lightweight template, kept system checks out of visible inner prose, and retained explicit skip and safe-fallback behavior."
+                        },
+                        {
+                            "id":  "preset-card-cot-stitching",
+                            "pass":  true,
+                            "evidence":  "Kept the reusable main CoT in the preset, expressed the card knowledge limit and combat judgment as phase-targeted increments, required ID and semantic deduplication plus stable ordering, and generated rather than manually duplicated the fallback."
+                        },
+                        {
+                            "id":  "ensemble-cot-update-script-split",
+                            "pass":  true,
+                            "evidence":  "Assigned necessary-actor and duplicate-dialogue checks to plot-side NPC scheduling, limited the update model to source-event extraction and legal updates, assigned deterministic derived changes to scripts, and required one writer per variable."
                         },
                         {
                             "id":  "safe-decompose",
@@ -110,6 +125,16 @@
                                    "id":  "untagged-mvu-context-leak",
                                    "pass":  true,
                                    "evidence":  "Rejected blanket untagged routing, required a recipient ledger and separate plot/update prompt budgets, and kept plot-only reasoning and output formats out of the update-model context."
+                               },
+                               {
+                                   "id":  "cot-mvu-conflation",
+                                   "pass":  true,
+                                   "evidence":  "Rejected MVU ownership of the complete CoT, kept plot, character, NPC, combat, and output judgments independent, and limited MVU analysis to optional variable-update evidence."
+                               },
+                               {
+                                   "id":  "cot-full-copy-and-reasoning-output",
+                                   "pass":  true,
+                                   "evidence":  "Rejected copying the preset main CoT into the card, replaced the empty thinking instruction with observable conditions, separated narrative inner thoughts from system checks, and used output and routing evidence instead of full hidden reasoning."
                                },
                                {
                                    "id":  "stale-bound-worldbook",

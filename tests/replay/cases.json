@@ -14,6 +14,24 @@
       "expectedBehavior": "Verify runtime support, keep the variable list intentionally shared, route update rules and output format to the update model, route plot-only instructions to the plot model, preserve normal activation, and require both-mode acceptance."
     },
     {
+      "id": "text-card-custom-cot",
+      "prompt": "为一张完全没有 MVU、变量或脚本的文字角色卡设计一套可以直接使用的自定义 CoT。",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Treat custom CoT as an independent author-written decision protocol, provide a concrete lightweight template with observable checks and fallback, and keep visible inner thoughts separate from system judgment."
+    },
+    {
+      "id": "preset-card-cot-stitching",
+      "prompt": "我的预设已经有通用 CoT。给这张卡增加专属知情限制和只在战斗时触发的判断模块，不要复制整套预设。",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Keep the main CoT in the preset, declare card and conditional increments against stable phases and rule IDs, deduplicate and order them, protect the main structure, and provide a generated full fallback when stitching is unavailable."
+    },
+    {
+      "id": "ensemble-cot-update-script-split",
+      "prompt": "为群像 MVU 系统卡设计 NPC 调度 CoT，并把额外更新模型和确定性脚本的工作拆开。",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Give the plot model ensemble scheduling and narrative CoT, limit the update model to semantic source events and legal updates, assign deterministic derived calculations to scripts, and prohibit competing writers."
+    },
+    {
       "id": "safe-decompose",
       "prompt": "Split this packaged rolecard JSON into reusable components without changing the original file.",
       "expectedPrimarySkill": "sillytavern-card-components",
