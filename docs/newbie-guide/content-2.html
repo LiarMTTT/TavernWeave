@@ -1,0 +1,115 @@
+<section class="section" id="models">
+<div class="section-head"><div class="section-no">03</div><div><h2>内容模型与双 Agent 副驾驶</h2><p class="section-kicker">内容创作、工程开发和并行 Agent 是三个不同岗位；模型越多不等于工作流越稳定。</p></div></div>
+<div class="callout danger"><strong>成人内容边界</strong>本节讨论合法、虚构、角色明确成年且基于自愿关系的成人向创作。未成年人性内容、年龄不明确的性内容、现实人物私密色情内容及其他违法剥削内容不属于正常创作范围。</div>
+<h3>先把三个岗位分开</h3>
+<div class="cards"><article class="card"><div class="card-icon">文</div><h4>内容模型</h4><p class="muted">负责角色设定、世界观、剧情、对话样本、关系推进和成人向正文。</p></article><article class="card"><div class="card-icon">工</div><h4>开发 Agent</h4><p class="muted">负责项目文件、代码、变量系统、前端、构建、调试和 Git。</p></article><article class="card"><div class="card-icon">副</div><h4>副驾驶 Agent</h4><p class="muted">与主 Agent 双开，共享总工作区，但处理另一个独立项目或完全隔离的写入范围。</p></article></div>
+<div class="callout"><strong>岗位不必由同一个模型承担</strong>某个模型代码能力强，不代表它适合写角色关系；某个模型成人内容限制较少，也不代表它适合维护工程文件。</div>
+<h3>为什么成人向创作者需要单独选择内容模型</h3>
+<p>NSFW 不等于违法、有害或没有创作价值。角色卡和互动叙事中的成人向内容，可能用于成年人之间的亲密关系、情色文学、成人角色扮演、服装与身体审美设计，以及完整的角色档案。</p>
+<p>真正影响创作的，是部分模型面对明确成年、完全虚构且基于自愿关系的内容时，仍可能频繁出现：</p>
+<ul class="checklist"><li>直接拒绝继续，导致剧情或角色卡开发中断。</li><li>自动淡化关键内容，破坏角色状态和关系推进。</li><li>把创作任务改写成说教或价值判断。</li><li>擅自改变用户指定的题材、文风或人物行为。</li><li>因为题材标签误伤正常的人设、身体和服装设计。</li></ul>
+<div class="callout warn"><strong>选择标准</strong>不要只问“哪个模型最聪明”，还要问：它能否在合法边界内稳定完成创作者真正提出的成人向任务。</div>
+<h3>本教程当前推荐：Claude 与 Grok</h3>
+<p>目前更推荐把 <strong>Claude</strong> 和 <strong>Grok</strong> 组合使用。这里不是声称它们完全没有审核，而是基于创作工作流中的实际分工：</p>
+<div class="compare"><div class="compare-side"><h4>Claude：主内容模型</h4><p class="muted">负责完整角色、世界观、长篇剧情、关系逻辑和上下文一致性。</p><div class="pill-row"><span class="pill">长文本</span><span class="pill">心理与关系</span><span class="pill">结构统一</span><span class="pill">设定一致性</span></div></div><div class="compare-vs">+</div><div class="compare-side"><h4>Grok：成人内容补位</h4><p class="muted">负责更直接的成人场景、对话细节、补写和同一场景的第二版本。</p><div class="pill-row"><span class="pill">直接表达</span><span class="pill">成人场景</span><span class="pill">第二视角</span><span class="pill">内容补位</span></div></div></div>
+<p class="small muted">模型和平台政策会变化，使用前应查看当前服务规则：<a href="https://www.anthropic.com/legal/aup" rel="noreferrer" target="_blank">Anthropic 使用政策</a> · <a href="https://docs.x.ai/grok/faq" rel="noreferrer" target="_blank">xAI Grok FAQ</a></p>
+<h3>Claude：更适合作为主内容模型</h3>
+<p>Claude 的价值不只是文字质量，而是更适合维护完整人物和复杂上下文。推荐它处理：</p>
+<div class="cards"><article class="card"><h4>角色与世界观</h4><p class="muted">角色档案、派系、背景、行为动机和世界规则。</p></article><article class="card"><h4>关系与长篇剧情</h4><p class="muted">关系为什么发展、人物为什么这样反应，以及事件如何影响后续。</p></article><article class="card"><h4>文本统一</h4><p class="muted">世界书整理、对话样本、已有文本扩写和文风统一。</p></article></div>
+<p>对成人向角色卡来说，Claude 更适合先回答：</p>
+<div class="code-block"><div class="code-label"><span>Claude 的核心职责</span><button class="copy-btn" type="button">复制</button></div><pre><code>这段成人内容为什么会发生？
+角色为什么会做出这种反应？
+这次互动会怎样改变人物关系和后续剧情？</code></pre></div>
+<p>它仍可能因为表达尺度、上下文歧义或平台策略拒绝部分内容。提供任务时，应明确角色年龄、虚构属性和自愿关系，减少不必要的误判。</p>
+<div class="code-block"><div class="code-label"><span>成人题材上下文声明</span><button class="copy-btn" type="button">复制</button></div><pre><code>本作品为虚构成人题材。
+
+所有参与亲密或性关系的角色均为18岁以上成年人。
+所有亲密行为均建立在明确、自愿、知情和可撤回的同意之上。
+不涉及现实人物、未成年人、胁迫或未经同意的私密内容。
+
+请按照创作要求处理角色、关系、世界观和剧情，
+不要因为题材属于成人向而擅自淡化、说教或改变作品方向。</code></pre></div>
+<h3>Grok：适合作为成人内容补位模型</h3>
+<p>Grok 更适合处理 Claude 容易中断或过度淡化的部分：</p>
+<ul class="checklist"><li>更直接的成人向场景和成人对话样本。</li><li>身体、动作和互动细节的连续描写。</li><li>Claude 已经完成结构，但没有完成的正文。</li><li>为同一场景提供另一种表达或强度版本。</li><li>检查原始需求是否在改写过程中被过度淡化。</li></ul>
+<p>在这套方案中，Grok 不需要取代 Claude 的全部工作。更稳定的职责划分是：</p>
+<div class="code-block"><div class="code-label"><span>Claude + Grok 分工</span><button class="copy-btn" type="button">复制</button></div><pre><code>Claude
+负责：角色、世界观、关系、长篇剧情、场景前因与后续影响
+
+Grok
+负责：成人场景、直接表达、动作与对话细节、第二版本</code></pre></div>
+<div class="callout warn"><strong>仍然需要人工验收</strong>限制更少不等于文字更好，也不等于角色一定一致。创作者仍要检查人物年龄、同意关系、设定、文风和事实错误。</div>
+<h3>三种成人内容创作流程</h3>
+<h4>方案一：Claude 主写，Grok 补位</h4>
+<div class="flow"><div class="flow-node">确定目标</div><div class="flow-arrow">→</div><div class="flow-node">Claude 建立角色与关系</div><div class="flow-arrow">→</div><div class="flow-node">Grok 完成成人段落</div><div class="flow-arrow">→</div><div class="flow-node">统一文风</div><div class="flow-arrow">→</div><div class="flow-node">开发 Agent 写入工程</div></div>
+<h4>方案二：同一资料生成两个版本</h4><p>把同一份角色档案分别交给 Claude 和 Grok，由创作者选择更符合人物的一版。最终选择权应保留给人，不要让第三个模型机械拼接两个版本。</p>
+<h4>方案三：结构与正文分离</h4>
+<div class="compare"><div class="compare-side"><h4>Claude</h4><p class="muted">输出场景结构、人物状态、关系变化与后续影响。</p></div><div class="compare-vs">→</div><div class="compare-side"><h4>Grok</h4><p class="muted">按照结构完成具体成人向正文。</p></div></div>
+<h3>什么是“双 Agent 副驾驶”</h3>
+<p>本教程中的副驾驶不是只负责审查的聊天模型，而是：</p>
+<div class="callout"><strong>双开 Agent，共享总工作区</strong>例如同时运行 Codex 桌面端和 Claude Code Desktop；两者都能读取共享资料，但分别处理不同项目或完全隔离的写入目录。</div>
+<p>副驾驶的价值，是让两个真实工程任务并行推进，而不是让两个 Agent 在同一项目里抢方向盘。</p>
+<h3>推荐的共享工作区</h3>
+<div class="code-block"><div class="code-label"><span>共享工作区结构</span><button class="copy-btn" type="button">复制</button></div><pre><code>ST-Workspace/
+│
+├─ 00-Shared/
+│  ├─ TavernWeave/
+│  ├─ ST开发指南DB/
+│  ├─ 通用模板/
+│  └─ 共享素材/
+│
+├─ Projects/
+│  ├─ 星月学院/
+│  ├─ 角色卡A/
+│  ├─ 角色卡B/
+│  └─ 工坊工具/
+│
+└─ Handoffs/
+   ├─ 项目交接/
+   └─ 临时任务说明/</code></pre></div>
+<p>两个 Agent 可以同时读取 <code>00-Shared/</code>，但写入范围必须明确分开：</p>
+<div class="compare"><div class="compare-side"><h4>Codex</h4><p><code>Projects/星月学院/</code></p><p class="muted">只处理大型角色卡工程。</p></div><div class="compare-vs">∥</div><div class="compare-side"><h4>Claude Code</h4><p><code>Projects/工坊工具/</code></p><p class="muted">只处理独立网页或前端工具。</p></div></div>
+<h3>双 Agent 推荐组合</h3>
+<div class="table-wrap"><table><thead><tr><th>组合</th><th>主驾驶职责</th><th>副驾驶职责</th></tr></thead><tbody><tr><td><strong>Codex + Claude Code</strong></td><td>Codex 处理大型角色卡工程、TW Skill、模块化、多文件修改和项目治理。</td><td>Claude Code 处理另一个独立的前端、预览、浏览器测试或调试项目。</td></tr><tr><td><strong>Claude Code + Codex</strong></td><td>Claude Code 处理当前需要频繁运行和预览的前端项目。</td><td>Codex 处理另一张角色卡、世界书、组件拆分或独立审计任务。</td></tr><tr><td><strong>共享知识底座</strong></td><td colspan="2">两边读取相同的 TavernWeave、ST 开发指南 DB、模板和命名规范，减少工程范式漂移。</td></tr></tbody></table></div>
+<h3>双 Agent 的五条硬规则</h3>
+<ul class="checklist"><li><strong>不能同时修改同一个项目。</strong>即使表面上是不同文件，也可能同时触碰 Git 状态、构建产物、锁文件、配置、版本号和自动格式化结果。</li><li><strong>共享资料默认只读。</strong><code>00-Shared/</code> 中的 Skill、DB 和模板只有在专门维护任务中才允许修改。</li><li><strong>每个 Agent 必须声明写入范围。</strong>允许读哪里、允许写哪里、禁止碰哪里，都应在开工时明确。</li><li><strong>同项目切换驾驶员前先停止写入。</strong>运行验证、建立 Git 提交、生成交接，再让另一个 Agent 重新读取项目。</li><li><strong>同一项目只能有一个写入驾驶员。</strong>第二个 Agent 可以只读分析，但不能边读边顺手修。</li></ul>
+<div class="callout danger"><strong>错误示例</strong>Codex 和 Claude Code 同时打开 <code>Projects/星月学院/</code> 并各自修改。两个 Agent 都可能基于过期文件继续工作，最终互相覆盖、撤销或污染 Git Diff。</div>
+<h3>双 Agent 开工模板</h3>
+<div class="code-block"><div class="code-label"><span>Agent A · Codex</span><button class="copy-btn" type="button">复制</button></div><pre><code>你是当前工作区的 Agent A。
+
+【允许读取】
+00-Shared/
+Projects/星月学院/
+
+【允许修改】
+Projects/星月学院/
+
+【禁止修改】
+00-Shared/
+Projects/其他所有项目/
+
+当前 Claude Code 正在处理另一个独立项目。
+不要访问、格式化或修改它的项目目录。
+
+开始前先说明本轮预计写入范围。</code></pre></div>
+<div class="code-block"><div class="code-label"><span>Agent B · Claude Code</span><button class="copy-btn" type="button">复制</button></div><pre><code>你是当前工作区的 Agent B。
+
+【允许读取】
+00-Shared/
+Projects/工坊工具/
+
+【允许修改】
+Projects/工坊工具/
+
+【禁止修改】
+00-Shared/
+Projects/其他所有项目/
+
+当前 Codex 正在处理另一个独立项目。
+不要访问、格式化或修改它的项目目录。
+
+开始前先说明本轮预计写入范围。</code></pre></div>
+<h3>推荐的完整个人创作工作站</h3>
+<div class="flow"><div class="flow-node">Claude<br/><span class="small muted">角色、世界观、关系、长篇内容</span></div><div class="flow-arrow">+</div><div class="flow-node">Grok<br/><span class="small muted">成人场景、直接表达、内容补位</span></div><div class="flow-arrow">+</div><div class="flow-node">Codex<br/><span class="small muted">角色卡工程、TW Skill、变量和构建</span></div><div class="flow-arrow">+</div><div class="flow-node">Claude Code<br/><span class="small muted">另一个独立项目、预览和调试</span></div></div>
+<div class="callout good"><strong>核心原则</strong>每个模型负责自己真正擅长的岗位；多个 Agent 可以共享知识底座，但写入范围必须互不冲突。</div>
+</section>
