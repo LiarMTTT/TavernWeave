@@ -1,0 +1,46 @@
+<section aria-labelledby="hero-title" class="hero">
+<div class="eyebrow">PURE VIBE CODE STARTER</div>
+<h1 id="hero-title">从一句需求，走到一次真正可验收的交付。</h1>
+<p class="hero-lead">你不必先学会写代码，但必须学会四件事：<span class="hero-strong">选对 Agent、说清目标、限制边界、亲自验收。</span></p>
+<div class="hero-actions"><a class="primary-btn" href="#first-run">开始第一次任务 ↓</a><button class="ghost-btn" data-copy-target="a0-template" type="button">复制 A0 轻量模板</button></div>
+<div class="hero-tags"><span class="tag">纯新手可读</span><span class="tag">手机友好</span><span class="tag">Codex / Claude Code / Cursor</span><span class="tag">TavernWeave</span><span class="tag">内容模型选型</span><span class="tag">SillyTavern 开发</span></div>
+</section>
+<section class="section" id="intro">
+<div class="section-head"><div class="section-no">00</div><div><h2>Vibe Code 到底是什么</h2><p class="section-kicker">不是“让 AI 随机抽一个成品”，而是一套由你驾驶的工程循环。</p></div></div>
+<p class="lead">真正可持续的 Vibe Code，是你负责方向和验收，Agent 负责调查、执行与验证。</p>
+<div aria-label="Vibe Code 基本流程" class="flow"><div class="flow-node">你定义结果</div><div class="flow-arrow">→</div><div class="flow-node">Agent 调查项目</div><div class="flow-arrow">→</div><div class="flow-node">提出方案</div><div class="flow-arrow">→</div><div class="flow-node">修改与验证</div><div class="flow-arrow">→</div><div class="flow-node">你亲自验收</div></div>
+<div class="callout"><strong>角色定位</strong>你不是坐在副驾驶座上的乘客。你是驾驶员；Agent 是能操作工作台的执行者。</div>
+<div class="cards"><article class="card"><div class="card-icon">目</div><h3>目标</h3><p class="muted">最终要出现什么可见结果，而不是笼统地说“优化一下”。</p></article><article class="card"><div class="card-icon">界</div><h3>边界</h3><p class="muted">哪些文件能动、哪些结构不能碰、哪些工作必须先获得批准。</p></article><article class="card"><div class="card-icon">验</div><h3>验收</h3><p class="muted">页面能否打开、按钮是否生效、变量是否真正写入，而不是 Agent 是否声称完成。</p></article></div>
+</section>
+<section class="section" id="first-run">
+<div class="section-head"><div class="section-no">01</div><div><h2>先完成第一次成功交付</h2><p class="section-kicker">先让新手看到“它真的做出来了”，再补术语。</p></div></div>
+<div class="steps"><div class="step"><strong>建立一个干净的练习目录</strong>不要把桌面、系统盘或唯一一份正式项目直接交给 Agent。新建一个专用文件夹，例如“我的第一个 Vibe 项目”。</div><div class="step"><strong>用 Agent 桌面端打开文件夹</strong>先不要折腾终端、插件和复杂环境。选择一个图形化 Agent，明确它只能操作当前目录。</div><div class="step"><strong>发送一个肉眼可验收的小任务</strong>第一次只做纯 HTML、CSS 和 JavaScript 单页，不安装依赖，不碰外部目录。</div><div class="step"><strong>亲自打开并点击</strong>确认文件真的出现、页面能打开、按钮能工作。文字报告不等于完成。</div></div>
+<div class="code-block"><div class="code-label"><span>第一次任务 · 可直接复制</span><button class="copy-btn" type="button">复制</button></div><pre><code>这是我的第一个 Vibe Code 项目。
+
+请先查看当前文件夹，不要访问文件夹以外的内容。
+
+帮我创建一个可以直接用浏览器打开的单页网页，要求：
+
+1. 页面标题为“我的第一个 Vibe 项目”；
+2. 页面中央有一张卡片；
+3. 卡片里有一段介绍文字和一个按钮；
+4. 点击按钮后显示“项目已经成功运行”；
+5. 使用纯 HTML、CSS 和 JavaScript；
+6. 不安装任何额外依赖。
+
+完成后告诉我：
+- 创建了哪些文件；
+- 怎么打开页面；
+- 我应该检查哪些地方。</code></pre></div>
+</section>
+<section class="section" id="agent">
+<div class="section-head"><div class="section-no">02</div><div><h2>认识 Agent，并选一个适合自己的</h2><p class="section-kicker">不是按“初级—高级”排队，而是看你准备怎样与 AI 一起工作。</p></div></div>
+<h3>普通聊天 AI 和 Agent 的区别</h3>
+<div class="compare"><div class="compare-side"><h4>普通聊天 AI</h4><p class="muted">回答问题、解释代码、给出建议。更像坐在旁边的顾问。</p></div><div class="compare-vs">VS</div><div class="compare-side"><h4>编码 Agent</h4><p class="muted">能阅读项目、改文件、运行命令、查看报错、执行测试并继续修正。</p></div></div>
+<div class="selector" id="agentSelector"><h3>30 秒 Agent 选型器</h3><p class="muted">点击最符合你的工作方式，可多选。</p><div class="choices"><button aria-pressed="false" class="choice-btn" data-choice="language" type="button">主要靠说人话指挥</button><button aria-pressed="false" class="choice-btn" data-choice="preview" type="button">经常做前端，需要实时预览</button><button aria-pressed="false" class="choice-btn" data-choice="manual" type="button">愿意查看并手动改代码</button><button aria-pressed="false" class="choice-btn" data-choice="automation" type="button">需要脚本、服务器或自动化</button></div><div aria-live="polite" class="recommendation" id="recommendation">选择你的工作方式后，这里会给出推荐。</div></div>
+<div class="table-wrap"><table><thead><tr><th>工具</th><th>主要优势</th><th>更适合谁</th></tr></thead><tbody><tr><td><strong>Codex 桌面端</strong></td><td>以项目、任务线程和 Agent 调度为中心；支持差异审查、并行 Agent、Worktree 和 Skills。</td><td>主要通过自然语言管理项目，希望直接使用 TW Skill 阵列，不准备频繁手改代码。</td></tr><tr><td><strong>Claude Code Desktop</strong></td><td>集成文件编辑器、终端、应用预览、可视化 Diff、并行会话与电脑操作。</td><td>经常制作前端、状态栏或桌面工具，需要 Agent 实际打开并测试程序。</td></tr><tr><td><strong>Cursor Agents Window</strong></td><td>Agent 工作台与完整 IDE 共存，可在本地、Worktree、云端和 SSH 环境并行运行。</td><td>希望 Agent 干活，同时保留人工编辑、跳转定义、调试和完整 IDE 能力。</td></tr></tbody></table></div>
+<h3>为什么不推荐纯新手从 CMD、CLI 和普通 VS Code 开始</h3><p>它们不是能力弱，而是会把大量与目标无关的系统复杂度同时暴露给新手。</p>
+<div class="cards"><article class="card"><h4>CLI 的额外负担</h4><p class="muted">目录、PATH、环境变量、权限提示、会话恢复、命令报错和文本 Diff 都需要自己识别。</p></article><article class="card"><h4>普通 IDE 的额外负担</h4><p class="muted">文件树、插件、终端、Git 面板、调试器、任务系统和工作区信任会同时出现。</p></article><article class="card"><h4>桌面 Agent 的价值</h4><p class="muted">把项目、会话、权限、计划、差异和运行结果集中在同一条可见任务链里。</p></article></div>
+<div class="callout good"><strong>默认建议</strong>主要靠说人话、使用 TavernWeave：Codex 桌面端。需要频繁预览和真实操作：Claude Code Desktop。愿意进入代码层：Cursor。脚本与自动化：CLI，放进阶教程。</div>
+<p class="small muted">产品能力参考：<a href="https://openai.com/index/introducing-the-codex-app/" rel="noreferrer" target="_blank">OpenAI Codex app</a> · <a href="https://code.claude.com/docs/en/desktop" rel="noreferrer" target="_blank">Claude Code Desktop</a> · <a href="https://cursor.com/changelog/3-0" rel="noreferrer" target="_blank">Cursor Agents Window</a></p>
+</section>
