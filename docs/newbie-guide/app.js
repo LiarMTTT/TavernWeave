@@ -3,11 +3,13 @@
 
   try {
     const urls = [
-      './content-1.html?v=4',
-      './content-2.html?v=4',
-      './content-3.html?v=4',
-      './content-4.html?v=4',
-      './content-5.html?v=4',
+      './content-1.html?v=5',
+      './content-2.html?v=5',
+      './content-3.html?v=5',
+      './content-4.html?v=5',
+      './content-5.html?v=5',
+      './content-6.html?v=5',
+      './content-7.html?v=5',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
