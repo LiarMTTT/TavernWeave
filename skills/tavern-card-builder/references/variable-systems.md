@@ -7,8 +7,9 @@
 3. Initialization
 4. Update rules
 5. Update-model routing
-6. Projection and rendering
-7. Cleanup and migration
+6. CoT and script boundary
+7. Projection and rendering
+8. Cleanup and migration
 
 ## 1. Capability detection
 
@@ -75,26 +76,45 @@ For a new dual-compatible card, use this baseline:
 
 - leave the current variable list unmarked only when both models need it;
 - mark variable update rules and variable output format with `[mvu_update]`;
-- mark plot-only reasoning, prose, or unrelated output formats with `[mvu_plot]`;
+- mark plot-only custom CoT, prose, or unrelated output formats with `[mvu_plot]`;
 - inventory every unmarked entry and justify why duplicating it into both model
   contexts is necessary.
 
 An unmarked entry is not automatically wrong. It is a shared-context decision with
-prompt-budget and information-exposure cost. Do not send plot-only chain-of-thought,
-style scaffolding, or unrelated output formats to the update model merely for
-compatibility.
+prompt-budget and information-exposure cost. Do not send plot-specific custom CoT,
+style scaffolding, NPC scheduling, or unrelated output formats to the update model
+merely for compatibility.
 
 For a retrofit, report the current mode and routing before editing names. Do not add
 markers blindly when the installed runtime ignores them or the card intentionally
 supports only one mode.
 
-## 6. Projection and rendering
+## 6. CoT and script boundary
+
+Custom CoT is not an MVU feature. A text card with no variables can use a complete
+custom CoT, and an MVU card still needs separate plot/character reasoning if the
+project requires it.
+
+- MVU `<analysis>` or equivalent update evidence only serves variable-update
+  decisions; it is not the complete plot, character, NPC, combat, and output CoT.
+- Zod defines or validates data structure and has no direct relationship to CoT.
+- The plot model receives plot and behavior CoT. An extra update model receives only
+  current state, generated plot, update rules, and update output format.
+- Let the LLM write semantic source events or source states. Let scripts perform
+  deterministic formulas, derived-variable updates, and batch synchronization.
+- Assign one writer to every variable. Never let the LLM and a script compete to
+  update the same field.
+
+Read [cot-design-and-authoring.md](cot-design-and-authoring.md) for independent CoT
+design, update-model separation, and practical LLM/script workload ranges.
+
+## 7. Projection and rendering
 
 The model projection is not the full database. Send only state the model needs for the current turn. Keep routing prefixes compatible with the target prompt pipeline and verify which model receives each entry.
 
 For UI, define a presentation model rather than letting the UI mutate raw state ad hoc. Delegate exact DOM/runtime implementation to `$sillytavern-embedded-ui` and `$sillytavern-api-reference`.
 
-## 7. Cleanup and migration
+## 8. Cleanup and migration
 
 Specify:
 

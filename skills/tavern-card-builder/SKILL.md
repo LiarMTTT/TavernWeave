@@ -1,6 +1,6 @@
 ---
 name: tavern-card-builder
-description: Plan and author maintainable SillyTavern character cards, including text cards, MVU variable cards, retrofits, schemas, initialization, update rules, single-model or extra-model update routing, lorebooks, prompts, openings, regex requirements, and companion-script requirements. Use when creating a new card, converting an existing card, adding a gameplay system, repairing an authoring protocol, or tracing a field across the card design. Do not use it as the primary skill for component-library extraction, build/package/release operations, exact API signature lookup, real-runtime debugging, embedded UI implementation, or workshop infrastructure; route those tasks to the focused TavernWeave skills.
+description: Plan and author maintainable SillyTavern character cards, including text cards, MVU variable cards, custom CoT design and authoring, modular CoT stitching and routing, prompt budgets, retrofits, schemas, initialization, update rules, single-model or extra-model update routing, lorebooks, prompts, openings, regex requirements, and companion-script requirements. Use when creating a new card, converting an existing card, adding a gameplay system, repairing an authoring protocol, or tracing a field across the card design. Do not use it as the primary skill for component-library extraction, build/package/release operations, exact API signature lookup, real-runtime debugging, embedded UI implementation, or workshop infrastructure; route those tasks to the focused TavernWeave skills.
 ---
 
 # Tavern Card Builder
@@ -17,11 +17,15 @@ Design the card as a set of explicit contracts. Keep authoring decisions here an
    - hybrid card with text protocol plus optional scripts or embedded UI;
    - retrofit that must preserve an existing card's voice, data, and command dialect.
 4. Ask only decisions that materially change the result. Do not force a fixed interview ritual for a narrow edit.
-5. For an MVU card, identify whether updates share the plot generation or use an
+5. Independently decide whether the card needs a custom CoT, whether a reusable main
+   CoT already exists in the preset, which card-specific increments are required, and
+   which modules should activate conditionally. Do not make this decision depend on
+   whether the card uses MVU.
+6. For an MVU card, identify whether updates share the plot generation or use an
    extra update-model pass. For a new MVU zod card whose runtime supports entry
    routing, prefer a dual-compatible layout; preserve an existing card's current mode
    unless migration is explicitly authorized.
-6. Record unresolved version-sensitive claims as assumptions and keep a real-runtime acceptance gate.
+7. Record unresolved version-sensitive claims as assumptions and keep a real-runtime acceptance gate.
 
 For the complete authoring sequence, read [authoring-workflow.md](references/authoring-workflow.md).
 
@@ -36,6 +40,17 @@ For every system, write down:
 - model-visible instructions;
 - optional runtime or UI dependencies;
 - verification evidence.
+
+For custom CoT, trace:
+
+```text
+main CoT phases -> card increments -> conditional modules -> recipient model
+                -> assembled prompt -> output boundary -> fallback -> acceptance
+```
+
+Use stable phase and rule IDs in authoring sources. Deduplicate by meaning as well as
+by ID. A card increment should add card-specific conditions, exceptions, or narrower
+constraints instead of copying the preset's complete CoT.
 
 For MVU state, trace every field through:
 
@@ -61,6 +76,7 @@ Read [opening-strategies.md](references/opening-strategies.md) before adding or 
 Keep these layers distinct even when one card ships them together:
 
 - card identity and narrative prose;
+- custom CoT and card-specific CoT increments;
 - lorebook and prompt routing;
 - persistent variable protocol;
 - regex transformations;
@@ -83,6 +99,7 @@ Use the focused skills when a task crosses the authoring boundary:
 Read only the references needed for the task:
 
 - [card-writing.md](references/card-writing.md) for identity fields, prose, greetings, examples, and plot guidance.
+- [cot-design-and-authoring.md](references/cot-design-and-authoring.md) for independent custom CoT definition, deployment, modular authoring, preset/card stitching, model routing, templates, budgets, script boundaries, and acceptance.
 - [lorebook-and-prompts.md](references/lorebook-and-prompts.md) for entry boundaries, routing, model-visible text, and prompt budgets.
 - [variable-systems.md](references/variable-systems.md) for schemas, initialization, updates, projections, cleanup, and migrations.
 - [opening-strategies.md](references/opening-strategies.md) for fixed greetings and dynamic setup flows.
@@ -96,6 +113,8 @@ Read only the references needed for the task:
 - Preserve an existing card's proven protocol unless there is evidence and authorization to migrate it.
 - Treat command dialects and runtime behavior as version-sensitive capabilities, not universal folklore.
 - Keep model-visible text free of incident history, development commentary, Markdown decoration that has no model purpose, and copyable hard-coded outputs.
+- Treat custom CoT as an author-written decision protocol, not as access to a model's hidden internal reasoning. Validate observable behavior and routing instead of requiring full reasoning output.
+- Default to preset main CoT plus card-specific increments and conditional modules. Keep plot-model CoT, update-model prompts, and deterministic script calculation separated by responsibility.
 - Use UTF-8-safe, guarded writes for multilingual or multiline bodies. Verify structural matches before and after mutation.
 - Prefer project-proven structures over new abstractions.
 - Validate in proportion to impact. A runtime-affecting change is not complete until it is accepted in real SillyTavern.
@@ -107,7 +126,7 @@ Return:
 
 1. target card type and detected capabilities;
 2. agreed systems and exclusions;
-3. field/lorebook/component contracts;
+3. field/lorebook/component contracts and CoT deployment/stitching contract;
 4. files or card sections to create or change;
 5. specialist skills required next;
 6. validation evidence obtained;
