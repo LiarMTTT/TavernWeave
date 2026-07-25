@@ -1,0 +1,105 @@
+<style>main > .footer:not(:last-child){display:none}</style>
+<section aria-labelledby="chapter-3-title" class="hero" id="chapter-3">
+<div class="eyebrow">CHAPTER 03 · SCRIPTS, REGEX & INTERACTION</div>
+<h2 id="chapter-3-title">酒馆助手脚本、正则与交互功能</h2>
+<p class="hero-lead">这一章继续拆开两个经常被误判的能力边界：<span class="hero-strong">正则到底能做到哪里，酒馆助手脚本又能把角色卡扩展到什么程度。</span></p>
+<div class="hero-tags"><span class="tag">Tavern Helper Script</span><span class="tag">Regex</span><span class="tag">UI 与交互</span><span class="tag">生命周期</span><span class="tag">真实状态</span></div>
+</section>
+<section class="section" id="th-script">
+<div class="section-head"><div class="section-no">16</div><div><h2>酒馆助手脚本是什么</h2><p class="section-kicker">第二章的计算脚本，只是酒馆助手脚本众多用途中的一种。</p></div></div>
+<p class="lead">酒馆助手脚本是运行在 SillyTavern 页面环境中的 JavaScript。它不只是“算数工具”，而是一层可以读取数据、监听事件、创建界面并执行交互逻辑的运行时能力。</p>
+<div class="cards"><article class="card"><div class="card-icon">数</div><h4>数据能力</h4><p class="muted">读取和修改变量、设置、消息与世界书数据。</p></article><article class="card"><div class="card-icon">界</div><h4>界面能力</h4><p class="muted">创建状态栏、控制中心、弹窗、抽屉、表单和按钮。</p></article><article class="card"><div class="card-icon">事</div><h4>运行能力</h4><p class="muted">监听生成、变量更新、对话切换和页面重载等事件。</p></article></div>
+<div class="flow"><div class="flow-node">用户点击或事件触发</div><div class="flow-arrow">→</div><div class="flow-node">脚本读取当前状态</div><div class="flow-arrow">→</div><div class="flow-node">执行逻辑</div><div class="flow-arrow">→</div><div class="flow-node">写回数据</div><div class="flow-arrow">→</div><div class="flow-node">刷新界面并反馈结果</div></div>
+<div class="callout"><strong>它不是提示词</strong>世界书主要把信息交给模型阅读；酒馆助手脚本在页面和运行时里真正执行功能。两者可以配合，但不是同一种东西。</div>
+</section>
+<section class="section" id="regex-vs-script">
+<div class="section-head"><div class="section-no">17</div><div><h2>先认清正则的能力上限</h2><p class="section-kicker">新手更常见的问题，不是分不清世界书和脚本，而是把正则当成了低代码程序引擎。</p></div></div>
+<p class="lead">正则非常强，但它的核心仍然是：<strong>找到一段文本，然后提取、隐藏或替换它。</strong></p>
+<div class="cards"><article class="card"><div class="card-icon">找</div><h4>正则擅长匹配</h4><p class="muted">识别固定标签、字段、前后缀和满足某种格式的文本。</p></article><article class="card"><div class="card-icon">换</div><h4>正则擅长改写</h4><p class="muted">隐藏内容、清理格式、提取字段、替换成固定文本或静态 HTML。</p></article><article class="card"><div class="card-icon">壳</div><h4>正则可以生成外壳</h4><p class="muted">把模型输出转换成卡片、按钮或面板的外观结构。</p></article></div>
+<h3>正则不适合可靠承担什么</h3>
+<ul class="checklist"><li>长期保存和迁移状态。</li><li>监听对话、生成和变量更新等生命周期。</li><li>执行复杂条件分支和多步骤业务逻辑。</li><li>发起异步网络请求并处理成功、失败和超时。</li><li>稳定管理按钮事件、重复初始化和资源清理。</li><li>在多个变量之间执行完整、可回滚的写入链。</li></ul>
+<div class="callout danger"><strong>最典型的误解</strong>正则把 <code>&lt;choice&gt;前往旧校舍&lt;/choice&gt;</code> 替换成了一个按钮，不代表这个按钮已经拥有点击行为。它可能只有外观，没有功能。</div>
+<h3>酒馆助手脚本的能力范围更大</h3>
+<div class="table-wrap"><table><thead><tr><th>需求</th><th>正则</th><th>酒馆助手脚本</th></tr></thead><tbody><tr><td>隐藏一个固定标签块</td><td>适合</td><td>通常没必要</td></tr><tr><td>把固定字段换成静态卡片</td><td>适合</td><td>也可以</td></tr><tr><td>点击按钮后读取变量并写回</td><td>不适合单独承担</td><td>适合</td></tr><tr><td>变量变化后自动刷新状态栏</td><td>不能只靠文本替换完成</td><td>适合</td></tr><tr><td>加载远程数据并处理失败</td><td>不适合</td><td>适合</td></tr><tr><td>管理世界书、设置和复杂 UI</td><td>不适合</td><td>适合</td></tr></tbody></table></div>
+<div class="compare"><div class="compare-side"><h4>正则的上限</h4><p class="muted">把文本识别出来，并转换成另一种文本或静态展示结构。</p></div><div class="compare-vs">VS</div><div class="compare-side"><h4>脚本的范围</h4><p class="muted">读取状态、执行逻辑、操作数据、创建交互、处理生命周期和失败。</p></div></div>
+<div class="callout good"><strong>判断口诀</strong>只需要“找出来、藏起来、换个样子”，先考虑正则；需要“点了以后做事、数据变化后刷新、失败后给反馈”，使用酒馆助手脚本。</div>
+</section>
+<section class="section" id="ui-script">
+<div class="section-head"><div class="section-no">18</div><div><h2>UI 脚本可以做什么</h2><p class="section-kicker">角色卡前端不止是状态栏，也可以是一套完整的操作界面。</p></div></div>
+<div class="cards"><article class="card"><h4>状态与资料</h4><p class="muted">状态栏、角色档案、任务列表、关系面板和世界状态。</p></article><article class="card"><h4>功能中心</h4><p class="muted">控制中心、背包、商店、地图、媒体管理和模块设置。</p></article><article class="card"><h4>开局与配置</h4><p class="muted">身份、难度、阵营、模式和可选模块的配置页面。</p></article></div>
+<h3>状态栏不是一段固定 HTML</h3>
+<p>一个真正会工作的状态栏通常需要：</p>
+<div class="flow"><div class="flow-node">读取变量</div><div class="flow-arrow">→</div><div class="flow-node">整理展示数据</div><div class="flow-arrow">→</div><div class="flow-node">渲染页面</div><div class="flow-arrow">→</div><div class="flow-node">监听状态变化</div><div class="flow-arrow">→</div><div class="flow-node">重新刷新</div></div>
+<p>只把一段状态栏 HTML 放进页面，只能证明外观存在，不能证明它会跟随真实数据变化。</p>
+<h3>开局页面只是输入入口</h3>
+<p>开局页可以让用户选择身份、模式或初始条件，但还需要明确：</p>
+<ul class="checklist"><li>选择结果保存到哪里。</li><li>什么时候正式写入变量。</li><li>重复打开是否覆盖已有数据。</li><li>取消、失败或刷新后如何处理。</li><li>选择结果怎样进入后续剧情和提示词。</li></ul>
+</section>
+<section class="section" id="ui-types">
+<div class="section-head"><div class="section-no">19</div><div><h2>展示型 UI 和操作型 UI 不一样</h2><p class="section-kicker">能看见数据，和能安全地修改数据，是两个完成等级。</p></div></div>
+<div class="compare"><div class="compare-side"><h4>展示型 UI</h4><p class="muted">读取并展示状态，例如时间、地点、任务、关系和装备。通常以只读为主。</p></div><div class="compare-vs">VS</div><div class="compare-side"><h4>操作型 UI</h4><p class="muted">允许用户购买、编辑、切换、使用或提交数据，必须处理写入和失败。</p></div></div>
+<p>操作型 UI 需要额外回答：</p>
+<ul class="checklist"><li>点击后具体修改什么数据。</li><li>写入前要检查哪些条件。</li><li>写入失败时怎样恢复和提示。</li><li>是否允许重复点击。</li><li>刷新和切换对话后是否仍然有效。</li><li>模型、计算脚本和 UI 谁是主要写入者。</li></ul>
+<div class="callout warn"><strong>按钮能点击不等于功能完成</strong>真正的完成链是：条件检查、数据写入、成功确认、界面刷新、失败反馈和重复执行保护。</div>
+</section>
+<section class="section" id="interaction-chain">
+<div class="section-head"><div class="section-no">20</div><div><h2>按钮和交互需要完整链路</h2><p class="section-kicker">不要把“改了页面文字”当成“完成了业务功能”。</p></div></div>
+<p class="lead">一个按钮至少包含入口、事件、逻辑和反馈四部分。</p>
+<div class="flow"><div class="flow-node">按钮入口</div><div class="flow-arrow">→</div><div class="flow-node">点击事件</div><div class="flow-arrow">→</div><div class="flow-node">条件检查</div><div class="flow-arrow">→</div><div class="flow-node">执行与写入</div><div class="flow-arrow">→</div><div class="flow-node">刷新与反馈</div></div>
+<h3>购买物品的完整例子</h3>
+<div class="code-block"><div class="code-label"><span>完整交互链</span><button class="copy-btn" type="button">复制</button></div><pre><code>点击购买
+→ 检查商品是否存在
+→ 检查金钱是否足够
+→ 防止重复提交
+→ 扣除金钱
+→ 增加物品
+→ 确认写入成功
+→ 刷新商店和背包
+→ 提示购买结果</code></pre></div>
+<h3>为什么要防重复执行</h3>
+<p>快速连点、事件重复绑定、页面重载和网络延迟，都可能让一次操作执行多次。</p>
+<ul class="checklist"><li>执行期间临时禁用按钮。</li><li>给事件或请求分配唯一标识。</li><li>初始化前检查旧监听器和旧 DOM。</li><li>相同事件处理完成后不能再次结算。</li><li>失败时释放锁定状态，允许用户重试。</li></ul>
+</section>
+<section class="section" id="lifecycle">
+<div class="section-head"><div class="section-no">21</div><div><h2>事件监听和生命周期</h2><p class="section-kicker">“第一次打开能运行”只完成了最简单的一条路径。</p></div></div>
+<p>脚本还需要面对：</p>
+<div class="cards"><article class="card"><h4>页面变化</h4><p class="muted">首次加载、刷新、脚本重载、禁用和重新启用。</p></article><article class="card"><h4>对话变化</h4><p class="muted">新建对话、切换对话、切换消息楼层和滑动消息。</p></article><article class="card"><h4>生成与数据变化</h4><p class="muted">开始生成、生成结束、变量更新和设置修改。</p></article></div>
+<h3>重复注册会发生什么</h3>
+<div class="code-block"><div class="code-label"><span>常见的重复监听问题</span><button class="copy-btn" type="button">复制</button></div><pre><code>第一次加载：注册 1 个监听器
+第二次加载：又注册 1 个监听器
+重复五次后：一次事件执行五遍</code></pre></div>
+<p>脚本应当使用固定标识，初始化前检查旧实例，并在重载、禁用或卸载时清理监听器、DOM、样式和提示词注入。</p>
+<div class="callout"><strong>什么是幂等</strong>同一段初始化执行多次，最终仍然只存在一套按钮、一套面板和一套监听器，而不是越加载越多。</div>
+</section>
+<section class="section" id="variable-io">
+<div class="section-head"><div class="section-no">22</div><div><h2>脚本读取和修改变量</h2><p class="section-kicker">脚本可以直接参与状态链，但不能绕过变量契约。</p></div></div>
+<div class="compare"><div class="compare-side"><h4>读取变量</h4><p class="muted">状态栏展示、条件判断、计算、功能开关、导出和提示词快照。</p></div><div class="compare-vs">+</div><div class="compare-side"><h4>修改变量</h4><p class="muted">用户操作、计算结果、设置保存和脚本确定产生的状态变化。</p></div></div>
+<p>脚本新增或修改变量前，应确认：</p>
+<ul class="checklist"><li>Schema 和初始化中是否存在该字段。</li><li>模型、脚本和 UI 中谁负责写入。</li><li>哪些组件会读取或展示它。</li><li>旧对话缺少这个字段时怎样补全。</li><li>字段失效后怎样清理或迁移。</li></ul>
+<div class="flow"><div class="flow-node">定义</div><div class="flow-arrow">→</div><div class="flow-node">初始化</div><div class="flow-arrow">→</div><div class="flow-node">写入</div><div class="flow-arrow">→</div><div class="flow-node">读取</div><div class="flow-arrow">→</div><div class="flow-node">展示</div><div class="flow-arrow">→</div><div class="flow-node">清理或迁移</div></div>
+<div class="callout danger"><strong>不要只改显示值</strong>把页面上的“金钱 1200”改成“金钱 999999”，不会自动修改真实变量。刷新后显示通常会恢复。</div>
+</section>
+<section class="section" id="worldbook-script">
+<div class="section-head"><div class="section-no">23</div><div><h2>脚本可以管理世界书</h2><p class="section-kicker">适合 DLC、可选模块、创意工坊和用户自定义内容。</p></div></div>
+<p>酒馆助手脚本可以根据目标环境提供的能力，对世界书条目执行创建、读取、更新、启停和卸载等操作。</p>
+<div class="cards"><article class="card"><h4>安装模块</h4><p class="muted">创建一组明确归属于当前功能的世界书条目。</p></article><article class="card"><h4>升级模块</h4><p class="muted">识别原版、用户修改版和冲突状态，再决定处理方式。</p></article><article class="card"><h4>卸载模块</h4><p class="muted">只删除当前功能明确创建的内容，不误伤用户条目。</p></article></div>
+<h3>不要直接覆盖用户修改</h3>
+<div class="flow"><div class="flow-node">读取当前条目</div><div class="flow-arrow">→</div><div class="flow-node">与旧版本基线对比</div><div class="flow-arrow">→</div><div class="flow-node">未修改则自动升级</div><div class="flow-arrow">→</div><div class="flow-node">已修改则提示冲突</div><div class="flow-arrow">→</div><div class="flow-node">由用户选择</div></div>
+<div class="callout warn"><strong>名称相似不能作为删除依据</strong>卸载必须依靠稳定标识和明确归属，不能搜索一个前缀后把相似条目全部删除。</div>
+</section>
+<section class="section" id="prompt-injection">
+<div class="section-head"><div class="section-no">24</div><div><h2>脚本可以向模型提供运行时信息</h2><p class="section-kicker">把脚本中的状态交给模型阅读，但不要制造无法追踪的隐藏提示词。</p></div></div>
+<p>脚本可以在目标运行环境支持时，向生成上下文加入：</p>
+<ul class="checklist"><li>当前启用的游戏模式和功能模块。</li><li>脚本计算出的只读状态摘要。</li><li>用户在 UI 中选择的设置。</li><li>模型当前确实需要、但不适合长期写进世界书的信息。</li></ul>
+<p>使用时需要控制：</p>
+<ul class="checklist"><li>不要重复注入世界书已经提供的内容。</li><li>不要把完整数据库每轮塞进上下文。</li><li>明确剧情模型和变量更新模型分别能看到什么。</li><li>脚本禁用、对话切换和模块关闭后必须清理旧注入。</li><li>让用户知道哪些设置会影响模型输出。</li></ul>
+<div class="callout"><strong>它不是世界书的自动替代品</strong>稳定设定仍适合放在角色卡和世界书中；脚本注入更适合运行时、可变化和可开关的信息。</div>
+</section>
+<section class="section" id="external-api">
+<div class="section-head"><div class="section-no">25</div><div><h2>API 调用和外部资源</h2><p class="section-kicker">脚本可以连接外部世界，但也会同时引入网络、权限和隐私风险。</p></div></div>
+<div class="cards"><article class="card"><h4>远程数据</h4><p class="muted">读取 JSON、工坊索引、版本信息和动态配置。</p></article><article class="card"><h4>媒体与服务</h4><p class="muted">加载图片、音频，或调用明确授权的外部服务。</p></article><article class="card"><h4>独立应用通信</h4><p class="muted">与 Gateway、独立前端或本地服务交换数据。</p></article></div>
+<h3>任何外部调用都要设计失败路径</h3>
+<div class="flow"><div class="flow-node">发起请求</div><div class="flow-arrow">→</div><div class="flow-node">成功则校验数据</div><div class="flow-arrow">→</div><div class="flow-node">失败或超时</div><div class="flow-arrow">→</div><div class="flow-node">明确提示并降级</div></div>
+<ul class="checklist"><li>地址失效或网络断开时，核心聊天是否还能继续。</li><li>返回数据格式改变时，脚本是否安全停止。</li><li>是否存在跨域、鉴权和权限问题。</li><li>请求中是否携带隐私、Token 或 API 密钥。</li><li>外部服务停止后有没有本地回退方案。</li></ul>
+<div class="callout danger"><strong>不要公开密钥</strong>角色卡、世界书和前端脚本都可能被用户查看。不要把私人 API 密钥硬编码进公开发布的角色卡。</div>
+</section>
