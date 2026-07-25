@@ -1,0 +1,142 @@
+<section aria-labelledby="chapter-2-title" class="hero" id="chapter-2">
+<div class="eyebrow">CHAPTER 02 · ROLE CARD MECHANISMS</div>
+<h2 id="chapter-2-title">Zod、CoT 与计算脚本</h2>
+<p class="hero-lead">这一章只解决三个问题：<span class="hero-strong">变量怎样长期保存、模型怎样整理推演、确定性计算怎样交给脚本。</span></p>
+<div class="hero-tags"><span class="tag">MVU Zod</span><span class="tag">自定义 CoT</span><span class="tag">酒馆助手计算脚本</span><span class="tag">减少变量输出压力</span></div>
+</section>
+<section class="section" id="zod">
+<div class="section-head"><div class="section-no">11</div><div><h2>Zod：把长期状态从正文里单独保存</h2><p class="section-kicker">本文所说的 Zod，默认指社区常说的 MVU Zod 整体方案。</p></div></div>
+<div class="callout"><strong>先统一叫法</strong>技术上，底层变量更新机制来自 MVU，变量结构约束使用 Zod Schema；但在当前角色卡开发语境中，大家通常把这套组合方案直接简称为“Zod”。为了避免新手误以为需要学习两套独立系统，后文统一使用“Zod”。</div>
+<p class="lead">Zod 用来保存那些不能只靠模型长对话记忆维持的信息。</p>
+<div class="cards"><article class="card"><div class="card-icon">时</div><h4>环境状态</h4><p class="muted">时间、日期、地点、天气和当前场景。</p></article><article class="card"><div class="card-icon">人</div><h4>角色状态</h4><p class="muted">关系、服装、伤势、任务和已掌握的信息。</p></article><article class="card"><div class="card-icon">世</div><h4>世界变化</h4><p class="muted">已完成事件、资源变化、阵营状态和长期结果。</p></article></div>
+<div class="flow"><div class="flow-node">读取当前变量</div><div class="flow-arrow">→</div><div class="flow-node">模型生成本轮剧情</div><div class="flow-arrow">→</div><div class="flow-node">输出变量更新</div><div class="flow-arrow">→</div><div class="flow-node">写回最新状态</div><div class="flow-arrow">→</div><div class="flow-node">下一轮继续读取</div></div>
+<h3>变量结构长什么样</h3>
+<div class="code-block"><div class="code-label"><span>简化后的变量示例</span><button class="copy-btn" type="button">复制</button></div><pre><code>环境:
+  日期: 2026-07-26
+  时间: 14:30
+  地点: 学生会办公室
+
+user:
+  金钱: 1200
+  当前任务: 调查旧校舍
+
+角色:
+  埃莉丝:
+    好感度: 42
+    当前状态: 工作中</code></pre></div>
+<p>模型不需要每轮重新生成整棵变量，只需要更新真正发生变化的路径。</p>
+<div class="code-block"><div class="code-label"><span>一次简单的变量更新</span><button class="copy-btn" type="button">复制</button></div><pre><code>[
+  {
+    "op": "replace",
+    "path": "/环境/时间",
+    "value": "15:10"
+  },
+  {
+    "op": "replace",
+    "path": "/角色/埃莉丝/当前状态",
+    "value": "前往旧校舍"
+  }
+]</code></pre></div>
+<h3>Schema 是变量结构说明书</h3>
+<p>Schema 用来规定变量有哪些字段、是什么类型、缺少时使用什么默认值，以及数值允许落在什么范围。</p>
+<div class="code-block"><div class="code-label"><span>Schema 简化示例</span><button class="copy-btn" type="button">复制</button></div><pre><code>const Schema = z.object({
+  环境: z.object({
+    时间: z.string().prefault('08:00'),
+    地点: z.string().prefault('未知地点')
+  }).prefault({}),
+
+  user: z.object({
+    金钱: z.coerce.number().min(0).prefault(0)
+  }).prefault({})
+});</code></pre></div>
+<div class="callout warn"><strong>Schema 不是剧情判断器</strong>它能规定“金钱必须是非负数字”，但不会自动理解任务是否完成，也不会自动决定完成任务应该奖励多少钱。</div>
+<h3>不是所有信息都值得做成变量</h3>
+<ul class="checklist"><li>后续对话还会读取，并且会影响剧情或功能。</li><li>不能稳定地只靠最近几轮正文恢复。</li><li>有明确的更新条件、读取者和清理方式。</li><li>保存它带来的价值，大于每轮注入和更新的成本。</li></ul>
+<p>只在一句描写中出现、以后不会再使用的信息，没有必要全部塞进 Zod。</p>
+</section>
+<section class="section" id="cot">
+<div class="section-head"><div class="section-no">12</div><div><h2>CoT：给模型一套明确的推演步骤</h2><p class="section-kicker">CoT 可以完全脱离 Zod 使用，不要把两者强行绑定。</p></div></div>
+<p class="lead">本文所说的 CoT，是作者写进预设、角色卡或世界书中的自定义推演提示词。</p>
+<div class="code-block"><div class="code-label"><span>轻量 CoT 示例</span><button class="copy-btn" type="button">复制</button></div><pre><code>生成回复前依次检查：
+
+1. 当前场景中有哪些人物、地点和时间条件；
+2. 每个角色知道什么、不知道什么；
+3. 每个角色当前最直接的目标和情绪；
+4. user 的行为会产生什么现实影响；
+5. 下一步行动是否符合角色性格和已有剧情；
+6. 回复是否出现设定冲突或越权知情。</code></pre></div>
+<h3>CoT 可以单独用于任何角色卡</h3>
+<div class="cards"><article class="card"><h4>普通文字卡</h4><p class="muted">整理角色动机、信息差和剧情连续性。</p></article><article class="card"><h4>群像或导演卡</h4><p class="muted">安排 NPC 日程、场景位置和各自目标。</p></article><article class="card"><h4>系统型角色卡</h4><p class="muted">检查战斗条件、任务判定或其他专项规则。</p></article></div>
+<p>Zod 卡可以没有专项 CoT；没有任何变量的文字卡，也可以使用复杂 CoT。</p>
+<h3>完整通用 CoT 通常放在预设里</h3>
+<div class="compare"><div class="compare-side"><h4>预设自定义 CoT</h4><p class="muted">保存通用的场景检查、人物动机、信息差、剧情连续性和输出检查。</p></div><div class="compare-vs">+</div><div class="compare-side"><h4>角色卡专项增量</h4><p class="muted">只补充本卡独有的群像规则、世界机制、人物限制和特殊格式。</p></div></div>
+<div class="code-block"><div class="code-label"><span>卡片专项 CoT 示例</span><button class="copy-btn" type="button">复制</button></div><pre><code>群像场景额外检查：
+
+- 当前场景中是否存在其他学生或教师；
+- NPC 不应无理由同时围绕 user 行动；
+- 不在现场的角色不能直接知道现场信息；
+- 每名 NPC 应保留自己的日程、目的和行动范围。</code></pre></div>
+<div class="callout good"><strong>推荐组合</strong>预设通用 CoT + 角色卡专项增量 + 按条件触发的特殊模块。不要让每张卡重复携带一整套相同 CoT。</div>
+<h3>变量更新分析不等于完整 CoT</h3>
+<p>Zod 更新格式中可能包含一段 <code>&lt;analysis&gt;</code>，它只负责判断哪些变量需要更新、路径是什么，以及应该新增还是替换。</p>
+<div class="compare"><div class="compare-side"><h4>完整 CoT</h4><p class="muted">处理人物、场景、信息差、剧情推进和输出质量。</p></div><div class="compare-vs">≠</div><div class="compare-side"><h4>变量更新分析</h4><p class="muted">只检查本轮有哪些状态需要写入 Zod。</p></div></div>
+<h3>避免空洞 CoT</h3>
+<ul class="checklist"><li>不要只写“深入思考”“仔细分析”，每一步都要有明确检查对象。</li><li>不要在 CoT 中重复整份角色设定和世界书。</li><li>不要提前锁死剧情结果，只规定判断条件和边界。</li><li>没有触发相关场景时，应允许跳过专项模块。</li></ul>
+</section>
+<section class="section" id="calc-script">
+<div class="section-head"><div class="section-no">13</div><div><h2>计算脚本：酒馆助手脚本的一种用途</h2><p class="section-kicker">本章只讲变量计算和自动结算，不把所有脚本能力混在一起。</p></div></div>
+<div class="callout"><strong>先划清范围</strong>酒馆助手脚本还可以实现 UI、按钮、弹窗、控制中心、消息监听、世界书操作、API 调用和其他交互功能。这些能力会与正则一起放到第三章。本节所说的“计算脚本”，只指负责变量计算和自动结算的脚本。</div>
+<p class="lead">计算脚本适合接管那些输入已经明确、可以按照固定规则重复得到相同结果的工作。</p>
+<div class="cards"><article class="card"><h4>数值计算</h4><p class="muted">金钱、经验、伤害、减伤、负重、资源产出和消耗。</p></article><article class="card"><h4>联动判断</h4><p class="muted">升级、关系阶段、任务奖励、成就和多字段同步。</p></article><article class="card"><h4>维护工作</h4><p class="muted">冷却时间、过期记录、重复事件拦截和临时数据清理。</p></article></div>
+<h3>模型负责判断事件，计算脚本负责处理结果</h3>
+<p>例如一次任务完成后，需要增加金钱、经验、关系值，并检查升级和成就。模型没有必要把所有结果逐条算完。</p>
+<div class="code-block"><div class="code-label"><span>模型只写入源事件</span><button class="copy-btn" type="button">复制</button></div><pre><code>[
+  {
+    "op": "add",
+    "path": "/待处理事件/-",
+    "value": {
+      "类型": "任务完成",
+      "任务ID": "quest_017",
+      "完成品质": "优秀",
+      "协助角色": ["埃莉丝"]
+    }
+  }
+]</code></pre></div>
+<div class="flow"><div class="flow-node">模型确认任务完成</div><div class="flow-arrow">→</div><div class="flow-node">写入源事件</div><div class="flow-arrow">→</div><div class="flow-node">计算脚本读取规则</div><div class="flow-arrow">→</div><div class="flow-node">更新奖励与联动变量</div><div class="flow-arrow">→</div><div class="flow-node">清理待处理事件</div></div>
+<p>模型只需要理解“发生了什么”；计算脚本再处理这件事会产生哪些确定结果。</p>
+<div class="callout good"><strong>最简单的分工</strong>需要理解剧情含义的判断交给模型；根据已有输入可以直接算出的结果交给计算脚本。</div>
+</section>
+<section class="section" id="calc-balance">
+<div class="section-head"><div class="section-no">14</div><div><h2>Zod 与计算脚本需要怎样分工</h2><p class="section-kicker">这里的“平衡”是工作量分配，不是游戏数值平衡。</p></div></div>
+<p class="lead">目标不是追求固定的五五开，而是尽量减少模型每轮必须显式输出的变量数量。</p>
+<h3>先问两个问题</h3>
+<div class="cards"><article class="card"><div class="card-icon">问</div><h4>需要理解剧情吗</h4><p class="muted">任务是否完成、角色是否答应、行为是否构成欺骗——交给模型。</p></article><article class="card"><div class="card-icon">算</div><h4>可以直接计算吗</h4><p class="muted">奖励、经验、等级、阈值和多字段联动——交给计算脚本。</p></article><article class="card"><div class="card-icon">主</div><h4>谁是主要写入者</h4><p class="muted">同一个最终变量不要同时由模型和脚本重复修改。</p></article></div>
+<h3>为什么计算脚本能减轻模型压力</h3>
+<p>一次事件如果最终影响十个变量，完全依靠模型时，它必须读取旧值、完成计算、写出十条路径，并保证没有遗漏和冲突。</p>
+<p>计算脚本可以把十几条结果压缩成一条源事件，再从这条事件自动推导其余变化。</p>
+<div class="compare"><div class="compare-side"><h4>模型全量更新</h4><p class="muted">输出长、路径多、容易使用旧值、漏写或重复结算。</p></div><div class="compare-vs">→</div><div class="compare-side"><h4>模型事件 + 脚本结算</h4><p class="muted">模型只做语义判断，脚本统一计算并保持多字段一致。</p></div></div>
+<h3>可用的经验参考</h3>
+<div class="table-wrap"><table><thead><tr><th>卡片类型</th><th>模型显式更新</th><th>计算脚本自动更新</th></tr></thead><tbody><tr><td>轻量剧情卡</td><td>70%～100%</td><td>0%～30%</td></tr><tr><td>任务、关系和成长混合卡</td><td>30%～50%</td><td>50%～70%</td></tr><tr><td>战斗、经营和经济系统卡</td><td>10%～30%</td><td>70%～90%</td></tr></tbody></table></div>
+<p class="small muted">这里统计的是最终变量变化中，需要模型亲自输出的比例，不是代码量，也不是变量总数。这只是经验参考，不是必须达到的指标。</p>
+<h3>不要让模型和计算脚本争抢变量</h3>
+<div class="callout danger"><strong>错误示例</strong>模型直接增加好感度，同时计算脚本又根据同一关系事件增加好感度。一次互动可能因此被重复结算。</div>
+<div class="compare"><div class="compare-side"><h4>简单系统</h4><p class="muted">模型判断关系变化，并直接修改好感度。</p></div><div class="compare-vs">或</div><div class="compare-side"><h4>复杂系统</h4><p class="muted">模型写入关系事件，由计算脚本统一修改好感度和关系阶段。</p></div></div>
+<p>两种方案都可以。关键是同一个最终结果只保留一个主要写入者。</p>
+<h3>不要为了脚本化而脚本化</h3>
+<p>当前地点、服装、姿态、任务阶段和是否获得情报等简单语义变量，通常可以直接由模型更新。</p>
+<div class="code-block"><div class="code-label"><span>简单变量直接更新即可</span><button class="copy-btn" type="button">复制</button></div><pre><code>{
+  "op": "replace",
+  "path": "/角色/埃莉丝/服装",
+  "value": "学生会制服"
+}</code></pre></div>
+<p>只有当服装还会联动防御、负重、温度、套装效果或多个 UI 状态时，才值得考虑交给计算脚本进一步处理。</p>
+<div class="callout warn"><strong>使用计算脚本的判断标准</strong>它是否能明显减少模型输出、避免重复计算，或保证多个变量始终一致。如果不能，就不要平白增加工程复杂度。</div>
+</section>
+<section class="section" id="chapter-2-summary">
+<div class="section-head"><div class="section-no">15</div><div><h2>第二章总结</h2><p class="section-kicker">把三个概念放回各自的位置。</p></div></div>
+<div class="cards"><article class="card"><div class="card-icon">Z</div><h4>Zod</h4><p class="muted">保存和更新长期状态。本文中的 Zod 已包含 MVU 变量更新机制。</p></article><article class="card"><div class="card-icon">C</div><h4>CoT</h4><p class="muted">独立的推演提示词。通常以预设通用 CoT 加角色卡专项增量的方式使用。</p></article><article class="card"><div class="card-icon">算</div><h4>计算脚本</h4><p class="muted">酒馆助手脚本的一种，用于确定性计算、自动结算和变量联动。</p></article></div>
+<div class="callout good"><strong>记住这一句</strong>模型负责理解发生了什么，计算脚本负责计算产生了什么结果。</div>
+<ul class="checklist"><li>不要把 MVU 和 Zod 拆成两套并列的新手课程。</li><li>不要把 CoT 与 Zod 强绑定，也不要把变量更新分析当成完整 CoT。</li><li>不要让模型承担大量重复、确定性的计算。</li><li>不要让模型与计算脚本同时修改同一个最终变量。</li><li>不要把计算脚本误当成酒馆助手脚本的全部能力。</li></ul>
+<p>下一章将继续介绍酒馆助手脚本的其他能力，以及正则如何参与 UI、显示和交互流程。</p>
+</section>
+<footer class="footer"><strong>TavernWeave 奶人教程 · v0.3</strong><br/><span class="small">内容会继续迭代。Skill 阵列与安装说明见 <a href="https://github.com/LiarMTTT/TavernWeave" rel="noreferrer" target="_blank">TavernWeave 仓库</a>。</span></footer>
