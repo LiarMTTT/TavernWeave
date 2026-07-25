@@ -8,6 +8,7 @@ gate for a release candidate.
 | Changed surface | Minimum evidence |
 | --- | --- |
 | Worldbook or rule text | UTF-8/JSON parse, model-visible lint, targeted contract, staged JSON pack. |
+| Card-bound worldbook or version surface | Stable-ID and version resolution, attachment check, maintained-source semantic parity, stale-version negative fixture, staged JSON pack. |
 | Initial variables or schema | Parse or syntax check, full field-chain trace, required/forbidden contract, staged JSON pack. |
 | Update protocol or output format | Parser and protocol contract, examples/fixtures, model-text lint, reverse forbidden check, staged JSON pack. |
 | Helper or runtime script | Language syntax, dependency/API contract, focused fixtures, staged JSON pack. |
@@ -29,6 +30,8 @@ Before producing artifacts, require:
 - active profile and manifest re-resolved from disk;
 - source changes complete within the approved scope;
 - existing release artifacts inventoried and preserved;
+- every card-bound or co-delivered worldbook resolved by stable ID from maintained
+  source, with its version surface and attachment target declared;
 - plan and configuration schemas valid;
 - dry-run output reviewed;
 - targeted checks passing;
@@ -41,14 +44,20 @@ explicitly selected.
 
 1. Compose generated components into staging.
 2. Verify declared required outputs and compare them with the intended source snapshot.
-3. Pack JSON from maintained component sources.
-4. Parse the packed JSON and run the contract suite.
-5. Embed the validated JSON into a copied or declared PNG shell according to manifest
+3. Resolve the card release and every bound worldbook from the active manifest; reject
+   stale or ambiguous sources before packing.
+4. Pack JSON from maintained component sources.
+5. Parse the packed JSON, inspect each worldbook attachment, and compare stable ID,
+   version, and semantic content with the resolved maintained source.
+6. When a standalone companion worldbook is declared, compare it with the card-bound
+   copy and reject version or content drift.
+7. Run the contract suite, including a stale-worldbook negative fixture.
+8. Embed the validated JSON into a copied or declared PNG shell according to manifest
    payload policy.
-6. Preserve all unrelated PNG chunks and replace only declared card payload chunks.
-7. Re-open the PNG, enumerate payload keywords, decode each payload, and compare its
+9. Preserve all unrelated PNG chunks and replace only declared card payload chunks.
+10. Re-open the PNG, enumerate payload keywords, decode each payload, and compare its
    parsed card semantics with the packed JSON.
-8. Record artifact hashes, sizes, and write paths.
+11. Record artifact hashes, sizes, and write paths.
 
 For broad SillyTavern compatibility, require a `chara` payload unless the target host
 contract explicitly proves a different import path. If an additional V3 payload is
@@ -59,6 +68,8 @@ declared, require it to be semantically equal to the JSON and reject duplicates.
 Require all applicable checks to pass:
 
 - configuration, schema, and version alignment;
+- card-bound and co-delivered worldbook ID, version, attachment, and maintained-source
+  parity, including rejection of the previous version;
 - dependency, conflict, and component-output ownership;
 - syntax and UTF-8 integrity with no replacement characters;
 - stable required and forbidden contract assertions;
@@ -79,6 +90,7 @@ rebuild; never patch the packed output to make the audit pass.
 Keep these checks distinct from offline success when they are in scope:
 
 - import JSON and PNG into the target SillyTavern version;
+- inspect the imported card's actual bound worldbook identity and declared version;
 - start a new chat and verify greetings and alternate greetings;
 - exercise worldbook activation, MVU updates, regex rendering, and helper permissions;
 - inspect the real DOM, computed styles, console, iframe/bridge state, and interactions;
