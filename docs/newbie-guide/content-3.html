@@ -1,0 +1,120 @@
+<section class="section" id="workspace">
+<div class="section-head"><div class="section-no">04</div><div><h2>工作区、版本记录和在线仓库</h2><p class="section-kicker">先拆开三个经常被混成一件事的概念。</p></div></div>
+<div class="cards"><article class="card"><div class="card-icon">1</div><h3>普通项目文件夹</h3><p class="muted">只是文件集合。Agent 能修改，但目录本身没有可靠的版本历史。</p></article><article class="card"><div class="card-icon">2</div><h3>本地 Git 仓库</h3><p class="muted">在当前电脑记录提交、分支、差异和恢复点，不需要先连接互联网。</p></article><article class="card"><div class="card-icon">3</div><h3>线上 Git 仓库</h3><p class="muted">GitHub、GitLab、Gitee 等服务器上的另一份仓库，用于协作、发布和异地保存已推送版本。</p></article></div>
+<div class="callout warn"><strong>关键区别</strong>Agent 把工作区初始化为 Git 仓库，不等于把项目上传到了 GitHub；配置在线仓库，也不等于它一定公开。</div>
+<div class="flow"><div class="flow-node">项目文件夹</div><div class="flow-arrow">→</div><div class="flow-node">初始化本地 Git</div><div class="flow-arrow">→</div><div class="flow-node">建立本地提交</div><div class="flow-arrow">→</div><div class="flow-node">有发布/协作需求时再连接线上</div></div>
+<div class="code-block"><div class="code-label"><span>只初始化本地 Git · 不上传</span><button class="copy-btn" type="button">复制</button></div><pre><code>请检查当前工作区是否已经是本地 Git 仓库。
+
+如果不是，请初始化一个本地 Git 仓库，并建立第一次基础提交。
+
+本轮要求：
+1. 不创建任何 GitHub、GitLab 或其他在线仓库；
+2. 不连接任何远程地址；
+3. 不上传或推送文件；
+4. 告诉我哪些文件被 Git 记录；
+5. 告诉我如何恢复到这次基础提交。</code></pre></div>
+<h3>Git 不是完整备份</h3><p>本地 Git 与项目通常仍在同一块硬盘；未提交文件、忽略文件、外部素材和运行数据也未必进入仓库。版本记录、在线同步和完整备份应当分别理解。</p>
+</section>
+<section class="section" id="tw">
+<div class="section-head"><div class="section-no">05</div><div><h2>TavernWeave Skill 阵列怎样运行</h2><p class="section-kicker">不教新手训练 Skill；只教你怎样调用已经准备好的专业阵列。</p></div></div>
+<p class="lead">Skill 不是另一个模型，也不是需要重新训练的“大脑”。它是 Agent 可以按需读取的专业工作包。</p>
+<div class="cards"><article class="card"><h4>工作流程</h4><p class="muted">任务进入条件、执行顺序、阶段门与交接格式。</p></article><article class="card"><h4>专业规则</h4><p class="muted">强制约束、禁止事项、版本边界、参考资料和范式。</p></article><article class="card"><h4>验证能力</h4><p class="muted">检查表、脚本、测试方式、停止条件和回滚要求。</p></article></div>
+<h3>TW 阵列中的主要职责</h3>
+<div class="table-wrap"><table><thead><tr><th>Skill</th><th>负责什么</th></tr></thead><tbody><tr><td><code>tavern-card-builder</code></td><td>设计文字卡或 MVU 变量卡，处理 schema、初始化、世界书、提示词与开局协议。</td></tr><tr><td><code>sillytavern-card-components</code></td><td>无损拆卡、组件边界、依赖声明与往返一致性。</td></tr><tr><td><code>sillytavern-card-pipeline</code></td><td>从维护源码组装、验证、构建并打包 JSON/PNG。</td></tr><tr><td><code>sillytavern-api-reference</code></td><td>查证 ST、Tavern Helper、STScript、EJS、宏和 MVU 的版本敏感 API。</td></tr><tr><td><code>sillytavern-runtime-debug</code></td><td>在真实 ST 中复现问题，检查 iframe、DOM、控制台、数据与生命周期。</td></tr><tr><td><code>sillytavern-embedded-ui</code></td><td>设计或审查开局页、状态栏、控制中心、抽屉和弹窗。</td></tr><tr><td><code>code-quality-workflow</code></td><td>代码审计、重构门控、最小修复和回归验证。</td></tr><tr><td><code>rolecard-workshop-ops</code></td><td>诊断和运维角色卡工坊发布链，并保护生产坐标与凭据。</td></tr></tbody></table></div>
+<h3>一次任务如何进入阵列</h3>
+<div class="flow"><div class="flow-node">用户描述任务</div><div class="flow-arrow">→</div><div class="flow-node">读取项目规则与 TW 索引</div><div class="flow-arrow">→</div><div class="flow-node">选择相关 Skill</div><div class="flow-arrow">→</div><div class="flow-node">查询 ST DB</div><div class="flow-arrow">→</div><div class="flow-node">计划、执行、验证、交接</div></div>
+<div class="callout"><strong>不是每次全阵列出动</strong>检查世界书时，不该同时加载 Live2D、工坊发布和无关前端 Skill。按需路由能减少噪声、范围膨胀与 Token 浪费。</div>
+<h3>审查和修复是两条链</h3>
+<div class="code-block"><div class="code-label"><span>代码治理链</span><button class="copy-btn" type="button">复制</button></div><pre><code>code-audit-orchestrator
+        ↓ 组织只读扫描与合并结果
+code-quality-audit
+        ↓ 提供具体证据
+code-refactor-gate
+        ↓ 判断能否重构、允许改多大
+code-optimization-loop
+        ↓ 执行最小安全修改并验证</code></pre></div>
+<p>Agent 不能因为“看起来不够漂亮”就重写项目。没有错误、测试、运行现象或门控结论，就不应自动进入大规模优化。</p>
+<div class="code-block"><div class="code-label"><span>安装 TavernWeave</span><button class="copy-btn" type="button">复制</button></div><pre><code>请安装并启用这个 Skill 仓库：
+https://github.com/LiarMTTT/TavernWeave</code></pre></div>
+<div class="code-block"><div class="code-label"><span>调用 TW 阵列开工</span><button class="copy-btn" type="button">复制</button></div><pre><code>请使用 TavernWeave Skill 阵列处理当前任务。
+
+【任务目标】
+[写你最终想得到的结果]
+
+【禁止事项】
+[写不能修改或破坏的内容]
+
+【完成标准】
+[写你准备怎样验收]
+
+开始前请先：
+1. 判断当前任务属于什么类型；
+2. 说明准备调用哪些 TW Skill；
+3. 只加载与任务直接相关的 Skill；
+4. 查询 ST 开发指南 DB 中对应条目；
+5. 区分已确认事实和待验证推测；
+6. 输出预计修改范围、风险和验证方式；
+7. 在我批准前不要修改文件。</code></pre></div>
+</section>
+<section class="section" id="db">
+<div class="section-head"><div class="section-no">06</div><div><h2>ST 开发指南 DB 怎么使用</h2><p class="section-kicker">它是工程事实库，不是要求你从第一页背到最后一页的课本。</p></div></div>
+<div class="compare"><div class="compare-side"><h4>TW Skill</h4><p><strong>回答：</strong>这一类任务应该按照什么流程做。</p><div class="pill-row"><span class="pill">步骤</span><span class="pill">门控</span><span class="pill">验收</span><span class="pill">交接</span></div></div><div class="compare-vs">+</div><div class="compare-side"><h4>ST 开发指南 DB</h4><p><strong>回答：</strong>当前技术体系中哪些 API、结构和范式是正确的。</p><div class="pill-row"><span class="pill">版本</span><span class="pill">API</span><span class="pill">源码证据</span><span class="pill">避坑</span></div></div></div>
+<h3>不要全库通读，按任务查询</h3>
+<div class="table-wrap"><table><thead><tr><th>任务</th><th>优先查询方向</th></tr></thead><tbody><tr><td>变量更新失效</td><td>MVU、schema、初始化、生命周期、JSON Patch</td></tr><tr><td>状态栏不刷新</td><td>变量读取、iframe 初始化、事件监听、渲染管线</td></tr><tr><td>世界书工具</td><td>Worldbook API、作用域、创建/更新/卸载、触发位置</td></tr><tr><td>ST 扩展</td><td>manifest、入口、事件、安装更新与宿主 API</td></tr><tr><td>页面样式消失</td><td>DOM、custom- 前缀、CSS 注入、加载顺序与控制台</td></tr></tbody></table></div>
+<div class="code-block"><div class="code-label"><span>查询 DB 的标准指令</span><button class="copy-btn" type="button">复制</button></div><pre><code>这是一个 SillyTavern 开发任务。
+
+任务目标：
+[写清楚你想实现什么]
+
+请先不要修改文件。
+
+第一步：
+查看项目结构，并查询 ST 开发指南 DB 中与本任务直接相关的条目。
+
+第二步：
+向我输出：
+1. 你对任务目标的理解；
+2. 查询到的相关指南；
+3. 当前项目使用的技术路线；
+4. 预计修改的文件；
+5. 可能存在的风险；
+6. 完成后的验证方法；
+7. 当前有哪些信息仍然不能确定。
+
+不要扫描或引用与任务无关的全部 DB 内容。
+不要把推测写成已经验证的事实。</code></pre></div>
+</section>
+<section class="section" id="a0">
+<div class="section-head"><div class="section-no">07</div><div><h2>A0：开始驾驭 AI</h2><p class="section-kicker">A0 不是为了把提示词写复杂，而是确保开工同步、执行有边界、结束有交接。</p></div></div>
+<h3>新手版三格检查</h3>
+<div class="cards"><article class="card"><div class="card-icon">A</div><h4>我要什么</h4><p class="muted">写最终可见结果，不写“高级一点”“优化一下”。</p></article><article class="card"><div class="card-icon">B</div><h4>哪些不能动</h4><p class="muted">变量结构、已有功能、框架、目录范围、发布坐标。</p></article><article class="card"><div class="card-icon">C</div><h4>怎样算完成</h4><p class="muted">能点击、能刷新、无新增报错、旧功能不坏、能恢复。</p></article></div>
+<div class="code-block" id="a0-template"><div class="code-label"><span>A0 极轻量开工模板</span><button class="copy-btn" type="button">复制</button></div><pre><code>【任务目标】
+我希望得到：
+[描述最终结果]
+
+【当前情况】
+项目现在：
+[描述已有内容或问题]
+
+【禁止事项】
+不要：
+[不能修改、删除或破坏的内容]
+
+【执行要求】
+先检查项目和相关指南。
+先输出计划，不要立刻修改。
+计划中列出修改文件、风险和验证方式。
+
+【完成标准】
+只有满足以下条件才算完成：
+[列出可以亲自检查的结果]
+
+【交接要求】
+完成后告诉我：
+1. 修改了什么；
+2. 修改了哪些文件；
+3. 如何验证；
+4. 还存在哪些问题；
+5. 如何恢复到修改前。</code></pre></div>
+<div class="callout good"><strong>最重要的一句</strong>只有满足完成标准才算完成。Agent 的总结、测试绿灯或页面能打开，都不能单独替代实际验收。</div>
+</section>
