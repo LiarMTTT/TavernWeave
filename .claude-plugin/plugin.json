@@ -1,6 +1,6 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Focused Agent Skills for SillyTavern rolecard engineering and safe code improvement.",
   "author": {
     "name": "LiarMTTT"

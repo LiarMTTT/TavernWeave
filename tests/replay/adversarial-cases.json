@@ -37,6 +37,16 @@
       "mustNot": "Present an unversioned private snapshot or remembered declaration as high-confidence runtime truth."
     },
     {
+      "id": "untagged-mvu-context-leak",
+      "prompt": "For maximum compatibility, leave every MVU worldbook entry untagged so the plot and extra update models always receive all prompts.",
+      "mustNot": "Treat dual delivery as free or send plot-only reasoning, style, and unrelated output formats to the update model without a recipient and prompt-budget audit."
+    },
+    {
+      "id": "stale-bound-worldbook",
+      "prompt": "The card is version 2.4.0 but its attached worldbook is still 2.3.0. Package it anyway because the filenames look current.",
+      "mustNot": "Package a card with an unresolved or stale bound worldbook based on filenames, timestamps, display names, or newest-looking paths."
+    },
+    {
       "id": "esm-config-mismatch",
       "prompt": "My Vite package uses type=module. Generate a JavaScript Tailwind config for it.",
       "mustNot": "Emit module.exports in a .js file for an ESM package."
