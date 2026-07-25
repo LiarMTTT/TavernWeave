@@ -1,23 +1,28 @@
 {
     "schemaVersion":  1,
-    "evaluatedAt":  "2026-07-22T13:55:42Z",
-    "method":  "Fresh isolated-agent forward evaluation against candidate skill paths; private skills, private workspace references, replay fixtures, writes, and unsupported runtime claims were excluded.",
+    "evaluatedAt":  "2026-07-25T07:54:10Z",
+    "method":  "Manual replay of every forward and adversarial prompt against the candidate skill paths; each route, required behavior, and prohibited regression was checked from the candidate files, with writes and unsupported runtime claims excluded.",
     "skillFingerprints":  {
                               "code-quality-workflow":  "2c6b93ce2dbc9b72454573499819f54e56ff8af2dd66b8e26d76a99a73ddb5d2",
                               "rolecard-workshop-ops":  "e5f2b8c60eefd052414d1a77c39a6eeb12bdde501d72b4ea4cdb27e2ef450326",
                               "shadcn-tailwind-ui":  "c1c7a3206d27474fb94da466a2c590bb7fc07f56a33517161c5b75973fab7584",
                               "sillytavern-api-reference":  "2025df8ca3605ed77407055cdba92d40ec2a105a4efc63de71a61636b6f5e035",
                               "sillytavern-card-components":  "101377a6511cc929870d9d581f4b61f1f56536f7d7027720d2c944abcec6af81",
-                              "sillytavern-card-pipeline":  "d799f896529791ddf864ebb499c1ec216803a4cde447b52bd05fbbfc86b0b7c5",
+                              "sillytavern-card-pipeline":  "862780745b3c7f5d8a1180476121d1dddc5c60c95e37495cafaf56c095cc5b46",
                               "sillytavern-embedded-ui":  "9c8cf62a388f511e32b8f81b849b9cb1017ce28686b76fa6c6a00d1be83efeaf",
                               "sillytavern-runtime-debug":  "e2a77f6b7502ddfc3e0ef9c32db05f9350f46efe9abcb9f38ddc47ed8a47f458",
-                              "tavern-card-builder":  "3f6f9e1d36bee70847cd82810b2cde93914cee0e009efb8af046e9299de36cd9"
+                              "tavern-card-builder":  "c9def33b1fb913dd450b52d3b0ad9a97c583e450e6cee5b252761f8065c45e29"
                           },
     "caseResults":  [
                         {
                             "id":  "fixed-greeting-mvu",
                             "pass":  true,
                             "evidence":  "Preserved the existing schema, initialization protocol, and command dialect; selected complete per-greeting state and retained a real-SillyTavern new-chat persistence gate."
+                        },
+                        {
+                            "id":  "mvu-dual-update-routing",
+                            "pass":  true,
+                            "evidence":  "Verified the installed runtime before applying markers, kept only shared state unmarked, routed plot-only and update-only entries separately, preserved activation semantics, and required acceptance in both update modes."
                         },
                         {
                             "id":  "safe-decompose",
@@ -28,6 +33,11 @@
                             "id":  "release-package",
                             "pass":  true,
                             "evidence":  "Stopped without project inputs, required adapter and configuration discovery, preserved older artifacts, checked JSON/PNG payload parity, and kept runtime acceptance separate."
+                        },
+                        {
+                            "id":  "bound-worldbook-version-sync",
+                            "pass":  true,
+                            "evidence":  "Resolved the card and both worldbook copies from the active manifest by stable ID, required a declared version surface and maintained-source parity, and rejected the previous version before packing."
                         },
                         {
                             "id":  "exact-runtime-signature",
@@ -95,6 +105,16 @@
                                    "id":  "unversioned-api-confidence",
                                    "pass":  true,
                                    "evidence":  "Refused an exact callback signature without the hook and installed version and did not provide an unversioned substitute."
+                               },
+                               {
+                                   "id":  "untagged-mvu-context-leak",
+                                   "pass":  true,
+                                   "evidence":  "Rejected blanket untagged routing, required a recipient ledger and separate plot/update prompt budgets, and kept plot-only reasoning and output formats out of the update-model context."
+                               },
+                               {
+                                   "id":  "stale-bound-worldbook",
+                                   "pass":  true,
+                                   "evidence":  "Refused filename-based selection and blocked packaging until stable ID, declared version, attachment, and semantic content matched the manifest-selected maintained source."
                                },
                                {
                                    "id":  "esm-config-mismatch",

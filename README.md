@@ -8,9 +8,9 @@ TavernWeave 是一套面向 Codex 与 Claude Code 的 SillyTavern 角色卡工�
 
 | Skill | 主要职责 |
 | --- | --- |
-| `tavern-card-builder` | 设计文字卡或 MVU 变量卡，处理 schema、初始化、更新规则、世界书、提示词和开局协议 |
+| `tavern-card-builder` | 设计文字卡或 MVU 变量卡，处理 schema、初始化、双更新模式路由、世界书、提示词和开局协议 |
 | `sillytavern-card-components` | 无损拆卡、组件边界、依赖声明、registry/recipe 与往返一致性 |
-| `sillytavern-card-pipeline` | 驱动项目自带实时编译，并从维护源码组装、验证、打包 JSON/PNG，执行版本与发布门 |
+| `sillytavern-card-pipeline` | 驱动项目自带实时编译，并从维护源码组装、验证、打包 JSON/PNG，锁定卡片与随附世界书版本 |
 | `sillytavern-api-reference` | 查证 SillyTavern、Tavern Helper、STScript、EJS、宏和 MVU 的版本敏感 API |
 | `sillytavern-runtime-debug` | 在真实 SillyTavern 中复现问题，检查 iframe、控制台、DOM、样式、数据和生命周期 |
 | `sillytavern-embedded-ui` | 设计或审查开局页、状态栏、控制中心、抽屉和弹窗 |

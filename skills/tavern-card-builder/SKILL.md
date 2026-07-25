@@ -1,6 +1,6 @@
 ---
 name: tavern-card-builder
-description: Plan and author maintainable SillyTavern character cards, including text cards, MVU variable cards, retrofits, schemas, initialization, update rules, lorebooks, prompts, openings, regex requirements, and companion-script requirements. Use when creating a new card, converting an existing card, adding a gameplay system, repairing an authoring protocol, or tracing a field across the card design. Do not use it as the primary skill for component-library extraction, build/package/release operations, exact API signature lookup, real-runtime debugging, embedded UI implementation, or workshop infrastructure; route those tasks to the focused TavernWeave skills.
+description: Plan and author maintainable SillyTavern character cards, including text cards, MVU variable cards, retrofits, schemas, initialization, update rules, single-model or extra-model update routing, lorebooks, prompts, openings, regex requirements, and companion-script requirements. Use when creating a new card, converting an existing card, adding a gameplay system, repairing an authoring protocol, or tracing a field across the card design. Do not use it as the primary skill for component-library extraction, build/package/release operations, exact API signature lookup, real-runtime debugging, embedded UI implementation, or workshop infrastructure; route those tasks to the focused TavernWeave skills.
 ---
 
 # Tavern Card Builder
@@ -17,7 +17,11 @@ Design the card as a set of explicit contracts. Keep authoring decisions here an
    - hybrid card with text protocol plus optional scripts or embedded UI;
    - retrofit that must preserve an existing card's voice, data, and command dialect.
 4. Ask only decisions that materially change the result. Do not force a fixed interview ritual for a narrow edit.
-5. Record unresolved version-sensitive claims as assumptions and keep a real-runtime acceptance gate.
+5. For an MVU card, identify whether updates share the plot generation or use an
+   extra update-model pass. For a new MVU zod card whose runtime supports entry
+   routing, prefer a dual-compatible layout; preserve an existing card's current mode
+   unless migration is explicitly authorized.
+6. Record unresolved version-sensitive claims as assumptions and keep a real-runtime acceptance gate.
 
 For the complete authoring sequence, read [authoring-workflow.md](references/authoring-workflow.md).
 
@@ -40,7 +44,7 @@ schema -> initialization -> update rules -> model projection -> runtime reader
        -> renderer -> write-back -> cleanup/migration -> examples/tests
 ```
 
-Do not add a field that has no consumer or lifecycle. Read [variable-systems.md](references/variable-systems.md) before writing schemas or update rules.
+Do not add a field that has no consumer or lifecycle. Read [variable-systems.md](references/variable-systems.md) before writing schemas, update rules, or MVU model-routing prefixes.
 
 ## Select the opening strategy
 

@@ -6,14 +6,15 @@
 2. Schema design
 3. Initialization
 4. Update rules
-5. Projection and rendering
-6. Cleanup and migration
+5. Update-model routing
+6. Projection and rendering
+7. Cleanup and migration
 
 ## 1. Capability detection
 
-Identify the actual MVU implementation and command dialect from installed source, card rules, type declarations, or verified runtime evidence. Do not mix native commands, an MVU JSONPatch dialect, and pure RFC 6902 semantics.
+Identify the actual MVU implementation, command dialect, and model-context modes from installed source, card rules, type declarations, or verified runtime evidence. Do not mix native commands, an MVU JSONPatch dialect, and pure RFC 6902 semantics.
 
-Use `$sillytavern-api-reference` for exact operations and signatures. Preserve the card's current dialect unless migration is explicitly requested and verified.
+Use `$sillytavern-api-reference` for exact operations and signatures. Preserve the card's current dialect and update mode unless migration is explicitly requested and verified.
 
 ## 2. Schema design
 
@@ -46,13 +47,54 @@ Do not delete `<initvar>` or `<UpdateVariable>` from greetings simply because a 
 - Include relationship, counter, cleanup, and invariant behavior only when the system actually needs it.
 - Avoid full hard-coded output examples that a model may copy verbatim; prefer structural constraints and small non-copyable fragments.
 
-## 5. Projection and rendering
+## 5. Update-model routing
+
+Treat the update mode as an authoring contract:
+
+- **same-generation update**: the plot model writes narrative output and the variable
+  update command in one generation;
+- **extra update-model pass**: one model writes the plot, then a separate model reads
+  the result and writes the variable update command.
+
+Do not assume every MVU implementation supports entry-name routing. When the detected
+MVU zod runtime documents the `[mvu_plot]` and `[mvu_update]` convention, apply this
+matrix:
+
+| Entry name | Same-generation update | Extra update-model pass |
+| --- | --- | --- |
+| contains `[mvu_plot]` | normal activated entry | plot model only |
+| contains `[mvu_update]` | normal activated entry | update model only |
+| contains neither marker | normal activated entry | both models |
+
+The marker may occur anywhere in the entry name; do not require it to be a literal
+prefix. Routing does not activate an entry: normal disabled, keyword, green-light,
+sticky, depth, and ordering behavior still applies first. Treat a name containing both
+markers as ambiguous unless the installed implementation explicitly defines it.
+
+For a new dual-compatible card, use this baseline:
+
+- leave the current variable list unmarked only when both models need it;
+- mark variable update rules and variable output format with `[mvu_update]`;
+- mark plot-only reasoning, prose, or unrelated output formats with `[mvu_plot]`;
+- inventory every unmarked entry and justify why duplicating it into both model
+  contexts is necessary.
+
+An unmarked entry is not automatically wrong. It is a shared-context decision with
+prompt-budget and information-exposure cost. Do not send plot-only chain-of-thought,
+style scaffolding, or unrelated output formats to the update model merely for
+compatibility.
+
+For a retrofit, report the current mode and routing before editing names. Do not add
+markers blindly when the installed runtime ignores them or the card intentionally
+supports only one mode.
+
+## 6. Projection and rendering
 
 The model projection is not the full database. Send only state the model needs for the current turn. Keep routing prefixes compatible with the target prompt pipeline and verify which model receives each entry.
 
 For UI, define a presentation model rather than letting the UI mutate raw state ad hoc. Delegate exact DOM/runtime implementation to `$sillytavern-embedded-ui` and `$sillytavern-api-reference`.
 
-## 6. Cleanup and migration
+## 7. Cleanup and migration
 
 Specify:
 

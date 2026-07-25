@@ -8,6 +8,12 @@
       "expectedBehavior": "Preserve the detected dialect, select per-greeting initialization, and retain a real-runtime acceptance gate."
     },
     {
+      "id": "mvu-dual-update-routing",
+      "prompt": "Make this MVU zod card work with both same-generation updates and the extra update-model pass without duplicating every worldbook entry into both model contexts.",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Verify runtime support, keep the variable list intentionally shared, route update rules and output format to the update model, route plot-only instructions to the plot model, preserve normal activation, and require both-mode acceptance."
+    },
+    {
       "id": "safe-decompose",
       "prompt": "Split this packaged rolecard JSON into reusable components without changing the original file.",
       "expectedPrimarySkill": "sillytavern-card-components",
@@ -18,6 +24,12 @@
       "prompt": "Assemble the maintained sources, validate them, and produce versioned JSON and PNG release artifacts.",
       "expectedPrimarySkill": "sillytavern-card-pipeline",
       "expectedBehavior": "Discover the project adapter, keep source and artifacts separate, and stop at explicit release gates."
+    },
+    {
+      "id": "bound-worldbook-version-sync",
+      "prompt": "Package card version 2.4.0 with its attached and standalone companion worldbook, making sure an older 2.3.0 worldbook cannot be selected.",
+      "expectedPrimarySkill": "sillytavern-card-pipeline",
+      "expectedBehavior": "Resolve both artifacts from the active manifest by stable ID, require a machine-checkable version surface, compare attached and standalone worldbooks with maintained source, and reject the stale version."
     },
     {
       "id": "exact-runtime-signature",

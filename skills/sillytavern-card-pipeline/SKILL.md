@@ -7,10 +7,10 @@ description: >-
   running a project-provided watch build for Tavern Helper real-time editing; creating
   or checking a profile, manifest, operation plan, or contract; choosing validation
   from changed-file impact; composing version components; packing or re-packing a
-  card; generating final JSON or PNG artifacts; verifying embedded payload parity; or
-  preparing an explicit checkpoint or public release. Do not use for exploratory card
-  disassembly or shared component-library design; use sillytavern-card-components
-  instead.
+  card; synchronizing card-bound worldbook versions; generating final JSON or PNG
+  artifacts; verifying embedded payload parity; or preparing an explicit checkpoint
+  or public release. Do not use for exploratory card disassembly or shared
+  component-library design; use sillytavern-card-components instead.
 ---
 
 # SillyTavern Card Pipeline
@@ -87,7 +87,8 @@ Resolve the active files together:
 - **profile**: card-family identity, defaults, protocol, variable roots, recipe, and
   configuration links;
 - **manifest**: exact version paths, component mapping, packaging policy,
-  deliverables, field chains, and release-specific behavior;
+  deliverables, field chains, card-bound worldbook identities, and release-specific
+  behavior;
 - **plan**: a reviewable sequence of intended changes between known states;
 - **contract**: stable required and forbidden invariants.
 
@@ -132,13 +133,19 @@ forbidden regressions, not encode a temporary implementation preference.
    build pass.
 3. Compose into staging and verify required outputs, dependency resolution, syntax,
    and component parity.
-4. Pack JSON from component sources into the manifest's staged target. Never inject a
+4. Resolve every card-bound or co-delivered worldbook by stable ID from the active
+   manifest. Verify its maintained source and declared version match the card release;
+   do not select a worldbook by display name, timestamp, or newest-looking filename.
+5. Pack JSON from component sources into the manifest's staged target. Never inject a
    fix after packing; first update the maintained source, then pack again.
-5. Validate the packed JSON before embedding it.
-6. Embed JSON into a copied or explicitly declared PNG shell according to manifest
+6. Re-open the packed JSON and verify the attached worldbook identity, version surface,
+   and semantic content match the resolved maintained source. If a standalone
+   worldbook is also delivered, require it to be the same declared version and content.
+7. Validate the packed JSON before embedding it.
+8. Embed JSON into a copied or explicitly declared PNG shell according to manifest
    policy. Preserve unrelated chunks and verify every emitted card payload decodes to
    the packed JSON.
-7. Keep reverse extraction disabled by default. Use it only as a sandboxed round-trip
+9. Keep reverse extraction disabled by default. Use it only as a sandboxed round-trip
    check after packing and embedding.
 
 If re-packing an existing target is explicitly required, snapshot and hash the current
@@ -152,6 +159,7 @@ acceptance criteria.
 At minimum, prove:
 
 - configuration and version alignment;
+- card-to-worldbook stable-ID, version, attachment, and source parity;
 - contract and forbidden-regression checks;
 - complete declared component and deliverable sets;
 - packed JSON validity and source parity;
@@ -172,6 +180,7 @@ State:
 - for live iteration, the watcher readiness signal, output path, latest successful
   rebuild, and whether real-SillyTavern reload was verified;
 - active profile, manifest, plan, and contract;
+- resolved card/worldbook version pair and attachment verification;
 - files written and preserved artifacts;
 - targeted, standard, and release checks with pass or fail results;
 - JSON and PNG hashes plus payload-parity result;

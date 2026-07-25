@@ -33,6 +33,7 @@ remembered profile without re-reading its current target.
 Resolve and validate exact paths for:
 
 - component source or snapshot directory;
+- every card-bound or co-delivered worldbook source;
 - packed JSON target;
 - PNG shell and PNG target when applicable;
 - contracts, recipes, fixtures, and extra validators;
@@ -45,6 +46,28 @@ and other packaging policy owned by the project.
 Reject paths that escape the approved root, source/target aliasing, missing inputs,
 duplicate targets, and writes to an archived release not explicitly selected for
 replacement.
+
+## Card-bound worldbook version checks
+
+For every worldbook attached to a card or delivered as its required companion, resolve
+from the active manifest:
+
+- stable card ID and release version;
+- stable worldbook ID and maintained source path;
+- the worldbook version surface or deterministic derivation from release truth;
+- the exact card attachment field or project-owned binding operation;
+- whether an equivalent standalone worldbook deliverable is required.
+
+SillyTavern export shapes do not provide one universal worldbook version field. Adapt
+to the repository's existing schema, but require a machine-checkable version surface
+when card/worldbook alignment is a release invariant. Do not infer alignment from
+display names, file modification times, directory order, or a filename alone.
+
+Before packing, reject a missing, duplicate, stale, or unresolved worldbook binding.
+After packing, inspect the attached object and prove its stable ID, declared version,
+and semantic content match the maintained source selected by the manifest. If the
+worldbook has an independent schema version, validate it separately from the card
+release version rather than treating the two numbers as interchangeable.
 
 ## Plan checks
 
@@ -79,7 +102,8 @@ Express both positive and negative invariants. Depending on the card, cover:
 - status or embedded UI markers;
 - stable IDs, ordering, counts, and metadata;
 - packaging and payload rules;
-- version alignment across card and worldbook surfaces.
+- stable card/worldbook binding and version alignment across both surfaces;
+- rejection of the previous worldbook version after a card release advances.
 
 Update a contract only when the stable behavior intentionally changes. Add a forbidden
 check when retiring an old protocol or component so a later pack cannot silently
@@ -90,7 +114,7 @@ restore it.
 Use this decision order:
 
 1. Treat maintained component source as content truth.
-2. Treat the active manifest as exact version and artifact truth.
+2. Treat the active manifest as exact card/worldbook version and artifact truth.
 3. Treat the profile as family defaults and configuration selection.
 4. Treat the contract as acceptance truth.
 5. Treat the plan as intended mutation history.
