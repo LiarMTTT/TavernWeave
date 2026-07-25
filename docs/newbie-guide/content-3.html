@@ -20,10 +20,11 @@
 <p class="lead">Skill 不是另一个模型，也不是需要重新训练的“大脑”。它是 Agent 可以按需读取的专业工作包。</p>
 <div class="cards"><article class="card"><h4>工作流程</h4><p class="muted">任务进入条件、执行顺序、阶段门与交接格式。</p></article><article class="card"><h4>专业规则</h4><p class="muted">强制约束、禁止事项、版本边界、参考资料和范式。</p></article><article class="card"><h4>验证能力</h4><p class="muted">检查表、脚本、测试方式、停止条件和回滚要求。</p></article></div>
 <h3>TW 阵列中的主要职责</h3>
-<div class="table-wrap"><table><thead><tr><th>Skill</th><th>负责什么</th></tr></thead><tbody><tr><td><code>tavern-card-builder</code></td><td>设计文字卡或 MVU 变量卡，处理 schema、初始化、世界书、提示词与开局协议。</td></tr><tr><td><code>sillytavern-card-components</code></td><td>无损拆卡、组件边界、依赖声明与往返一致性。</td></tr><tr><td><code>sillytavern-card-pipeline</code></td><td>从维护源码组装、验证、构建并打包 JSON/PNG。</td></tr><tr><td><code>sillytavern-api-reference</code></td><td>查证 ST、Tavern Helper、STScript、EJS、宏和 MVU 的版本敏感 API。</td></tr><tr><td><code>sillytavern-runtime-debug</code></td><td>在真实 ST 中复现问题，检查 iframe、DOM、控制台、数据与生命周期。</td></tr><tr><td><code>sillytavern-embedded-ui</code></td><td>设计或审查开局页、状态栏、控制中心、抽屉和弹窗。</td></tr><tr><td><code>code-quality-workflow</code></td><td>代码审计、重构门控、最小修复和回归验证。</td></tr><tr><td><code>rolecard-workshop-ops</code></td><td>诊断和运维角色卡工坊发布链，并保护生产坐标与凭据。</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Skill</th><th>负责什么</th></tr></thead><tbody><tr><td><code>tavern-card-builder</code></td><td>设计文字卡或 Zod 变量卡，处理 schema、初始化、世界书、提示词与开局协议。</td></tr><tr><td><code>sillytavern-card-components</code></td><td>无损拆卡、组件边界、依赖声明与往返一致性。</td></tr><tr><td><code>sillytavern-card-pipeline</code></td><td>从维护源码组装、验证、构建并打包 JSON/PNG。</td></tr><tr><td><code>sillytavern-api-reference</code></td><td>查证 ST、Tavern Helper、STScript、EJS、宏和 MVU 的版本敏感 API。</td></tr><tr><td><code>sillytavern-runtime-debug</code></td><td>在真实 ST 中复现问题，检查 iframe、DOM、控制台、数据与生命周期。</td></tr><tr><td><code>sillytavern-embedded-ui</code></td><td>设计或审查开局页、状态栏、控制中心、抽屉和弹窗。</td></tr><tr><td><code>code-quality-workflow</code></td><td>代码审计、重构门控、最小修复和回归验证。</td></tr><tr><td><code>rolecard-workshop-ops</code></td><td>诊断和运维角色卡工坊发布链，并保护生产坐标与凭据。</td></tr></tbody></table></div>
 <h3>一次任务如何进入阵列</h3>
 <div class="flow"><div class="flow-node">用户描述任务</div><div class="flow-arrow">→</div><div class="flow-node">读取项目规则与 TW 索引</div><div class="flow-arrow">→</div><div class="flow-node">选择相关 Skill</div><div class="flow-arrow">→</div><div class="flow-node">查询 ST DB</div><div class="flow-arrow">→</div><div class="flow-node">计划、执行、验证、交接</div></div>
 <div class="callout"><strong>不是每次全阵列出动</strong>检查世界书时，不该同时加载 Live2D、工坊发布和无关前端 Skill。按需路由能减少噪声、范围膨胀与 Token 浪费。</div>
+<div class="callout good"><strong>TW 与 DB 是双子星</strong>TavernWeave 负责组织任务、选择 Skill 和控制施工流程；ST 开发指南 DB 提供版本、API、源码证据、案例和避坑记录。TW 不会替代 DB，只有两者同时保留，Agent 才能既知道“怎么做”，又知道“依据什么做”。</div>
 <h3>审查和修复是两条链</h3>
 <div class="code-block"><div class="code-label"><span>代码治理链</span><button class="copy-btn" type="button">复制</button></div><pre><code>code-audit-orchestrator
         ↓ 组织只读扫描与合并结果
@@ -52,15 +53,17 @@ https://github.com/LiarMTTT/TavernWeave</code></pre></div>
 2. 说明准备调用哪些 TW Skill；
 3. 只加载与任务直接相关的 Skill；
 4. 查询 ST 开发指南 DB 中对应条目；
-5. 区分已确认事实和待验证推测；
-6. 输出预计修改范围、风险和验证方式；
-7. 在我批准前不要修改文件。</code></pre></div>
+5. 保留 ST 开发指南 DB，禁止删除、覆盖或擅自精简；
+6. 区分已确认事实和待验证推测；
+7. 输出预计修改范围、风险和验证方式；
+8. 在我批准前不要修改文件。</code></pre></div>
 </section>
 <section class="section" id="db">
 <div class="section-head"><div class="section-no">06</div><div><h2>ST 开发指南 DB 怎么使用</h2><p class="section-kicker">它是工程事实库，不是要求你从第一页背到最后一页的课本。</p></div></div>
 <div class="compare"><div class="compare-side"><h4>TW Skill</h4><p><strong>回答：</strong>这一类任务应该按照什么流程做。</p><div class="pill-row"><span class="pill">步骤</span><span class="pill">门控</span><span class="pill">验收</span><span class="pill">交接</span></div></div><div class="compare-vs">+</div><div class="compare-side"><h4>ST 开发指南 DB</h4><p><strong>回答：</strong>当前技术体系中哪些 API、结构和范式是正确的。</p><div class="pill-row"><span class="pill">版本</span><span class="pill">API</span><span class="pill">源码证据</span><span class="pill">避坑</span></div></div></div>
+<div class="callout danger"><strong>安装 TW 后也不能删除 DB</strong>Skill 中的摘要、规则和路由不能替代 DB 原文。不要让 Agent 因为“已经安装 TavernWeave”就把 DB 视为重复文件进行删除、覆盖、迁空或压缩清理。需要整理 DB 时，必须保留原始副本，并把新增、修订和归档分开处理。</div>
 <h3>不要全库通读，按任务查询</h3>
-<div class="table-wrap"><table><thead><tr><th>任务</th><th>优先查询方向</th></tr></thead><tbody><tr><td>变量更新失效</td><td>MVU、schema、初始化、生命周期、JSON Patch</td></tr><tr><td>状态栏不刷新</td><td>变量读取、iframe 初始化、事件监听、渲染管线</td></tr><tr><td>世界书工具</td><td>Worldbook API、作用域、创建/更新/卸载、触发位置</td></tr><tr><td>ST 扩展</td><td>manifest、入口、事件、安装更新与宿主 API</td></tr><tr><td>页面样式消失</td><td>DOM、custom- 前缀、CSS 注入、加载顺序与控制台</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>任务</th><th>优先查询方向</th></tr></thead><tbody><tr><td>变量更新失效</td><td>Zod（MVU Zod）、schema、初始化、生命周期、JSON Patch</td></tr><tr><td>状态栏不刷新</td><td>变量读取、iframe 初始化、事件监听、渲染管线</td></tr><tr><td>世界书工具</td><td>Worldbook API、作用域、创建/更新/卸载、触发位置</td></tr><tr><td>ST 扩展</td><td>manifest、入口、事件、安装更新与宿主 API</td></tr><tr><td>页面样式消失</td><td>DOM、custom- 前缀、CSS 注入、加载顺序与控制台</td></tr></tbody></table></div>
 <div class="code-block"><div class="code-label"><span>查询 DB 的标准指令</span><button class="copy-btn" type="button">复制</button></div><pre><code>这是一个 SillyTavern 开发任务。
 
 任务目标：
@@ -82,7 +85,8 @@ https://github.com/LiarMTTT/TavernWeave</code></pre></div>
 7. 当前有哪些信息仍然不能确定。
 
 不要扫描或引用与任务无关的全部 DB 内容。
-不要把推测写成已经验证的事实。</code></pre></div>
+不要把推测写成已经验证的事实。
+不要以 TavernWeave 已包含摘要为由删除、覆盖或裁剪 DB。</code></pre></div>
 </section>
 <section class="section" id="a0">
 <div class="section-head"><div class="section-no">07</div><div><h2>A0：开始驾驭 AI</h2><p class="section-kicker">A0 不是为了把提示词写复杂，而是确保开工同步、执行有边界、结束有交接。</p></div></div>
