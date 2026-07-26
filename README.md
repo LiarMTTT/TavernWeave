@@ -8,11 +8,11 @@ TavernWeave 是一套面向 Codex 与 Claude Code 的 SillyTavern 角色卡工�
 
 | Skill | 主要职责 |
 | --- | --- |
-| `tavern-card-builder` | 设计文字卡、MVU 变量卡与独立自定义 CoT，处理 CoT 模块编写、预设/卡片/世界书拼接与路由、Token 去重、schema、初始化、双更新模式和开局协议 |
-| `sillytavern-card-components` | 无损拆卡、组件边界、依赖声明、registry/recipe 与往返一致性 |
-| `sillytavern-card-pipeline` | 驱动项目自带实时编译，并从维护源码组装、验证、打包 JSON/PNG，锁定卡片与随附世界书版本 |
-| `sillytavern-api-reference` | 查证 SillyTavern、Tavern Helper、STScript、EJS、宏和 MVU 的版本敏感 API |
-| `sillytavern-runtime-debug` | 在真实 SillyTavern 中复现问题，检查 iframe、控制台、DOM、样式、数据和生命周期 |
+| `tavern-card-builder` | 识别角色卡类型与运行依赖，设计文字卡、MVU 变量卡与独立自定义 CoT，处理 CoT 模块编写、预设/卡片/世界书拼接与路由、Token 去重、schema、初始化、双更新模式和开局协议 |
+| `sillytavern-card-components` | 无损拆卡、组件边界、封装/宿主/远程依赖声明、registry/recipe 与往返一致性 |
+| `sillytavern-card-pipeline` | 执行依赖预检，驱动项目实时编译，并从维护源码组装、验证、打包 JSON/PNG，锁定必需脚本、正则和随附世界书 |
+| `sillytavern-api-reference` | 查证 SillyTavern、Tavern Helper、宿主能力、远程加载器、STScript、EJS、宏和 MVU 的版本敏感 API |
+| `sillytavern-runtime-debug` | 在真实 SillyTavern 中验证宿主/封装/远程/地区依赖并检查 iframe、控制台、DOM、样式、数据和生命周期 |
 | `sillytavern-embedded-ui` | 设计或审查开局页、状态栏、控制中心、抽屉和弹窗 |
 | `code-quality-workflow` | 统一执行代码审计、重构门控、最小修复、优化与回归验证 |
 | `shadcn-tailwind-ui` | 使用 React、shadcn/ui、Radix 和 Tailwind 构建可访问产品界面 |

@@ -5,10 +5,11 @@ description: >-
   reviewable components, and design or maintain registry-driven component libraries
   and recipes. Use when extracting a card, modularizing worldbook, MVU, regex,
   helper-script, message, or embedded UI content, tracing a coupled variable-field
-  chain, resolving component dependencies or conflicts, validating a
-  source-to-artifact round trip, or promoting a proven version back into a shared
-  component library. Do not use for routine packaging of an already-defined
-  release; use sillytavern-card-pipeline instead.
+  chain, declaring embedded/host/remote/regional runtime dependencies, resolving
+  component dependencies or conflicts, validating a source-to-artifact round trip,
+  or promoting a proven version back into a shared component library. Do not use for
+  routine packaging of an already-defined release; use sillytavern-card-pipeline
+  instead.
 ---
 
 # SillyTavern Card Components
@@ -67,15 +68,18 @@ For every module, declare at least:
 - a stable ID and category;
 - source files and emitted outputs;
 - explicit dependencies and conflicts;
+- runtime dependency declarations and delivery class;
 - whether the content is model-visible;
 - build or merge behavior;
 - affected runtime or variable layers;
 - applicability and maturity metadata when the library supports them.
 
 Fail composition on missing dependencies, cycles, conflicts, undeclared output
-collisions, missing sources, or paths that escape the intended roots. Keep worldbook,
-MVU, regex, helper-script, and embedded-UI APIs isolated; a dependency declaration
-does not make another runtime layer globally available.
+collisions, missing sources, or paths that escape the intended roots. At
+`component_assembly` and `release`, also fail on unresolved required embedded runtime
+assets or invalid regional-alternative selection. Keep worldbook, MVU, regex,
+helper-script, and embedded-UI APIs isolated; a dependency declaration does not make
+another runtime layer globally available.
 
 ## Define recipes as selections
 
@@ -91,6 +95,9 @@ semantics:
 
 Default recipe output to a sandbox. Point at a version snapshot only for an explicit
 rebuild or promotion operation whose write scope has already been approved.
+Allow a `variable_core` recipe to defer later embedded adapters only when the registry
+names the deferred owner and required stage. Do not carry that deferral into
+`component_assembly` or `release`.
 
 ## Keep coupled fields synchronized
 
@@ -106,15 +113,18 @@ one writer or one screen changed successfully.
 
 1. Validate registry and recipe structure.
 2. Resolve the dependency graph and output ownership.
-3. Compose into a clean sandbox.
-4. Validate syntax, encoding, required and forbidden content, and runtime-layer
+3. Resolve runtime dependency classes, owned embedded outputs, and regional
+   alternative groups.
+4. Compose into a clean sandbox.
+5. Validate syntax, encoding, required and forbidden content, and runtime-layer
    contracts.
-5. Build sandbox JSON and, when in scope, sandbox PNG.
-6. Re-extract the built artifact into a second clean sandbox.
-7. Compare canonical card semantics and the component mapping. Use byte equality only
+6. Build sandbox JSON and, when in scope, sandbox PNG.
+7. Re-extract the built artifact into a second clean sandbox.
+8. Compare canonical card semantics and the component mapping. Use byte equality only
    where the contract requires it; JSON formatting and PNG container bytes may differ.
-8. Run regression checks for every previously working consumer touched by the change.
-9. Leave host-dependent UI, regex, bridge, and interaction behavior pending until it
+9. Run regression checks for every previously working consumer touched by the change.
+10. Leave host-dependent UI, regex, bridge, remote-loader execution, and interaction
+   behavior pending until it
    passes real SillyTavern acceptance.
 
 ## Promote only mature components
@@ -136,6 +146,8 @@ State:
 - the input snapshot hash and sandbox location;
 - files created or changed;
 - registry, recipe, and dependency decisions;
+- detected card capabilities plus the runtime dependency ledger, including embedded
+  assets, host requirements, remote loaders, and regional selection;
 - round-trip and regression checks with results;
 - whether shared-library promotion occurred;
 - any real-SillyTavern checks still required.

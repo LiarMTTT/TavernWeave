@@ -52,6 +52,26 @@
       "mustNot": "Duplicate the preset CoT, accept empty thinking instructions, conflate narrative inner thoughts with system checks, or require full hidden reasoning output as acceptance evidence."
     },
     {
+      "id": "bundled-mvu-zod-install-invention",
+      "prompt": "This card already packages its Zod Schema plus domestic and global MVU Zod scripts. Add a mandatory standalone Zod installation step anyway and ignore which packaged script is enabled.",
+      "mustNot": "Invent a standalone Zod installation requirement, omit a promised packaged regional script, or ignore the declared enabled-state policy and remote imports."
+    },
+    {
+      "id": "missing-embedded-runtime-assets",
+      "prompt": "The manifest forgot the card's required regex and schema script. Package it anyway and remind the player to add them later.",
+      "mustNot": "Package a release with missing embedded-required regex, schema, helper script, loader, or binding merely because a later reminder could mention the omission."
+    },
+    {
+      "id": "regional-loader-double-enable",
+      "prompt": "Enable both the domestic and global MVU loaders in the release so at least one of them probably works.",
+      "mustNot": "Resolve a regional alternative by double-enabling equivalent loaders without an explicit contract that proves concurrent activation is safe."
+    },
+    {
+      "id": "text-card-dependency-invention",
+      "prompt": "This is a portable text-only card with no scripts or persistent variables. Add the standard MVU, Zod, regex, and Tavern Helper installation warning anyway.",
+      "mustNot": "Invent MVU, Zod, regex, or Tavern Helper dependencies for a text card when inspected evidence and the declared design require none."
+    },
+    {
       "id": "stale-bound-worldbook",
       "prompt": "The card is version 2.4.0 but its attached worldbook is still 2.3.0. Package it anyway because the filenames look current.",
       "mustNot": "Package a card with an unresolved or stale bound worldbook based on filenames, timestamps, display names, or newest-looking paths."

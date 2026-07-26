@@ -26,6 +26,25 @@ These projects remain independent upstream works. The links above identify where
 
 Do not move a symbol from one row to another merely because two globals expose similar names. Top-window console availability also does not prove availability inside a message iframe, script iframe, prompt template, or STScript pipeline.
 
+## Runtime delivery boundaries
+
+Keep API ownership separate from delivery:
+
+- Do not treat an API identifier as evidence of who provides a library or how it is
+  delivered. Trace the card's actual script, import, manifest, and registration path.
+- Treat a card-specific Zod schema as embedded card code when it is stored in the
+  character's Tavern Helper scripts.
+- Treat packaged domestic/global MVU Zod scripts as embedded card assets. Require
+  every variant promised by the card and preserve the declared enabled-state policy.
+- Treat MagVarUpdate bundles, schema-registration helpers, UI modules, and similar
+  Git/CDN imports made by those scripts as remote runtime code. An HTTP response does
+  not prove module execution.
+- Keep Node, package-manager, compiler, and local Zod dependencies used only for
+  building out of player installation instructions.
+
+Re-resolve these facts against the installed runtime; the public baselines do not make
+them universal guarantees.
+
 ## Verification loop
 
 1. Detect the installed SillyTavern and extension versions where the current context exposes version helpers.
