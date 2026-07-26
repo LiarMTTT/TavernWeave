@@ -1,6 +1,6 @@
 ---
 name: tavern-card-builder
-description: Plan and author maintainable SillyTavern character cards, including text cards, MVU variable cards, custom CoT design and authoring, modular CoT stitching and routing, prompt budgets, retrofits, schemas, initialization, update rules, single-model or extra-model update routing, lorebooks, prompts, openings, regex requirements, and companion-script requirements. Use when creating a new card, converting an existing card, adding a gameplay system, repairing an authoring protocol, or tracing a field across the card design. Do not use it as the primary skill for component-library extraction, build/package/release operations, exact API signature lookup, real-runtime debugging, embedded UI implementation, or workshop infrastructure; route those tasks to the focused TavernWeave skills.
+description: Plan and author maintainable SillyTavern character cards, including card-type and capability detection, runtime-dependency ledgers, text cards, MVU or MVU Zod cards, custom CoT design and authoring, modular CoT stitching and routing, prompt budgets, retrofits, schemas, initialization, update rules, single-model or extra-model update routing, lorebooks, prompts, openings, regex requirements, and companion scripts. Use when creating or converting a card, adding a gameplay system, identifying which dependencies must be embedded or enabled, repairing an authoring protocol, or tracing a field across the card design. Do not use it as the primary skill for component extraction, build/package/release operations, exact API lookup, real-runtime debugging, embedded UI implementation, or workshop infrastructure; route those tasks to the focused TavernWeave skills.
 ---
 
 # Tavern Card Builder
@@ -11,11 +11,10 @@ Design the card as a set of explicit contracts. Keep authoring decisions here an
 
 1. Read repository instructions and inspect the existing card before proposing a design.
 2. Identify the target SillyTavern, Tavern Helper, prompt-template, and MVU implementations or versions when behavior depends on them.
-3. Classify the task:
-   - text card with no persistent variable runtime;
-   - MVU card with schema-governed state;
-   - hybrid card with text protocol plus optional scripts or embedded UI;
-   - retrofit that must preserve an existing card's voice, data, and command dialect.
+3. Detect one primary card type plus capability flags from the actual card and
+   maintained source. Build a runtime dependency ledger before deciding what the user
+   must install, what the card must embed, and what loads remotely. Read
+   [card-types-and-runtime-dependencies.md](references/card-types-and-runtime-dependencies.md).
 4. Ask only decisions that materially change the result. Do not force a fixed interview ritual for a narrow edit.
 5. Independently decide whether the card needs a custom CoT, whether a reusable main
    CoT already exists in the preset, which card-specific increments are required, and
@@ -38,7 +37,7 @@ For every system, write down:
 - writer, reader, renderer, and cleanup owner;
 - initialization and migration behavior;
 - model-visible instructions;
-- optional runtime or UI dependencies;
+- runtime dependency class, delivery, enabled policy, and failure behavior;
 - verification evidence.
 
 For custom CoT, trace:
@@ -103,6 +102,7 @@ Read only the references needed for the task:
 - [lorebook-and-prompts.md](references/lorebook-and-prompts.md) for entry boundaries, routing, model-visible text, and prompt budgets.
 - [variable-systems.md](references/variable-systems.md) for schemas, initialization, updates, projections, cleanup, and migrations.
 - [opening-strategies.md](references/opening-strategies.md) for fixed greetings and dynamic setup flows.
+- [card-types-and-runtime-dependencies.md](references/card-types-and-runtime-dependencies.md) for type detection, dependency classes, regional loaders, and user notices.
 - [regex-and-runtime-requirements.md](references/regex-and-runtime-requirements.md) for transformation and script requirements without inventing APIs.
 - [retrofit-and-text-cards.md](references/retrofit-and-text-cards.md) for preserving an existing card or avoiding MVU entirely.
 - [validation.md](references/validation.md) before handoff.
@@ -112,6 +112,12 @@ Read only the references needed for the task:
 - Keep source and generated artifacts separate. Fix the source, then rebuild the artifact.
 - Preserve an existing card's proven protocol unless there is evidence and authorization to migrate it.
 - Treat command dialects and runtime behavior as version-sensitive capabilities, not universal folklore.
+- Treat `z` only as a code identifier, never as a card-type or dependency-delivery
+  signal. Trace the card schema, embedded loader, Git/CDN Zod or MVU Zod runtime, and
+  regional alternative as separate evidence-backed dependencies. Do not replace the
+  card's declared remote loader with a standalone Zod installation step.
+- Do not silently install extensions or remote runtimes. Report embedded, host,
+  remote, regional, optional, and development-only dependencies separately.
 - Keep model-visible text free of incident history, development commentary, Markdown decoration that has no model purpose, and copyable hard-coded outputs.
 - Treat custom CoT as an author-written decision protocol, not as access to a model's hidden internal reasoning. Validate observable behavior and routing instead of requiring full reasoning output.
 - Default to preset main CoT plus card-specific increments and conditional modules. Keep plot-model CoT, update-model prompts, and deterministic script calculation separated by responsibility.
@@ -124,10 +130,11 @@ Read only the references needed for the task:
 
 Return:
 
-1. target card type and detected capabilities;
+1. target card type, detected capabilities, and evidence;
 2. agreed systems and exclusions;
-3. field/lorebook/component contracts and CoT deployment/stitching contract;
-4. files or card sections to create or change;
-5. specialist skills required next;
-6. validation evidence obtained;
-7. real-runtime or user acceptance still required.
+3. runtime dependency ledger and user-facing install/embed/remote-load notice;
+4. field/lorebook/component contracts and CoT deployment/stitching contract;
+5. files or card sections to create or change;
+6. specialist skills required next;
+7. validation evidence obtained;
+8. real-runtime or user acceptance still required.

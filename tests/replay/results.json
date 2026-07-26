@@ -1,17 +1,17 @@
 {
     "schemaVersion":  1,
     "evaluatedAt":  "2026-07-25T17:35:11Z",
-    "method":  "Manual replay of every forward and adversarial prompt against the candidate skill paths, including the no-MVU CoT, preset/card stitching, ensemble routing, MVU separation, and script-ownership cases; each route, required behavior, and prohibited regression was checked from the candidate files, with writes and unsupported runtime claims excluded.",
+    "method":  "Manual replay of every forward and adversarial prompt against the candidate skill paths, including custom CoT, model routing, script ownership, card-type detection, packaged MVU Zod scripts, enabled-state policy, and runtime dependency notices; each route, required behavior, and prohibited regression was checked from the candidate files, with writes and unsupported runtime claims excluded.",
     "skillFingerprints":  {
                               "code-quality-workflow":  "2c6b93ce2dbc9b72454573499819f54e56ff8af2dd66b8e26d76a99a73ddb5d2",
                               "rolecard-workshop-ops":  "e5f2b8c60eefd052414d1a77c39a6eeb12bdde501d72b4ea4cdb27e2ef450326",
                               "shadcn-tailwind-ui":  "c1c7a3206d27474fb94da466a2c590bb7fc07f56a33517161c5b75973fab7584",
-                              "sillytavern-api-reference":  "2025df8ca3605ed77407055cdba92d40ec2a105a4efc63de71a61636b6f5e035",
-                              "sillytavern-card-components":  "101377a6511cc929870d9d581f4b61f1f56536f7d7027720d2c944abcec6af81",
-                              "sillytavern-card-pipeline":  "862780745b3c7f5d8a1180476121d1dddc5c60c95e37495cafaf56c095cc5b46",
+                              "sillytavern-api-reference":  "bb579d1d9a1768a581db6dd258ea451ccfe5eed4037827565800cef9ef7764b2",
+                              "sillytavern-card-components":  "f38b684085d15bc4f5689fb51c1cf58778b4da88d8f26aa908fea89af2586682",
+                              "sillytavern-card-pipeline":  "4fed160bdaebe69233e9c13fdbfebcb42fa9eaf54cf7ffa05ddd815471a23658",
                               "sillytavern-embedded-ui":  "9c8cf62a388f511e32b8f81b849b9cb1017ce28686b76fa6c6a00d1be83efeaf",
-                              "sillytavern-runtime-debug":  "e2a77f6b7502ddfc3e0ef9c32db05f9350f46efe9abcb9f38ddc47ed8a47f458",
-                              "tavern-card-builder":  "7bd9b8651bf00e0ab551d220bed27846864e515b6de3ba5ca72dc5cac481cd2e"
+                              "sillytavern-runtime-debug":  "12b62a28aa899aaf19188fc4e96543a51b4ddc31b78493373bce3cde8cfa5943",
+                              "tavern-card-builder":  "d3c16b783d966e7f6bd6b24801a551ad63166a8601347b07a1b6489d8d4a48a2"
                           },
     "caseResults":  [
                         {
@@ -40,6 +40,11 @@
                             "evidence":  "Assigned necessary-actor and duplicate-dialogue checks to plot-side NPC scheduling, limited the update model to source-event extraction and legal updates, assigned deterministic derived changes to scripts, and required one writer per variable."
                         },
                         {
+                            "id":  "card-type-runtime-ledger",
+                            "pass":  true,
+                            "evidence":  "Classified the card as mvu_zod from its packaged schema, registration path, and loader scripts; required both promised regional scripts with their declared enabled states; separated Git CDN imports and Tavern Helper; and omitted a standalone Zod installation step."
+                        },
+                        {
                             "id":  "safe-decompose",
                             "pass":  true,
                             "evidence":  "Required an identified input, byte-preserved original, fresh sandbox, source mapping, and semantic roundtrip before any reusable component promotion."
@@ -48,6 +53,11 @@
                             "id":  "release-package",
                             "pass":  true,
                             "evidence":  "Stopped without project inputs, required adapter and configuration discovery, preserved older artifacts, checked JSON/PNG payload parity, and kept runtime acceptance separate."
+                        },
+                        {
+                            "id":  "runtime-dependency-preflight",
+                            "pass":  true,
+                            "evidence":  "Reconciled detected and declared card capabilities, required the packaged schema, regexes, and every promised domestic/global MVU Zod script, enforced their enabled states, and separated Tavern Helper setup and remote execution from offline packaging."
                         },
                         {
                             "id":  "bound-worldbook-version-sync",
@@ -135,6 +145,26 @@
                                    "id":  "cot-full-copy-and-reasoning-output",
                                    "pass":  true,
                                    "evidence":  "Rejected copying the preset main CoT into the card, replaced the empty thinking instruction with observable conditions, separated narrative inner thoughts from system checks, and used output and routing evidence instead of full hidden reasoning."
+                               },
+                               {
+                                   "id":  "bundled-mvu-zod-install-invention",
+                                   "pass":  true,
+                                   "evidence":  "Rejected the invented standalone Zod installation step, required the packaged schema and both promised regional scripts, preserved their enabled-state policy, and kept remote imports explicit."
+                               },
+                               {
+                                   "id":  "missing-embedded-runtime-assets",
+                                   "pass":  true,
+                                   "evidence":  "Blocked assembly because required embedded regex and schema assets were undeclared or absent; a later user reminder was not accepted as a substitute for packaging completeness."
+                               },
+                               {
+                                   "id":  "regional-loader-double-enable",
+                                   "pass":  true,
+                                   "evidence":  "Rejected double activation of equivalent domestic and global loaders, required the manifest selection rule, and kept runtime fallback behavior separate from enabled-state policy."
+                               },
+                               {
+                                   "id":  "text-card-dependency-invention",
+                                   "pass":  true,
+                                   "evidence":  "Classified the inspected artifact as text-only and emitted no unsupported MVU, Zod, regex, or Tavern Helper installation requirement."
                                },
                                {
                                    "id":  "stale-bound-worldbook",

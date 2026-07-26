@@ -1,6 +1,6 @@
 ---
 name: sillytavern-runtime-debug
-description: Reproduce, diagnose, collect execution evidence for, and close acceptance of rolecard behavior inside a real SillyTavern runtime using any capable browser driver. Use when the primary task requires live execution of opening-page, status-bar, control-center, popup, regex, worldbook, Tavern Helper iframe, real-time listener or hot-reload, MVU, import, console, responsive, or interaction checks that static previews cannot prove. Do not use as the primary skill for designing or implementing embedded UI source; hand those changes to sillytavern-embedded-ui, then resume runtime validation on the rebuilt artifact.
+description: Reproduce, diagnose, collect execution evidence for, and close acceptance of rolecard behavior inside a real SillyTavern runtime using any capable browser driver. Use when the primary task requires live execution of imports, required regex/helper scripts, host extensions, Git/CDN or regional loaders, MVU/Zod capabilities, opening pages, status bars, control centers, iframes, real-time reload, console, responsive, or interaction checks that static previews cannot prove. Do not use as the primary skill for designing or implementing embedded UI source; hand those changes to sillytavern-embedded-ui, then resume runtime validation on the rebuilt artifact.
 ---
 
 # SillyTavern Runtime Debug
@@ -65,6 +65,8 @@ Record before reproduction:
 
 - SillyTavern version and relevant extension versions;
 - target character/card identity and artifact revision;
+- declared primary card type, capability flags, runtime dependency ledger, and selected
+  regional loader;
 - current chat identity, selected opening swipe, and message count;
 - browser, viewport, zoom, color scheme, and device class;
 - whether the artifact was freshly imported or already present;
@@ -133,9 +135,30 @@ artifact/import
 ### Import and artifact
 
 - Confirm the imported character matches the expected name, version, and payload revision.
-- Confirm required regexes, scripts, worldbook bindings, and extensions are present and enabled.
+- Re-inventory character-local regexes and Tavern Helper scripts from the imported
+  artifact. Confirm every required schema, loader, binding, worldbook, and host
+  extension is present and enabled under the declared policy.
+- Confirm a regional-alternative group has the intended member enabled and no
+  unintended double activation.
 - Use a new chat when testing first-message, alternate-greeting, or mount behavior.
 - Distinguish a rebuild failure from a stale imported artifact.
+
+### Runtime dependencies and remote loaders
+
+- Probe every `host_required` extension or capability in the correct frame and scope.
+  A packaged script is not proof that its host exists.
+- Treat `z` as a code-level identifier, not proof of a host-provided library. Resolve
+  the actual Zod/MVU Zod loader or import declared by the card, then verify its
+  readiness inside the executing helper-script context. Do not silently install a
+  package or substitute a different provider.
+- For `remote_runtime`, capture the requested URL/ref, primary/fallback attempt,
+  network failure, module exception, and expected readiness capability.
+- Treat HTTP success as transport evidence only. Confirm the module executed and
+  published the expected global, registration, DOM marker, event, or other readiness
+  signal.
+- For domestic/global or other `regional_alternative` loaders, test the selected
+  member and its declared fallback. Do not enable both merely to make one pass.
+- Keep `development_only` packages out of player setup and runtime failure reports.
 
 ### Console and exceptions
 
@@ -195,6 +218,7 @@ Select the rows relevant to the change and record pass/fail evidence:
 | Dimension | Required evidence |
 | --- | --- |
 | Import | Expected artifact is selected and its scripts/regexes/bindings are present |
+| Dependencies | Host capabilities, embedded requirements, remote execution, and regional selection match the ledger |
 | Fresh chat | First message or opening mount appears without manual injection |
 | Console | No new causal errors or unhandled rejections |
 | DOM | Correct element count, ownership, attributes, and no duplicate mounts |
@@ -214,6 +238,8 @@ Return:
 - the minimal reproduction;
 - the failing layer and root cause, with direct evidence;
 - versions, artifact identity, browser, and viewport;
+- detected card type/capabilities plus embedded, host, remote, regional, optional, and
+  development-only dependency status;
 - the implementation handoff and rebuilt/imported artifact state, when a UI source change was required;
 - checks that passed;
 - checks still blocked by unavailable devices, accounts, extensions, or driver capabilities.

@@ -1,4 +1,4 @@
 interface:
   display_name: "SillyTavern Card Pipeline"
-  short_description: "Validate, package, and release rolecards safely"
-  default_prompt: "Use $sillytavern-card-pipeline to detect this project's build adapter, validate the active release data, and package the requested rolecard artifacts."
+  short_description: "Preflight, package, and release rolecards safely"
+  default_prompt: "Use $sillytavern-card-pipeline to detect this rolecard's build adapter, type, and runtime dependencies, enforce embedded-asset gates, and package the requested artifacts."
