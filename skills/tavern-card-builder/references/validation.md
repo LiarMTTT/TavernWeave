@@ -19,6 +19,12 @@
   ordering.
 - Fixed greetings and dynamic setup use the selected opening strategy.
 - Regex and script requirements name failure behavior and idempotence.
+- The primary card type and capability flags are supported by inspected evidence.
+- Every runtime dependency has one class and a delivery path; player notices exclude
+  development-only tools.
+- An MVU Zod card distinguishes its embedded schema, every promised domestic/global
+  MVU Zod script, their declared enabled states, remote import targets, and required
+  host extension.
 - Model-visible text contains no developer-only explanation or secret.
 
 ## 2. CoT-specific checks
@@ -58,6 +64,9 @@ When artifacts exist, delegate to `$sillytavern-card-pipeline` and verify:
 - generated JSON matches source contracts;
 - PNG embedding preserves the expected payload;
 - import/export roundtrip retains entries and extensions;
+- every `embedded_required` regex, schema, script, loader, and binding is present with
+  the declared enabled state;
+- regional alternative groups satisfy the declared selection rule;
 - a card-bound or co-delivered worldbook resolves to the card's declared version;
 - versions and release notes describe the actual change.
 
@@ -85,6 +94,9 @@ For runtime-affecting work, verify in real SillyTavern:
 - keyword/green-light/sticky routing still activates and deactivates the same entries
   under both update modes;
 - script registration and cleanup;
+- host-required capabilities are installed and enabled;
+- selected Git/CDN loaders execute, publish their expected readiness capability, and
+  use their declared fallback when the primary path fails;
 - UI on target devices and reload paths;
 - console errors, network failures, and safe fallback.
 
@@ -99,3 +111,5 @@ Separate:
 - real-runtime evidence;
 - user acceptance still pending;
 - assumptions tied to a runtime version or optional extension.
+- dependencies already embedded, host setup still required, remote loads, selected
+  regional alternative, and development-only exclusions.

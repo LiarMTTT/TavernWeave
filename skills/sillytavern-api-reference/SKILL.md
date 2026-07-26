@@ -1,6 +1,6 @@
 ---
 name: sillytavern-api-reference
-description: Verify exact SillyTavern, Tavern Helper / JS-Slash-Runner, STScript, macro, prompt-injection, worldbook, EJS, and MVU APIs before implementing or reviewing rolecard automation. Use when a task depends on a function signature, event name or payload, slash-command grammar, macro behavior, variable scope, message-floor operation, generation option, or version-sensitive extension capability.
+description: Verify exact SillyTavern, Tavern Helper / JS-Slash-Runner, STScript, macro, prompt-injection, worldbook, EJS, MVU, and runtime-library capabilities before implementing or reviewing rolecard automation. Use when a task depends on a function signature, event payload, slash-command grammar, variable scope, message-floor operation, generation option, runtime-symbol provider, Git/CDN loader, or version-sensitive extension capability.
 ---
 
 # SillyTavern API Reference
@@ -25,10 +25,13 @@ Do not transfer a symbol between surfaces merely because similarly named globals
 ## Verification workflow
 
 1. Capture the target versions and capabilities. In a Tavern Helper context, prefer `getTavernVersion()` and `getTavernHelperVersion()`. Probe optional integrations with `typeof`, `Object.keys`, or documented initialization helpers.
-2. Search the authority that matches those versions. Prefer runtime source or official versioned documentation, then matching declarations, then the public interoperability index in [references/core-facts.md](references/core-facts.md).
-3. Copy the exact symbol spelling, parameter shape, return type, event constant, or command grammar. Never reconstruct it from memory.
+2. Identify whether each dependency is host-provided, embedded in the card, or loaded
+   remotely. Do not infer an installation requirement from an imported helper or a
+   global symbol.
+3. Search the authority that matches those versions. Prefer runtime source or official versioned documentation, then matching declarations, then the public interoperability index in [references/core-facts.md](references/core-facts.md).
+4. Copy the exact symbol spelling, parameter shape, return type, event constant, or command grammar. Never reconstruct it from memory.
    If the request omits the concrete symbol or installed version, stop before giving an exact value or signature. Ask for the hook and runtime identity; do not volunteer an example from a moving branch as though it answered the target-runtime question.
-4. Record provenance beside version-sensitive work using this compact form:
+5. Record provenance beside version-sensitive work using this compact form:
 
    ```text
    symbol: updateWorldbookWith
@@ -39,8 +42,8 @@ Do not transfer a symbol between surfaces merely because similarly named globals
    runtime_check: performed check, or reason it remains pending
    ```
 
-5. Implement the narrowest supported API and add capability failure behavior. Do not silently fall back to private host DOM, deprecated APIs, or a different persistence scope.
-6. Verify the call in the intended context. A browser console probe does not prove the same global exists inside a message iframe, script iframe, prompt template, or STScript pipeline.
+6. Implement the narrowest supported API and add capability failure behavior. Do not silently fall back to private host DOM, deprecated APIs, or a different persistence scope.
+7. Verify the call in the intended context. A browser console probe does not prove the same global exists inside a message iframe, script iframe, prompt template, or STScript pipeline.
 
 ## Confidence rules
 
@@ -61,6 +64,15 @@ Keep declaration truth separate from runtime truth. A declaration can establish 
 - Distinguish `generate` from `generateRaw`: the latter supplies its own ordered prompts. Neither should be assumed to create a normal chat turn or to run MVU parsing automatically.
 - Treat message floors and swipes explicitly. Read with `include_swipes: true` when alternate pages matter, and choose the smallest `refresh` scope after writes.
 - Wait for optional globals such as `Mvu` before use. Subscribe with exported event constants, especially where upstream string values contain historical spelling mistakes.
+- Do not infer a provider, installation state, or delivery class from an API
+  identifier alone. Trace the actual card script, import, manifest declaration, and
+  runtime registration path.
+- Treat packaged domestic/global MVU Zod scripts as card assets whose presence and
+  enabled states must match the card contract. Treat the Git/CDN modules imported by
+  those scripts as remote delivery. Do not replace this packaged loading path with a
+  standalone Zod installation instruction.
+- Treat a remote import as runtime delivery, not proof of installation or execution.
+  Record its URL/ref, fallback, and readiness probe.
 - Keep macros for substitution. A macro that writes variables may run during preview, swipe, or re-render; use an explicit transaction when timing matters.
 - Preserve STScript pipe values, named-argument syntax, quoting, and closure delimiters exactly as documented. `/send` adds a message but does not itself trigger generation.
 - Add cleanup for listeners, prompt injections, timers, and shared interfaces when their lifecycle can outlive the current operation.
@@ -81,6 +93,8 @@ When sources disagree:
 For API-dependent answers or patches:
 
 - name every runtime or extension dependency;
+- state whether each dependency is host-provided, card-embedded, remote-loaded,
+  optional, regional, or development-only;
 - state the detected or assumed version;
 - identify the exact authority used for each sensitive symbol;
 - provide code for the correct execution context;

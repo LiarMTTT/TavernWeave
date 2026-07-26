@@ -19,6 +19,7 @@ Inspect the actual input before designing:
 - embedded or linked lorebooks;
 - scripts, regex rules, UI resources, and loaders;
 - variable protocol and command dialect;
+- card type, capability flags, and host/embedded/remote dependency evidence;
 - project instructions, source/artifact boundaries, and release process.
 
 For an existing card, preserve a read-only snapshot and hash before any transformation. Do not infer the source tree from a packaged JSON or PNG when a maintained source exists.
@@ -28,6 +29,7 @@ For an existing card, preserve a read-only snapshot and hash before any transfor
 Confirm only decisions that affect architecture or content ownership:
 
 - text, MVU, or hybrid card;
+- primary card type and capability flags;
 - whether custom CoT is required, and whether the preset already provides a reusable main CoT;
 - card-specific CoT increments, conditional modules, recipient models, and safe fallback;
 - target runtime and optional dependencies;
@@ -41,15 +43,19 @@ Provide a short proposed contract and ask for confirmation before a large new ca
 
 ## 3. Contract design
 
-Build five maps:
+Build six maps:
 
 1. **Content map** — identity, setting, actors, locations, plot guidance, greetings, examples.
 2. **CoT map** — preset main phases, card increments, conditional modules, recipient models, output boundaries, fallback.
 3. **State map** — fields, types, defaults, ownership, lifecycle, migrations.
 4. **Runtime map** — optional helper scripts, events, regex, UI, external resources.
 5. **Artifact map** — maintained sources, generated snapshots, packages, and release outputs.
+6. **Dependency ledger** — embedded requirements, host capabilities, remote loaders,
+   regional alternatives, optional features, and development-only tools.
 
 If a repository exposes a component registry or recipe, consume its declared contract through `$sillytavern-card-components`; do not copy project-specific registry entries into the authoring skill.
+Use [card-types-and-runtime-dependencies.md](card-types-and-runtime-dependencies.md)
+for the shared type and dependency vocabulary.
 
 ## 4. CoT deployment and stitching decision
 
@@ -76,7 +82,7 @@ merging custom CoT.
 ## 5. Authoring sequence
 
 1. Freeze the target and existing behavior.
-2. Design the content, CoT, and state maps.
+2. Detect the card type and capabilities, then design the content, CoT, state, and dependency maps.
 3. Decide CoT ownership, model recipients, stitching, and fallback.
 4. Write schema and initialization contracts when MVU is required.
 5. Write update and cleanup rules.
@@ -84,7 +90,9 @@ merging custom CoT.
 7. Write only the required main CoT, card increments, and conditional modules.
 8. Specify regex, script, and UI requirements without inventing exact APIs.
 9. Build each model-visible projection and its prompt budget separately.
-10. Validate internal chains and route build/runtime work to specialists.
+10. State which requirements are already embedded, which need host enablement, and
+   which load remotely.
+11. Validate internal chains and route build/runtime work to specialists.
 
 ## 6. Specialist handoff
 

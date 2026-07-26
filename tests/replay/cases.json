@@ -32,6 +32,12 @@
       "expectedBehavior": "Give the plot model ensemble scheduling and narrative CoT, limit the update model to semantic source events and legal updates, assign deterministic derived calculations to scripts, and prohibit competing writers."
     },
     {
+      "id": "card-type-runtime-ledger",
+      "prompt": "Identify this rolecard before editing it. It contains a packaged Zod Schema script, a packaged global MVU Zod script enabled by default, a packaged domestic MVU Zod script disabled by default, character-local regexes, and Git CDN imports inside those scripts. Tell me what the player really needs to install.",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Return an mvu_zod primary type from the schema, registration path, and packaged loader evidence; require the embedded schema plus both promised regional scripts with their declared enabled states; separate their Git CDN targets and Tavern Helper host requirement; and do not add a standalone Zod installation step."
+    },
+    {
       "id": "safe-decompose",
       "prompt": "Split this packaged rolecard JSON into reusable components without changing the original file.",
       "expectedPrimarySkill": "sillytavern-card-components",
@@ -42,6 +48,12 @@
       "prompt": "Assemble the maintained sources, validate them, and produce versioned JSON and PNG release artifacts.",
       "expectedPrimarySkill": "sillytavern-card-pipeline",
       "expectedBehavior": "Discover the project adapter, keep source and artifacts separate, and stop at explicit release gates."
+    },
+    {
+      "id": "runtime-dependency-preflight",
+      "prompt": "Package this MVU Zod card after confirming its required regexes, packaged Zod Schema, packaged domestic/global MVU Zod scripts, declared enabled states, and their Git CDN imports are complete.",
+      "expectedPrimarySkill": "sillytavern-card-pipeline",
+      "expectedBehavior": "Reconcile detected and declared card capabilities, block a missing schema or promised regional script and any enabled-state mismatch, and report embedded assets, Tavern Helper setup, remote imports, and development-only exclusions separately."
     },
     {
       "id": "bound-worldbook-version-sync",

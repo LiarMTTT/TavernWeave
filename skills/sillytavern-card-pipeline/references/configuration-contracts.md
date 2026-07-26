@@ -6,8 +6,8 @@ Keep workflow behavior data-driven while preserving one owner for each fact.
 
 | File | Owns | Must not become |
 | --- | --- | --- |
-| Profile | Card-family identity, defaults, protocol selection, variable roots, recipe, and links to version data. | A copy of every packed field or a version-specific script. |
-| Manifest | Exact version paths, component mappings, packaging policy, deliverables, field chains, and release-specific declarations. | A second component source tree. |
+| Profile | Card-family identity, defaults, protocol selection, card-type/capability defaults, variable roots, recipe, and links to version data. | A copy of every packed field or a version-specific script. |
+| Manifest | Exact version paths, component mappings, packaging policy, deliverables, field chains, runtime dependency ledger, and release-specific declarations. | A second component source tree. |
 | Plan | Ordered, reviewable operations that transform one known state into another. | An evergreen truth source or an opaque migration program. |
 | Contract | Stable required behavior, forbidden regressions, counts, identities, and protocol invariants. | A snapshot of temporary implementation preferences. |
 
@@ -20,6 +20,7 @@ Require a stable ID, family or type, semantic version, and an explicit link or
 deterministic resolution to version truth. When relevant, declare:
 
 - update protocol and model-context mode;
+- primary card type, capability flags, and runtime dependency defaults;
 - variable roots and status/UI variant;
 - component recipe and component-library compatibility;
 - default target paths or a manifest selector;
@@ -41,11 +42,52 @@ Resolve and validate exact paths for:
 
 Also validate component selectors, required counts or stable IDs, field-chain
 declarations, version text, deprecated entries, payload keywords, extension mirroring,
-and other packaging policy owned by the project.
+runtime dependency declarations, and other packaging policy owned by the project.
 
 Reject paths that escape the approved root, source/target aliasing, missing inputs,
 duplicate targets, and writes to an archived release not explicitly selected for
 replacement.
+
+## Card-type and runtime-dependency checks
+
+Detect one primary type (`text`, `mvu`, `mvu_zod`, or `hybrid`) plus capability flags
+from maintained source. Reconcile detection with profile and manifest declarations.
+Record whether each fact is declared, detected, or inferred.
+
+For each runtime dependency, require fields equivalent to:
+
+- stable ID and role;
+- class: `host_required`, `embedded_required`, `remote_runtime`,
+  `regional_alternative`, `optional`, or `development_only`;
+- source owner and stable evidence such as JSON pointer, script/regex ID, or output;
+- required stage and enabled policy;
+- region and alternative-group rule;
+- version/Git ref, remote URL, fallback, and failure behavior when applicable;
+- static and real-host validation owners.
+
+Apply these rules:
+
+- A required character-local regex, card-specific Zod schema, non-regional Tavern
+  Helper script, loader, or binding must be `embedded_required`.
+- Tavern Helper or another extension/capability that the card cannot carry is
+  `host_required`.
+- A declared Git/CDN MVU bundle, schema-registration helper, or other runtime import
+  is `remote_runtime`; it is not a player-side package installation.
+- Packaged domestic/global implementations of one role are `regional_alternative`.
+  The manifest must require every promised script and define the enabled state for
+  each member.
+- Node, a package manager, compiler, or local Zod package used only for builds is
+  `development_only` and must not appear in player installation notices.
+
+Do not infer a card type, provider, or installation path from an API call alone.
+Require independent evidence for the card-specific schema, registration path,
+packaged domestic/global MVU Zod scripts, remote import targets, and enabled policy.
+When those scripts already ship in the card, report them as embedded assets and do not
+add a standalone Zod installation step.
+
+At `variable_core`, a later embedded adapter may be explicitly deferred with an owner
+and required stage. At `component_assembly` or `release`, missing required embedded
+assets and invalid regional selection block the build.
 
 ## Card-bound worldbook version checks
 
@@ -96,6 +138,10 @@ or component source.
 Express both positive and negative invariants. Depending on the card, cover:
 
 - required and forbidden worldbook entries, regex scripts, and helper scripts;
+- card-type/capability evidence and runtime dependency classes;
+- required embedded schema/loaders and regional alternative selection;
+- forbidden player-facing claims that development-only Zod/Node packages must be
+  installed;
 - required variable roots and complete field chains;
 - model-visible forbidden terms;
 - output protocol location and ordering;
