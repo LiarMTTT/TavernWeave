@@ -37,6 +37,68 @@
 <div class="section-head"><div class="section-no">02</div><div><h2>认识 Agent，并选一个适合自己的</h2><p class="section-kicker">不是按“初级—高级”排队，而是看你准备怎样与 AI 一起工作。</p></div></div>
 <h3>普通聊天 AI 和 Agent 的区别</h3>
 <div class="compare"><div class="compare-side"><h4>普通聊天 AI</h4><p class="muted">回答问题、解释代码、给出建议。更像坐在旁边的顾问。</p></div><div class="compare-vs">VS</div><div class="compare-side"><h4>编码 Agent</h4><p class="muted">能阅读项目、改文件、运行命令、查看报错、执行测试并继续修正。</p></div></div>
+<h3>先用一句话理解 Agent</h3>
+<p>普通聊天 AI 更像一个顾问：你问它问题，它给你文字、代码或建议。</p>
+<p>Agent 则是一个被允许操作工作台的 AI 执行者。除了回答问题，它还可以打开和搜索项目文件、修改允许范围内的内容、运行命令、查看错误、打开浏览器检查页面，并根据结果继续修正。</p>
+<p>所以，Agent 并不是“一个更会聊天的 AI”。它的关键区别是：<strong>不仅能告诉你怎么做，还能在允许的范围内实际动手。</strong></p>
+<div class="callout"><strong>最简单的比喻</strong>聊天 AI 像隔着电话告诉你怎么修东西；Agent 像来到工作台前，能够查看现场、使用工具、动手修改，再检查结果。</div>
+<h3>Agent 接到任务后是怎么运转的</h3>
+<p>Agent 通常不会一次性把整件事做完，而是不断重复一个工作循环：</p>
+<div aria-label="Agent 基本工作循环" class="flow"><div class="flow-node">听懂任务</div><div class="flow-arrow">→</div><div class="flow-node">查看现场</div><div class="flow-arrow">→</div><div class="flow-node">决定下一步</div><div class="flow-arrow">→</div><div class="flow-node">使用工具</div><div class="flow-arrow">→</div><div class="flow-node">检查结果</div><div class="flow-arrow">→</div><div class="flow-node">继续修改或交付</div></div>
+<div class="steps">
+<div class="step"><strong>听懂你要什么</strong>Agent 先判断最终想看到什么结果、当前处理哪个项目、哪些地方允许修改、哪些内容不能碰，以及做到什么程度才算完成。如果要求不清楚，它就只能猜。</div>
+<div class="step"><strong>查看项目现场</strong>它会搜索和打开文件，确认功能写在哪里、项目使用什么结构、有没有现成规则、当前有没有未保存的改动，以及应该修改源码还是构建后的成品。这一步像工人开工前先检查房间，而不是进门就砸墙。</div>
+<div class="step"><strong>决定下一步做什么</strong>根据刚看到的信息，它可能继续搜索、阅读说明、提出方案、修改一小部分内容、运行项目、打开页面，或者发现风险后先询问你。</div>
+<div class="step"><strong>使用工具实际动手</strong>只有使用工具时，项目才会真正发生变化。编辑文件才会写入代码，运行构建才会生成产物，打开浏览器并点击才知道按钮是否有效。</div>
+<div class="step"><strong>根据结果继续修正</strong>如果运行失败，Agent 会把错误当成新的线索，继续经历“修改—运行—发现问题—查找原因—再修改”的循环。它不是一开始就知道全部答案，而是在每次行动后读取结果，再决定下一步。</div>
+<div class="step"><strong>完成后向你交付</strong>它应说明修改了什么、动了哪些文件、实际运行了哪些检查、哪些结果已经确认，以及哪些部分仍需要你亲自验收。</div>
+</div>
+<div class="callout warn"><strong>说过不等于做过</strong>Agent 说“我准备修改”，不代表文件已经变化；说“应该可以”，也不代表已经验证。要看它是否真正使用工具，以及工具返回了什么结果。</div>
+<h3>一个最简单的例子</h3>
+<div class="code-block"><div class="code-label"><span>你交给 Agent 的任务</span><button class="copy-btn" type="button">复制</button></div><pre><code>给这个页面增加一个复制按钮，
+点击后把模板复制到剪贴板。</code></pre></div>
+<p>Agent 可能会这样工作：</p>
+<ol><li>打开项目，找到页面文件；</li><li>查找模板内容和现有按钮样式；</li><li>添加复制按钮和点击逻辑；</li><li>打开页面；</li><li>实际点击按钮；</li><li>检查剪贴板内容；</li><li>如果按钮没有反应，读取报错并继续修改；</li><li>验证成功后向你报告改动。</li></ol>
+<div class="callout danger"><strong>生成代码不等于完成任务</strong>如果它只生成了一段按钮代码，却没有写入文件、打开页面和实际点击，那么它只完成了“提出答案”，还没有完成真正的交付。</div>
+<h3>你应该怎样指挥 Agent</h3>
+<p>你不需要先学会写代码，也不需要提前知道应该修改哪个文件。你首先要说清的是：<strong>想得到什么结果。</strong></p>
+<div class="callout good"><strong>热知识</strong>你的知识越全面，指挥 AI 的效率就越高，所以该看教程就看。你不必先成为开发者，但越理解自己在做什么，越能给出准确目标、判断 Agent 有没有找对方向。实在不行，就给 AI 提供可靠样本，让 AI 先搞明白，再用你能听懂的方式教你。</div>
+<p>一个适合新手的任务可以包含五部分：</p>
+<div class="flow"><div class="flow-node">目标</div><div class="flow-arrow">+</div><div class="flow-node">对象</div><div class="flow-arrow">+</div><div class="flow-node">边界</div><div class="flow-arrow">+</div><div class="flow-node">验收</div><div class="flow-arrow">+</div><div class="flow-node">遇到意外怎么办</div></div>
+<div class="code-block"><div class="code-label"><span>新手指挥模板</span><button class="copy-btn" type="button">复制</button></div><pre><code>我要在【哪个项目或页面】实现【什么可见结果】。
+
+请先查看当前项目，确认相关功能在哪里。
+
+允许修改：
+- 【允许修改的范围】
+
+不要修改：
+- 【必须保留的内容】
+
+完成后请实际检查：
+- 【页面、按钮、数据或运行结果】
+
+如果发现需要扩大修改范围，先告诉我，不要直接继续。</code></pre></div>
+<h3>含糊的要求和可执行的要求</h3>
+<div class="compare"><div class="compare-side"><h4>不够清楚</h4><p>帮我优化一下这个页面。</p><p class="muted">Agent 不知道你想优化颜色、排版、信息密度、手机适配、速度还是功能逻辑，只能自行猜测。</p></div><div class="compare-vs">VS</div><div class="compare-side"><h4>更容易成功</h4><p>优化奶人教程的 PC 页面，提高信息密度和正文可读性。</p><p class="muted">允许修改布局和样式，不要修改教程正文与手机端功能。1440 宽度下正文空间应更大，页面不能出现横向滚动；如果需要重做结构，先告诉我。</p></div></div>
+<p>你没有告诉 Agent 应该写哪一条 CSS，但已经把结果、边界和验收说清楚了。这就足够让它开始调查。</p>
+<h3>不要试图用一句话控制完整项目</h3>
+<p>指挥 Agent 更像管理一个连续任务，而不是许一个愿望：</p>
+<ol><li>先给出目标和边界；</li><li>观察 Agent 找到了什么；</li><li>对风险较高的方案先审核；</li><li>让它执行并检查；</li><li>根据实际页面继续反馈；</li><li>满足验收条件后再结束任务。</li></ol>
+<p>反馈时不要只说“不对”“还是不好看”或“没成功”，应该说明操作、预期和实际表现：</p>
+<div class="code-block"><div class="code-label"><span>可执行的反馈</span><button class="copy-btn" type="button">复制</button></div><pre><code>我在 1440 宽度下查看了页面。
+
+预期：
+左侧目录只显示章节标题，需要时再展开。
+
+实际：
+第一章仍然默认展开，占用了大部分高度。
+
+请只修正目录默认展开逻辑，不要调整正文。</code></pre></div>
+<h3>你和 Agent 各自负责什么</h3>
+<div class="table-wrap"><table><thead><tr><th>你负责</th><th>Agent 负责</th></tr></thead><tbody><tr><td>决定想要的结果</td><td>调查项目和相关资料</td></tr><tr><td>限制允许修改的边界</td><td>找到实现位置并执行修改</td></tr><tr><td>批准高风险或扩大范围的操作</td><td>运行检查并根据错误继续修正</td></tr><tr><td>判断最终结果是否可用</td><td>提交验证证据和交接说明</td></tr></tbody></table></div>
+<div class="callout good"><strong>记住这句话</strong>你不需要告诉 Agent 每一行代码怎么写，但必须告诉它要到哪里、不能撞什么，以及怎样才算真正到达。</div>
+<p>理解 Agent 怎样工作后，再根据自己的工作方式选择具体工具。</p>
 <div class="selector" id="agentSelector"><h3>30 秒 Agent 选型器</h3><p class="muted">点击最符合你的工作方式，可多选。</p><div class="choices"><button aria-pressed="false" class="choice-btn" data-choice="language" type="button">主要靠说人话指挥</button><button aria-pressed="false" class="choice-btn" data-choice="preview" type="button">经常做前端，需要实时预览</button><button aria-pressed="false" class="choice-btn" data-choice="manual" type="button">愿意查看并手动改代码</button><button aria-pressed="false" class="choice-btn" data-choice="automation" type="button">需要脚本、服务器或自动化</button></div><div aria-live="polite" class="recommendation" id="recommendation">选择你的工作方式后，这里会给出推荐。</div></div>
 <div class="table-wrap"><table><thead><tr><th>工具</th><th>主要优势</th><th>更适合谁</th></tr></thead><tbody><tr><td><strong>Codex 桌面端</strong></td><td>以项目、任务线程和 Agent 调度为中心；支持差异审查、并行 Agent、Worktree 和 Skills。</td><td>主要通过自然语言管理项目，希望直接使用 TW Skill 阵列，不准备频繁手改代码。</td></tr><tr><td><strong>Claude Code Desktop</strong></td><td>集成文件编辑器、终端、应用预览、可视化 Diff、并行会话与电脑操作。</td><td>经常制作前端、状态栏或桌面工具，需要 Agent 实际打开并测试程序。</td></tr><tr><td><strong>Cursor Agents Window</strong></td><td>Agent 工作台与完整 IDE 共存，可在本地、Worktree、云端和 SSH 环境并行运行。</td><td>希望 Agent 干活，同时保留人工编辑、跳转定义、调试和完整 IDE 能力。</td></tr></tbody></table></div>
 <h3>为什么不推荐纯新手从 CMD、CLI 和普通 VS Code 开始</h3><p>它们不是能力弱，而是会把大量与目标无关的系统复杂度同时暴露给新手。</p>
