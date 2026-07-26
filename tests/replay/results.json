@@ -1,17 +1,17 @@
 {
     "schemaVersion":  1,
-    "evaluatedAt":  "2026-07-25T17:35:11Z",
+    "evaluatedAt":  "2026-07-26T08:56:55Z",
     "method":  "Manual replay of every forward and adversarial prompt against the candidate skill paths, including custom CoT, model routing, script ownership, card-type detection, packaged MVU Zod scripts, enabled-state policy, and runtime dependency notices; each route, required behavior, and prohibited regression was checked from the candidate files, with writes and unsupported runtime claims excluded.",
     "skillFingerprints":  {
                               "code-quality-workflow":  "2c6b93ce2dbc9b72454573499819f54e56ff8af2dd66b8e26d76a99a73ddb5d2",
                               "rolecard-workshop-ops":  "e5f2b8c60eefd052414d1a77c39a6eeb12bdde501d72b4ea4cdb27e2ef450326",
                               "shadcn-tailwind-ui":  "c1c7a3206d27474fb94da466a2c590bb7fc07f56a33517161c5b75973fab7584",
-                              "sillytavern-api-reference":  "bb579d1d9a1768a581db6dd258ea451ccfe5eed4037827565800cef9ef7764b2",
-                              "sillytavern-card-components":  "f38b684085d15bc4f5689fb51c1cf58778b4da88d8f26aa908fea89af2586682",
-                              "sillytavern-card-pipeline":  "4fed160bdaebe69233e9c13fdbfebcb42fa9eaf54cf7ffa05ddd815471a23658",
+                              "sillytavern-api-reference":  "9b6a48b293f3b82049a0b5f2570ce31ba6529d54bf992c0bd0a83e90ca8e8609",
+                              "sillytavern-card-components":  "df924414084507e5f88f3cca591994e2ba803af3ebe12f86c487f2ac8d4cb594",
+                              "sillytavern-card-pipeline":  "940825043ee0d9bac1ce0fbf5bf60792795fc343ef016f47a764ea42f253beda",
                               "sillytavern-embedded-ui":  "9c8cf62a388f511e32b8f81b849b9cb1017ce28686b76fa6c6a00d1be83efeaf",
-                              "sillytavern-runtime-debug":  "12b62a28aa899aaf19188fc4e96543a51b4ddc31b78493373bce3cde8cfa5943",
-                              "tavern-card-builder":  "d3c16b783d966e7f6bd6b24801a551ad63166a8601347b07a1b6489d8d4a48a2"
+                              "sillytavern-runtime-debug":  "b08ef98a3a58d4b06b21820e4199e92923287cb63649f241a56f77b36847c288",
+                              "tavern-card-builder":  "ee42fcd51de991c1a1252b2bfdef4208b95dc21c2c3440c065e6e23fb87c4205"
                           },
     "caseResults":  [
                         {

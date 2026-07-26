@@ -147,10 +147,11 @@ artifact/import
 
 - Probe every `host_required` extension or capability in the correct frame and scope.
   A packaged script is not proof that its host exists.
-- Treat `z` as a code-level identifier, not proof of a host-provided library. Resolve
-  the actual Zod/MVU Zod loader or import declared by the card, then verify its
-  readiness inside the executing helper-script context. Do not silently install a
-  package or substitute a different provider.
+- Verify every packaged domestic/global MVU Zod script promised by the card and check
+  that its enabled state matches the manifest or packed baseline. Then verify the
+  selected script's remote module and the schema-registration helper actually execute
+  in the Tavern Helper context. Do not silently install a package or substitute a
+  different provider.
 - For `remote_runtime`, capture the requested URL/ref, primary/fallback attempt,
   network failure, module exception, and expected readiness capability.
 - Treat HTTP success as transport evidence only. Confirm the module executed and

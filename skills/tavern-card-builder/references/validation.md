@@ -22,9 +22,9 @@
 - The primary card type and capability flags are supported by inspected evidence.
 - Every runtime dependency has one class and a delivery path; player notices exclude
   development-only tools.
-- An MVU Zod card does not use the identifier `z` as delivery evidence; it
-  distinguishes the embedded card schema and loader, the declared remote Zod/MVU Zod
-  runtime, and regional alternatives.
+- An MVU Zod card distinguishes its embedded schema, every promised domestic/global
+  MVU Zod script, their declared enabled states, remote import targets, and required
+  host extension.
 - Model-visible text contains no developer-only explanation or secret.
 
 ## 2. CoT-specific checks

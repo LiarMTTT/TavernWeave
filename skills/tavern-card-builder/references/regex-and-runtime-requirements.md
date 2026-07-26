@@ -43,9 +43,9 @@ Classify every regex, helper script, schema, loader, and host extension through
   stage.
 - A Git/CDN import is `remote_runtime`; record its role, URL/ref, fallback, and
   failure behavior without telling the player to install it locally.
-- Equivalent domestic and global loaders are `regional_alternative`; preserve the
-  declared selection rule and reject a release with no selected member or an
-  unintended double activation.
+- Equivalent domestic and global loaders are `regional_alternative`; require every
+  variant promised by the card to remain packaged, preserve the declared selection
+  rule, and reject a release with no selected member or unintended double activation.
 - A host extension is `host_required`; do not treat a packaged script as proof that
   the host capability is installed.
 

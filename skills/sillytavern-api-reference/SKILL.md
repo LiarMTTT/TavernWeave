@@ -64,12 +64,13 @@ Keep declaration truth separate from runtime truth. A declaration can establish 
 - Distinguish `generate` from `generateRaw`: the latter supplies its own ordered prompts. Neither should be assumed to create a normal chat turn or to run MVU parsing automatically.
 - Treat message floors and swipes explicitly. Read with `include_swipes: true` when alternate pages matter, and choose the smallest `refresh` scope after writes.
 - Wait for optional globals such as `Mvu` before use. Subscribe with exported event constants, especially where upstream string values contain historical spelling mistakes.
-- Treat `z` only as a code-level identifier. Do not infer its provider, installation
-  state, or delivery class from the identifier itself. Trace the actual import,
-  embedded loader, manifest declaration, or runtime registration path.
-- When a card declares a Git/CDN-loaded Zod or MVU Zod runtime, classify that code as
-  remote delivery, preserve its domestic/global selection policy, and do not replace
-  it with a standalone installation instruction.
+- Do not infer a provider, installation state, or delivery class from an API
+  identifier alone. Trace the actual card script, import, manifest declaration, and
+  runtime registration path.
+- Treat packaged domestic/global MVU Zod scripts as card assets whose presence and
+  enabled states must match the card contract. Treat the Git/CDN modules imported by
+  those scripts as remote delivery. Do not replace this packaged loading path with a
+  standalone Zod installation instruction.
 - Treat a remote import as runtime delivery, not proof of installation or execution.
   Record its URL/ref, fallback, and readiness probe.
 - Keep macros for substitution. A macro that writes variables may run during preview, swipe, or re-render; use an explicit transaction when timing matters.

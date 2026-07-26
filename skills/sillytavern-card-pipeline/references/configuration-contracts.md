@@ -67,22 +67,23 @@ For each runtime dependency, require fields equivalent to:
 
 Apply these rules:
 
-- A required character-local regex, card-specific Zod schema, Tavern Helper script,
-  loader, or binding must be `embedded_required`.
+- A required character-local regex, card-specific Zod schema, non-regional Tavern
+  Helper script, loader, or binding must be `embedded_required`.
 - Tavern Helper or another extension/capability that the card cannot carry is
   `host_required`.
-- A declared Git/CDN Zod, MVU Zod, or other runtime import is `remote_runtime`; it is
-  not a player-side package installation.
-- Domestic/global implementations of one role are `regional_alternative`; the
-  manifest must define their selection rule, normally exactly one enabled member.
+- A declared Git/CDN MVU bundle, schema-registration helper, or other runtime import
+  is `remote_runtime`; it is not a player-side package installation.
+- Packaged domestic/global implementations of one role are `regional_alternative`.
+  The manifest must require every promised script and define the enabled state for
+  each member.
 - Node, a package manager, compiler, or local Zod package used only for builds is
   `development_only` and must not appear in player installation notices.
 
-Do not infer a card type, provider, or installation path from the identifier `z` or a
-call such as `z.object`. Require independent evidence for the card-specific schema and
-its registration path. Classify the schema by where it is stored, the embedded loader
-by its packed field, and the declared Git/CDN Zod or MVU Zod target as
-`remote_runtime`. Preserve the project's domestic/global loader selection.
+Do not infer a card type, provider, or installation path from an API call alone.
+Require independent evidence for the card-specific schema, registration path,
+packaged domestic/global MVU Zod scripts, remote import targets, and enabled policy.
+When those scripts already ship in the card, report them as embedded assets and do not
+add a standalone Zod installation step.
 
 At `variable_core`, a later embedded adapter may be explicitly deferred with an owner
 and required stage. At `component_assembly` or `release`, missing required embedded

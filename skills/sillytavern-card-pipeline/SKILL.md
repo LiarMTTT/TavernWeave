@@ -111,10 +111,10 @@ the packed extension surfaces without an explicit compatibility explanation.
    embedded-required, remote-runtime, regional-alternative, optional, or
    development-only.
 3. Present a preflight notice that separates content already embedded from host setup,
-   remote runtime loads, regional selection, and development-only tools. Never use
-   the identifier `z` as dependency or delivery evidence. Follow the card's declared
-   Zod/MVU Zod loader and do not replace Git/CDN delivery with a local installation
-   instruction.
+   remote runtime loads, regional selection, and development-only tools. For an MVU
+   Zod card, list its packaged schema and domestic/global scripts as already embedded,
+   then list their Git/CDN targets separately. Do not replace that loading path with a
+   local Zod installation instruction.
 4. Define the exact write scope and new artifact paths. Preserve earlier releases;
    default to a new version or staging directory.
 5. Anchor a regression checklist for every already-working consumer in scope.
@@ -154,8 +154,9 @@ forbidden regressions, not encode a temporary implementation preference.
    and component parity.
 5. Verify every required embedded regex, schema, helper script, loader, and binding is
    present in its declared packed field with the expected stable identity and enabled
-   state. Validate regional alternative groups, normally requiring exactly one enabled
-   member.
+   state. For regional groups, require every script promised by the card and enforce
+   the manifest's enabled-state policy; a common domestic/global pair keeps both
+   scripts packaged and enables only its declared default.
 6. Resolve every card-bound or co-delivered worldbook by stable ID from the active
    manifest. Verify its maintained source and declared version match the card release;
    do not select a worldbook by display name, timestamp, or newest-looking filename.

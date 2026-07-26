@@ -53,9 +53,9 @@ explicitly selected.
    then compare them with the intended source snapshot.
 3. Produce a user notice that reports what is already embedded, what the host must
    provide, what loads remotely, which regional member is selected, and which tools
-   are development-only. For a declared Git/CDN Zod or MVU Zod runtime, report the
-   selected loader and fallback without adding a standalone Zod installation step.
-   The identifier `z` is not evidence of delivery.
+   are development-only. For an MVU Zod card, name the packaged schema and
+   domestic/global scripts, state which script is enabled, and report their remote
+   targets without adding a standalone Zod installation step.
 4. Resolve the card release and every bound worldbook from the active manifest; reject
    stale or ambiguous sources before packing.
 5. Pack JSON from maintained component sources.

@@ -38,7 +38,7 @@ Primary types:
 | --- | --- |
 | `text` | Narrative and prompt behavior without a persistent variable runtime. |
 | `mvu` | An identified MVU dialect owns persistent state, but no Zod schema registration is required. |
-| `mvu_zod` | MVU state is governed by a card-specific Zod schema and a detected schema-registration path. |
+| `mvu_zod` | MVU state is governed by a card-specific Zod schema with a detected registration path and the required packaged MVU Zod loader scripts. |
 | `hybrid` | Multiple runtime systems are peers and no narrower primary type describes the card. |
 
 Use capability flags such as:
@@ -64,7 +64,7 @@ Classify every runtime dependency:
 | `host_required` | A host extension or capability the card cannot carry itself. | Tell the user what must be installed or enabled; keep acceptance pending until probed. |
 | `embedded_required` | A schema, regex, helper script, loader, or binding that must ship inside the card. | Block assembly or release when missing, disabled contrary to policy, or lost in roundtrip. |
 | `remote_runtime` | Code or UI loaded at runtime from GitHub, jsDelivr, or another declared endpoint. | Report the remote load and fallback policy; do not describe it as a local installation. |
-| `regional_alternative` | Equivalent domestic/global or other regional loaders. | Require the declared selection rule, normally exactly one enabled member. |
+| `regional_alternative` | Equivalent domestic/global or other regional loader scripts. | Require every loader promised by the card to be packaged, then enforce its declared enabled-state policy. |
 | `optional` | A non-core feature whose absence has a defined fail-soft path. | Report the disabled feature and fallback without blocking unrelated core behavior. |
 | `development_only` | Node, package-manager, compiler, local Zod package, or other build dependency. | Keep it out of player installation notices. |
 
@@ -76,23 +76,23 @@ installed or that remote code executed.
 
 Separate these facts:
 
-- `z` is only a code-level identifier and does not reveal the provider or delivery
-  method;
 - the card-specific Zod schema is `embedded_required`;
-- an embedded loader that initiates a required remote import is
-  `embedded_required`;
-- the Zod/MVU Zod runtime, `mvu_zod.js`, MagVarUpdate bundle, or similar declared
-  Git/CDN target is `remote_runtime`;
-- domestic and global loaders are `regional_alternative` when they implement the same
-  runtime role;
+- card-packaged MVU Zod scripts such as domestic and global variants are
+  `regional_alternative` with `delivery: embedded`;
+- every regional loader promised by the card must be present, while its enabled state
+  follows the card's manifest or proven packed baseline;
+- MagVarUpdate bundles, schema-registration helpers, or similar declared Git/CDN
+  targets imported by those scripts are `remote_runtime`;
+- Tavern Helper or another extension that executes the packaged scripts is
+  `host_required`;
 - a local `zod` package used to build or dump schema files is `development_only`.
 
-Do not infer `mvu_zod`, a provider, or an installation path merely because card code
-contains `z` or calls `z.object`. Require independent schema and registration
-evidence. When the card declares Git/CDN delivery, report the selected remote loader
-and its domestic/global fallback rather than asking the player to install Zod
-directly. Preserve an existing card's proven loader and regional-selection policy
-unless migration is explicitly authorized.
+Do not infer `mvu_zod`, a provider, or an installation path from an API call alone.
+Require the schema, registration path, packaged loader identities, remote targets, and
+enabled policy as independent evidence. If the card already packages its domestic and
+global MVU Zod scripts, tell the player that the runtime loads through those scripts;
+do not ask them to install Zod directly. Preserve an existing card's proven loader and
+regional-selection policy unless migration is explicitly authorized.
 
 ## 5. Runtime dependency ledger
 
@@ -106,7 +106,7 @@ Record fields equivalent to:
 | `required` | Whether absence blocks the selected stage. |
 | `sourceOwner` | Maintained module, card field, manifest, or external project that owns the fact. |
 | `evidence` | Stable script ID, regex ID/name, JSON pointer, source path, or capability probe. |
-| `delivery` | Embedded field, host installation, remote URL, or explicit unknown. |
+| `delivery` | Embedded card field, host installation, remote URL, or explicit unknown. |
 | `enabledPolicy` | Required enabled state or alternative-group rule. |
 | `region` | Global, domestic, or another declared target when applicable. |
 | `versionOrRef` | Detected version, Git ref, or an explicit unknown. |
@@ -117,9 +117,9 @@ Record fields equivalent to:
 For `mvu_zod`, trace at least:
 
 ```text
-embedded loader -> remote Zod/MVU Zod runtime -> runtime readiness
-                -> schema registration -> card schema -> update rules
-                -> required regex/UI consumers
+host extension -> embedded domestic/global MVU Zod script -> remote MVU bundle
+               -> embedded Zod schema -> remote registration helper
+               -> schema registration -> update rules -> regex/UI consumers
 ```
 
 At `variable_core`, later embedded adapters may be explicitly deferred. At

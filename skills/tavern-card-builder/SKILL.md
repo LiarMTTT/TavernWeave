@@ -112,10 +112,11 @@ Read only the references needed for the task:
 - Keep source and generated artifacts separate. Fix the source, then rebuild the artifact.
 - Preserve an existing card's proven protocol unless there is evidence and authorization to migrate it.
 - Treat command dialects and runtime behavior as version-sensitive capabilities, not universal folklore.
-- Treat `z` only as a code identifier, never as a card-type or dependency-delivery
-  signal. Trace the card schema, embedded loader, Git/CDN Zod or MVU Zod runtime, and
-  regional alternative as separate evidence-backed dependencies. Do not replace the
-  card's declared remote loader with a standalone Zod installation step.
+- Detect MVU Zod from the card's schema, registration path, and packaged loader
+  scripts, never from an API identifier alone. Trace the embedded schema, embedded
+  domestic/global MVU Zod scripts, their Git/CDN targets, and the required host
+  extension separately. When the card already ships its loader scripts, do not add a
+  standalone Zod installation step.
 - Do not silently install extensions or remote runtimes. Report embedded, host,
   remote, regional, optional, and development-only dependencies separately.
 - Keep model-visible text free of incident history, development commentary, Markdown decoration that has no model purpose, and copyable hard-coded outputs.

@@ -77,11 +77,13 @@ Use these rules:
   embedding card code does not satisfy it.
 - A Git/CDN import is `remote_runtime`, not an installation task.
 - Equivalent domestic/global loaders are `regional_alternative`; at release, enforce
-  the declared rule, normally exactly one enabled member.
+  that every promised loader is packaged and its enabled state matches the declared
+  rule.
 - A local Zod package, compiler, or package manager used only to build artifacts is
   `development_only` and must not enter player-facing installation instructions.
-- The identifier `z` is not a component or delivery signal. Resolve the actual schema,
-  embedded loader, remote target, and regional alternative from stable card evidence.
+- An API identifier is not a component or delivery signal. Resolve the actual schema,
+  packaged domestic/global scripts, their remote targets, and enabled states from
+  stable card evidence.
 
 At `variable_core`, an embedded adapter may be deferred when its owner and later
 required stage are explicit. At `component_assembly` and `release`, unresolved

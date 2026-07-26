@@ -30,16 +30,15 @@ Do not move a symbol from one row to another merely because two globals expose s
 
 Keep API ownership separate from delivery:
 
-- Do not treat an identifier such as `z` as evidence of who provides a library or how
-  it is delivered. Trace the card's actual import, loader, manifest, and registration
-  path.
+- Do not treat an API identifier as evidence of who provides a library or how it is
+  delivered. Trace the card's actual script, import, manifest, and registration path.
 - Treat a card-specific Zod schema as embedded card code when it is stored in the
   character's Tavern Helper scripts.
-- Treat declared Zod/MVU Zod loaders, `mvu_zod.js`, MagVarUpdate bundles, UI modules,
-  and similar Git/CDN imports as remote runtime code. An HTTP response does not prove
-  module execution.
-- Treat domestic/global loader pairs as alternatives with an explicit selection and
-  fallback policy, not as two extensions that should both be enabled.
+- Treat packaged domestic/global MVU Zod scripts as embedded card assets. Require
+  every variant promised by the card and preserve the declared enabled-state policy.
+- Treat MagVarUpdate bundles, schema-registration helpers, UI modules, and similar
+  Git/CDN imports made by those scripts as remote runtime code. An HTTP response does
+  not prove module execution.
 - Keep Node, package-manager, compiler, and local Zod dependencies used only for
   building out of player installation instructions.
 
