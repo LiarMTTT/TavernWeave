@@ -3,19 +3,20 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="面向纯 Vibe Code 新手的 Agent 选型、TavernWeave 与 ST 开发指南 DB、Zod、CoT、酒馆助手脚本、正则、UI 与交互教程。" name="description"/>
+<meta content="面向 AI Agent 制卡新手的 TavernWeave、ST 开发指南 DB、Zod、CoT、酒馆助手脚本、正则、UI、运行时监听与调试教程。" name="description"/>
 <meta content="dark light" name="color-scheme"/>
 <meta content="#0b0d12" name="theme-color"/>
 <title>奶人教程｜从零开始驾驭 AI Agent 做 ST 开发</title>
-<link href="./style.css?v=5" rel="stylesheet"/>
-<meta content="0.4.0" name="tw-guide-version"/></head>
+<link href="./style.css?v=12" rel="stylesheet"/>
+<link href="./layout-v6.css?v=12" rel="stylesheet"/>
+<meta content="0.5.0" name="tw-guide-version"/></head>
 <body>
 <a class="skip-link" href="#main">跳到正文</a>
 <div class="progress" id="progress"></div>
 <header class="topbar">
 <a aria-label="返回顶部" class="brand" href="#top">
 <span class="brand-mark">TW</span>
-<span class="brand-copy"><span class="brand-title">奶人教程</span><span class="brand-sub">TavernWeave · Vibe Code 入门</span></span>
+<span class="brand-copy"><span class="brand-title">奶人教程</span><span class="brand-sub">TavernWeave · Vibe Code 制卡入门</span></span>
 </a>
 <div class="top-actions">
 <a class="ghost-btn desktop-only" href="https://github.com/LiarMTTT/TavernWeave" rel="noreferrer" target="_blank">TavernWeave</a>
@@ -26,9 +27,12 @@
 <div class="mobile-overlay" id="overlay"></div>
 <div class="layout" id="top">
 <aside aria-label="文章目录" class="sidebar">
-<div class="sidebar-label">目录</div>
+<div class="toc-head"><div><span class="toc-kicker">学习路径</span><strong>文章目录</strong></div><span aria-live="polite" class="toc-progress" id="tocProgress">00 / 45</span></div>
 <nav class="nav-list">
-<div class="sidebar-label">第一章 · 驾驭 Agent</div>
+<div class="nav-level"><span>入门篇</span><span>第一至三章</span></div>
+<details class="nav-chapter" open>
+<summary><span class="nav-chapter-no">Ⅰ</span><span>第一章 · 驾驭 Agent</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
+<div class="nav-chapter-links">
 <a class="nav-link" href="#intro"><span>00</span><span>Vibe Code 是什么</span></a>
 <a class="nav-link" href="#first-run"><span>01</span><span>第一次成功交付</span></a>
 <a class="nav-link" href="#agent"><span>02</span><span>认识与选择 Agent</span></a>
@@ -40,14 +44,22 @@
 <a class="nav-link" href="#workflow"><span>08</span><span>一次完整任务</span></a>
 <a class="nav-link" href="#mistakes"><span>09</span><span>高频错误</span></a>
 <a class="nav-link" href="#graduate"><span>10</span><span>成长路线与毕业检查</span></a>
-<div class="sidebar-label">第二章 · 角色卡机制</div>
+</div>
+</details>
+<details class="nav-chapter">
+<summary><span class="nav-chapter-no">Ⅱ</span><span>第二章 · 角色卡机制</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
+<div class="nav-chapter-links">
 <a class="nav-link" href="#chapter-2"><span>Ⅱ</span><span>Zod、CoT 与计算脚本</span></a>
 <a class="nav-link" href="#zod"><span>11</span><span>Zod 变量机制</span></a>
 <a class="nav-link" href="#cot"><span>12</span><span>自定义 CoT</span></a>
 <a class="nav-link" href="#calc-script"><span>13</span><span>计算脚本</span></a>
 <a class="nav-link" href="#calc-balance"><span>14</span><span>变量更新分工</span></a>
 <a class="nav-link" href="#chapter-2-summary"><span>15</span><span>第二章总结</span></a>
-<div class="sidebar-label">第三章 · 脚本与正则</div>
+</div>
+</details>
+<details class="nav-chapter">
+<summary><span class="nav-chapter-no">Ⅲ</span><span>第三章 · 脚本与正则</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
+<div class="nav-chapter-links">
 <a class="nav-link" href="#chapter-3"><span>Ⅲ</span><span>脚本、正则与交互</span></a>
 <a class="nav-link" href="#th-script"><span>16</span><span>酒馆助手脚本</span></a>
 <a class="nav-link" href="#regex-vs-script"><span>17</span><span>正则能力上限</span></a>
@@ -70,11 +82,29 @@
 <a class="nav-link" href="#acceptance"><span>34</span><span>运行时验收</span></a>
 <a class="nav-link" href="#tw-db-script"><span>35</span><span>TW + DB 施工</span></a>
 <a class="nav-link" href="#chapter-3-summary"><span>36</span><span>第三章总结</span></a>
+</div>
+</details>
+<div class="nav-level advanced"><span>进阶篇</span><span>第四章起</span></div>
+<details class="nav-chapter">
+<summary><span class="nav-chapter-no">Ⅳ</span><span>第四章 · 运行时调试</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
+<div class="nav-chapter-links">
+<a class="nav-link" href="#chapter-4"><span>Ⅳ</span><span>真实实例调试</span></a>
+<a class="nav-link" href="#runtime-evidence"><span>37</span><span>为什么监听运行实例</span></a>
+<a class="nav-link" href="#agent-mock"><span>38</span><span>Agent Mock 架构</span></a>
+<a class="nav-link" href="#mock-receiver"><span>39</span><span>建立 Mock 接收器</span></a>
+<a class="nav-link" href="#tavern-probe"><span>40</span><span>酒馆侧 Probe</span></a>
+<a class="nav-link" href="#agent-debug-loop"><span>41</span><span>让 Agent 读事件流</span></a>
+<a class="nav-link" href="#vscode-listener"><span>42</span><span>VS Code 监听</span></a>
+<a class="nav-link" href="#debug-compare"><span>43</span><span>方案与效果对比</span></a>
+<a class="nav-link" href="#combined-debug"><span>44</span><span>联合调试与验收</span></a>
+<a class="nav-link" href="#chapter-4-summary"><span>45</span><span>第四章总结</span></a>
+</div>
+</details>
 </nav>
 </aside>
 <main id="main"><section class="section">正在加载教程内容…</section></main>
 </div>
 <button aria-label="返回顶部" class="icon-btn backtop" id="backtop" title="返回顶部" type="button">↑</button>
-<script src="./app.js?v=5"></script>
+<script src="./app.js?v=12"></script>
 </body>
 </html>
