@@ -3,13 +3,14 @@
 
   try {
     const urls = [
-      './content-1.html?v=5',
-      './content-2.html?v=5',
-      './content-3.html?v=5',
-      './content-4.html?v=5',
-      './content-5.html?v=5',
-      './content-6.html?v=5',
-      './content-7.html?v=5',
+      './content-1.html?v=12',
+      './content-2.html?v=12',
+      './content-3.html?v=12',
+      './content-4.html?v=12',
+      './content-5.html?v=12',
+      './content-6.html?v=12',
+      './content-7.html?v=12',
+      './content-8.html?v=12',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
@@ -27,6 +28,9 @@
   const themeToggle = document.getElementById('themeToggle');
   const menuToggle = document.getElementById('menuToggle');
   const overlay = document.getElementById('overlay');
+  const sidebar = document.querySelector('.sidebar');
+  const tocProgress = document.getElementById('tocProgress');
+  const chapterGroups = [...document.querySelectorAll('.nav-chapter')];
   const savedTheme = localStorage.getItem('tw-guide-theme');
   const systemLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
 
@@ -53,6 +57,20 @@
   menuToggle.addEventListener('click', () => setNav(!body.classList.contains('nav-open')));
   overlay.addEventListener('click', () => setNav(false));
   document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => setNav(false)));
+  chapterGroups.forEach(group => {
+    group.addEventListener('toggle', () => {
+      if (!group.open) return;
+      chapterGroups.forEach(other => {
+        if (other !== group) other.open = false;
+      });
+      window.requestAnimationFrame(() => {
+        sidebar.scrollTo({
+          top: Math.max(0, group.offsetTop - 82),
+          behavior: 'smooth',
+        });
+      });
+    });
+  });
 
   function onScroll() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -69,7 +87,13 @@
   const observer = new IntersectionObserver(entries => {
     const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
     if (!visible) return;
-    navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
+    const activeLink = navLinks.find(link => link.getAttribute('href') === `#${visible.target.id}`);
+    navLinks.forEach(link => link.classList.toggle('active', link === activeLink));
+    if (!activeLink) return;
+    const activeChapter = activeLink.closest('.nav-chapter');
+    chapterGroups.forEach(group => group.classList.toggle('contains-active', group === activeChapter));
+    const sectionNumber = activeLink.querySelector('span')?.textContent || '—';
+    tocProgress.textContent = `${sectionNumber} / 45`;
   }, { rootMargin: '-18% 0px -70% 0px', threshold: [0, 0.15, 0.4] });
 
   sections.forEach(section => observer.observe(section));
@@ -130,4 +154,20 @@
     pressed ? choices.delete(key) : choices.add(key);
     calculateRecommendation();
   }));
+
+  if (location.hash) {
+    window.requestAnimationFrame(() => {
+      const hash = decodeURIComponent(location.hash.slice(1));
+      const target = document.getElementById(hash);
+      const targetLink = navLinks.find(link => link.getAttribute('href') === `#${hash}`);
+      const targetChapter = targetLink?.closest('.nav-chapter');
+      if (targetChapter) targetChapter.open = true;
+      const previousScrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      target?.scrollIntoView();
+      window.requestAnimationFrame(() => {
+        root.style.scrollBehavior = previousScrollBehavior;
+      });
+    });
+  }
 })();

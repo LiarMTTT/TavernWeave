@@ -1,0 +1,329 @@
+/* v0.5: responsive desktop reading layout and chapter navigation */
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 72%, white);
+  outline-offset: 3px;
+}
+
+.sidebar {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--panel-solid) 72%, transparent);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 44%, transparent) transparent;
+  overscroll-behavior: contain;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 48%, transparent);
+  background-clip: padding-box;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--accent) 72%, transparent);
+  background-clip: padding-box;
+}
+
+.toc-head {
+  position: sticky;
+  top: -12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: -12px -12px 10px;
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel-solid) 92%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.toc-head strong {
+  display: block;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.toc-kicker {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.toc-progress {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-size: 11px;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
+
+.nav-list {
+  gap: 8px;
+}
+
+.nav-level {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 8px 2px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nav-level span:last-child {
+  font-weight: 650;
+  letter-spacing: 0.04em;
+}
+
+.nav-level.advanced {
+  margin-top: 4px;
+  color: var(--warn);
+}
+
+.nav-chapter {
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+}
+
+.nav-chapter[open] {
+  border-color: var(--line);
+  background: color-mix(in srgb, var(--panel-solid) 60%, transparent);
+}
+
+.nav-chapter summary {
+  min-height: 48px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  cursor: pointer;
+  list-style: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 820;
+  line-height: 1.3;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.nav-chapter summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-chapter summary:hover,
+.nav-chapter[open] summary,
+.nav-chapter.contains-active > summary {
+  color: var(--text);
+  background: var(--accent-soft);
+}
+
+.nav-chapter-no {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.nav-chevron {
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.nav-chapter[open] .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-chapter-links {
+  display: grid;
+  gap: 2px;
+  padding: 2px 6px 8px;
+}
+
+.nav-link {
+  min-height: 40px;
+  align-items: center;
+  padding: 8px 9px;
+  font-size: 13px;
+}
+
+.nav-link.active {
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.card-icon {
+  display: none;
+}
+
+.chapter-tier {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: -8px 0 24px 64px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.chapter-tier span:first-child {
+  padding: 5px 9px;
+  border: 1px solid color-mix(in srgb, var(--warn) 38%, var(--line));
+  border-radius: 999px;
+  color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 9%, transparent);
+  font-weight: 850;
+}
+
+.chapter-tier strong {
+  color: var(--text);
+}
+
+.section > p,
+.section > ol:not([class]),
+.section > ul:not([class]) {
+  max-width: 78ch;
+}
+
+.table-wrap,
+.flow {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 42%, transparent) transparent;
+}
+
+.table-wrap::-webkit-scrollbar,
+.flow::-webkit-scrollbar {
+  height: 7px;
+}
+
+.table-wrap::-webkit-scrollbar-track,
+.flow::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-wrap::-webkit-scrollbar-thumb,
+.flow::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 48%, transparent);
+  background-clip: padding-box;
+}
+
+@media (min-width: 1180px) {
+  :root {
+    --max: 1480px;
+    --nav-w: 300px;
+  }
+
+  .layout {
+    grid-template-columns: var(--nav-w) minmax(0, 1fr);
+    gap: 42px;
+    padding: 36px clamp(28px, 3.2vw, 52px) 110px;
+  }
+
+  .hero {
+    min-height: 500px;
+    padding: clamp(52px, 5vw, 82px);
+  }
+
+  .section {
+    padding: clamp(38px, 3.4vw, 56px);
+  }
+
+  .cards {
+    gap: 12px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .flow-node {
+    flex: 1 1 0;
+    min-width: 108px;
+  }
+}
+
+@media (max-width: 940px) {
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  .sidebar {
+    inset: var(--header-h) auto 0 0;
+    width: min(88vw, 360px);
+    height: auto;
+    padding: 14px;
+    border-width: 0 1px 0 0;
+    border-radius: 0 22px 22px 0;
+    box-shadow: 24px 0 70px rgba(0, 0, 0, 0.28);
+  }
+
+  .toc-head {
+    top: -14px;
+    margin: -14px -14px 10px;
+    padding: 18px 16px 14px;
+  }
+
+  .nav-chapter summary {
+    min-height: 50px;
+    font-size: 14px;
+  }
+
+  .nav-link {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .chapter-tier {
+    margin-left: 52px;
+  }
+}
+
+@media (max-width: 640px) {
+  .toc-progress {
+    font-size: 10px;
+  }
+
+  .section > p,
+  .section > ol:not([class]),
+  .section > ul:not([class]) {
+    max-width: none;
+  }
+
+  .chapter-tier {
+    margin: -4px 0 20px;
+  }
+}
