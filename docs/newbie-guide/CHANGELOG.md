@@ -1,5 +1,22 @@
 # 奶人教程更新日志
 
+## 0.5.3 - 2026-07-27
+
+### Agent 与套餐
+
+- 在第一章 02 的 Agent 选型后新增 ChatGPT 官方移动端订阅说明。
+- 分开说明 ChatGPT 注册、首次 API Key 手机号验证、服务支持地区和移动端购买，不把它们合并成“绕过手机号”流程。
+- 补充 Apple App Store、Google Play、礼品卡地区限制与账号安全边界。
+- 将 `jieoupen/Google-Play-Store` 限定为非官方的安卓设备兼容性参考，不把第三方安装器或虚拟空间当成购买方案。
+
+### 第三方模型
+
+- 第一章 03 调整为“模型选择、第三方接入与双 Agent 副驾驶”。
+- 新增 CC Switch 与 Codex++ 的定位、配置步骤、选择建议和验收要求。
+- 明确 Responses、Chat Completions、本地路由、工具调用和桌面端兼容性边界。
+- 套餐购买与第三方模型配置分别位于 02、03，不互相混写。
+- 章节目录新增 `02.1 ChatGPT 套餐购买` 与 `03.1 第三方模型接入` 子项，可直接跳转到对应教程。
+
 ## 0.5.2 - 2026-07-26
 
 在线阅读：[TavernWeave · Vibe Code 制卡入门](https://liarmttt.github.io/TavernWeave/newbie-guide/)
