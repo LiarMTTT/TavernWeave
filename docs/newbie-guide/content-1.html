@@ -104,5 +104,20 @@
 <h3>为什么不推荐纯新手从 CMD、CLI 和普通 VS Code 开始</h3><p>它们不是能力弱，而是会把大量与目标无关的系统复杂度同时暴露给新手。</p>
 <div class="cards"><article class="card"><h4>CLI 的额外负担</h4><p class="muted">目录、PATH、环境变量、权限提示、会话恢复、命令报错和文本 Diff 都需要自己识别。</p></article><article class="card"><h4>普通 IDE 的额外负担</h4><p class="muted">文件树、插件、终端、Git 面板、调试器、任务系统和工作区信任会同时出现。</p></article><article class="card"><h4>桌面 Agent 的价值</h4><p class="muted">把项目、会话、权限、计划、差异和运行结果集中在同一条可见任务链里。</p></article></div>
 <div class="callout good"><strong>默认建议</strong>主要靠说人话、使用 TavernWeave：Codex 桌面端。需要频繁预览和真实操作：Claude Code Desktop。愿意进入代码层：Cursor。脚本与自动化：CLI，放进阶教程。</div>
+<h3 id="chatgpt-mobile-subscription">通过官方移动端订阅 ChatGPT</h3>
+<div class="callout"><strong>本节只讲官方套餐购买</strong>ChatGPT 套餐、OpenAI API 和第三方模型 API 是三套不同的服务与计费体系。这里不讨论第三方模型接入，也不把购买套餐写成手机号验证流程。</div>
+<p>OpenAI 当前说明是：创建账号和使用 ChatGPT 已不再要求手机号验证。如果注册时出现手机号页面，先确认是否进入了 OpenAI Platform 的首次 API Key 流程——首次生成 API Key 目前仍可能要求手机号验证，这与购买 ChatGPT 套餐不是同一件事。</p>
+<p>中国大陆目前不在 OpenAI 公布的 ChatGPT 支持地区列表中。因此，“中国大陆手机号不能用于相关验证”和“购买 ChatGPT 套餐需要绕过手机号”不能写成同一件事；真正需要检查的是服务地区、应用商店地区、付款资料与账号归属是否一致。</p>
+<h4>iPhone 与 iPad</h4>
+<p>位于支持地区、并且能从当前 Apple App Store 下载官方 ChatGPT 应用的用户，可以：</p>
+<ol><li>从 App Store 安装 OpenAI 发布的官方 ChatGPT 应用；</li><li>登录自己的 OpenAI 账号；</li><li>在应用内选择升级套餐；</li><li>通过 Apple 的订阅确认页面完成购买；</li><li>以后由 Apple 管理扣款、续订、收据和退款入口。</li></ol>
+<div class="callout warn"><strong>Apple 礼品卡有地区限制</strong>礼品卡、Apple 账号商店地区和使用地区需要匹配。礼品卡不能跨国家或地区兑换；部分订阅即使已有余额，也可能要求账号绑定有效付款方式。更换设备后套餐没有恢复，可在 ChatGPT iOS 应用设置中选择 <code>Restore purchases</code>。</div>
+<h4>Android</h4>
+<p>位于支持地区、并且拥有正常 Google Play 环境的用户，可以：</p>
+<ol><li>从 Google Play 安装 OpenAI 发布的官方 ChatGPT 应用；</li><li>登录自己的 OpenAI 账号；</li><li>在应用内选择升级套餐；</li><li>通过 Google Play 的订阅确认页面完成购买；</li><li>以后由 Google Play 管理扣款和续订。</li></ol>
+<div class="callout warn"><strong>Google Play 礼品卡不是通用跨区付款方式</strong>Google 要求礼品卡购买地、币种、Google Play 国家资料以及用户实际所在国家或地区一致。礼品卡只能在购买国家兑换和使用。</div>
+<div class="callout"><strong>设备没有 Google Play 怎么办</strong><a href="https://github.com/jieoupen/Google-Play-Store" rel="noreferrer" target="_blank">jieoupen/Google-Play-Store</a> 是社区整理的 Google 服务框架安装资料，只能作为设备兼容性参考，不是 OpenAI、Google 或设备厂商的官方教程，也不解决商店地区和付款资格问题。仓库中包含第三方安装器、APK 镜像与虚拟空间方案；新手应优先使用设备厂商支持的 Google 服务环境，不要在未知安装器或虚拟空间中输入 Google、OpenAI 或付款账户凭据。</div>
+<div class="callout danger"><strong>移动端内购不是地区绕过方案</strong>不要使用临时接码、来源不明的成品账号、虚构的常住地区或账单资料，也不要购买与账号地区不匹配的礼品卡。Apple 和 Google 内购只是官方移动端支付渠道，不会改变 OpenAI 对服务地区的要求；从不支持地区访问或使用不受支持地区的付款方式，可能导致账号被阻止或暂停。</div>
+<p class="small muted">规则与购买流程参考：<a href="https://help.openai.com/en/articles/8983040" rel="noreferrer" target="_blank">OpenAI 手机验证说明</a> · <a href="https://help.openai.com/en/articles/7947663-chatgpt-supported-countries" rel="noreferrer" target="_blank">ChatGPT 支持地区</a> · <a href="https://help.openai.com/en/articles/9131992" rel="noreferrer" target="_blank">不支持地区说明</a> · <a href="https://help.openai.com/en/articles/7885016-chatgpt-ios-app-faq" rel="noreferrer" target="_blank">ChatGPT iOS FAQ</a> · <a href="https://support.google.com/googleplay/answer/11564359" rel="noreferrer" target="_blank">Google Play 礼品卡限制</a> · <a href="https://support.apple.com/en-ie/108285" rel="noreferrer" target="_blank">Apple 礼品卡地区限制</a></p>
 <p class="small muted">产品能力参考：<a href="https://openai.com/index/introducing-the-codex-app/" rel="noreferrer" target="_blank">OpenAI Codex app</a> · <a href="https://code.claude.com/docs/en/desktop" rel="noreferrer" target="_blank">Claude Code Desktop</a> · <a href="https://cursor.com/changelog/3-0" rel="noreferrer" target="_blank">Cursor Agents Window</a></p>
 </section>

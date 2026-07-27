@@ -1,9 +1,25 @@
 <section class="section" id="models">
-<div class="section-head"><div class="section-no">03</div><div><h2>内容模型与双 Agent 副驾驶</h2><p class="section-kicker">内容创作、工程开发和并行 Agent 是三个不同岗位；模型越多不等于工作流越稳定。</p></div></div>
+<div class="section-head"><div class="section-no">03</div><div><h2>模型选择、第三方接入与双 Agent 副驾驶</h2><p class="section-kicker">内容创作、工程开发、模型供应商和并行 Agent 是不同层次；模型越多不等于工作流越稳定。</p></div></div>
 <div class="callout danger"><strong>成人内容边界</strong>本节讨论合法、虚构、角色明确成年且基于自愿关系的成人向创作。未成年人性内容、年龄不明确的性内容、现实人物私密色情内容及其他违法剥削内容不属于正常创作范围。</div>
 <h3>先把三个岗位分开</h3>
 <div class="cards"><article class="card"><div class="card-icon">文</div><h4>内容模型</h4><p class="muted">负责角色设定、世界观、剧情、对话样本、关系推进和成人向正文。</p></article><article class="card"><div class="card-icon">工</div><h4>开发 Agent</h4><p class="muted">负责项目文件、代码、变量系统、前端、构建、调试和 Git。</p></article><article class="card"><div class="card-icon">副</div><h4>副驾驶 Agent</h4><p class="muted">与主 Agent 双开，共享总工作区，但处理另一个独立项目或完全隔离的写入范围。</p></article></div>
 <div class="callout"><strong>岗位不必由同一个模型承担</strong>某个模型代码能力强，不代表它适合写角色关系；某个模型成人内容限制较少，也不代表它适合维护工程文件。</div>
+<h3 id="third-party-models">让开发 Agent 使用第三方模型</h3>
+<div class="callout"><strong>本节只讲 API 与供应商配置</strong>这里讨论的是怎样让 Codex 使用 DeepSeek、Kimi、GLM、MiniMax 或其他兼容 API，不讨论 ChatGPT 套餐购买。</div>
+<p>开发 Agent 能否完整工作，不只取决于模型能否生成文字。接入第三方供应商前，还要确认：</p>
+<ul class="checklist"><li>是否支持 Responses API，或是否能从 Chat Completions 正确转换。</li><li>是否能处理工具调用、流式输出和长任务中的连续状态。</li><li>模型 ID、上下文窗口和自动压缩阈值是否准确。</li><li>图片、插件、MCP、Skill 等能力是否完整兼容。</li><li>供应商如何计费，以及怎样存储提示词、源码和上传文件。</li></ul>
+<h4>CC Switch：同时管理多个 Agent 工具</h4>
+<p>CC Switch 适合同时使用 Codex、Claude Code、Gemini CLI 等工具，并且需要频繁切换多个供应商的用户。</p>
+<ol><li>从 <a href="https://github.com/farion1231/cc-switch" rel="noreferrer" target="_blank">CC Switch 官方仓库</a>或官方 Releases 下载最新版。</li><li>打开 Codex 页面，点击右上角的 <code>+</code>。</li><li>优先选择内置供应商预设。</li><li>填写自己的 API Key，检查 Base URL、模型 ID 和模型映射。</li><li>保存并启用供应商，然后完全退出并重启 Codex。</li><li>执行一个只读测试任务，并在供应商控制台确认实际请求。</li></ol>
+<div class="callout warn"><strong>什么时候需要本地路由</strong>原生支持 Responses API 的供应商通常可以直接连接。只支持 Chat Completions，或者使用非默认模型名的供应商，需要开启“需要本地路由映射”，并保持 CC Switch 本地路由与 Codex 接管运行。修改模型映射后也应重启 Codex，因为模型目录通常在启动时加载。</div>
+<h4>Codex++：专注管理 Codex 桌面端</h4>
+<p>Codex++ 更适合主要使用 Codex 桌面端，希望集中管理供应商、模型目录、会话和诊断功能的用户。</p>
+<ol><li>从 <a href="https://github.com/BigPizzaV3/CodexPlusPlus/releases" rel="noreferrer" target="_blank">Codex++ 官方 Releases</a>下载对应系统的版本。</li><li>先打开“Codex++ 管理工具”，检查官方 Codex 应用路径和运行状态。</li><li>新建供应商并选择“纯 API”模式。</li><li>填写协议、Base URL、API Key、模型 ID 和上下文窗口。</li><li>运行模型测试或 <code>Provider Doctor</code>。</li><li>保存后从 <code>Codex++</code> 入口启动应用，再用只读项目验证模型、工具调用和流式响应。</li></ol>
+<div class="callout warn"><strong>桌面端兼容性会变化</strong>Codex++ 通过外部启动器、本地辅助服务和界面增强与官方桌面应用配合，不修改官方应用的 <code>app.asar</code>。但它仍依赖官方应用的页面结构和本地数据格式；官方应用升级后，部分增强功能可能需要等待适配。</div>
+<h4>怎样选择</h4>
+<div class="table-wrap"><table><thead><tr><th>需求</th><th>建议</th></tr></thead><tbody><tr><td>同时管理 Codex、Claude Code、Gemini 等多个工具</td><td>CC Switch</td></tr><tr><td>主要使用 Codex 桌面端，需要会话和界面增强</td><td>Codex++</td></tr><tr><td>供应商原生支持 Responses，而且只配置一次</td><td>可以直接配置 Codex</td></tr><tr><td>上游只有 Chat Completions，需要协议转换</td><td>CC Switch 或 Codex++</td></tr><tr><td>不确定第三方模型是否支持 Agent 工具调用</td><td>先运行模型测试，再使用项目副本验收</td></tr></tbody></table></div>
+<div class="callout danger"><strong>连接成功不等于 Agent 可以完整工作</strong>至少还要验证文件读取、工具调用、流式输出、上下文长度和供应商计费记录。不要把 API Key、<code>auth.json</code>、Access Token 或完整配置截图发到公开聊天、Git 仓库和 Issue。</div>
+<p class="small muted">配置资料：<a href="https://github.com/farion1231/cc-switch/blob/main/docs/user-manual/zh/2-providers/2.1-add.md" rel="noreferrer" target="_blank">CC Switch 添加供应商手册</a> · <a href="https://github.com/BigPizzaV3/CodexPlusPlus" rel="noreferrer" target="_blank">Codex++ 项目说明</a></p>
 <h3>为什么成人向创作者需要单独选择内容模型</h3>
 <p>NSFW 不等于违法、有害或没有创作价值。角色卡和互动叙事中的成人向内容，可能用于成年人之间的亲密关系、情色文学、成人角色扮演、服装与身体审美设计，以及完整的角色档案。</p>
 <p>真正影响创作的，是部分模型面对明确成年、完全虚构且基于自愿关系的内容时，仍可能频繁出现：</p>
