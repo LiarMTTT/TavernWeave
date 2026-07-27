@@ -180,6 +180,18 @@
   font-size: 13px;
 }
 
+.nav-sublink {
+  grid-template-columns: 34px 1fr;
+  min-height: 34px;
+  margin-left: 10px;
+  padding-block: 6px;
+  font-size: 12px;
+}
+
+.nav-sublink span:first-child {
+  color: var(--accent);
+}
+
 .nav-link.active {
   box-shadow: inset 3px 0 0 var(--accent);
 }
@@ -305,6 +317,11 @@
   .nav-link {
     min-height: 44px;
     font-size: 14px;
+  }
+
+  .nav-sublink {
+    min-height: 40px;
+    font-size: 13px;
   }
 
   .chapter-tier {

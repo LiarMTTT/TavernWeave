@@ -3,14 +3,14 @@
 
   try {
     const urls = [
-      './content-1.html?v=14',
-      './content-2.html?v=14',
-      './content-3.html?v=14',
-      './content-4.html?v=14',
-      './content-5.html?v=14',
-      './content-6.html?v=14',
-      './content-7.html?v=14',
-      './content-8.html?v=14',
+      './content-1.html?v=16',
+      './content-2.html?v=16',
+      './content-3.html?v=16',
+      './content-4.html?v=16',
+      './content-5.html?v=16',
+      './content-6.html?v=16',
+      './content-7.html?v=16',
+      './content-8.html?v=16',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
