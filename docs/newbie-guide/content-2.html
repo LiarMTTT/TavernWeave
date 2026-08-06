@@ -1,12 +1,12 @@
 <section class="section" id="models">
-<div class="section-head"><div class="section-no">03</div><div><h2>模型选择、第三方接入与双 Agent 副驾驶</h2><p class="section-kicker">内容创作、工程开发、模型供应商和并行 Agent 是不同层次；模型越多不等于工作流越稳定。</p></div></div>
+<div class="section-head"><div class="section-no">03</div><div><h2>别把写手、工程师和副驾驶塞进一个模型</h2><p class="section-kicker">内容创作、工程开发、模型供应商、并行 Agent，各是各的岗位；人多不等于不翻车。</p></div></div>
 <div class="callout danger"><strong>成人内容边界</strong>本节讨论合法、虚构、角色明确成年且基于自愿关系的成人向创作。未成年人性内容、年龄不明确的性内容、现实人物私密色情内容及其他违法剥削内容不属于正常创作范围。</div>
-<h3>先把三个岗位分开</h3>
+<h3>开工前，先把三张工牌发对</h3>
 <div class="cards"><article class="card"><div class="card-icon">文</div><h4>内容模型</h4><p class="muted">负责角色设定、世界观、剧情、对话样本、关系推进和成人向正文。</p></article><article class="card"><div class="card-icon">工</div><h4>开发 Agent</h4><p class="muted">负责项目文件、代码、变量系统、前端、构建、调试和 Git。</p></article><article class="card"><div class="card-icon">副</div><h4>副驾驶 Agent</h4><p class="muted">与主 Agent 双开，共享总工作区，但处理另一个独立项目或完全隔离的写入范围。</p></article></div>
 <div class="callout"><strong>岗位不必由同一个模型承担</strong>某个模型代码能力强，不代表它适合写角色关系；某个模型成人内容限制较少，也不代表它适合维护工程文件。</div>
-<h3 id="third-party-models">让开发 Agent 使用第三方模型</h3>
-<div class="callout"><strong>本节只讲 API 与供应商配置</strong>这里讨论的是怎样让 Codex 使用 DeepSeek、Kimi、GLM、MiniMax 或其他兼容 API，不讨论 ChatGPT 套餐购买。</div>
-<p>开发 Agent 能否完整工作，不只取决于模型能否生成文字。接入第三方供应商前，还要确认：</p>
+<h3 data-subsection="03.1" id="third-party-models">第三方模型接入：先测工具链，别只测聊天</h3>
+<div class="callout"><strong>这里接 API，不买 ChatGPT 套餐</strong>下面讲的是怎样让 Codex 使用 DeepSeek、Kimi、GLM、MiniMax 或其他兼容 API；套餐购买在上一节，别把两笔账搅在一起。</div>
+<p>能回一句“你好”，离能当开发 Agent 还远。接第三方供应商前，把下面几项逐个验掉：</p>
 <ul class="checklist"><li>是否支持 Responses API，或是否能从 Chat Completions 正确转换。</li><li>是否能处理工具调用、流式输出和长任务中的连续状态。</li><li>模型 ID、上下文窗口和自动压缩阈值是否准确。</li><li>图片、插件、MCP、Skill 等能力是否完整兼容。</li><li>供应商如何计费，以及怎样存储提示词、源码和上传文件。</li></ul>
 <h4>CC Switch：同时管理多个 Agent 工具</h4>
 <p>CC Switch 适合同时使用 Codex、Claude Code、Gemini CLI 等工具，并且需要频繁切换多个供应商的用户。</p>
@@ -16,21 +16,61 @@
 <p>Codex++ 更适合主要使用 Codex 桌面端，希望集中管理供应商、模型目录、会话和诊断功能的用户。</p>
 <ol><li>从 <a href="https://github.com/BigPizzaV3/CodexPlusPlus/releases" rel="noreferrer" target="_blank">Codex++ 官方 Releases</a>下载对应系统的版本。</li><li>先打开“Codex++ 管理工具”，检查官方 Codex 应用路径和运行状态。</li><li>新建供应商并选择“纯 API”模式。</li><li>填写协议、Base URL、API Key、模型 ID 和上下文窗口。</li><li>运行模型测试或 <code>Provider Doctor</code>。</li><li>保存后从 <code>Codex++</code> 入口启动应用，再用只读项目验证模型、工具调用和流式响应。</li></ol>
 <div class="callout warn"><strong>桌面端兼容性会变化</strong>Codex++ 通过外部启动器、本地辅助服务和界面增强与官方桌面应用配合，不修改官方应用的 <code>app.asar</code>。但它仍依赖官方应用的页面结构和本地数据格式；官方应用升级后，部分增强功能可能需要等待适配。</div>
-<h4>怎样选择</h4>
+<h4>别纠结，按需求拿工具</h4>
 <div class="table-wrap"><table><thead><tr><th>需求</th><th>建议</th></tr></thead><tbody><tr><td>同时管理 Codex、Claude Code、Gemini 等多个工具</td><td>CC Switch</td></tr><tr><td>主要使用 Codex 桌面端，需要会话和界面增强</td><td>Codex++</td></tr><tr><td>供应商原生支持 Responses，而且只配置一次</td><td>可以直接配置 Codex</td></tr><tr><td>上游只有 Chat Completions，需要协议转换</td><td>CC Switch 或 Codex++</td></tr><tr><td>不确定第三方模型是否支持 Agent 工具调用</td><td>先运行模型测试，再使用项目副本验收</td></tr></tbody></table></div>
-<div class="callout danger"><strong>连接成功不等于 Agent 可以完整工作</strong>至少还要验证文件读取、工具调用、流式输出、上下文长度和供应商计费记录。不要把 API Key、<code>auth.json</code>、Access Token 或完整配置截图发到公开聊天、Git 仓库和 Issue。</div>
+<div class="callout danger"><strong>绿灯亮了，不代表车能开</strong>连通后还得验证文件读取、工具调用、流式输出、上下文长度和供应商计费记录。API Key、<code>auth.json</code>、Access Token 和完整配置截图，一样都别扔进公开聊天、Git 仓库或 Issue。</div>
 <p class="small muted">配置资料：<a href="https://github.com/farion1231/cc-switch/blob/main/docs/user-manual/zh/2-providers/2.1-add.md" rel="noreferrer" target="_blank">CC Switch 添加供应商手册</a> · <a href="https://github.com/BigPizzaV3/CodexPlusPlus" rel="noreferrer" target="_blank">Codex++ 项目说明</a></p>
-<h3>为什么成人向创作者需要单独选择内容模型</h3>
+<h3 data-subsection="03.2" id="paid-agent-traps">国内环境付费避雷：别给模型名交智商税</h3>
+<div class="callout danger"><strong>先说结论</strong>本教程作者当前国内实测：<strong>Cursor Pro+ 和 Ultra 已经完全不值得购买；Kiro 提供的 Claude 也没有达到主力开发 Agent 应有的可靠性。</strong>这里评价的是国内用户付费后实际拿到的东西，不是声称所有地区、所有账号都会遇到一模一样的结果。</div>
+<h4>Cursor：Fable／Opus 用不了，再大的套餐也只是大号空桶</h4>
+<p>Cursor 过去真正撑得起高价套餐的，不只是编辑器界面，而是能在 Agent 里使用 Fable、Opus 这类高能力模型。问题在于：本教程作者当前在国内环境实测时，这条路线已经无法正常工作。</p>
+<ul class="checklist"><li>Fable 无法形成可用的开发工作流。</li><li>Opus 同样无法稳定承担正式项目。</li><li>剩余模型和 Agent 体验，撑不起 Pro+ 与 Ultra 的价格。</li><li>套餐额度加倍，不会把不可用的核心模型变回来。</li></ul>
+<p>Cursor 官方目前仍把 Pro+ 和 Ultra 的主要卖点写成更高的 Agent 限额：Pro+ 约为 Pro 的三倍，Ultra 约为 Pro 的二十倍。但“二十倍”只有在目标模型真能用时才值钱；如果 Fable／Opus 已经掉线，放大的只是额度数字，不是交付能力。</p>
+<div class="callout warn"><strong>别把 IDE 和套餐绑在一起买</strong>Cursor 的编辑、跳转和调试可以继续按需使用，但“Cursor 这个 IDE 顺手”不等于“Cursor Pro+／Ultra 值得续费”。国内环境没有先验完 Fable／Opus，就不要直接冲高价套餐。</div>
+<h4>为什么此时 OpenCode 更实在</h4>
+<p>OpenCode 至少把方向盘交还给用户：官方文档列出七十多种供应商，并支持自定义供应商、Base URL 和本地模型。哪个供应商在当前环境里真能跑，就明确接哪个；一个上游掉线，也不用连同整套 IDE 套餐一起陪葬。</p>
+<div class="callout"><strong>OpenCode 不是绕区神器</strong>它不会替你绕过模型供应商的地区规则，也不该拿来盗用订阅或共享账号。它的优势是选择更透明、替换更容易：用合法可用的 API 或官方支持接入，先跑真实任务，再决定给谁付钱。</div>
+<h4>Kiro：下拉框写着 Claude，不等于办事时真有 Claude 那股脑子</h4>
+<p>本教程作者实际测试 Kiro 的 Claude 后，得到的不是“偶尔发挥不好”，而是整体上明显低于同档 Claude 应有的表现：理解复杂要求吃力，连续执行不可靠，Agent 能力很差，无法放心交付正式工程。对开发 Agent 来说，模型名字只是招牌；能不能看懂任务、持续调用工具、检查结果并把活干完，才是货。</p>
+<div class="callout danger"><strong>本教程实测结论</strong>Kiro 中标注为 Claude 的实际体验表现出明显的低智力、低可靠性和极差的 Agent 能力。免费额度可以拿来验货，但不建议因为界面里出现 Claude、Sonnet 或 Opus 的名字，就购买 Kiro 套餐或把正式项目交给它。</div>
+<h4>Kiro Auto：官方明说会混合路由</h4>
+<p>Kiro 官方把 Auto 定义为模型路由器，会根据任务自动选择模型；官方文档还明确说明，Auto 的内部路由并不严格受管理员已经批准的模型列表限制，请求可能交给该区域内 Kiro 可用的其他模型。与此同时，Kiro 的模型目录里既有高倍率的 Opus，也有更低倍率、偏成本效率的 Haiku、DeepSeek、MiniMax、GLM 和 Qwen Coder。</p>
+<p>平台把这叫“平衡质量、速度和成本”；站在付费用户这边看，意思就是：你抱着高能力模型的预期买套餐，但平台仍保留把任务分给不同档次模型的权力。简单补全也许无所谓，长任务、复杂工具调用和正式工程可经不起这种盲盒。</p>
+<div class="callout warn"><strong>证据边界也要讲清楚</strong>官方资料足以证明 Auto 会混合路由，却不能单凭外部表现证明“手动指定 Claude 后一定被偷偷换成了某个具体模型”。所以本教程不编后台故事，只陈述两件已经足够避雷的事：Auto 的混合路由是官方机制；Kiro Claude 的实际交付质量没有通过本教程作者的主力 Agent 验收。</div>
+<div class="table-wrap"><table><thead><tr><th>产品或方案</th><th>国内环境建议</th><th>一句话理由</th></tr></thead><tbody><tr><td>Cursor 免费版／仅作 IDE</td><td>可以按需使用</td><td>编辑、跳转和调试仍有用途。</td></tr><tr><td>Cursor Pro</td><td>先验货再决定</td><td>先确认目标模型在自己的网络与账号环境中真能跑。</td></tr><tr><td>Cursor Pro+</td><td><strong>不推荐购买</strong></td><td>Fable／Opus 不可用时，三倍额度没有实际价值。</td></tr><tr><td>Cursor Ultra</td><td><strong>强烈不推荐</strong></td><td>高价买到更大的平台额度，也买不回不可用的核心模型。</td></tr><tr><td>OpenCode + 明确供应商</td><td><strong>优先考虑</strong></td><td>供应商、模型和 Base URL 都能自己选，换上游也更轻。</td></tr><tr><td>Kiro 免费额度</td><td>只拿来试验</td><td>先用真实任务验 Claude 与 Agent，不看宣传图下结论。</td></tr><tr><td>Kiro 付费套餐</td><td><strong>强烈不推荐</strong></td><td>Claude 实测质量差，Auto 又是混合模型路由。</td></tr></tbody></table></div>
+<div class="callout danger"><strong>一句话避雷</strong>Cursor Pro+ 和 Ultra，是给已经失去核心模型价值的套餐继续加码；Kiro 则挂着 Claude 的招牌，却没有交付可信的 Claude Agent 体验。真要干活，OpenCode 配合明确、可验证的供应商，至少比这两种黑箱套餐靠谱。</div>
+<p class="small muted">当前机制参考：<a href="https://cursor.com/pricing" rel="noreferrer" target="_blank">Cursor 套餐</a> · <a href="https://cursor.com/docs/account/regions" rel="noreferrer" target="_blank">Cursor 地区与模型可用性</a> · <a href="https://opencode.ai/docs/providers" rel="noreferrer" target="_blank">OpenCode 供应商</a> · <a href="https://kiro.dev/docs/models/" rel="noreferrer" target="_blank">Kiro 模型与 Auto 路由</a>。产品、地区限制和模型目录都会变化，付费前请重新核对。</p>
+<h3 data-subsection="03.3" id="model-readiness-check">开工前先看雷达：今天这颗脑子值不值得上工</h3>
+<p class="lead">开工、续费或购买模型厂商自己的套餐／API 前，先看近期真实表现：它今天还聪明吗、跑得动 Agent 吗、速度和额度值不值这个价。</p>
+<div class="callout good"><strong>先做判断，再开套餐</strong>优先参考真实任务和连续趋势，再拿自己的固定任务复测。模型名、宣传分数和额度倍数都不等于交付质量；能把活稳定干完，才值得长期付钱。</div>
+<h4>第一眼先看大盘：今天谁的状态能干活</h4>
+<p>排行榜不会替你写完项目，但能告诉你今天应该先把时间和预算放在哪。重点看真实任务、连续趋势、速度与成本，别拿一次网红题当智商鉴定。</p>
+<div class="cards">
+<article class="card"><div class="card-icon">码</div><h4>Codex 雷达</h4><p class="muted">看 Coding Agent 在真实开源仓库任务里的通过率、耗时、额度和近期波动。站内的 IQ 是通过率换算值，不是人类智商。</p><p><a class="ghost-btn" href="https://codexradar.com/" rel="noreferrer" target="_blank">看主站雷达 ↗</a></p></article>
+<article class="card"><div class="card-icon">实</div><h4>分布式雷达</h4><p class="muted">DeepSWE 真实任务由社区机器执行，再由服务端干净容器重跑验证；比模型自报和单题表演更接近实际开工。</p><p><a class="ghost-btn" href="https://deng.codexradar.com/" rel="noreferrer" target="_blank">看实测天梯 ↗</a></p></article>
+<article class="card"><div class="card-icon">榜</div><h4>模型能力大盘</h4><p class="muted">Artificial Analysis 看能力、Agent、价格与速度；LiveBench、SuperCLUE 和 OpenCompass 补充国模、中文任务与可复现评测。</p><p><a class="ghost-btn" href="https://artificialanalysis.ai/" rel="noreferrer" target="_blank">看综合榜 ↗</a></p></article>
+</div>
+<div class="callout"><strong>先看趋势，再看名次</strong>同一个模型今天第一、明天第三不稀奇。真正值得留意的是：连续几天是否明显下滑、真实任务是否掉分、速度有没有变慢，以及完成同一类任务要烧掉多少额度。</div>
+<h4>官方套餐怎么决定：拿自己的活跑，不拿宣传页脑补</h4>
+<div class="flow"><div class="flow-node">看近期雷达与公开榜</div><div class="flow-arrow">→</div><div class="flow-node">优先选官方套餐／API</div><div class="flow-arrow">→</div><div class="flow-node">跑三类固定任务</div><div class="flow-arrow">→</div><div class="flow-node">算返工、时间与总成本</div><div class="flow-arrow">→</div><div class="flow-node">再决定买不买</div></div>
+<ul class="checklist"><li><strong>短任务：</strong>修一个明确的小 Bug，看能否一次命中且不乱改旁边文件。</li><li><strong>长上下文：</strong>读一组互相引用的文件，看它会不会漏要求、忘前文或擅自简化。</li><li><strong>Agent 任务：</strong>让它查看现场、调用工具、运行测试并根据失败继续修正。</li><li><strong>至少三轮：</strong>记录一次成功率、返工次数、工具误用、总耗时和实际扣费。</li><li><strong>判断总账：</strong>便宜但要你反复擦屁股的模型，往往比贵一点但一次交付的模型更烧钱。</li></ul>
+<p class="small muted">公开榜补充：<a href="https://livebench.ai/" rel="noreferrer" target="_blank">LiveBench</a> · <a href="https://www.superclueai.com/" rel="noreferrer" target="_blank">SuperCLUE</a> · <a href="https://rank.opencompass.org.cn/home" rel="noreferrer" target="_blank">OpenCompass 榜单</a> · <a href="https://github.com/open-compass/opencompass" rel="noreferrer" target="_blank">OpenCompass 开源评测</a>。公开榜测的是指定模型或公开端点，不保证某家中转给你的也是同一份货。</p>
+<h4>第三方 API 要验货，工具放在这里</h4>
+<p>已经拿到第三方接口时，可以用下面工具补查模型来源、协议、上下文和能力缩水。它们只负责找风险信号，优先级排在公开雷达、官方渠道和自己的真实任务之后。</p>
+<div class="table-wrap"><table><thead><tr><th>工具</th><th>适合检查</th><th>怎么看结果</th></tr></thead><tbody><tr><td><a href="https://apipkhub.com/leaderboard/claude" rel="noreferrer" target="_blank">Prism Claude 真伪榜</a></td><td>Claude thinking signature、协议字段、长上下文和历史报告</td><td>签名是较硬的单次验真信号，但不能证明以后每次都给同一档模型。</td></tr><tr><td><a href="https://unorouter.com/en/ai-api-model-tester" rel="noreferrer" target="_blank">UnoRouter Model Tester</a></td><td>Claude 档位降级、身份异常、响应混杂和协议包装</td><td>适合做第一轮筛查；页面声明浏览器直连，仍只应使用临时 Key。</td></tr><tr><td><a href="https://clarus.help/checker" rel="noreferrer" target="_blank">Clarus Checker</a></td><td>Claude 行为、能力、上下文、思考和工具调用特征</td><td>适合当第二意见；行为指纹会受系统提示、网络和采样影响。</td></tr><tr><td><a href="https://testllm.ai/" rel="noreferrer" target="_blank">TestLLM</a></td><td>Claude 协议与 Anthropic、Bedrock、Vertex 类来源判断</td><td>服务端参与检测；来源像 Kiro／Bedrock 不等于已经证明模型降智。</td></tr><tr><td><a href="https://apitest.work/" rel="noreferrer" target="_blank">API 测试工作台</a></td><td>DeepSeek、Qwen、GLM、Claude 等接口的随机题、长上下文、工具规划和 A/B</td><td>当前可能经站点代理转发请求，只准喂独立、限额、用完即删的测试 Key。</td></tr></tbody></table></div>
+<div class="callout danger"><strong>别为了验 Key，把 Key 送了</strong>任何第三方检测站本身都可能成为新的风险点。不要填写生产 Key、企业主账号 Key、正式项目使用的高额度 Key，也不要上传源码和私密提示词。最稳妥的做法是单独创建低额度测试 Key，跑完立即吊销；不能创建临时 Key，就别在网页检测站里测。</div>
+<div class="callout warn"><strong>顺序别倒过来</strong>先用雷达和公开榜观察近期状态，再用自己的固定任务验交付，最后优先选择模型厂商的官方套餐／API。第三方接口检测只是额外证据，不是选购主线。</div>
+<h3>写成人内容，别让工程模型兼职当作者</h3>
 <p>NSFW 不等于违法、有害或没有创作价值。角色卡和互动叙事中的成人向内容，可能用于成年人之间的亲密关系、情色文学、成人角色扮演、服装与身体审美设计，以及完整的角色档案。</p>
-<p>真正影响创作的，是部分模型面对明确成年、完全虚构且基于自愿关系的内容时，仍可能频繁出现：</p>
+<p>真正卡创作的，是部分模型即使面对明确成年、完全虚构、自愿关系的内容，仍会反复干这些事：</p>
 <ul class="checklist"><li>直接拒绝继续，导致剧情或角色卡开发中断。</li><li>自动淡化关键内容，破坏角色状态和关系推进。</li><li>把创作任务改写成说教或价值判断。</li><li>擅自改变用户指定的题材、文风或人物行为。</li><li>因为题材标签误伤正常的人设、身体和服装设计。</li></ul>
 <div class="callout warn"><strong>选择标准</strong>不要只问“哪个模型最聪明”，还要问：它能否在合法边界内稳定完成创作者真正提出的成人向任务。</div>
-<h3>本教程当前推荐：Claude 与 Grok</h3>
-<p>目前更推荐把 <strong>Claude</strong> 和 <strong>Grok</strong> 组合使用。这里不是声称它们完全没有审核，而是基于创作工作流中的实际分工：</p>
+<h3>当前好用的分工：Claude 打底，Grok 补火</h3>
+<p>当前更实用的组合是 <strong>Claude</strong> 加 <strong>Grok</strong>。不是说它们完全没有审核，而是两边各做自己更稳的活：</p>
 <div class="compare"><div class="compare-side"><h4>Claude：主内容模型</h4><p class="muted">负责完整角色、世界观、长篇剧情、关系逻辑和上下文一致性。</p><div class="pill-row"><span class="pill">长文本</span><span class="pill">心理与关系</span><span class="pill">结构统一</span><span class="pill">设定一致性</span></div></div><div class="compare-vs">+</div><div class="compare-side"><h4>Grok：成人内容补位</h4><p class="muted">负责更直接的成人场景、对话细节、补写和同一场景的第二版本。</p><div class="pill-row"><span class="pill">直接表达</span><span class="pill">成人场景</span><span class="pill">第二视角</span><span class="pill">内容补位</span></div></div></div>
 <p class="small muted">模型和平台政策会变化，使用前应查看当前服务规则：<a href="https://www.anthropic.com/legal/aup" rel="noreferrer" target="_blank">Anthropic 使用政策</a> · <a href="https://docs.x.ai/grok/faq" rel="noreferrer" target="_blank">xAI Grok FAQ</a></p>
-<h3>Claude：更适合作为主内容模型</h3>
-<p>Claude 的价值不只是文字质量，而是更适合维护完整人物和复杂上下文。推荐它处理：</p>
+<h3>Claude 守住人物、关系和长线剧情</h3>
+<p>Claude 的价值不只在文笔，更在于能把人物和复杂上下文端稳。优先交给它：</p>
 <div class="cards"><article class="card"><h4>角色与世界观</h4><p class="muted">角色档案、派系、背景、行为动机和世界规则。</p></article><article class="card"><h4>关系与长篇剧情</h4><p class="muted">关系为什么发展、人物为什么这样反应，以及事件如何影响后续。</p></article><article class="card"><h4>文本统一</h4><p class="muted">世界书整理、对话样本、已有文本扩写和文风统一。</p></article></div>
 <p>对成人向角色卡来说，Claude 更适合先回答：</p>
 <div class="code-block"><div class="code-label"><span>Claude 的核心职责</span><button class="copy-btn" type="button">复制</button></div><pre><code>这段成人内容为什么会发生？
@@ -45,8 +85,8 @@
 
 请按照创作要求处理角色、关系、世界观和剧情，
 不要因为题材属于成人向而擅自淡化、说教或改变作品方向。</code></pre></div>
-<h3>Grok：适合作为成人内容补位模型</h3>
-<p>Grok 更适合处理 Claude 容易中断或过度淡化的部分：</p>
+<h3>Grok 接住 Claude 容易刹车的部分</h3>
+<p>Claude 容易中断或过度淡化的地方，可以让 Grok 接手：</p>
 <ul class="checklist"><li>更直接的成人向场景和成人对话样本。</li><li>身体、动作和互动细节的连续描写。</li><li>Claude 已经完成结构，但没有完成的正文。</li><li>为同一场景提供另一种表达或强度版本。</li><li>检查原始需求是否在改写过程中被过度淡化。</li></ul>
 <p>在这套方案中，Grok 不需要取代 Claude 的全部工作。更稳定的职责划分是：</p>
 <div class="code-block"><div class="code-label"><span>Claude + Grok 分工</span><button class="copy-btn" type="button">复制</button></div><pre><code>Claude
@@ -55,17 +95,17 @@
 Grok
 负责：成人场景、直接表达、动作与对话细节、第二版本</code></pre></div>
 <div class="callout warn"><strong>仍然需要人工验收</strong>限制更少不等于文字更好，也不等于角色一定一致。创作者仍要检查人物年龄、同意关系、设定、文风和事实错误。</div>
-<h3>三种成人内容创作流程</h3>
+<h3>三条能落地的成人内容流水线</h3>
 <h4>方案一：Claude 主写，Grok 补位</h4>
 <div class="flow"><div class="flow-node">确定目标</div><div class="flow-arrow">→</div><div class="flow-node">Claude 建立角色与关系</div><div class="flow-arrow">→</div><div class="flow-node">Grok 完成成人段落</div><div class="flow-arrow">→</div><div class="flow-node">统一文风</div><div class="flow-arrow">→</div><div class="flow-node">开发 Agent 写入工程</div></div>
 <h4>方案二：同一资料生成两个版本</h4><p>把同一份角色档案分别交给 Claude 和 Grok，由创作者选择更符合人物的一版。最终选择权应保留给人，不要让第三个模型机械拼接两个版本。</p>
 <h4>方案三：结构与正文分离</h4>
 <div class="compare"><div class="compare-side"><h4>Claude</h4><p class="muted">输出场景结构、人物状态、关系变化与后续影响。</p></div><div class="compare-vs">→</div><div class="compare-side"><h4>Grok</h4><p class="muted">按照结构完成具体成人向正文。</p></div></div>
-<h3>什么是“双 Agent 副驾驶”</h3>
+<h3>双 Agent 不是两个人抢方向盘</h3>
 <p>本教程中的副驾驶不是只负责审查的聊天模型，而是：</p>
 <div class="callout"><strong>双开 Agent，共享总工作区</strong>例如同时运行 Codex 桌面端和 Claude Code Desktop；两者都能读取共享资料，但分别处理不同项目或完全隔离的写入目录。</div>
-<p>副驾驶的价值，是让两个真实工程任务并行推进，而不是让两个 Agent 在同一项目里抢方向盘。</p>
-<h3>推荐的共享工作区</h3>
+<p>副驾驶是为了让两个真实工程任务并行，不是把同一个项目撕成拔河现场。</p>
+<h3>共享资料可以，写入地盘必须分开</h3>
 <div class="code-block"><div class="code-label"><span>共享工作区结构</span><button class="copy-btn" type="button">复制</button></div><pre><code>ST-Workspace/
 │
 ├─ 00-Shared/
@@ -85,12 +125,12 @@ Grok
    └─ 临时任务说明/</code></pre></div>
 <p>两个 Agent 可以同时读取 <code>00-Shared/</code>，但写入范围必须明确分开：</p>
 <div class="compare"><div class="compare-side"><h4>Codex</h4><p><code>Projects/星月学院/</code></p><p class="muted">只处理大型角色卡工程。</p></div><div class="compare-vs">∥</div><div class="compare-side"><h4>Claude Code</h4><p><code>Projects/工坊工具/</code></p><p class="muted">只处理独立网页或前端工具。</p></div></div>
-<h3>双 Agent 推荐组合</h3>
+<h3>双 Agent 怎么配才不互殴</h3>
 <div class="table-wrap"><table><thead><tr><th>组合</th><th>主驾驶职责</th><th>副驾驶职责</th></tr></thead><tbody><tr><td><strong>Codex + Claude Code</strong></td><td>Codex 处理大型角色卡工程、TW Skill、模块化、多文件修改和项目治理。</td><td>Claude Code 处理另一个独立的前端、预览、浏览器测试或调试项目。</td></tr><tr><td><strong>Claude Code + Codex</strong></td><td>Claude Code 处理当前需要频繁运行和预览的前端项目。</td><td>Codex 处理另一张角色卡、世界书、组件拆分或独立审计任务。</td></tr><tr><td><strong>共享知识底座</strong></td><td colspan="2">两边读取相同的 TavernWeave、ST 开发指南 DB、模板和命名规范，减少工程范式漂移。</td></tr></tbody></table></div>
-<h3>双 Agent 的五条硬规则</h3>
+<h3>双 Agent 的五条铁律</h3>
 <ul class="checklist"><li><strong>不能同时修改同一个项目。</strong>即使表面上是不同文件，也可能同时触碰 Git 状态、构建产物、锁文件、配置、版本号和自动格式化结果。</li><li><strong>共享资料默认只读。</strong><code>00-Shared/</code> 中的 Skill、DB 和模板只有在专门维护任务中才允许修改。</li><li><strong>每个 Agent 必须声明写入范围。</strong>允许读哪里、允许写哪里、禁止碰哪里，都应在开工时明确。</li><li><strong>同项目切换驾驶员前先停止写入。</strong>运行验证、建立 Git 提交、生成交接，再让另一个 Agent 重新读取项目。</li><li><strong>同一项目只能有一个写入驾驶员。</strong>第二个 Agent 可以只读分析，但不能边读边顺手修。</li></ul>
 <div class="callout danger"><strong>错误示例</strong>Codex 和 Claude Code 同时打开 <code>Projects/星月学院/</code> 并各自修改。两个 Agent 都可能基于过期文件继续工作，最终互相覆盖、撤销或污染 Git Diff。</div>
-<h3>双 Agent 开工模板</h3>
+<h3>开工前，先把地盘写进模板</h3>
 <div class="code-block"><div class="code-label"><span>Agent A · Codex</span><button class="copy-btn" type="button">复制</button></div><pre><code>你是当前工作区的 Agent A。
 
 【允许读取】
@@ -125,7 +165,7 @@ Projects/其他所有项目/
 不要访问、格式化或修改它的项目目录。
 
 开始前先说明本轮预计写入范围。</code></pre></div>
-<h3>推荐的完整个人创作工作站</h3>
+<h3>一套够用的个人创作工作站</h3>
 <div class="flow"><div class="flow-node">Claude<br/><span class="small muted">角色、世界观、关系、长篇内容</span></div><div class="flow-arrow">+</div><div class="flow-node">Grok<br/><span class="small muted">成人场景、直接表达、内容补位</span></div><div class="flow-arrow">+</div><div class="flow-node">Codex<br/><span class="small muted">角色卡工程、TW Skill、变量和构建</span></div><div class="flow-arrow">+</div><div class="flow-node">Claude Code<br/><span class="small muted">另一个独立项目、预览和调试</span></div></div>
 <div class="callout good"><strong>核心原则</strong>每个模型负责自己真正擅长的岗位；多个 Agent 可以共享知识底座，但写入范围必须互不冲突。</div>
 </section>

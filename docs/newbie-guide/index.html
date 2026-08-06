@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="面向 AI Agent 制卡新手的 TavernWeave、ST 开发指南 DB、Zod、CoT、酒馆助手脚本、正则、UI、运行时监听与调试教程。" name="description"/>
+<meta content="从一句需求到真实酒馆验收：讲人话的 TavernWeave、Agent、Zod、CoT、脚本、正则与运行时调试教程。" name="description"/>
 <meta content="dark light" name="color-scheme"/>
 <meta content="#0b0d12" name="theme-color"/>
 <title>奶人教程｜从零开始驾驭 AI Agent 做 ST 开发</title>
-<link href="./style.css?v=16" rel="stylesheet"/>
-<link href="./layout-v6.css?v=16" rel="stylesheet"/>
-<meta content="0.5.3" name="tw-guide-version"/></head>
+<link href="./style.css?v=23" rel="stylesheet"/>
+<link href="./layout-v6.css?v=23" rel="stylesheet"/>
+<meta content="0.5.7" name="tw-guide-version"/></head>
 <body>
 <a class="skip-link" href="#main">跳到正文</a>
 <div class="progress" id="progress"></div>
@@ -33,73 +33,75 @@
 <details class="nav-chapter" open>
 <summary><span class="nav-chapter-no">Ⅰ</span><span>第一章 · 驾驭 Agent</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
 <div class="nav-chapter-links">
-<a class="nav-link" href="#intro"><span>00</span><span>Vibe Code 是什么</span></a>
-<a class="nav-link" href="#first-run"><span>01</span><span>第一次成功交付</span></a>
-<a class="nav-link" href="#agent"><span>02</span><span>认识与选择 Agent</span></a>
+<a class="nav-link" href="#intro"><span>00</span><span>Vibe Code 不是开盲盒</span></a>
+<a class="nav-link" href="#first-run"><span>01</span><span>第一个真交付</span></a>
+<a class="nav-link" href="#agent"><span>02</span><span>Agent 怎么干活</span></a>
 <a class="nav-link nav-sublink" href="#chatgpt-mobile-subscription"><span>02.1</span><span>ChatGPT 套餐购买</span></a>
 <a class="nav-link" href="#models"><span>03</span><span>模型、接入与副驾驶</span></a>
 <a class="nav-link nav-sublink" href="#third-party-models"><span>03.1</span><span>第三方模型接入</span></a>
-<a class="nav-link" href="#workspace"><span>04</span><span>工作区与 Git</span></a>
-<a class="nav-link" href="#tw"><span>05</span><span>TW Skill 阵列</span></a>
-<a class="nav-link" href="#db"><span>06</span><span>ST 开发指南 DB</span></a>
-<a class="nav-link" href="#a0"><span>07</span><span>A0 驾驭协议</span></a>
-<a class="nav-link" href="#workflow"><span>08</span><span>一次完整任务</span></a>
-<a class="nav-link" href="#mistakes"><span>09</span><span>高频错误</span></a>
-<a class="nav-link" href="#graduate"><span>10</span><span>成长路线与毕业检查</span></a>
+<a class="nav-link nav-sublink" href="#paid-agent-traps"><span>03.2</span><span>付费 Agent 避雷</span></a>
+<a class="nav-link nav-sublink" href="#model-readiness-check"><span>03.3</span><span>开工前模型体检</span></a>
+<a class="nav-link" href="#workspace"><span>04</span><span>文件夹 / Git / GitHub</span></a>
+<a class="nav-link" href="#tw"><span>05</span><span>TW 施工队</span></a>
+<a class="nav-link" href="#db"><span>06</span><span>按任务查 DB</span></a>
+<a class="nav-link" href="#a0"><span>07</span><span>A0 开工三句话</span></a>
+<a class="nav-link" href="#workflow"><span>08</span><span>完整跑一趟</span></a>
+<a class="nav-link" href="#mistakes"><span>09</span><span>六个送命习惯</span></a>
+<a class="nav-link" href="#graduate"><span>10</span><span>收住方向盘</span></a>
 </div>
 </details>
 <details class="nav-chapter">
 <summary><span class="nav-chapter-no">Ⅱ</span><span>第二章 · 角色卡机制</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
 <div class="nav-chapter-links">
-<a class="nav-link" href="#chapter-2"><span>Ⅱ</span><span>Zod、CoT 与计算脚本</span></a>
-<a class="nav-link" href="#zod"><span>11</span><span>Zod 变量机制</span></a>
-<a class="nav-link" href="#cot"><span>12</span><span>自定义 CoT</span></a>
-<a class="nav-link" href="#calc-script"><span>13</span><span>计算脚本</span></a>
-<a class="nav-link" href="#calc-balance"><span>14</span><span>变量更新分工</span></a>
-<a class="nav-link" href="#chapter-2-summary"><span>15</span><span>第二章总结</span></a>
+<a class="nav-link" href="#chapter-2"><span>Ⅱ</span><span>Zod、CoT 与脚本</span></a>
+<a class="nav-link" href="#zod"><span>11</span><span>Zod 记账</span></a>
+<a class="nav-link" href="#cot"><span>12</span><span>CoT 检查单</span></a>
+<a class="nav-link" href="#calc-script"><span>13</span><span>脚本接管算术</span></a>
+<a class="nav-link" href="#calc-balance"><span>14</span><span>别抢同一支笔</span></a>
+<a class="nav-link" href="#chapter-2-summary"><span>15</span><span>第二章收口</span></a>
 </div>
 </details>
 <details class="nav-chapter">
 <summary><span class="nav-chapter-no">Ⅲ</span><span>第三章 · 脚本与正则</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
 <div class="nav-chapter-links">
-<a class="nav-link" href="#chapter-3"><span>Ⅲ</span><span>脚本、正则与交互</span></a>
-<a class="nav-link" href="#th-script"><span>16</span><span>酒馆助手脚本</span></a>
-<a class="nav-link" href="#regex-vs-script"><span>17</span><span>正则能力上限</span></a>
-<a class="nav-link" href="#ui-script"><span>18</span><span>UI 脚本</span></a>
-<a class="nav-link" href="#ui-types"><span>19</span><span>展示与操作 UI</span></a>
-<a class="nav-link" href="#interaction-chain"><span>20</span><span>交互完整链路</span></a>
-<a class="nav-link" href="#lifecycle"><span>21</span><span>生命周期</span></a>
-<a class="nav-link" href="#variable-io"><span>22</span><span>变量读写</span></a>
-<a class="nav-link" href="#worldbook-script"><span>23</span><span>世界书管理</span></a>
-<a class="nav-link" href="#prompt-injection"><span>24</span><span>运行时提示词</span></a>
-<a class="nav-link" href="#external-api"><span>25</span><span>API 与外部资源</span></a>
-<a class="nav-link" href="#regex"><span>26</span><span>正则基础</span></a>
-<a class="nav-link" href="#hide-update"><span>27</span><span>隐藏更新内容</span></a>
-<a class="nav-link" href="#regex-ui"><span>28</span><span>正则生成 UI</span></a>
-<a class="nav-link" href="#structured-output"><span>29</span><span>结构化输出</span></a>
-<a class="nav-link" href="#cooperation"><span>30</span><span>正则与脚本配合</span></a>
-<a class="nav-link" href="#choose-tool"><span>31</span><span>工具选择</span></a>
-<a class="nav-link" href="#common-failures"><span>32</span><span>常见失败</span></a>
-<a class="nav-link" href="#real-state"><span>33</span><span>真实状态</span></a>
-<a class="nav-link" href="#acceptance"><span>34</span><span>运行时验收</span></a>
-<a class="nav-link" href="#tw-db-script"><span>35</span><span>TW + DB 施工</span></a>
-<a class="nav-link" href="#chapter-3-summary"><span>36</span><span>第三章总结</span></a>
+<a class="nav-link" href="#chapter-3"><span>Ⅲ</span><span>脚本动手，正则改字</span></a>
+<a class="nav-link" href="#th-script"><span>16</span><span>脚本真会干活</span></a>
+<a class="nav-link" href="#regex-vs-script"><span>17</span><span>正则不是神器</span></a>
+<a class="nav-link" href="#ui-script"><span>18</span><span>UI 不只画皮</span></a>
+<a class="nav-link" href="#ui-types"><span>19</span><span>能看与能改</span></a>
+<a class="nav-link" href="#interaction-chain"><span>20</span><span>按钮完整链</span></a>
+<a class="nav-link" href="#lifecycle"><span>21</span><span>生命周期找上门</span></a>
+<a class="nav-link" href="#variable-io"><span>22</span><span>变量别乱改</span></a>
+<a class="nav-link" href="#worldbook-script"><span>23</span><span>世界书安全装卸</span></a>
+<a class="nav-link" href="#prompt-injection"><span>24</span><span>只塞此刻所需</span></a>
+<a class="nav-link" href="#external-api"><span>25</span><span>API 失败路线</span></a>
+<a class="nav-link" href="#regex"><span>26</span><span>正则找字换字</span></a>
+<a class="nav-link" href="#hide-update"><span>27</span><span>更新块别掐死</span></a>
+<a class="nav-link" href="#regex-ui"><span>28</span><span>按钮还得通电</span></a>
+<a class="nav-link" href="#structured-output"><span>29</span><span>别让模型编前端</span></a>
+<a class="nav-link" href="#cooperation"><span>30</span><span>改字与办事</span></a>
+<a class="nav-link" href="#choose-tool"><span>31</span><span>三秒选工具</span></a>
+<a class="nav-link" href="#common-failures"><span>32</span><span>故障掉在哪层</span></a>
+<a class="nav-link" href="#real-state"><span>33</span><span>DOM 不是真相</span></a>
+<a class="nav-link" href="#acceptance"><span>34</span><span>别在离线页自嗨</span></a>
+<a class="nav-link" href="#tw-db-script"><span>35</span><span>TW 定流程，DB 查真相</span></a>
+<a class="nav-link" href="#chapter-3-summary"><span>36</span><span>第三章收口</span></a>
 </div>
 </details>
 <div class="nav-level advanced"><span>进阶篇</span><span>第四章起</span></div>
 <details class="nav-chapter">
 <summary><span class="nav-chapter-no">Ⅳ</span><span>第四章 · 运行时调试</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
 <div class="nav-chapter-links">
-<a class="nav-link" href="#chapter-4"><span>Ⅳ</span><span>真实实例调试</span></a>
-<a class="nav-link" href="#runtime-evidence"><span>37</span><span>为什么监听运行实例</span></a>
-<a class="nav-link" href="#agent-mock"><span>38</span><span>Agent Mock 架构</span></a>
-<a class="nav-link" href="#mock-receiver"><span>39</span><span>建立 Mock 接收器</span></a>
-<a class="nav-link" href="#tavern-probe"><span>40</span><span>酒馆侧 Probe</span></a>
-<a class="nav-link" href="#agent-debug-loop"><span>41</span><span>让 Agent 读事件流</span></a>
-<a class="nav-link" href="#vscode-listener"><span>42</span><span>VS Code 监听</span></a>
-<a class="nav-link" href="#debug-compare"><span>43</span><span>方案与效果对比</span></a>
-<a class="nav-link" href="#combined-debug"><span>44</span><span>联合调试与验收</span></a>
-<a class="nav-link" href="#chapter-4-summary"><span>45</span><span>第四章总结</span></a>
+<a class="nav-link" href="#chapter-4"><span>Ⅳ</span><span>听见真实酒馆</span></a>
+<a class="nav-link" href="#runtime-evidence"><span>37</span><span>源码对，运行照样坏</span></a>
+<a class="nav-link" href="#agent-mock"><span>38</span><span>Mock 三层分工</span></a>
+<a class="nav-link" href="#mock-receiver"><span>39</span><span>本机接收器</span></a>
+<a class="nav-link" href="#tavern-probe"><span>40</span><span>只报摘要的 Probe</span></a>
+<a class="nav-link" href="#agent-debug-loop"><span>41</span><span>盯最早断点</span></a>
+<a class="nav-link" href="#vscode-listener"><span>42</span><span>停在案发现场</span></a>
+<a class="nav-link" href="#debug-compare"><span>43</span><span>时间线与断点</span></a>
+<a class="nav-link" href="#combined-debug"><span>44</span><span>先收网，再下刀</span></a>
+<a class="nav-link" href="#chapter-4-summary"><span>45</span><span>第四章收口</span></a>
 </div>
 </details>
 </nav>
@@ -107,6 +109,6 @@
 <main id="main"><section class="section">正在加载教程内容…</section></main>
 </div>
 <button aria-label="返回顶部" class="icon-btn backtop" id="backtop" title="返回顶部" type="button">↑</button>
-<script src="./app.js?v=16"></script>
+<script src="./app.js?v=23"></script>
 </body>
 </html>
