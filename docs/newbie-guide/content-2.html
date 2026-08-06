@@ -4,7 +4,7 @@
 <h3>开工前，先把三张工牌发对</h3>
 <div class="cards"><article class="card"><div class="card-icon">文</div><h4>内容模型</h4><p class="muted">负责角色设定、世界观、剧情、对话样本、关系推进和成人向正文。</p></article><article class="card"><div class="card-icon">工</div><h4>开发 Agent</h4><p class="muted">负责项目文件、代码、变量系统、前端、构建、调试和 Git。</p></article><article class="card"><div class="card-icon">副</div><h4>副驾驶 Agent</h4><p class="muted">与主 Agent 双开，共享总工作区，但处理另一个独立项目或完全隔离的写入范围。</p></article></div>
 <div class="callout"><strong>岗位不必由同一个模型承担</strong>某个模型代码能力强，不代表它适合写角色关系；某个模型成人内容限制较少，也不代表它适合维护工程文件。</div>
-<h3 id="third-party-models">第三方模型接入：先测工具链，别只测聊天</h3>
+<h3 data-subsection="03.1" id="third-party-models">第三方模型接入：先测工具链，别只测聊天</h3>
 <div class="callout"><strong>这里接 API，不买 ChatGPT 套餐</strong>下面讲的是怎样让 Codex 使用 DeepSeek、Kimi、GLM、MiniMax 或其他兼容 API；套餐购买在上一节，别把两笔账搅在一起。</div>
 <p>能回一句“你好”，离能当开发 Agent 还远。接第三方供应商前，把下面几项逐个验掉：</p>
 <ul class="checklist"><li>是否支持 Responses API，或是否能从 Chat Completions 正确转换。</li><li>是否能处理工具调用、流式输出和长任务中的连续状态。</li><li>模型 ID、上下文窗口和自动压缩阈值是否准确。</li><li>图片、插件、MCP、Skill 等能力是否完整兼容。</li><li>供应商如何计费，以及怎样存储提示词、源码和上传文件。</li></ul>
@@ -20,7 +20,7 @@
 <div class="table-wrap"><table><thead><tr><th>需求</th><th>建议</th></tr></thead><tbody><tr><td>同时管理 Codex、Claude Code、Gemini 等多个工具</td><td>CC Switch</td></tr><tr><td>主要使用 Codex 桌面端，需要会话和界面增强</td><td>Codex++</td></tr><tr><td>供应商原生支持 Responses，而且只配置一次</td><td>可以直接配置 Codex</td></tr><tr><td>上游只有 Chat Completions，需要协议转换</td><td>CC Switch 或 Codex++</td></tr><tr><td>不确定第三方模型是否支持 Agent 工具调用</td><td>先运行模型测试，再使用项目副本验收</td></tr></tbody></table></div>
 <div class="callout danger"><strong>绿灯亮了，不代表车能开</strong>连通后还得验证文件读取、工具调用、流式输出、上下文长度和供应商计费记录。API Key、<code>auth.json</code>、Access Token 和完整配置截图，一样都别扔进公开聊天、Git 仓库或 Issue。</div>
 <p class="small muted">配置资料：<a href="https://github.com/farion1231/cc-switch/blob/main/docs/user-manual/zh/2-providers/2.1-add.md" rel="noreferrer" target="_blank">CC Switch 添加供应商手册</a> · <a href="https://github.com/BigPizzaV3/CodexPlusPlus" rel="noreferrer" target="_blank">Codex++ 项目说明</a></p>
-<h3 id="paid-agent-traps">国内环境付费避雷：别给模型名交智商税</h3>
+<h3 data-subsection="03.2" id="paid-agent-traps">国内环境付费避雷：别给模型名交智商税</h3>
 <div class="callout danger"><strong>先说结论</strong>本教程作者当前国内实测：<strong>Cursor Pro+ 和 Ultra 已经完全不值得购买；Kiro 提供的 Claude 也没有达到主力开发 Agent 应有的可靠性。</strong>这里评价的是国内用户付费后实际拿到的东西，不是声称所有地区、所有账号都会遇到一模一样的结果。</div>
 <h4>Cursor：Fable／Opus 用不了，再大的套餐也只是大号空桶</h4>
 <p>Cursor 过去真正撑得起高价套餐的，不只是编辑器界面，而是能在 Agent 里使用 Fable、Opus 这类高能力模型。问题在于：本教程作者当前在国内环境实测时，这条路线已经无法正常工作。</p>
@@ -40,7 +40,7 @@
 <div class="table-wrap"><table><thead><tr><th>产品或方案</th><th>国内环境建议</th><th>一句话理由</th></tr></thead><tbody><tr><td>Cursor 免费版／仅作 IDE</td><td>可以按需使用</td><td>编辑、跳转和调试仍有用途。</td></tr><tr><td>Cursor Pro</td><td>先验货再决定</td><td>先确认目标模型在自己的网络与账号环境中真能跑。</td></tr><tr><td>Cursor Pro+</td><td><strong>不推荐购买</strong></td><td>Fable／Opus 不可用时，三倍额度没有实际价值。</td></tr><tr><td>Cursor Ultra</td><td><strong>强烈不推荐</strong></td><td>高价买到更大的平台额度，也买不回不可用的核心模型。</td></tr><tr><td>OpenCode + 明确供应商</td><td><strong>优先考虑</strong></td><td>供应商、模型和 Base URL 都能自己选，换上游也更轻。</td></tr><tr><td>Kiro 免费额度</td><td>只拿来试验</td><td>先用真实任务验 Claude 与 Agent，不看宣传图下结论。</td></tr><tr><td>Kiro 付费套餐</td><td><strong>强烈不推荐</strong></td><td>Claude 实测质量差，Auto 又是混合模型路由。</td></tr></tbody></table></div>
 <div class="callout danger"><strong>一句话避雷</strong>Cursor Pro+ 和 Ultra，是给已经失去核心模型价值的套餐继续加码；Kiro 则挂着 Claude 的招牌，却没有交付可信的 Claude Agent 体验。真要干活，OpenCode 配合明确、可验证的供应商，至少比这两种黑箱套餐靠谱。</div>
 <p class="small muted">当前机制参考：<a href="https://cursor.com/pricing" rel="noreferrer" target="_blank">Cursor 套餐</a> · <a href="https://cursor.com/docs/account/regions" rel="noreferrer" target="_blank">Cursor 地区与模型可用性</a> · <a href="https://opencode.ai/docs/providers" rel="noreferrer" target="_blank">OpenCode 供应商</a> · <a href="https://kiro.dev/docs/models/" rel="noreferrer" target="_blank">Kiro 模型与 Auto 路由</a>。产品、地区限制和模型目录都会变化，付费前请重新核对。</p>
-<h3 id="model-readiness-check">开工前先看雷达：今天这颗脑子值不值得上工</h3>
+<h3 data-subsection="03.3" id="model-readiness-check">开工前先看雷达：今天这颗脑子值不值得上工</h3>
 <p class="lead">开工、续费或购买模型厂商自己的套餐／API 前，先看近期真实表现：它今天还聪明吗、跑得动 Agent 吗、速度和额度值不值这个价。</p>
 <div class="callout good"><strong>先做判断，再开套餐</strong>优先参考真实任务和连续趋势，再拿自己的固定任务复测。模型名、宣传分数和额度倍数都不等于交付质量；能把活稳定干完，才值得长期付钱。</div>
 <h4>第一眼先看大盘：今天谁的状态能干活</h4>

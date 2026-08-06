@@ -3,14 +3,14 @@
 
   try {
     const urls = [
-      './content-1.html?v=19',
-      './content-2.html?v=19',
-      './content-3.html?v=19',
-      './content-4.html?v=19',
-      './content-5.html?v=19',
-      './content-6.html?v=19',
-      './content-7.html?v=19',
-      './content-8.html?v=19',
+      './content-1.html?v=23',
+      './content-2.html?v=23',
+      './content-3.html?v=23',
+      './content-4.html?v=23',
+      './content-5.html?v=23',
+      './content-6.html?v=23',
+      './content-7.html?v=23',
+      './content-8.html?v=23',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
@@ -48,10 +48,31 @@
     updateThemeMeta();
   });
 
+  let navScrollY = 0;
+
   function setNav(open) {
+    const wasOpen = body.classList.contains('nav-open');
+    if (open === wasOpen) return;
+
+    if (open) {
+      navScrollY = window.scrollY;
+      body.style.position = 'fixed';
+      body.style.top = `-${navScrollY}px`;
+      body.style.width = '100%';
+    }
+
     body.classList.toggle('nav-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
     menuToggle.textContent = open ? '×' : '☰';
+
+    if (!open) {
+      body.style.position = '';
+      body.style.top = '';
+      body.style.width = '';
+      window.scrollTo({ top: navScrollY, left: 0, behavior: 'auto' });
+    }
+
+    window.requestAnimationFrame(updateActiveNav);
   }
 
   menuToggle.addEventListener('click', () => setNav(!body.classList.contains('nav-open')));
@@ -82,21 +103,45 @@
   onScroll();
   backtop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  const sections = [...document.querySelectorAll('main section[id]')];
   const navLinks = [...document.querySelectorAll('.nav-link')];
-  const observer = new IntersectionObserver(entries => {
-    const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!visible) return;
-    const activeLink = navLinks.find(link => link.getAttribute('href') === `#${visible.target.id}`);
+  const navAnchors = navLinks.map(link => {
+    const id = decodeURIComponent(link.getAttribute('href').slice(1));
+    return { link, target: document.getElementById(id) };
+  }).filter(entry => entry.target);
+  let currentActiveLink = null;
+
+  function setActiveLink(activeLink) {
+    if (!activeLink || activeLink === currentActiveLink) return;
+    currentActiveLink = activeLink;
     navLinks.forEach(link => link.classList.toggle('active', link === activeLink));
-    if (!activeLink) return;
     const activeChapter = activeLink.closest('.nav-chapter');
     chapterGroups.forEach(group => group.classList.toggle('contains-active', group === activeChapter));
+    if (activeChapter && !activeChapter.open) activeChapter.open = true;
     const sectionNumber = activeLink.querySelector('span')?.textContent || '—';
     tocProgress.textContent = `${sectionNumber} / 45`;
-  }, { rootMargin: '-18% 0px -70% 0px', threshold: [0, 0.15, 0.4] });
+  }
 
-  sections.forEach(section => observer.observe(section));
+  function updateActiveNav() {
+    if (body.classList.contains('nav-open')) return;
+    const headerHeight = Number.parseFloat(getComputedStyle(root).getPropertyValue('--header-h')) || 64;
+    const activationLine = headerHeight + Math.min(128, window.innerHeight * 0.22);
+    let activeEntry = navAnchors[0];
+
+    navAnchors.forEach(entry => {
+      if (entry.target.getBoundingClientRect().top <= activationLine) activeEntry = entry;
+    });
+
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+      activeEntry = navAnchors.at(-1);
+    }
+
+    setActiveLink(activeEntry?.link);
+  }
+
+  navLinks.forEach(link => link.addEventListener('click', () => setActiveLink(link)));
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  window.addEventListener('resize', updateActiveNav);
+  updateActiveNav();
 
   async function copyText(text, button) {
     try {
@@ -162,6 +207,7 @@
       const targetLink = navLinks.find(link => link.getAttribute('href') === `#${hash}`);
       const targetChapter = targetLink?.closest('.nav-chapter');
       if (targetChapter) targetChapter.open = true;
+      setActiveLink(targetLink);
       const previousScrollBehavior = root.style.scrollBehavior;
       root.style.scrollBehavior = 'auto';
       target?.scrollIntoView();
