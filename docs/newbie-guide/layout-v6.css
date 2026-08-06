@@ -196,6 +196,43 @@
   box-shadow: inset 3px 0 0 var(--accent);
 }
 
+.nav-sublink.active {
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  color: var(--text);
+  background: linear-gradient(90deg, var(--accent-soft), color-mix(in srgb, var(--accent-soft) 34%, transparent));
+  font-weight: 820;
+}
+
+.nav-sublink.active span:first-child {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.section > h3[data-subsection] {
+  position: relative;
+  margin-top: 64px;
+  padding-top: 34px;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line-strong));
+  scroll-margin-top: calc(var(--header-h) + 18px);
+}
+
+.section > h3[data-subsection]::before {
+  content: attr(data-subsection);
+  width: fit-content;
+  display: block;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 36%, var(--line));
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
 .card-icon {
   display: none;
 }
@@ -342,5 +379,10 @@
 
   .chapter-tier {
     margin: -4px 0 20px;
+  }
+
+  .section > h3[data-subsection] {
+    margin-top: 50px;
+    padding-top: 28px;
   }
 }

@@ -3,21 +3,21 @@
 
   try {
     const urls = [
-      './content-1.html?v=16',
-      './content-2.html?v=16',
-      './content-3.html?v=16',
-      './content-4.html?v=16',
-      './content-5.html?v=16',
-      './content-6.html?v=16',
-      './content-7.html?v=16',
-      './content-8.html?v=16',
+      './content-1.html?v=23',
+      './content-2.html?v=23',
+      './content-3.html?v=23',
+      './content-4.html?v=23',
+      './content-5.html?v=23',
+      './content-6.html?v=23',
+      './content-7.html?v=23',
+      './content-8.html?v=23',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
     if (failed) throw new Error(`HTTP ${failed.status}`);
     main.innerHTML = (await Promise.all(responses.map(response => response.text()))).join('');
   } catch (error) {
-    main.innerHTML = `<section class="section"><h2>页面内容加载失败</h2><p>${String(error)}</p><p>请刷新页面，或打开固定版本预览。</p></section>`;
+    main.innerHTML = `<section class="section"><h2>正文没加载出来</h2><p>${String(error)}</p><p>先刷新一次；还不行，就打开固定版本预览。</p></section>`;
     return;
   }
 
@@ -48,10 +48,31 @@
     updateThemeMeta();
   });
 
+  let navScrollY = 0;
+
   function setNav(open) {
+    const wasOpen = body.classList.contains('nav-open');
+    if (open === wasOpen) return;
+
+    if (open) {
+      navScrollY = window.scrollY;
+      body.style.position = 'fixed';
+      body.style.top = `-${navScrollY}px`;
+      body.style.width = '100%';
+    }
+
     body.classList.toggle('nav-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
     menuToggle.textContent = open ? '×' : '☰';
+
+    if (!open) {
+      body.style.position = '';
+      body.style.top = '';
+      body.style.width = '';
+      window.scrollTo({ top: navScrollY, left: 0, behavior: 'auto' });
+    }
+
+    window.requestAnimationFrame(updateActiveNav);
   }
 
   menuToggle.addEventListener('click', () => setNav(!body.classList.contains('nav-open')));
@@ -82,21 +103,45 @@
   onScroll();
   backtop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  const sections = [...document.querySelectorAll('main section[id]')];
   const navLinks = [...document.querySelectorAll('.nav-link')];
-  const observer = new IntersectionObserver(entries => {
-    const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!visible) return;
-    const activeLink = navLinks.find(link => link.getAttribute('href') === `#${visible.target.id}`);
+  const navAnchors = navLinks.map(link => {
+    const id = decodeURIComponent(link.getAttribute('href').slice(1));
+    return { link, target: document.getElementById(id) };
+  }).filter(entry => entry.target);
+  let currentActiveLink = null;
+
+  function setActiveLink(activeLink) {
+    if (!activeLink || activeLink === currentActiveLink) return;
+    currentActiveLink = activeLink;
     navLinks.forEach(link => link.classList.toggle('active', link === activeLink));
-    if (!activeLink) return;
     const activeChapter = activeLink.closest('.nav-chapter');
     chapterGroups.forEach(group => group.classList.toggle('contains-active', group === activeChapter));
+    if (activeChapter && !activeChapter.open) activeChapter.open = true;
     const sectionNumber = activeLink.querySelector('span')?.textContent || '—';
     tocProgress.textContent = `${sectionNumber} / 45`;
-  }, { rootMargin: '-18% 0px -70% 0px', threshold: [0, 0.15, 0.4] });
+  }
 
-  sections.forEach(section => observer.observe(section));
+  function updateActiveNav() {
+    if (body.classList.contains('nav-open')) return;
+    const headerHeight = Number.parseFloat(getComputedStyle(root).getPropertyValue('--header-h')) || 64;
+    const activationLine = headerHeight + Math.min(128, window.innerHeight * 0.22);
+    let activeEntry = navAnchors[0];
+
+    navAnchors.forEach(entry => {
+      if (entry.target.getBoundingClientRect().top <= activationLine) activeEntry = entry;
+    });
+
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+      activeEntry = navAnchors.at(-1);
+    }
+
+    setActiveLink(activeEntry?.link);
+  }
+
+  navLinks.forEach(link => link.addEventListener('click', () => setActiveLink(link)));
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  window.addEventListener('resize', updateActiveNav);
+  updateActiveNav();
 
   async function copyText(text, button) {
     try {
@@ -130,10 +175,10 @@
   const recommendation = document.getElementById('recommendation');
   const choiceButtons = [...document.querySelectorAll('.choice-btn')];
   const recommendations = {
-    codex: '<strong>推荐：Codex 桌面端</strong><br><span class="muted">你的核心诉求是自然语言指挥、任务管理和 TW Skill 阵列。它最接近“Agent 指挥台”。</span>',
-    claude: '<strong>推荐：Claude Code Desktop</strong><br><span class="muted">你的工作高度依赖前端预览、真实点击和应用验证，集成预览与电脑操作更重要。</span>',
-    cursor: '<strong>推荐：Cursor Agents Window</strong><br><span class="muted">你希望 Agent 和完整 IDE 同时存在，准备进入文件、代码跳转和人工微调层。</span>',
-    cli: '<strong>推荐：Agent CLI（进阶路径）</strong><br><span class="muted">脚本、服务器和自动化是第一需求。CLI 更灵活，但不属于本教程的默认入口。</span>',
+    codex: '<strong>推荐：Codex 桌面端</strong><br><span class="muted">你主要靠说人话带项目，还要调 TW Skill 阵列。它最像一张能直接派活的 Agent 指挥台。</span>',
+    claude: '<strong>推荐：Claude Code Desktop</strong><br><span class="muted">你的活离不开前端预览、真实点击和应用验货；能把页面当场打开，比多一块代码面板更值钱。</span>',
+    opencode: '<strong>推荐：OpenCode</strong><br><span class="muted">你准备进入代码层，也希望自己选择当前环境中真正可用的供应商、模型或自定义 API。Cursor 可以作为备用 IDE，但先别为没验过货的 Pro+ 或 Ultra 买单。</span>',
+    cli: '<strong>推荐：Agent CLI（进阶路径）</strong><br><span class="muted">你的主菜是脚本、服务器和自动化。CLI 更自由，也更容易把环境杂活一锅端上来，所以放进阶路径。</span>',
   };
 
   function calculateRecommendation() {
@@ -142,7 +187,7 @@
       return;
     }
     if (choices.has('automation')) recommendation.innerHTML = recommendations.cli;
-    else if (choices.has('manual')) recommendation.innerHTML = recommendations.cursor;
+    else if (choices.has('manual')) recommendation.innerHTML = recommendations.opencode;
     else if (choices.has('preview')) recommendation.innerHTML = recommendations.claude;
     else recommendation.innerHTML = recommendations.codex;
   }
@@ -162,6 +207,7 @@
       const targetLink = navLinks.find(link => link.getAttribute('href') === `#${hash}`);
       const targetChapter = targetLink?.closest('.nav-chapter');
       if (targetChapter) targetChapter.open = true;
+      setActiveLink(targetLink);
       const previousScrollBehavior = root.style.scrollBehavior;
       root.style.scrollBehavior = 'auto';
       target?.scrollIntoView();

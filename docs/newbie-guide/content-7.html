@@ -1,16 +1,16 @@
 <section class="section" id="regex">
-<div class="section-head"><div class="section-no">26</div><div><h2>正则是什么</h2><p class="section-kicker">正则表达式是一套文本匹配规则，不是一套完整应用运行时。</p></div></div>
-<p class="lead">它可以找到满足某种格式的文本，然后提取、隐藏、删除或替换。</p>
+<div class="section-head"><div class="section-no">26</div><div><h2>正则负责找字换字，不负责主持大局</h2><p class="section-kicker">它是一套文本匹配规则，不是一套应用运行时。</p></div></div>
+<p class="lead">给它一个格式，它能把对应文本找出来、抽出来、藏起来或换掉。再多的戏，别硬加。</p>
 <div class="code-block"><div class="code-label"><span>结构化输出示例</span><button class="copy-btn" type="button">复制</button></div><pre><code>&lt;status&gt;
 地点：学生会办公室
 时间：14:30
 &lt;/status&gt;</code></pre></div>
 <p>正则可以识别 <code>&lt;status&gt;...&lt;/status&gt;</code>，将内容隐藏、提取，或替换成固定的展示结构。</p>
 <div class="compare"><div class="compare-side"><h4>适合正则</h4><p class="muted">固定标签、简单字段、前后缀、格式清理和展示替换。</p></div><div class="compare-vs">VS</div><div class="compare-side"><h4>不适合正则</h4><p class="muted">复杂状态、异步请求、多步骤交互、持久化和生命周期管理。</p></div></div>
-<div class="callout warn"><strong>不要堆成巨型正则</strong>当一条正则开始承担大量分支、嵌套格式和业务规则时，通常已经到了应该改用结构化数据或脚本的阶段。</div>
+<div class="callout warn"><strong>正则长成章鱼，就该换工具了</strong>一条表达式开始伸出大量分支、嵌套格式和业务规则时，别再续触手；改用结构化数据或脚本。</div>
 </section>
 <section class="section" id="hide-update">
-<div class="section-head"><div class="section-no">27</div><div><h2>为什么需要隐藏变量更新内容</h2><p class="section-kicker">系统需要读取的内容，不一定都适合显示给用户。</p></div></div>
+<div class="section-head"><div class="section-no">27</div><div><h2>更新块要藏，但别先把它掐死</h2><p class="section-kicker">系统要读，用户不用看；处理顺序错了，变量直接断粮。</p></div></div>
 <p>Zod 卡可能让模型输出：</p>
 <div class="code-block"><div class="code-label"><span>变量更新块</span><button class="copy-btn" type="button">复制</button></div><pre><code>&lt;UpdateVariable&gt;
   ...
@@ -20,7 +20,7 @@
 <div class="callout danger"><strong>隐藏不等于提前删除</strong>如果正则在变量系统读取前就破坏了更新块，变量可能无法正常写入。具体处理顺序必须按当前运行环境验证。</div>
 </section>
 <section class="section" id="regex-ui">
-<div class="section-head"><div class="section-no">28</div><div><h2>正则可以生成界面外观，但不能自动补齐行为</h2><p class="section-kicker">HTML 出现了，不代表功能闭环已经存在。</p></div></div>
+<div class="section-head"><div class="section-no">28</div><div><h2>正则能画按钮，不能替按钮通电</h2><p class="section-kicker">HTML 出现只说明外壳到了，行为链还没接上。</p></div></div>
 <p>例如模型输出：</p>
 <div class="code-block"><div class="code-label"><span>模型输出标签</span><button class="copy-btn" type="button">复制</button></div><pre><code>&lt;choice&gt;前往旧校舍&lt;/choice&gt;</code></pre></div>
 <p>正则可以替换成：</p>
@@ -30,7 +30,7 @@
 <div class="callout good"><strong>一句话区别</strong>正则可以生成外观，脚本负责赋予行为。</div>
 </section>
 <section class="section" id="structured-output">
-<div class="section-head"><div class="section-no">29</div><div><h2>不要让模型每轮自由生成整套 HTML</h2><p class="section-kicker">模型擅长生成内容，但不适合成为不受约束的前端模板引擎。</p></div></div>
+<div class="section-head"><div class="section-no">29</div><div><h2>别让模型每轮现编一套前端</h2><p class="section-kicker">让它填内容，不要让它每回合重造 DOM、class 和样式。</p></div></div>
 <p>让模型直接输出任意 HTML，常见问题包括：</p>
 <ul class="checklist"><li>标签没有闭合，导致后续楼层布局被破坏。</li><li>class、字段和层级每轮变化，脚本无法稳定识别。</li><li>内联样式污染主题和移动端显示。</li><li>输出变长，挤占正文和变量更新空间。</li><li>出现不安全或无法预测的页面内容。</li></ul>
 <p>更稳定的方式是让模型输出有限的结构化数据：</p>
@@ -43,7 +43,7 @@
 <div class="callout"><strong>固定模板的价值</strong>内容可以变化，DOM 结构、class 名和交互入口保持稳定，脚本、CSS 和移动端适配才容易维护。</div>
 </section>
 <section class="section" id="cooperation">
-<div class="section-head"><div class="section-no">30</div><div><h2>正则和脚本怎样配合</h2><p class="section-kicker">不是所有 UI 都需要正则，也不是所有文本处理都要写脚本。</p></div></div>
+<div class="section-head"><div class="section-no">30</div><div><h2>正则负责改字，脚本负责办事</h2><p class="section-kicker">纯文本别上重武器，真交互也别靠替换规则硬撑。</p></div></div>
 <h3>隐藏 Zod 更新</h3>
 <div class="flow"><div class="flow-node">模型输出正文和更新块</div><div class="flow-arrow">→</div><div class="flow-node">Zod 更新变量</div><div class="flow-arrow">→</div><div class="flow-node">正则隐藏更新块</div><div class="flow-arrow">→</div><div class="flow-node">用户只看正文</div></div>
 <h3>生成可点击选项</h3>
@@ -53,7 +53,7 @@
 <p>第三种情况通常不需要先让模型输出一段文本，也不需要正则参与。数据已经存在于变量中时，脚本可以直接读取和展示。</p>
 </section>
 <section class="section" id="choose-tool">
-<div class="section-head"><div class="section-no">31</div><div><h2>什么时候用正则，什么时候用脚本</h2><p class="section-kicker">先按需求本质选择工具，不要按“哪种写起来短”选择。</p></div></div>
+<div class="section-head"><div class="section-no">31</div><div><h2>三秒决定：正则还是脚本</h2><p class="section-kicker">看需求本质，别看哪种写起来少两行。</p></div></div>
 <div class="cards"><article class="card"><div class="card-icon">正</div><h4>只处理文本</h4><p class="muted">匹配、隐藏、提取、清理和简单替换，优先正则。</p></article><article class="card"><div class="card-icon">脚</div><h4>需要逻辑或状态</h4><p class="muted">判断、变量、保存、请求、监听和交互，使用脚本。</p></article><article class="card"><div class="card-icon">合</div><h4>文本变成交互</h4><p class="muted">正则生成结构，脚本绑定行为，两者配合。</p></article></div>
 <div class="code-block"><div class="code-label"><span>工具选择口诀</span><button class="copy-btn" type="button">复制</button></div><pre><code>找出来、藏起来、换个样子
 → 正则
@@ -63,15 +63,15 @@
 
 模型输出要变成可交互界面
 → 正则 + 脚本</code></pre></div>
-<div class="callout warn"><strong>能用正则勉强实现，不等于应该用正则</strong>如果需求已经包含状态、事件、异步或清理，尽早切换到脚本，通常比继续堆替换规则更可靠。</div>
+<div class="callout warn"><strong>勉强塞进去，不叫选对工具</strong>需求一旦碰到状态、事件、异步或清理，尽早换脚本；继续堆替换规则，只是在给以后埋雷。</div>
 </section>
 <section class="section" id="common-failures">
-<div class="section-head"><div class="section-no">32</div><div><h2>UI、脚本和正则的常见失败</h2><p class="section-kicker">先根据现象判断丢失的是外观、行为、数据还是生命周期。</p></div></div>
+<div class="section-head"><div class="section-no">32</div><div><h2>页面坏在哪，先看丢了哪一层</h2><p class="section-kicker">外观、行为、数据、生命周期，别一出错就从头乱改。</p></div></div>
 <div class="table-wrap"><table><thead><tr><th>现象</th><th>常见原因</th></tr></thead><tbody><tr><td>页面看得到，但按钮不能用</td><td>只生成了 HTML，没有绑定脚本事件。</td></tr><tr><td>按钮第一次有效，刷新后失效</td><td>只在首次加载时绑定，没有处理重新渲染。</td></tr><tr><td>点击一次执行多次</td><td>监听器重复注册，或没有执行锁。</td></tr><tr><td>状态栏一直显示旧数据</td><td>只初始化读取一次，没有监听变量变化。</td></tr><tr><td>正则把正文也隐藏了</td><td>匹配范围过大或边界不明确。</td></tr><tr><td>变量更新突然失效</td><td>正则破坏了更新块，或执行顺序不正确。</td></tr><tr><td>UI 变了，刷新后恢复</td><td>只改了 DOM，没有写入真实状态。</td></tr><tr><td>变量已变化，UI 没变化</td><td>写入成功，但没有重新读取和渲染。</td></tr></tbody></table></div>
-<div class="callout"><strong>反馈问题时说清四件事</strong>做了什么、预期什么、实际发生什么、控制台或数据层有什么证据。不要只说“按钮坏了”。</div>
+<div class="callout"><strong>“按钮坏了”不是故障报告</strong>把四件事说齐：做了什么、预期什么、实际发生什么、控制台或数据层留下了什么证据。</div>
 </section>
 <section class="section" id="real-state">
-<div class="section-head"><div class="section-no">33</div><div><h2>页面显示不等于真实状态</h2><p class="section-kicker">DOM 是展示结果，不应自动被当成唯一数据源。</p></div></div>
+<div class="section-head"><div class="section-no">33</div><div><h2>DOM 会演戏，真实数据不会</h2><p class="section-kicker">页面只是展示结果，别顺手把它封成唯一真相。</p></div></div>
 <div class="compare"><div class="compare-side"><h4>真实状态</h4><p class="muted">保存在变量、设置、消息或其他明确持久层中的数据。</p></div><div class="compare-vs">→</div><div class="compare-side"><h4>展示状态</h4><p class="muted">页面当前显示的文字、卡片、进度条和选中效果。</p></div></div>
 <p>错误流程：</p>
 <div class="code-block"><div class="code-label"><span>只改页面</span><button class="copy-btn" type="button">复制</button></div><pre><code>用户点击
@@ -83,14 +83,14 @@
 <div class="callout good"><strong>数据驱动界面</strong>页面应尽量从真实状态重新渲染，而不是把 DOM 上临时显示的值当作最终真相。</div>
 </section>
 <section class="section" id="acceptance">
-<div class="section-head"><div class="section-no">34</div><div><h2>怎样验收脚本和正则</h2><p class="section-kicker">离线页面能检查外观，但不能关闭真实 SillyTavern 的运行时验收。</p></div></div>
-<h3>至少检查这些路径</h3>
+<div class="section-head"><div class="section-no">34</div><div><h2>验收脚本，别只在离线页里自嗨</h2><p class="section-kicker">离线页能看外观，真实 SillyTavern 才能判运行时生死。</p></div></div>
+<h3>这几条路径，一个都别漏</h3>
 <ul class="checklist"><li>新建对话时能否正常初始化。</li><li>刷新页面后是否仍然有效。</li><li>切换对话和消息楼层后是否读取正确数据。</li><li>按钮是否只执行一次，并能处理快速连点。</li><li>重复打开面板是否产生重复 DOM 或监听器。</li><li>变量和设置是否真正写入。</li><li>UI 是否跟随真实数据刷新。</li><li>正则是否只匹配目标内容。</li><li>脚本禁用或重载后是否存在残留。</li><li>控制台是否出现新的错误。</li><li>移动端是否可读、可点、无横向溢出。</li><li>外部资源失败时是否有明确提示和降级。</li></ul>
-<h3>离线 HTML 不能证明什么</h3>
+<h3>本地能亮，不代表酒馆里能活</h3>
 <div class="cards"><article class="card"><h4>不能证明 API 可用</h4><p class="muted">宿主函数、事件和作用域只有在真实环境中才能确认。</p></article><article class="card"><h4>不能证明持久化成功</h4><p class="muted">页面演示可以改 DOM，但未必写入聊天或消息变量。</p></article><article class="card"><h4>不能证明生命周期正确</h4><p class="muted">刷新、切换对话、脚本重载和生成事件需要真机验证。</p></article></div>
 </section>
 <section class="section" id="tw-db-script">
-<div class="section-head"><div class="section-no">35</div><div><h2>让 TavernWeave 和 DB 帮你施工</h2><p class="section-kicker">脚本、正则和宿主 API 都可能随版本变化，不要让 Agent 凭记忆发明接口。</p></div></div>
+<div class="section-head"><div class="section-no">35</div><div><h2>让 TW 定流程，让 DB 查真相</h2><p class="section-kicker">脚本、正则、宿主 API 都会变；别让 Agent 靠记忆现场编接口。</p></div></div>
 <div class="code-block"><div class="code-label"><span>脚本与正则任务开工模板</span><button class="copy-btn" type="button">复制</button></div><pre><code>请使用 TavernWeave 处理当前酒馆助手脚本或正则任务。
 
 开始前：
@@ -107,7 +107,7 @@
 <div class="callout good"><strong>双子星仍然有效</strong>TavernWeave 负责选择施工流程和专项 Skill，ST 开发指南 DB 负责提供版本、API、案例和避坑依据。</div>
 </section>
 <section class="section" id="chapter-3-summary">
-<div class="section-head"><div class="section-no">36</div><div><h2>第三章总结</h2><p class="section-kicker">把文本处理、运行逻辑和真实状态放回各自的位置。</p></div></div>
+<div class="section-head"><div class="section-no">36</div><div><h2>第三章收口：谁管文本，谁管行为，谁是真相</h2><p class="section-kicker">正则改字，脚本办事，数据层保管最终答案。</p></div></div>
 <div class="cards"><article class="card"><div class="card-icon">正</div><h4>正则</h4><p class="muted">匹配、提取、隐藏、清理和替换文本，也能生成静态展示外壳。</p></article><article class="card"><div class="card-icon">脚</div><h4>酒馆助手脚本</h4><p class="muted">执行逻辑、操作数据、创建交互、监听生命周期和连接外部能力。</p></article><article class="card"><div class="card-icon">态</div><h4>真实状态</h4><p class="muted">保存在明确的数据层中，UI 只是读取并展示它。</p></article></div>
 <div class="callout good"><strong>记住这组判断</strong>找出来、藏起来、换个样子：正则。点了以后做事、数据变化后刷新、失败后反馈：脚本。</div>
 <ul class="checklist"><li>不要把正则当成万能低代码程序引擎。</li><li>不要低估酒馆助手脚本在 UI、数据、事件和 API 上的能力范围。</li><li>不要把生成了 HTML 当成已经完成交互功能。</li><li>不要只修改页面显示而不写入真实状态。</li><li>不要只在首次加载路径上验收。</li><li>不要跳过真实 SillyTavern 的运行时检查。</li></ul>
