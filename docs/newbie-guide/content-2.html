@@ -20,6 +20,26 @@
 <div class="table-wrap"><table><thead><tr><th>需求</th><th>建议</th></tr></thead><tbody><tr><td>同时管理 Codex、Claude Code、Gemini 等多个工具</td><td>CC Switch</td></tr><tr><td>主要使用 Codex 桌面端，需要会话和界面增强</td><td>Codex++</td></tr><tr><td>供应商原生支持 Responses，而且只配置一次</td><td>可以直接配置 Codex</td></tr><tr><td>上游只有 Chat Completions，需要协议转换</td><td>CC Switch 或 Codex++</td></tr><tr><td>不确定第三方模型是否支持 Agent 工具调用</td><td>先运行模型测试，再使用项目副本验收</td></tr></tbody></table></div>
 <div class="callout danger"><strong>连接成功不等于 Agent 可以完整工作</strong>至少还要验证文件读取、工具调用、流式输出、上下文长度和供应商计费记录。不要把 API Key、<code>auth.json</code>、Access Token 或完整配置截图发到公开聊天、Git 仓库和 Issue。</div>
 <p class="small muted">配置资料：<a href="https://github.com/farion1231/cc-switch/blob/main/docs/user-manual/zh/2-providers/2.1-add.md" rel="noreferrer" target="_blank">CC Switch 添加供应商手册</a> · <a href="https://github.com/BigPizzaV3/CodexPlusPlus" rel="noreferrer" target="_blank">Codex++ 项目说明</a></p>
+<h3 id="paid-agent-traps">国内环境付费避雷：别给模型名交智商税</h3>
+<div class="callout danger"><strong>先说结论</strong>本教程作者当前国内实测：<strong>Cursor Pro+ 和 Ultra 已经完全不值得购买；Kiro 提供的 Claude 也没有达到主力开发 Agent 应有的可靠性。</strong>这里评价的是国内用户付费后实际拿到的东西，不是声称所有地区、所有账号都会遇到一模一样的结果。</div>
+<h4>Cursor：Fable／Opus 用不了，再大的套餐也只是大号空桶</h4>
+<p>Cursor 过去真正撑得起高价套餐的，不只是编辑器界面，而是能在 Agent 里使用 Fable、Opus 这类高能力模型。问题在于：本教程作者当前在国内环境实测时，这条路线已经无法正常工作。</p>
+<ul class="checklist"><li>Fable 无法形成可用的开发工作流。</li><li>Opus 同样无法稳定承担正式项目。</li><li>剩余模型和 Agent 体验，撑不起 Pro+ 与 Ultra 的价格。</li><li>套餐额度加倍，不会把不可用的核心模型变回来。</li></ul>
+<p>Cursor 官方目前仍把 Pro+ 和 Ultra 的主要卖点写成更高的 Agent 限额：Pro+ 约为 Pro 的三倍，Ultra 约为 Pro 的二十倍。但“二十倍”只有在目标模型真能用时才值钱；如果 Fable／Opus 已经掉线，放大的只是额度数字，不是交付能力。</p>
+<div class="callout warn"><strong>别把 IDE 和套餐绑在一起买</strong>Cursor 的编辑、跳转和调试可以继续按需使用，但“Cursor 这个 IDE 顺手”不等于“Cursor Pro+／Ultra 值得续费”。国内环境没有先验完 Fable／Opus，就不要直接冲高价套餐。</div>
+<h4>为什么此时 OpenCode 更实在</h4>
+<p>OpenCode 至少把方向盘交还给用户：官方文档列出七十多种供应商，并支持自定义供应商、Base URL 和本地模型。哪个供应商在当前环境里真能跑，就明确接哪个；一个上游掉线，也不用连同整套 IDE 套餐一起陪葬。</p>
+<div class="callout"><strong>OpenCode 不是绕区神器</strong>它不会替你绕过模型供应商的地区规则，也不该拿来盗用订阅或共享账号。它的优势是选择更透明、替换更容易：用合法可用的 API 或官方支持接入，先跑真实任务，再决定给谁付钱。</div>
+<h4>Kiro：下拉框写着 Claude，不等于办事时真有 Claude 那股脑子</h4>
+<p>本教程作者实际测试 Kiro 的 Claude 后，得到的不是“偶尔发挥不好”，而是整体上明显低于同档 Claude 应有的表现：理解复杂要求吃力，连续执行不可靠，Agent 能力很差，无法放心交付正式工程。对开发 Agent 来说，模型名字只是招牌；能不能看懂任务、持续调用工具、检查结果并把活干完，才是货。</p>
+<div class="callout danger"><strong>本教程实测结论</strong>Kiro 中标注为 Claude 的实际体验表现出明显的低智力、低可靠性和极差的 Agent 能力。免费额度可以拿来验货，但不建议因为界面里出现 Claude、Sonnet 或 Opus 的名字，就购买 Kiro 套餐或把正式项目交给它。</div>
+<h4>Kiro Auto：官方明说会混合路由</h4>
+<p>Kiro 官方把 Auto 定义为模型路由器，会根据任务自动选择模型；官方文档还明确说明，Auto 的内部路由并不严格受管理员已经批准的模型列表限制，请求可能交给该区域内 Kiro 可用的其他模型。与此同时，Kiro 的模型目录里既有高倍率的 Opus，也有更低倍率、偏成本效率的 Haiku、DeepSeek、MiniMax、GLM 和 Qwen Coder。</p>
+<p>平台把这叫“平衡质量、速度和成本”；站在付费用户这边看，意思就是：你抱着高能力模型的预期买套餐，但平台仍保留把任务分给不同档次模型的权力。简单补全也许无所谓，长任务、复杂工具调用和正式工程可经不起这种盲盒。</p>
+<div class="callout warn"><strong>证据边界也要讲清楚</strong>官方资料足以证明 Auto 会混合路由，却不能单凭外部表现证明“手动指定 Claude 后一定被偷偷换成了某个具体模型”。所以本教程不编后台故事，只陈述两件已经足够避雷的事：Auto 的混合路由是官方机制；Kiro Claude 的实际交付质量没有通过本教程作者的主力 Agent 验收。</div>
+<div class="table-wrap"><table><thead><tr><th>产品或方案</th><th>国内环境建议</th><th>一句话理由</th></tr></thead><tbody><tr><td>Cursor 免费版／仅作 IDE</td><td>可以按需使用</td><td>编辑、跳转和调试仍有用途。</td></tr><tr><td>Cursor Pro</td><td>先验货再决定</td><td>先确认目标模型在自己的网络与账号环境中真能跑。</td></tr><tr><td>Cursor Pro+</td><td><strong>不推荐购买</strong></td><td>Fable／Opus 不可用时，三倍额度没有实际价值。</td></tr><tr><td>Cursor Ultra</td><td><strong>强烈不推荐</strong></td><td>高价买到更大的平台额度，也买不回不可用的核心模型。</td></tr><tr><td>OpenCode + 明确供应商</td><td><strong>优先考虑</strong></td><td>供应商、模型和 Base URL 都能自己选，换上游也更轻。</td></tr><tr><td>Kiro 免费额度</td><td>只拿来试验</td><td>先用真实任务验 Claude 与 Agent，不看宣传图下结论。</td></tr><tr><td>Kiro 付费套餐</td><td><strong>强烈不推荐</strong></td><td>Claude 实测质量差，Auto 又是混合模型路由。</td></tr></tbody></table></div>
+<div class="callout danger"><strong>一句话避雷</strong>Cursor Pro+ 和 Ultra，是给已经失去核心模型价值的套餐继续加码；Kiro 则挂着 Claude 的招牌，却没有交付可信的 Claude Agent 体验。真要干活，OpenCode 配合明确、可验证的供应商，至少比这两种黑箱套餐靠谱。</div>
+<p class="small muted">当前机制参考：<a href="https://cursor.com/pricing" rel="noreferrer" target="_blank">Cursor 套餐</a> · <a href="https://cursor.com/docs/account/regions" rel="noreferrer" target="_blank">Cursor 地区与模型可用性</a> · <a href="https://opencode.ai/docs/providers" rel="noreferrer" target="_blank">OpenCode 供应商</a> · <a href="https://kiro.dev/docs/models/" rel="noreferrer" target="_blank">Kiro 模型与 Auto 路由</a>。产品、地区限制和模型目录都会变化，付费前请重新核对。</p>
 <h3>为什么成人向创作者需要单独选择内容模型</h3>
 <p>NSFW 不等于违法、有害或没有创作价值。角色卡和互动叙事中的成人向内容，可能用于成年人之间的亲密关系、情色文学、成人角色扮演、服装与身体审美设计，以及完整的角色档案。</p>
 <p>真正影响创作的，是部分模型面对明确成年、完全虚构且基于自愿关系的内容时，仍可能频繁出现：</p>

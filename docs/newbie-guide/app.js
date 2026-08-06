@@ -3,14 +3,14 @@
 
   try {
     const urls = [
-      './content-1.html?v=16',
-      './content-2.html?v=16',
-      './content-3.html?v=16',
-      './content-4.html?v=16',
-      './content-5.html?v=16',
-      './content-6.html?v=16',
-      './content-7.html?v=16',
-      './content-8.html?v=16',
+      './content-1.html?v=17',
+      './content-2.html?v=17',
+      './content-3.html?v=17',
+      './content-4.html?v=17',
+      './content-5.html?v=17',
+      './content-6.html?v=17',
+      './content-7.html?v=17',
+      './content-8.html?v=17',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
@@ -132,7 +132,7 @@
   const recommendations = {
     codex: '<strong>推荐：Codex 桌面端</strong><br><span class="muted">你的核心诉求是自然语言指挥、任务管理和 TW Skill 阵列。它最接近“Agent 指挥台”。</span>',
     claude: '<strong>推荐：Claude Code Desktop</strong><br><span class="muted">你的工作高度依赖前端预览、真实点击和应用验证，集成预览与电脑操作更重要。</span>',
-    cursor: '<strong>推荐：Cursor Agents Window</strong><br><span class="muted">你希望 Agent 和完整 IDE 同时存在，准备进入文件、代码跳转和人工微调层。</span>',
+    opencode: '<strong>推荐：OpenCode</strong><br><span class="muted">你准备进入代码层，也希望自己选择当前环境中真正可用的供应商、模型或自定义 API。Cursor 可以作为备用 IDE，但先别为没验过货的 Pro+ 或 Ultra 买单。</span>',
     cli: '<strong>推荐：Agent CLI（进阶路径）</strong><br><span class="muted">脚本、服务器和自动化是第一需求。CLI 更灵活，但不属于本教程的默认入口。</span>',
   };
 
@@ -142,7 +142,7 @@
       return;
     }
     if (choices.has('automation')) recommendation.innerHTML = recommendations.cli;
-    else if (choices.has('manual')) recommendation.innerHTML = recommendations.cursor;
+    else if (choices.has('manual')) recommendation.innerHTML = recommendations.opencode;
     else if (choices.has('preview')) recommendation.innerHTML = recommendations.claude;
     else recommendation.innerHTML = recommendations.codex;
   }
