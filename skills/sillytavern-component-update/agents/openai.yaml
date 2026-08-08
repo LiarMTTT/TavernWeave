@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern Component Update"
+  short_description: "Build importable component updates without forced repacking"
+  default_prompt: "Use $sillytavern-component-update to choose component-only or full-card delivery and build the smallest validated update."

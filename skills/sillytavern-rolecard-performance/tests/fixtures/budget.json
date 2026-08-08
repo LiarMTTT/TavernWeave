@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "limits": {
+    "fileBytes": 10000,
+    "maxStringBytes": 1000,
+    "worldbookEntries": 10
+  },
+  "maxGrowth": {
+    "fileBytes": 0,
+    "promptBytes": 0
+  }
+}

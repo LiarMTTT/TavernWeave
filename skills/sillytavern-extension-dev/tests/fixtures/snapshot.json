@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-08T00:00:00Z",
+  "versions": {
+    "sillytavern": "1.18.0",
+    "tavernHelper": "4.8.19"
+  },
+  "symbols": [
+    "SillyTavern.getContext"
+  ]
+}

@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.5.0 - 2026-08-08
+
+### 组件级更新交付
+
+- 新增 `sillytavern-component-update`。用户可明确选择只生成可导入测试的正则/酒馆助手脚本组件，或生成整卡 pipeline handoff；组件模式不会产出角色卡 JSON/PNG。
+- 新增 dry-run 计划、稳定 ID、输出路径、SHA-256、助手脚本按钮/数据与未知字段保留检查，避免为了修改一个组件而静默重封整卡。
+
+### 正则、安全与数据库卡验证
+
+- 新增 `sillytavern-render-regex-pipeline`，用 fixture 检查正则方言、placement/source、display/prompt、深度和替换结果，并明确列出离线工具无法替代的真实酒馆阶段。
+- 新增 `sillytavern-rolecard-security`，只读扫描 HTML sink、动态执行、远程 JavaScript、跨帧通信、凭据形状、iframe 权限和可疑正则；报告不包含凭据值或代码长摘录。
+- 新增 `sillytavern-database-rolecards`，校验卡内表结构、主键、类型、默认值、字段绑定及幂等迁移；同层兼容路线继续以 `DBR-C8-UNVERIFIED` 阻止，直到真实 SillyTavern 验收转正。
+
+### 扩展、性能与媒体运行时
+
+- 新增 `sillytavern-extension-dev`，提供 dry-run UI 扩展脚手架、manifest/入口/hook 校验和惰性能力快照门；默认不安装、不更新、不刷新真实酒馆。
+- 新增 `sillytavern-rolecard-performance`，脱敏统计整卡、提示词、世界书、正则、助手脚本、远程引用与内嵌数据预算，并独立校验具名真实环境采集的 p50/p95 样本。
+- 新增 `sillytavern-media-live2d-runtime`，校验本地媒体哈希、远程依赖、预加载预算、Tavern Helper 音频通道与 Live2D provider/fallback/销毁绑定；离线阶段不下载或执行远程资产。
+
+### 发布门
+
+- 七个新 Skill 均附 Node 脚本和可复跑 fixture；正式校验新增 JavaScript 语法检查与逐文件 Node 测试。
+- replay 路由扩展到组件更新、正则阶段、安全审计、数据库卡迁移、扩展工程、大卡性能和媒体生命周期，并继续区分静态证据与真实运行时验收。
+
 ## 0.4.0 - 2026-07-26
 
 ### 新增角色卡类型识别

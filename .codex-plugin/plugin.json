@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "0.4.0",
-  "description": "Focused Agent Skills for SillyTavern rolecard engineering and safe code improvement.",
+  "version": "0.5.0",
+  "description": "Focused Agent Skills for SillyTavern rolecard engineering, component delivery, extension development, validation, media, performance, and safe code improvement.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "TavernWeave",
     "shortDescription": "Build, debug, and release robust SillyTavern rolecards.",
-    "longDescription": "TavernWeave provides focused skills for rolecard type and dependency detection, authoring, modular sources, release pipelines, runtime debugging, embedded interfaces, workshop operations, and evidence-driven code quality.",
+    "longDescription": "TavernWeave provides focused skills for rolecard type and dependency detection, authoring, component-only delivery, UI extension development, render and regex fixtures, security audits, structured data models, performance budgets, audio and Live2D lifecycle, release pipelines, runtime debugging, embedded interfaces, workshop operations, and evidence-driven code quality.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
@@ -26,6 +26,11 @@
     ],
     "defaultPrompt": [
       "Design a maintainable SillyTavern rolecard and choose the right TavernWeave skill.",
+      "Update only a rolecard regex or Tavern Helper script and emit an importable test artifact without repacking the card.",
+      "Validate this rolecard's regex stages, security surface, and structured data migrations with deterministic fixtures.",
+      "Scaffold and statically validate a SillyTavern UI extension without installing it into the host.",
+      "Measure a large rolecard against static and captured runtime performance budgets.",
+      "Validate rolecard audio and Live2D assets, preload policy, fallbacks, and lifecycle cleanup.",
       "Detect which rolecard dependencies must be embedded, enabled in the host, or loaded remotely.",
       "Audit this rolecard source and prepare the smallest safe release workflow.",
       "Reproduce this rolecard UI issue in SillyTavern and identify the owning layer."

@@ -96,6 +96,90 @@
       "prompt": "The rolecard workshop publish request now returns 502. Diagnose the chain before changing production.",
       "expectedPrimarySkill": "rolecard-workshop-ops",
       "expectedBehavior": "Trace the configurable public/gateway/storage chain read-only and require authorization before deploy or secret changes."
+    },
+    {
+      "id": "component-only-regex-update",
+      "prompt": "Only update this character-local status-bar regex. Give me an importable test JSON and do not rebuild or package the rolecard.",
+      "expectedPrimarySkill": "sillytavern-component-update",
+      "expectedBehavior": "Freeze component mode, preserve the stable ID and untouched fields, emit only an importable regex artifact plus validation evidence, and produce no card JSON or PNG."
+    },
+    {
+      "id": "component-full-card-handoff",
+      "prompt": "Update these two Tavern Helper scripts and then package the complete card, but keep every unrelated component unchanged.",
+      "expectedPrimarySkill": "sillytavern-component-update",
+      "expectedBehavior": "Freeze full-card mode, build validated script artifacts and an assembly handoff with an untouched-surface hash, then route composition and packaging to sillytavern-card-pipeline."
+    },
+    {
+      "id": "regex-placement-depth-fixtures",
+      "prompt": "Prove whether this card regex runs for AI display at depth 0, is skipped for prompts, and stops after depth 4 using repeatable fixtures.",
+      "expectedPrimarySkill": "sillytavern-render-regex-pipeline",
+      "expectedBehavior": "Validate the regex dialect and flags, use the supplied numeric placement without guessing, run display/prompt/depth fixtures, and emit an ordered stage trace."
+    },
+    {
+      "id": "regex-host-disagreement",
+      "prompt": "The offline replacement passes but the imported regex does nothing in SillyTavern. Work out what the fixture does and what still needs live evidence.",
+      "expectedPrimarySkill": "sillytavern-render-regex-pipeline",
+      "expectedBehavior": "Keep the deterministic fixture result, list unsupported host stages, treat the installed runtime as authoritative, and hand exact runtime reproduction to sillytavern-runtime-debug."
+    },
+    {
+      "id": "rolecard-static-security-audit",
+      "prompt": "Before I import this card, scan its HTML, helper scripts, regex replacements, and remote loaders for security risks without running anything.",
+      "expectedPrimarySkill": "sillytavern-rolecard-security",
+      "expectedBehavior": "Perform a read-only redacted scan, report rule IDs and locations without executing content or exposing credential values, and separate suspicious patterns from confirmed reachability."
+    },
+    {
+      "id": "rolecard-security-baseline",
+      "prompt": "Compare this candidate's rolecard security report with the approved baseline and block any newly introduced rule count.",
+      "expectedPrimarySkill": "sillytavern-rolecard-security",
+      "expectedBehavior": "Compare counts by stable rule ID, report positive deltas as regressions, and avoid treating a baseline as a suppression list."
+    },
+    {
+      "id": "database-rolecard-migration",
+      "prompt": "Migrate my quest table from status to state, add progress=0, preserve custom fields, and prove the migration is idempotent.",
+      "expectedPrimarySkill": "sillytavern-database-rolecards",
+      "expectedBehavior": "Validate the multi-floor model, run a deterministic rename plus add-field fixture, preserve unknown data, compare expected output, and prove the second run is unchanged."
+    },
+    {
+      "id": "database-rolecard-bindings",
+      "prompt": "Check that every status-bar and control-center binding names an existing table field and refreshes after message edits and swipes.",
+      "expectedPrimarySkill": "sillytavern-database-rolecards",
+      "expectedBehavior": "Validate stable binding IDs, table and field references, access owner and refresh events, keep UI implementation separate, and retain real multi-floor lifecycle acceptance."
+    },
+    {
+      "id": "extension-static-scaffold",
+      "prompt": "Create a minimal SillyTavern UI extension with a manifest, activation hook, namespaced settings, and a capability contract, but do not install it.",
+      "expectedPrimarySkill": "sillytavern-extension-dev",
+      "expectedBehavior": "Freeze the UI-extension boundary, plan before writing, generate only the minimal scaffold, validate manifest paths and hook exports, and perform no host installation or reload."
+    },
+    {
+      "id": "extension-capability-snapshot",
+      "prompt": "Check this extension against the versions and symbols captured from my target SillyTavern instance and tell me which optional features must fall back.",
+      "expectedPrimarySkill": "sillytavern-extension-dev",
+      "expectedBehavior": "Validate the inert capability snapshot, block missing required symbols or minimum versions, activate declared optional fallbacks, and keep signatures and live behavior unclaimed."
+    },
+    {
+      "id": "large-rolecard-budget-regression",
+      "prompt": "Compare this assembled rolecard with the approved build and show exactly which size, prompt, worldbook, regex, script, or media budgets regressed without printing its contents.",
+      "expectedPrimarySkill": "sillytavern-rolecard-performance",
+      "expectedBehavior": "Measure both artifacts with the same redacted metric surface, apply hard limits and declared growth deltas, identify owners, and avoid deleting behavior merely because it is large."
+    },
+    {
+      "id": "rolecard-runtime-performance-sample",
+      "prompt": "Validate the first-render and swipe p95 timings I captured from a named SillyTavern browser/device setup, separately from the card size report.",
+      "expectedPrimarySkill": "sillytavern-rolecard-performance",
+      "expectedBehavior": "Require a named environment and sufficient captured samples, calculate deterministic percentiles per scenario, and keep static and real-runtime gates independent."
+    },
+    {
+      "id": "media-live2d-contract",
+      "prompt": "Audit this card's local and remote media plus Live2D model, motions, expressions, provider, fallback, and teardown bindings without downloading anything.",
+      "expectedPrimarySkill": "sillytavern-media-live2d-runtime",
+      "expectedBehavior": "Verify local containment, bytes and hashes, leave remote sources uncontacted, require an explicit Live2D provider and fallback, and pair load/play actions with teardown."
+    },
+    {
+      "id": "media-preload-audio-lifecycle",
+      "prompt": "Plan eager, lazy, and on-demand media under a byte budget and check that BGM playback stops on chat teardown without replacing the user's whole playlist.",
+      "expectedPrimarySkill": "sillytavern-media-live2d-runtime",
+      "expectedBehavior": "Produce a non-network preload plan, enforce declared byte and count limits, use only BGM or ambient audio contracts, preserve existing settings, and validate deterministic cleanup."
     }
   ]
 }

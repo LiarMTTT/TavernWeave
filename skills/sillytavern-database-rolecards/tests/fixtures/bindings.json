@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "modelId": "quest-ledger",
+  "bindings": [
+    {
+      "id": "quest-state-hud",
+      "surface": "status-bar",
+      "table": "quests",
+      "field": "state",
+      "access": "read",
+      "owner": "quest-status-renderer",
+      "refreshEvents": ["MESSAGE_UPDATED", "MESSAGE_SWIPED"]
+    }
+  ]
+}
