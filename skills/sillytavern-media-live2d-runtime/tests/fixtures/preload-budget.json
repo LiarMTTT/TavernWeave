@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "limits": {
+    "eagerBytes": 100,
+    "lazyBytes": 100,
+    "eagerAssets": 2
+  }
+}

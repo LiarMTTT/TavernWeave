@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "cardId": "tw-media-fixture",
+  "assets": [
+    {
+      "id": "theme-bgm",
+      "kind": "audio",
+      "source": {
+        "type": "local",
+        "path": "media/theme.ogg"
+      },
+      "bytes": 14,
+      "sha256": "06d6347850f33b8166cf2f126b8425097776f3fd7f28acabf3db88eda7e2629c",
+      "preload": "lazy",
+      "lifetime": "chat",
+      "fallbackAssetId": null
+    },
+    {
+      "id": "avatar-static",
+      "kind": "image",
+      "source": {
+        "type": "local",
+        "path": "media/avatar.png"
+      },
+      "bytes": 22,
+      "sha256": "04cd772e73141a51f2cbf3e3fef5978f1318197ec775806825c9944c1f00c0ff",
+      "preload": "eager",
+      "lifetime": "card",
+      "fallbackAssetId": null
+    },
+    {
+      "id": "avatar-model",
+      "kind": "live2d-model",
+      "source": {
+        "type": "local",
+        "path": "media/avatar.model3.json"
+      },
+      "bytes": 53,
+      "sha256": "6e874d0020cf882b16aa81645bbd3d6030a347160caa18b4ed28fba71e5b9bb5",
+      "preload": "lazy",
+      "lifetime": "chat",
+      "fallbackAssetId": "avatar-static"
+    },
+    {
+      "id": "avatar-idle",
+      "kind": "live2d-motion",
+      "source": {
+        "type": "local",
+        "path": "media/idle.motion3.json"
+      },
+      "bytes": 36,
+      "sha256": "2a9b48c572fba953d1734337433b834ed1587e506eafb4b38d1efd91e76e4c96",
+      "preload": "on-demand",
+      "lifetime": "message",
+      "fallbackAssetId": null
+    },
+    {
+      "id": "avatar-happy",
+      "kind": "live2d-expression",
+      "source": {
+        "type": "local",
+        "path": "media/happy.exp3.json"
+      },
+      "bytes": 45,
+      "sha256": "3b69eab81c8fcf7a75f03ea7f62e3222d9bdbf2765b412af2e25a608b9f4d97c",
+      "preload": "on-demand",
+      "lifetime": "message",
+      "fallbackAssetId": null
+    },
+    {
+      "id": "scene-video",
+      "kind": "video",
+      "source": {
+        "type": "remote",
+        "url": "https://example.invalid/media/scene.webm"
+      },
+      "bytes": 1000,
+      "preload": "on-demand",
+      "lifetime": "message",
+      "fallbackAssetId": "avatar-static"
+    }
+  ],
+  "audio": {
+    "bgm": [
+      "theme-bgm"
+    ],
+    "ambient": [],
+    "settings": {
+      "bgm": {
+        "enabled": true,
+        "mode": "repeat_all",
+        "muted": false,
+        "volume": 40
+      }
+    }
+  },
+  "live2d": {
+    "provider": "Example Live2D Adapter",
+    "runtimeGlobal": "ExampleLive2D",
+    "versionProbe": "ExampleLive2D.version",
+    "modelAssetIds": [
+      "avatar-model"
+    ],
+    "fallbackAssetId": "avatar-static"
+  }
+}

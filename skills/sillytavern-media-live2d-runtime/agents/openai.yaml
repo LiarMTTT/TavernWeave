@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern Media and Live2D Runtime"
+  short_description: "Validate media assets and Live2D lifecycle"
+  default_prompt: "Use $sillytavern-media-live2d-runtime to validate this card media manifest and its audio or Live2D lifecycle bindings."

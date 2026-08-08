@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "modelId": "quest-ledger",
+  "modelVersion": "2.0.0",
+  "storage": {
+    "scope": "message",
+    "root": "stat_data.database",
+    "strategy": "multi-floor"
+  },
+  "tables": {
+    "quests": {
+      "primaryKey": "id",
+      "fields": {
+        "id": { "type": "string", "required": true },
+        "state": { "type": "string", "required": true, "default": "open" },
+        "progress": { "type": "number", "required": true, "default": 0 }
+      }
+    }
+  }
+}

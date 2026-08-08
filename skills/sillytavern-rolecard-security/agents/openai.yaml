@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern Rolecard Security"
+  short_description: "Audit rolecard markup, scripts, loaders, and secret risks"
+  default_prompt: "Use $sillytavern-rolecard-security to audit this rolecard for injection, remote-loader, permission, and secret-exposure risks."

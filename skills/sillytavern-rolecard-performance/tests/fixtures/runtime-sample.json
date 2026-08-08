@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "environment": {
+    "sillytavern": "1.18.0",
+    "browser": "Chromium fixture",
+    "device": "TW test device",
+    "cardHash": "fixture-card-sha256"
+  },
+  "scenarios": [
+    {
+      "id": "first-render",
+      "samplesMs": [100, 110, 120, 130, 140],
+      "budgetP95Ms": 150
+    },
+    {
+      "id": "swipe-rerender",
+      "samplesMs": [20, 25, 22, 28, 24],
+      "budgetP95Ms": 30
+    }
+  ]
+}

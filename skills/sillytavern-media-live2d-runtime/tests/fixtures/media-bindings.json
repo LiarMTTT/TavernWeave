@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "cardId": "tw-media-fixture",
+  "requiredCapabilities": [
+    "TavernHelper.playAudio",
+    "TavernHelper.pauseAudio",
+    "ExampleLive2D"
+  ],
+  "bindings": [
+    {
+      "id": "audio-start",
+      "event": "MESSAGE_RECEIVED",
+      "action": "play-audio",
+      "assetId": "theme-bgm",
+      "cleanupBindingId": "audio-stop"
+    },
+    {
+      "id": "audio-stop",
+      "event": "PAGEHIDE",
+      "action": "pause-audio"
+    },
+    {
+      "id": "live2d-load",
+      "event": "APP_READY",
+      "action": "load-live2d",
+      "assetId": "avatar-model",
+      "cleanupBindingId": "live2d-dispose"
+    },
+    {
+      "id": "live2d-dispose",
+      "event": "PAGEHIDE",
+      "action": "dispose-live2d"
+    },
+    {
+      "id": "live2d-motion",
+      "event": "MESSAGE_RECEIVED",
+      "action": "set-live2d-motion",
+      "assetId": "avatar-idle"
+    },
+    {
+      "id": "live2d-expression",
+      "event": "MESSAGE_UPDATED",
+      "action": "set-live2d-expression",
+      "assetId": "avatar-happy"
+    }
+  ]
+}

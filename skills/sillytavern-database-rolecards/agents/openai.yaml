@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern Database Rolecards"
+  short_description: "Validate rolecard schemas, migrations, and floor bindings"
+  default_prompt: "Use $sillytavern-database-rolecards to validate this rolecard data model, migration fixtures, and multi-floor UI bindings."
