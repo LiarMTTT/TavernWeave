@@ -4,6 +4,10 @@ TavernWeave 是一套面向 Codex 与 Claude Code 的 SillyTavern 工程 Skill �
 
 > TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
+## 奶人教程
+
+第一次使用 TavernWeave，或想了解如何指挥 Agent 完成制卡、调试和验收，可阅读：[TavernWeave 奶人教程 · Vibe Code 制卡入门](https://liarmttt.github.io/TavernWeave/newbie-guide/)。
+
 ## Skill 阵列
 
 | Skill | 主要职责 |
