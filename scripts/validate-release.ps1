@@ -34,10 +34,14 @@ function Get-PortableFileHash([string]$Path) {
 
 function Get-SkillFingerprint([string]$Directory) {
     $directoryFull = [System.IO.Path]::GetFullPath($Directory).TrimEnd([char]92, [char]47)
-    $rows = foreach ($file in (Get-ChildItem -LiteralPath $directoryFull -File -Recurse | Sort-Object FullName)) {
+    [string[]]$relativePaths = @(foreach ($file in (Get-ChildItem -LiteralPath $directoryFull -File -Recurse)) {
         if ($file.FullName -match '[\\/]__pycache__[\\/]' -or $file.Extension -ieq '.pyc') { continue }
-        $relative = $file.FullName.Substring($directoryFull.Length).TrimStart([char]92, [char]47).Replace([char]92, [char]47)
-        $hash = Get-PortableFileHash $file.FullName
+        $file.FullName.Substring($directoryFull.Length).TrimStart([char]92, [char]47).Replace([char]92, [char]47)
+    })
+    [System.Array]::Sort($relativePaths, [System.StringComparer]::Ordinal)
+    $rows = foreach ($relative in $relativePaths) {
+        $nativeRelative = $relative.Replace([char]47, [System.IO.Path]::DirectorySeparatorChar)
+        $hash = Get-PortableFileHash (Join-Path $directoryFull $nativeRelative)
         "$relative`t$hash"
     }
     $material = ($rows -join "`n") + "`n"
@@ -216,6 +220,31 @@ foreach ($scriptFile in @($publicFiles | Where-Object { $_.Extension -ieq '.ps1'
     [System.Management.Automation.Language.Parser]::ParseFile($scriptFile.FullName, [ref]$parseTokens, [ref]$parseErrors) | Out-Null
     foreach ($parseError in @($parseErrors)) {
         Add-ValidationError "PowerShell parse error in $($scriptFile.FullName): $($parseError.Message)"
+    }
+}
+
+$nodeFiles = @($publicFiles | Where-Object { $_.Extension -iin @('.js', '.mjs') })
+$nodeTests = @($nodeFiles | Where-Object { $_.FullName -match '[\\/]tests[\\/].*\.test\.mjs$' })
+if ($nodeFiles.Count -gt 0) {
+    $nodeCommand = Get-Command node -ErrorAction SilentlyContinue
+    if (-not $nodeCommand) {
+        Add-ValidationError 'Node.js is required to validate JavaScript files.'
+    } else {
+        foreach ($nodeFile in $nodeFiles) {
+            $nodeCheckOutput = @(& $nodeCommand.Source --check $nodeFile.FullName 2>&1)
+            if ($LASTEXITCODE -ne 0) {
+                Add-ValidationError "Node syntax error in $($nodeFile.FullName): $($nodeCheckOutput -join ' ')"
+            }
+        }
+        foreach ($nodeTest in $nodeTests) {
+            # Execute each test file directly. `node --test` spawns workers and is not
+            # available in every Windows sandbox, while direct execution retains the
+            # built-in node:test assertions and exit status.
+            $nodeTestOutput = @(& $nodeCommand.Source $nodeTest.FullName 2>&1)
+            if ($LASTEXITCODE -ne 0) {
+                Add-ValidationError "Node test failed in $($nodeTest.FullName): $($nodeTestOutput -join ' ')"
+            }
+        }
     }
 }
 

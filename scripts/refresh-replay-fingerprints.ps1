@@ -31,10 +31,14 @@ function Get-PortableFileHash([string]$Path) {
 
 function Get-SkillFingerprint([string]$Directory) {
     $directoryFull = [System.IO.Path]::GetFullPath($Directory).TrimEnd([char]92, [char]47)
-    $rows = foreach ($file in (Get-ChildItem -LiteralPath $directoryFull -File -Recurse | Sort-Object FullName)) {
+    [string[]]$relativePaths = @(foreach ($file in (Get-ChildItem -LiteralPath $directoryFull -File -Recurse)) {
         if ($file.FullName -match '[\\/]__pycache__[\\/]' -or $file.Extension -ieq '.pyc') { continue }
-        $relative = $file.FullName.Substring($directoryFull.Length).TrimStart([char]92, [char]47).Replace([char]92, [char]47)
-        $hash = Get-PortableFileHash $file.FullName
+        $file.FullName.Substring($directoryFull.Length).TrimStart([char]92, [char]47).Replace([char]92, [char]47)
+    })
+    [System.Array]::Sort($relativePaths, [System.StringComparer]::Ordinal)
+    $rows = foreach ($relative in $relativePaths) {
+        $nativeRelative = $relative.Replace([char]47, [System.IO.Path]::DirectorySeparatorChar)
+        $hash = Get-PortableFileHash (Join-Path $directoryFull $nativeRelative)
         "$relative`t$hash"
     }
     $material = ($rows -join "`n") + "`n"

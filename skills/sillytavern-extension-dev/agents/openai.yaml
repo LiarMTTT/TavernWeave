@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern Extension Development"
+  short_description: "Scaffold and validate SillyTavern UI extensions"
+  default_prompt: "Use $sillytavern-extension-dev to scaffold and statically validate this SillyTavern UI extension."

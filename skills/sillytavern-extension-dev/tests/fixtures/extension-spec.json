@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "tw-fixture-extension",
+  "displayName": "TW Fixture Extension",
+  "author": "TavernWeave",
+  "version": "0.1.0",
+  "homePage": "https://github.com/LiarMTTT/TavernWeave",
+  "minimumClientVersion": "1.18.0",
+  "loadingOrder": 20,
+  "autoUpdate": false,
+  "withCss": true,
+  "requirements": [
+    {
+      "id": "host-context",
+      "owner": "sillytavern",
+      "symbol": "SillyTavern.getContext",
+      "required": true,
+      "fallback": null
+    },
+    {
+      "id": "helper-audio",
+      "owner": "tavern-helper",
+      "symbol": "TavernHelper.playAudio",
+      "required": false,
+      "fallback": "Disable extension audio controls"
+    }
+  ]
+}

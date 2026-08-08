@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern Rolecard Performance"
+  short_description: "Measure and gate large rolecard performance"
+  default_prompt: "Use $sillytavern-rolecard-performance to measure this rolecard and compare it with an approved performance budget."

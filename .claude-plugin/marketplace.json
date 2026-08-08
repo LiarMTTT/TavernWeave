@@ -11,7 +11,7 @@
         "source": "github",
         "repo": "LiarMTTT/TavernWeave"
       },
-      "description": "Build, debug, review, and release maintainable SillyTavern rolecards."
+      "description": "Build extensions and rolecards, update by component, validate media and performance, debug, review, and release maintainable SillyTavern projects."
     }
   ]
 }

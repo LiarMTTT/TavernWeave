@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "display-depth-zero",
+      "input": "<status>ready</status>",
+      "source": "ai_output",
+      "placement": 2,
+      "destination": "display",
+      "depth": 0,
+      "expected": "ready"
+    },
+    {
+      "id": "prompt-skipped",
+      "input": "<status>ready</status>",
+      "source": "ai_output",
+      "placement": 2,
+      "destination": "prompt",
+      "depth": 0,
+      "expected": "<status>ready</status>"
+    },
+    {
+      "id": "depth-skipped",
+      "input": "<status>ready</status>",
+      "source": "ai_output",
+      "placement": 2,
+      "destination": "display",
+      "depth": 5,
+      "expected": "<status>ready</status>"
+    }
+  ]
+}

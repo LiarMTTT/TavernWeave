@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "modelId": "quest-ledger",
+  "modelVersion": "2.0.0",
+  "tables": {
+    "quests": [
+      { "id": "q1", "custom": "preserve me", "state": "open", "progress": 0 }
+    ]
+  }
+}

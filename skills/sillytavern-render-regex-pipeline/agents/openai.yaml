@@ -1,0 +1,4 @@
+interface:
+  display_name: "SillyTavern Render Regex Pipeline"
+  short_description: "Validate Tavern regex stages with deterministic fixtures"
+  default_prompt: "Use $sillytavern-render-regex-pipeline to validate this regex across source, destination, depth, and render-stage fixtures."

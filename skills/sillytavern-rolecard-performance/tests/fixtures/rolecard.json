@@ -1,0 +1,46 @@
+{
+  "spec": "chara_card_v2",
+  "data": {
+    "name": "TW Performance Fixture",
+    "description": "private prompt text",
+    "first_mes": "hello",
+    "avatar_inline": "data:text/plain;base64,aGVsbG8=",
+    "reference": "https://example.invalid/fixture.js",
+    "character_book": {
+      "entries": [
+        {
+          "id": 1,
+          "content": "world one"
+        },
+        {
+          "id": 2,
+          "content": "world two"
+        }
+      ]
+    },
+    "extensions": {
+      "regex_scripts": [
+        {
+          "id": "regex-1",
+          "findRegex": "/foo/g",
+          "replaceString": "bar"
+        }
+      ],
+      "tavern_helper": {
+        "scripts": [
+          {
+            "type": "folder",
+            "id": "folder-1",
+            "scripts": [
+              {
+                "type": "script",
+                "id": "script-1",
+                "content": "const privateToken = 'do not report this';"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

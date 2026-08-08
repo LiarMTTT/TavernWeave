@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "modelId": "quest-ledger",
+  "fromVersion": "1.0.0",
+  "toVersion": "2.0.0",
+  "allowDataLoss": false,
+  "operations": [
+    { "op": "rename-field", "table": "quests", "from": "status", "to": "state" },
+    { "op": "add-field", "table": "quests", "field": "progress", "default": 0 }
+  ]
+}
