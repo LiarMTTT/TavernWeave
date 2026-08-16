@@ -29,6 +29,25 @@ Soul 归位</code></pre></div>
 <div class="callout danger"><strong>公开负向门</strong>A1 是驾驶员母板，不随 TW 发布；命令式旧 B1、过程档案、本地证据、AFV raw/收件箱、个人 RAG 和凭据也不会出现在资料库、挑选页或 Soul 中。</div>
 <p>本地安装后可打开 <code>skills/consult-tavernweave-library/assets/picker/index.html</code>。它只把候选 ID 存在浏览器本地，不要往选择单里放角色卡正文、私密设定或生产信息。</p>
 </section>
+<section class="section" id="install-gate">
+<div class="section-head"><div class="section-no">05.4</div><div><h2>安装不是数文件夹：V1.0.1 必须拿出 18/18 回执</h2><p class="section-kicker">源码里有、复制到本机、宿主真发现，是三道不同的门。</p></div></div>
+<p class="lead">“我更新了原来的 16 个 Skill”不等于安装了新版。旧安装器如果只遍历本机已有目录，就会漏掉新加入的 Soul 与 Library；旧 Skill 虽然已经引用 Library，真正调用时却找不到它。</p>
+<div class="steps"><div class="step"><strong>先看仓库应有清单</strong>V1.0.1 的机器清单固定列出 18 个正式 Skill，不能拿本机旧目录反推仓库内容。</div><div class="step"><strong>再比较实际安装位置</strong>安装必须计算“仓库应有目录 − 本机已有目录”，创建缺失项，而不是只覆盖旧文件。</div><div class="step"><strong>核验 Soul、Library 与 picker</strong>目录存在还不够，内容必须与当前源码逐文件匹配，离线挑选页也必须在实际安装目录里。</div><div class="step"><strong>最后新建任务</strong>18/18 只证明文件安装完整；宿主能否发现并调用新 Skill，要在新任务或重启会话后另验。</div></div>
+<div class="code-block"><div class="code-label"><span>完整安装 · 可直接复制</span><button class="copy-btn" type="button">复制</button></div><pre><code>请把 TavernWeave 完整安装或更新到仓库最新版本：
+https://github.com/LiarMTTT/TavernWeave
+
+不要只覆盖本机已经存在的 Skill。
+请以仓库 skills/ 的完整目录为准，比较仓库应有目录与实际安装目录，创建新增 Skill。
+
+安装后必须核对：
+- 18/18 个 TavernWeave Skill 完整匹配；
+- activate-tavernweave-soul 存在；
+- consult-tavernweave-library 存在；
+- Library 的 assets/picker/index.html 存在。
+
+请返回实际安装路径和安装回执。通过后提醒我新建任务，再验证宿主是否真正发现 Soul 与 Library。</code></pre></div>
+<div class="callout warn"><strong>别让回执越级</strong><code>INSTALLATION VERIFIED: 18/18</code> 只证明实际目录完整，不能冒充 Codex / Claude 已经重新扫描，也不能冒充 Soul、Library 或真实 SillyTavern 已运行。</div>
+</section>
 <section class="section" id="intro">
 <div class="section-head"><div class="section-no">00</div><div><h2>Vibe Code 不是开盲盒</h2><p class="section-kicker">你掌方向盘，Agent 跑工程循环；成品不是靠抽。</p></div></div>
 <p class="lead">能长期用的 Vibe Code 很朴素：你定方向、卡边界、收结果，Agent 调查、动手、拿证据。</p>

@@ -3,14 +3,14 @@
 
   try {
     const urls = [
-      './content-1.html?v=24',
-      './content-2.html?v=24',
-      './content-3.html?v=24',
-      './content-4.html?v=24',
-      './content-5.html?v=24',
-      './content-6.html?v=24',
-      './content-7.html?v=24',
-      './content-8.html?v=24',
+      './content-1.html?v=25',
+      './content-2.html?v=25',
+      './content-3.html?v=25',
+      './content-4.html?v=25',
+      './content-5.html?v=25',
+      './content-6.html?v=25',
+      './content-7.html?v=25',
+      './content-8.html?v=25',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
@@ -118,7 +118,7 @@
     chapterGroups.forEach(group => group.classList.toggle('contains-active', group === activeChapter));
     if (activeChapter && !activeChapter.open) activeChapter.open = true;
     const sectionNumber = activeLink.querySelector('span')?.textContent || '—';
-    tocProgress.textContent = `${sectionNumber} / 48`;
+    tocProgress.textContent = `${sectionNumber} / 49`;
   }
 
   function updateActiveNav() {

@@ -8,7 +8,7 @@
 
 TavernWeave 是面向 Codex 与 Claude Code 的 SillyTavern 制卡工程系统：18 个可路由 Skill、一份可恢复的创作权威、一条从源码到真实酒馆和人工验收的证据链、统一随包的 ST/设计/动效资料库，以及可选的阿瞳 / MTTT.sir 双人格教学层。
 
-当前正式版本为 **[v1.0.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.0.0)**。源码验证、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
+当前正式版本为 **[v1.0.1](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.0.1)**，重点补齐从仓库源码到实际安装目录之间的完整性门。源码版本、实际安装、宿主发现、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
 
 > TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
@@ -107,22 +107,52 @@ skills/consult-tavernweave-library/assets/picker/index.html
 
 ## 奶人教程
 
-第一次使用 TavernWeave，或想了解如何指挥 Agent 完成制卡、调试和验收，可阅读：[TavernWeave 奶人教程 · Vibe Code 制卡入门](https://liarmttt.github.io/TavernWeave/newbie-guide/)。
+第一次使用 TavernWeave，或想了解如何指挥 Agent 完成制卡、调试和验收，可阅读：[TavernWeave 奶人教程 · Vibe Code 制卡入门](https://liarmttt.github.io/TavernWeave/)。
 
 ## 安装与更新
 
-把仓库链接交给 Codex 或 Claude Code：
+把仓库链接交给 Codex 或 Claude Code。安装器必须以仓库 `skills/` 的完整清单为源，创建缺失目录，不能只覆盖本机已经存在的 Skill：
 
 ```text
-请安装并启用这个 Skill 仓库：
+请完整安装并启用这个 Skill 仓库：
 https://github.com/LiarMTTT/TavernWeave
+
+不要只覆盖本机已经存在的 Skill。请以仓库 skills/ 的完整目录为准；安装后核对 18/18，并单独确认 activate-tavernweave-soul、consult-tavernweave-library 和 Library 离线挑选页存在。
 ```
 
 更新：
 
 ```text
-请把已安装的 TavernWeave 更新到这个仓库的最新版本：
+请把已安装的 TavernWeave 完整更新到这个仓库的最新版本：
 https://github.com/LiarMTTT/TavernWeave
+
+更新必须比较“仓库应有目录”和“实际安装目录”，创建新增 Skill，不能只修改旧目录；完成后返回安装回执，再新建任务验证宿主发现。
 ```
 
-安装或更新后新建任务，使宿主重新发现 Skill。正式发布前请以 manifest、Release 与校验结果为准，不要把工作分支里的 `rc` 文本当成已经发布。
+如果宿主或 Agent 使用“把每个 Skill 复制到某个项目级目录”的便携安装方式，可在仓库根运行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-tavernweave.ps1 -TargetSkillRoot '<实际 Skill 根目录>'
+```
+
+安装或更新后必须对**实际扫描位置**运行核验，而不是只检查源码仓库。核验器默认拒绝把 TavernWeave 源码目录本身当作安装目标：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-install.ps1 -TargetRoot '<实际插件根目录或 Skill 根目录>'
+```
+
+通过回执必须包含：
+
+```text
+INSTALLATION VERIFIED: 18/18
+Library: present-and-matched
+Library picker: present
+Soul: present-and-matched
+Host rediscovery: required-new-task
+```
+
+目标目录中的无关个人 Skill 会保留；18 个 TavernWeave 官方目录必须与当前源码逐文件匹配。写入目标最后一级必须明确名为 `skills`；安装脚本拒绝盘符根、用户目录根、源码仓库内部目标和目录链接，替换失败时会回滚已有官方 Skill。
+
+完成 18/18 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul 与 Library；安装回执不能冒充宿主发现。正式发布前请以 manifest、Release 与校验结果为准，不要把工作分支文本当成已经发布。
+
+维护者若只是在发布前自检源码树，可显式使用 `-AllowSourceTree`；该开关不能用于普通用户的安装回执。

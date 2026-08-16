@@ -1,6 +1,6 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A routed SillyTavern rolecard engineering system with resumable creative authority, bundled guides and design references, evidence gates, and optional portable teaching personas.",
   "author": {
     "name": "LiarMTTT"
