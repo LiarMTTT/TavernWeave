@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · WAAPI 时间轴</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .stage {
+      position: relative;
+      height: 72px;
+      margin: 14px 0;
+      background: #1a1d26;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .dot {
+      position: absolute;
+      top: 24px; left: 12px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: #e8b86d;
+    }
+    button {
+      background: #232833; color: inherit;
+      border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px;
+      margin-right: 6px;
+    }
+    .step { font-size: 12px; color: #9aa3b2; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>三条关键帧用 <code>element.animate</code> 串起来，结束再接下一段。这是平台 WAAPI，<strong>不是</strong> GSAP / Motion / Theatre。文档站和营销首页不嵌。不是已采用时间轴。</p>
+    <div class="stage"><div class="dot" id="dot"></div></div>
+    <p class="step" id="step">停在起点</p>
+    <button type="button" id="play">播放</button>
+    <button type="button" id="stop">停</button>
+  </main>
+  <script>
+    const dot = document.getElementById("dot");
+    const step = document.getElementById("step");
+    let current = null;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const frames = [
+      { to: { transform: "translateX(28vw)" }, label: "1 / 3 右移" },
+      { to: { transform: "translateX(28vw) scale(1.35)" }, label: "2 / 3 放大" },
+      { to: { transform: "translateX(0) scale(1)" }, label: "3 / 3 回位" }
+    ];
+    async function play() {
+      if (current) current.cancel();
+      if (reduce) {
+        step.textContent = "减动效：只切到终点，不播位移。";
+        dot.style.transform = "none";
+        return;
+      }
+      for (const frame of frames) {
+        step.textContent = frame.label;
+        current = dot.animate(
+          [{ transform: getComputedStyle(dot).transform }, frame.to],
+          { duration: 420, easing: "ease", fill: "forwards" }
+        );
+        await current.finished.catch(() => {});
+        if (!current) return;
+      }
+      step.textContent = "播完";
+    }
+    document.getElementById("play").addEventListener("click", play);
+    document.getElementById("stop").addEventListener("click", () => {
+      if (current) current.cancel();
+      current = null;
+      dot.getAnimations().forEach((anim) => anim.cancel());
+      dot.style.transform = "none";
+      step.textContent = "停在起点";
+    });
+  </script>
+</body>
+</html>

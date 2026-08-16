@@ -5,6 +5,8 @@ description: Diagnose, review, operate, or deploy a generic rolecard workshop ma
 
 # Rolecard Workshop Ops
 
+Before any operational write, use `$consult-tavernweave-library` with the `rolecard-workshop-ops` route to load A0 and the deployment/workshop guides. Keep public guidance separate from production coordinates, credentials, live state, and deployment authorization.
+
 Use this skill for workshop infrastructure and the contract between a rolecard client, a public catalog, a package Gateway, identity provider, review tools, and storage. Keep local rolecard UI work out of this skill unless the failure crosses that boundary.
 
 ## Operating Modes

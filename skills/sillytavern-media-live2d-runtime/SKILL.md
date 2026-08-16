@@ -10,6 +10,8 @@ description: >-
 
 # SillyTavern Media and Live2D Runtime
 
+Before changing media or lifecycle behavior, use `$consult-tavernweave-library` with the `sillytavern-media-live2d-runtime` route to load A0, media/Live2D guides, and only the relevant motion references. Do not let a library catalog imply a provider API or redistribution license.
+
 Treat media as versioned runtime dependencies rather than decorative URLs. Validate
 the inert contract first; keep network retrieval and rendering in explicit live gates.
 

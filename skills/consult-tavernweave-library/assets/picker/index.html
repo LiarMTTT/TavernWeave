@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>TavernWeave Library · 指南与设计挑选</title>
+  <link rel="stylesheet" href="picker.css?v=1.0.0">
+</head>
+<body>
+  <a class="skip" href="#library-grid">跳到资料</a>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">TAVERNWEAVE · LOCAL LIBRARY</p>
+      <h1>先找证据，再挑手感。</h1>
+      <p class="lede">ST 指南负责工程边界，设计与动效负责候选方向。加入清单不等于采用、安装或验收。</p>
+    </div>
+    <div class="snapshot" aria-label="资料快照">
+      <span>SNAPSHOT</span>
+      <strong data-snapshot>载入中</strong>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls" aria-label="资料筛选">
+      <nav class="tabs" aria-label="资料域" data-tabs></nav>
+      <label class="search">
+        <span>检索</span>
+        <input type="search" data-search placeholder="名称、标签、说明、来源" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+      <div class="filter-row" data-filters aria-label="分类筛选"></div>
+      <p class="result-count" data-count aria-live="polite"></p>
+    </section>
+
+    <section class="workspace">
+      <div class="grid" id="library-grid" data-grid tabindex="-1"></div>
+      <aside class="inspector" data-inspector aria-live="polite">
+        <p class="inspector-empty">选择一条资料查看边界、来源与本地沙盘。</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="selection" data-selection>
+    <div>
+      <p class="selection-kicker">PROPOSED · 仅保存候选 ID</p>
+      <p data-selection-summary>尚未选择资料</p>
+    </div>
+    <div class="selection-actions">
+      <button type="button" data-copy>复制 JSON</button>
+      <button type="button" data-download>下载选择单</button>
+      <button type="button" class="quiet" data-clear>清空</button>
+    </div>
+  </footer>
+
+  <noscript>
+    <p class="noscript">此挑选页需要 JavaScript。资料正文仍可在 <code>references/st-guides</code> 与 <code>references/design-wiki</code> 中直接阅读。</p>
+  </noscript>
+  <script src="catalog-data.js?v=1.0.0"></script>
+  <script src="manifest-data.js?v=1.0.0"></script>
+  <script src="picker.js?v=1.0.0"></script>
+</body>
+</html>

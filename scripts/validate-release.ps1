@@ -198,13 +198,20 @@ foreach ($file in $textFiles) {
         Add-ValidationError "Private absolute Windows path detected: $($file.FullName)"
     }
     if ($file.Extension -ieq '.md') {
-        foreach ($match in [regex]::Matches($text, '\[[^\]]+\]\((?<target>[^)]+)\)')) {
+        $markdownForLinks = [regex]::Replace($text, '(?ms)^```.*?^```\s*$', '')
+        $markdownForLinks = [regex]::Replace($markdownForLinks, '`[^`\r\n]*`', '')
+        foreach ($match in [regex]::Matches($markdownForLinks, '\[[^\]]+\]\((?<target>[^)]+)\)')) {
             $target = $match.Groups['target'].Value.Trim().Trim('<', '>')
             if ($target -match '^(?:https?://|mailto:|codex:|#)') { continue }
             $target = ($target -split '#', 2)[0]
             if (-not $target) { continue }
             try { $target = [System.Uri]::UnescapeDataString($target) } catch { }
-            $resolved = [System.IO.Path]::GetFullPath((Join-Path $file.DirectoryName $target))
+            try {
+                $resolved = [System.IO.Path]::GetFullPath((Join-Path $file.DirectoryName $target))
+            } catch {
+                Add-ValidationError "Invalid Markdown link target: $($file.FullName) -> $target"
+                continue
+            }
             if (-not $resolved.StartsWith($pluginRootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
                 Add-ValidationError "Markdown link escapes plugin root: $($file.FullName) -> $target"
             } elseif (-not (Test-Path -LiteralPath $resolved)) {
@@ -243,6 +250,31 @@ if ($nodeFiles.Count -gt 0) {
             $nodeTestOutput = @(& $nodeCommand.Source $nodeTest.FullName 2>&1)
             if ($LASTEXITCODE -ne 0) {
                 Add-ValidationError "Node test failed in $($nodeTest.FullName): $($nodeTestOutput -join ' ')"
+            }
+        }
+
+        $libraryValidator = Join-Path $PluginRoot 'skills\consult-tavernweave-library\scripts\validate-library.mjs'
+        if (-not (Test-Path -LiteralPath $libraryValidator -PathType Leaf)) {
+            Add-ValidationError 'TavernWeave Library validator is missing.'
+        } else {
+            $libraryOutput = @(& $nodeCommand.Source $libraryValidator 2>&1)
+            if ($LASTEXITCODE -ne 0) {
+                Add-ValidationError "TavernWeave Library validation failed: $($libraryOutput -join ' ')"
+            }
+        }
+
+        $routeSource = Join-Path $PluginRoot 'skills\consult-tavernweave-library\references\route-map.json'
+        $routeDocs = Join-Path $PluginRoot 'docs\newbie-guide\tavernweave-route-map.json'
+        if (-not (Test-Path -LiteralPath $routeSource -PathType Leaf) -or -not (Test-Path -LiteralPath $routeDocs -PathType Leaf)) {
+            Add-ValidationError 'Library and newbie-guide route maps are both required.'
+        } elseif ((Get-PortableFileHash $routeSource) -ne (Get-PortableFileHash $routeDocs)) {
+            Add-ValidationError 'Newbie-guide route map is stale; run scripts/sync-library-route-map.mjs.'
+        }
+
+        $pickerRoot = Join-Path $PluginRoot 'skills\consult-tavernweave-library\assets\picker'
+        foreach ($pickerFile in @('index.html', 'picker.css', 'picker.js', 'catalog.json', 'catalog-data.js', 'manifest-data.js')) {
+            if (-not (Test-Path -LiteralPath (Join-Path $pickerRoot $pickerFile) -PathType Leaf)) {
+                Add-ValidationError "Picker asset missing: $pickerFile"
             }
         }
     }

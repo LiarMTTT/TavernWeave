@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 缓动对照</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .track {
+      position: relative;
+      height: 36px;
+      margin: 14px 0;
+      background: #1a1d26;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .dot {
+      position: absolute;
+      top: 6px; left: 8px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: #7eb8ff;
+    }
+    .dot.ease { animation: slide 1.6s ease infinite alternate; }
+    .dot.linear { animation: slide 1.6s linear infinite alternate; }
+    .dot.sampled {
+      background: #e8b86d;
+      animation: slide 1.6s linear(0, 0.04, 0.16, 0.36, 0.64, 0.86, 0.96, 1) infinite alternate;
+    }
+    @keyframes slide { to { left: calc(100% - 32px); } }
+    label { display: block; font-size: 12px; color: #9aa3b2; margin-bottom: 4px; }
+    button {
+      margin-top: 8px;
+      background: #232833;
+      color: inherit;
+      border: 1px solid #2e3440;
+      border-radius: 8px;
+      padding: 6px 10px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p>CSS animation 默认 <strong>ease</strong>；WAAPI 默认 <strong>linear</strong>。第三条是 <code>linear()</code> 取样近似，<strong>不是</strong>原生 <code>spring()</code>，也不能手势打断。</p>
+    <label>CSS ease</label>
+    <div class="track"><div class="dot ease"></div></div>
+    <label>linear（WAAPI 默认）</label>
+    <div class="track"><div class="dot linear"></div></div>
+    <label>linear() 取样（看起来像弹簧，其实是折线）</label>
+    <div class="track"><div class="dot sampled"></div></div>
+    <button type="button" id="toggle">暂停 / 继续</button>
+  </main>
+  <script>
+    const dots = [...document.querySelectorAll(".dot")];
+    let paused = false;
+    document.getElementById("toggle").addEventListener("click", () => {
+      paused = !paused;
+      dots.forEach((el) => { el.style.animationPlayState = paused ? "paused" : "running"; });
+    });
+  </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "0.5.0",
-  "description": "Focused Agent Skills for SillyTavern rolecard engineering, component delivery, extension development, validation, media, performance, and safe code improvement.",
+  "version": "1.0.0",
+  "description": "A routed SillyTavern rolecard engineering system with resumable creative authority, bundled guides and design references, evidence gates, and optional portable teaching personas.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -16,8 +16,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "TavernWeave",
-    "shortDescription": "Build, debug, and release robust SillyTavern rolecards.",
-    "longDescription": "TavernWeave provides focused skills for rolecard type and dependency detection, authoring, component-only delivery, UI extension development, render and regex fixtures, security audits, structured data models, performance budgets, audio and Live2D lifecycle, release pipelines, runtime debugging, embedded interfaces, workshop operations, and evidence-driven code quality.",
+    "shortDescription": "Design, build, verify, and learn SillyTavern rolecards.",
+    "longDescription": "TavernWeave combines 18 focused skills with a resumable creative-authority contract, material provenance, layered acceptance evidence, a bundled routed library of ST guides and frontend design or motion references, an offline picker, and optional current-task Atong or MTTT.sir teaching personas.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
@@ -25,6 +25,9 @@
       "Write"
     ],
     "defaultPrompt": [
+      "阿瞳助我！用当前任务级温柔指导模式帮我完成这张角色卡。",
+      "MTTT.sir，拷打我！检查我是否真的理解这次 Vibe Code 的架构与验收。",
+      "Route this task through TavernWeave Library, read A0, and load only the smallest relevant guide set.",
       "Design a maintainable SillyTavern rolecard and choose the right TavernWeave skill.",
       "Update only a rolecard regex or Tavern Helper script and emit an importable test artifact without repacking the card.",
       "Validate this rolecard's regex stages, security surface, and structured data migrations with deterministic fixtures.",

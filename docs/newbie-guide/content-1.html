@@ -5,6 +5,30 @@
 <div class="hero-actions"><a class="primary-btn" href="#first-run">开始第一次任务 ↓</a><button class="ghost-btn" data-copy-target="a0-template" type="button">复制 A0 轻量模板</button></div>
 <div class="hero-tags"><span class="tag">第一至三章 · 入门</span><span class="tag">第四章起 · 进阶</span><span class="tag">TavernWeave</span><span class="tag">SillyTavern 制卡开发</span></div>
 </section>
+<section class="section" id="tw-v1">
+<div class="section-head"><div class="section-no">05.1</div><div><h2>v1 不只是一排 Skill：先选人格，再查资料，最后让工程 Skill 干活</h2><p class="section-kicker">一个安装入口，三层按需工作；不是把整库一次塞给模型。</p></div></div>
+<div aria-label="TavernWeave v1 三层入口" class="flow"><div class="flow-node">Soul · 可选教学人格</div><div class="flow-arrow">→</div><div class="flow-node">Library · A0 与最小资料集</div><div class="flow-arrow">→</div><div class="flow-node">工程 Skill · 真正制卡和验收</div></div>
+<div class="cards"><article class="card"><div class="card-icon">魂</div><h3>Soul</h3><p class="muted">只改变解释、追问和教学节奏，不改变事实、权限、已验状态和真正负责工作的 Skill。</p></article><article class="card"><div class="card-icon">库</div><h3>Library</h3><p class="muted">写入型任务先过 A0，再按意图加载少量 ST 指南、设计、动效或来源 Wiki。</p></article><article class="card"><div class="card-icon">工</div><h3>工程阵列</h3><p class="muted">18 个 Skill 各管创作、组件、API、UI、调试、构建、安全、性能和发布门。</p></article></div>
+<div class="callout"><strong>最重要的边界</strong>安装了资料库，不等于 Agent 每轮都读完整个资料库；开了人格，也不等于人格获得文件、Git、联网、发布或生产权限。</div>
+</section>
+<section class="section" id="soul-mode">
+<div class="section-head"><div class="section-no">05.2</div><div><h2>阿瞳陪你搭脚手架，MTTT.sir 逼你拿出证据</h2><p class="section-kicker">同一套工程事实，两种教学策略；安全词随时优先。</p></div></div>
+<div class="compare"><div class="compare-side"><h4>阿瞳 · 温柔指导版</h4><p>先理解你卡在哪里，再给解释、例子、两三个真选择和一个能收掉的下一步。</p></div><div class="compare-vs">↔</div><div class="compare-side"><h4>MTTT.sir · 严格学习版</h4><p>要求你说出定义、证据、取舍和失败条件，用反例与复述检查你是否真的理解。</p></div></div>
+<div class="code-block"><div class="code-label"><span>Soul 口令</span><button class="copy-btn" type="button">复制</button></div><pre><code>阿瞳助我！
+MTTT.sir，拷打我！
+阿瞳接手
+MTTT.sir 上课
+Soul 归位</code></pre></div>
+<div class="callout warn"><strong>v1 是 Portable</strong>它可靠作用于当前任务，但不承诺新任务、分叉、归档、跨设备或上下文丢失后仍自动保持。它不会冒充真实 MTTT，也不会自动读取或写回你的完整聊天历史和私有 RAG。</div>
+<p>MTTT.sir 可以严厉批评论证、代码、设计和逃避收尾的行为，但不能羞辱你的身份、能力或脆弱经历；阿瞳可以温柔，但不能为了安慰而把没验过说成通过。说出 <code>Soul 归位</code> 后立即恢复普通 TW 风格。</p>
+</section>
+<section class="section" id="library-mode">
+<div class="section-head"><div class="section-no">05.3</div><div><h2>DB 不再另装：A0、ST 指南、设计、动效和挑选页都随 TW</h2><p class="section-kicker">先查最小资料，再让负责的 Skill 做；候选永远不冒充采用。</p></div></div>
+<p class="lead">v1 一次安装携带 A0、31 册正式 ST 指南、1 册明确待验证的 C8、82 个设计条目、38 个动效条目、18 份直接关联 Wiki 和本地沙盘。路由器先看任务属于哪个 Skill，再返回最小资料路径和读取回执。</p>
+<div class="steps"><div class="step"><strong>写入先过 A0</strong>用目标、红线、验收三格阻止方向一开始就错。</div><div class="step"><strong>按意图查专题</strong>状态栏看 UI/移动指南，MVU 看变量指南，白屏看宿主/部署指南，不一次加载整库。</div><div class="step"><strong>设计动效只进候选</strong>挑选页可以看沙盘、来源和边界，导出的清单固定标记为 <code>proposed</code>。</div><div class="step"><strong>回到工程 Skill</strong>资料解释怎么选；真正的源码、API、真实酒馆和发布验收仍由对应 Skill 与目标环境负责。</div></div>
+<div class="callout danger"><strong>公开负向门</strong>A1 是驾驶员母板，不随 TW 发布；命令式旧 B1、过程档案、本地证据、AFV raw/收件箱、个人 RAG 和凭据也不会出现在资料库、挑选页或 Soul 中。</div>
+<p>本地安装后可打开 <code>skills/consult-tavernweave-library/assets/picker/index.html</code>。它只把候选 ID 存在浏览器本地，不要往选择单里放角色卡正文、私密设定或生产信息。</p>
+</section>
 <section class="section" id="intro">
 <div class="section-head"><div class="section-no">00</div><div><h2>Vibe Code 不是开盲盒</h2><p class="section-kicker">你掌方向盘，Agent 跑工程循环；成品不是靠抽。</p></div></div>
 <p class="lead">能长期用的 Vibe Code 很朴素：你定方向、卡边界、收结果，Agent 调查、动手、拿证据。</p>

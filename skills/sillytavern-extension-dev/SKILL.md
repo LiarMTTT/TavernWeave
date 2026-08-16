@@ -9,6 +9,8 @@ description: >-
 
 # SillyTavern Extension Development
 
+Before generating or editing an extension, use `$consult-tavernweave-library` with the `sillytavern-extension-dev` route to load A0 and the extension/workshop guides. The receipt does not replace exact installed-version capability checks or installation authorization.
+
 Build browser-side UI extensions against an explicit host contract. Keep static
 project validation separate from installation and real-runtime acceptance.
 

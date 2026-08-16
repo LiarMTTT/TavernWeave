@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "0.5.0",
-  "description": "Focused Agent Skills for SillyTavern rolecard engineering, component delivery, extension development, validation, media, performance, and safe code improvement.",
+  "version": "1.0.0",
+  "description": "A routed SillyTavern rolecard engineering system with resumable creative authority, bundled guides and design references, evidence gates, and optional portable teaching personas.",
   "author": {
     "name": "LiarMTTT"
   },

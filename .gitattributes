@@ -6,5 +6,6 @@
 *.py text eol=lf
 *.ps1 text eol=lf
 *.mjs text eol=lf
+skills/consult-tavernweave-library/references/st-guides/*.md -whitespace
 *.png binary
 *.zip binary

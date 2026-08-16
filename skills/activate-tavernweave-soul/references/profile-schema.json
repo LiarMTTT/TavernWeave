@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavernweave.local/schemas/creator-profile-v1.json",
+  "title": "Sanitized TavernWeave Creator Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profileId", "version", "scope", "confirmedAt", "privacy", "preferences", "sources"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "profileId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"},
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "scope": {"enum": ["user", "project"]},
+    "confirmedAt": {"type": "string", "format": "date"},
+    "privacy": {"const": "private-adapter"},
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language": {"type": "string", "maxLength": 32},
+        "conclusionFirst": {"type": "boolean"},
+        "technicalAltitude": {"enum": ["new", "intermediate", "expert", "adaptive"]},
+        "decisionBatchSize": {"type": "integer", "minimum": 1, "maximum": 4},
+        "creativeOpenness": {"enum": ["open", "guided", "structured"]},
+        "acceptanceStyle": {"enum": ["evidence-first", "guided", "compact"]}
+      }
+    },
+    "sources": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "label", "confirmedAt"],
+        "properties": {
+          "type": {"enum": ["explicit-user-setting", "project-authority", "approved-summary"]},
+          "label": {"type": "string", "maxLength": 120},
+          "confirmedAt": {"type": "string", "format": "date"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 指针拖拽</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p.copy { font-size: 13px; line-height: 1.55; max-width: 46em; margin: 0 0 12px; }
+    code { font-size: 12px; color: #7eb8ff; }
+    #board { position: relative; height: 260px; background: #1a1d26; border: 1px solid #3a404c; touch-action: none; }
+    #card {
+      position: absolute; left: 24px; top: 24px; width: 140px;
+      padding: 12px; background: #232833; border: 1px solid #7eb8ff; cursor: grab;
+      user-select: none;
+    }
+    #card:active { cursor: grabbing; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy">Pointer Events 拖一张卡。不是 HTML5 DnD，也没有 droppable。dnd-kit / use-gesture 文档不嵌；这页只演示指针坐标。这不是已采用手势栈。</p>
+    <div id="board"><div id="card">按住拖我</div></div>
+  </main>
+  <script>
+    const card = document.getElementById("card");
+    const board = document.getElementById("board");
+    let drag = null;
+    card.addEventListener("pointerdown", (event) => {
+      card.setPointerCapture(event.pointerId);
+      const r = card.getBoundingClientRect();
+      const b = board.getBoundingClientRect();
+      drag = { x: event.clientX - r.left, y: event.clientY - r.top, b };
+    });
+    card.addEventListener("pointermove", (event) => {
+      if (!drag) return;
+      const x = event.clientX - drag.b.left - drag.x;
+      const y = event.clientY - drag.b.top - drag.y;
+      card.style.left = Math.max(0, Math.min(board.clientWidth - card.offsetWidth, x)) + "px";
+      card.style.top = Math.max(0, Math.min(board.clientHeight - card.offsetHeight, y)) + "px";
+    });
+    const end = () => { drag = null; };
+    card.addEventListener("pointerup", end);
+    card.addEventListener("pointercancel", end);
+  </script>
+</body>
+</html>

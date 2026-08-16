@@ -6,6 +6,8 @@ description: >-
 
 # Code Quality Workflow
 
+Before an authorized write, use `$consult-tavernweave-library` with the `code-quality-workflow` route and record the A0 receipt. When the last acceptance gap keeps expanding, read [references/finish-mode.md](references/finish-mode.md) and freeze one visible problem plus one exit condition.
+
 Use one state machine for code-quality work:
 
 ```text

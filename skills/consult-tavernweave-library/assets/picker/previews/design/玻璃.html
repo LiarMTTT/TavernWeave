@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 多层玻璃</title>
+  <style>
+    html, body { margin: 0; min-height: 100%; font-family: "Segoe UI", "PingFang SC", sans-serif; color: #f4f6fb; }
+    body {
+      background:
+        radial-gradient(circle at 20% 20%, #3d6aa3 0, transparent 42%),
+        radial-gradient(circle at 80% 10%, #c4783a 0, transparent 36%),
+        repeating-linear-gradient(90deg, #1b2230 0 18px, #222b3c 18px 36px);
+    }
+    .copy { padding: 16px 18px 8px; font-size: 13px; line-height: 1.5; color: #d7deea; }
+    .stage { position: relative; min-height: 280px; padding: 28px; }
+    .panel {
+      width: min(420px, 92%);
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(18, 22, 32, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(16px) saturate(1.2);
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    }
+    .panel h1 { margin: 0 0 8px; font-size: 20px; }
+    .panel p { margin: 0; color: #e6ebf5; font-size: 13px; line-height: 1.55; }
+    .ghost {
+      position: absolute; right: 36px; top: 72px;
+      width: min(280px, 70%);
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body>
+  <div class="copy">
+    同文档才能糊到背后的色块和条纹。跨 iframe 糊不到父页——见视觉 CSS 概念页。这不是已采用皮肤。
+  </div>
+  <div class="stage">
+    <div class="panel">
+      <h1>多层玻璃</h1>
+      <p>半透明底 + blur + 1px 高光边。上层不要全透明，否则滤镜叠不起来。</p>
+    </div>
+    <div class="ghost">第二层也要半透明，才能看见叠玻璃。</div>
+  </div>
+</body>
+</html>

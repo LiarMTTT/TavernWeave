@@ -11,6 +11,8 @@ description: >-
 
 # SillyTavern Database Rolecards
 
+Before schema or migration writes, use `$consult-tavernweave-library` with the `sillytavern-database-rolecards` route and load A0, C4, and C7. C8 is returned only with explicit experimental opt-in and remains blocked from mature claims until real-host acceptance.
+
 Treat structured rolecard state as versioned application data. Keep schema,
 migration, storage scope, writers, and UI bindings machine-checkable.
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 视口单位</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #cfc6b4; color: #1c1610; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { height: 100%; display: grid; grid-template-rows: auto 1fr; }
+    p.copy { margin: 0; padding: 12px 16px; font-size: 13px; line-height: 1.5; background: #efe6d6; }
+    code { font-size: 12px; }
+    .phone {
+      place-self: center;
+      width: min(280px, 86%);
+      height: min(420px, 70%);
+      border: 10px solid #1c1610;
+      border-radius: 28px;
+      background: #efe6d6;
+      overflow: auto;
+      position: relative;
+    }
+    .bar { padding: 6px 10px; font-size: 11px; background: #1c1610; color: #efe6d6; }
+    .vh { height: 100vh; background: #9a3412; color: #fff; padding: 8px; font-size: 12px; }
+    .svh { height: 100svh; background: #1f4d3a; color: #fff; padding: 8px; font-size: 12px; margin-top: 8px; }
+    .note { padding: 8px 10px 16px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy">框是手机壳，<strong>不是</strong> daisyUI 组件。壳内 <code>100vh</code> 按大视口算，往往会高出这只壳；<code>100svh</code> 跟小视口。规范页不嵌。这不是已采用壳。</p>
+    <div class="phone">
+      <div class="bar">壳高 = 这只框的高</div>
+      <div class="vh">100vh · 若比壳高，会在壳里滚</div>
+      <div class="svh">100svh</div>
+      <p class="note">真机浏览器工具栏显隐才看得出 dvh。本沙盘只保证壳内单位相对这只框。</p>
+    </div>
+  </main>
+</body>
+</html>

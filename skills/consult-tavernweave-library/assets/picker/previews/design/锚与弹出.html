@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 锚与弹出</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px; }
+    p.copy, .note { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    p.copy { margin: 0 0 14px; }
+    code { font-size: 12px; color: #7eb8ff; }
+    #demo-btn {
+      anchor-name: --demo-anchor;
+      font-size: 13px;
+      padding: 6px 10px;
+    }
+    #demo-pop {
+      margin: 0;
+      padding: 10px 12px;
+      max-width: 18em;
+      font-size: 13px;
+      line-height: 1.5;
+      border: 1px solid #3a404c;
+      background: #1a1d26;
+      color: #e8eaef;
+    }
+    @supports (anchor-name: --demo-anchor) {
+      #demo-pop {
+        position-anchor: --demo-anchor;
+        position: absolute;
+        top: anchor(bottom);
+        left: anchor(left);
+        margin-top: 6px;
+      }
+      .no-anchor { display: none; }
+    }
+    @supports not (anchor-name: --demo-anchor) {
+      .has-anchor { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy">Popover API + CSS 锚定位入口示意，不是 Rec 清单，也不是已采用控件皮。按钮 <code>popovertarget="demo-pop"</code>，层 <code>id="demo-pop" popover</code>。支持时用 <code>anchor-name: --demo-anchor</code> 与 <code>position-anchor: --demo-anchor</code>，再 <code>top: anchor(bottom)</code> / <code>left: anchor(left)</code>。</p>
+    <button id="demo-btn" type="button" popovertarget="demo-pop">打开弹出</button>
+    <div id="demo-pop" popover>弹出层。有锚定位时贴在按钮下沿左齐；没有则走 popover 默认位置。</div>
+    <p class="note has-anchor">本浏览器识别 <code>anchor-name</code> / <code>position-anchor</code>，弹出按锚定位。</p>
+    <p class="note no-anchor">本浏览器没有锚定位，弹出在默认位置。</p>
+  </main>
+</body>
+</html>

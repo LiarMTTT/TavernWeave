@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · getRootNode</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p.copy { font-size: 13px; line-height: 1.55; max-width: 46em; margin: 0 0 14px; }
+    code { font-size: 12px; color: #7eb8ff; }
+    button { background: #232833; color: inherit; border: 1px solid #3a404c; border-radius: 8px; padding: 8px 12px; font: inherit; cursor: pointer; }
+    #host { margin: 12px 0; padding: 12px; background: #1a1d26; border: 1px solid #3a404c; }
+    pre { font-size: 12px; white-space: pre-wrap; background: #0c0d10; padding: 10px 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy">同一按钮在亮 DOM 和 Shadow 里，<code>getRootNode()</code> 对到的根不一样。Portal / 弹出层必须问对的 document，不能写死 <code>document.body</code>。这不是已采用 Zag，也不接酒馆宿主。</p>
+    <p><button type="button" id="light">亮 DOM 里问根</button></p>
+    <div id="host"></div>
+    <pre id="out">还没点。</pre>
+  </main>
+  <script>
+    const out = document.getElementById("out");
+    const report = (el, where) => {
+      const root = el.getRootNode();
+      const name = root === document ? "document" : root.constructor.name;
+      out.textContent = where + " → " + name + (root.host ? "（host=" + root.host.id + "）" : "");
+    };
+    document.getElementById("light").addEventListener("click", (event) => report(event.currentTarget, "亮 DOM"));
+    const host = document.getElementById("host");
+    const shadow = host.attachShadow({ mode: "open" });
+    shadow.innerHTML = "<button type='button'>Shadow 里问根</button>";
+    shadow.querySelector("button").addEventListener("click", (event) => report(event.currentTarget, "Shadow"));
+  </script>
+</body>
+</html>

@@ -11,6 +11,8 @@ description: >-
 
 # SillyTavern Render Regex Pipeline
 
+Before changing a regex, use `$consult-tavernweave-library` with the `sillytavern-render-regex-pipeline` route to load A0 plus the render/regex guides. Preserve the route receipt and keep those guides separate from exact host-version evidence.
+
 Turn regex behavior into an explicit, replayable stage trace. Separate structural
 validation from offline replacement and real-host acceptance.
 

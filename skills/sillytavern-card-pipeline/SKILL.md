@@ -21,6 +21,10 @@ Drive the target repository's workflow without pretending this skill ships a bui
 engine. Discover and verify the project's own tools, map them to a small adapter
 contract, and keep configuration, source, and artifacts in distinct layers.
 
+Before a write, build, or package action, use `$consult-tavernweave-library` with the `sillytavern-card-pipeline` route. Read A0 and the returned build/deployment guides, then keep the route receipt beside the preflight evidence.
+
+Record capability-specific evidence with [acceptance-ledger.md](references/acceptance-ledger.md). Keep source, automated, offline artifact, browser, real SillyTavern, human, and release gates separate; automation never writes `driver-accepted`.
+
 ## Confirm the requested gate
 
 Classify the request before running any mutating command:

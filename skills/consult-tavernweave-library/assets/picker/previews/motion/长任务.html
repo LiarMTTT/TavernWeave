@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 长任务与让出</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    button {
+      background: #232833; color: inherit;
+      border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px;
+    }
+    .pulse {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: #7eb8ff;
+      animation: blink 0.7s linear infinite alternate;
+    }
+    @keyframes blink { to { opacity: 0.2; } }
+    .log { font-size: 12px; color: #9aa3b2; min-height: 3em; }
+    code { color: #e8b86d; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>左边蓝点靠主线程刷。同步空转会卡住交互；切片 <code>setTimeout(0)</code> 让出后，点按还能进。这是主线程占用对照，<strong>不是</strong>实验室 INP 分数，也不用 <code>isInputPending</code>。不是已采用性能栈。</p>
+    <div class="row">
+      <div class="pulse" aria-hidden="true"></div>
+      <button type="button" id="block">同步卡 200ms</button>
+      <button type="button" id="yield">切片跑 200ms</button>
+      <button type="button" id="tap">现在点我</button>
+    </div>
+    <p class="log" id="log">还没跑。</p>
+  </main>
+  <script>
+    const log = document.getElementById("log");
+    const spin = (ms) => {
+      const end = performance.now() + ms;
+      while (performance.now() < end) { /* 故意占主线程 */ }
+    };
+    document.getElementById("block").addEventListener("click", () => {
+      const t0 = performance.now();
+      spin(200);
+      log.textContent = "同步空转 " + Math.round(performance.now() - t0) + "ms。这段里蓝点会停。";
+    });
+    document.getElementById("yield").addEventListener("click", async () => {
+      const t0 = performance.now();
+      let left = 200;
+      while (left > 0) {
+        const chunk = Math.min(16, left);
+        spin(chunk);
+        left -= chunk;
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      }
+      log.textContent = "切片让出后跑完 " + Math.round(performance.now() - t0) + "ms。中间可以点「现在点我」。";
+    });
+    document.getElementById("tap").addEventListener("click", () => {
+      log.textContent = "点到了 · " + new Date().toLocaleTimeString();
+    });
+  </script>
+</body>
+</html>

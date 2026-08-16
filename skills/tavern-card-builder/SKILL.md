@@ -7,6 +7,10 @@ description: Plan and author maintainable SillyTavern character cards, including
 
 Design the card as a set of explicit contracts. Keep authoring decisions here and route engineering work to the owning specialist.
 
+Before a write-capable design, use `$consult-tavernweave-library` with the `tavern-card-builder` route so A0 and the smallest matching ST guides are actually read. Keep the route receipt with the project authority; a bundled database that was not routed and read is not evidence.
+
+For a new or long-running card, establish the resumable creative authority in [creative-authority.md](references/creative-authority.md) before producing large prose. For source novels, notes, chats, or research, add the chain in [material-provenance.md](references/material-provenance.md). For persistent knowledge, state, narrative recall, or creator-profile requests, keep the four stores separate using [memory-architecture.md](references/memory-architecture.md).
+
 ## Start with the target
 
 1. Read repository instructions and inspect the existing card before proposing a design.
