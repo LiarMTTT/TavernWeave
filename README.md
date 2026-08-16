@@ -1,8 +1,14 @@
 # TavernWeave
 
+<p align="center">
+  <img src="docs/assets/tavernweave-v1-cover.png" alt="一台位于幻想酒馆中的数字织机，将角色卡、世界书、设计资料与工程模块编织成统一工作流" width="100%">
+</p>
+
+<p align="center"><strong>把灵感、资料、代码与验收，织成一张真正可维护的角色卡。</strong></p>
+
 TavernWeave 是面向 Codex 与 Claude Code 的 SillyTavern 制卡工程系统：18 个可路由 Skill、一份可恢复的创作权威、一条从源码到真实酒馆和人工验收的证据链、统一随包的 ST/设计/动效资料库，以及可选的阿瞳 / MTTT.sir 双人格教学层。
 
-当前工作树是已经通过专项自动验证、浏览器检查与驾驶员体验验收的 **v1.0.0 正式源码版本**。本地提交、远端推送、打包与 Release 仍按各自独立门执行，不能互相代替。
+当前正式版本为 **[v1.0.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.0.0)**。源码验证、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
 
 > TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
