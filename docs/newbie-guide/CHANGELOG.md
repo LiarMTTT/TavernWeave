@@ -1,5 +1,12 @@
 # 奶人教程更新日志
 
+## 1.0.1 - 2026-08-16
+
+- 新增 `05.4 安装不是数文件夹`，解释仓库源码、实际安装目录和宿主发现是三道不同的门。
+- 安装口令要求按仓库完整清单创建新增目录，不得只覆盖已有 Skill。
+- 加入 18/18、Soul、Library 与离线挑选页安装回执，以及安装后新建任务的独立发现门。
+- 更新教程版本至 `1.0.1`，缓存标识至 `v25`；桌面、390px 窄屏与驾驶员验收通过。
+
 ## 1.0.0 - 2026-08-16
 
 - 新增 TavernWeave v1 三层入口：Portable Soul → Routed Library → 18 个工程 Skill。
@@ -68,7 +75,7 @@
 
 ## 0.5.2 - 2026-07-26
 
-在线阅读：[TavernWeave · Vibe Code 制卡入门](https://liarmttt.github.io/TavernWeave/newbie-guide/)
+在线阅读：[TavernWeave · Vibe Code 制卡入门](https://liarmttt.github.io/TavernWeave/)
 
 这次更新把教程从“会让 Agent 修改东西”，继续推进到“看懂 Agent 怎么工作，并能根据真实运行证据指挥它 Debug”。
 

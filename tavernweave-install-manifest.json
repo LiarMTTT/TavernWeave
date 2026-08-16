@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "package": "tavernweave-agent-skills",
+  "version": "1.0.1",
+  "skillCount": 18,
+  "skills": [
+    "activate-tavernweave-soul",
+    "code-quality-workflow",
+    "consult-tavernweave-library",
+    "rolecard-workshop-ops",
+    "shadcn-tailwind-ui",
+    "sillytavern-api-reference",
+    "sillytavern-card-components",
+    "sillytavern-card-pipeline",
+    "sillytavern-component-update",
+    "sillytavern-database-rolecards",
+    "sillytavern-embedded-ui",
+    "sillytavern-extension-dev",
+    "sillytavern-media-live2d-runtime",
+    "sillytavern-render-regex-pipeline",
+    "sillytavern-rolecard-performance",
+    "sillytavern-rolecard-security",
+    "sillytavern-runtime-debug",
+    "tavern-card-builder"
+  ],
+  "requiredPaths": [
+    "skills/activate-tavernweave-soul/SKILL.md",
+    "skills/consult-tavernweave-library/SKILL.md",
+    "skills/consult-tavernweave-library/assets/picker/index.html"
+  ],
+  "hostRediscovery": "required-new-task"
+}

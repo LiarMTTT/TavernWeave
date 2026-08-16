@@ -124,6 +124,48 @@ $skillRoot = Join-Path $PluginRoot 'skills'
 $skillDirs = @(Get-ChildItem -LiteralPath $skillRoot -Directory | Sort-Object Name)
 if ($skillDirs.Count -eq 0) { Add-ValidationError 'No skill directories were found.' }
 
+$installManifest = $null
+$installManifestPath = Join-Path $PluginRoot 'tavernweave-install-manifest.json'
+if (-not (Test-Path -LiteralPath $installManifestPath -PathType Leaf)) {
+    Add-ValidationError "Missing installation manifest: $installManifestPath"
+} else {
+    try {
+        $installManifest = Get-Content -LiteralPath $installManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $installSkills = @($installManifest.skills | ForEach-Object { [string]$_ })
+        $sourceSkills = @($skillDirs | ForEach-Object { $_.Name })
+        if ($installManifest.schemaVersion -ne 1) { Add-ValidationError 'Installation manifest schemaVersion must be 1.' }
+        if ($installManifest.package -ne 'tavernweave-agent-skills') { Add-ValidationError 'Installation manifest package name is invalid.' }
+        if ($manifest -and $installManifest.version -ne $manifest.version) { Add-ValidationError 'Installation manifest and Codex manifest versions do not match.' }
+        if ($claudeManifest -and $installManifest.version -ne $claudeManifest.version) { Add-ValidationError 'Installation manifest and Claude manifest versions do not match.' }
+        if ([int]$installManifest.skillCount -ne $installSkills.Count) { Add-ValidationError 'Installation manifest skillCount does not match its skills array.' }
+        if ($installSkills.Count -ne @($installSkills | Sort-Object -Unique).Count) { Add-ValidationError 'Installation manifest contains duplicate skill names.' }
+        if (($installSkills -join "`n") -ne (($installSkills | Sort-Object) -join "`n")) { Add-ValidationError 'Installation manifest skills must remain sorted.' }
+        if ((($installSkills | Sort-Object) -join "`n") -ne (($sourceSkills | Sort-Object) -join "`n")) { Add-ValidationError 'Installation manifest skill names do not exactly match the source skill directories.' }
+        if ($installManifest.hostRediscovery -ne 'required-new-task') { Add-ValidationError 'Installation manifest must keep host rediscovery as a separate new-task gate.' }
+
+        $requiredInstallPaths = @(
+            'skills/activate-tavernweave-soul/SKILL.md',
+            'skills/consult-tavernweave-library/SKILL.md',
+            'skills/consult-tavernweave-library/assets/picker/index.html'
+        )
+        $declaredRequiredPaths = @($installManifest.requiredPaths | ForEach-Object { [string]$_ })
+        foreach ($requiredInstallPath in $requiredInstallPaths) {
+            if ($requiredInstallPath -notin $declaredRequiredPaths) { Add-ValidationError "Installation manifest omits a v1 hard gate: $requiredInstallPath" }
+        }
+        foreach ($requiredInstallPath in $declaredRequiredPaths) {
+            $nativePath = $requiredInstallPath.Replace([char]47, [System.IO.Path]::DirectorySeparatorChar)
+            $resolvedPath = [System.IO.Path]::GetFullPath((Join-Path $PluginRoot $nativePath))
+            if (-not $resolvedPath.StartsWith($pluginRootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+                Add-ValidationError "Installation manifest path escapes plugin root: $requiredInstallPath"
+            } elseif (-not (Test-Path -LiteralPath $resolvedPath -PathType Leaf)) {
+                Add-ValidationError "Installation manifest required path is missing: $requiredInstallPath"
+            }
+        }
+    } catch {
+        Add-ValidationError "Invalid installation manifest: $($_.Exception.Message)"
+    }
+}
+
 foreach ($skillDir in $skillDirs) {
     $skillPath = Join-Path $skillDir.FullName 'SKILL.md'
     $openAiPath = Join-Path $skillDir.FullName 'agents\openai.yaml'
@@ -227,6 +269,17 @@ foreach ($scriptFile in @($publicFiles | Where-Object { $_.Extension -ieq '.ps1'
     [System.Management.Automation.Language.Parser]::ParseFile($scriptFile.FullName, [ref]$parseTokens, [ref]$parseErrors) | Out-Null
     foreach ($parseError in @($parseErrors)) {
         Add-ValidationError "PowerShell parse error in $($scriptFile.FullName): $($parseError.Message)"
+    }
+}
+
+$installGateTest = Join-Path $PluginRoot 'tests\install-gate.test.ps1'
+if (-not (Test-Path -LiteralPath $installGateTest -PathType Leaf)) {
+    Add-ValidationError 'Installation gate test is missing.'
+} else {
+    try {
+        $installGateOutput = @(& $installGateTest -PluginRoot $PluginRoot 2>&1)
+    } catch {
+        Add-ValidationError "Installation gate test failed: $($_.Exception.Message)"
     }
 }
 
