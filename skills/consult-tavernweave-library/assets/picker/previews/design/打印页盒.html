@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 打印页盒</title>
+  <style>
+    html, body { margin: 0; background: #e8e4dc; color: #1a1814; font-family: "Iowan Old Style", "Songti SC", serif; }
+    main { padding: 16px 18px 24px; }
+    p.copy { font-size: 13px; line-height: 1.55; max-width: 46em; margin: 0 0 14px; }
+    code { font-size: 12px; color: #3d4f6f; }
+    button { font: inherit; padding: 6px 12px; cursor: pointer; }
+    .sheet {
+      width: min(420px, 100%);
+      min-height: 280px;
+      margin-top: 12px;
+      padding: 28px 32px 36px;
+      background: #fff;
+      color: #222;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    }
+    .sheet h1 { margin: 0 0 8px; font-size: 20px; }
+    .sheet p { margin: 0 0 10px; font-size: 13px; line-height: 1.6; }
+    .sheet .hdr, .sheet .ftr { display: none; font-size: 11px; color: #666; }
+    body.print-view { background: #cfc8bb; }
+    body.print-view .sheet { box-shadow: none; outline: 1px dashed #888; }
+    body.print-view .sheet .hdr, body.print-view .sheet .ftr { display: block; }
+    body.print-view .no-print { display: none; }
+    @page { size: A5; margin: 16mm; }
+    @media print {
+      body { background: #fff; }
+      button, .copy { display: none; }
+      .sheet { box-shadow: none; width: auto; }
+      .sheet .hdr, .sheet .ftr { display: block; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy"><code>@page</code> 只在打印生效。本页用「打印预览」把页眉页脚和藏块在屏幕上模拟出来，不是浏览器打印对话框。邮件 HTML 另走表，不要拿这页当 MJML。这不是已采用版式。</p>
+    <button type="button" id="toggle">打印预览开 / 关</button>
+    <article class="sheet">
+      <p class="hdr">页眉 · 样本册打印沙盘</p>
+      <h1>页盒</h1>
+      <p>正文在页盒里。打印时页边由 <code>@page</code> 管，不是这张白卡片的 padding。</p>
+      <p class="no-print">这块带 <code>.no-print</code>，打印和预览态都会藏。</p>
+      <p>页脚在下面。真机请用系统打印看页眉是否进页盒，各浏览器不一。</p>
+      <p class="ftr">页脚 · 不是已采用皮肤</p>
+    </article>
+  </main>
+  <script>
+    document.getElementById("toggle").addEventListener("click", () => {
+      document.body.classList.toggle("print-view");
+    });
+  </script>
+</body>
+</html>

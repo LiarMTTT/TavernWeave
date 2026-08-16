@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "snapshotVersion": "2026-08-16",
+  "standingGuide": "ST-A0",
+  "routes": [
+    {"id":"tavern-card-builder","terms":["制卡","角色卡","世界书","设定","开局","mvu","变量","提示词","预设"],"guides":["ST-A2","ST-A3","ST-A4","ST-A6","ST-B1","ST-C10"],"domains":[]},
+    {"id":"sillytavern-card-components","terms":["拆卡","组件","registry","recipe"],"guides":["ST-A2","ST-A6"],"domains":[]},
+    {"id":"sillytavern-component-update","terms":["组件更新","正则更新","脚本更新"],"guides":["ST-A2","ST-A6","ST-B2"],"domains":[]},
+    {"id":"sillytavern-render-regex-pipeline","terms":["正则","渲染管线","宏"],"guides":["ST-A5","ST-A6"],"domains":[]},
+    {"id":"sillytavern-rolecard-security","terms":["安全","xss","注入","权限"],"guides":["ST-D6"],"domains":[]},
+    {"id":"sillytavern-database-rolecards","terms":["数据库","表格","同层数据库"],"guides":["ST-C4","ST-C7"],"experimentalGuides":["ST-C8"],"domains":[]},
+    {"id":"sillytavern-extension-dev","terms":["扩展","插件","酒馆脚本","魔棒"],"guides":["ST-D5","ST-E5"],"domains":[]},
+    {"id":"sillytavern-rolecard-performance","terms":["性能","大卡","预算","inp"],"guides":["ST-D2"],"domains":["motion"]},
+    {"id":"sillytavern-media-live2d-runtime","terms":["媒体","音频","视频","live2d","立绘"],"guides":["ST-E3","ST-E4"],"domains":["motion"]},
+    {"id":"sillytavern-card-pipeline","terms":["构建","打包","发布","部署","json","png"],"guides":["ST-A2","ST-D1","ST-D4"],"domains":[]},
+    {"id":"sillytavern-api-reference","terms":["api","签名","事件","stscript","quickreplies","宏"],"guides":["ST-A5","ST-B1","ST-B2","ST-C1","ST-D3"],"domains":[]},
+    {"id":"sillytavern-runtime-debug","terms":["调试","白屏","空白","控制台","宿主"],"guides":["ST-C1","ST-D4"],"domains":[]},
+    {"id":"sillytavern-embedded-ui","terms":["状态栏","控制中心","抽屉","浮窗","悬浮球","开局页","美化","移动端"],"guides":["ST-C1","ST-C2","ST-C3","ST-C9","ST-C10","ST-C11","ST-C12","ST-C13","ST-D7"],"domains":["design","motion"]},
+    {"id":"code-quality-workflow","terms":["代码质量","重构","优化","收尾"],"guides":[],"domains":[]},
+    {"id":"shadcn-tailwind-ui","terms":["shadcn","tailwind","react","产品界面"],"guides":["ST-C3","ST-D7"],"domains":["design","motion"]},
+    {"id":"rolecard-workshop-ops","terms":["工坊","发布链","网关","存储","502"],"guides":["ST-D1","ST-D4","ST-E5"],"domains":[]},
+    {"id":"consult-tavernweave-library","terms":["资料库","指南","设计库","动效库","挑选"],"guides":[],"domains":["design","motion"]},
+    {"id":"activate-tavernweave-soul","terms":["阿瞳","mttt.sir","soul"],"guides":[],"domains":[]}
+  ]
+}

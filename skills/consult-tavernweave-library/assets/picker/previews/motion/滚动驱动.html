@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 滚动驱动</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .warn { color: #e8b86d; display: block; }
+    .scroller {
+      height: 220px;
+      overflow: auto;
+      margin: 12px 0;
+      background: #1a1d26;
+      border: 1px solid #2e3440;
+      border-radius: 8px;
+    }
+    .bar {
+      position: sticky; top: 0; z-index: 1;
+      height: 8px; width: 100%;
+      transform-origin: 0 50%;
+      background: #7eb8ff;
+    }
+    .pad { padding: 12px 14px 28px; font-size: 13px; line-height: 1.7; color: #9aa3b2; }
+    @supports (animation-timeline: scroll()) {
+      .warn { display: none; }
+      .bar {
+        animation-name: fill;
+        animation-duration: auto;
+        animation-timing-function: linear;
+        animation-timeline: scroll(nearest block);
+        animation-range: 0% 100%;
+      }
+    }
+    @keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      .bar { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p>进度条用真 CSS <code>animation-timeline: scroll(nearest block)</code> 与 <code>animation-range: 0% 100%</code> 绑 <code>@keyframes fill</code>。绑的是<strong>容器滚动</strong>，不是 Lenis，也<strong>不是</strong>工坊已采用动效栈。上线前先查兼容。</p>
+    <p class="warn">本浏览器没有滚动驱动动画，只看到静态块</p>
+    <div class="scroller" id="box">
+      <div class="bar" aria-hidden="true"></div>
+      <div class="pad">
+        <p>在此框内滚动。条在容器顶，<code>scroll(nearest block)</code> 找最近块轴滚动器——iframe 里比绑 window 稳。</p>
+        <p>一段占位，把内容拉长，让进度能从 0% 走到 100%。</p>
+        <p>再一段。减动效媒体查询下停动画，条停在静态块，不跟滚。</p>
+        <p>再一段。@supports 检测 animation-timeline: scroll()；不支持时上面黄字可见。</p>
+        <p>再一段。keyframes 只改 scaleX，没有脚本监听 scroll 事件。</p>
+        <p>再一段。末尾：滚到底时条应满宽（支持滚动驱动时）。</p>
+        <p>底。</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

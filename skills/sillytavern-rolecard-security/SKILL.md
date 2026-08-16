@@ -11,6 +11,8 @@ description: >-
 
 # SillyTavern Rolecard Security
 
+Use `$consult-tavernweave-library` with the `sillytavern-rolecard-security` route for the public XSS/security guide. Add A0 before any authorized remediation; a static guide or scan does not authorize executing suspicious content.
+
 Treat rolecard content as an executable supply-chain surface. Scan read-only first,
 then separate suspicious patterns from verified vulnerabilities.
 

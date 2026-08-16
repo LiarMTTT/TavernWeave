@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 平滑滚动</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .col h2 { margin: 0 0 6px; font-size: 13px; color: #9aa3b2; font-weight: 600; }
+    .box {
+      height: 220px;
+      overflow: auto;
+      background: #1a1d26;
+      border: 1px solid #2e3440;
+      border-radius: 8px;
+    }
+    .box.smooth { scroll-behavior: smooth; }
+    .item { padding: 18px 12px; border-bottom: 1px solid #2e3440; font-size: 13px; }
+    .item:nth-child(3) { background: #232833; }
+    button {
+      margin-top: 8px;
+      background: #232833; color: inherit;
+      border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p>左边 <code>scroll-behavior: auto</code>，右边 <code>smooth</code>。点按钮滚到第三条。这是原生滚动条，<strong>不是</strong> Lenis / Locomotive。GitHub 和文档不嵌。尽量走原生条，不要先上平滑库。不是已采用滚动栈。</p>
+    <div class="pair">
+      <div class="col">
+        <h2>auto</h2>
+        <div class="box" id="auto"></div>
+        <button type="button" data-to="auto">滚到第三条</button>
+      </div>
+      <div class="col">
+        <h2>smooth</h2>
+        <div class="box smooth" id="smooth"></div>
+        <button type="button" data-to="smooth">滚到第三条</button>
+      </div>
+    </div>
+  </main>
+  <script>
+    function fill(id) {
+      const box = document.getElementById(id);
+      for (let i = 1; i <= 12; i += 1) {
+        const item = document.createElement("div");
+        item.className = "item";
+        item.dataset.n = String(i);
+        item.textContent = "条目 " + i + (i === 3 ? " · 目标" : "");
+        box.appendChild(item);
+      }
+    }
+    fill("auto");
+    fill("smooth");
+    document.querySelectorAll("[data-to]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const box = document.getElementById(btn.dataset.to);
+        box.querySelector('[data-n="3"]').scrollIntoView({ block: "center", behavior: box.classList.contains("smooth") ? "smooth" : "auto" });
+      });
+    });
+  </script>
+</body>
+</html>

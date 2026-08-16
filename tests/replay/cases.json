@@ -180,6 +180,30 @@
       "prompt": "Plan eager, lazy, and on-demand media under a byte budget and check that BGM playback stops on chat teardown without replacing the user's whole playlist.",
       "expectedPrimarySkill": "sillytavern-media-live2d-runtime",
       "expectedBehavior": "Produce a non-network preload plan, enforce declared byte and count limits, use only BGM or ambient audio contracts, preserve existing settings, and validate deterministic cleanup."
+    },
+    {
+      "id": "creative-authority-resume",
+      "prompt": "继续做这张长篇设定角色卡。先从项目权威恢复已经确认、候选、待决、证据和下一道门，不要重新问我冻结过的设定。",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Read the Markdown/YAML creative authority and actual worktree first, preserve state buckets, restate only genuine conflicts or open decisions, and continue from the recorded next gate."
+    },
+    {
+      "id": "library-routed-ui-selection",
+      "prompt": "我要做一个适合手机酒馆状态栏的底部抽屉。先查 TW 资料库并给我三种设计和动效候选，不要把候选直接算作采用。",
+      "expectedPrimarySkill": "consult-tavernweave-library",
+      "expectedBehavior": "Return A0 for the write task, route to the embedded-UI and mobile guides plus design and motion domains, keep selections proposed, and retain exact API and real-host gates."
+    },
+    {
+      "id": "soul-atong-card-guidance",
+      "prompt": "阿瞳助我！我第一次把长篇小说做成角色卡，请温柔地带我建立权威和材料来源链。",
+      "expectedPrimarySkill": "activate-tavernweave-soul",
+      "expectedBehavior": "Activate Atong as current-task Portable mode, disclose unchanged permissions and profile status, use warm scaffolding, and route the technical work to tavern-card-builder and the library."
+    },
+    {
+      "id": "soul-mttt-sir-teachback",
+      "prompt": "MTTT.sir，拷打我！检查我是不是拿 Node fixture 冒充真实酒馆验收。",
+      "expectedPrimarySkill": "activate-tavernweave-soul",
+      "expectedBehavior": "Activate strict but respectful Portable mode, demand the exact capability and evidence boundary, require teach-back, preserve the real-host gate, and avoid personal humiliation."
     }
   ]
 }

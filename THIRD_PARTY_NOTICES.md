@@ -16,6 +16,17 @@ The seven 0.5.0 skills (`sillytavern-component-update`, `sillytavern-render-rege
 
 Only public facts needed to locate and distinguish these interoperability surfaces are summarized. Any future inclusion or adaptation of upstream material must be reviewed under that project's own license before release.
 
+## TavernWeave Library snapshot
+
+The `consult-tavernweave-library` skill includes an explicit public snapshot of two LiarMTTT-authored local knowledge sources:
+
+- 32 ST development topic guides plus the public A0 harness checklist, distributed by the same copyright holder under TavernWeave's PolyForm Noncommercial license;
+- AFV frontend-design and motion catalogs, directly linked concept Wiki pages, and owned technique sandboxes originally published by LiarMTTT under the MIT License. The AFV MIT notice is retained in `skills/consult-tavernweave-library/references/AFV-LICENSE.txt`.
+
+Catalog entries may link to independent standards, libraries, products, demos, fonts, images, or source sites. TavernWeave records names, URLs, classification, and interoperability notes; it does not vendor those external projects, their paid examples, third-party fonts, images, or source code. An outbound catalog link is not a redistribution license or an adoption decision. Users must review the linked project's current terms before incorporating it into a card or product.
+
+The public snapshot intentionally excludes the A1 driver master, archived command-era guidance, local evidence, AFV raw or inbox material, private profiles, credentials, and unrelated knowledge domains. File-level hashes and redaction counts are recorded in the library manifest.
+
 ## shadcn-tailwind-ui source review
 
 The private source used as a design input carried inconsistent license metadata and unverified font assets. TavernWeave does not redistribute those fonts, coverage output, or unknown-license assets. Any retained third-party code must keep its original notice in the corresponding skill and is not relicensed by TavernWeave's repository-level license.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "阿瞳 / MTTT.sir · TavernWeave Soul"
+  short_description: "开启阿瞳或 MTTT.sir 的当前任务级指导模式"
+  default_prompt: "Use $activate-tavernweave-soul to start Atong mode for this TavernWeave task."

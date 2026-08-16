@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 竖排</title>
+  <style>
+    html, body { margin: 0; background: #e8e0d0; color: #2a241c; font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+    main { padding: 16px 18px; }
+    p.copy { font-size: 13px; line-height: 1.55; max-width: 46em; margin: 0 0 14px; }
+    code { font-size: 12px; }
+    .cols { display: flex; gap: 20px; align-items: flex-start; }
+    .col { flex: 1 1 0; min-width: 0; }
+    .label { font-size: 13px; margin: 0 0 8px; color: #5a5044; }
+    .paper {
+      background: #f4eee2;
+      border: 1px solid #c8bba6;
+      box-shadow: inset 0 0 0 1px #fff8ee;
+    }
+    .hz {
+      writing-mode: horizontal-tb;
+      padding: 14px 16px;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    .vt {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      height: 22em;
+      padding: 16px 14px;
+      font-size: 16px;
+      line-height: 1.8;
+      background-image: repeating-linear-gradient(
+        to left,
+        transparent 0 1.8em,
+        rgba(90, 80, 68, 0.12) 1.8em calc(1.8em + 1px)
+      );
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy">对照同一段中文：左 <code>writing-mode: horizontal-tb</code>，右 <code>vertical-rl</code> + <code>text-orientation: mixed</code>。竖排用 UAX #50 + OpenType <code>vert</code>；这页没有随库字，看不到 <code>vert</code> 替换，只看书写方向。这不是已采用皮肤。</p>
+    <div class="cols">
+      <div class="col">
+        <p class="label">horizontal-tb</p>
+        <div class="paper hz">纸页上的字从左往右走。春雨落在石阶上，廊下的灯还没点，只听见檐水一滴一滴打在木桶里。</div>
+      </div>
+      <div class="col">
+        <p class="label">vertical-rl · mixed</p>
+        <div class="paper vt">纸页上的字从左往右走。春雨落在石阶上，廊下的灯还没点，只听见檐水一滴一滴打在木桶里。</div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

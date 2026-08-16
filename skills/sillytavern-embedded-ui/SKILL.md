@@ -5,6 +5,8 @@ description: Design, implement, or review framework-neutral embedded interfaces 
 
 # SillyTavern Embedded UI
 
+Before designing or changing an embedded interface, use `$consult-tavernweave-library` with the `sillytavern-embedded-ui` route. Read A0, the smallest matching UI/mobile guides, and selected design/motion references; every selection remains `proposed` until the project authority adopts it.
+
 Build the smallest maintainable interface that fits the rolecard's actual lifecycle. Use semantic HTML, CSS, and JavaScript as the portable baseline. Adopt a framework only when the existing project already uses it or the interaction complexity clearly justifies it.
 
 ## Own the implementation boundary

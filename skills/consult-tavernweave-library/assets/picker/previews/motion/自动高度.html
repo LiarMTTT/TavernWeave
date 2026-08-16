@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · interpolate-size</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p.copy { font-size: 13px; line-height: 1.55; max-width: 46em; margin: 0 0 12px; }
+    code { font-size: 12px; color: #7eb8ff; }
+    button { background: #232833; color: inherit; border: 1px solid #3a404c; border-radius: 8px; padding: 6px 10px; font: inherit; cursor: pointer; }
+    .box {
+      margin-top: 12px; overflow: hidden; background: #1a1d26; border: 1px solid #3a404c;
+      interpolate-size: allow-keywords;
+      height: 2.8em;
+      transition: height 0.35s ease;
+    }
+    .box.open { height: auto; }
+    .box p { margin: 0; padding: 10px 12px; font-size: 13px; line-height: 1.55; }
+    #support { font-size: 12px; color: #9aa3b2; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy"><code>interpolate-size: allow-keywords</code> 才能把 <code>height: auto</code> 动画起来。不支持的浏览器会硬切。不是 spring()。这不是已采用手风琴。</p>
+    <button type="button" id="t">展开 / 收起</button>
+    <div class="box" id="box">
+      <p>第一行始终露出来。</p>
+      <p>后面这几行只有展开才完整看见。高度跟内容走，不是写死 200px。</p>
+      <p>查兼容后再用。本页不引入 JS 量高度。</p>
+    </div>
+    <p id="support"></p>
+  </main>
+  <script>
+    document.getElementById("t").addEventListener("click", () => {
+      document.getElementById("box").classList.toggle("open");
+    });
+    const ok = CSS.supports && CSS.supports("interpolate-size: allow-keywords");
+    document.getElementById("support").textContent = ok ? "这台浏览器声称支持 interpolate-size。" : "这台浏览器不支持 interpolate-size，只会硬切。";
+  </script>
+</body>
+</html>

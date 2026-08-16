@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 底抽屉</title>
+  <style>
+    html, body { margin: 0; min-height: 100%; background: #cfc6b4; color: #1c1610; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 28px; }
+    p.copy { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button {
+      font: inherit;
+      padding: 6px 12px;
+      border: 1px solid #1c1610;
+      background: #efe6d6;
+      border-radius: 8px;
+    }
+    dialog {
+      width: min(420px, 100%);
+      max-width: 100%;
+      margin: auto 0 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+    dialog::backdrop { background: rgba(28, 22, 16, 0.45); }
+    .sheet {
+      background: #efe6d6;
+      border-radius: 16px 16px 0 0;
+      padding: 14px 16px 20px;
+      box-shadow: 0 -8px 24px rgba(28, 22, 16, 0.18);
+    }
+    .sheet h1 { margin: 0 0 8px; font-size: 18px; }
+    .sheet p { margin: 0 0 12px; font-size: 13px; line-height: 1.5; }
+    @media (prefers-reduced-motion: no-preference) {
+      dialog[open] { animation: up 180ms ease-out; }
+    }
+    @keyframes up {
+      from { transform: translateY(24px); }
+      to { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy">原生 <code>&lt;dialog&gt;</code> 从底边滑上来。这是平台控件，<strong>不是</strong> Apple HIG，也<strong>不是</strong> Vaul。规范正文不嵌。这不是已采用抽屉。</p>
+    <button type="button" id="open">打开底抽屉</button>
+    <dialog id="sheet">
+      <div class="sheet">
+        <h1>底抽屉</h1>
+        <p>点遮罩或「关掉」关闭。减动效时只切状态，不播位移。</p>
+        <button type="button" id="close">关掉</button>
+      </div>
+    </dialog>
+  </main>
+  <script>
+    const sheet = document.getElementById("sheet");
+    document.getElementById("open").addEventListener("click", () => sheet.showModal());
+    document.getElementById("close").addEventListener("click", () => sheet.close());
+    sheet.addEventListener("click", (event) => {
+      if (event.target === sheet) sheet.close();
+    });
+  </script>
+</body>
+</html>

@@ -14,6 +14,8 @@ description: >-
 
 # SillyTavern Card Components
 
+Before decomposition or registry writes, use `$consult-tavernweave-library` with the `sillytavern-card-components` route, read A0 and the returned card-format/regex guidance, and record the receipt in the roundtrip plan.
+
 Treat reusable component sources and packed card artifacts as different layers. Keep
 the shared library stable, make exploratory work disposable, and move changes across
 that boundary only after evidence supports promotion.

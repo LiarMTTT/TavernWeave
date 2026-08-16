@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 同文档 View Transition</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p, .status { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .status { color: #9aa3b2; }
+    .card {
+      view-transition-name: vt-card;
+      max-width: 28em;
+      margin: 12px 0;
+      padding: 14px 16px;
+      background: #1a1d26;
+      border: 1px solid #2e3440;
+      border-radius: 8px;
+    }
+    .card h2 { margin: 0 0 8px; font-size: 16px; }
+    .card ul { margin: 0; padding-left: 1.2em; }
+    button {
+      background: #232833; color: inherit;
+      border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-group(*),
+      ::view-transition-old(*),
+      ::view-transition-new(*) { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p>同文档 <code>document.startViewTransition</code> 包住 DOM 切换；元素写了真属性 <code>view-transition-name: vt-card</code>。这是平台 API 预览，<strong>不是</strong>工坊已采用动效栈，也<strong>不要</strong>引入 GSAP/Motion。</p>
+    <p>同文档 VT 属 Baseline Newly（Firefox 144 起齐）。不要写成「VT 已经 Baseline」却漏掉「同文档」——跨文档是另一条。</p>
+    <p class="status" id="status"></p>
+    <article class="card" id="panel"></article>
+    <button type="button" id="toggle">切换 目录 / 详情</button>
+  </main>
+  <script>
+    const panel = document.getElementById("panel");
+    const status = document.getElementById("status");
+    const hasVT = typeof document.startViewTransition === "function";
+    const reduceMq = matchMedia("(prefers-reduced-motion: reduce)");
+    let list = true;
+    status.textContent = hasVT
+      ? "已检测到 startViewTransition；减动时停大位移，只留切状态。"
+      : "没有 View Transition API，只做硬切";
+    function paint() {
+      panel.innerHTML = list
+        ? "<h2>目录</h2><ul><li>条目甲</li><li>条目乙</li><li>条目丙</li></ul>"
+        : "<h2>详情 · 条目甲</h2><p>详情正文。过渡根是这张卡，name 为 vt-card。</p>";
+    }
+    function swap() {
+      list = !list;
+      const run = () => paint();
+      if (hasVT && !reduceMq.matches) document.startViewTransition(run);
+      else run();
+    }
+    paint();
+    document.getElementById("toggle").addEventListener("click", swap);
+  </script>
+</body>
+</html>

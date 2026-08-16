@@ -5,6 +5,8 @@ description: Build, restyle, or review accessible React interfaces that use shad
 
 # shadcn + Tailwind UI
 
+Before UI writes, use `$consult-tavernweave-library` with the `shadcn-tailwind-ui` route to load A0, responsive/CSS guides, and candidate design/motion references. Selecting a library or visual direction does not authorize dependency installation or overwrite existing configuration.
+
 Use this skill for implementation work inside an existing React codebase. Preserve the project's framework, package manager, component conventions, tokens, and installed shadcn components before introducing anything new.
 
 ## Scope

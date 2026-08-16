@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · iframe 分层</title>
+  <style>
+    html, body { margin: 0; min-height: 100%; font-family: "Segoe UI", "PingFang SC", sans-serif; color: #f4f6fb; }
+    body {
+      background:
+        radial-gradient(circle at 20% 20%, #3d6aa3 0, transparent 42%),
+        radial-gradient(circle at 80% 10%, #c4783a 0, transparent 36%),
+        #1b2230;
+    }
+    main { padding: 16px 18px 24px; }
+    p.copy { font-size: 13px; line-height: 1.55; max-width: 46em; margin: 0 0 12px; }
+    code { color: #9ad; }
+    iframe { width: min(420px, 100%); height: 180px; border: 1px solid rgba(255,255,255,0.3); background: transparent; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy">父页有色块。子 iframe 里的玻璃只能糊到<strong>iframe 自己的文档</strong>，糊不到这块父页背景。这就是酒馆宿主分层。不是已采用壳。</p>
+    <iframe srcdoc="<!DOCTYPE html><html><head><style>html,body{margin:0;height:100%;background:rgba(8,10,16,.15)} .p{margin:20px;padding:14px;border-radius:12px;background:rgba(18,22,32,.42);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#e8eef8;font:13px/1.5 sans-serif}</style></head><body><div class='p'>iframe 内 backdrop-filter。父页色块不应该被糊到。</div></body></html>" title="子文档玻璃"></iframe>
+  </main>
+</body>
+</html>

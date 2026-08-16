@@ -1,0 +1,1386 @@
+{
+  "schemaVersion": 1,
+  "snapshotVersion": "2026-08-16",
+  "catalogs": {
+    "design": {
+      "id": "design",
+      "title": "设计",
+      "blurb": "点一条就出沙盘；没有沙盘、能嵌的出源站。规范长文不嵌。不是已采用设计系统。",
+      "previewBase": "../前端设计库/preview/",
+      "items": [
+        {
+          "id": "wiki-visual",
+          "name": "视觉CSS与设计token",
+          "grade": "概念",
+          "tags": [
+            "玻璃",
+            "token",
+            "视口"
+          ],
+          "wiki": "../视觉CSS与设计token.md",
+          "note": "正式蒸馏正文：backdrop-filter、视口、DTCG、P3≠HDR、Houdini。",
+          "preview": "玻璃.html"
+        },
+        {
+          "id": "wiki-a11y",
+          "name": "无障碍与包容设计",
+          "grade": "概念",
+          "tags": [
+            "无障碍"
+          ],
+          "wiki": "../无障碍与包容设计.md",
+          "url": "https://www.w3.org/WAI/ARIA/apg/",
+          "note": "APG ≠ 规范；包容 ≠ 无障碍；GAG/XAG/APX 不可互换。",
+          "preview": "无障碍.html"
+        },
+        {
+          "id": "wiki-cjk",
+          "name": "CJK排印与竖排",
+          "grade": "概念",
+          "tags": [
+            "排印"
+          ],
+          "wiki": "../CJK排印与竖排.md",
+          "url": "https://www.w3.org/TR/clreq/",
+          "note": "CLREQ/JLREQ 是需求不是实现保证；竖排用 UAX #50 + vert。",
+          "preview": "竖排.html"
+        },
+        {
+          "id": "wiki-print",
+          "name": "打印CSS与邮件HTML",
+          "grade": "概念",
+          "tags": [
+            "打印",
+            "邮件"
+          ],
+          "wiki": "../打印CSS与邮件HTML.md",
+          "url": "https://documentation.mjml.io/",
+          "note": "页盒 css-page；AMP 段序对打 RFC 2046。",
+          "preview": "打印页盒.html"
+        },
+        {
+          "id": "wiki-head",
+          "name": "无头组件与根节点",
+          "grade": "概念",
+          "tags": [
+            "组件"
+          ],
+          "wiki": "../无头组件与根节点.md",
+          "url": "https://zagjs.com/guides/composition",
+          "note": "getRootNode 对到对的 document。映射，不是已采用 Zag。",
+          "preview": "根节点.html"
+        },
+        {
+          "id": "css-1",
+          "name": "MDN backdrop-filter",
+          "grade": "规范",
+          "tags": [
+            "玻璃"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/backdrop-filter",
+          "wiki": "../视觉CSS与设计token.md",
+          "note": "毛玻璃真源。规范页不嵌，看本地玻璃。",
+          "preview": "玻璃.html"
+        },
+        {
+          "id": "css-2",
+          "name": "glassmorphism.com",
+          "grade": "生成器",
+          "tags": [
+            "玻璃"
+          ],
+          "url": "https://glassmorphism.com/",
+          "embed": true,
+          "note": "原版毛玻璃滑块；学院站会弹登录。不当设计系统。",
+          "preview": "玻璃.html"
+        },
+        {
+          "id": "css-3",
+          "name": "css.glass",
+          "grade": "生成器",
+          "tags": [
+            "玻璃"
+          ],
+          "url": "https://css.glass/",
+          "embed": true,
+          "note": "最简玻璃生成器。配方偏浅色营销卡。",
+          "preview": "玻璃.html"
+        },
+        {
+          "id": "css-4",
+          "name": "CSS-Tricks 多层玻璃",
+          "grade": "规范",
+          "tags": [
+            "玻璃"
+          ],
+          "url": "https://css-tricks.com/using-css-backdrop-filter-for-ui-effects/",
+          "note": "长文且常拒嵌。本地沙盘是同手法，不是原文镜像。",
+          "preview": "玻璃.html"
+        },
+        {
+          "id": "css-5",
+          "name": "augmented-ui",
+          "grade": "库",
+          "tags": [
+            "HUD"
+          ],
+          "url": "https://augmented-ui.com/",
+          "embed": true,
+          "note": "赛博切角。兼容数据停在 2020。"
+        },
+        {
+          "id": "css-6",
+          "name": "扫描线终端",
+          "grade": "灵感",
+          "tags": [
+            "HUD"
+          ],
+          "url": "https://css-tricks.com/old-timey-terminal-styling/",
+          "note": "2018 长文，不嵌。本地扫描线是同手法。",
+          "preview": "扫描线.html"
+        },
+        {
+          "id": "css-7",
+          "name": "Open Props",
+          "grade": "库",
+          "tags": [
+            "token"
+          ],
+          "url": "https://open-props.style/",
+          "embed": true,
+          "note": "现成 CSS 自定义属性集。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "css-8",
+          "name": "Radix Colors",
+          "grade": "库",
+          "tags": [
+            "token"
+          ],
+          "url": "https://www.radix-ui.com/colors",
+          "embed": true,
+          "note": "颜色阶，不必上 Radix 组件。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "css-10",
+          "name": "Uiverse",
+          "grade": "灵感",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://uiverse.io/",
+          "embed": true,
+          "note": "社区控件片段，质量参差。"
+        },
+        {
+          "id": "css-11",
+          "name": "daisyUI",
+          "grade": "库",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://daisyui.com/",
+          "note": "文档站，不嵌整站。偏后台。本地只看视口壳，不是 daisyUI。",
+          "preview": "视口单位.html"
+        },
+        {
+          "id": "h1",
+          "name": "CodePen Scifi Stuff",
+          "grade": "灵感",
+          "tags": [
+            "HUD"
+          ],
+          "url": "https://codepen.io/marioluevanos/pen/XKqNZB",
+          "embed": "https://codepen.io/marioluevanos/embed/XKqNZB?default-tab=result",
+          "note": "机甲向。嵌的是 Pen 结果页，许可以原 Pen 为准。"
+        },
+        {
+          "id": "h2",
+          "name": "Cyberpunk buttons",
+          "grade": "灵感",
+          "tags": [
+            "HUD"
+          ],
+          "url": "https://codepen.io/jh3y/pen/JjRbeBq",
+          "embed": "https://codepen.io/jh3y/embed/JjRbeBq?default-tab=result",
+          "note": "机甲按钮。嵌结果页。"
+        },
+        {
+          "id": "h3",
+          "name": "vuild suit",
+          "grade": "灵感",
+          "tags": [
+            "HUD"
+          ],
+          "url": "https://vuild.com/suit/",
+          "embed": true,
+          "note": "机甲套装向。"
+        },
+        {
+          "id": "h4",
+          "name": "Kenney Sci-Fi UI",
+          "grade": "灵感",
+          "tags": [
+            "HUD"
+          ],
+          "url": "https://kenney.nl/assets/ui-pack-sci-fi",
+          "note": "素材店页，不嵌。CC0 拼装。"
+        },
+        {
+          "id": "h5",
+          "name": "Liquid Glass Apple",
+          "grade": "灵感",
+          "tags": [
+            "玻璃"
+          ],
+          "url": "https://codepen.io/wprod/pen/raVpwJL",
+          "embed": "https://codepen.io/wprod/embed/raVpwJL?default-tab=result",
+          "note": "学园/笔记向玻璃。嵌结果页。",
+          "preview": "玻璃.html"
+        },
+        {
+          "id": "h6",
+          "name": "daisyUI Phone",
+          "grade": "库",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://daisyui.com/components/mockup-phone/",
+          "note": "组件文档页，不嵌。本地是视口壳，不是 daisyUI。",
+          "preview": "视口单位.html"
+        },
+        {
+          "id": "h7",
+          "name": "Vaul",
+          "grade": "库",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://vaul.emilkowal.ski/",
+          "embed": true,
+          "note": "iOS 风格底抽屉，站本身就是演示。本地是原生 dialog，不是 Vaul。",
+          "preview": "底抽屉.html"
+        },
+        {
+          "id": "h8",
+          "name": "Apple Sheets",
+          "grade": "规范",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+          "note": "HIG 正文，不嵌。本地是原生 dialog，不是 HIG。",
+          "preview": "底抽屉.html"
+        },
+        {
+          "id": "h10",
+          "name": "MDN Viewport",
+          "grade": "规范",
+          "tags": [
+            "视口"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/CSSOM_view/Viewport_concepts",
+          "wiki": "../视觉CSS与设计token.md",
+          "note": "规范页不嵌。壳内看 vh / svh。",
+          "preview": "视口单位.html"
+        },
+        {
+          "id": "g1",
+          "name": "Godly",
+          "grade": "灵感",
+          "tags": [
+            "画廊"
+          ],
+          "url": "https://godly.website/",
+          "embed": true,
+          "note": "落地页画廊。嵌是为了扫，不是已采用皮肤。"
+        },
+        {
+          "id": "g2",
+          "name": "dark.design",
+          "grade": "灵感",
+          "tags": [
+            "画廊"
+          ],
+          "url": "https://www.dark.design/",
+          "embed": true,
+          "note": "深色站画廊。"
+        },
+        {
+          "id": "g3",
+          "name": "Radix Themes Playground",
+          "grade": "库",
+          "tags": [
+            "token"
+          ],
+          "url": "https://www.radix-ui.com/themes/playground",
+          "embed": true,
+          "note": "Panel 可拨到 Translucent。"
+        },
+        {
+          "id": "g4",
+          "name": "shadcn Blocks",
+          "grade": "库",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://ui.shadcn.com/blocks",
+          "note": "文档块目录，不嵌。/examples 索引曾 404。"
+        },
+        {
+          "id": "g8",
+          "name": "Realtime Colors",
+          "grade": "生成器",
+          "tags": [
+            "token"
+          ],
+          "url": "https://www.realtimecolors.com/",
+          "embed": true,
+          "note": "配色实时预览。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "g9",
+          "name": "Material 3",
+          "grade": "规范",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://m3.material.io/components",
+          "note": "组件目录正文，不嵌。"
+        },
+        {
+          "id": "g10",
+          "name": "Apple Materials",
+          "grade": "规范",
+          "tags": [
+            "玻璃"
+          ],
+          "url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+          "note": "HIG 材质，不嵌。",
+          "preview": "玻璃.html"
+        },
+        {
+          "id": "oklch",
+          "name": "oklch.com",
+          "grade": "生成器",
+          "tags": [
+            "token"
+          ],
+          "url": "https://oklch.com/",
+          "embed": true,
+          "note": "OKLCH 取色。规范真源是 CSS Color 4。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "color4",
+          "name": "CSS Color 4",
+          "grade": "规范",
+          "tags": [
+            "token"
+          ],
+          "url": "https://www.w3.org/TR/css-color-4/",
+          "wiki": "../视觉CSS与设计token.md",
+          "note": "规范页不嵌。oklch()；display-p3 是 SDR 宽色不是 HDR。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "dtcg",
+          "name": "DTCG 2025.10",
+          "grade": "规范",
+          "tags": [
+            "token"
+          ],
+          "url": "https://www.designtokens.org/tr/2025.10/",
+          "note": "CG 终稿，不是 W3C Standard。规范页不嵌。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "clreq",
+          "name": "CLREQ",
+          "grade": "规范",
+          "tags": [
+            "排印"
+          ],
+          "url": "https://www.w3.org/TR/clreq/",
+          "wiki": "../CJK排印与竖排.md",
+          "note": "中文排版需求，不嵌正文。",
+          "preview": "竖排.html"
+        },
+        {
+          "id": "wcag",
+          "name": "WCAG 2.2",
+          "grade": "规范",
+          "tags": [
+            "无障碍"
+          ],
+          "url": "https://www.w3.org/TR/WCAG22/",
+          "wiki": "../无障碍与包容设计.md",
+          "note": "符合性走 2.x；APCA 非正式标准。不嵌。",
+          "preview": "无障碍.html"
+        },
+        {
+          "id": "apg",
+          "name": "ARIA APG",
+          "grade": "规范",
+          "tags": [
+            "无障碍"
+          ],
+          "url": "https://www.w3.org/WAI/ARIA/apg/",
+          "note": "模式指南，不是规范正文。不嵌整站。",
+          "preview": "无障碍.html"
+        },
+        {
+          "id": "lucide",
+          "name": "Lucide",
+          "grade": "库",
+          "tags": [
+            "图标"
+          ],
+          "url": "https://lucide.dev/",
+          "embed": true,
+          "note": "ISC。图标浏览适合嵌。"
+        },
+        {
+          "id": "phosphor",
+          "name": "Phosphor",
+          "grade": "库",
+          "tags": [
+            "图标"
+          ],
+          "url": "https://phosphoricons.com/",
+          "embed": true,
+          "note": "MIT。"
+        },
+        {
+          "id": "mjml",
+          "name": "MJML",
+          "grade": "库",
+          "tags": [
+            "邮件"
+          ],
+          "url": "https://documentation.mjml.io/",
+          "wiki": "../打印CSS与邮件HTML.md",
+          "note": "文档站，不嵌。MIT。本地只演示页盒，不是 MJML。",
+          "preview": "打印页盒.html"
+        },
+        {
+          "id": "caniemail",
+          "name": "Can I Email",
+          "grade": "规范",
+          "tags": [
+            "邮件"
+          ],
+          "url": "https://www.caniemail.com/",
+          "embed": true,
+          "note": "支持表本身就是查表工具，适合嵌。"
+        },
+        {
+          "id": "wiki-css26",
+          "name": "CSS平台2026",
+          "grade": "概念",
+          "tags": [
+            "平台",
+            "组件"
+          ],
+          "wiki": "../CSS平台2026.md",
+          "note": "锚 / 弹出 / 控件换皮等入口；不是 Rec 清单。",
+          "preview": "锚与弹出.html"
+        },
+        {
+          "id": "wiki-tw",
+          "name": "Tailwind与原子CSS",
+          "grade": "概念",
+          "tags": [
+            "token"
+          ],
+          "wiki": "../Tailwind与原子CSS.md",
+          "note": "v4 @theme / Uno 预设 / Panda 构建期；不是已采用皮肤。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "wiki-colr",
+          "name": "COLRv1与增量字体",
+          "grade": "概念",
+          "tags": [
+            "字体",
+            "排印"
+          ],
+          "wiki": "../COLRv1与增量字体.md",
+          "note": "COLR/CPAL、font-palette、IFT 三层；拒盗字库。无真彩色字时不要假沙盘。"
+        },
+        {
+          "id": "wiki-zhds",
+          "name": "中文设计系统",
+          "grade": "概念",
+          "tags": [
+            "token",
+            "组件"
+          ],
+          "wiki": "../中文设计系统.md",
+          "note": "Ant / TDesign / Arco / Semi 四家中文规范；不是已采用皮肤。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "wiki-form",
+          "name": "表单与combobox",
+          "grade": "概念",
+          "tags": [
+            "表单"
+          ],
+          "wiki": "../表单与combobox.md",
+          "note": "Constraint Validation；APG combobox ≠ listbox；:invalid ≠ :user-invalid。",
+          "preview": "表单校验.html"
+        },
+        {
+          "id": "wiki-virt",
+          "name": "虚拟列表",
+          "grade": "概念",
+          "tags": [
+            "组件"
+          ],
+          "wiki": "../虚拟列表.md",
+          "note": "windowing；TanStack Virtualizer 是坐标器不是组件。",
+          "preview": "虚拟列表.html"
+        },
+        {
+          "id": "wiki-lit",
+          "name": "Lit与自定义元素",
+          "grade": "概念",
+          "tags": [
+            "组件"
+          ],
+          "wiki": "../Lit与自定义元素.md",
+          "note": "薄库叠标准 CE；表单真源是 ElementInternals。",
+          "preview": "自定义元素.html"
+        },
+        {
+          "id": "wiki-host",
+          "name": "酒馆宿主与iframe分层",
+          "grade": "概念",
+          "tags": [
+            "宿主",
+            "视口"
+          ],
+          "wiki": "../酒馆宿主与iframe分层.md",
+          "note": "谁造窗、TH 官方名字、ST 净化钩子；跨 iframe 糊不到父页。",
+          "preview": "iframe分层.html"
+        },
+        {
+          "id": "wiki-vrt",
+          "name": "测试与视觉回归",
+          "grade": "概念",
+          "tags": [
+            "其它"
+          ],
+          "wiki": "../测试与视觉回归.md",
+          "note": "runner ≠ 像素 VRT ≠ ARIA 快照 ≠ axe ≠ Chromatic。"
+        },
+        {
+          "id": "d2-anchor",
+          "name": "MDN Anchor positioning",
+          "grade": "规范",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning",
+          "wiki": "../CSS平台2026.md",
+          "note": "规范页不嵌。",
+          "preview": "锚与弹出.html"
+        },
+        {
+          "id": "d2-popover",
+          "name": "MDN Popover API",
+          "grade": "规范",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Popover_API",
+          "wiki": "../CSS平台2026.md",
+          "note": "规范页不嵌。",
+          "preview": "锚与弹出.html"
+        },
+        {
+          "id": "d2-userinv",
+          "name": "MDN :user-invalid",
+          "grade": "规范",
+          "tags": [
+            "表单"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/:user-invalid",
+          "wiki": "../表单与combobox.md",
+          "note": "规范页不嵌。",
+          "preview": "表单校验.html"
+        },
+        {
+          "id": "d2-constraint",
+          "name": "MDN Constraint validation",
+          "grade": "规范",
+          "tags": [
+            "表单"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation",
+          "wiki": "../表单与combobox.md",
+          "note": "规范页不嵌。",
+          "preview": "表单校验.html"
+        },
+        {
+          "id": "d2-apg-combo",
+          "name": "APG combobox",
+          "grade": "规范",
+          "tags": [
+            "表单"
+          ],
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/",
+          "wiki": "../表单与combobox.md",
+          "note": "模式指南不是规范正文。不嵌。本地只演示伪类。",
+          "preview": "表单校验.html"
+        },
+        {
+          "id": "d2-tw-theme",
+          "name": "Tailwind @theme",
+          "grade": "库",
+          "tags": [
+            "token"
+          ],
+          "url": "https://tailwindcss.com/docs/theme",
+          "wiki": "../Tailwind与原子CSS.md",
+          "note": "文档站不嵌。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "d2-uno",
+          "name": "UnoCSS presets",
+          "grade": "库",
+          "tags": [
+            "token"
+          ],
+          "url": "https://unocss.dev/presets/",
+          "wiki": "../Tailwind与原子CSS.md",
+          "note": "文档不嵌。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "d2-panda",
+          "name": "Panda CSS",
+          "grade": "库",
+          "tags": [
+            "token"
+          ],
+          "url": "https://panda-css.com/docs/overview/why-panda",
+          "wiki": "../Tailwind与原子CSS.md",
+          "note": "文档不嵌。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "d2-palette",
+          "name": "MDN font-palette",
+          "grade": "规范",
+          "tags": [
+            "字体"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/font-palette",
+          "wiki": "../COLRv1与增量字体.md",
+          "note": "规范不嵌。没有随库分发的 COLRv1 字，不造假沙盘。"
+        },
+        {
+          "id": "d2-canicolr",
+          "name": "Can I use COLRv1",
+          "grade": "规范",
+          "tags": [
+            "字体"
+          ],
+          "url": "https://caniuse.com/colr-v1",
+          "embed": true,
+          "note": "兼容表适合嵌。"
+        },
+        {
+          "id": "d2-ant",
+          "name": "Ant Design 价值观",
+          "grade": "规范",
+          "tags": [
+            "token"
+          ],
+          "url": "https://ant.design/docs/spec/values-cn",
+          "wiki": "../中文设计系统.md",
+          "note": "中文规范正文，不嵌整站。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "d2-tdesign",
+          "name": "TDesign 色",
+          "grade": "规范",
+          "tags": [
+            "token"
+          ],
+          "url": "https://tdesign.tencent.com/design/color",
+          "wiki": "../中文设计系统.md",
+          "note": "不嵌整站。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "d2-arco",
+          "name": "Arco 风格",
+          "grade": "规范",
+          "tags": [
+            "token"
+          ],
+          "url": "https://arco.design/docs/spec/style-guideline",
+          "wiki": "../中文设计系统.md",
+          "note": "不嵌整站。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "d2-semi",
+          "name": "Semi tokens",
+          "grade": "规范",
+          "tags": [
+            "token"
+          ],
+          "url": "https://semi.design/zh-CN/basic/tokens",
+          "wiki": "../中文设计系统.md",
+          "note": "不嵌整站。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "d2-virtual",
+          "name": "TanStack Virtual",
+          "grade": "库",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://tanstack.com/virtual/latest/docs/introduction",
+          "wiki": "../虚拟列表.md",
+          "note": "文档不嵌。本地是手写 windowing，不是 TanStack。",
+          "preview": "虚拟列表.html"
+        },
+        {
+          "id": "d2-lit",
+          "name": "Lit 文档",
+          "grade": "库",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://lit.dev/docs/",
+          "wiki": "../Lit与自定义元素.md",
+          "note": "文档站不嵌。本地是原生 CE。",
+          "preview": "自定义元素.html"
+        },
+        {
+          "id": "d2-writing",
+          "name": "CSS Writing Modes",
+          "grade": "规范",
+          "tags": [
+            "排印"
+          ],
+          "url": "https://www.w3.org/TR/css-writing-modes-3/",
+          "wiki": "../CJK排印与竖排.md",
+          "note": "规范不嵌。",
+          "preview": "竖排.html"
+        },
+        {
+          "id": "d2-uax50",
+          "name": "UAX #50",
+          "grade": "规范",
+          "tags": [
+            "排印"
+          ],
+          "url": "https://www.unicode.org/reports/tr50/",
+          "wiki": "../CJK排印与竖排.md",
+          "note": "规范不嵌。",
+          "preview": "竖排.html"
+        },
+        {
+          "id": "d2-playwright-vrt",
+          "name": "Playwright snapshots",
+          "grade": "库",
+          "tags": [
+            "其它"
+          ],
+          "url": "https://playwright.dev/docs/test-snapshots",
+          "wiki": "../测试与视觉回归.md",
+          "note": "文档不嵌。"
+        },
+        {
+          "id": "d2-chromatic",
+          "name": "Chromatic",
+          "grade": "库",
+          "tags": [
+            "其它"
+          ],
+          "url": "https://www.chromatic.com/docs/",
+          "wiki": "../测试与视觉回归.md",
+          "note": "产品文档不嵌。"
+        },
+        {
+          "id": "d2-gfonts",
+          "name": "Google Fonts",
+          "grade": "库",
+          "tags": [
+            "字体"
+          ],
+          "url": "https://fonts.google.com/",
+          "embed": true,
+          "note": "字厂目录可嵌浏览。逐族看许可证；不是已采用字库。"
+        },
+        {
+          "id": "d2-fontshare",
+          "name": "Fontshare",
+          "grade": "库",
+          "tags": [
+            "字体"
+          ],
+          "url": "https://www.fontshare.com/",
+          "embed": true,
+          "note": "字厂画廊。免费商用走 ITF FFL，不是 OFL。不是已采用字库。"
+        },
+        {
+          "id": "d2-fontsource",
+          "name": "Fontsource",
+          "grade": "库",
+          "tags": [
+            "字体"
+          ],
+          "url": "https://fontsource.org/",
+          "embed": true,
+          "note": "开源字体 npm / 自托管目录。各包跟上游许可。不是已采用字库。"
+        },
+        {
+          "id": "d2-ali-font",
+          "name": "阿里巴巴普惠体",
+          "grade": "库",
+          "tags": [
+            "字体"
+          ],
+          "url": "https://fonts.alibabagroup.com/",
+          "note": "自定义免费商用声明，不是 OFL。官网不嵌。不是已采用字库。"
+        },
+        {
+          "id": "d2-m3-theme",
+          "name": "Material Theme Builder",
+          "grade": "生成器",
+          "tags": [
+            "token"
+          ],
+          "url": "https://material-foundation.github.io/material-theme-builder/",
+          "embed": true,
+          "note": "HCT 主题可视化。HCT ≠ OKLCH。不是已采用 Material。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "d2-apca",
+          "name": "APCA Calculator",
+          "grade": "生成器",
+          "tags": [
+            "token"
+          ],
+          "url": "https://apcacontrast.com/",
+          "embed": true,
+          "note": "对比计算器，非正式标准，不是 WCAG 3 符合性。不是已采用算法。",
+          "preview": "token色阶.html"
+        },
+        {
+          "id": "d2-typewolf",
+          "name": "Typewolf",
+          "grade": "灵感",
+          "tags": [
+            "画廊"
+          ],
+          "url": "https://www.typewolf.com/",
+          "embed": true,
+          "note": "真站用字画廊。嵌是为了扫样本，不是已采用皮肤。"
+        },
+        {
+          "id": "d2-fiu",
+          "name": "Fonts In Use",
+          "grade": "灵感",
+          "tags": [
+            "字体"
+          ],
+          "url": "https://fontsinuse.com/",
+          "embed": true,
+          "note": "用法档案；图 ARR，不当免费图库。不是已采用字单。"
+        },
+        {
+          "id": "d2-thetype",
+          "name": "The Type",
+          "grade": "灵感",
+          "tags": [
+            "排印"
+          ],
+          "url": "https://thetype.com/",
+          "wiki": "../CJK排印与竖排.md",
+          "note": "中文排印杂志。长文不嵌。不是已采用字体或版式。"
+        },
+        {
+          "id": "d2-weui",
+          "name": "WeUI",
+          "grade": "库",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://weui.io/",
+          "embed": true,
+          "wiki": "../中文设计系统.md",
+          "note": "微信样式库演示，不是完整设计语言。四家之外。不是已采用皮肤。"
+        },
+        {
+          "id": "d2-dndkit",
+          "name": "dnd-kit",
+          "grade": "库",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://dndkit.com/",
+          "note": "投放区与排序；默认 Pointer Events，不是 HTML5 DnD。文档不嵌。不是已采用手势栈。",
+          "preview": "指针拖拽.html"
+        },
+        {
+          "id": "d2-usegesture",
+          "name": "use-gesture",
+          "grade": "库",
+          "tags": [
+            "组件"
+          ],
+          "url": "https://use-gesture.netlify.app/",
+          "note": "只识别手势，没有 droppable。文档不嵌。不是已采用手势栈。",
+          "preview": "指针拖拽.html"
+        }
+      ]
+    },
+    "motion": {
+      "id": "motion",
+      "title": "动效",
+      "blurb": "点一条就出沙盘；生成器和 Demo Hub 出源站。规范、GitHub、价目页不嵌。CSS 无原生 spring()。不是已采用动效栈。",
+      "previewBase": "../动画库/preview/",
+      "items": [
+        {
+          "id": "wiki-anim",
+          "name": "动画库与动效管线",
+          "grade": "概念",
+          "tags": [
+            "平台"
+          ],
+          "wiki": "../动画库与动效管线.md",
+          "note": "正式蒸馏正文。怎么选、许可、第二波库都在这页。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "wiki-inp",
+          "name": "Web性能与INP",
+          "grade": "概念",
+          "tags": [
+            "性能"
+          ],
+          "wiki": "../Web性能与INP.md",
+          "url": "https://web.dev/articles/inp",
+          "note": "动效不要变成长任务。INP 已取代 FID。",
+          "preview": "长任务.html"
+        },
+        {
+          "id": "css-tr",
+          "name": "CSS Transitions",
+          "grade": "规范",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions",
+          "wiki": "../动画库与动效管线.md",
+          "note": "属性 A→B。规范页不嵌。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "css-an",
+          "name": "CSS Animations",
+          "grade": "规范",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations",
+          "note": "keyframes。默认缓动是 ease。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "waapi",
+          "name": "Web Animations API",
+          "grade": "规范",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API",
+          "note": "同一引擎的 JS 入口。默认缓动是 linear。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "vt",
+          "name": "View Transitions",
+          "grade": "规范",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API",
+          "note": "同文档 Baseline Newly（Firefox 144）；跨文档 Limited。规范页不嵌。",
+          "preview": "视口过渡.html"
+        },
+        {
+          "id": "vt-base",
+          "name": "同文档 VT Baseline 说明",
+          "grade": "规范",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://web.dev/blog/same-document-view-transitions-are-now-baseline-newly-available",
+          "note": "不要写成「VT 已经 Baseline」而不加「同文档」。",
+          "preview": "视口过渡.html"
+        },
+        {
+          "id": "scroll",
+          "name": "Scroll-driven animations",
+          "grade": "规范",
+          "tags": [
+            "滚动"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Scroll-driven_animations",
+          "note": "进度绑滚动。新特性，先查兼容。规范页不嵌。",
+          "preview": "滚动驱动.html"
+        },
+        {
+          "id": "prm",
+          "name": "prefers-reduced-motion",
+          "grade": "规范",
+          "tags": [
+            "无障碍"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion",
+          "wiki": "../无障碍与包容设计.md",
+          "note": "库不会自动关完。大位移要可关。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "easing2",
+          "name": "CSS Easing 2",
+          "grade": "规范",
+          "tags": [
+            "缓动"
+          ],
+          "url": "https://www.w3.org/TR/css-easing-2/",
+          "note": "有 linear()，无 spring()。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "linear-doc",
+          "name": "Chrome linear() 说明",
+          "grade": "规范",
+          "tags": [
+            "缓动"
+          ],
+          "url": "https://developer.chrome.com/docs/css-ui/css-linear-easing-function",
+          "note": "bounce/spring 靠取样，不是运行时弹簧。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "linear-gen",
+          "name": "linear() 生成器",
+          "grade": "生成器",
+          "tags": [
+            "缓动"
+          ],
+          "url": "https://linear-easing-generator.netlify.app/",
+          "embed": true,
+          "note": "把曲线收成 linear(...) 字符串。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "easings",
+          "name": "easings.net",
+          "grade": "生成器",
+          "tags": [
+            "缓动"
+          ],
+          "url": "https://easings.net/",
+          "embed": true,
+          "note": "常见曲线公式。不必为一条曲线引入 JS。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "bezier",
+          "name": "cubic-bezier.com",
+          "grade": "生成器",
+          "tags": [
+            "缓动"
+          ],
+          "url": "https://cubic-bezier.com/",
+          "embed": true,
+          "note": "调 cubic-bezier()。",
+          "preview": "缓动对照.html"
+        },
+        {
+          "id": "gsap",
+          "name": "GSAP",
+          "grade": "库",
+          "tags": [
+            "时间轴"
+          ],
+          "url": "https://gsap.com/",
+          "wiki": "../动画库与动效管线.md",
+          "note": "营销首页不嵌。2025-04-30 起 Standard No Charge。本地是 WAAPI 串帧，不是 GSAP。",
+          "preview": "时间轴.html"
+        },
+        {
+          "id": "gsap-demo",
+          "name": "GSAP Demo Hub",
+          "grade": "灵感",
+          "tags": [
+            "时间轴"
+          ],
+          "url": "https://demos.gsap.com/",
+          "embed": true,
+          "note": "看手感。Demo ≠ 已采用皮肤。"
+        },
+        {
+          "id": "gsap-ease",
+          "name": "GSAP Ease Visualizer",
+          "grade": "生成器",
+          "tags": [
+            "缓动"
+          ],
+          "url": "https://gsap.com/docs/v3/Eases/",
+          "embed": true,
+          "note": "缓动可视化。"
+        },
+        {
+          "id": "motion",
+          "name": "Motion",
+          "grade": "库",
+          "tags": [
+            "时间轴"
+          ],
+          "url": "https://motion.dev/",
+          "note": "文档站不嵌。核心 MIT。Motion+ 是示例/高级件付费。本地是 WAAPI，不是 Motion。",
+          "preview": "时间轴.html"
+        },
+        {
+          "id": "motion-ex",
+          "name": "Motion Examples",
+          "grade": "灵感",
+          "tags": [
+            "时间轴"
+          ],
+          "url": "https://motion.dev/examples",
+          "embed": true,
+          "note": "部分示例在 Plus 墙后。"
+        },
+        {
+          "id": "anime",
+          "name": "Anime.js",
+          "grade": "库",
+          "tags": [
+            "时间轴"
+          ],
+          "url": "https://animejs.com/",
+          "embed": true,
+          "note": "站本身是演示。轻量 JS 时间轴，不绑 React。"
+        },
+        {
+          "id": "lottie",
+          "name": "Lottie",
+          "grade": "库",
+          "tags": [
+            "矢量"
+          ],
+          "url": "https://airbnb.github.io/lottie/#/",
+          "note": "文档站不嵌。播 AE JSON。不是通用 JS 动画库。"
+        },
+        {
+          "id": "rive",
+          "name": "Rive",
+          "grade": "库",
+          "tags": [
+            "矢量"
+          ],
+          "url": "https://rive.app/",
+          "note": "产品站不嵌。运行时 MIT；导出上生产要付费。"
+        },
+        {
+          "id": "theatre",
+          "name": "Theatre.js",
+          "grade": "库",
+          "tags": [
+            "时间轴"
+          ],
+          "url": "https://www.theatrejs.com/docs/latest",
+          "note": "文档不嵌。core Apache-2.0；studio AGPL。本地是 WAAPI，不是 Theatre。",
+          "preview": "时间轴.html"
+        },
+        {
+          "id": "lenis",
+          "name": "Lenis",
+          "grade": "库",
+          "tags": [
+            "滚动"
+          ],
+          "url": "https://github.com/darkroomengineering/lenis",
+          "note": "GitHub 不嵌。MIT。本地是原生 scroll-behavior，不是 Lenis。",
+          "preview": "平滑滚动.html"
+        },
+        {
+          "id": "loco",
+          "name": "Locomotive Scroll v5",
+          "grade": "库",
+          "tags": [
+            "滚动"
+          ],
+          "url": "https://scroll.locomotive.ca/docs/",
+          "note": "文档不嵌。建在 Lenis 上。本地是原生滚动，不是 Locomotive。",
+          "preview": "平滑滚动.html"
+        },
+        {
+          "id": "spline",
+          "name": "Spline runtime",
+          "grade": "库",
+          "tags": [
+            "矢量"
+          ],
+          "url": "https://github.com/splinetool/react-spline/issues/234",
+          "note": "Issue 页不嵌。runtime 无 SPDX。react-spline 是 MIT，两套不要并。"
+        },
+        {
+          "id": "unicorn",
+          "name": "Unicorn Studio",
+          "grade": "库",
+          "tags": [
+            "矢量"
+          ],
+          "url": "https://www.unicorn.studio/docs/pricing/",
+          "note": "价目页不嵌。运行时专有。导出上生产要付费。"
+        },
+        {
+          "id": "animista",
+          "name": "Animista",
+          "grade": "生成器",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://animista.net/",
+          "embed": true,
+          "note": "调 keyframes，只带走用到的几条。"
+        },
+        {
+          "id": "hovercss",
+          "name": "Hover.css",
+          "grade": "生成器",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://ianlunn.github.io/Hover/",
+          "embed": true,
+          "note": "过时。新活优先 CSS transition。",
+          "preview": "悬停过渡.html"
+        },
+        {
+          "id": "wiki-xr",
+          "name": "WebXR与glTF",
+          "grade": "概念",
+          "tags": [
+            "矢量"
+          ],
+          "wiki": "../WebXR与glTF.md",
+          "note": "会话合同 ≠ 资产格式 ≠ 引擎。不是已采用 3D 栈。"
+        },
+        {
+          "id": "wiki-codec",
+          "name": "媒体格式与编解码",
+          "grade": "概念",
+          "tags": [
+            "其它"
+          ],
+          "wiki": "../媒体格式与编解码.md",
+          "note": "容器/编码、WebCodecs、两套 PiP；不是已采用播放器。"
+        },
+        {
+          "id": "m2-starting",
+          "name": "MDN @starting-style",
+          "grade": "规范",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style",
+          "wiki": "../CSS平台2026.md",
+          "preview": "视口过渡.html",
+          "note": "进场前样式。规范不嵌。"
+        },
+        {
+          "id": "m2-interp",
+          "name": "MDN interpolate-size",
+          "grade": "规范",
+          "tags": [
+            "平台"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size",
+          "wiki": "../CSS平台2026.md",
+          "note": "规范不嵌。自动高度动画仍要查兼容。",
+          "preview": "自动高度.html"
+        },
+        {
+          "id": "m2-scrolltl",
+          "name": "MDN scroll-timeline",
+          "grade": "规范",
+          "tags": [
+            "滚动"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline",
+          "wiki": "../动画库与动效管线.md",
+          "preview": "滚动驱动.html",
+          "note": "规范不嵌。"
+        },
+        {
+          "id": "m2-gltf",
+          "name": "Khronos glTF",
+          "grade": "规范",
+          "tags": [
+            "矢量"
+          ],
+          "url": "https://www.khronos.org/gltf/",
+          "wiki": "../WebXR与glTF.md",
+          "note": "格式首页，不嵌。"
+        },
+        {
+          "id": "m2-webxr",
+          "name": "MDN WebXR",
+          "grade": "规范",
+          "tags": [
+            "矢量"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API",
+          "wiki": "../WebXR与glTF.md",
+          "note": "规范不嵌。"
+        },
+        {
+          "id": "m2-webcodecs",
+          "name": "MDN WebCodecs",
+          "grade": "规范",
+          "tags": [
+            "其它"
+          ],
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API",
+          "wiki": "../媒体格式与编解码.md",
+          "note": "规范不嵌。"
+        },
+        {
+          "id": "sda-style",
+          "name": "scroll-driven-animations.style",
+          "grade": "灵感",
+          "tags": [
+            "滚动"
+          ],
+          "url": "https://scroll-driven-animations.style/",
+          "embed": true,
+          "preview": "滚动驱动.html",
+          "note": "B4-Scrolly 范例站。Bramus / Chrome Rel 可视化。Apache-2.0。Demo ≠ 已采用皮肤。"
+        }
+      ]
+    }
+  }
+}

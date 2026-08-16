@@ -5,6 +5,8 @@ description: Reproduce, diagnose, collect execution evidence for, and close acce
 
 # SillyTavern Runtime Debug
 
+Use `$consult-tavernweave-library` with the `sillytavern-runtime-debug` route for the relevant host and deployment guidance. Add A0 before any write or host mutation, and keep recalled guide advice separate from evidence captured in the named real SillyTavern instance.
+
 Close runtime bugs with evidence from the real target SillyTavern instance. An offline HTML preview can support development, but it cannot establish import behavior, message rendering, extension injection, iframe access, event timing, persistence, or MVU updates.
 
 ## Own the runtime boundary

@@ -66,6 +66,6 @@ foreach ($skill in (Get-ChildItem -LiteralPath (Join-Path $PluginRoot 'skills') 
 }
 $results.skillFingerprints = [pscustomobject]$fingerprints
 $results.evaluatedAt = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
-$json = $results | ConvertTo-Json -Depth 8
-[System.IO.File]::WriteAllText($resultsPath, $json + [Environment]::NewLine, [System.Text.UTF8Encoding]::new($false))
+$json = ($results | ConvertTo-Json -Depth 8).Replace("`r`n", "`n").Replace("`r", "`n")
+[System.IO.File]::WriteAllText($resultsPath, $json + "`n", [System.Text.UTF8Encoding]::new($false))
 Write-Output $resultsPath

@@ -11,6 +11,8 @@ description: >-
 
 # SillyTavern Component Update
 
+Before a write-capable update, use `$consult-tavernweave-library` with the `sillytavern-component-update` route to load A0 and the smallest matching ST guides. Keep the receipt with the component-mode scope lock; it does not authorize repacking the full card.
+
 Keep the selected component as the unit of change. Produce importable test artifacts
 without forcing an unrelated card rebuild.
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 扫描线终端</title>
+  <style>
+    html, body { margin: 0; min-height: 100%; background: #070807; color: #b6f5b0; font-family: "Cascadia Mono", "Sarasa Mono SC", Consolas, monospace; }
+    main { padding: 16px 18px 24px; }
+    p.copy { font-size: 12px; line-height: 1.55; max-width: 46em; color: #8bb88a; }
+    code { color: #d7ffd2; }
+    .term {
+      position: relative;
+      margin-top: 12px;
+      min-height: 220px;
+      padding: 16px 18px;
+      background: #031406;
+      border: 1px solid #1c4a22;
+      overflow: hidden;
+    }
+    .term::after {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.28) 0 1px,
+        transparent 1px 3px
+      );
+      mix-blend-mode: multiply;
+    }
+    h1 { margin: 0 0 8px; font-size: 16px; font-weight: 600; }
+    p { margin: 0 0 8px; font-size: 13px; line-height: 1.55; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="copy">真 CSS：<code>repeating-linear-gradient</code> 盖在终端块上，不是色块示意。2018 那篇长文不嵌；这页只演示同手法。这不是已采用皮肤。</p>
+    <div class="term">
+      <h1>ready.</h1>
+      <p>扫描线是叠层，不是字号。字在下层，线在 <code>::after</code>。</p>
+      <p>&gt; echo backdrop-filter 糊不到跨 iframe 的父页</p>
+    </div>
+  </main>
+</body>
+</html>

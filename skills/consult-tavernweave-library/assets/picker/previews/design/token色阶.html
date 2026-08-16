@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · token 色阶</title>
+  <style>
+    :root {
+      --bg: #12141a;
+      --text: #e8eaef;
+      --accent: #7eb8ff;
+      --surface: #1a1d26;
+    }
+    html[data-theme="warm"] {
+      --bg: #1b1612;
+      --text: #f3e6d4;
+      --accent: #e8b86d;
+      --surface: #2a2118;
+    }
+    html, body { margin: 0; background: var(--bg); color: var(--text); font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 40em; }
+    .row { display: flex; gap: 8px; margin: 12px 0 18px; }
+    button {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, #000);
+      border-radius: 8px;
+      padding: 6px 10px;
+    }
+    .swatches { display: flex; gap: 8px; }
+    .swatch {
+      width: 72px; height: 72px; border-radius: 10px;
+      background: var(--accent);
+    }
+    .swatch.dim { opacity: 0.55; }
+    .swatch.ghost { background: color-mix(in srgb, var(--accent) 28%, var(--surface)); }
+    code { font-size: 12px; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main>
+    <p>组件引用 token 名，不写死 <code>#7eb8ff</code>。切主题只改根上的自定义属性。这不是 DTCG 文件，也不是已采用色板。</p>
+    <div class="row">
+      <button type="button" data-theme="cool">冷色</button>
+      <button type="button" data-theme="warm">暖色</button>
+    </div>
+    <div class="swatches">
+      <div class="swatch" title="accent"></div>
+      <div class="swatch dim" title="accent dim"></div>
+      <div class="swatch ghost" title="accent ghost"></div>
+    </div>
+  </main>
+  <script>
+    document.querySelectorAll("button[data-theme]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.documentElement.dataset.theme = btn.dataset.theme;
+      });
+    });
+  </script>
+</body>
+</html>

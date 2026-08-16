@@ -9,6 +9,8 @@ description: >-
 
 # SillyTavern Rolecard Performance
 
+Use `$consult-tavernweave-library` with the `sillytavern-rolecard-performance` route for A0, the large-card guide, and motion/performance references when writing. Keep library advice, static metrics, browser samples, and real SillyTavern evidence as distinct gates.
+
 Turn “the card feels heavy” into reproducible static metrics and separately captured
 runtime evidence. Do not optimize by deleting content before ownership is known.
 

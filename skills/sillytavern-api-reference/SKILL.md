@@ -5,6 +5,8 @@ description: Verify exact SillyTavern, Tavern Helper / JS-Slash-Runner, STScript
 
 # SillyTavern API Reference
 
+Use `$consult-tavernweave-library` with the `sillytavern-api-reference` route for the smallest relevant ST guide set, then verify exact symbols against the identified target version. A guide route is navigation evidence, not a substitute for the installed runtime or pinned source. Add A0 only if the task becomes write-capable.
+
 Treat this skill as an authority-routing procedure, not as a frozen copy of an evolving API. The public baselines in [references/core-facts.md](references/core-facts.md) are dated navigation snapshots, not claims about the latest release. The target runtime always wins.
 
 ## Resolve the runtime surface
