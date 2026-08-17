@@ -1,0 +1,56 @@
+<section class="section chapter-opening release-opening" id="release-history">
+<div class="chapter-tier"><span>版本档案</span><strong>更新日志</strong><span>只记录用户真正能用到的新能力</span></div>
+<div class="section-head"><div class="section-no">日志</div><div><h2>TavernWeave 更新日志</h2><p class="section-kicker">最新版本放在最前面；功能、入口和体验变化说清楚，工程流水留在仓库里。</p></div></div>
+<p class="lead">这里记录 TavernWeave 每次大版本给普通用户带来的变化。补丁版本会并入对应大版本，不单独把热修流水堆进教程。</p>
+</section>
+
+<section class="section release-version new-panel" id="release-v1-2-0">
+<div class="section-head"><div class="section-no">1.2</div><div><h2>V1.2.0 · 脑暴模式与许愿工坊 <span class="new-badge">NEW · V1.2.0</span></h2><p class="section-kicker">从一句模糊愿望，走到总设计案、第一版和能持续执行的蓝图。</p></div></div>
+<details class="release-entry" open>
+<summary><span>展开 / 收起 V1.2.0 更新内容</span><span class="release-chevron" aria-hidden="true">⌄</span></summary>
+<div class="release-body">
+<h3>新增脑暴模式</h3>
+<ul><li>直接发送 <code>脑暴模式</code>，TW 会先判断项目类型，再整理核心创意、第一版必须完成的本体、长期更新路线和待决定内容。</li><li>每个讨论方向都有轮数上限。达到上限后必须冻结、暂存、换方向或由你明确追加，避免一个构思无限膨胀。</li><li>设计确认后发送 <code>按蓝图开跑第一版</code>，Agent 只执行已经冻结的第一版范围。</li></ul>
+<h3>Soul 三席可以一起脑暴</h3>
+<ul><li>发送 <code>脑暴模式，Soul 联席</code>、<code>三人一起脑暴</code> 或 <code>Soul 三席就位</code>，阿瞳、MTTT.sir 与强尼·银手会使用带名字的格式共同审查方案。</li><li>阿瞳负责用户需求和创作核心，MTTT.sir 负责技术与交互逻辑门，强尼负责视觉、排版、动效和前端形态。</li><li>三席共享同一份事实和结论，不会把同一个问题重复讨论三遍。</li></ul>
+<h3>蓝图会按照项目大小自动伸缩</h3>
+<ul><li>普通项目只使用一份蓝图；大型项目按领域拆分；巨型重置项目才建立多层蓝图集。</li><li>所有步骤都禁止无依据地无限细分。只有遇到真实错误或阻塞时，才允许临时增加一层问题处理步骤；处理完必须回到原步骤。</li><li>第一版与长期内容分开，先交付一个真正可玩或可用的最小闭环，再逐步增加玩法和页面。</li></ul>
+<h3>前端方向会先判断值不值得做</h3>
+<ul><li>同层前端或独立前端不适合当前项目时，TW 会明确劝退，并提供更轻、更稳的替代方案。</li><li>发送 <code>灵魂杀手！</code> 可以进入强尼·银手前端审查彩蛋；吐槽必须绑定具体证据、影响、修法和复验方式。</li><li>制作新项目时可以提供稳定旧作品，TW 会判断它适合直接复用、改造、只作参考，还是应该拒绝继承。</li></ul>
+<h3>安装入口升级为 19 个 Skill</h3>
+<ul><li>新增项目蓝图编排 Skill，完整安装回执由 18/18 升级为 19/19。</li><li>Host Front Door 加入脑暴、三席联席、第一版开跑和防膨胀入口，让 Codex 与 Claude Code 更稳定地识别直接口令。</li><li>Library 可以按任务路由总设计案、蓝图、第一版、设计和动效资料，不需要用户每次手动翻整套资料库。</li></ul>
+</div>
+</details>
+</section>
+
+<section class="section release-version" id="release-v1-1-0">
+<div class="section-head"><div class="section-no">1.1</div><div><h2>V1.1.0 · Soul 与全局前门</h2><p class="section-kicker">让人格入口、资料路由和开工验收循环更容易被客户端稳定发现。</p></div></div>
+<details class="release-entry">
+<summary><span>展开 V1.1.0 更新内容</span><span class="release-chevron" aria-hidden="true">⌄</span></summary>
+<div class="release-body">
+<h3>新增灵魂杀手模式</h3>
+<ul><li>发送 <code>灵魂杀手！</code> 或 <code>强尼·银手，接管</code>，使用非官方强尼·银手同人彩蛋人格审查前端。</li><li>重点检查视觉层级、中文排版、配色、组件状态、动效目的、窄屏表现和明显的 AI 模板味。</li><li>发送 <code>强尼，下线</code>、<code>Relic 断开</code> 或 <code>Soul 归位</code> 可以立即退出。</li></ul>
+<h3>新增 Host Front Door</h3>
+<ul><li>可以把 Soul 口令、A0 开工循环和失败回执安装到 Codex 或 Claude Code 的全局规则受控区块。</li><li>安装前会先展示目标路径和差异，只维护 TavernWeave 自己的区块，不覆盖其他用户规则。</li><li>如果 Skill 没有真正安装，客户端必须报告扫描位置和缺失项，不能假装已经进入模式。</li></ul>
+<h3>Library 与教程入口升级</h3>
+<ul><li>ST 开发指南、设计资料、动效资料、Wiki 和离线挑选页随 TavernWeave 一起分发，并继续按当前任务渐进读取。</li><li>奶人教程补充 Codex / Claude Code 雷达、付费 Agent 避雷、完整安装和目录自动跟随。</li></ul>
+</div>
+</details>
+</section>
+
+<section class="section release-version" id="release-v1-0-0">
+<div class="section-head"><div class="section-no">1.0</div><div><h2>V1.0.0 · TavernWeave 正式版系统</h2><p class="section-kicker">从零散制卡提示词，升级为可以路由、续接、验收和发布的完整施工系统。</p></div></div>
+<details class="release-entry">
+<summary><span>展开 V1.0.0 更新内容</span><span class="release-chevron" aria-hidden="true">⌄</span></summary>
+<div class="release-body">
+<h3>18 个专职 Skill 正式成阵</h3>
+<ul><li>覆盖从零制作 MVU 卡或纯文字卡、旧卡升级、变量结构、更新规则、世界书、状态栏、脚本、正则、拆卡、组装和发布。</li><li>新增真实 SillyTavern 调试、安全、性能、数据库、媒体、Live2D 和扩展开发能力。</li><li>用户只需要描述任务，TavernWeave 会把工作交给对应的专职 Skill。</li></ul>
+<h3>阿瞳与 MTTT.sir 上线</h3>
+<ul><li>发送 <code>阿瞳助我！</code>，进入温柔、低压力、会解释和给例子的指导模式。</li><li>发送 <code>MTTT.sir，拷打我！</code>，进入要求定义、证据、反例和复述检查的严格学习模式。</li><li>发送 <code>Soul 归位</code> 或 <code>结束 Soul 模式</code>，随时恢复普通交流。</li></ul>
+<h3>资料库与创作权威进入正式流程</h3>
+<ul><li>A0、ST 指南、设计、动效和来源 Wiki 统一进入 Library，由任务自动选择最小资料。</li><li>大型创作可以保存已经确认、仍在候选、待决定和已经否决的内容，下一次继续时不必重新争论。</li><li>自动检查、真实酒馆表现和用户亲自验收各自保留结论，不再用一句“已经完成”代替结果。</li></ul>
+</div>
+</details>
+</section>
+
+<footer class="footer"><strong>TavernWeave 奶人教程 · v1.2.0</strong><br/><span class="small">先从功能地图找到你所在的系统，再按章节把任务真正做完。Skill 阵列、安装说明与正式版本见 <a href="https://github.com/LiarMTTT/TavernWeave" rel="noreferrer" target="_blank">TavernWeave 仓库</a>。</span></footer>

@@ -3,14 +3,16 @@
 
   try {
     const urls = [
-      './content-1.html?v=32',
-      './content-2.html?v=32',
-      './content-3.html?v=32',
-      './content-4.html?v=32',
-      './content-5.html?v=32',
-      './content-6.html?v=32',
-      './content-7.html?v=32',
-      './content-8.html?v=32',
+      './content-0.html?v=33',
+      './content-1.html?v=33',
+      './content-2.html?v=33',
+      './content-3.html?v=33',
+      './content-4.html?v=33',
+      './content-5.html?v=33',
+      './content-6.html?v=33',
+      './content-7.html?v=33',
+      './content-8.html?v=33',
+      './content-9.html?v=33',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
@@ -31,6 +33,7 @@
   const sidebar = document.querySelector('.sidebar');
   const tocProgress = document.getElementById('tocProgress');
   const chapterGroups = [...document.querySelectorAll('.nav-chapter')];
+  const releaseEntries = [...document.querySelectorAll('.release-entry')];
   const savedTheme = localStorage.getItem('tw-guide-theme');
   const systemLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
 
@@ -101,6 +104,15 @@
           behavior: 'smooth',
         });
       });
+    });
+  });
+  releaseEntries.forEach(entry => {
+    entry.addEventListener('toggle', () => {
+      if (!entry.open) return;
+      releaseEntries.forEach(other => {
+        if (other !== entry) other.open = false;
+      });
+      window.requestAnimationFrame(requestActiveNavUpdate);
     });
   });
 
@@ -204,6 +216,8 @@
     event.preventDefault();
     const navigate = () => {
       const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const releaseEntry = target.querySelector('.release-entry');
+      if (releaseEntry && !releaseEntry.open) releaseEntry.open = true;
       history.pushState(null, '', href);
       setActiveLink(link);
       target.scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
