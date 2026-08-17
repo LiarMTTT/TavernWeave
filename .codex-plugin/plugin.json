@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.0.1",
-  "description": "A routed SillyTavern rolecard engineering system with resumable creative authority, bundled guides and design references, evidence gates, and optional portable teaching personas.",
+  "version": "1.1.0",
+  "description": "A routed SillyTavern rolecard engineering system with resumable creative authority, bundled guides, host front-door adapters, evidence gates, and three optional portable Soul modes.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "TavernWeave",
     "shortDescription": "Design, build, verify, and learn SillyTavern rolecards.",
-    "longDescription": "TavernWeave combines 18 focused skills with a resumable creative-authority contract, material provenance, layered acceptance evidence, a bundled routed library of ST guides and frontend design or motion references, an offline picker, and optional current-task Atong or MTTT.sir teaching personas.",
+    "longDescription": "TavernWeave combines 18 focused skills with a resumable creative-authority contract, material provenance, layered acceptance evidence, a bundled routed library of ST guides and frontend design or motion references, an offline picker, optional global Host Front Doors, and current-task Atong, MTTT.sir, or Soul Killer modes.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
@@ -27,6 +27,7 @@
     "defaultPrompt": [
       "阿瞳助我！用当前任务级温柔指导模式帮我完成这张角色卡。",
       "MTTT.sir，拷打我！检查我是否真的理解这次 Vibe Code 的架构与验收。",
+      "灵魂杀手！用强尼·银手彩蛋人格审查这个前端，并给出最多三条有证据的 Relic 故障。",
       "Route this task through TavernWeave Library, read A0, and load only the smallest relevant guide set.",
       "Design a maintainable SillyTavern rolecard and choose the right TavernWeave skill.",
       "Update only a rolecard regex or Tavern Helper script and emit an importable test artifact without repacking the card.",

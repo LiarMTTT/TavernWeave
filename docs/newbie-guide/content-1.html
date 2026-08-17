@@ -6,21 +6,23 @@
 <div class="hero-tags"><span class="tag">第一至三章 · 入门</span><span class="tag">第四章起 · 进阶</span><span class="tag">TavernWeave</span><span class="tag">SillyTavern 制卡开发</span></div>
 </section>
 <section class="section" id="tw-v1">
-<div class="section-head"><div class="section-no">05.1</div><div><h2>v1 不只是一排 Skill：先选人格，再查资料，最后让工程 Skill 干活</h2><p class="section-kicker">一个安装入口，三层按需工作；不是把整库一次塞给模型。</p></div></div>
-<div aria-label="TavernWeave v1 三层入口" class="flow"><div class="flow-node">Soul · 可选教学人格</div><div class="flow-arrow">→</div><div class="flow-node">Library · A0 与最小资料集</div><div class="flow-arrow">→</div><div class="flow-node">工程 Skill · 真正制卡和验收</div></div>
+<div class="section-head"><div class="section-no">05.1</div><div><h2>v1 不只是一排 Skill：全局前门接令，Soul 定姿态，Library 查资料</h2><p class="section-kicker">入口可以常驻，资料仍按需读，真正施工继续交给工程 Skill。</p></div></div>
+<div aria-label="TavernWeave v1 四层入口" class="flow"><div class="flow-node">Host Front Door · 推荐全局入口</div><div class="flow-arrow">→</div><div class="flow-node">Soul · 可选教学/审查模式</div><div class="flow-arrow">→</div><div class="flow-node">Library · A0 与最小资料集</div><div class="flow-arrow">→</div><div class="flow-node">工程 Skill · 真正制卡和验收</div></div>
 <div class="cards"><article class="card"><div class="card-icon">魂</div><h3>Soul</h3><p class="muted">只改变解释、追问和教学节奏，不改变事实、权限、已验状态和真正负责工作的 Skill。</p></article><article class="card"><div class="card-icon">库</div><h3>Library</h3><p class="muted">写入型任务先过 A0，再按意图加载少量 ST 指南、设计、动效或来源 Wiki。</p></article><article class="card"><div class="card-icon">工</div><h3>工程阵列</h3><p class="muted">18 个 Skill 各管创作、组件、API、UI、调试、构建、安全、性能和发布门。</p></article></div>
 <div class="callout"><strong>最重要的边界</strong>安装了资料库，不等于 Agent 每轮都读完整个资料库；开了人格，也不等于人格获得文件、Git、联网、发布或生产权限。</div>
 </section>
 <section class="section" id="soul-mode">
-<div class="section-head"><div class="section-no">05.2</div><div><h2>阿瞳陪你搭脚手架，MTTT.sir 逼你拿出证据</h2><p class="section-kicker">同一套工程事实，两种教学策略；安全词随时优先。</p></div></div>
-<div class="compare"><div class="compare-side"><h4>阿瞳 · 温柔指导版</h4><p>先理解你卡在哪里，再给解释、例子、两三个真选择和一个能收掉的下一步。</p></div><div class="compare-vs">↔</div><div class="compare-side"><h4>MTTT.sir · 严格学习版</h4><p>要求你说出定义、证据、取舍和失败条件，用反例与复述检查你是否真的理解。</p></div></div>
+<div class="section-head"><div class="section-no">05.2</div><div><h2>阿瞳扶你走，MTTT.sir 查理解，灵魂杀手拆前端</h2><p class="section-kicker">同一套工程事实，三种互动策略；安全词随时优先。</p></div></div>
+<div class="cards"><article class="card"><h4>阿瞳 · 温柔指导</h4><p>先理解你卡在哪里，再给解释、例子、两三个真选择和一个能收掉的下一步。</p></article><article class="card"><h4>MTTT.sir · 严格学习</h4><p>要求你说出定义、证据、取舍和失败条件，用反例与复述检查你是否真的理解。</p></article><article class="card"><h4>灵魂杀手 · 前端审查彩蛋</h4><p>由非官方强尼·银手同人彩蛋人格接管：可以嘴臭地拆设计，但最多三条 Relic 故障都要有证据、修法和复验。</p></article></div>
 <div class="code-block"><div class="code-label"><span>Soul 口令</span><button class="copy-btn" type="button">复制</button></div><pre><code>阿瞳助我！
 MTTT.sir，拷打我！
+灵魂杀手！
+强尼·银手，接管！
 阿瞳接手
 MTTT.sir 上课
 Soul 归位</code></pre></div>
-<div class="callout warn"><strong>v1 是 Portable</strong>它可靠作用于当前任务，但不承诺新任务、分叉、归档、跨设备或上下文丢失后仍自动保持。它不会冒充真实 MTTT，也不会自动读取或写回你的完整聊天历史和私有 RAG。</div>
-<p>MTTT.sir 可以严厉批评论证、代码、设计和逃避收尾的行为，但不能羞辱你的身份、能力或脆弱经历；阿瞳可以温柔，但不能为了安慰而把没验过说成通过。说出 <code>Soul 归位</code> 后立即恢复普通 TW 风格。</p>
+<div class="callout warn"><strong>Soul 仍是 Portable</strong>全局前门能让新任务更可靠地识别入口，但模式状态仍不承诺跨任务、分叉、归档、设备或上下文丢失永久保持。它不会自动读取或写回你的完整聊天历史和私有 RAG。</div>
+<p>MTTT.sir 可以严厉批评论证和逃避收尾的行为；灵魂杀手可以骂页面、特效和偷懒取舍，但不能羞辱你的身份、价值或脆弱经历，也不能冒充官方角色/现实演员、复制游戏台词和素材。阿瞳也不能为了安慰而把没验过说成通过。说出 <code>Soul 归位</code>、<code>强尼，下线</code> 或 <code>Relic 断开</code> 后立即恢复普通 TW 风格。</p>
 </section>
 <section class="section" id="library-mode">
 <div class="section-head"><div class="section-no">05.3</div><div><h2>DB 不再另装：A0、ST 指南、设计、动效和挑选页都随 TW</h2><p class="section-kicker">先查最小资料，再让负责的 Skill 做；候选永远不冒充采用。</p></div></div>
@@ -30,9 +32,9 @@ Soul 归位</code></pre></div>
 <p>本地安装后可打开 <code>skills/consult-tavernweave-library/assets/picker/index.html</code>。它只把候选 ID 存在浏览器本地，不要往选择单里放角色卡正文、私密设定或生产信息。</p>
 </section>
 <section class="section" id="install-gate">
-<div class="section-head"><div class="section-no">05.4</div><div><h2>安装不是数文件夹：V1.0.1 必须拿出 18/18 回执</h2><p class="section-kicker">源码里有、复制到本机、宿主真发现，是三道不同的门。</p></div></div>
+<div class="section-head"><div class="section-no">05.4</div><div><h2>安装不是数文件夹：18/18 之外还有全局前门与宿主重发现</h2><p class="section-kicker">源码里有、复制到本机、前门当前、宿主真发现，是四道不同的门。</p></div></div>
 <p class="lead">“我更新了原来的 16 个 Skill”不等于安装了新版。旧安装器如果只遍历本机已有目录，就会漏掉新加入的 Soul 与 Library；旧 Skill 虽然已经引用 Library，真正调用时却找不到它。</p>
-<div class="steps"><div class="step"><strong>先看仓库应有清单</strong>V1.0.1 的机器清单固定列出 18 个正式 Skill，不能拿本机旧目录反推仓库内容。</div><div class="step"><strong>再比较实际安装位置</strong>安装必须计算“仓库应有目录 − 本机已有目录”，创建缺失项，而不是只覆盖旧文件。</div><div class="step"><strong>核验 Soul、Library 与 picker</strong>目录存在还不够，内容必须与当前源码逐文件匹配，离线挑选页也必须在实际安装目录里。</div><div class="step"><strong>最后新建任务</strong>18/18 只证明文件安装完整；宿主能否发现并调用新 Skill，要在新任务或重启会话后另验。</div></div>
+<div class="steps"><div class="step"><strong>先看仓库应有清单</strong>机器清单固定列出 18 个正式 Skill，不能拿本机旧目录反推仓库内容。</div><div class="step"><strong>再比较实际安装位置</strong>安装必须计算“仓库应有目录 − 本机已有目录”，创建缺失项，而不是只覆盖旧文件。</div><div class="step"><strong>核验 Soul、Library 与 picker</strong>目录存在还不够，内容必须与当前源码逐文件匹配，离线挑选页也必须在实际安装目录里。</div><div class="step"><strong>明文处理 Host Front Door</strong>安装器应推荐写入 Codex/Claude 全局规则，并给“安装（推荐）/先看 diff/仅装 Skills”；它只能改带版本的受控区块。</div><div class="step"><strong>最后新建任务</strong>18/18 和前门 current 都不证明宿主已调用 Skill；要在新任务或重启后用直接口令另验。</div></div>
 <div class="code-block"><div class="code-label"><span>完整安装 · 可直接复制</span><button class="copy-btn" type="button">复制</button></div><pre><code>请把 TavernWeave 完整安装或更新到仓库最新版本：
 https://github.com/LiarMTTT/TavernWeave
 
@@ -45,8 +47,10 @@ https://github.com/LiarMTTT/TavernWeave
 - consult-tavernweave-library 存在；
 - Library 的 assets/picker/index.html 存在。
 
-请返回实际安装路径和安装回执。通过后提醒我新建任务，再验证宿主是否真正发现 Soul 与 Library。</code></pre></div>
-<div class="callout warn"><strong>别让回执越级</strong><code>INSTALLATION VERIFIED: 18/18</code> 只证明实际目录完整，不能冒充 Codex / Claude 已经重新扫描，也不能冒充 Soul、Library 或真实 SillyTavern 已运行。</div>
+请明文推荐把 Host Front Door 安装到当前 Codex 或 Claude Code 的全局规则；先显示目标路径与 diff，确认后只更新 TavernWeave 受控区块。
+请返回 Skill 与前门两份回执。通过后提醒我新建任务，再验证宿主是否真正发现 Soul 与 Library。</code></pre></div>
+<div class="callout warn"><strong>别让回执越级</strong><code>INSTALLATION VERIFIED: 18/18</code> 只证明实际目录完整，<code>Host Front Door: current</code> 只证明全局区块匹配。两者都不能冒充 Codex / Claude 已重新扫描、Soul/Library 已调用或真实 SillyTavern 已运行。</div>
+<div class="callout"><strong>DSH 先看 Preview 边界</strong>官方 Developer Preview 的 <code>minimal</code> 没有 Skill loader；TW Lite Full/Entry 只是针对审计版本的离线自定义预设候选。没有真实安装、API 调用与同题 A/B 前，不要宣传支持 minimal 或“发挥模型最大智力”。</div>
 </section>
 <section class="section" id="intro">
 <div class="section-head"><div class="section-no">00</div><div><h2>Vibe Code 不是开盲盒</h2><p class="section-kicker">你掌方向盘，Agent 跑工程循环；成品不是靠抽。</p></div></div>

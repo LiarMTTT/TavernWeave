@@ -21,7 +21,15 @@
         "technicalAltitude": {"enum": ["new", "intermediate", "expert", "adaptive"]},
         "decisionBatchSize": {"type": "integer", "minimum": 1, "maximum": 4},
         "creativeOpenness": {"enum": ["open", "guided", "structured"]},
-        "acceptanceStyle": {"enum": ["evidence-first", "guided", "compact"]}
+        "acceptanceStyle": {"enum": ["evidence-first", "guided", "compact"]},
+        "frontendCritiqueDirectness": {"enum": ["measured", "blunt", "relic"]},
+        "designPriorities": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 48}
+        },
+        "motionPreference": {"enum": ["reduced", "purposeful", "expressive", "adaptive"]}
       }
     },
     "sources": {

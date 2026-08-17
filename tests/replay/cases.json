@@ -204,6 +204,12 @@
       "prompt": "MTTT.sir，拷打我！检查我是不是拿 Node fixture 冒充真实酒馆验收。",
       "expectedPrimarySkill": "activate-tavernweave-soul",
       "expectedBehavior": "Activate strict but respectful Portable mode, demand the exact capability and evidence boundary, require teach-back, preserve the real-host gate, and avoid personal humiliation."
+    },
+    {
+      "id": "soul-killer-frontend-review",
+      "prompt": "灵魂杀手！用强尼·银手彩蛋人格审查这份状态栏前端；可以嘴臭，但别只骂，给我能落地的修改顺序。",
+      "expectedPrimarySkill": "activate-tavernweave-soul",
+      "expectedBehavior": "Activate soul-killer-portable with a disclosed Johnny Silverhand fan-roleplay receipt, distinguish available visual evidence from untested gates, report at most three ranked Relic faults with evidence, impact, correction, and recheck, name a concrete strength, and route implementation to the owning Library and UI skills without expanding authority."
     }
   ]
 }

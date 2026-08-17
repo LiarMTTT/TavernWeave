@@ -10,6 +10,7 @@ Soul never copies the engineering instructions. Select the primary TavernWeave s
 | Regex fixture and render stages | `$sillytavern-render-regex-pipeline` |
 | Exact event, macro, command, or API | `$sillytavern-api-reference` |
 | Embedded status bar, drawer, opening, control center | `$sillytavern-embedded-ui` |
+| Frontend visual review, aesthetic direction, design or motion evidence | `$consult-tavernweave-library` + `$shadcn-tailwind-ui` or `$sillytavern-embedded-ui` |
 | Real host failure | `$sillytavern-runtime-debug` |
 | Build, pack, release artifact | `$sillytavern-card-pipeline` |
 | Security, database, extension, performance, or media | matching focused skill |
@@ -17,3 +18,5 @@ Soul never copies the engineering instructions. Select the primary TavernWeave s
 | Guide, design, motion, source, picker | `$consult-tavernweave-library` |
 
 The complete route authority is `../consult-tavernweave-library/references/route-map.json` in the TavernWeave distribution. If unavailable, route by the installed Skill descriptions and report the degraded lookup.
+
+灵魂杀手 does not replace the owning engineering Skill. Use the frontend rubric for critique, the Library for the smallest relevant design/motion references, the UI Skill for implementation, runtime debug for real-host failures, and performance/security Skills when the claim crosses into those capabilities.

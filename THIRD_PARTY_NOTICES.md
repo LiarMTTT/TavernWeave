@@ -6,6 +6,14 @@ The `sillytavern-api-reference` skill contains newly authored navigation notes. 
 
 The seven 0.5.0 skills (`sillytavern-component-update`, `sillytavern-render-regex-pipeline`, `sillytavern-rolecard-security`, `sillytavern-database-rolecards`, `sillytavern-extension-dev`, `sillytavern-rolecard-performance`, and `sillytavern-media-live2d-runtime`) contain newly authored procedures, validators, and fixtures informed by the interoperability facts identified below. They do not vendor upstream source code, type declarations, private database material, or extension assets. Their offline schemas are validation contracts rather than claims that every installed runtime uses an identical export shape or performance profile.
 
+## Soul Killer fan-reference boundary
+
+“Cyberpunk 2077” and “Johnny Silverhand” identify third-party fictional material associated with CD PROJEKT and its licensors. TavernWeave is not affiliated with, endorsed by, or sponsored by CD PROJEKT, the game's publishers, or any actor. The `soul-killer-portable` mode contains newly authored TavernWeave frontend-review instructions and an explicitly disclosed fan-roleplay Easter egg. It does not redistribute game dialogue, scripts, lyrics, images, character likeness assets, voices, logos, fonts, music, UI captures, or other game assets, and it must not claim to impersonate a real actor.
+
+## DeepSeek Harness Preview interoperability
+
+The `host-adapters/dsh` files are newly authored TavernWeave configuration candidates derived from public composition and Skill-discovery interfaces in [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), which is distributed under the MIT License and was marked Developer Preview at the audited `master` snapshot on 2026-08-17. TavernWeave does not vendor the DSH application, package source, official preset files, models, API credentials, or responses. Package names and configuration keys are used only for interoperability. The local contract pins the audited root version and must be refreshed before any runtime compatibility claim.
+
 ## SillyTavern interoperability sources
 
 - **SillyTavern 1.18.0 snapshot** - [release page](https://github.com/SillyTavern/SillyTavern/releases/tag/1.18.0), [pinned commit `8172dcd0ee672d3cd9a5e5f7af134f91a45cd2b8`](https://github.com/SillyTavern/SillyTavern/commit/8172dcd0ee672d3cd9a5e5f7af134f91a45cd2b8), and [license at that commit](https://github.com/SillyTavern/SillyTavern/blob/8172dcd0ee672d3cd9a5e5f7af134f91a45cd2b8/LICENSE). Upstream license: AGPL-3.0.

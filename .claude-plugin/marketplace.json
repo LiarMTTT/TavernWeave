@@ -3,7 +3,7 @@
   "owner": {
     "name": "LiarMTTT"
   },
-  "description": "TavernWeave skills, routed library, evidence contracts, and portable Soul personas for SillyTavern rolecard engineering.",
+  "description": "TavernWeave skills, routed library, Host Front Doors, evidence contracts, and three portable Soul modes for SillyTavern rolecard engineering.",
   "plugins": [
     {
       "name": "tavernweave-agent-skills",

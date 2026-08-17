@@ -5,6 +5,9 @@ param(
     [string]$TargetRoot,
     [ValidateSet('auto', 'plugin', 'skills')]
     [string]$Layout = 'auto',
+    [ValidateSet('None', 'Codex', 'Claude')]
+    [string]$AgentHost = 'None',
+    [string]$TargetInstructionFile,
     [switch]$Json,
     [switch]$AllowSourceTree
 )
@@ -15,6 +18,9 @@ $PluginRoot = [System.IO.Path]::GetFullPath($PluginRoot).TrimEnd([char]92, [char
 $TargetRoot = [System.IO.Path]::GetFullPath($TargetRoot).TrimEnd([char]92, [char]47)
 if (-not $AllowSourceTree -and $TargetRoot.Equals($PluginRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
     throw 'Refusing to verify the source repository as an installed target. Point TargetRoot at the host-scanned plugin or skills directory.'
+}
+if ($TargetInstructionFile -and $AgentHost -eq 'None') {
+    throw 'TargetInstructionFile requires -AgentHost Codex or -AgentHost Claude.'
 }
 
 function Get-PortableFileHash([string]$Path) {
@@ -137,6 +143,17 @@ if ($Layout -eq 'plugin') {
 
 $extraTargetDirectories = @($targetDirectories | Where-Object { $_ -notin $expectedSkills } | Sort-Object)
 $matchedSkills = @($presentSkills | Where-Object { $_ -notin $driftedSkills })
+$frontDoorReceipt = $null
+if ($AgentHost -ne 'None') {
+    $frontDoorManager = Join-Path $PluginRoot 'scripts\manage-host-front-door.ps1'
+    if (-not (Test-Path -LiteralPath $frontDoorManager -PathType Leaf)) {
+        throw "Host Front Door manager is missing: $frontDoorManager"
+    }
+    $frontDoorArgs = @{ PluginRoot = $PluginRoot; AgentHost = $AgentHost; Action = 'Check'; Json = $true }
+    if ($TargetInstructionFile) { $frontDoorArgs.TargetInstructionFile = $TargetInstructionFile }
+    $frontDoorPayload = (& $frontDoorManager @frontDoorArgs | Out-String) | ConvertFrom-Json
+    $frontDoorReceipt = $frontDoorPayload.receipt
+}
 $failures = [System.Collections.Generic.List[string]]::new()
 if ($missingSkills.Count -gt 0) { $failures.Add('missing-skills') }
 if ($driftedSkills.Count -gt 0) { $failures.Add('content-drift') }
@@ -160,6 +177,9 @@ $receipt = [pscustomobject][ordered]@{
     librarySkill = if ('consult-tavernweave-library' -in $matchedSkills) { 'present-and-matched' } else { 'missing-or-drifted' }
     libraryPicker = if ('skills/consult-tavernweave-library/assets/picker/index.html' -notin $missingRequiredPaths) { 'present' } else { 'missing' }
     soulSkill = if ('activate-tavernweave-soul' -in $matchedSkills) { 'present-and-matched' } else { 'missing-or-drifted' }
+    hostFrontDoor = if ($frontDoorReceipt) { [string]$frontDoorReceipt.statusAfter } else { 'not-checked' }
+    hostFrontDoorTarget = if ($frontDoorReceipt) { [string]$frontDoorReceipt.targetInstructionFile } else { $null }
+    hostFrontDoorVersion = if ($frontDoorReceipt) { [string]$frontDoorReceipt.adapterVersion } else { $null }
     hostRediscovery = [string]$installManifest.hostRediscovery
     failures = @($failures)
 }
@@ -181,6 +201,8 @@ if ($Json) {
     Write-Output "Library: $($receipt.librarySkill)"
     Write-Output "Library picker: $($receipt.libraryPicker)"
     Write-Output "Soul: $($receipt.soulSkill)"
+    Write-Output "Host Front Door: $($receipt.hostFrontDoor)"
+    if ($receipt.hostFrontDoorTarget) { Write-Output "Host Front Door target: $($receipt.hostFrontDoorTarget)" }
     Write-Output "Host rediscovery: $($receipt.hostRediscovery)"
 }
 
