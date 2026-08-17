@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.1.0 - 2026-08-17
+
+### Host Front Door 与 A0 loop
+
+- 新增 Codex `AGENTS.md` 与 Claude Code `CLAUDE.md` 的可选全局 Host Front Door。安装/更新会明文推荐全局入口，并支持状态检查、diff 预览、安装、升级和移除；只维护带版本的受控区块，保留原文、UTF-8 BOM 与换行风格，已有文件先备份。
+- 安装器新增 `-AgentHost` 与 `-HostFrontDoorAction`，默认只明文推荐，不静默改全局规则；规则文件缺失、区块缺失、过期、同版本漂移、标记损坏、宿主文件名错误和链接路径均有确定回执或拒绝结果。
+- 全局前门固化直接 Soul 口令、Skill 缺失失败回执与 A0 的“目标/红线/验收 → 写入授权 → 自动证据 → 人工验收”基础 loop，同时继续把 Skill 文件、宿主重发现、真实 ST、人工验收、Git 与 Release 分开。
+
+### Soul v2 · 灵魂杀手
+
+- `activate-tavernweave-soul` 扩展为阿瞳、MTTT.sir、灵魂杀手三模式状态机。`灵魂杀手！`、强尼/Relic 别名与 `/soul on soul-killer` 进入 `soul-killer-portable`；直接安全词优先退出，引用、代码和测试夹具不会误触发。
+- 灵魂杀手以非官方强尼·银手同人彩蛋人格审查前端：允许尖锐吐槽可观察的页面与设计取舍，但每条判词必须绑定证据、影响、修复和复验；禁止攻击用户身份/价值/脆弱经历、阻止退出、冒充官方或现实演员，以及复制游戏台词或资产。
+- 新增前端审美 rubric，覆盖视觉论点、层级、节奏、中文排版、色彩 token、组件状态、动效目的、390px/ST iframe、可访问性和 AI 模板味；截图、浏览器、真实 ST 与驾驶员审美验收仍为独立证据。
+
+### DSH TW Lite Preview
+
+- 基于官方 `deepseek-ai/deepseek-harness` `master` 根版本 `0.1.0-rc.5` 重新建立离线兼容合同。明确官方 `minimal` 不挂 Skill filesystem/loader，`standard` 与 `code` 才具备对应能力。
+- 新增 `TW Lite Full` 与 `TW Lite Entry` 自定义预设候选：保留跨平台 shell、文件系统、Skill 与用户询问，默认移除 Web、子 Agent、工作流、Ralph、todo、goal、jobs 与 Code presentation；Entry 只用于三入口目录的 A/B，二级 Skill 路由明确降级。
+- 当前只通过 JSON、预设组成和负向声明静态测试；尚未安装 DSH、配置 API、产生模型/额度调用，亦未完成 Windows/Linux/WSL、真实 SillyTavern 或智力 A/B。该版本转正前必须补真实运行证据。
+
+### 版本与验证
+
+- Codex、Claude 与安装 manifest 升至 `1.1.0`；安装 manifest schema 升至 2，并单独登记 Host Front Door 与 DSH Preview 制品。
+- replay 扩展至 35 个正向和 40 个对抗案例，新增灵魂杀手前端审查、官方身份/版权越界与退出阻挠负向门；专项自动验证、教程桌面/窄屏浏览器检查与驾驶员体验验收均已通过。
+
 ## 1.0.1 - 2026-08-16
 
 ### 安装完整性门

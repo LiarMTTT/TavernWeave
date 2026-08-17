@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "adapterVersion": "1.1.0",
+  "hosts": {
+    "codex": {
+      "displayName": "Codex",
+      "instructionFileName": "AGENTS.md",
+      "defaultDirectory": ".codex",
+      "homeOverrideEnvironment": "CODEX_HOME",
+      "rediscovery": "new-task-or-restart",
+      "support": "formal"
+    },
+    "claude": {
+      "displayName": "Claude Code",
+      "instructionFileName": "CLAUDE.md",
+      "defaultDirectory": ".claude",
+      "homeOverrideEnvironment": null,
+      "rediscovery": "new-task-or-restart",
+      "support": "formal"
+    },
+    "dsh": {
+      "displayName": "DeepSeek Harness",
+      "instructionFileName": null,
+      "defaultDirectory": null,
+      "homeOverrideEnvironment": null,
+      "rediscovery": "new-session",
+      "support": "preview-preset-only"
+    }
+  }
+}

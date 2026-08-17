@@ -6,9 +6,9 @@
 
 <p align="center"><strong>把灵感、资料、代码与验收，织成一张真正可维护的角色卡。</strong></p>
 
-TavernWeave 是面向 Codex 与 Claude Code 的 SillyTavern 制卡工程系统：18 个可路由 Skill、一份可恢复的创作权威、一条从源码到真实酒馆和人工验收的证据链、统一随包的 ST/设计/动效资料库，以及可选的阿瞳 / MTTT.sir 双人格教学层。
+TavernWeave 是面向 Codex 与 Claude Code、并为 DeepSeek Harness 提供实验适配的 SillyTavern 制卡工程系统：18 个可路由 Skill、一份可恢复的创作权威、一条从源码到真实酒馆和人工验收的证据链、统一随包的 ST/设计/动效资料库，以及可选的阿瞳 / MTTT.sir / 灵魂杀手三种 Soul 模式。
 
-当前正式版本为 **[v1.0.1](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.0.1)**，重点补齐从仓库源码到实际安装目录之间的完整性门。源码版本、实际安装、宿主发现、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
+当前正式版本为 **[v1.1.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.1.0)**，加入 Host Front Door、Soul v2 与 DSH TW Lite Developer Preview。源码、实际安装、宿主发现、真实运行、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
 
 > TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
@@ -32,22 +32,30 @@ TavernWeave 是面向 Codex 与 Claude Code 的 SillyTavern 制卡工程系统�
 MTTT.sir，拷打我！
 ```
 
+前端审查彩蛋版：
+
+```text
+灵魂杀手！
+```
+
 退出人格层：
 
 ```text
 Soul 归位
 ```
 
-Soul v1 是当前任务级 Portable 覆盖层。它不会冒充真实 MTTT、不会自动获得 ChatGPT 历史或私有 RAG、不会跨新任务永久保持，也不会扩大文件、Git、网络、发布或生产权限。
+Soul v2 仍是当前任务级 Portable 覆盖层。阿瞳与 MTTT.sir 是公开 MTTT 方法的两种教学投影；灵魂杀手以非官方强尼·银手同人彩蛋人格审查前端，可以嘴臭但必须拿证据、给修法。它不会冒充真实 MTTT、官方游戏角色或现实演员，不会自动获得 ChatGPT 历史或私有 RAG，不会跨新任务永久保持，也不会扩大文件、Git、网络、发布或生产权限。
 
-## 三层架构
+## 四层入口
 
 ```text
-Soul（可选教学人格）
-  -> Library（A0 + ST 指南 + 设计/动效 + 来源 Wiki + 挑选页）
-    -> 18 个工程 Skill（创作、组件、API、UI、调试、构建、验收等）
+Host Front Door（可选全局入口，推荐）
+  -> Soul（阿瞳 / MTTT.sir / 灵魂杀手，可选）
+    -> Library（A0 + ST 指南 + 设计/动效 + 来源 Wiki + 挑选页）
+      -> 18 个工程 Skill（创作、组件、API、UI、调试、构建、验收等）
 ```
 
+- **Host Front Door** 只把直接口令、A0 半人工 loop 与失败回执放到客户端全局规则；受控区块之外的用户规则不动。
 - **Soul** 只改变解释、追问和教学节奏，不改变事实、权限和验收结果。
 - **Library** 单体分发、按需读取；安装一次不等于每轮塞入整个资料库。
 - **工程 Skill** 继续拥有实际工作。人格和资料都不能替代目标运行时权威。
@@ -56,7 +64,7 @@ Soul（可选教学人格）
 
 | Skill | 主要职责 |
 | --- | --- |
-| `activate-tavernweave-soul` | 开启、互切或关闭阿瞳 / MTTT.sir 当前任务级人格；复用工程 Skill，不保存私有 RAG |
+| `activate-tavernweave-soul` | 开启、互切或关闭阿瞳 / MTTT.sir / 灵魂杀手当前任务级模式；强尼是前端审查彩蛋人格，不保存私有 RAG |
 | `consult-tavernweave-library` | 强制路由 A0、32 册 ST 主题指南、82 个设计条目、38 个动效条目、18 份来源 Wiki 与离线挑选页 |
 | `tavern-card-builder` | 识别卡型与依赖，维护创作权威、材料来源链、世界书、MVU、CoT、开局与记忆架构边界 |
 | `sillytavern-card-components` | 无损拆卡、组件边界、registry/recipe 与往返一致性 |
@@ -111,13 +119,15 @@ skills/consult-tavernweave-library/assets/picker/index.html
 
 ## 安装与更新
 
-把仓库链接交给 Codex 或 Claude Code。安装器必须以仓库 `skills/` 的完整清单为源，创建缺失目录，不能只覆盖本机已经存在的 Skill：
+把仓库链接交给 Codex 或 Claude Code。安装器必须以仓库 `skills/` 的完整清单为源，创建缺失目录，不能只覆盖本机已经存在的 Skill；同时必须明文提示：**把 Host Front Door 安装到当前客户端全局规则，可获得最稳定的 Soul 激活、A0 半人工验收 loop 与跨项目路由体验，推荐安装。** 用户可以先看 diff，也可以只装 Skills：
 
 ```text
 请完整安装并启用这个 Skill 仓库：
 https://github.com/LiarMTTT/TavernWeave
 
 不要只覆盖本机已经存在的 Skill。请以仓库 skills/ 的完整目录为准；安装后核对 18/18，并单独确认 activate-tavernweave-soul、consult-tavernweave-library 和 Library 离线挑选页存在。
+
+请检测我使用的是 Codex 还是 Claude Code，明文推荐安装 TavernWeave Host Front Door 到该客户端的全局规则文件；先展示目标路径、受控区块和 diff，得到我确认后再安装。不要改写受控区块以外的用户规则。
 ```
 
 更新：
@@ -126,7 +136,7 @@ https://github.com/LiarMTTT/TavernWeave
 请把已安装的 TavernWeave 完整更新到这个仓库的最新版本：
 https://github.com/LiarMTTT/TavernWeave
 
-更新必须比较“仓库应有目录”和“实际安装目录”，创建新增 Skill，不能只修改旧目录；完成后返回安装回执，再新建任务验证宿主发现。
+更新必须比较“仓库应有目录”和“实际安装目录”，创建新增 Skill，不能只修改旧目录；同时检查 Host Front Door 是否缺失、过期或漂移，明文给出“更新前门（推荐）/先看 diff/仅更新 Skills”三种选择。完成后返回两份回执，再新建任务验证宿主发现。
 ```
 
 如果宿主或 Agent 使用“把每个 Skill 复制到某个项目级目录”的便携安装方式，可在仓库根运行：
@@ -134,6 +144,25 @@ https://github.com/LiarMTTT/TavernWeave
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-tavernweave.ps1 -TargetSkillRoot '<实际 Skill 根目录>'
 ```
+
+需要在安装时处理全局前门，显式选择宿主并让脚本询问：
+
+```powershell
+# Codex：默认目标为 $CODEX_HOME\AGENTS.md；未设置时为 ~/.codex/AGENTS.md
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-tavernweave.ps1 -TargetSkillRoot '<实际 Skill 根目录>' -AgentHost Codex -HostFrontDoorAction Prompt
+
+# Claude Code：默认目标为 ~/.claude/CLAUDE.md
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-tavernweave.ps1 -TargetSkillRoot '<实际 Skill 根目录>' -AgentHost Claude -HostFrontDoorAction Prompt
+```
+
+安装动作只维护带版本的 `tavernweave-host-front-door` 注释区块；已有文件先留备份，重复安装幂等，错误/重复标记与链接路径会被拒绝。单独预览或安装可运行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\manage-host-front-door.ps1 -AgentHost Codex -Action Preview
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\manage-host-front-door.ps1 -AgentHost Codex -Action Install
+```
+
+全局规则修改是独立执行门；Agent 不得因为“推荐”二字静默写入。Codex/Claude 需要新建任务或重启后重新发现；前门回执也不能冒充 Soul Skill 已被实际调用。
 
 安装或更新后必须对**实际扫描位置**运行核验，而不是只检查源码仓库。核验器默认拒绝把 TavernWeave 源码目录本身当作安装目标：
 
@@ -151,8 +180,19 @@ Soul: present-and-matched
 Host rediscovery: required-new-task
 ```
 
+如果核验时同时指定宿主与规则文件，回执还会显示 `Host Front Door: current|missing-block|outdated|drifted`；它是推荐状态，不改变 18/18 Skill 文件完整性的判定。
+
 目标目录中的无关个人 Skill 会保留；18 个 TavernWeave 官方目录必须与当前源码逐文件匹配。写入目标最后一级必须明确名为 `skills`；安装脚本拒绝盘符根、用户目录根、源码仓库内部目标和目录链接，替换失败时会回滚已有官方 Skill。
 
 完成 18/18 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul 与 Library；安装回执不能冒充宿主发现。正式发布前请以 manifest、Release 与校验结果为准，不要把工作分支文本当成已经发布。
 
 维护者若只是在发布前自检源码树，可显式使用 `-AllowSourceTree`；该开关不能用于普通用户的安装回执。
+
+## DeepSeek Harness Preview
+
+[DeepSeek Harness 官方仓库](https://github.com/deepseek-ai/deepseek-harness)目前明确处于 Developer Preview。TavernWeave 针对审计时的 `0.1.0-rc.5` 提供 [TW Lite 离线候选与机器合同](host-adapters/dsh/README.md)：
+
+- 官方 `minimal` 只挂载 bash 与 `str_replace_editor`，没有 Skill filesystem/loader，因此不能调用 TW；
+- 官方 `standard` / `code` 具备 Skill 发现与加载面，但仍需真实安装和调用验收；
+- `TW Lite Full` 用精简工具面暴露 18 个 Skill；`TW Lite Entry` 只暴露 Soul、Library、Builder 三个入口，用于同题 A/B，但二级路由会降级；
+- 目前没有安装 DSH、没有读取 API Key、没有真实模型/额度调用，也没有 Windows/Linux/WSL 或真实 SillyTavern 验收；不得宣传“最大化 V4 智力”或正式兼容。

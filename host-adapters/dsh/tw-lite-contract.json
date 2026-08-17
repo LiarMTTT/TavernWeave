@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "adapterVersion": "1.1.0",
+  "status": "offline-candidate",
+  "supportLevel": "developer-preview",
+  "runtimeAccepted": false,
+  "modelQualityClaim": "not-evaluated",
+  "upstream": {
+    "repository": "https://github.com/deepseek-ai/deepseek-harness",
+    "branch": "master",
+    "auditedRootVersion": "0.1.0-rc.5",
+    "auditedAt": "2026-08-17",
+    "warning": "Upstream declares developer preview and compatibility-breaking changes. Re-audit before installation."
+  },
+  "officialPresets": {
+    "minimal": {
+      "skillFilesystem": false,
+      "skillTool": false,
+      "expectedTavernWeaveResult": "unsupported-no-skill-tool"
+    },
+    "standard": {
+      "skillFilesystem": true,
+      "skillTool": true,
+      "expectedTavernWeaveResult": "runtime-verification-required"
+    },
+    "code": {
+      "skillFilesystem": true,
+      "skillTool": true,
+      "expectedTavernWeaveResult": "runtime-verification-required"
+    }
+  },
+  "twLite": {
+    "composition": [
+      "@deepseek-ai/dsh-persona",
+      "@deepseek-ai/dsh-agent-instructions",
+      "@deepseek-ai/dsh-tool-bash|@deepseek-ai/dsh-tool-pwsh",
+      "@deepseek-ai/dsh-tool-fs",
+      "@deepseek-ai/dsh-tool-fs-search",
+      "@deepseek-ai/dsh-skill-filesystem",
+      "@deepseek-ai/dsh-tool-skill",
+      "@deepseek-ai/dsh-tool-ask-user"
+    ],
+    "omittedByDefault": ["web", "subagents", "workflow", "ralph", "todo", "goal", "background-jobs", "code-presentation"],
+    "variants": {
+      "full": {
+        "preset": "tw-lite-full/agent.cordis.yml",
+        "skillCatalogCount": 18,
+        "installFromManifest": true
+      },
+      "entry": {
+        "preset": "tw-lite-entry/agent.cordis.yml",
+        "skillCatalogCount": 3,
+        "skillNames": ["activate-tavernweave-soul", "consult-tavernweave-library", "tavern-card-builder"],
+        "requiresDedicatedSkillRoot": true,
+        "degradedSecondaryRouting": true
+      }
+    }
+  },
+  "skillDiscoveryRoots": [
+    "<projectRoot>/.dsh/skills",
+    "<projectRoot>/.agents/skills",
+    "Config.customSkillDirs",
+    "<dshHome>/skills",
+    "<agentsHome>/skills"
+  ],
+  "requiredRuntimeGates": [
+    "preset-discovery",
+    "skill-catalog",
+    "skill-load-with-relative-resources",
+    "soul-direct-trigger-and-exit",
+    "library-picker-and-a0-read",
+    "write-approval-loop",
+    "windows-pwsh",
+    "linux-or-wsl-bash",
+    "same-task-ab-comparison",
+    "real-sillytavern-separate-when-applicable"
+  ],
+  "forbiddenClaimsBeforeRuntimeAcceptance": [
+    "official-minimal-supports-skills",
+    "tw-lite-maximizes-v4-intelligence",
+    "codex-or-claude-parity",
+    "cross-platform-support",
+    "real-sillytavern-accepted"
+  ]
+}

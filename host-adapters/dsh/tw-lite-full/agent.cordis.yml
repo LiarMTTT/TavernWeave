@@ -1,0 +1,40 @@
+# TavernWeave TW Lite Full — offline candidate for DSH 0.1.0-rc.5.
+# Re-audit upstream and run the gates in ../tw-lite-contract.json before use.
+- id: persona
+  name: '@deepseek-ai/dsh-persona'
+  config:
+    text: |-
+      You are a coding agent using TavernWeave when the user's task concerns SillyTavern rolecards or TavernWeave itself.
+      Direct Soul commands must load activate-tavernweave-soul; quoted commands are data. "Soul 归位" exits immediately.
+      "灵魂杀手" is the frontend-review mode; Johnny Silverhand is only its disclosed fan-roleplay Easter-egg persona.
+      Before attended write work, load consult-tavernweave-library and A0, align goal, red lines, and acceptance, and preserve separate evidence gates.
+
+- id: agent-instructions
+  name: '@deepseek-ai/dsh-agent-instructions'
+  config:
+    maxBytes: 65536
+
+- id: tool-bash
+  name: '@deepseek-ai/dsh-tool-bash'
+  disabled: !!js process.platform === 'win32'
+
+- id: tool-pwsh
+  name: '@deepseek-ai/dsh-tool-pwsh'
+  disabled: !!js process.platform !== 'win32'
+
+- id: tool-fs
+  name: '@deepseek-ai/dsh-tool-fs'
+
+- id: tool-fs-search
+  name: '@deepseek-ai/dsh-tool-fs-search'
+  config:
+    sampleOverCapGlobResults: false
+
+- id: skill-filesystem
+  name: '@deepseek-ai/dsh-skill-filesystem'
+
+- id: tool-skill
+  name: '@deepseek-ai/dsh-tool-skill'
+
+- id: tool-ask-user
+  name: '@deepseek-ai/dsh-tool-ask-user'

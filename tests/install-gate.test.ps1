@@ -6,6 +6,7 @@ if (-not $PluginRoot) { $PluginRoot = Split-Path -Parent $PSScriptRoot }
 $PluginRoot = [System.IO.Path]::GetFullPath($PluginRoot).TrimEnd([char]92, [char]47)
 $installScript = Join-Path $PluginRoot 'scripts\install-tavernweave.ps1'
 $verifyScript = Join-Path $PluginRoot 'scripts\verify-install.ps1'
+$frontDoorManager = Join-Path $PluginRoot 'scripts\manage-host-front-door.ps1'
 $manifestPath = Join-Path $PluginRoot 'tavernweave-install-manifest.json'
 $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $sourceSkillRoot = Join-Path $PluginRoot 'skills'
@@ -45,6 +46,16 @@ try {
     & $installScript -PluginRoot $PluginRoot -TargetSkillRoot $cleanRoot -Confirm:$false | Out-Null
     $cleanReceipt = @(& $verifyScript -PluginRoot $PluginRoot -TargetRoot $cleanRoot -Layout skills)
     Assert-True ($cleanReceipt -contains 'INSTALLATION VERIFIED: 18/18') 'A clean install did not reach 18/18.'
+
+    $frontDoorTarget = Join-Path $testRoot 'host-front-door\AGENTS.md'
+    & $installScript -PluginRoot $PluginRoot -TargetSkillRoot $cleanRoot -AgentHost Codex -HostFrontDoorAction Install -TargetInstructionFile $frontDoorTarget -Confirm:$false | Out-Null
+    $frontDoorCheck = ((& $frontDoorManager -PluginRoot $PluginRoot -AgentHost Codex -Action Check -TargetInstructionFile $frontDoorTarget -Json) | Out-String) | ConvertFrom-Json
+    Assert-True ($frontDoorCheck.receipt.statusAfter -eq 'current') 'The integrated installer did not install the Codex Host Front Door.'
+    $frontDoorVerify = ((& $verifyScript -PluginRoot $PluginRoot -TargetRoot $cleanRoot -Layout skills -AgentHost Codex -TargetInstructionFile $frontDoorTarget -Json) | Out-String) | ConvertFrom-Json
+    Assert-True ($frontDoorVerify.hostFrontDoor -eq 'current') 'The installation receipt did not report the current Host Front Door.'
+    & $installScript -PluginRoot $PluginRoot -TargetSkillRoot $cleanRoot -AgentHost Codex -HostFrontDoorAction Install -TargetInstructionFile $frontDoorTarget -Confirm:$false | Out-Null
+    $frontDoorAfterSecondInstall = ((& $frontDoorManager -PluginRoot $PluginRoot -AgentHost Codex -Action Check -TargetInstructionFile $frontDoorTarget -Json) | Out-String) | ConvertFrom-Json
+    Assert-True ($frontDoorAfterSecondInstall.receipt.statusAfter -eq 'current') 'The integrated Host Front Door update was not idempotent.'
 
     [System.IO.File]::AppendAllText((Join-Path $cleanRoot 'consult-tavernweave-library\SKILL.md'), "`ninstallation drift`n", [System.Text.UTF8Encoding]::new($false))
     Assert-VerifyFails $cleanRoot 'A modified Library skill must fail content verification.'
@@ -92,7 +103,7 @@ try {
     Assert-True $rollbackInstallFailed 'The installer must refuse a linked official skill directory.'
     Assert-True (Test-Path -LiteralPath $rollbackMarker -PathType Leaf) 'A failed install did not restore the previously replaced official skill.'
 
-    Write-Output 'Install gate tests passed: legacy gap rejected, 18/18 upgrade passed, clean install passed, drift rejected, picker loss rejected, unsafe target rejected, source-tree impersonation rejected, linked-target rollback passed.'
+    Write-Output 'Install gate tests passed: legacy gap rejected, 18/18 upgrade passed, clean install passed, Host Front Door install/receipt/idempotence passed, drift rejected, picker loss rejected, unsafe target rejected, source-tree impersonation rejected, linked-target rollback passed.'
 } finally {
     $tempRoot = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath()).TrimEnd([char]92, [char]47)
     $resolvedTestRoot = [System.IO.Path]::GetFullPath($testRoot).TrimEnd([char]92, [char]47)

@@ -133,7 +133,7 @@ if (-not (Test-Path -LiteralPath $installManifestPath -PathType Leaf)) {
         $installManifest = Get-Content -LiteralPath $installManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
         $installSkills = @($installManifest.skills | ForEach-Object { [string]$_ })
         $sourceSkills = @($skillDirs | ForEach-Object { $_.Name })
-        if ($installManifest.schemaVersion -ne 1) { Add-ValidationError 'Installation manifest schemaVersion must be 1.' }
+        if ($installManifest.schemaVersion -ne 2) { Add-ValidationError 'Installation manifest schemaVersion must be 2.' }
         if ($installManifest.package -ne 'tavernweave-agent-skills') { Add-ValidationError 'Installation manifest package name is invalid.' }
         if ($manifest -and $installManifest.version -ne $manifest.version) { Add-ValidationError 'Installation manifest and Codex manifest versions do not match.' }
         if ($claudeManifest -and $installManifest.version -ne $claudeManifest.version) { Add-ValidationError 'Installation manifest and Claude manifest versions do not match.' }
@@ -142,6 +142,9 @@ if (-not (Test-Path -LiteralPath $installManifestPath -PathType Leaf)) {
         if (($installSkills -join "`n") -ne (($installSkills | Sort-Object) -join "`n")) { Add-ValidationError 'Installation manifest skills must remain sorted.' }
         if ((($installSkills | Sort-Object) -join "`n") -ne (($sourceSkills | Sort-Object) -join "`n")) { Add-ValidationError 'Installation manifest skill names do not exactly match the source skill directories.' }
         if ($installManifest.hostRediscovery -ne 'required-new-task') { Add-ValidationError 'Installation manifest must keep host rediscovery as a separate new-task gate.' }
+        if (-not $installManifest.hostFrontDoor -or $installManifest.hostFrontDoor.version -ne $installManifest.version) { Add-ValidationError 'Host Front Door version must match the installation manifest.' }
+        if ($installManifest.hostFrontDoor.recommended -ne $true) { Add-ValidationError 'Host Front Door must remain an explicit recommended install choice.' }
+        if ($installManifest.hostFrontDoor.dshSupport -ne 'preview-preset-only') { Add-ValidationError 'DSH Host Front Door support must remain preview-preset-only.' }
 
         $requiredInstallPaths = @(
             'skills/activate-tavernweave-soul/SKILL.md',
@@ -159,6 +162,23 @@ if (-not (Test-Path -LiteralPath $installManifestPath -PathType Leaf)) {
                 Add-ValidationError "Installation manifest path escapes plugin root: $requiredInstallPath"
             } elseif (-not (Test-Path -LiteralPath $resolvedPath -PathType Leaf)) {
                 Add-ValidationError "Installation manifest required path is missing: $requiredInstallPath"
+            }
+        }
+        foreach ($requiredSourcePathValue in @($installManifest.hostFrontDoor.requiredSourcePaths)) {
+            $requiredSourcePath = [string]$requiredSourcePathValue
+            $nativePath = $requiredSourcePath.Replace([char]47, [System.IO.Path]::DirectorySeparatorChar)
+            $resolvedPath = [System.IO.Path]::GetFullPath((Join-Path $PluginRoot $nativePath))
+            if (-not $resolvedPath.StartsWith($pluginRootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+                Add-ValidationError "Host Front Door source path escapes plugin root: $requiredSourcePath"
+            } elseif (-not (Test-Path -LiteralPath $resolvedPath -PathType Leaf)) {
+                Add-ValidationError "Host Front Door source path is missing: $requiredSourcePath"
+            }
+        }
+        foreach ($dshPathValue in @($installManifest.dshPreview.contract, $installManifest.dshPreview.fullPreset, $installManifest.dshPreview.entryPreset)) {
+            $dshPath = [string]$dshPathValue
+            $resolvedDshPath = [System.IO.Path]::GetFullPath((Join-Path $PluginRoot ($dshPath.Replace([char]47, [System.IO.Path]::DirectorySeparatorChar))))
+            if (-not $resolvedDshPath.StartsWith($pluginRootPrefix, [System.StringComparison]::OrdinalIgnoreCase) -or -not (Test-Path -LiteralPath $resolvedDshPath -PathType Leaf)) {
+                Add-ValidationError "DSH Preview source path is missing or unsafe: $dshPath"
             }
         }
     } catch {
@@ -280,6 +300,17 @@ if (-not (Test-Path -LiteralPath $installGateTest -PathType Leaf)) {
         $installGateOutput = @(& $installGateTest -PluginRoot $PluginRoot 2>&1)
     } catch {
         Add-ValidationError "Installation gate test failed: $($_.Exception.Message)"
+    }
+}
+
+$hostFrontDoorTest = Join-Path $PluginRoot 'tests\host-front-door.test.ps1'
+if (-not (Test-Path -LiteralPath $hostFrontDoorTest -PathType Leaf)) {
+    Add-ValidationError 'Host Front Door test is missing.'
+} else {
+    try {
+        $hostFrontDoorOutput = @(& $hostFrontDoorTest -PluginRoot $PluginRoot 2>&1)
+    } catch {
+        Add-ValidationError "Host Front Door test failed: $($_.Exception.Message)"
     }
 }
 

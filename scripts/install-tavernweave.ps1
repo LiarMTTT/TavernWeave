@@ -3,6 +3,11 @@ param(
     [string]$PluginRoot,
     [Parameter(Mandatory = $true)]
     [string]$TargetSkillRoot,
+    [ValidateSet('None', 'Codex', 'Claude')]
+    [string]$AgentHost = 'None',
+    [ValidateSet('Recommend', 'Prompt', 'Preview', 'Install', 'Skip')]
+    [string]$HostFrontDoorAction = 'Recommend',
+    [string]$TargetInstructionFile,
     [switch]$KeepBackup
 )
 
@@ -36,7 +41,8 @@ if (Test-SameOrChildPath $TargetSkillRoot $PluginRoot) {
 
 $installManifestPath = Join-Path $PluginRoot 'tavernweave-install-manifest.json'
 $verifyScript = Join-Path $PSScriptRoot 'verify-install.ps1'
-foreach ($requiredFile in @($installManifestPath, $verifyScript)) {
+$frontDoorManager = Join-Path $PSScriptRoot 'manage-host-front-door.ps1'
+foreach ($requiredFile in @($installManifestPath, $verifyScript, $frontDoorManager)) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
         throw "Required installer file is missing: $requiredFile"
     }
@@ -52,8 +58,50 @@ foreach ($skillName in $expectedSkills) {
     }
 }
 
+if ($AgentHost -eq 'None' -and $HostFrontDoorAction -in @('Prompt', 'Preview', 'Install')) {
+    throw "HostFrontDoorAction $HostFrontDoorAction requires -AgentHost Codex or -AgentHost Claude."
+}
+if ($TargetInstructionFile -and $AgentHost -eq 'None') {
+    throw 'TargetInstructionFile requires -AgentHost Codex or -AgentHost Claude.'
+}
+
+function Invoke-HostFrontDoorStep([bool]$PreviewOnly = $false) {
+    if ($HostFrontDoorAction -eq 'Skip') {
+        Write-Output 'Host Front Door: skipped by explicit choice. Soul activation remains dependent on Skill discovery.'
+        return
+    }
+    if ($AgentHost -eq 'None') {
+        Write-Output 'HOST FRONT DOOR RECOMMENDED: install it into the current agent client global instruction file for the best Soul activation, A0 loop, and cross-project TavernWeave routing experience.'
+        Write-Output 'Choose the host explicitly: -AgentHost Codex or -AgentHost Claude; then use -HostFrontDoorAction Prompt, Preview, or Install.'
+        return
+    }
+
+    $resolvedAction = if ($PreviewOnly) { 'Preview' } else { $HostFrontDoorAction }
+    if ($resolvedAction -eq 'Recommend') { $resolvedAction = 'Check' }
+    if ($resolvedAction -eq 'Prompt') {
+        Write-Output "HOST FRONT DOOR RECOMMENDED for ${AgentHost}: global installation provides the best Soul activation and A0 loop experience."
+        $choice = (Read-Host 'Choose [I]nstall (recommended), [V]iew proposed block, or [S]kills only').Trim().ToUpperInvariant()
+        $resolvedAction = switch ($choice) {
+            'I' { 'Install' }
+            'V' { 'Preview' }
+            'S' { 'Check' }
+            default { throw "Unknown Host Front Door choice: $choice" }
+        }
+    }
+
+    $managerArgs = @{
+        PluginRoot = $PluginRoot
+        AgentHost = $AgentHost
+        Action = $resolvedAction
+    }
+    if ($TargetInstructionFile) { $managerArgs.TargetInstructionFile = $TargetInstructionFile }
+    if ($resolvedAction -in @('Install', 'Remove')) { $managerArgs.Confirm = $false }
+    & $frontDoorManager @managerArgs
+}
+
 if (-not $PSCmdlet.ShouldProcess($TargetSkillRoot, "Install TavernWeave $($installManifest.version) with $($installManifest.skillCount) complete skills")) {
     Write-Output "WHATIF: would install $($installManifest.skillCount) TavernWeave skills into $TargetSkillRoot"
+    Invoke-HostFrontDoorStep -PreviewOnly $true
     return
 }
 
@@ -134,5 +182,13 @@ try {
         if (Test-Path -LiteralPath $backupRoot) {
             Remove-Item -LiteralPath $backupRoot -Recurse -Force
         }
+    }
+}
+
+if ($success) {
+    try {
+        Invoke-HostFrontDoorStep
+    } catch {
+        throw "TavernWeave Skills installed and verified, but the Host Front Door step failed without rolling back the Skills: $($_.Exception.Message)"
     }
 }
