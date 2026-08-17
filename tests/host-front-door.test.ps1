@@ -36,6 +36,10 @@ try {
     $installedText = Get-Content -LiteralPath $codexTarget -Raw -Encoding UTF8
     Assert-True ($installedText.Contains("- $unicodeRule")) 'The installer discarded existing Chinese instructions.'
     Assert-True ($installedText.Contains('soul-killer-portable')) 'The managed block omitted the Soul Killer route.'
+    Assert-True ($installedText.Contains('orchestrate-project-blueprint')) 'The managed block omitted the brainstorm route.'
+    Assert-True ($installedText.Contains('soul-ensemble-portable')) 'The managed block omitted the Soul ensemble route.'
+    Assert-True ($installedText.Contains('runtimePersistentBlueprintBudget = 0')) 'The managed block omitted the persistent-blueprint execution guard.'
+    Assert-True ($installedText.Contains('return to the parent step')) 'The managed block omitted the temporary problem-refinement return contract.'
     $installedBytes = [System.IO.File]::ReadAllBytes($codexTarget)
     Assert-True ($installedBytes[0] -eq 0xEF -and $installedBytes[1] -eq 0xBB -and $installedBytes[2] -eq 0xBF) 'The installer did not preserve the UTF-8 BOM.'
 
@@ -43,7 +47,7 @@ try {
     Assert-True ($secondReceipt.statusBefore -eq 'current' -and $secondReceipt.changed -eq $false) 'A repeated install was not idempotent.'
     Assert-True (-not $secondReceipt.backupPath) 'An idempotent install created an unnecessary backup.'
 
-    $outdatedText = $installedText.Replace('begin version=1.1.0', 'begin version=1.0.0')
+    $outdatedText = $installedText.Replace('begin version=1.2.0', 'begin version=1.0.0')
     [System.IO.File]::WriteAllText($codexTarget, $outdatedText, [System.Text.UTF8Encoding]::new($true))
     $outdatedReceipt = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Check -TargetInstructionFile $codexTarget -Json)
     Assert-True ($outdatedReceipt.statusBefore -eq 'outdated') 'An outdated marker version was not diagnosed.'

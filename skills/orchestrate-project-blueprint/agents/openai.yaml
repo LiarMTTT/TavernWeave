@@ -1,0 +1,4 @@
+interface:
+  display_name: "脑暴模式 · 许愿工坊"
+  short_description: "把模糊构思收束为可执行总设计、首版合同与防膨胀蓝图"
+  default_prompt: "使用 $orchestrate-project-blueprint 梳理当前构思，先收束总设计案与首版边界，再生成不递归膨胀的执行蓝图。"

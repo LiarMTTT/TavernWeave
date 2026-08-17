@@ -6,9 +6,9 @@
 
 <p align="center"><strong>把灵感、资料、代码与验收，织成一张真正可维护的角色卡。</strong></p>
 
-TavernWeave 是面向 Codex 与 Claude Code、并为 DeepSeek Harness 提供实验适配的 SillyTavern 制卡工程系统：18 个可路由 Skill、一份可恢复的创作权威、一条从源码到真实酒馆和人工验收的证据链、统一随包的 ST/设计/动效资料库，以及可选的阿瞳 / MTTT.sir / 灵魂杀手三种 Soul 模式。
+TavernWeave 是面向 Codex 与 Claude Code、并为 DeepSeek Harness 提供实验适配的 SillyTavern 制卡与 Vibe Coding 工程系统：19 个可路由 Skill、从模糊愿望到总设计案/首版/蓝图的项目编排、一份可恢复的创作权威、一条从源码到真实宿主和人工验收的证据链、统一随包的 ST/设计/动效资料库，以及可单席或三席联动的 Soul 模式。
 
-当前正式版本为 **[v1.1.1](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.1.1)**。本版修复奶人教程目录顺序、点击定位、滚动跟随和移动抽屉回显，并恢复独立的 Codex / Claude Code 雷达入口；同时继续包含 v1.1.0 的 Host Front Door、Soul v2 与 DSH TW Lite Developer Preview。源码、实际安装、宿主发现、真实运行、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
+当前正式版本仍为 **[v1.1.1](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.1.1)**；仓库工作区正在形成 **v1.2.0 候选**。候选新增“脑暴模式 · 许愿工坊”、Soul 三席联席、按体量生成单蓝图/蓝图集、执行期反递归门、First Playable 收束和前端承载面劝退协议。源码候选、实际安装、宿主发现、真实运行、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
 
 > TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
@@ -38,25 +38,45 @@ MTTT.sir，拷打我！
 灵魂杀手！
 ```
 
+从一句愿望收束总设计案和第一版：
+
+```text
+脑暴模式
+```
+
+让三种 Soul 镜头一起参与脑暴：
+
+```text
+脑暴模式，Soul 联席
+```
+
+设计确认后执行冻结的首版：
+
+```text
+按蓝图开跑第一版
+```
+
 退出人格层：
 
 ```text
 Soul 归位
 ```
 
-Soul v2 仍是当前任务级 Portable 覆盖层。阿瞳与 MTTT.sir 是公开 MTTT 方法的两种教学投影；灵魂杀手以非官方强尼·银手同人彩蛋人格审查前端，可以嘴臭但必须拿证据、给修法。它不会冒充真实 MTTT、官方游戏角色或现实演员，不会自动获得 ChatGPT 历史或私有 RAG，不会跨新任务永久保持，也不会扩大文件、Git、网络、发布或生产权限。
+Soul 仍是当前任务级 Portable 覆盖层。阿瞳与 MTTT.sir 是公开 MTTT 方法的两种教学投影；灵魂杀手以非官方强尼·银手同人彩蛋人格审查前端，可以嘴臭但必须拿证据、给修法。三席联席只是同一 Agent 的三个标记镜头，共享事实、权限、每轮 2–4 个决策和同一收束账本，不是三个独立模型。它不会自动获得 ChatGPT 历史或私有 RAG，不会跨新任务永久保持，也不会扩大文件、Git、网络、发布或生产权限。
 
-## 四层入口
+## 五层入口
 
 ```text
 Host Front Door（可选全局入口，推荐）
-  -> Soul（阿瞳 / MTTT.sir / 灵魂杀手，可选）
-    -> Library（A0 + ST 指南 + 设计/动效 + 来源 Wiki + 挑选页）
-      -> 18 个工程 Skill（创作、组件、API、UI、调试、构建、验收等）
+  -> Soul（阿瞳 / MTTT.sir / 灵魂杀手 / 三席，可选）
+    -> 脑暴编排（总设计案 + First Playable + 蓝图/蓝图集，可选）
+      -> Library（A0 + ST 指南 + 设计/动效 + 来源 Wiki + 挑选页）
+        -> 19 个工程 Skill（创作、组件、API、UI、调试、构建、验收等）
 ```
 
 - **Host Front Door** 只把直接口令、A0 半人工 loop 与失败回执放到客户端全局规则；受控区块之外的用户规则不动。
 - **Soul** 只改变解释、追问和教学节奏，不改变事实、权限和验收结果。
+- **脑暴编排** 控制方向轮数、四态决策、第一版边界和蓝图体量；任意活动步骤都不能无依据递归增殖。真实问题可以临时细分，解决或确认阻塞后必须关闭支线并回到父步骤。
 - **Library** 单体分发、按需读取；安装一次不等于每轮塞入整个资料库。
 - **工程 Skill** 继续拥有实际工作。人格和资料都不能替代目标运行时权威。
 
@@ -66,6 +86,7 @@ Host Front Door（可选全局入口，推荐）
 | --- | --- |
 | `activate-tavernweave-soul` | 开启、互切或关闭阿瞳 / MTTT.sir / 灵魂杀手当前任务级模式；强尼是前端审查彩蛋人格，不保存私有 RAG |
 | `consult-tavernweave-library` | 强制路由 A0、32 册 ST 主题指南、82 个设计条目、38 个动效条目、18 份来源 Wiki 与离线挑选页 |
+| `orchestrate-project-blueprint` | 将角色卡或普通 Vibe Code 愿望收束为总设计案、First Playable、分级蓝图集、NEXT 和反递归执行门；可召集 Soul 三席联席 |
 | `tavern-card-builder` | 识别卡型与依赖，维护创作权威、材料来源链、世界书、MVU、CoT、开局与记忆架构边界 |
 | `sillytavern-card-components` | 无损拆卡、组件边界、registry/recipe 与往返一致性 |
 | `sillytavern-component-update` | 组件级更新、可导入测试制品与整卡 pipeline 交接，阻止静默重封 |
@@ -125,7 +146,7 @@ skills/consult-tavernweave-library/assets/picker/index.html
 请完整安装并启用这个 Skill 仓库：
 https://github.com/LiarMTTT/TavernWeave
 
-不要只覆盖本机已经存在的 Skill。请以仓库 skills/ 的完整目录为准；安装后核对 18/18，并单独确认 activate-tavernweave-soul、consult-tavernweave-library 和 Library 离线挑选页存在。
+不要只覆盖本机已经存在的 Skill。请以仓库 skills/ 的完整目录为准；安装后核对 19/19，并单独确认 activate-tavernweave-soul、consult-tavernweave-library、orchestrate-project-blueprint 和 Library 离线挑选页存在。
 
 请检测我使用的是 Codex 还是 Claude Code，明文推荐安装 TavernWeave Host Front Door 到该客户端的全局规则文件；先展示目标路径、受控区块和 diff，得到我确认后再安装。不要改写受控区块以外的用户规则。
 ```
@@ -173,18 +194,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-install.ps1
 通过回执必须包含：
 
 ```text
-INSTALLATION VERIFIED: 18/18
+INSTALLATION VERIFIED: 19/19
 Library: present-and-matched
 Library picker: present
 Soul: present-and-matched
 Host rediscovery: required-new-task
 ```
 
-如果核验时同时指定宿主与规则文件，回执还会显示 `Host Front Door: current|missing-block|outdated|drifted`；它是推荐状态，不改变 18/18 Skill 文件完整性的判定。
+如果核验时同时指定宿主与规则文件，回执还会显示 `Host Front Door: current|missing-block|outdated|drifted`；它是推荐状态，不改变 19/19 Skill 文件完整性的判定。
 
-目标目录中的无关个人 Skill 会保留；18 个 TavernWeave 官方目录必须与当前源码逐文件匹配。写入目标最后一级必须明确名为 `skills`；安装脚本拒绝盘符根、用户目录根、源码仓库内部目标和目录链接，替换失败时会回滚已有官方 Skill。
+目标目录中的无关个人 Skill 会保留；19 个 TavernWeave 官方目录必须与当前源码逐文件匹配。写入目标最后一级必须明确名为 `skills`；安装脚本拒绝盘符根、用户目录根、源码仓库内部目标和目录链接，替换失败时会回滚已有官方 Skill。
 
-完成 18/18 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul 与 Library；安装回执不能冒充宿主发现。正式发布前请以 manifest、Release 与校验结果为准，不要把工作分支文本当成已经发布。
+完成 19/19 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul、脑暴编排与 Library；安装回执不能冒充宿主发现。正式发布前请以 manifest、Release 与校验结果为准，不要把工作分支文本当成已经发布。
 
 维护者若只是在发布前自检源码树，可显式使用 `-AllowSourceTree`；该开关不能用于普通用户的安装回执。
 
@@ -194,5 +215,5 @@ Host rediscovery: required-new-task
 
 - 官方 `minimal` 只挂载 bash 与 `str_replace_editor`，没有 Skill filesystem/loader，因此不能调用 TW；
 - 官方 `standard` / `code` 具备 Skill 发现与加载面，但仍需真实安装和调用验收；
-- `TW Lite Full` 用精简工具面暴露 18 个 Skill；`TW Lite Entry` 只暴露 Soul、Library、Builder 三个入口，用于同题 A/B，但二级路由会降级；
+- `TW Lite Full` 用精简工具面暴露 19 个 Skill；`TW Lite Entry` 只暴露 Soul、Library、Project Blueprint、Builder 四个入口，用于同题 A/B，但二级路由会降级；
 - 目前没有安装 DSH、没有读取 API Key、没有真实模型/额度调用，也没有 Windows/Linux/WSL 或真实 SillyTavern 验收；不得宣传“最大化 V4 智力”或正式兼容。

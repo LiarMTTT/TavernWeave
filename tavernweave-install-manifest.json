@@ -1,12 +1,13 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "1.1.1",
-  "skillCount": 18,
+  "version": "1.2.0",
+  "skillCount": 19,
   "skills": [
     "activate-tavernweave-soul",
     "code-quality-workflow",
     "consult-tavernweave-library",
+    "orchestrate-project-blueprint",
     "rolecard-workshop-ops",
     "shadcn-tailwind-ui",
     "sillytavern-api-reference",
@@ -26,11 +27,13 @@
   "requiredPaths": [
     "skills/activate-tavernweave-soul/SKILL.md",
     "skills/consult-tavernweave-library/SKILL.md",
+    "skills/orchestrate-project-blueprint/SKILL.md",
+    "skills/orchestrate-project-blueprint/assets/templates/total-design.md",
     "skills/consult-tavernweave-library/assets/picker/index.html"
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "1.1.1",
+    "version": "1.2.0",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",

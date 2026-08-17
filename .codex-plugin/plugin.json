@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.1.1",
-  "description": "A routed SillyTavern rolecard engineering system with resumable creative authority, bundled guides, host front-door adapters, evidence gates, and three optional portable Soul modes.",
+  "version": "1.2.0",
+  "description": "A routed SillyTavern and Vibe Coding system with bounded brainstorming, scale-aware blueprints, resumable authority, bundled guides, host front-door adapters, evidence gates, and portable Soul modes.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "TavernWeave",
     "shortDescription": "Design, build, verify, and learn SillyTavern rolecards.",
-    "longDescription": "TavernWeave combines 18 focused skills with a resumable creative-authority contract, material provenance, layered acceptance evidence, a bundled routed library of ST guides and frontend design or motion references, an offline picker, optional global Host Front Doors, and current-task Atong, MTTT.sir, or Soul Killer modes.",
+    "longDescription": "TavernWeave combines 19 focused skills with bounded brainstorming, total-design and scale-aware blueprint contracts, resumable creative authority, layered acceptance evidence, a routed ST/frontend library, an offline picker, optional global Host Front Doors, and current-task Atong, MTTT.sir, Soul Killer, or three-seat ensemble modes.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
@@ -25,6 +25,8 @@
       "Write"
     ],
     "defaultPrompt": [
+      "脑暴模式，Soul 联席：帮我把这个想法收束成总设计案、第一版合同和不会递归膨胀的执行蓝图。",
+      "按蓝图开跑第一版；只执行已确认的 First Playable，运行时不要新增子蓝图。",
       "阿瞳助我！用当前任务级温柔指导模式帮我完成这张角色卡。",
       "MTTT.sir，拷打我！检查我是否真的理解这次 Vibe Code 的架构与验收。",
       "灵魂杀手！用强尼·银手彩蛋人格审查这个前端，并给出最多三条有证据的 Relic 故障。",
