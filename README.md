@@ -8,7 +8,7 @@
 
 TavernWeave 是面向 Codex 与 Claude Code、并为 DeepSeek Harness 提供实验适配的 SillyTavern 制卡工程系统：18 个可路由 Skill、一份可恢复的创作权威、一条从源码到真实酒馆和人工验收的证据链、统一随包的 ST/设计/动效资料库，以及可选的阿瞳 / MTTT.sir / 灵魂杀手三种 Soul 模式。
 
-当前正式版本为 **[v1.1.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.1.0)**，加入 Host Front Door、Soul v2 与 DSH TW Lite Developer Preview。源码、实际安装、宿主发现、真实运行、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
+当前正式版本为 **[v1.1.1](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.1.1)**。本版修复奶人教程目录顺序、点击定位、滚动跟随和移动抽屉回显，并恢复独立的 Codex / Claude Code 雷达入口；同时继续包含 v1.1.0 的 Host Front Door、Soul v2 与 DSH TW Lite Developer Preview。源码、实际安装、宿主发现、真实运行、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
 
 > TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
