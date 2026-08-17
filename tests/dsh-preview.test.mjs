@@ -25,12 +25,15 @@ test("TW Lite candidates add Skills without broad tool surfaces", () => {
     for (const forbidden of ["dsh-tool-web", "dsh-tool-subagent", "dsh-tool-workflow", "dsh-tool-ralph", "dsh-tool-todo", "dsh-tool-goal"]) assert.doesNotMatch(preset, new RegExp(forbidden));
     assert.match(preset, /灵魂杀手/u);
     assert.match(preset, /Soul 归位/u);
+    assert.match(preset, /orchestrate-project-blueprint/u);
+    assert.match(preset, /runtimePersistentBlueprintBudget at zero/u);
+    assert.match(preset, /return to the parent step/u);
   }
 });
 
-test("Entry catalog is a declared degraded three-Skill experiment", () => {
-  assert.equal(contract.twLite.variants.full.skillCatalogCount, 18);
-  assert.deepEqual(contract.twLite.variants.entry.skillNames, ["activate-tavernweave-soul", "consult-tavernweave-library", "tavern-card-builder"]);
+test("Entry catalog is a declared degraded four-Skill experiment", () => {
+  assert.equal(contract.twLite.variants.full.skillCatalogCount, 19);
+  assert.deepEqual(contract.twLite.variants.entry.skillNames, ["activate-tavernweave-soul", "consult-tavernweave-library", "orchestrate-project-blueprint", "tavern-card-builder"]);
   assert.equal(contract.twLite.variants.entry.requiresDedicatedSkillRoot, true);
   assert.equal(contract.twLite.variants.entry.degradedSecondaryRouting, true);
 });

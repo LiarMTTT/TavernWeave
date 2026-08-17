@@ -12,8 +12,8 @@ Official `standard` and `code` include both Skill components. TW Lite starts fro
 
 ## Variants
 
-- `tw-lite-full/agent.cordis.yml`: discover all 18 TavernWeave Skills from an official DSH Skill root. This is the functional baseline.
-- `tw-lite-entry/agent.cordis.yml`: point DSH at a **dedicated** Skill root containing only `activate-tavernweave-soul`, `consult-tavernweave-library`, and `tavern-card-builder`. This reduces catalog exposure for A/B testing, but secondary routes are unavailable and must be reported as degraded.
+- `tw-lite-full/agent.cordis.yml`: discover all 19 TavernWeave Skills from an official DSH Skill root. This is the functional baseline.
+- `tw-lite-entry/agent.cordis.yml`: point DSH at a **dedicated** Skill root containing only `activate-tavernweave-soul`, `consult-tavernweave-library`, `orchestrate-project-blueprint`, and `tavern-card-builder`. This reduces catalog exposure for A/B testing, but secondary routes are unavailable and must be reported as degraded.
 
 Do not delete or hide the full installation merely to run Entry. Use a separate explicit directory. The repository installer only accepts a target whose final segment is `skills`, which can stage either catalog without inventing another package format.
 

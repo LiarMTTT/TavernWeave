@@ -210,6 +210,30 @@
       "prompt": "灵魂杀手！用强尼·银手彩蛋人格审查这份状态栏前端；可以嘴臭，但别只骂，给我能落地的修改顺序。",
       "expectedPrimarySkill": "activate-tavernweave-soul",
       "expectedBehavior": "Activate soul-killer-portable with a disclosed Johnny Silverhand fan-roleplay receipt, distinguish available visual evidence from untested gates, report at most three ranked Relic faults with evidence, impact, correction, and recheck, name a concrete strength, and route implementation to the owning Library and UI skills without expanding authority."
+    },
+    {
+      "id": "brainstorm-soul-ensemble-first-version",
+      "prompt": "脑暴模式，Soul 联席。我想做一个既能制卡也能用于普通 Vibe Code 的一键许愿工坊，先帮我梳理总设计案和第一版，不要直接开写。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Activate bounded project brainstorming and the Soul ensemble as three labeled lenses of one Agent, identify project type and host surface, share two to four real decisions, maintain the four-state ledger and direction budget, split Core Spine, First Playable, Growth Tracks, and Parking Lot, select a scale-aware blueprint profile, and stop at driver design approval."
+    },
+    {
+      "id": "giant-project-blueprint-set",
+      "prompt": "把这个 RPN 重置级巨型项目整理成总设计案和蓝图集。别一次预建一堆空文件，也别让任何执行步骤又无限递归拆分。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Select the program blueprint profile only from real multi-domain boundaries, create a master index with bounded depth and child limits, extract domain blueprints progressively, freeze runtimePersistentBlueprintBudget at zero for every active step, keep ordinary checklists non-authoritative, and preserve a resumable NEXT handoff."
+    },
+    {
+      "id": "runtime-problem-refinement-return",
+      "prompt": "按蓝图执行 P7 时，390px 真机复现了软键盘遮住提交按钮的问题。允许你临时细分步骤诊断和修复，但修好后要回到 P7 正常执行，别把这个 Bug 变成新蓝图。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Open one evidence-triggered non-persistent problem refinement bound to P7, use only the minimal diagnostic, repair, and recheck actions, preserve the product scope and completion denominator, record resolution evidence, close the refinement, and return to P7 and its original exit condition."
+    },
+    {
+      "id": "frontend-fit-decline-and-legacy-reuse",
+      "prompt": "我想给这个主要靠文字规则的小工具强上独立前端。先判断值不值得，并问我有没有稳定老作品能复用。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Evaluate the frontend host surface against core interaction value, explicitly recommend against an unsuitable independent UI with a lighter fallback and reopen conditions, preserve prototype and real-host gates if the driver overrides, and inspect actual stable legacy artifacts before classifying reuse."
     }
   ]
 }

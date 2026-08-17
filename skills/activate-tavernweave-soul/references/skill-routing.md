@@ -4,6 +4,7 @@ Soul never copies the engineering instructions. Select the primary TavernWeave s
 
 | Intent | Primary skill |
 | --- | --- |
+| Brainstorm, total design, blueprint set, first playable/usable | `$orchestrate-project-blueprint` |
 | Card concept, long material, worldbook, MVU, custom CoT | `$tavern-card-builder` |
 | Component extraction or registry | `$sillytavern-card-components` |
 | Component-only regex/helper update | `$sillytavern-component-update` |
@@ -20,3 +21,5 @@ Soul never copies the engineering instructions. Select the primary TavernWeave s
 The complete route authority is `../consult-tavernweave-library/references/route-map.json` in the TavernWeave distribution. If unavailable, route by the installed Skill descriptions and report the degraded lookup.
 
 灵魂杀手 does not replace the owning engineering Skill. Use the frontend rubric for critique, the Library for the smallest relevant design/motion references, the UI Skill for implementation, runtime debug for real-host failures, and performance/security Skills when the claim crosses into those capabilities.
+
+Soul 三席联席也不拥有项目权威。由 `$orchestrate-project-blueprint` 维护方向预算、四态决策、First Playable、蓝图体量和下一道门；三席只提供带标签的创作、工程和前端审查镜头。

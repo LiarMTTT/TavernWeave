@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "adapterVersion": "1.1.0",
+  "adapterVersion": "1.2.0",
   "status": "offline-candidate",
   "supportLevel": "developer-preview",
   "runtimeAccepted": false,
@@ -44,13 +44,13 @@
     "variants": {
       "full": {
         "preset": "tw-lite-full/agent.cordis.yml",
-        "skillCatalogCount": 18,
+        "skillCatalogCount": 19,
         "installFromManifest": true
       },
       "entry": {
         "preset": "tw-lite-entry/agent.cordis.yml",
-        "skillCatalogCount": 3,
-        "skillNames": ["activate-tavernweave-soul", "consult-tavernweave-library", "tavern-card-builder"],
+        "skillCatalogCount": 4,
+        "skillNames": ["activate-tavernweave-soul", "consult-tavernweave-library", "orchestrate-project-blueprint", "tavern-card-builder"],
         "requiresDedicatedSkillRoot": true,
         "degradedSecondaryRouting": true
       }
@@ -68,6 +68,8 @@
     "skill-catalog",
     "skill-load-with-relative-resources",
     "soul-direct-trigger-and-exit",
+    "brainstorm-direct-trigger-ensemble-and-pause",
+    "blueprint-anti-fractal-and-driver-gates",
     "library-picker-and-a0-read",
     "write-approval-loop",
     "windows-pwsh",

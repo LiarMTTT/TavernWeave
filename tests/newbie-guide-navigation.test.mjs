@@ -43,7 +43,7 @@ test("guide navigation targets follow the rendered document order", async () => 
 test("TavernWeave subsections stay between chapter 05 and chapter 06", async () => {
   const content1 = await readGuideFile("content-1.html");
   const content3 = await readGuideFile("content-3.html");
-  const orderedIds = ["tw", "tw-v1", "soul-mode", "library-mode", "install-gate", "db"];
+  const orderedIds = ["tw", "tw-v1", "soul-mode", "library-mode", "install-gate", "brainstorm-blueprint", "db"];
   const positions = orderedIds.map(id => content3.indexOf(`id="${id}"`));
 
   assert.ok(!content1.includes('id="tw-v1"'), "Chapter 05.1 must not render before chapter 00.");
@@ -81,6 +81,20 @@ test("navigation state is derived from the live document", async () => {
   assert.match(app, /target\.scrollIntoView\(\{ block: 'start', behavior:/);
   assert.match(app, /if \(body\.classList\.contains\('nav-open'\)\)/);
   assert.doesNotMatch(app, /\/ 49/);
-  assert.match(index, /app\.js\?v=31/);
-  assert.match(app, /content-8\.html\?v=31/);
+  assert.match(index, /app\.js\?v=32/);
+  assert.match(app, /content-8\.html\?v=32/);
+});
+
+test("brainstorm blueprint tutorial exposes v1.2 contracts", async () => {
+  const index = await readGuideFile("index.html");
+  const content3 = await readGuideFile("content-3.html");
+
+  assert.match(index, /href="#brainstorm-blueprint"><span>05\.5<\/span><span>脑暴与防膨胀蓝图<\/span>/);
+  assert.match(content3, /脑暴模式，Soul 联席/);
+  assert.match(content3, /Core Spine、First Playable、Growth Tracks、Parking Lot/);
+  assert.match(content3, /执行期持久权威蓝图预算固定为 0/);
+  assert.match(content3, /只有出现可观察错误、失败证据、未满足的退出条件或实际阻塞时/);
+  assert.match(content3, /关闭支线，回到父步骤/);
+  assert.match(content3, /driverOverride/);
+  assert.match(content3, /按蓝图开跑第一版/);
 });
