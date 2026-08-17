@@ -8,7 +8,7 @@
 
 TavernWeave 是面向 Codex 与 Claude Code、并为 DeepSeek Harness 提供实验适配的 SillyTavern 制卡与 Vibe Coding 工程系统：19 个可路由 Skill、从模糊愿望到总设计案/首版/蓝图的项目编排、一份可恢复的创作权威、一条从源码到真实宿主和人工验收的证据链、统一随包的 ST/设计/动效资料库，以及可单席或三席联动的 Soul 模式。
 
-当前正式版本仍为 **[v1.1.1](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.1.1)**；仓库工作区正在形成 **v1.2.0 候选**。候选新增“脑暴模式 · 许愿工坊”、Soul 三席联席、按体量生成单蓝图/蓝图集、执行期反递归门、First Playable 收束和前端承载面劝退协议。源码候选、实际安装、宿主发现、真实运行、远端推送、发布资产与 Release 状态分别留证，不能互相代替。
+当前正式版本为 **[v1.2.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.2.0)**。本版新增“脑暴模式 · 许愿工坊”、Soul 三席联席、按体量生成单蓝图/蓝图集、执行期反递归门、First Playable 收束和前端承载面劝退协议。源码与自动验证已经随本版发布；实际安装、宿主发现、真实运行与驾驶员验收仍是彼此独立的证据门，不能互相代替。
 
 > TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
