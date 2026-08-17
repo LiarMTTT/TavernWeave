@@ -3,14 +3,14 @@
 
   try {
     const urls = [
-      './content-1.html?v=26',
-      './content-2.html?v=26',
-      './content-3.html?v=26',
-      './content-4.html?v=26',
-      './content-5.html?v=26',
-      './content-6.html?v=26',
-      './content-7.html?v=26',
-      './content-8.html?v=26',
+      './content-1.html?v=31',
+      './content-2.html?v=31',
+      './content-3.html?v=31',
+      './content-4.html?v=31',
+      './content-5.html?v=31',
+      './content-6.html?v=31',
+      './content-7.html?v=31',
+      './content-8.html?v=31',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
@@ -49,19 +49,24 @@
   });
 
   let navScrollY = 0;
+  let navScrollHeight = 0;
 
   function setNav(open) {
     const wasOpen = body.classList.contains('nav-open');
     if (open === wasOpen) return;
+    const activeBeforeOpen = open ? document.querySelector('.nav-link.active') : null;
 
     if (open) {
       navScrollY = window.scrollY;
+      navScrollHeight = document.documentElement.scrollHeight;
+      body.classList.add('nav-open');
       body.style.position = 'fixed';
       body.style.top = `-${navScrollY}px`;
       body.style.width = '100%';
+    } else {
+      body.classList.remove('nav-open');
     }
 
-    body.classList.toggle('nav-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
     menuToggle.textContent = open ? '×' : '☰';
 
@@ -72,12 +77,18 @@
       window.scrollTo({ top: navScrollY, left: 0, behavior: 'auto' });
     }
 
-    window.requestAnimationFrame(updateActiveNav);
+    window.requestAnimationFrame(() => {
+      if (open) {
+        const activeAtFrozenScroll = getActiveEntryAt(navScrollY, navScrollHeight)?.link || activeBeforeOpen;
+        setActiveLink(activeAtFrozenScroll);
+        keepActiveLinkVisible(activeAtFrozenScroll);
+      }
+      else updateActiveNav();
+    });
   }
 
   menuToggle.addEventListener('click', () => setNav(!body.classList.contains('nav-open')));
   overlay.addEventListener('click', () => setNav(false));
-  document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => setNav(false)));
   chapterGroups.forEach(group => {
     group.addEventListener('toggle', () => {
       if (!group.open) return;
@@ -108,39 +119,108 @@
     const id = decodeURIComponent(link.getAttribute('href').slice(1));
     return { link, target: document.getElementById(id) };
   }).filter(entry => entry.target);
+  const documentOrderedAnchors = [...navAnchors].sort((a, b) => {
+    if (a.target === b.target) return 0;
+    const relation = a.target.compareDocumentPosition(b.target);
+    return relation & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+  });
+  const navTotal = navAnchors.length;
+  const tocHead = sidebar.querySelector('.toc-head');
   let currentActiveLink = null;
+  let activeNavFrame = 0;
+
+  function keepActiveLinkVisible(activeLink) {
+    if (!activeLink || (window.innerWidth <= 940 && !body.classList.contains('nav-open'))) return;
+    const sidebarRect = sidebar.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    const visibleTop = Math.max(sidebarRect.top, tocHead?.getBoundingClientRect().bottom || sidebarRect.top) + 10;
+    const visibleBottom = sidebarRect.bottom - 12;
+    let delta = 0;
+
+    if (linkRect.top < visibleTop) delta = linkRect.top - visibleTop;
+    else if (linkRect.bottom > visibleBottom) delta = linkRect.bottom - visibleBottom;
+    if (!delta) return;
+
+    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    sidebar.scrollTo({
+      top: Math.max(0, sidebar.scrollTop + delta),
+      behavior: reducedMotion ? 'auto' : 'smooth',
+    });
+  }
 
   function setActiveLink(activeLink) {
-    if (!activeLink || activeLink === currentActiveLink) return;
+    if (!activeLink) return;
+    if (activeLink === currentActiveLink) {
+      keepActiveLinkVisible(activeLink);
+      return;
+    }
     currentActiveLink = activeLink;
     navLinks.forEach(link => link.classList.toggle('active', link === activeLink));
     const activeChapter = activeLink.closest('.nav-chapter');
     chapterGroups.forEach(group => group.classList.toggle('contains-active', group === activeChapter));
     if (activeChapter && !activeChapter.open) activeChapter.open = true;
     const sectionNumber = activeLink.querySelector('span')?.textContent || '—';
-    tocProgress.textContent = `${sectionNumber} / 49`;
+    tocProgress.textContent = `${sectionNumber} / ${navTotal}`;
+    window.requestAnimationFrame(() => keepActiveLinkVisible(activeLink));
+  }
+
+  function getActiveEntryAt(scrollTop, pageScrollHeight = document.documentElement.scrollHeight) {
+    const headerHeight = Number.parseFloat(getComputedStyle(root).getPropertyValue('--header-h')) || 64;
+    const activationLine = headerHeight + Math.min(128, window.innerHeight * 0.22);
+    let activeEntry = documentOrderedAnchors[0];
+
+    documentOrderedAnchors.forEach(entry => {
+      const targetDocumentTop = entry.target.getBoundingClientRect().top + scrollTop;
+      if (targetDocumentTop <= scrollTop + activationLine) activeEntry = entry;
+    });
+
+    if (scrollTop + window.innerHeight >= pageScrollHeight - 2) {
+      activeEntry = documentOrderedAnchors.at(-1);
+    }
+
+    return activeEntry;
   }
 
   function updateActiveNav() {
     if (body.classList.contains('nav-open')) return;
-    const headerHeight = Number.parseFloat(getComputedStyle(root).getPropertyValue('--header-h')) || 64;
-    const activationLine = headerHeight + Math.min(128, window.innerHeight * 0.22);
-    let activeEntry = navAnchors[0];
-
-    navAnchors.forEach(entry => {
-      if (entry.target.getBoundingClientRect().top <= activationLine) activeEntry = entry;
-    });
-
-    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
-      activeEntry = navAnchors.at(-1);
-    }
+    const activeEntry = getActiveEntryAt(window.scrollY);
 
     setActiveLink(activeEntry?.link);
   }
 
-  navLinks.forEach(link => link.addEventListener('click', () => setActiveLink(link)));
-  window.addEventListener('scroll', updateActiveNav, { passive: true });
-  window.addEventListener('resize', updateActiveNav);
+  function requestActiveNavUpdate() {
+    if (activeNavFrame) return;
+    activeNavFrame = window.requestAnimationFrame(() => {
+      activeNavFrame = 0;
+      updateActiveNav();
+    });
+  }
+
+  navLinks.forEach(link => link.addEventListener('click', event => {
+    const href = link.getAttribute('href');
+    const target = document.getElementById(decodeURIComponent(href.slice(1)));
+    if (!target) return;
+
+    event.preventDefault();
+    const navigate = () => {
+      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      history.pushState(null, '', href);
+      setActiveLink(link);
+      target.scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
+      window.setTimeout(requestActiveNavUpdate, reducedMotion ? 0 : 360);
+    };
+
+    if (body.classList.contains('nav-open')) {
+      setNav(false);
+      window.requestAnimationFrame(navigate);
+    } else {
+      navigate();
+    }
+  }));
+  window.addEventListener('scroll', requestActiveNavUpdate, { passive: true });
+  window.addEventListener('resize', requestActiveNavUpdate);
+  window.addEventListener('load', requestActiveNavUpdate, { once: true });
+  document.fonts?.ready.then(requestActiveNavUpdate);
   updateActiveNav();
 
   async function copyText(text, button) {

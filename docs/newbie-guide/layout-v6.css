@@ -237,6 +237,14 @@
   display: none;
 }
 
+.radar-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.radar-cards .ghost-btn {
+  width: 100%;
+}
+
 .chapter-tier {
   display: flex;
   align-items: center;
@@ -359,6 +367,10 @@
   .nav-sublink {
     min-height: 40px;
     font-size: 13px;
+  }
+
+  .radar-cards {
+    grid-template-columns: 1fr;
   }
 
   .chapter-tier {
