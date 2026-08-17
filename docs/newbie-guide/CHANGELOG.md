@@ -1,6 +1,6 @@
 # 奶人教程更新日志
 
-## 1.2.0 - Unreleased
+## 1.2.0 - 2026-08-17
 
 - 第五章升级为 Host Front Door → Soul 单席/三席 → 脑暴编排 → Library → 19 个 Skill 的五层入口。
 - 新增 `05.5 脑暴与防膨胀蓝图`：用可复制口令演示 Soul 三席联席、每轮 2～4 个决策、方向讨论上限、Core Spine / First Playable / Growth Tracks / Parking Lot、三档蓝图体量，以及任意活动步骤的持久蓝图零预算与真实问题临时细分/回归合同。
