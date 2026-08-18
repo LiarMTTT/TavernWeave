@@ -48,7 +48,7 @@ try {
     Assert-True ($secondReceipt.statusBefore -eq 'current' -and $secondReceipt.changed -eq $false) 'A repeated install was not idempotent.'
     Assert-True (-not $secondReceipt.backupPath) 'An idempotent install created an unnecessary backup.'
 
-    $outdatedText = $installedText.Replace('begin version=1.2.0', 'begin version=1.0.0')
+    $outdatedText = $installedText.Replace('begin version=1.3.0', 'begin version=1.0.0')
     [System.IO.File]::WriteAllText($codexTarget, $outdatedText, [System.Text.UTF8Encoding]::new($true))
     $outdatedReceipt = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Check -TargetInstructionFile $codexTarget -Json)
     Assert-True ($outdatedReceipt.statusBefore -eq 'outdated') 'An outdated marker version was not diagnosed.'
