@@ -1,19 +1,58 @@
 {
-  "schemaVersion": 1,
-  "snapshotVersion": "2026-08-16",
+  "schemaVersion": 2,
+  "snapshotVersion": "2026-08-18",
   "sourcePolicy": "explicit-allowlist",
   "expectedCounts": {
     "standingGuides": 1,
     "formalGuides": 31,
     "experimentalGuides": 1,
-    "designItems": 82,
-    "motionItems": 38,
-    "linkedWiki": 18
+    "designItems": 462,
+    "motionItems": 194,
+    "conceptItems": 86,
+    "linkedWiki": 86,
+    "ledgerItems": 1609,
+    "screenedRoutes": 243,
+    "readyRoutes": 88,
+    "wikiOnlyRoutes": 155,
+    "screenedDesignAdds": 362,
+    "screenedMotionAdds": 147
+  },
+  "screening": {
+    "routeCount": 243,
+    "ready": 88,
+    "wikiOnly": 155,
+    "designAdds": 362,
+    "motionAdds": 147,
+    "candidateFilesDistributed": false
+  },
+  "sourceFiles": {
+    "design": {
+      "source": "AFV/concepts/前端设计库/catalog.js",
+      "hash": "714affc5de095e05c2c83b45a448a932e217b79db63a304e9263de24ece46d7a",
+      "bytes": 155560
+    },
+    "motion": {
+      "source": "AFV/concepts/动画库/catalog.js",
+      "hash": "44d587776dfc2cadee2c3d9b1f43539aa056090d8182838e49745e973df3a533",
+      "bytes": 67268
+    },
+    "wiki": {
+      "source": "AFV/concepts/库挑选器/wiki-catalog.js",
+      "hash": "13ff1399ba303b534818c6df465f8e8f0556cb406346c6dca71e28ad15490c07",
+      "bytes": 18667
+    },
+    "ledger": {
+      "source": "AFV/concepts/库挑选器/ledger-catalog.js",
+      "hash": "4321dc03613694536d4dd72366b7e94b159bcf96323eb9ed0dae15b1bd7675de",
+      "bytes": 545783
+    }
   },
   "exclusions": [
     "STDB/A1_驾驶员同步检查.md",
     "STDB/B1_变量更新规则_命令式时代_归档.md",
     "STDB/本地证据/**",
+    "AFV/10-收件箱/**",
+    "AFV/raw/**",
     "AFV unrelated framework and knowledge domains"
   ],
   "documents": [
@@ -513,7 +552,22 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-01",
+      "id": "AFV-WIKI-001",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/边缘缓存与SWR.md",
+      "source": "AFV/concepts/边缘缓存与SWR.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "485f3570d190c13f2941a1c3427cd24da6717f73f25827b23d9e10dda5fe2b76",
+      "targetHash": "485f3570d190c13f2941a1c3427cd24da6717f73f25827b23d9e10dda5fe2b76",
+      "bytes": 12580,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-002",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -528,7 +582,7 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-02",
+      "id": "AFV-WIKI-003",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -543,7 +597,37 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-03",
+      "id": "AFV-WIKI-004",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/创意工坊与安全契约.md",
+      "source": "AFV/concepts/创意工坊与安全契约.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "f03a72ab1ab89d59b27b36faaa9faca343798f3cf866bd51f65c9344f5f56a35",
+      "targetHash": "f03a72ab1ab89d59b27b36faaa9faca343798f3cf866bd51f65c9344f5f56a35",
+      "bytes": 2723,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-005",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/打包回封路径.md",
+      "source": "AFV/concepts/打包回封路径.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "10cc9b004ecc6f44449cdf3598459f0f6488e40f71290e3755a2d5763fbdbf4b",
+      "targetHash": "10cc9b004ecc6f44449cdf3598459f0f6488e40f71290e3755a2d5763fbdbf4b",
+      "bytes": 3117,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-006",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -558,7 +642,7 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-04",
+      "id": "AFV-WIKI-007",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -573,7 +657,127 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-05",
+      "id": "AFV-WIKI-008",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/概念分级.md",
+      "source": "AFV/concepts/概念分级.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "04f6d2cc88b643a033d728ebb2147021eac456ea86793ad3418997cd0ab07eae",
+      "targetHash": "937bd53755b9d6cc49d04a059fed0f78a7b89b19b52fb782ee5bae1444585ce4",
+      "bytes": 3387,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-009",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/功能开关与OpenFeature.md",
+      "source": "AFV/concepts/功能开关与OpenFeature.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "fb7e47879d5f708e4639eed370d55b09ee038b6f6174dca1c4a3d01b639de6ed",
+      "targetHash": "fb7e47879d5f708e4639eed370d55b09ee038b6f6174dca1c4a3d01b639de6ed",
+      "bytes": 15013,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-010",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/构建链与Vite.md",
+      "source": "AFV/concepts/构建链与Vite.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "4055adb6734b417d510945d3a56530e18872c680a7c7304b4fb3b8d5bc284750",
+      "targetHash": "4055adb6734b417d510945d3a56530e18872c680a7c7304b4fb3b8d5bc284750",
+      "bytes": 12166,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-011",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/后端架构名词与工坊对照.md",
+      "source": "AFV/concepts/后端架构名词与工坊对照.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "4381a371fb3d63d009469b8f58da9a666f5a9440191ddd29ce316a044e3f8cda",
+      "targetHash": "4381a371fb3d63d009469b8f58da9a666f5a9440191ddd29ce316a044e3f8cda",
+      "bytes": 14259,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-012",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/角色卡技术路径总图.md",
+      "source": "AFV/concepts/角色卡技术路径总图.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "7aad8b51c3c4edceab9312b2c36832371618153904b52c82fcfb2509a8ab2afb",
+      "targetHash": "7aad8b51c3c4edceab9312b2c36832371618153904b52c82fcfb2509a8ab2afb",
+      "bytes": 6635,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-013",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/角色卡前端名词中英对照.md",
+      "source": "AFV/concepts/角色卡前端名词中英对照.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "dcb96dcd60174044c2979aa931c2ba8b0cde819954d4d32ea03f223ea868c1d8",
+      "targetHash": "dcb96dcd60174044c2979aa931c2ba8b0cde819954d4d32ea03f223ea868c1d8",
+      "bytes": 13658,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-014",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/角色卡升格.md",
+      "source": "AFV/concepts/角色卡升格.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "2c0043eadd2efb9e0d0a2dfa0a603627506fe4a7d10b5e2718835ff183920396",
+      "targetHash": "2c0043eadd2efb9e0d0a2dfa0a603627506fe4a7d10b5e2718835ff183920396",
+      "bytes": 3191,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-015",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/角色卡DOM与挂载点.md",
+      "source": "AFV/concepts/角色卡DOM与挂载点.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "0aa040062bbc21544b57683617fbcf840e04f58e0044b47fc77806d8cd04c4f8",
+      "targetHash": "0aa040062bbc21544b57683617fbcf840e04f58e0044b47fc77806d8cd04c4f8",
+      "bytes": 10990,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-016",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -588,7 +792,52 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-06",
+      "id": "AFV-WIKI-017",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/开局页路径.md",
+      "source": "AFV/concepts/开局页路径.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "50ae7f24c68ba81f60646e02091c163086a1142440910f7dbb9808d4f26d8306",
+      "targetHash": "50ae7f24c68ba81f60646e02091c163086a1142440910f7dbb9808d4f26d8306",
+      "bytes": 2961,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-018",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/可观测与OpenTelemetry.md",
+      "source": "AFV/concepts/可观测与OpenTelemetry.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "9463b5c9d8ac6a7e77b005f9127b80923424b71d12de868a7a02d64bbc9f8fad",
+      "targetHash": "9463b5c9d8ac6a7e77b005f9127b80923424b71d12de868a7a02d64bbc9f8fad",
+      "bytes": 16715,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-019",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/控制中心与状态栏.md",
+      "source": "AFV/concepts/控制中心与状态栏.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "eac57359115d770056d5e89c89c9db8ce4a47892ff1f6609da6ada0d0752df40",
+      "targetHash": "eac57359115d770056d5e89c89c9db8ce4a47892ff1f6609da6ada0d0752df40",
+      "bytes": 3903,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-020",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -603,7 +852,127 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-07",
+      "id": "AFV-WIKI-021",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/媒体库路径.md",
+      "source": "AFV/concepts/媒体库路径.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "69b97798364aa770b4c27a877b5a56af8979052b684dc544a9b9b76f9d835944",
+      "targetHash": "69b97798364aa770b4c27a877b5a56af8979052b684dc544a9b9b76f9d835944",
+      "bytes": 1942,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-022",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/前端架构名词与取舍.md",
+      "source": "AFV/concepts/前端架构名词与取舍.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "683783524e00e2580b71810c331cb4432902e465802a26be0ac5ead84075e2f8",
+      "targetHash": "683783524e00e2580b71810c331cb4432902e465802a26be0ac5ead84075e2f8",
+      "bytes": 11406,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-023",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/入口外壳与HUD宿主.md",
+      "source": "AFV/concepts/入口外壳与HUD宿主.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "23908db74b1520250a406ca64e35c907ea7cdd46bebe582098e99f1465f50708",
+      "targetHash": "23908db74b1520250a406ca64e35c907ea7cdd46bebe582098e99f1465f50708",
+      "bytes": 2651,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-024",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/十二因素与CAP.md",
+      "source": "AFV/concepts/十二因素与CAP.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "c39bab7c0dc9fed993395f5a06fece9a1668c90eeee46a02b4a558fe91a004e6",
+      "targetHash": "c39bab7c0dc9fed993395f5a06fece9a1668c90eeee46a02b4a558fe91a004e6",
+      "bytes": 16357,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-025",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/实时基建与Durable Objects.md",
+      "source": "AFV/concepts/实时基建与Durable Objects.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "6789e7cc6d14392ca09bb551ac13badd2ee7af7fadf6938072f4c30f8e97173d",
+      "targetHash": "6789e7cc6d14392ca09bb551ac13badd2ee7af7fadf6938072f4c30f8e97173d",
+      "bytes": 16782,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-026",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/世界书缓存排序.md",
+      "source": "AFV/concepts/世界书缓存排序.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "20f078b9063933bf9c3e41ec5e572dcf7e052de3fa94f9b2920dfe798cd4a23b",
+      "targetHash": "20f078b9063933bf9c3e41ec5e572dcf7e052de3fa94f9b2920dfe798cd4a23b",
+      "bytes": 1904,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-027",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/世界书注入路径.md",
+      "source": "AFV/concepts/世界书注入路径.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "f9db910cef47e2b5f8fd6fca685ccda1bccd7f74241637859dc9b1ba8d497790",
+      "targetHash": "f9db910cef47e2b5f8fd6fca685ccda1bccd7f74241637859dc9b1ba8d497790",
+      "bytes": 2530,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-028",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/事件溯源与CQRS.md",
+      "source": "AFV/concepts/事件溯源与CQRS.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "4f4d68175558ae3f5fe3efbe5ba9235ca8f993d34cb9c20382e14a29dc471d1b",
+      "targetHash": "4f4d68175558ae3f5fe3efbe5ba9235ca8f993d34cb9c20382e14a29dc471d1b",
+      "bytes": 12196,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-029",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -618,7 +987,37 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-08",
+      "id": "AFV-WIKI-030",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/通行密钥规范入口.md",
+      "source": "AFV/concepts/通行密钥规范入口.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "a702d8a691c548459bbd514698a23159d5d10489ae4ea69f2b225f63284026f1",
+      "targetHash": "a702d8a691c548459bbd514698a23159d5d10489ae4ea69f2b225f63284026f1",
+      "bytes": 11489,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-031",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/文档站生成器.md",
+      "source": "AFV/concepts/文档站生成器.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "6fd135b7d9676c5d54e9983ed2b2dc71953512de9dd5da5b6533a092f36285e1",
+      "targetHash": "6fd135b7d9676c5d54e9983ed2b2dc71953512de9dd5da5b6533a092f36285e1",
+      "bytes": 13184,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-032",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -633,7 +1032,7 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-09",
+      "id": "AFV-WIKI-033",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -648,7 +1047,82 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-10",
+      "id": "AFV-WIKI-034",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/向量检索入口.md",
+      "source": "AFV/concepts/向量检索入口.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "6abafb568a32d7127bc9fe760d5273b2bed01056a400f46fefdb88ae5e7c0b83",
+      "targetHash": "6abafb568a32d7127bc9fe760d5273b2bed01056a400f46fefdb88ae5e7c0b83",
+      "bytes": 11400,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-035",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/消息渲染与正则管线.md",
+      "source": "AFV/concepts/消息渲染与正则管线.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "6f7660a6f0d00150035a63519d7a54c0a9756a6d6a1a48b1ee44a9299be90b78",
+      "targetHash": "6f7660a6f0d00150035a63519d7a54c0a9756a6d6a1a48b1ee44a9299be90b78",
+      "bytes": 3898,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-036",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/小手机与宿主桥.md",
+      "source": "AFV/concepts/小手机与宿主桥.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "412ef8f8288b25c4285fa9c71e29ac7ac6750b4ef9d586c15d9bb09408afb31e",
+      "targetHash": "412ef8f8288b25c4285fa9c71e29ac7ac6750b4ef9d586c15d9bb09408afb31e",
+      "bytes": 2770,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-037",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/斜杠命令与宿主发送链.md",
+      "source": "AFV/concepts/斜杠命令与宿主发送链.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "240748cb8f51765dd4c16e7c94d3313234aa6c32b94679e6b4d8bc64365da8c5",
+      "targetHash": "240748cb8f51765dd4c16e7c94d3313234aa6c32b94679e6b4d8bc64365da8c5",
+      "bytes": 2849,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-038",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/行动选项桥.md",
+      "source": "AFV/concepts/行动选项桥.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "c633420f605a8d2c244b566a9029f87377cede6eff7bcd07958c12407c63334b",
+      "targetHash": "c633420f605a8d2c244b566a9029f87377cede6eff7bcd07958c12407c63334b",
+      "bytes": 2063,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-039",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -663,7 +1137,22 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-11",
+      "id": "AFV-WIKI-040",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/站内搜索与Pagefind.md",
+      "source": "AFV/concepts/站内搜索与Pagefind.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "feff139a0355317e93315c5b9d51706ce8ce8fd6a559446f524abba48deceb4e",
+      "targetHash": "feff139a0355317e93315c5b9d51706ce8ce8fd6a559446f524abba48deceb4e",
+      "bytes": 12487,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-041",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -678,7 +1167,67 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-12",
+      "id": "AFV-WIKI-042",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/状态机与SCXML.md",
+      "source": "AFV/concepts/状态机与SCXML.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "165401357086af49eae4877e03e01fb9e2e45a65cb27e49f880ade300d353725",
+      "targetHash": "165401357086af49eae4877e03e01fb9e2e45a65cb27e49f880ade300d353725",
+      "bytes": 10433,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-043",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/桌面壳Electron Tauri.md",
+      "source": "AFV/concepts/桌面壳Electron Tauri.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "32d32d3110c5e67bb47dae6709e00079a0bc8cf0577ba34cb6898763ff9302a7",
+      "targetHash": "32d32d3110c5e67bb47dae6709e00079a0bc8cf0577ba34cb6898763ff9302a7",
+      "bytes": 12618,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-044",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/组件库registry与recipe.md",
+      "source": "AFV/concepts/组件库registry与recipe.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "9931cf49fc45606257b08d0d9f9e06a7015b87b8f976bde4aea60ea7f698270d",
+      "targetHash": "9931cf49fc45606257b08d0d9f9e06a7015b87b8f976bde4aea60ea7f698270d",
+      "bytes": 2937,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-045",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/C4与ADR.md",
+      "source": "AFV/concepts/C4与ADR.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "2881df5133fcc1937d9ff0b334049804f12897bf7e47f5ea87e3374158f16ae6",
+      "targetHash": "2881df5133fcc1937d9ff0b334049804f12897bf7e47f5ea87e3374158f16ae6",
+      "bytes": 14546,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-046",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -693,7 +1242,7 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-13",
+      "id": "AFV-WIKI-047",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -708,7 +1257,37 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-14",
+      "id": "AFV-WIKI-048",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/CRDT与local-first.md",
+      "source": "AFV/concepts/CRDT与local-first.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "75b5417b10e4c75bc95315d3b835f3f8a3e7d67dbb5cc43bd34fa4adfcb2d2a7",
+      "targetHash": "75b5417b10e4c75bc95315d3b835f3f8a3e7d67dbb5cc43bd34fa4adfcb2d2a7",
+      "bytes": 12753,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-049",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/CSP与Trusted Types.md",
+      "source": "AFV/concepts/CSP与Trusted Types.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "34ce8d50bb078447c943e4df9f76fe527200f08542c1172586899ca6c9d8efac",
+      "targetHash": "34ce8d50bb078447c943e4df9f76fe527200f08542c1172586899ca6c9d8efac",
+      "bytes": 11065,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-050",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -723,7 +1302,202 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-15",
+      "id": "AFV-WIKI-051",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/DORA五项与SLO.md",
+      "source": "AFV/concepts/DORA五项与SLO.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "76630dd546bedc44e2f6ed42640b3ee5f10d8520379a018dfe2a633e4a34b1bd",
+      "targetHash": "76630dd546bedc44e2f6ed42640b3ee5f10d8520379a018dfe2a633e4a34b1bd",
+      "bytes": 10072,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-052",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/Feed与Schema.org.md",
+      "source": "AFV/concepts/Feed与Schema.org.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "e0a4faa90eb4a120ee21dbd05e3d4f77f69408a05b1714c56aaff2299fd7cf67",
+      "targetHash": "e0a4faa90eb4a120ee21dbd05e3d4f77f69408a05b1714c56aaff2299fd7cf67",
+      "bytes": 14871,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-053",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/git挂载与远程真身.md",
+      "source": "AFV/concepts/git挂载与远程真身.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "2206fdeb96c0cc8dacdec9290dbcc68cd0b3167708f969af262a38979bf88cef",
+      "targetHash": "2206fdeb96c0cc8dacdec9290dbcc68cd0b3167708f969af262a38979bf88cef",
+      "bytes": 2505,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-054",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/GraphQL与异步事件合同.md",
+      "source": "AFV/concepts/GraphQL与异步事件合同.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "2ece9d6772a6bd3e22c9a5b581451b11ff23a959d3db87f27760ff7494de4f15",
+      "targetHash": "2ece9d6772a6bd3e22c9a5b581451b11ff23a959d3db87f27760ff7494de4f15",
+      "bytes": 11931,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-055",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/gRPC与Connect.md",
+      "source": "AFV/concepts/gRPC与Connect.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "e2a66f629e438274011a8a1d5f50522c7e959788b67473e00090e1bb719dfe9b",
+      "targetHash": "e2a66f629e438274011a8a1d5f50522c7e959788b67473e00090e1bb719dfe9b",
+      "bytes": 13031,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-056",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/HTMX与超媒体.md",
+      "source": "AFV/concepts/HTMX与超媒体.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "3e3a11b35c451a8a2a5927cb6bef7aa90dc56cee0d28baef9515d084209e1fe1",
+      "targetHash": "3e3a11b35c451a8a2a5927cb6bef7aa90dc56cee0d28baef9515d084209e1fe1",
+      "bytes": 12960,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-057",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/HTTP3与QUIC.md",
+      "source": "AFV/concepts/HTTP3与QUIC.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "9bbd1a0bc22a9aa518f92223d75516b6adbc633af8f7bb84a7bea391c7d56e1d",
+      "targetHash": "9bbd1a0bc22a9aa518f92223d75516b6adbc633af8f7bb84a7bea391c7d56e1d",
+      "bytes": 8973,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-058",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/HTTP合同与问题详情.md",
+      "source": "AFV/concepts/HTTP合同与问题详情.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "79bc632218a591ff810379fd60ac57fd7a13bdf2fbb050a09f02c02c0ed1aeaa",
+      "targetHash": "79bc632218a591ff810379fd60ac57fd7a13bdf2fbb050a09f02c02c0ed1aeaa",
+      "bytes": 11190,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-059",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/Iceberg与湖仓.md",
+      "source": "AFV/concepts/Iceberg与湖仓.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "e5c3fdd2231096b8068a284945963b27f682f6a7f50a0eb9e8bc69103ebb62a6",
+      "targetHash": "e5c3fdd2231096b8068a284945963b27f682f6a7f50a0eb9e8bc69103ebb62a6",
+      "bytes": 13449,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-060",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/JPEG XL与HDR静图.md",
+      "source": "AFV/concepts/JPEG XL与HDR静图.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "ea0b1adcb54c1a3260039149d659332bcc2664ff819fa76e5266b874bc4c7eee",
+      "targetHash": "ea0b1adcb54c1a3260039149d659332bcc2664ff819fa76e5266b874bc4c7eee",
+      "bytes": 11101,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-061",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/JS Temporal.md",
+      "source": "AFV/concepts/JS Temporal.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "f25eed9a65f8cd81f2c9479f86af6581245a5df4bdf65a007e799591c98c5f6d",
+      "targetHash": "f25eed9a65f8cd81f2c9479f86af6581245a5df4bdf65a007e799591c98c5f6d",
+      "bytes": 9985,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-062",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/JSON Schema与Protobuf.md",
+      "source": "AFV/concepts/JSON Schema与Protobuf.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "9dcb1aba9af76defb8153965fe86ac71edda03d58462b1f5c93c57d4c0f03359",
+      "targetHash": "9dcb1aba9af76defb8153965fe86ac71edda03d58462b1f5c93c57d4c0f03359",
+      "bytes": 13021,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-063",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/Kubernetes工作负载.md",
+      "source": "AFV/concepts/Kubernetes工作负载.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "75afb752b73c9eae4b4b2ad8fd54d1de05c1fc4e01b9aa96333b8e29abba006e",
+      "targetHash": "75afb752b73c9eae4b4b2ad8fd54d1de05c1fc4e01b9aa96333b8e29abba006e",
+      "bytes": 17899,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-064",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -738,7 +1512,217 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-16",
+      "id": "AFV-WIKI-065",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/MCP与A2A.md",
+      "source": "AFV/concepts/MCP与A2A.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "aba973e0bdbeec402b1a45961cb7ad5adf20e2c1e13c4cf9eaefa78b501f2a06",
+      "targetHash": "aba973e0bdbeec402b1a45961cb7ad5adf20e2c1e13c4cf9eaefa78b501f2a06",
+      "bytes": 14224,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-066",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/MVU变量闭环.md",
+      "source": "AFV/concepts/MVU变量闭环.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "bd75543d1a24fc6348c6874cb673afd7d6e779175ee72aa3b831166278ced89b",
+      "targetHash": "bd75543d1a24fc6348c6874cb673afd7d6e779175ee72aa3b831166278ced89b",
+      "bytes": 3974,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-067",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/OAuth与OIDC.md",
+      "source": "AFV/concepts/OAuth与OIDC.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "79a1f677c6abb9b969b26ba0065467c9ed78bc1e4c24b036c4984958f77d267f",
+      "targetHash": "79a1f677c6abb9b969b26ba0065467c9ed78bc1e4c24b036c4984958f77d267f",
+      "bytes": 13190,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-068",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/OMNI正则与data属性选择器.md",
+      "source": "AFV/concepts/OMNI正则与data属性选择器.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "92d9995493bd527cdc9e9a2e6699524f4b577efdb22b78605878a051561ca4dd",
+      "targetHash": "92d9995493bd527cdc9e9a2e6699524f4b577efdb22b78605878a051561ca4dd",
+      "bytes": 2757,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-069",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/OpenAPI与Arazzo.md",
+      "source": "AFV/concepts/OpenAPI与Arazzo.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "b363394b97368d3aa4fcb1fba8a20df312c4b0533dfdb276890ca690ea97daf2",
+      "targetHash": "b363394b97368d3aa4fcb1fba8a20df312c4b0533dfdb276890ca690ea97daf2",
+      "bytes": 12101,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-070",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/ORM三面.md",
+      "source": "AFV/concepts/ORM三面.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "ad6ad22775e8397a03619b51d01a6c4d45b2b4d07fad4f97d29365356b195c2a",
+      "targetHash": "ad6ad22775e8397a03619b51d01a6c4d45b2b4d07fad4f97d29365356b195c2a",
+      "bytes": 11755,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-071",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/Postgres与多租户.md",
+      "source": "AFV/concepts/Postgres与多租户.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "6129bd4513048d38a2a30a88f215ab526e8d21a0b25c49f7730b658beb85b8bb",
+      "targetHash": "6129bd4513048d38a2a30a88f215ab526e8d21a0b25c49f7730b658beb85b8bb",
+      "bytes": 14105,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-072",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/Prometheus与OpenMetrics.md",
+      "source": "AFV/concepts/Prometheus与OpenMetrics.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "03ac47861a15811651d37ab142739689337332941adeb4ef03a9a3469eff5e7d",
+      "targetHash": "03ac47861a15811651d37ab142739689337332941adeb4ef03a9a3469eff5e7d",
+      "bytes": 15937,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-073",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/PWA与存储配额.md",
+      "source": "AFV/concepts/PWA与存储配额.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "cf28ed03fb4f2233bd3fd0c0f58b22438950dfc0251e5f778bd8f32c0a94d09d",
+      "targetHash": "cf28ed03fb4f2233bd3fd0c0f58b22438950dfc0251e5f778bd8f32c0a94d09d",
+      "bytes": 12124,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-074",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/Redis与日志队列.md",
+      "source": "AFV/concepts/Redis与日志队列.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "277858912a9056afbb2f50f65a3fdd6687a4158b67d46f4f0942e6cda8a48fd5",
+      "targetHash": "277858912a9056afbb2f50f65a3fdd6687a4158b67d46f4f0942e6cda8a48fd5",
+      "bytes": 13465,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-075",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/Saga三义与补偿.md",
+      "source": "AFV/concepts/Saga三义与补偿.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "9e274e6a8f71edf012f76c57d9697e5d7cee6cd422c5215554944d9fa3ef0a52",
+      "targetHash": "9e274e6a8f71edf012f76c57d9697e5d7cee6cd422c5215554944d9fa3ef0a52",
+      "bytes": 14664,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-076",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/SBOM与SLSA.md",
+      "source": "AFV/concepts/SBOM与SLSA.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "ee8e56ef90fa0181ee9649177eaeae2040dbf2f0a93ccad0b3ffa2e0e5b0fe6e",
+      "targetHash": "ee8e56ef90fa0181ee9649177eaeae2040dbf2f0a93ccad0b3ffa2e0e5b0fe6e",
+      "bytes": 13912,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-077",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/SharedWorker与Web Locks.md",
+      "source": "AFV/concepts/SharedWorker与Web Locks.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "4742e60cd57659fadfd3099f65882b6ec5218e49218aa17849a2a0d6ce1c316b",
+      "targetHash": "4742e60cd57659fadfd3099f65882b6ec5218e49218aa17849a2a0d6ce1c316b",
+      "bytes": 10621,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-078",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/Signals与TC39.md",
+      "source": "AFV/concepts/Signals与TC39.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "5d4a4547fb24f2ff4903a68f1463d9fd9ea666d42c1920d9d9661ec05cac8c58",
+      "targetHash": "5d4a4547fb24f2ff4903a68f1463d9fd9ea666d42c1920d9d9661ec05cac8c58",
+      "bytes": 10861,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-079",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -753,7 +1737,52 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-17",
+      "id": "AFV-WIKI-080",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/TanStack查询与路由.md",
+      "source": "AFV/concepts/TanStack查询与路由.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "4b20ebb8f7fa090b2596a38529ab280a67527d51f698d100390cd98f4bf7fc3a",
+      "targetHash": "4b20ebb8f7fa090b2596a38529ab280a67527d51f698d100390cd98f4bf7fc3a",
+      "bytes": 12833,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-081",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/WASI与组件模型.md",
+      "source": "AFV/concepts/WASI与组件模型.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "9ec21eb5508ab5c770492ffe9eb9a1e4939353e896c70f3dc0ddb9a86bd91fb0",
+      "targetHash": "9ec21eb5508ab5c770492ffe9eb9a1e4939353e896c70f3dc0ddb9a86bd91fb0",
+      "bytes": 10023,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-082",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/Web Push与角标.md",
+      "source": "AFV/concepts/Web Push与角标.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "2ffc0c35dde28defc121944b5cf8bb288774e3abe25840e2651af9e26876793c",
+      "targetHash": "2ffc0c35dde28defc121944b5cf8bb288774e3abe25840e2651af9e26876793c",
+      "bytes": 11064,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-083",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -768,7 +1797,22 @@
       "credentialRedactions": 0
     },
     {
-      "id": "WIKI-18",
+      "id": "AFV-WIKI-084",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/WebRTC信令边界.md",
+      "source": "AFV/concepts/WebRTC信令边界.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "2e34b570ec0327a1f306ad8876b41757011ea627d67f18d307ae5c376e6b6bbb",
+      "targetHash": "2e34b570ec0327a1f306ad8876b41757011ea627d67f18d307ae5c376e6b6bbb",
+      "bytes": 10122,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-085",
       "type": "design-wiki",
       "status": "reference",
       "standing": false,
@@ -781,38 +1825,383 @@
       "redactions": 0,
       "pathRedactions": 0,
       "credentialRedactions": 0
+    },
+    {
+      "id": "AFV-WIKI-086",
+      "type": "design-wiki",
+      "status": "reference",
+      "standing": false,
+      "path": "references/design-wiki/WinterTC与服务器JS.md",
+      "source": "AFV/concepts/WinterTC与服务器JS.md",
+      "license": "MIT-AFV-2026-LiarMTTT",
+      "sourceHash": "d7b81e6c6dde974a061b9cd57c4be93214c2587f0f6e27cccb4185d0bd986cf3",
+      "targetHash": "d7b81e6c6dde974a061b9cd57c4be93214c2587f0f6e27cccb4185d0bd986cf3",
+      "bytes": 12222,
+      "redactions": 0,
+      "pathRedactions": 0,
+      "credentialRedactions": 0
     }
   ],
   "assets": [
     {
       "path": "assets/picker/catalog-data.js",
-      "hash": "27533a885ea065a554a90aa5376e03071ce9246d7b0f690fc30646d7c46d6af1",
-      "bytes": 26943
+      "hash": "9a212a6d3dda5b5da66f7b55fe9497ce3326c79476f2bb736a79a65b37408b6e",
+      "bytes": 811546
     },
     {
       "path": "assets/picker/catalog.json",
-      "hash": "cf23083ca9c2fb15b10eb54e2487ab907f4b84cadcd35f2ec6733ddf683556ce",
-      "bytes": 42701
+      "hash": "5c4c90960e6753136785bc7a372bdbd58eace68b4c224518ff58350f2110336c",
+      "bytes": 1217437
     },
     {
       "path": "assets/picker/index.html",
-      "hash": "f828f0ecd7ad53dab3860e39ce1a77ce194591ca458a2e8a6ef9c6a5b8a6d59b",
-      "bytes": 2420
+      "hash": "448f9b70972b09c9251d7fe0e9685462a9f045e0a5d23c5fc93adb47ef72876b",
+      "bytes": 2570
     },
     {
       "path": "assets/picker/manifest-data.js",
-      "hash": "cc08f74b8564560c13299de03c45e7a592217722e81edf36fea0b1124038f5b7",
-      "bytes": 22994
+      "hash": "54f869a00172827fa5193719279ad8c1c4f138d599d3e63c2176f1e8a5d45ee9",
+      "bytes": 54815
     },
     {
       "path": "assets/picker/picker.css",
-      "hash": "2d24c9d6852b0443afd63e7c9356565f69fe40380b428308f2b7078c73b56da1",
-      "bytes": 7574
+      "hash": "98d3774d4a8d4d538dced01804a9a92b37515be962a040fed48a3d8a1b6e8096",
+      "bytes": 7706
     },
     {
       "path": "assets/picker/picker.js",
-      "hash": "573a579aec71beddfe4592d4cee3f60e418ff1a8ef57ddffb694cb3ffc6b4cb4",
-      "bytes": 10794
+      "hash": "207f1a2f3573d282d4479dcc0008962e58ed7773d24c97d59b0a1f2e595430b8",
+      "bytes": 11052
+    },
+    {
+      "path": "assets/picker/previews/common/暗色方案.html",
+      "hash": "3a3ea758c3bb729b765ec9146cd617fddc1b9b3c02a1c6756232e61a971229fc",
+      "bytes": 1156
+    },
+    {
+      "path": "assets/picker/previews/common/层叠层.html",
+      "hash": "341445162f1486bdced6201cbf7e35f723b696d1b9b388b36fc45d237a451265",
+      "bytes": 1290
+    },
+    {
+      "path": "assets/picker/previews/common/传输探测.html",
+      "hash": "7839a9471a9e45243d19ec9301bb15eb1d58b6f992809d8067f8a5932bae2476",
+      "bytes": 993
+    },
+    {
+      "path": "assets/picker/previews/common/存储配额.html",
+      "hash": "d3c9b29b8be6184af701aae6aaad0cae9b1ff17c0ab8e2bb59c3ee5249723e16",
+      "bytes": 1376
+    },
+    {
+      "path": "assets/picker/previews/common/弹簧取样.html",
+      "hash": "ef7a8a8411eba9ede81df28464a943b490bfa9357e6179c426ebb1f6c7473c81",
+      "bytes": 1457
+    },
+    {
+      "path": "assets/picker/previews/common/导航API.html",
+      "hash": "d90d08c595a3926cf45dd9d3c2025994003f64d60a3277a636eb24339027af66",
+      "bytes": 1645
+    },
+    {
+      "path": "assets/picker/previews/common/导入映射.html",
+      "hash": "e266af21faa640a275156f662807d0859624c6d8c788a43908d3659f652b8097",
+      "bytes": 1037
+    },
+    {
+      "path": "assets/picker/previews/common/调度让出.html",
+      "hash": "df35f164f731d05d3c62991afdd9458132cee50417366583e7c07ce7d507cdd1",
+      "bytes": 2264
+    },
+    {
+      "path": "assets/picker/previews/common/定位.html",
+      "hash": "307b360eb927acb0a5b378f759cebe9c9d6641c7d1adc009a042641581df6963",
+      "bytes": 1551
+    },
+    {
+      "path": "assets/picker/previews/common/对比偏好.html",
+      "hash": "e024d62109e4c855e34576eaf5a8b0d6c540f8b4230160a1f67a6551b7126350",
+      "bytes": 1289
+    },
+    {
+      "path": "assets/picker/previews/common/孤立探测.html",
+      "hash": "40fc62ddb91d32ada5f1c8b46ca7b53b15c40086320a0d588c1004bf02eb4dce",
+      "bytes": 967
+    },
+    {
+      "path": "assets/picker/previews/common/广播通道.html",
+      "hash": "c46b19e89195aa5d5673c560ed8c0e98157f81f71ac109d7596028cd474e46b4",
+      "bytes": 1197
+    },
+    {
+      "path": "assets/picker/previews/common/广色域.html",
+      "hash": "499b7393f126a8438c42d335d5ff5b65e877a8057b981d6a0aaf8ff103ae7098",
+      "bytes": 1241
+    },
+    {
+      "path": "assets/picker/previews/common/国际化.html",
+      "hash": "2dc074f8789e2f3ae72371eb9cde966083bc4e8ea2a69dd233feb85cc8565f7f",
+      "bytes": 1475
+    },
+    {
+      "path": "assets/picker/previews/common/画布图.html",
+      "hash": "2809875326bbfe4e800aaa17028c959bdba80e04c089b8c080996d0cd17859a7",
+      "bytes": 1002
+    },
+    {
+      "path": "assets/picker/previews/common/画中画.html",
+      "hash": "e94b16a4d5016ef5e470cd7c0132d6e659b6d08c5bfea38ed981ae6281d62b91",
+      "bytes": 2154
+    },
+    {
+      "path": "assets/picker/previews/common/计算压力.html",
+      "hash": "d9bdf2a41240b130b5fee0fe12342b9d6a34c66652279333385cd30a03928a16",
+      "bytes": 1414
+    },
+    {
+      "path": "assets/picker/previews/common/交叉观察.html",
+      "hash": "792fed1787d78b797512056041121e3205c0379b837b7db8337f15aca6b6be7a",
+      "bytes": 1491
+    },
+    {
+      "path": "assets/picker/previews/common/截屏.html",
+      "hash": "e76f997047aaf2ad959830ec5587f338090bb4172435561f9a9e9884e3fecbf2",
+      "bytes": 2030
+    },
+    {
+      "path": "assets/picker/previews/common/可变轴.html",
+      "hash": "631d9abf2cbb0ac29a00b18cfbad377884c00f53a0636373acb721fd66a9f014",
+      "bytes": 1700
+    },
+    {
+      "path": "assets/picker/previews/common/可读流.html",
+      "hash": "efb899cdea628a90784e62b2aeb54c86c735810994569439417b50fa5fc7fd36",
+      "bytes": 1533
+    },
+    {
+      "path": "assets/picker/previews/common/空状态.html",
+      "hash": "dcdd940cfb6ce15181143ac14ff1892eef9548ba71a9af2b5bc0d22d8e6ff983",
+      "bytes": 1456
+    },
+    {
+      "path": "assets/picker/previews/common/跨源隔离.html",
+      "hash": "73a340f1b75991f051391e8770c6ae9f0599a4d459e9869aab363f0be5649f11",
+      "bytes": 947
+    },
+    {
+      "path": "assets/picker/previews/common/乐观撤销.html",
+      "hash": "b7645cd9d8bb6aefe64e18774a9bcbbe783de418cf55010b28fe343efce4c52b",
+      "bytes": 1503
+    },
+    {
+      "path": "assets/picker/previews/common/流体字.html",
+      "hash": "d5b50ea80aea64a7beed9c412a5b885bdd9913efecc8e2e759b83b6d64093fe1",
+      "bytes": 1204
+    },
+    {
+      "path": "assets/picker/previews/common/命令面板.html",
+      "hash": "846b2527105239bc91123861e168db31dfad41254d8e912c6b8e6dcfd1de3b7f",
+      "bytes": 2196
+    },
+    {
+      "path": "assets/picker/previews/common/内在布局.html",
+      "hash": "1d04dc824ab7b6113b70413a6295bb11bf278312f3df469d957df1426f797ed0",
+      "bytes": 1285
+    },
+    {
+      "path": "assets/picker/previews/common/清单探测.html",
+      "hash": "158f4d173b396ca93410c03e3b4f7a752a64a19405de602de30dd452c6971004",
+      "bytes": 1025
+    },
+    {
+      "path": "assets/picker/previews/common/权限查询.html",
+      "hash": "19ee37cf4cf2b916415c47800032fb349aacbd1affa98bde3fa86b1a594b151f",
+      "bytes": 1688
+    },
+    {
+      "path": "assets/picker/previews/common/设备探测.html",
+      "hash": "7993ccac3a93f5f151c7917d48a9b1f1c8646818be90cecad5b27142843c65cf",
+      "bytes": 1012
+    },
+    {
+      "path": "assets/picker/previews/common/通行密钥探测.html",
+      "hash": "e306ad9258c86514d0f258f081e9c414b9b743421833d90fb48af7ad165d3756",
+      "bytes": 1224
+    },
+    {
+      "path": "assets/picker/previews/common/通知探测.html",
+      "hash": "3f96aa42b3931ad382efebbe563a8a1ea749c8194b29f60493ccf6fc1b49c851",
+      "bytes": 1422
+    },
+    {
+      "path": "assets/picker/previews/common/图格式.html",
+      "hash": "25034fa27e29301d59a5dc7b956246fac74aa06ea5bd254de74492bb79e57fd0",
+      "bytes": 2271
+    },
+    {
+      "path": "assets/picker/previews/common/推测加载.html",
+      "hash": "7e0114a5a5cdf55de646b758b76c0c0f3fbe7be24b7c45b89ba82a2499603680",
+      "bytes": 1007
+    },
+    {
+      "path": "assets/picker/previews/common/文件选取.html",
+      "hash": "53bf02ae7eb04716b9edcf01d50875f416fe9e8f0eab81e93e0bafa3b6836ab7",
+      "bytes": 1898
+    },
+    {
+      "path": "assets/picker/previews/common/压缩流.html",
+      "hash": "f2def29bbd382ae5f94e526678ad30d1423da1852f2f80e3ef7a6ca738c18001",
+      "bytes": 1568
+    },
+    {
+      "path": "assets/picker/previews/common/音频图.html",
+      "hash": "333eba9fa1fb56f523c0973fafe89ab58acac47b813c3744ffdc780d4141fcb9",
+      "bytes": 1931
+    },
+    {
+      "path": "assets/picker/previews/common/语音MIDI.html",
+      "hash": "853bfea37bad59121dd9c3a5d4ca3b14d54d71829946c37b7126dba22f3852cf",
+      "bytes": 1315
+    },
+    {
+      "path": "assets/picker/previews/common/振动手柄.html",
+      "hash": "51cde5fdc924edd45f5aa1c6e07e41d89e86fa9f72fd5cad6575aafbbfaf2cff",
+      "bytes": 1456
+    },
+    {
+      "path": "assets/picker/previews/common/支付探测.html",
+      "hash": "d77ff9871934dfbb6ed5c19475b60d1bf17b4479a3d30f7bfc1f4d22141507ed",
+      "bytes": 918
+    },
+    {
+      "path": "assets/picker/previews/common/状态机.html",
+      "hash": "13ed79547c8e03e35d45517431faa20412d00f17f882b81e32f76becb79c8cca",
+      "bytes": 1416
+    },
+    {
+      "path": "assets/picker/previews/common/子网格.html",
+      "hash": "6cfd9d8e723b7832be6c3f793332b3d756b6dbf80cf11020a790a3a04e54d700",
+      "bytes": 1856
+    },
+    {
+      "path": "assets/picker/previews/common/字样页.html",
+      "hash": "f698418d7cf72116614bee63cbe57b42a410ae1fe24b9d17459b9ee25b5ad9a8",
+      "bytes": 1316
+    },
+    {
+      "path": "assets/picker/previews/common/自定义高亮.html",
+      "hash": "c89d4b7b8c1355671a45ecf5b5b41daa5532cdbc9dee44b2cea6bb4619212831",
+      "bytes": 1817
+    },
+    {
+      "path": "assets/picker/previews/common/Cookie店.html",
+      "hash": "a0bb73aae98e97d2126f103e89eb0369ff4b08eb1bcd9a2a8bca8b85f7aa6192",
+      "bytes": 1543
+    },
+    {
+      "path": "assets/picker/previews/common/CSS函数.html",
+      "hash": "28d78c51e4c2ae3536baea00e033198e37b0fd43f6387eb01c14e129374c84e8",
+      "bytes": 1792
+    },
+    {
+      "path": "assets/picker/previews/common/CSS三维.html",
+      "hash": "bb8845e6acc739316f601b9c7aa764b53bd7ac78eb046e9c9fc3500e3e90356b",
+      "bytes": 1217
+    },
+    {
+      "path": "assets/picker/previews/common/CSS属性.html",
+      "hash": "059ecf2fae11440c737941baf257e0fc63324f9aa94d7dda919b3a9e39583805",
+      "bytes": 1671
+    },
+    {
+      "path": "assets/picker/previews/common/FedCM探测.html",
+      "hash": "1db94b2e610518026125f054f46c5cbb239d64b43cd8bef31eff1b6c745f56fa",
+      "bytes": 999
+    },
+    {
+      "path": "assets/picker/previews/common/FontFace载入.html",
+      "hash": "1c29a331dcff3f43b3fa61db14a8c3648d743bce0722b9f51611cf813c872edb",
+      "bytes": 1645
+    },
+    {
+      "path": "assets/picker/previews/common/IndexedDB.html",
+      "hash": "0dd5ba68878643e7d2c1644ccf778e632e49a03d68117ecdb20f19eb495228dd",
+      "bytes": 2025
+    },
+    {
+      "path": "assets/picker/previews/common/JSON模块.html",
+      "hash": "2b85b66bc375d850a05a7db34202bd6d0d0a7ab1bef0b06f6366c09ed21a79e2",
+      "bytes": 1471
+    },
+    {
+      "path": "assets/picker/previews/common/MathML.html",
+      "hash": "b2422ca3643518b601f6d540ce384fc75690fa73778aa27768a9ad2a720eb4a5",
+      "bytes": 1397
+    },
+    {
+      "path": "assets/picker/previews/common/OffscreenCanvas.html",
+      "hash": "5c60d55b2988066fe763a8197ab004e20107fb325d70f9b773f936a012fd3def",
+      "bytes": 1543
+    },
+    {
+      "path": "assets/picker/previews/common/SVG滤镜.html",
+      "hash": "750e198cf923732633ae0c180349dccf74a3f5c3bac2ae089c2fdba19570b5b2",
+      "bytes": 1805
+    },
+    {
+      "path": "assets/picker/previews/common/SVG图标.html",
+      "hash": "19157c352ece286a9097aa1e6561921cc9bffd4f570e05ef1a231715fa946bc8",
+      "bytes": 987
+    },
+    {
+      "path": "assets/picker/previews/common/Temporal试.html",
+      "hash": "f5386106265d7b98803fd0f69615d3e58133cb0e8568e4f5b09a13494add042d",
+      "bytes": 1066
+    },
+    {
+      "path": "assets/picker/previews/common/TrustedTypes.html",
+      "hash": "0b473e21ddd6f3e5e8999fd3d5249b6a019c26e2a964c2269608e8301509b0cf",
+      "bytes": 1761
+    },
+    {
+      "path": "assets/picker/previews/common/UA提示.html",
+      "hash": "8fba5fc1de6a334c719b1b64e8b31faa7c81f361c32e1fa1df2a11a4e853bd9d",
+      "bytes": 1069
+    },
+    {
+      "path": "assets/picker/previews/common/UI声.html",
+      "hash": "dcb1a9a61518ad0acee8693d9a4b0a2e94125598b041788ffe755775b1fc77ff",
+      "bytes": 1609
+    },
+    {
+      "path": "assets/picker/previews/common/Wasm加法.html",
+      "hash": "e93a467549ab207f75172c24153b73d1dc8ff2ab02bae682f3c2a1d314c4a616",
+      "bytes": 1393
+    },
+    {
+      "path": "assets/picker/previews/common/WebGPU清屏.html",
+      "hash": "c186ccb205c2579ba2a2594446b8b7ab63f0781c02c2717dbef57a0499ac3499",
+      "bytes": 2135
+    },
+    {
+      "path": "assets/picker/previews/common/WebLocks.html",
+      "hash": "c52f41ac78bbf9eee6737d3753157be6f355b1ed7f64a3b6017584771956224f",
+      "bytes": 1501
+    },
+    {
+      "path": "assets/picker/previews/common/WebShare.html",
+      "hash": "503d133e50977880c33f3b56c6afbbc411d01e1185fef89800d9bff3ff354cf0",
+      "bytes": 1431
+    },
+    {
+      "path": "assets/picker/previews/common/WebVTT.html",
+      "hash": "e1fc1719f423fb271443104a62b3082d5991270c33249ba8d89476f6ef937893",
+      "bytes": 1611
+    },
+    {
+      "path": "assets/picker/previews/common/Worker消息.html",
+      "hash": "c90e5451a47b596316bbe2c336cbe1ae5a0ad0f533213d96cefd53547bdfbd45",
+      "bytes": 1258
     },
     {
       "path": "assets/picker/previews/design/表单校验.html",

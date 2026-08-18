@@ -16,12 +16,14 @@ The script returns paths, never full document bodies. The agent reads those path
 
 ```json
 {
-  "schemaVersion": 1,
-  "snapshotVersion": "2026-08-16",
+  "schemaVersion": 2,
+  "snapshotVersion": "2026-08-18",
   "routeIds": ["tavern-card-builder"],
   "standing": ["ST-A0"],
   "documents": ["ST-A2", "ST-B1"],
   "domains": ["design", "motion"],
+  "catalogSummary": {"design": 462, "motion": 194, "wiki": 86, "ledger": 1609},
+  "candidates": [{"id": "design:d4-example", "state": "proposed"}],
   "experimentalIncluded": false,
   "selectionState": "proposed",
   "unresolved": ["target runtime API evidence"]
@@ -39,9 +41,17 @@ A picker export has this shape:
   "schemaVersion": 1,
   "kind": "tavernweave-library-selection",
   "state": "proposed",
-  "snapshotVersion": "2026-08-16",
+  "snapshotVersion": "2026-08-18",
   "items": ["design:wiki-visual", "motion:css-vt"]
 }
 ```
 
 An implementation authority must separately promote a candidate. Selection cannot install a dependency, approve a license, alter a card, or close an acceptance item.
+
+The full catalog is an asset, not a prompt payload. Query it deterministically with a narrow intent and bounded result count:
+
+```powershell
+node scripts/query-library.mjs --skill consult-tavernweave-library --intent "玻璃 HUD 移动端" --domain design,ledger --limit 6
+```
+
+The 243 AFV screening receipts are source-side audit inputs. TavernWeave stores only their aggregate counts and the resulting public catalogs; it does not distribute the inbox JSON files.

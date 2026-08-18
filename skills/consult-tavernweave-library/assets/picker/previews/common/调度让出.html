@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 调度让出</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; margin-right: 6px; }
+    .pulse { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #7eb8ff; animation: blink 0.6s linear infinite alternate; }
+    @keyframes blink { to { opacity: 0.2; } }
+    .st { color: #9aa3b2; }
+    code { color: #e8b86d; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><code>scheduler.yield</code> 不是 <code>requestIdleCallback</code>，也不是长任务条目。没有 yield 就退回 <code>setTimeout(0)</code>。不是已采用调度栈。</p>
+    <p><span class="pulse"></span> 主线程还在刷</p>
+    <button type="button" id="block">同步 180ms</button>
+    <button type="button" id="yield">让出后跑 180ms</button>
+    <p class="st" id="st">还没跑。</p>
+  </main>
+  <script>
+    const st = document.getElementById("st");
+    const spin = (ms) => { const end = performance.now() + ms; while (performance.now() < end) {} };
+    const yieldFn = globalThis.scheduler && scheduler.yield
+      ? () => scheduler.yield()
+      : () => new Promise((r) => setTimeout(r, 0));
+    document.getElementById("block").addEventListener("click", () => {
+      const t0 = performance.now();
+      spin(180);
+      st.textContent = "同步 " + Math.round(performance.now() - t0) + "ms，蓝点会停。";
+    });
+    document.getElementById("yield").addEventListener("click", async () => {
+      const t0 = performance.now();
+      let left = 180;
+      while (left > 0) {
+        spin(Math.min(16, left));
+        left -= 16;
+        await yieldFn();
+      }
+      st.textContent = "让出后 " + Math.round(performance.now() - t0) + "ms。用的是 " + (globalThis.scheduler && scheduler.yield ? "scheduler.yield" : "setTimeout(0)") + "。";
+    });
+  </script>
+</body>
+</html>

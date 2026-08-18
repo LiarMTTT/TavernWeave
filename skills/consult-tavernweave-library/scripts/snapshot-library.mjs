@@ -10,7 +10,22 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const skillRoot = path.resolve(here, "..");
 const referencesRoot = path.join(skillRoot, "references");
 const assetsRoot = path.join(skillRoot, "assets", "picker");
-const snapshotVersion = "2026-08-16";
+const snapshotVersion = "2026-08-18";
+const expectedCounts = {
+  standingGuides: 1,
+  formalGuides: 31,
+  experimentalGuides: 1,
+  designItems: 462,
+  motionItems: 194,
+  conceptItems: 86,
+  linkedWiki: 86,
+  ledgerItems: 1609,
+  screenedRoutes: 243,
+  readyRoutes: 88,
+  wikiOnlyRoutes: 155,
+  screenedDesignAdds: 362,
+  screenedMotionAdds: 147,
+};
 
 const guides = [
   ["ST-A0", "A0_驾驭工程从零搭建检查单.md", "standing"],
@@ -39,7 +54,7 @@ function portableHash(buffer) {
   return crypto.createHash("sha256").update(bytes).digest("hex");
 }
 function safeCopy(source, target) {
-  if (!fs.existsSync(source) || !fs.statSync(source).isFile()) throw new Error(`missing source: ${path.basename(source)}`);
+  if (!fs.existsSync(source) || !fs.statSync(source).isFile()) throw new Error(`missing source: ${source}`);
   fs.mkdirSync(path.dirname(target), { recursive: true });
   const sourceBytes = fs.readFileSync(source);
   const sourceText = sourceBytes.toString("utf8");
@@ -62,9 +77,16 @@ function safeCopy(source, target) {
     credentialRedactions: credentialMatches.length,
   };
 }
+function rewritePortableWikiLinks(target, meta) {
+  const original = fs.readFileSync(target, "utf8");
+  const rewritten = original.replace(/\]\(库挑选器\/index\.html([^)]*)\)/gu, "](../../assets/picker/index.html$1)");
+  if (rewritten !== original) fs.writeFileSync(target, rewritten, "utf8");
+  const bytes = fs.readFileSync(target);
+  return { ...meta, targetHash: portableHash(bytes), bytes: bytes.length };
+}
 function loadCatalog(file, key) {
   const sandbox = { window: {} };
-  vm.runInNewContext(fs.readFileSync(file, "utf8"), sandbox, { filename: path.basename(file), timeout: 1000 });
+  vm.runInNewContext(fs.readFileSync(file, "utf8"), sandbox, { filename: path.basename(file), timeout: 5000 });
   const catalog = sandbox.window.AFV_CATALOGS?.[key];
   if (!catalog || !Array.isArray(catalog.items)) throw new Error(`invalid ${key} catalog`);
   return JSON.parse(JSON.stringify(catalog));
@@ -73,6 +95,37 @@ function walkFiles(root) {
   if (!fs.existsSync(root)) return [];
   return fs.readdirSync(root, { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? walkFiles(path.join(root, entry.name)) : [path.join(root, entry.name)]);
 }
+function isInside(root, target) {
+  const relative = path.relative(root, target);
+  return relative && !relative.startsWith("..") && !path.isAbsolute(relative);
+}
+function removeStaleFiles(root, expected, extensions) {
+  if (!isInside(skillRoot, root)) throw new Error(`refusing unsafe snapshot cleanup: ${root}`);
+  for (const file of walkFiles(root)) {
+    if (extensions.includes(path.extname(file).toLowerCase()) && !expected.has(path.resolve(file))) fs.rmSync(file);
+  }
+}
+function loadScreeningSummary(afvRoot, design, motion) {
+  const candidateRoot = path.join(afvRoot, "10-收件箱", "写回候选");
+  const files = fs.readdirSync(candidateRoot).filter((name) => /^实装-.*\.json$/u.test(name)).sort();
+  if (files.length !== expectedCounts.screenedRoutes) throw new Error(`screened route count drift: ${files.length}`);
+  const rows = files.map((name) => JSON.parse(fs.readFileSync(path.join(candidateRoot, name), "utf8")));
+  const routes = new Set(rows.map((row) => row.route));
+  if (routes.size !== files.length) throw new Error(`duplicate screened route: files=${files.length}, routes=${routes.size}`);
+  const ready = rows.filter((row) => row.status === "ready").length;
+  const wikiOnly = rows.filter((row) => row.status === "wiki-only").length;
+  if (ready !== expectedCounts.readyRoutes || wikiOnly !== expectedCounts.wikiOnlyRoutes) throw new Error(`screening status drift: ready=${ready}, wiki-only=${wikiOnly}`);
+  const additions = rows.flatMap((row) => (row.add || []).map((item) => ({ ...item, route: row.route })));
+  const uniqueAdditions = new Map(additions.map((item) => [item.id, item]));
+  if (uniqueAdditions.size !== additions.length) throw new Error("duplicate screened catalog item id");
+  const catalogIds = new Set([...design.items, ...motion.items].map((item) => item.id));
+  const missing = additions.filter((item) => !catalogIds.has(item.id));
+  if (missing.length) throw new Error(`screened items missing from catalogs: ${missing.slice(0, 5).map((item) => item.id).join(", ")}`);
+  const designAdds = additions.filter((item) => item.lib === "design").length;
+  const motionAdds = additions.filter((item) => item.lib === "motion").length;
+  if (designAdds !== expectedCounts.screenedDesignAdds || motionAdds !== expectedCounts.screenedMotionAdds) throw new Error(`screened addition drift: design=${designAdds}, motion=${motionAdds}`);
+  return { routeCount: files.length, ready, wikiOnly, designAdds, motionAdds, candidateFilesDistributed: false };
+}
 
 const stdbRoot = path.resolve(arg("--stdb-root") || "");
 const afvRoot = path.resolve(arg("--afv-root") || "");
@@ -80,7 +133,7 @@ if (!arg("--stdb-root") || !arg("--afv-root")) {
   console.error("Usage: node snapshot-library.mjs --stdb-root <ST开发指南DB> --afv-root <AFV root>");
   process.exit(2);
 }
-if (fs.existsSync(path.join(stdbRoot, "A1_驾驶员同步检查.md")) === false) throw new Error("A1 exclusion sentinel is missing at source; refusing ambiguous source root");
+if (!fs.existsSync(path.join(stdbRoot, "A1_驾驶员同步检查.md"))) throw new Error("A1 exclusion sentinel is missing at source; refusing ambiguous source root");
 
 const stOut = path.join(referencesRoot, "st-guides");
 const wikiOut = path.join(referencesRoot, "design-wiki");
@@ -93,27 +146,75 @@ for (const [id, filename, status] of guides) {
 }
 
 const conceptRoot = path.join(afvRoot, "concepts");
-const design = loadCatalog(path.join(conceptRoot, "前端设计库", "catalog.js"), "design");
-const motion = loadCatalog(path.join(conceptRoot, "动画库", "catalog.js"), "motion");
-if (design.items.length !== 82 || motion.items.length !== 38) throw new Error(`catalog count drift: design=${design.items.length}, motion=${motion.items.length}`);
-const wikiNames = [...new Set([...design.items, ...motion.items].map((item) => item.wiki && path.basename(item.wiki)).filter(Boolean))].sort((a, b) => a.localeCompare(b, "zh-CN"));
-if (wikiNames.length !== 18) throw new Error(`linked Wiki count drift: ${wikiNames.length}`);
+const afvPickerRoot = path.join(conceptRoot, "库挑选器");
+const catalogSources = {
+  design: path.join(conceptRoot, "前端设计库", "catalog.js"),
+  motion: path.join(conceptRoot, "动画库", "catalog.js"),
+  wiki: path.join(afvPickerRoot, "wiki-catalog.js"),
+  ledger: path.join(afvPickerRoot, "ledger-catalog.js"),
+};
+const sourceCatalogs = Object.fromEntries(Object.entries(catalogSources).map(([key, file]) => [key, loadCatalog(file, key)]));
+for (const [key, countKey] of [["design", "designItems"], ["motion", "motionItems"], ["wiki", "conceptItems"], ["ledger", "ledgerItems"]]) {
+  if (sourceCatalogs[key].items.length !== expectedCounts[countKey]) throw new Error(`${key} catalog count drift: ${sourceCatalogs[key].items.length}`);
+}
+const screening = loadScreeningSummary(afvRoot, sourceCatalogs.design, sourceCatalogs.motion);
+
+const wikiNames = [...new Set(Object.values(sourceCatalogs).flatMap((catalog) => catalog.items.map((item) => item.wiki && path.basename(item.wiki)).filter(Boolean)))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+if (wikiNames.length !== expectedCounts.linkedWiki) throw new Error(`linked Wiki count drift: ${wikiNames.length}`);
+const expectedWikiTargets = new Set();
 for (const [index, filename] of wikiNames.entries()) {
   const target = path.join(wikiOut, filename);
-  const meta = safeCopy(path.join(conceptRoot, filename), target);
-  documents.push({ id: `WIKI-${String(index + 1).padStart(2, "0")}`, type: "design-wiki", status: "reference", standing: false, path: `references/design-wiki/${filename}`, source: `AFV/concepts/${filename}`, license: "MIT-AFV-2026-LiarMTTT", ...meta });
+  expectedWikiTargets.add(path.resolve(target));
+  const meta = rewritePortableWikiLinks(target, safeCopy(path.join(conceptRoot, filename), target));
+  documents.push({ id: `AFV-WIKI-${String(index + 1).padStart(3, "0")}`, type: "design-wiki", status: "reference", standing: false, path: `references/design-wiki/${filename}`, source: `AFV/concepts/${filename}`, license: "MIT-AFV-2026-LiarMTTT", ...meta });
 }
-for (const [domain, sourceDir] of [["design", "前端设计库"], ["motion", "动画库"]]) {
-  const files = walkFiles(path.join(conceptRoot, sourceDir, "preview")).filter((file) => file.toLowerCase().endsWith(".html"));
-  for (const source of files) safeCopy(source, path.join(previewOut, domain, path.basename(source)));
-}
+removeStaleFiles(wikiOut, expectedWikiTargets, [".md"]);
 
+const previewRoots = {
+  design: path.join(conceptRoot, "前端设计库", "preview"),
+  motion: path.join(conceptRoot, "动画库", "preview"),
+  common: path.join(afvPickerRoot, "preview"),
+};
+const expectedPreviewTargets = new Set();
+function normalizePreview(domain, reference) {
+  if (!reference) return "";
+  if (/^(?:https?:|data:|\/)/i.test(reference) || path.isAbsolute(reference)) throw new Error(`non-portable preview reference: ${domain}:${reference}`);
+  let source;
+  if (reference.startsWith(".")) source = path.resolve(afvPickerRoot, reference);
+  else if (domain === "design" || domain === "motion") source = path.resolve(previewRoots[domain], reference.replace(/^preview[\\/]/i, ""));
+  else source = path.resolve(afvPickerRoot, reference.startsWith("preview/") ? reference : `preview/${reference}`);
+  const bucket = Object.entries(previewRoots).find(([, root]) => isInside(root, source));
+  if (!bucket || !fs.existsSync(source)) throw new Error(`missing or escaping preview: ${domain}:${reference}`);
+  const relative = path.relative(bucket[1], source);
+  const targetRelative = path.join(bucket[0], relative);
+  const target = path.join(previewOut, targetRelative);
+  expectedPreviewTargets.add(path.resolve(target));
+  safeCopy(source, target);
+  return targetRelative.replaceAll(path.sep, "/");
+}
+function normalizeCatalog(domain, catalog) {
+  return {
+    ...catalog,
+    previewBase: "previews/",
+    items: catalog.items.map((item) => ({
+      ...item,
+      ...(item.wiki ? { wiki: `references/design-wiki/${path.basename(item.wiki)}` } : {}),
+      ...(item.preview ? { preview: normalizePreview(domain, item.preview) } : {}),
+    })),
+  };
+}
+const catalogs = Object.fromEntries(Object.entries(sourceCatalogs).map(([domain, catalog]) => [domain, normalizeCatalog(domain, catalog)]));
+removeStaleFiles(previewOut, expectedPreviewTargets, [".html"]);
+
+const sourceFiles = Object.fromEntries(Object.entries(catalogSources).map(([key, file]) => [key, { source: `AFV/${path.relative(afvRoot, file).replaceAll(path.sep, "/")}`, hash: portableHash(fs.readFileSync(file)), bytes: fs.statSync(file).size }])) ;
 const catalogTarget = path.join(assetsRoot, "catalog.json");
 fs.mkdirSync(path.dirname(catalogTarget), { recursive: true });
-const catalogPayload = { schemaVersion: 1, snapshotVersion, catalogs: { design, motion } };
+const catalogPayload = { schemaVersion: 2, snapshotVersion, screening, catalogs };
 fs.writeFileSync(catalogTarget, `${JSON.stringify(catalogPayload, null, 2)}\n`, "utf8");
 fs.writeFileSync(path.join(assetsRoot, "catalog-data.js"), `window.TW_LIBRARY_CATALOG = ${JSON.stringify(catalogPayload)};\n`, "utf8");
-fs.writeFileSync(path.join(assetsRoot, "manifest-data.js"), `window.TW_LIBRARY_MANIFEST = ${JSON.stringify({ schemaVersion: 1, snapshotVersion, documents })};\n`, "utf8");
+
+const pickerManifest = { schemaVersion: 2, snapshotVersion, expectedCounts, screening, sourceFiles, documents };
+fs.writeFileSync(path.join(assetsRoot, "manifest-data.js"), `window.TW_LIBRARY_MANIFEST = ${JSON.stringify(pickerManifest)};\n`, "utf8");
 
 const snapshotRoots = [stOut, wikiOut, assetsRoot];
 const files = snapshotRoots.flatMap(walkFiles).sort((a, b) => a.localeCompare(b));
@@ -129,13 +230,16 @@ const assets = files.filter((file) => !file.startsWith(stOut) && !file.startsWit
   bytes: fs.statSync(file).size,
 }));
 const manifest = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   snapshotVersion,
   sourcePolicy: "explicit-allowlist",
-  expectedCounts: { standingGuides: 1, formalGuides: 31, experimentalGuides: 1, designItems: 82, motionItems: 38, linkedWiki: 18 },
-  exclusions: ["STDB/A1_驾驶员同步检查.md", "STDB/B1_变量更新规则_命令式时代_归档.md", "STDB/本地证据/**", "AFV unrelated framework and knowledge domains"],
+  expectedCounts,
+  screening,
+  sourceFiles,
+  exclusions: ["STDB/A1_驾驶员同步检查.md", "STDB/B1_变量更新规则_命令式时代_归档.md", "STDB/本地证据/**", "AFV/10-收件箱/**", "AFV/raw/**", "AFV unrelated framework and knowledge domains"],
   documents,
   assets,
 };
+if ([...documents, ...assets].some((record) => /(?:^|\/)10-收件箱\/|(?:^|\/)写回候选\/|(?:^|\/)实装-[^/]+\.json$/u.test(record.path))) throw new Error("AFV candidate inbox path leaked into public snapshot");
 fs.writeFileSync(path.join(referencesRoot, "library-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
-console.log(`Library snapshot written: ${documents.length} documents, ${design.items.length} design items, ${motion.items.length} motion items, ${assets.length} picker assets.`);
+console.log(`Library snapshot written: ${documents.length} documents, ${catalogs.design.items.length} design, ${catalogs.motion.items.length} motion, ${catalogs.wiki.items.length} concepts, ${catalogs.ledger.items.length} ledger items, ${expectedPreviewTargets.size} previews.`);

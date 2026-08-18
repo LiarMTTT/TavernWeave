@@ -19,7 +19,7 @@
     {"id":"code-quality-workflow","terms":["代码质量","重构","优化","收尾"],"guides":[],"domains":[]},
     {"id":"shadcn-tailwind-ui","terms":["shadcn","tailwind","react","产品界面"],"guides":["ST-C3","ST-D7"],"domains":["design","motion"]},
     {"id":"rolecard-workshop-ops","terms":["工坊","发布链","网关","存储","502"],"guides":["ST-D1","ST-D4","ST-E5"],"domains":[]},
-    {"id":"consult-tavernweave-library","terms":["资料库","指南","设计库","动效库","挑选"],"guides":[],"domains":["design","motion"]},
+    {"id":"consult-tavernweave-library","terms":["资料库","指南","设计库","动效库","概念库","蒸馏账本","筛选页","挑选"],"guides":[],"domains":["design","motion","wiki","ledger"]},
     {"id":"activate-tavernweave-soul","terms":["阿瞳","mttt.sir","soul","三席联席"],"guides":[],"domains":[]},
     {"id":"orchestrate-project-blueprint","terms":["脑暴","总设计案","蓝图","子蓝图","第一版","first playable","first usable","vibe code","许愿"],"guides":[],"domains":[]}
   ]

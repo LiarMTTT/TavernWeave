@@ -10,7 +10,7 @@
   const storageKey = "tavernweave-library-proposed-ids-v1";
   const tabs = [
     ["guides", "ST 指南"], ["design", "设计"], ["motion", "动效"],
-    ["wiki", "来源 Wiki"], ["sources", "外部源站"], ["selected", "已选"],
+    ["wiki", "概念"], ["ledger", "蒸馏账本"], ["sources", "外部源站"], ["selected", "已选"],
   ];
   const state = { tab: location.hash.slice(1) || "guides", query: "", filter: "", current: "" };
   if (!tabs.some(([id]) => id === state.tab)) state.tab = "guides";
@@ -28,6 +28,8 @@
   const search = el("[data-search]");
   const count = el("[data-count]");
   el("[data-snapshot]").textContent = manifest.snapshotVersion;
+  const expected = manifest.expectedCounts || {};
+  el("[data-library-summary]").textContent = `${expected.designItems || 0} 设计 · ${expected.motionItems || 0} 动效 · ${expected.conceptItems || 0} 概念 · ${expected.ledgerItems || 0} 账本条 · ${manifest.screening?.routeCount || 0}/${expected.screenedRoutes || 0} 路筛选`;
 
   const guideItems = manifest.documents.filter((item) => item.type === "st-guide").map((item) => ({
     id: `guide:${item.id}`, domain: "guides", name: item.path.split("/").pop().replace(/\.md$/, ""),
@@ -35,25 +37,27 @@
     note: item.standing ? "写入型任务的常驻驾驭检查。" : item.status === "experimental" ? "实验路线；只在显式评估时读取。" : "ST 开发指南公开快照。",
     local: `../../${item.path.replace(/^references\//, "references/")}`,
   }));
-  const wikiItems = manifest.documents.filter((item) => item.type === "design-wiki").map((item) => ({
-    id: `wiki:${item.id}`, domain: "wiki", name: item.path.split("/").pop().replace(/\.md$/, ""), grade: "概念", tags: ["来源 Wiki"],
-    note: "设计或动效条目直接关联的公开概念页。", local: `../../${item.path.replace(/^references\//, "references/")}`,
-  }));
   const normalizeCatalog = (domain) => catalog.catalogs[domain].items.map((item) => ({ ...item, id: `${domain}:${item.id}`, domain }));
   const designItems = normalizeCatalog("design");
   const motionItems = normalizeCatalog("motion");
-  const sourceItems = [...designItems, ...motionItems].filter((item) => item.url).map((item) => ({ ...item, id: `source:${item.id}`, domain: "sources" }));
-  const all = [...guideItems, ...designItems, ...motionItems, ...wikiItems, ...sourceItems];
+  const wikiItems = normalizeCatalog("wiki");
+  const ledgerItems = normalizeCatalog("ledger");
+  const sourceMap = new Map();
+  for (const item of [...designItems, ...motionItems, ...wikiItems, ...ledgerItems]) {
+    if (item.url && !sourceMap.has(item.url)) sourceMap.set(item.url, { ...item, id: `source:${item.id}`, domain: "sources", sourceKey: item.id });
+  }
+  const sourceItems = [...sourceMap.values()];
+  const all = [...guideItems, ...designItems, ...motionItems, ...wikiItems, ...ledgerItems, ...sourceItems];
 
   function currentPool() {
     const pool = state.tab === "selected" ? all.filter((item) => selected.has(selectionKey(item))) : all.filter((item) => item.domain === state.tab);
     const q = state.query.trim().toLowerCase();
     return pool.filter((item) => {
       if (state.filter && !(item.tags || []).includes(state.filter) && item.grade !== state.filter) return false;
-      return !q || [item.name, item.note, item.grade, item.url, ...(item.tags || [])].filter(Boolean).join(" ").toLowerCase().includes(q);
+      return !q || [item.name, item.note, item.grade, item.url, item.wiki, item.route, item.routeLabel, ...(item.tags || [])].filter(Boolean).join(" ").toLowerCase().includes(q);
     });
   }
-  function selectionKey(item) { return item.domain === "sources" ? item.id.replace(/^source:/, "") : item.id; }
+  function selectionKey(item) { return item.domain === "sources" ? item.sourceKey : item.id; }
   function saveSelection() { localStorage.setItem(storageKey, JSON.stringify([...selected].sort())); paintSelection(); }
   function selectionPayload() {
     return { schemaVersion: 1, kind: "tavernweave-library-selection", state: "proposed", snapshotVersion: manifest.snapshotVersion, items: [...selected].sort() };
@@ -72,7 +76,7 @@
     });
   }
   function paintFilters(pool) {
-    const values = [...new Set(pool.flatMap((item) => [item.grade, ...(item.tags || [])]).filter(Boolean))].slice(0, 18);
+    const values = [...new Set(pool.flatMap((item) => [item.grade, ...(item.tags || [])]).filter(Boolean))].slice(0, 30);
     filterBox.replaceChildren();
     const allButton = button("全部", { "aria-pressed": String(!state.filter) });
     allButton.addEventListener("click", () => { state.filter = ""; paintGrid(); });
@@ -114,16 +118,16 @@
     const title = document.createElement("h2"); title.textContent = item.name;
     const note = document.createElement("p"); note.className = "inspector-note"; note.textContent = item.note || "无附加说明。";
     const meta = document.createElement("dl"); meta.className = "meta-list";
-    addMeta(meta, "级别", item.grade); addMeta(meta, "标签", (item.tags || []).join(" · ")); addMeta(meta, "来源", item.url || item.local || item.wiki); addMeta(meta, "状态", "proposed / 未采用");
+    addMeta(meta, "级别", item.grade); addMeta(meta, "标签", (item.tags || []).join(" · ")); addMeta(meta, "分路", [item.route, item.routeLabel].filter(Boolean).join(" · ")); addMeta(meta, "来源", item.url || item.local || item.wiki); addMeta(meta, "状态", "proposed / 未采用");
     const boundary = document.createElement("p"); boundary.className = "boundary"; boundary.textContent = "候选条目不等于已采用设计、已安装依赖、已通过许可复核或已完成真实 SillyTavern 验收。";
     const actions = document.createElement("div"); actions.className = "actions";
     const key = selectionKey(item); const pick = button(selected.has(key) ? "移出候选" : "加入候选", { class: "action primary" });
     pick.addEventListener("click", () => { selected.has(key) ? selected.delete(key) : selected.add(key); saveSelection(); paintGrid(); paintInspector(item); }); actions.appendChild(pick);
-    const localPath = item.local || (item.wiki ? `../../references/design-wiki/${item.wiki.split("/").pop()}` : "");
+    const localPath = item.local || (item.wiki ? `../../${item.wiki}` : "");
     if (localPath) { const link = document.createElement("a"); link.className = "action"; link.href = localPath; link.target = "_blank"; link.rel = "noreferrer"; link.textContent = "打开本地正文"; actions.appendChild(link); }
     if (item.url) { const link = document.createElement("a"); link.className = "action"; link.href = item.url; link.target = "_blank"; link.rel = "noreferrer"; link.textContent = "打开来源站"; actions.appendChild(link); }
     body.append(domain, title, note, meta, boundary, actions);
-    if (item.preview && ["design", "motion"].includes(item.domain)) { const frame = document.createElement("iframe"); frame.className = "preview"; frame.title = `${item.name} 本地沙盘`; frame.loading = "lazy"; frame.referrerPolicy = "no-referrer"; frame.src = `previews/${item.domain}/${item.preview}`; body.appendChild(frame); }
+    if (item.preview) { const frame = document.createElement("iframe"); frame.className = "preview"; frame.title = `${item.name} 本地沙盘`; frame.loading = "lazy"; frame.referrerPolicy = "no-referrer"; frame.src = `previews/${item.preview}`; body.appendChild(frame); }
     inspector.appendChild(body);
   }
   function paintSelection() { el("[data-selection-summary]").textContent = selected.size ? `已选择 ${selected.size} 条；状态仍为 proposed。` : "尚未选择资料"; }

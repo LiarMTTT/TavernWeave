@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 暗色方案</title>
+  <style>
+    html, body { margin: 0; background: #efe6d6; color: #1c1610; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      html, body { background: #12141a; color: #e8eaef; }
+      .card { background: #1a1d26; }
+    }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .card { padding: 12px; background: #fff; border-radius: 8px; }
+    .st { opacity: 0.7; }
+    code { color: #9a3412; }
+    @media (prefers-color-scheme: dark) { code { color: #7eb8ff; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p><code>prefers-color-scheme</code>。这是系统方案，不是 HIG 正文，也不是已采用暗色皮肤。</p>
+    <div class="card">这张卡跟系统走。</div>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    document.getElementById("st").textContent = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  </script>
+</body>
+</html>

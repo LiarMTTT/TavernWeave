@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · Wasm 加法</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; }
+    .st { color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>内存里一段最小 <code>add</code> 模块。这是 Wasm 核心，<strong>不是</strong> WASI / 组件模型。不是已采用 Wasm 栈。</p>
+    <button type="button" id="go">3 + 5</button>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    const bytes = new Uint8Array([0,97,115,109,1,0,0,0,1,7,1,96,2,127,127,1,127,3,2,1,0,7,7,1,3,97,100,100,0,0,10,9,1,7,0,32,0,32,1,106,11]);
+    document.getElementById("go").addEventListener("click", async () => {
+      const st = document.getElementById("st");
+      try {
+        const { instance } = await WebAssembly.instantiate(bytes);
+        st.textContent = "add(3,5) = " + instance.exports.add(3, 5);
+      } catch (err) {
+        st.textContent = err.message;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 画中画</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    video { display: block; width: 240px; height: 80px; background: #000; border-radius: 8px; }
+    button { margin-top: 8px; background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; margin-right: 6px; }
+    .st { color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>视频 PiP 与文档 PiP 是两套 API。唤醒锁另走 <code>navigator.wakeLock</code>。不是已采用播放器。</p>
+    <video id="v" muted playsinline></video>
+    <button type="button" id="pip">视频 PiP</button>
+    <button type="button" id="wake">要唤醒锁</button>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    const st = document.getElementById("st");
+    const v = document.getElementById("v");
+    const c = document.createElement("canvas");
+    c.width = 240; c.height = 80;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#e8b86d";
+    ctx.fillRect(0, 0, 240, 80);
+    v.srcObject = c.captureStream();
+    document.getElementById("pip").addEventListener("click", async () => {
+      try {
+        await v.play();
+        if (!document.pictureInPictureEnabled) { st.textContent = "没有视频 PiP。"; return; }
+        await v.requestPictureInPicture();
+        st.textContent = "视频 PiP。文档 PiP 是另一套。";
+      } catch (err) { st.textContent = err.message; }
+    });
+    document.getElementById("wake").addEventListener("click", async () => {
+      try {
+        if (!navigator.wakeLock) { st.textContent = "没有 Wake Lock。"; return; }
+        await navigator.wakeLock.request("screen");
+        st.textContent = "拿到 screen wake lock。";
+      } catch (err) { st.textContent = err.message; }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 命令面板</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; }
+    dialog { border: 1px solid #2e3440; background: #1a1d26; color: inherit; border-radius: 8px; padding: 12px; width: min(320px, 90vw); }
+    input { width: 100%; background: #12141a; color: inherit; border: 1px solid #2e3440; border-radius: 6px; padding: 6px; }
+    [role=listbox] { margin-top: 8px; }
+    [role=option] { padding: 6px; border-radius: 4px; }
+    [role=option][aria-selected=true] { background: #232833; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>APG 无专模，叠 Dialog + Listbox。这<strong>不是</strong> cmdk。不是已采用命令栈。</p>
+    <button type="button" id="open">打开</button>
+    <dialog id="dlg">
+      <input id="q" type="search" aria-label="过滤" />
+      <div role="listbox" id="list"></div>
+    </dialog>
+  </main>
+  <script>
+    const items = ["打开正文", "跳转源站", "看沙盘", "收下"];
+    const dlg = document.getElementById("dlg");
+    const q = document.getElementById("q");
+    const list = document.getElementById("list");
+    function paint() {
+      const v = q.value.trim();
+      list.replaceChildren();
+      items.filter((x) => !v || x.includes(v)).forEach((x, i) => {
+        const opt = document.createElement("div");
+        opt.role = "option";
+        opt.textContent = x;
+        opt.setAttribute("aria-selected", i === 0 ? "true" : "false");
+        list.appendChild(opt);
+      });
+    }
+    document.getElementById("open").addEventListener("click", () => { dlg.showModal(); paint(); q.focus(); });
+    q.addEventListener("input", paint);
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+  </script>
+</body>
+</html>

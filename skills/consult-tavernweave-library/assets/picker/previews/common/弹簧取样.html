@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 弹簧取样</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .track { position: relative; height: 36px; margin: 12px 0; background: #1a1d26; border-radius: 8px; overflow: hidden; }
+    .dot { position: absolute; top: 6px; left: 8px; width: 24px; height: 24px; border-radius: 50%; background: #7eb8ff; }
+    .dot.bounce { background: #e8b86d; animation: slide 1.5s linear(0, 0.04, 0.16, 0.42, 0.78, 1.08, 0.94, 1) infinite alternate; }
+    .dot.ease { animation: slide 1.5s ease infinite alternate; }
+    @keyframes slide { to { left: calc(100% - 32px); } }
+    label { display: block; font-size: 12px; color: #9aa3b2; }
+    code { color: #e8b86d; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>CSS 没有原生 <code>spring()</code>。下面第二条是 <code>linear()</code> 取样，看起来像回弹，其实是折线。不是 GSAP / Motion 弹簧，不是已采用动效栈。</p>
+    <label>ease</label>
+    <div class="track"><div class="dot ease"></div></div>
+    <label>linear() 取样（像弹簧）</label>
+    <div class="track"><div class="dot bounce"></div></div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 计算压力</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .st { font-size: 18px; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><code>PressureObserver</code> 看 CPU 压力。没有这 API 就直说。这<strong>不是</strong> Idle Detection，也不是生命周期。不是已采用性能探针。</p>
+    <p class="st" id="st">检测中</p>
+  </main>
+  <script>
+    const st = document.getElementById("st");
+    if (typeof PressureObserver !== "function") {
+      st.textContent = "没有 PressureObserver。";
+    } else {
+      try {
+        const obs = new PressureObserver((list) => {
+          const last = list[list.length - 1];
+          st.textContent = (last.source || "cpu") + " · " + last.state + (last.ownContributionEstimate != null ? " · own " + last.ownContributionEstimate : "");
+        });
+        obs.observe("cpu");
+        st.textContent = "已观察 cpu。变负载才会跳。";
+      } catch (err) {
+        st.textContent = "观察失败：" + err.message;
+      }
+    }
+  </script>
+</body>
+</html>

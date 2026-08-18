@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · OffscreenCanvas</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    canvas { display: block; background: #1a1d26; border-radius: 8px; }
+    .st { color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><code>transferControlToOffscreen</code> 后在 Offscreen 上画。WHATWG 已删 <code>commit()</code>，这里不用它。不是已采用画布栈。</p>
+    <canvas id="c" width="280" height="140"></canvas>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    const canvas = document.getElementById("c");
+    const st = document.getElementById("st");
+    if (!canvas.transferControlToOffscreen) {
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#7eb8ff";
+      ctx.fillRect(20, 20, 80, 80);
+      st.textContent = "没有 OffscreenCanvas，普通 2D。";
+    } else {
+      const off = canvas.transferControlToOffscreen();
+      const ctx = off.getContext("2d");
+      ctx.fillStyle = "#e8b86d";
+      ctx.fillRect(30, 30, 90, 70);
+      ctx.fillStyle = "#12141a";
+      ctx.font = "16px sans-serif";
+      ctx.fillText("offscreen", 40, 70);
+      st.textContent = "已转到 OffscreenCanvas 2D。";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 图格式</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    pre { background: #1a1d26; padding: 10px; border-radius: 8px; font-size: 12px; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>用 <code>HTMLImageElement.decode</code> / 类型探测看浏览器认不认 AVIF / WebP / JXL。没有样张就不解码真图。JXL 仍看实现。不是已采用图栈。</p>
+    <pre id="out">检测中</pre>
+  </main>
+  <script>
+    function can(type) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(img.width === 1);
+        img.onerror = () => resolve(false);
+        img.src = "data:" + type + ";base64,AAAA";
+      });
+    }
+    Promise.all([
+      ["image/webp", "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA"],
+      ["image/avif", "AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKBzgABpAQ0AIyC2dvbiB0dXJubw=="]
+    ].map(async ([type, b64]) => {
+      const img = new Image();
+      const ok = await new Promise((resolve) => {
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = "data:" + type + ";base64," + b64;
+      });
+      return type + " · " + (ok ? "能解" : "不能");
+    })).then((lines) => {
+      const jxl = document.createElement("canvas").toDataURL("image/jxl").indexOf("image/jxl") === 0;
+      document.getElementById("out").textContent = lines.join("\n") + "\nimage/jxl canvas · " + (jxl ? "编码器认" : "不认") + "\nJXL 静图另看实现，不是这页能保证的。";
+    });
+  </script>
+</body>
+</html>
