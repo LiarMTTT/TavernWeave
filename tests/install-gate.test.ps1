@@ -31,21 +31,22 @@ try {
 
     $legacyRoot = Join-Path $testRoot 'legacy\skills'
     New-Item -ItemType Directory -Path $legacyRoot -Force | Out-Null
-    foreach ($skillName in @($manifest.skills | Where-Object { $_ -notin @('activate-tavernweave-soul', 'consult-tavernweave-library') })) {
+    foreach ($skillName in @($manifest.skills | Where-Object { $_ -ne 'reflect-on-vibe-code-growth' })) {
         Copy-Item -LiteralPath (Join-Path $sourceSkillRoot $skillName) -Destination (Join-Path $legacyRoot $skillName) -Recurse -Force
     }
     New-Item -ItemType Directory -Path (Join-Path $legacyRoot 'unrelated-user-skill') -Force | Out-Null
-    Assert-VerifyFails $legacyRoot 'A 16-skill legacy install must fail before it can claim TavernWeave v1 completeness.'
+    Assert-VerifyFails $legacyRoot 'A 19-skill legacy install must fail before it can claim current TavernWeave source completeness.'
 
     & $installScript -PluginRoot $PluginRoot -TargetSkillRoot $legacyRoot -Confirm:$false | Out-Null
     $legacyReceipt = @(& $verifyScript -PluginRoot $PluginRoot -TargetRoot $legacyRoot -Layout skills)
-    Assert-True ($legacyReceipt -contains 'INSTALLATION VERIFIED: 19/19') 'The upgraded legacy target did not reach 19/19.'
+    Assert-True ($legacyReceipt -contains 'INSTALLATION VERIFIED: 20/20') 'The upgraded legacy target did not reach 20/20.'
+    Assert-True (Test-Path -LiteralPath (Join-Path $legacyRoot 'reflect-on-vibe-code-growth\SKILL.md') -PathType Leaf) 'The upgrade did not create the new mirror-growth Skill.'
     Assert-True (Test-Path -LiteralPath (Join-Path $legacyRoot 'unrelated-user-skill') -PathType Container) 'The installer removed an unrelated user skill.'
 
     $cleanRoot = Join-Path $testRoot 'clean\skills'
     & $installScript -PluginRoot $PluginRoot -TargetSkillRoot $cleanRoot -Confirm:$false | Out-Null
     $cleanReceipt = @(& $verifyScript -PluginRoot $PluginRoot -TargetRoot $cleanRoot -Layout skills)
-    Assert-True ($cleanReceipt -contains 'INSTALLATION VERIFIED: 19/19') 'A clean install did not reach 19/19.'
+    Assert-True ($cleanReceipt -contains 'INSTALLATION VERIFIED: 20/20') 'A clean install did not reach 20/20.'
 
     $frontDoorTarget = Join-Path $testRoot 'host-front-door\AGENTS.md'
     & $installScript -PluginRoot $PluginRoot -TargetSkillRoot $cleanRoot -AgentHost Codex -HostFrontDoorAction Install -TargetInstructionFile $frontDoorTarget -Confirm:$false | Out-Null
@@ -82,7 +83,7 @@ try {
     Assert-True $sourceTreeVerificationFailed 'The verifier must not let the source repository impersonate an installed target.'
 
     $sourceReceipt = @(& $verifyScript -PluginRoot $PluginRoot -TargetRoot $PluginRoot -Layout plugin -AllowSourceTree)
-    Assert-True ($sourceReceipt -contains 'INSTALLATION VERIFIED: 19/19') 'Maintainer source verification must require and honor AllowSourceTree.'
+    Assert-True ($sourceReceipt -contains 'INSTALLATION VERIFIED: 20/20') 'Maintainer source verification must require and honor AllowSourceTree.'
 
     $rollbackRoot = Join-Path $testRoot 'rollback\skills'
     New-Item -ItemType Directory -Path $rollbackRoot -Force | Out-Null
@@ -103,7 +104,7 @@ try {
     Assert-True $rollbackInstallFailed 'The installer must refuse a linked official skill directory.'
     Assert-True (Test-Path -LiteralPath $rollbackMarker -PathType Leaf) 'A failed install did not restore the previously replaced official skill.'
 
-    Write-Output 'Install gate tests passed: legacy gap rejected, 19/19 upgrade passed, clean install passed, Host Front Door install/receipt/idempotence passed, drift rejected, picker loss rejected, unsafe target rejected, source-tree impersonation rejected, linked-target rollback passed.'
+    Write-Output 'Install gate tests passed: legacy gap rejected, 20/20 upgrade passed, clean install passed, Host Front Door install/receipt/idempotence passed, drift rejected, picker loss rejected, unsafe target rejected, source-tree impersonation rejected, linked-target rollback passed.'
 } finally {
     $tempRoot = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath()).TrimEnd([char]92, [char]47)
     $resolvedTestRoot = [System.IO.Path]::GetFullPath($testRoot).TrimEnd([char]92, [char]47)

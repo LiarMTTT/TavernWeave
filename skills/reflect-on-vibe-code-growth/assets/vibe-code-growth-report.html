@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vibe Code 成长历程</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: rgb(255 255 255);
+      --surface: rgb(247 248 249);
+      --surface-2: rgb(255 255 255 / 96%);
+      --text: rgb(26 28 31);
+      --muted: rgb(26 28 31 / 56%);
+      --line: rgb(26 28 31 / 10%);
+      --input: rgb(26 28 31 / 14%);
+      --accent: rgb(51 156 255);
+      --accent-soft: rgb(229 242 255);
+      --accent-text: rgb(255 255 255);
+      --good: rgb(0 162 64);
+      --warn: rgb(226 85 7);
+      --bad: rgb(224 46 42);
+      --series-1: rgb(51 156 255);
+      --series-2: rgb(243 136 59);
+      --series-3: rgb(93 201 119);
+      --series-4: rgb(235 119 177);
+      --series-5: rgb(155 121 236);
+      --series-6: rgb(58 185 177);
+      --radius: 12.5px;
+      --radius-card: 20px;
+      --font-size-base: 14px;
+    }
+    @media (prefers-color-scheme: dark) {
+      html[data-theme="auto"] {
+        --bg: rgb(24 24 24);
+        --surface: rgb(36 36 36);
+        --surface-2: rgb(54 54 54 / 96%);
+        --text: rgb(255 255 255);
+        --muted: rgb(255 255 255 / 56%);
+        --line: rgb(255 255 255 / 10%);
+        --input: rgb(255 255 255 / 15%);
+        --accent: rgb(131 195 255);
+        --accent-soft: rgb(13 39 63);
+        --accent-text: rgb(13 13 13);
+        --good: rgb(64 201 119);
+        --warn: rgb(255 133 73);
+        --bad: rgb(255 103 100);
+        --series-1: rgb(51 156 255);
+        --series-2: rgb(245 154 86);
+        --series-3: rgb(116 213 139);
+        --series-4: rgb(240 143 192);
+        --series-5: rgb(170 145 239);
+        --series-6: rgb(90 203 194);
+      }
+    }
+    html[data-theme="dark"] {
+      --bg: rgb(24 24 24);
+      --surface: rgb(36 36 36);
+      --surface-2: rgb(54 54 54 / 96%);
+      --text: rgb(255 255 255);
+      --muted: rgb(255 255 255 / 56%);
+      --line: rgb(255 255 255 / 10%);
+      --input: rgb(255 255 255 / 15%);
+      --accent: rgb(131 195 255);
+      --accent-soft: rgb(13 39 63);
+      --accent-text: rgb(13 13 13);
+      --good: rgb(64 201 119);
+      --warn: rgb(255 133 73);
+      --bad: rgb(255 103 100);
+      --series-1: rgb(51 156 255);
+      --series-2: rgb(245 154 86);
+      --series-3: rgb(116 213 139);
+      --series-4: rgb(240 143 192);
+      --series-5: rgb(170 145 239);
+      --series-6: rgb(90 203 194);
+    }
+    html[data-theme="light"] { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: var(--font-size-base);
+      line-height: 1.5;
+    }
+    button { font: inherit; color: inherit; }
+    button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .shell { width: min(736px, calc(100% - 32px)); margin: 0 auto; padding: 16px 0 48px; }
+    .topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+    h1 { margin: 0; font-size: 1.714rem; line-height: 1.25; font-weight: 500; }
+    h2 { font-size: 1.429rem; }
+    h3 { font-size: 1.286rem; }
+    h2, h3 { line-height: 1.25; font-weight: 500; }
+    strong, th { font-weight: 500; }
+    .subtitle { margin: 4px 0 0; color: var(--muted); max-width: 680px; }
+    .actions, .chapter-nav, .legend { display: flex; gap: 8px; flex-wrap: wrap; }
+    .confidence-key { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; color: var(--muted); }
+    .legend-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; background: var(--text); }
+    .legend-dot.estimate { border-radius: 2px; background: var(--series-2); }
+    .legend-dot.evidence { border-radius: 0; transform: rotate(45deg); background: var(--series-3); }
+    .legend-dot.reported { background: var(--series-6); }
+    .report-tools { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; margin-top: 10px; }
+    .btn {
+      appearance: button;
+      display: inline-flex;
+      min-height: 28px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--input);
+      border-radius: var(--radius);
+      background: var(--surface-2);
+      padding: 0 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:hover { background: color-mix(in srgb, var(--text) 6%, var(--surface-2)); }
+    .btn.primary { background: var(--text); color: var(--bg); border-color: transparent; }
+    .chapter-nav { margin: 14px 0 18px; padding: 8px 0 14px; border-block: 1px solid var(--line); }
+    .chapter-nav .btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+    .chapter { min-height: 0; }
+    .chapter[hidden] { display: none; }
+    .chapter-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+    .chapter-head h2 { margin: 0 0 14px; }
+    .chapter-kicker, .muted { color: var(--muted); }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .metric-grid { display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card {
+      border: 0;
+      border-radius: var(--radius-card);
+      background: var(--surface);
+      padding: 12px;
+      overflow: hidden;
+      overflow-wrap: break-word;
+    }
+    .card h3 { margin: 0 0 10px; }
+    .metric-label { color: var(--muted); }
+    .metric-value { display: block; font-size: 1.286rem; font-weight: 500; line-height: 1.25; margin-top: 3px; }
+    .tag { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; font-size: .82rem; color: var(--muted); }
+    .legend { margin-bottom: 14px; color: var(--muted); font-size: .9rem; }
+    .legend span::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 6px; background: var(--accent); }
+    .legend .estimate::before { border-radius: 50%; background: var(--warn); }
+    .legend .reported::before { transform: rotate(45deg); background: var(--good); }
+    .legend .unknown::before { background: var(--muted); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 0; }
+    th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 500; }
+    .overview-table { margin-top: 14px; }
+    .overview-table table, .dimension-table table, .token-table table, .project-table table { min-width: 0; }
+    .network-layout { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: stretch; }
+    .network-figure { min-width: 0; }
+    .network-figure h3 { margin: 0 0 4px; }
+    .network-subtitle { color: var(--muted); margin: 0 0 8px; }
+    #capability-network { display: block; width: 100%; min-width: 0; overflow: visible; }
+    .network-edge { stroke: var(--line); stroke-width: 1.2; fill: none; }
+    .network-edge.cross { stroke-dasharray: 4 5; opacity: .72; }
+    .network-edge.active { stroke: var(--accent); stroke-width: 2; }
+    .network-node {
+      width: 100%;
+      height: 100%;
+      padding: 4px 6px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--text);
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+    }
+    .network-node .node-score { color: var(--muted); font-weight: 500; }
+    .network-node.core { border-radius: 50%; background: color-mix(in srgb, var(--accent) 18%, var(--bg)); border-color: var(--accent); }
+    .network-node.cluster { font-weight: 500; }
+    .network-node.series-1 { background: color-mix(in srgb, var(--series-1) 16%, var(--bg)); }
+    .network-node.series-2 { background: color-mix(in srgb, var(--series-2) 16%, var(--bg)); }
+    .network-node.series-3 { background: color-mix(in srgb, var(--series-3) 16%, var(--bg)); }
+    .network-node.series-4 { background: color-mix(in srgb, var(--series-4) 16%, var(--bg)); }
+    .network-node.series-5 { background: color-mix(in srgb, var(--series-5) 16%, var(--bg)); }
+    .network-node.series-6 { background: color-mix(in srgb, var(--series-6) 16%, var(--bg)); }
+    .network-node[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent); }
+    .network-detail { min-width: 0; border-top: 1px solid var(--line); padding-top: 14px; }
+    .network-detail h3 { margin-top: 0; }
+    .cluster-key { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 8px; color: var(--muted); }
+    .cluster-key span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; background: var(--cluster-color); }
+    .detail-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .detail-list strong { display: block; margin-bottom: 3px; }
+    .dimension-list { display: grid; gap: 12px; }
+    .dimension-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dimension-row { border-left: 3px solid var(--accent); padding: 12px 14px; background: color-mix(in srgb, var(--accent) 6%, transparent); border-radius: 0; }
+    .score { color: var(--accent); font-weight: 500; }
+    .flow-map { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 14px 0 20px; }
+    .flow-step { position: relative; padding: 12px; border-top: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 9%, transparent); }
+    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -11px; top: 50%; color: var(--muted); transform: translateY(-50%); }
+    .dimension-card { border-left: 0; }
+    .dimension-card h3 { display: flex; justify-content: space-between; gap: 12px; }
+    .score-track { height: 8px; background: color-mix(in srgb, var(--text) 9%, transparent); overflow: hidden; margin: 10px 0 14px; }
+    .score-fill { display: block; height: 100%; background: var(--accent); }
+    .evidence-line { color: var(--muted); }
+    .narrative-sections { display: grid; gap: 0; margin-top: 18px; }
+    .narrative-section { border-top: 1px solid var(--line); padding: 15px 0; }
+    .narrative-section h3 { margin: 0 0 8px; }
+    .narrative-section p { margin: 7px 0; }
+    .comparison-list { display: grid; gap: 8px; }
+    .comparison-row { display: grid; grid-template-columns: minmax(160px, .8fr) minmax(110px, .35fr) minmax(220px, 1.2fr); gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .protocol-list { display: grid; gap: 10px; }
+    .protocol-item { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
+    .protocol-number { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+    .timeline { position: relative; margin-left: 8px; }
+    .timeline::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+    .timeline-row { position: relative; padding-left: 34px; margin-bottom: 20px; }
+    .timeline-row::before { content: ""; position: absolute; left: 2px; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: var(--timeline-color, var(--accent)); border: 3px solid var(--bg); }
+    .timeline-row h3 { margin: 0 0 3px; }
+    .timeline-row p { margin: 0 0 4px; }
+    .decision-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px; }
+    .verdict-line { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .verdict-line:last-child { border-bottom: 0; }
+    .stage-grid { display: grid; grid-template-columns: 1.15fr repeat(6, minmax(92px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .stage-grid > div { background: var(--surface); padding: 10px; min-height: 58px; }
+    .stage-head { color: var(--muted); font-size: .83rem; }
+    .status-complete { color: var(--good); }
+    .status-partial, .status-blocked { color: var(--warn); }
+    .status-unverifiable, .status-not-evaluated { color: var(--muted); }
+    .notice { border-left: 4px solid var(--warn); padding: 14px 16px; background: color-mix(in srgb, var(--warn) 9%, var(--surface)); }
+    .empty { display: grid; place-items: center; min-height: 200px; color: var(--muted); text-align: center; }
+    dialog { width: min(880px, calc(100% - 28px)); max-height: min(86vh, 900px); overflow: auto; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); color: var(--text); padding: 24px; }
+    dialog::backdrop { background: rgba(0, 0, 0, .5); }
+    code { word-break: break-word; }
+    .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .text-preview { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--surface-2); padding: 16px; border: 1px solid var(--line); border-radius: 10px; max-height: 56vh; overflow: auto; }
+    .copy-status { min-height: 1.5em; color: var(--muted); }
+    footer { margin-top: 32px; color: var(--muted); font-size: .88rem; }
+    .history-strip { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .decision-grid { grid-template-columns: 1fr; }
+      .stage-grid { grid-template-columns: 1fr 1fr; }
+      .stage-grid .stage-head { display: none; }
+    }
+    @media (max-width: 736px) {
+      .shell { width: min(100% - 24px, 736px); padding-top: 18px; }
+      .grid.two { grid-template-columns: 1fr; }
+      .actions { width: 100%; }
+      .actions .btn { flex: 1 1 140px; }
+      .report-tools { justify-content: flex-start; }
+      .chapter-nav { flex-wrap: wrap; overflow: visible; padding-bottom: 12px; }
+      .chapter-nav .btn { flex: 1 1 132px; }
+      .chapter-head { display: block; }
+      .flow-map { grid-template-columns: 1fr; gap: 8px; }
+      .flow-step:not(:last-child)::after { content: "↓"; right: 14px; top: auto; bottom: -16px; transform: none; }
+      .comparison-row { grid-template-columns: 1fr; gap: 3px; }
+    }
+    @media (max-width: 480px) {
+      .shell { width: min(100% - 18px, 360px); }
+      .card { padding: 12px; }
+      .stage-grid { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .dimension-list, .grid { grid-template-columns: 1fr; }
+      .responsive-table { min-width: 620px; }
+    }
+    @media print {
+      body { background: white; color: black; }
+      .actions, .chapter-nav { display: none; }
+      .chapter[hidden] { display: block; }
+      .chapter { break-after: page; }
+      .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell" id="mirror-report">
+    <header class="topbar">
+      <div>
+        <h1>Vibe Code 成长历程</h1>
+        <p class="subtitle" id="scope-line">等待载入当前证据窗口。历史分数是当时证据，不是能力上限。</p>
+      </div>
+      <div class="confidence-key" aria-label="数据口径图例">
+        <span><i class="legend-dot"></i>精确统计</span>
+        <span><i class="legend-dot reported"></i>用户自报</span>
+        <span><i class="legend-dot estimate"></i>阶段估算</span>
+        <span><i class="legend-dot evidence"></i>证据评分</span>
+      </div>
+    </header>
+
+    <div class="report-tools" aria-label="报告操作">
+      <button class="btn" type="button" id="theme-toggle">主题：自动</button>
+      <a class="btn" id="export-json" href="#" download>导出便携 JSON</a>
+      <a class="btn" id="export-html" href="#" download>导出便携 HTML</a>
+      <button class="btn primary" type="button" id="open-text-assessment">完整文字评估</button>
+      <button class="btn" type="button" id="local-history">本地履历说明</button>
+    </div>
+
+    <nav class="chapter-nav" aria-label="报告章节">
+      <button class="btn" type="button" data-chapter="overview" aria-pressed="true">01 精简总表</button>
+      <button class="btn" type="button" data-chapter="network" aria-pressed="false">02 能力网络</button>
+      <button class="btn" type="button" data-chapter="core" aria-pressed="false">03 四项核心</button>
+      <button class="btn" type="button" data-chapter="tokens" aria-pressed="false">04 Token 经济</button>
+      <button class="btn" type="button" data-chapter="projects" aria-pressed="false">05 项目达成</button>
+      <button class="btn" type="button" data-chapter="timeline" aria-pressed="false">06 历程</button>
+      <button class="btn" type="button" data-chapter="verdict" aria-pressed="false">07 结论</button>
+    </nav>
+
+    <section class="chapter" data-panel="overview" aria-labelledby="overview-title">
+      <div class="chapter-head"><h2 id="overview-title">第一章｜精简总表</h2><span class="chapter-kicker">结论先行</span></div>
+      <div class="metric-grid" id="summary-grid"></div>
+      <div class="table-wrap overview-table">
+        <table class="responsive-table" aria-label="精简总表">
+          <thead><tr><th>观察面</th><th>当前结果</th><th>判断</th></tr></thead>
+          <tbody id="overview-table-body"></tbody>
+        </table>
+      </div>
+      <div class="history-strip"><h3>历史轨迹与可比变化</h3><div id="comparison-summary"></div></div>
+      <div class="network-layout" style="margin-top:16px">
+        <div class="network-figure">
+          <h3>能力网状图</h3>
+          <p class="network-subtitle">核心 → 能力簇 → 当前维度。每一个节点都是可操作按钮；点击或用键盘聚焦后查看完整证据。</p>
+          <svg id="capability-network" role="img" aria-label="当前 Vibe Code 能力网络"></svg>
+          <div class="cluster-key" id="cluster-key" aria-label="能力簇图例"></div>
+        </div>
+        <aside class="network-detail" aria-live="polite"><h3 id="detail-title">选择一个能力维度</h3><ul class="detail-list" id="detail-list"></ul></aside>
+      </div>
+    </section>
+
+    <section class="chapter" data-panel="network" aria-labelledby="network-title" hidden>
+      <div class="chapter-head"><h2 id="network-title">第二章｜能力网络详解</h2><span class="chapter-kicker">能力如何转化为结果</span></div>
+      <div class="flow-map" id="capability-flow" aria-label="核心能力转化链"></div>
+      <div class="table-wrap dimension-table">
+        <table class="responsive-table" aria-label="完整能力维度评分与作用">
+          <thead><tr><th>能力簇</th><th>维度</th><th>评分</th><th>置信度/方法</th><th>当前判断</th><th>主要限制</th></tr></thead>
+          <tbody id="dimension-table-body"></tbody>
+        </table>
+      </div>
+      <div class="narrative-sections" id="network-narrative"></div>
+    </section>
+
+    <section class="chapter" data-panel="core" aria-labelledby="core-title" hidden>
+      <div class="chapter-head"><h2 id="core-title">第三章｜四项核心</h2><span class="chapter-kicker">决断、纠错、学习、同步</span></div>
+      <div class="dimension-list" id="core-list"></div>
+    </section>
+
+    <section class="chapter" data-panel="tokens" aria-labelledby="tokens-title" hidden>
+      <div class="chapter-head"><h2 id="tokens-title">第四章｜Token 经济</h2><span class="chapter-kicker">口径分离，不伪造合计</span></div>
+      <p class="notice">Codex、Chat、用户自报与估算必须各自保留口径。没有统一精确 Chat Token 导出时，不得用可见字符换算，也不得与 Codex 总量相加。</p>
+      <div class="metric-grid" id="token-grid"></div>
+      <div class="table-wrap token-table">
+        <table class="responsive-table" aria-label="Token 来源、口径和依据">
+          <thead><tr><th>系统</th><th>指标</th><th>数值</th><th>证据类型</th><th>依据</th><th>解释</th></tr></thead>
+          <tbody id="token-table-body"></tbody>
+        </table>
+      </div>
+      <div class="narrative-sections" id="token-narrative"></div>
+    </section>
+
+    <section class="chapter" data-panel="projects" aria-labelledby="projects-title" hidden>
+      <div class="chapter-head"><h2 id="projects-title">第五章｜项目达成</h2><span class="chapter-kicker">六道完成门分别核验</span></div>
+      <p class="notice">定义、实现、自动验证、构建/封装、人工验收、发布/在线回读是六个独立事实；本章不把前置绿灯冒充后续完成。</p>
+      <div class="metric-grid" id="project-summary-grid"></div>
+      <div class="table-wrap project-table">
+        <table class="responsive-table" aria-label="项目完成门总表">
+          <thead><tr><th>项目</th><th>定义</th><th>实现</th><th>自动验证</th><th>构建/封装</th><th>人工验收</th><th>发布/回读</th></tr></thead>
+          <tbody id="project-table-body"></tbody>
+        </table>
+      </div>
+      <div class="narrative-sections" id="project-narrative"></div>
+    </section>
+
+    <section class="chapter" data-panel="timeline" aria-labelledby="timeline-title" hidden>
+      <div class="chapter-head"><h2 id="timeline-title">第六章｜Vibe Code 历程</h2><span class="chapter-kicker">证据窗口内的阶段变化</span></div>
+      <div class="timeline" id="timeline-list"></div>
+      <div class="narrative-sections" id="timeline-narrative"></div>
+    </section>
+
+    <section class="chapter" data-panel="verdict" aria-labelledby="verdict-title" hidden>
+      <div class="chapter-head"><h2 id="verdict-title">第七章｜结论</h2><span class="chapter-kicker">边界与下一次校准</span></div>
+      <div class="decision-grid">
+        <div id="verdict-grid"></div>
+        <div class="card">
+          <h3>下一阶段行动协议</h3>
+          <div class="protocol-list" id="recommendation-list"></div>
+        </div>
+      </div>
+      <div class="narrative-sections" id="verdict-narrative"></div>
+    </section>
+
+    <footer>便携导出不是权威履历。权威节点由 TavernWeave 的确定性脚本保存并校验哈希、索引与前序关系。</footer>
+  </main>
+
+  <dialog id="history-dialog" aria-labelledby="history-title">
+    <h2 id="history-title">保存为权威本地履历</h2>
+    <p>浏览器没有权限直接改写本地履历链。请让 Codex 使用 <code>save-mirror-record.mjs</code> 保存当前结构化记录；脚本会拒绝覆盖旧节点，并在损坏或断链时停止。</p>
+    <p class="muted">“导出便携 HTML / JSON”只适合携带和查看，不能替代 record/report 哈希、index.json 与 latest.json 指针。</p>
+    <div class="dialog-actions"><button class="btn primary" type="button" id="close-dialog">明白</button></div>
+  </dialog>
+
+  <dialog id="text-dialog" aria-labelledby="text-title">
+    <h2 id="text-title">Vibe Code 成长历程｜单份文字评估表单</h2>
+    <p class="muted">这份 Markdown 与当前画板来自同一结构化记录，可单独阅读、复制和保存；它不是卡片摘要。</p>
+    <pre class="text-preview" id="text-assessment-preview"></pre>
+    <p class="copy-status" id="copy-status" aria-live="polite"></p>
+    <div class="dialog-actions">
+      <button class="btn" type="button" id="copy-text-assessment">复制全文</button>
+      <a class="btn" id="export-text" href="#" download>导出 Markdown</a>
+      <button class="btn primary" type="button" id="close-text-dialog">关闭</button>
+    </div>
+  </dialog>
+
+  <script id="mirror-record-data" type="application/json">__MIRROR_RECORD_JSON__</script>
+  <script>
+    (() => {
+      "use strict";
+      const root = document.getElementById("mirror-report");
+      const raw = document.getElementById("mirror-record-data").textContent.trim();
+      const emptyRecord = {
+        title: "Vibe Code 成长历程",
+        evidenceWindow: { start: "未载入", end: "未载入", coverageNote: "请由 Skill 写入当前记录。" },
+        evidence: [], dimensions: [], tokenEconomics: { sources: [] },
+        projectPortfolio: { projects: [] }, timeline: [], verdict: {}
+      };
+      let record = emptyRecord;
+      if (raw !== "__" + "MIRROR_RECORD_JSON__") {
+        try { record = JSON.parse(raw); } catch (error) { console.error("Invalid mirror record data", error); }
+      }
+
+      const text = (value, fallback = "未核验") => value === undefined || value === null || value === "" ? fallback : String(value);
+      const score = (dimension) => Number.isFinite(dimension?.score) ? String(dimension.score) : "不可评分";
+      const byId = new Map((record.dimensions || []).map((item) => [item.dimensionId, item]));
+      const evidenceById = new Map((record.evidence || []).map((item) => [item.evidenceId, item]));
+      const make = (tag, className, content) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (content !== undefined) node.textContent = content;
+        return node;
+      };
+      const measurementLabels = { exact: "精确统计", "user-reported": "用户自报", "phase-estimate": "阶段估算", "behavioral-evidence-score": "行为证据评分", unverifiable: "不可核验" };
+      const confidenceLabels = { high: "高", medium: "中", low: "低", unverifiable: "不可核验" };
+      const statusLabels = { complete: "完成", partial: "部分完成", blocked: "受阻", "not-evaluated": "未核验", "not-applicable": "不适用", unverifiable: "不可核验" };
+      const narrativeSections = record.narrativeAssessment?.sections || [];
+      const renderNarratives = (targetId, predicate) => {
+        const target = document.getElementById(targetId);
+        narrativeSections.filter(predicate).forEach((section) => {
+          const article = make("article", "narrative-section");
+          article.append(make("h3", "", text(section.title)), make("p", "", text(section.summary)));
+          (section.paragraphs || []).forEach((paragraph) => article.append(make("p", "", text(paragraph))));
+          if ((section.evidenceRefs || []).length) article.append(make("p", "muted", `证据索引：${section.evidenceRefs.map((id) => evidenceById.get(id)?.label || id).join("、")}`));
+          target.append(article);
+        });
+      };
+
+      document.getElementById("scope-line").textContent = `观察窗口：${text(record.evidenceWindow?.start)}—${text(record.evidenceWindow?.end)}｜量表：${text(record.rubricVersion)}｜${text(record.evidenceWindow?.coverageNote, "历史分数只保留当时口径。")}`;
+
+      const summaryGrid = document.getElementById("summary-grid");
+      const summaries = Array.isArray(record.summary) && record.summary.length ? record.summary : [
+        { label: "当前维度", value: record.dimensions?.length ?? 0, note: "每次从当前证据完整重评" },
+        { label: "证据条目", value: record.evidence?.length ?? 0, note: "精确、自报、估算与不可核验分列" },
+        { label: "项目样本", value: record.projectPortfolio?.projects?.length ?? 0, note: "六道完成门独立核验" }
+      ];
+      summaries.forEach((item) => {
+        const card = make("article", "card");
+        card.append(make("span", "metric-label", text(item.label)), make("strong", "metric-value", text(item.value)), make("p", "muted", text(item.note, "")));
+        summaryGrid.append(card);
+      });
+
+      const sortedDimensions = [...(record.dimensions || [])].filter((item) => Number.isFinite(item.score)).sort((left, right) => right.score - left.score);
+      const weakestDimensions = [...sortedDimensions].reverse();
+      const evidenceCounts = (record.evidence || []).reduce((counts, item) => { counts[item.measurementType] = (counts[item.measurementType] || 0) + 1; return counts; }, {});
+      const overviewRows = [
+        ["能力形态", text(record.narrativeAssessment?.executiveSummary, record.verdict?.current), "从当前证据重评，不把历史分数当能力上限"],
+        ["最强能力", sortedDimensions.slice(0, 4).map((item) => `${item.label} ${score(item)}`).join("｜"), "高分必须同时展示证据、限制和下一步"],
+        ["主要瓶颈", weakestDimensions.slice(0, 3).map((item) => `${item.label} ${score(item)}`).join("｜"), text(record.verdict?.limits)],
+        ["证据构成", Object.entries(evidenceCounts).map(([type, count]) => `${measurementLabels[type] || type} ${count}`).join("｜"), "不同证据类型不混成一个精确总量"],
+        ["项目样本", `${record.projectPortfolio?.projects?.length || 0} 个项目；每个项目核验六道门`, "前置门通过不等于人工验收或发布完成"]
+      ];
+      const overviewBody = document.getElementById("overview-table-body");
+      overviewRows.forEach(([label, result, judgment]) => {
+        const row = make("tr");
+        row.append(make("td", "", label), make("td", "", result), make("td", "", judgment));
+        overviewBody.append(row);
+      });
+
+      const comparison = document.getElementById("comparison-summary");
+      if (!record.comparison) comparison.append(make("p", "muted", "首个履历节点，没有前序差值。"));
+      else {
+        const list = make("div", "comparison-list");
+        (record.comparison.dimensionMappings || []).forEach((mapping) => {
+          const before = byId.get(mapping.previousDimensionId)?.label || mapping.previousDimensionId;
+          const after = mapping.currentDimensionId ? (byId.get(mapping.currentDimensionId)?.label || mapping.currentDimensionId) : "已退役";
+          const row = make("div", "comparison-row");
+          row.append(make("strong", "", `${before} → ${after}`), make("span", "score", text(mapping.comparisonLabel)), make("span", "muted", text(mapping.note)));
+          list.append(row);
+        });
+        (record.comparison.newDimensionIds || []).forEach((id) => list.append(make("div", "comparison-row", `新维度：${byId.get(id)?.label || id}`)));
+        comparison.append(list);
+      }
+
+      const dimensions = record.dimensions || [];
+      const clusterOrder = ["产品决策", "驾驶校准", "学习迁移", "交付质量", "经济耐力", "思考创新"];
+      const clusterSeries = new Map(clusterOrder.map((label, index) => [label, index + 1]));
+      const groupedDimensions = new Map();
+      dimensions.forEach((dimension) => {
+        const cluster = text(dimension.cluster, "其他能力");
+        if (!groupedDimensions.has(cluster)) groupedDimensions.set(cluster, []);
+        groupedDimensions.get(cluster).push(dimension);
+        if (!clusterSeries.has(cluster)) clusterSeries.set(cluster, (clusterSeries.size % 6) + 1);
+      });
+      const orderedClusterLabels = [
+        ...clusterOrder.filter((label) => groupedDimensions.has(label)),
+        ...[...groupedDimensions.keys()].filter((label) => !clusterOrder.includes(label)).sort()
+      ];
+      const clusters = orderedClusterLabels.map((label) => ({
+        id: `cluster-${label}`,
+        label,
+        series: clusterSeries.get(label),
+        leaves: groupedDimensions.get(label)
+      }));
+
+      const uniqueText = (values) => [...new Set(values.map((value) => text(value, "")).filter(Boolean))];
+      const detailById = new Map();
+      dimensions.forEach((dimension) => {
+        detailById.set(dimension.dimensionId, {
+          id: dimension.dimensionId,
+          title: dimension.label,
+          score: score(dimension),
+          cluster: text(dimension.cluster),
+          confidence: `${text(confidenceLabels[dimension.confidence] || dimension.confidence)} / ${text(dimension.scoringMethod)}`,
+          judgment: text(dimension.judgment),
+          evidence: uniqueText((dimension.evidenceRefs || []).map((id) => evidenceById.get(id)?.summary || id)).join("；"),
+          risk: text(dimension.limits),
+          next: text(dimension.nextStep)
+        });
+      });
+      clusters.forEach((cluster) => {
+        const numeric = cluster.leaves.filter((dimension) => Number.isFinite(dimension.score));
+        const average = numeric.length ? (numeric.reduce((total, dimension) => total + dimension.score, 0) / numeric.length).toFixed(1) : "不可评分";
+        const evidenceRefs = uniqueText(cluster.leaves.flatMap((dimension) => dimension.evidenceRefs || []));
+        detailById.set(cluster.id, {
+          id: cluster.id,
+          title: `${cluster.label}能力簇`,
+          score: average,
+          cluster: "能力簇",
+          confidence: "由当前簇内维度综合，不作为独立历史分数",
+          judgment: `本簇包含 ${cluster.leaves.map((dimension) => dimension.label).join("、")}。${cluster.leaves[0]?.judgment || ""}`,
+          evidence: uniqueText(evidenceRefs.map((id) => evidenceById.get(id)?.summary || id)).join("；"),
+          risk: uniqueText(cluster.leaves.map((dimension) => dimension.limits)).join("；"),
+          next: uniqueText(cluster.leaves.map((dimension) => dimension.nextStep)).join("；")
+        });
+      });
+      detailById.set("core", {
+        id: "core",
+        title: "当前能力网络",
+        score: `${dimensions.length} 维`,
+        cluster: "完整当前证据重评",
+        confidence: text(record.rubricVersion),
+        judgment: text(record.narrativeAssessment?.executiveSummary, record.verdict?.current),
+        evidence: `${record.evidence?.length || 0} 条结构化证据；${clusters.length} 个能力簇；历史节点不构成本次评分锚点。`,
+        risk: text(record.verdict?.limits),
+        next: text(record.verdict?.next)
+      });
+
+      let selectedNode = dimensions[0]?.dimensionId || "core";
+      const svg = document.getElementById("capability-network");
+      const svgNs = "http://www.w3.org/2000/svg";
+      const svgElement = (name, attributes = {}) => {
+        const element = document.createElementNS(svgNs, name);
+        Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, String(value)));
+        return element;
+      };
+      const nodeSize = (type, narrow, width) => {
+        if (type === "core") return narrow ? { w: 126, h: 70 } : { w: 136, h: 76 };
+        if (type === "cluster") return narrow ? { w: 112, h: 46 } : { w: 104, h: 48 };
+        return narrow ? { w: Math.min(138, (width - 38) / 2), h: 50 } : { w: 94, h: 52 };
+      };
+      const addEdge = (group, from, to, className = "") => {
+        group.append(svgElement("line", {
+          x1: from.x, y1: from.y, x2: to.x, y2: to.y,
+          class: `network-edge ${className}`.trim(),
+          "data-from": from.id, "data-to": to.id
+        }));
+      };
+      const addNode = (group, position, id, label, value, type, series) => {
+        const size = nodeSize(type, position.narrow, position.canvasWidth);
+        const foreign = svgElement("foreignObject", {
+          x: position.x - size.w / 2,
+          y: position.y - size.h / 2,
+          width: size.w,
+          height: size.h
+        });
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `network-node ${type} series-${series || 1}`;
+        button.dataset.nodeId = id;
+        button.setAttribute("aria-pressed", String(selectedNode === id));
+        button.setAttribute("aria-label", `${label}，${value}`);
+        button.append(make("span", "", label), make("span", "node-score", value));
+        button.addEventListener("click", () => selectCapability(id));
+        foreign.append(button);
+        group.append(foreign);
+      };
+      const selectCapability = (id, redraw = true) => {
+        const detail = detailById.get(id);
+        if (!detail) return;
+        selectedNode = id;
+        document.getElementById("detail-title").textContent = `${detail.title} · ${detail.score}`;
+        const list = document.getElementById("detail-list");
+        list.replaceChildren();
+        [
+          ["判断", detail.judgment],
+          ["证据", detail.evidence],
+          ["限制", detail.risk],
+          ["下一步", detail.next],
+          ["置信度 / 方法", `${detail.cluster}｜${detail.confidence}`]
+        ].forEach(([label, value]) => {
+          const item = make("li");
+          item.append(make("strong", "", label), make("span", "", text(value)));
+          list.append(item);
+        });
+        document.querySelectorAll(".network-node").forEach((node) => node.setAttribute("aria-pressed", String(node.dataset.nodeId === id)));
+        if (redraw) drawNetwork();
+      };
+
+      function drawNetwork() {
+        if (!svg || svg.closest("[data-panel]")?.hidden) return;
+        const width = Math.max(300, Math.round(svg.getBoundingClientRect().width || svg.parentElement.getBoundingClientRect().width || 700));
+        const narrow = width < 520;
+        const positions = {};
+        let height;
+        if (narrow) {
+          height = 130 + clusters.reduce((total, cluster) => total + 86 + Math.ceil(cluster.leaves.length / 2) * 58, 0);
+          positions.core = { id: "core", x: width / 2, y: 48, narrow, canvasWidth: width };
+          let cursorY = 140;
+          clusters.forEach((cluster) => {
+            positions[cluster.id] = { id: cluster.id, x: width / 2, y: cursorY, narrow, canvasWidth: width };
+            cluster.leaves.forEach((dimension, index) => {
+              positions[dimension.dimensionId] = {
+                id: dimension.dimensionId,
+                x: index % 2 === 0 ? width * .27 : width * .73,
+                y: cursorY + 64 + Math.floor(index / 2) * 58,
+                narrow,
+                canvasWidth: width
+              };
+            });
+            cursorY += 88 + Math.ceil(cluster.leaves.length / 2) * 58;
+          });
+        } else {
+          height = Math.max(690, 520 + dimensions.length * 10);
+          const center = { x: width / 2, y: height / 2 };
+          positions.core = { id: "core", x: center.x, y: center.y, narrow, canvasWidth: width };
+          const slot = 360 / Math.max(1, dimensions.length);
+          let leafIndex = 0;
+          clusters.forEach((cluster) => {
+            const leafAngles = cluster.leaves.map((dimension) => {
+              const angle = -90 + leafIndex * slot;
+              leafIndex += 1;
+              const radians = angle * Math.PI / 180;
+              positions[dimension.dimensionId] = {
+                id: dimension.dimensionId,
+                x: center.x + width * .43 * Math.cos(radians),
+                y: center.y + height * .41 * Math.sin(radians),
+                narrow,
+                canvasWidth: width
+              };
+              return radians;
+            });
+            const vectorX = leafAngles.reduce((total, angle) => total + Math.cos(angle), 0);
+            const vectorY = leafAngles.reduce((total, angle) => total + Math.sin(angle), 0);
+            const clusterAngle = Math.atan2(vectorY, vectorX);
+            positions[cluster.id] = {
+              id: cluster.id,
+              x: center.x + width * .22 * Math.cos(clusterAngle),
+              y: center.y + height * .21 * Math.sin(clusterAngle),
+              narrow,
+              canvasWidth: width
+            };
+          });
+        }
+
+        svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+        svg.setAttribute("height", String(height));
+        svg.style.height = `${height}px`;
+        svg.replaceChildren();
+        if (!dimensions.length) {
+          const label = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "currentColor" });
+          label.textContent = "等待载入当前能力网络";
+          svg.append(label);
+          return;
+        }
+
+        const edgeGroup = svgElement("g", { "aria-hidden": "true" });
+        const nodeGroup = svgElement("g");
+        clusters.forEach((cluster) => {
+          addEdge(edgeGroup, positions.core, positions[cluster.id], selectedNode === cluster.id ? "active" : "");
+          cluster.leaves.forEach((dimension) => addEdge(
+            edgeGroup,
+            positions[cluster.id],
+            positions[dimension.dimensionId],
+            selectedNode === dimension.dimensionId ? "active" : ""
+          ));
+        });
+        svg.append(edgeGroup, nodeGroup);
+        addNode(nodeGroup, positions.core, "core", "当前能力网", `${dimensions.length} 维`, "core", 1);
+        clusters.forEach((cluster) => {
+          addNode(nodeGroup, positions[cluster.id], cluster.id, cluster.label, "能力簇", "cluster", cluster.series);
+          cluster.leaves.forEach((dimension) => addNode(
+            nodeGroup,
+            positions[dimension.dimensionId],
+            dimension.dimensionId,
+            dimension.label,
+            score(dimension),
+            "leaf",
+            cluster.series
+          ));
+        });
+      }
+
+      const clusterKey = document.getElementById("cluster-key");
+      clusters.forEach((cluster) => {
+        const item = make("span", "", cluster.label);
+        item.style.setProperty("--cluster-color", `var(--series-${cluster.series})`);
+        clusterKey.append(item);
+      });
+      selectCapability(selectedNode, false);
+      new ResizeObserver(drawNetwork).observe(document.querySelector(".network-figure"));
+
+      const flow = document.getElementById("capability-flow");
+      const flowIds = ["learning-speed", "cross-domain-transfer", "correction", "decisiveness", "acceptance-evidence"];
+      flowIds.map((id) => byId.get(id)).filter(Boolean).forEach((dimension) => {
+        const step = make("div", "flow-step");
+        step.append(make("strong", "", `${dimension.label} ${score(dimension)}`), make("div", "muted", text(dimension.judgment)));
+        flow.append(step);
+      });
+      if (!flow.children.length) flow.append(make("div", "empty", "当前记录尚未形成可核验的能力转化链。"));
+
+      const dimensionTable = document.getElementById("dimension-table-body");
+      (record.dimensions || []).forEach((dimension) => {
+        const row = make("tr");
+        row.append(
+          make("td", "", text(dimension.cluster)),
+          make("td", "", text(dimension.label)),
+          make("td", "score", score(dimension)),
+          make("td", "", `${text(confidenceLabels[dimension.confidence] || dimension.confidence)} / ${text(dimension.scoringMethod)}`),
+          make("td", "", text(dimension.judgment)),
+          make("td", "", text(dimension.limits))
+        );
+        dimensionTable.append(row);
+      });
+      renderNarratives("network-narrative", (section) => !["token-economy", "project-portfolio", "growth-timeline", "final-verdict"].includes(section.sectionId));
+
+      const coreIds = record.coreDimensionIds || ["decisiveness", "correction", "learning-speed", "driver-sync"];
+      const coreList = document.getElementById("core-list");
+      coreIds.map((id) => byId.get(id)).filter(Boolean).forEach((dimension) => {
+        const row = make("article", "card dimension-card");
+        const heading = make("h3");
+        heading.append(make("span", "", dimension.label), make("span", "score", score(dimension)));
+        const track = make("div", "score-track");
+        const fill = make("span", "score-fill");
+        const scale = dimension.scoreScale || record.scoringMethod?.scoreScale || { min: 0, max: 10 };
+        const percent = Number.isFinite(dimension.score) ? Math.max(0, Math.min(100, ((dimension.score - scale.min) / (scale.max - scale.min)) * 100)) : 0;
+        fill.style.width = `${percent}%`;
+        track.append(fill);
+        row.append(
+          heading,
+          make("p", "", text(dimension.judgment)),
+          track,
+          make("p", "evidence-line", `证据：${(dimension.evidenceRefs || []).map((id) => evidenceById.get(id)?.summary || id).join("；")}`),
+          make("p", "", `限制：${text(dimension.limits)}`),
+          make("p", "", `下一步：${text(dimension.nextStep)}`),
+          make("p", "muted", `置信度：${text(confidenceLabels[dimension.confidence] || dimension.confidence)}｜方法：${text(dimension.scoringMethod)}`)
+        );
+        coreList.append(row);
+      });
+      if (!coreList.children.length) coreList.append(make("div", "empty", "当前记录尚未声明四项核心维度。"));
+
+      const tokenGrid = document.getElementById("token-grid");
+      (record.tokenEconomics?.sources || []).forEach((source) => {
+        const card = make("article", "card");
+        card.append(make("span", "tag", measurementLabels[source.measurementType] || source.measurementType), make("h3", "", `${text(source.system)} · ${text(source.metric)}`), make("strong", "metric-value", `${text(source.value)} ${text(source.unit, "")}`), make("p", "muted", text(source.basis)), make("p", "", text(source.note, "")));
+        tokenGrid.append(card);
+      });
+      if (!tokenGrid.children.length) tokenGrid.append(make("div", "empty card", "没有可核验的 Token 口径。"));
+      const tokenTable = document.getElementById("token-table-body");
+      (record.tokenEconomics?.sources || []).forEach((source) => {
+        const row = make("tr");
+        row.append(
+          make("td", "", text(source.system)),
+          make("td", "", text(source.metric)),
+          make("td", "", `${text(source.value)} ${text(source.unit, "")}`),
+          make("td", "", measurementLabels[source.measurementType] || source.measurementType),
+          make("td", "", text(source.basis)),
+          make("td", "", text(source.note))
+        );
+        tokenTable.append(row);
+      });
+      renderNarratives("token-narrative", (section) => section.sectionId === "token-economy");
+
+      const stageLabels = { definition: "定义", implementation: "实现", automatedVerification: "自动验证", buildPackaging: "构建/封装", humanAcceptance: "人工验收", releaseOnlineReadback: "发布/在线回读" };
+      const projects = record.projectPortfolio?.projects || [];
+      const allStages = projects.flatMap((project) => Object.values(project.stages || {}));
+      const projectSummaries = [
+        { label: "项目样本", value: projects.length, note: "按六道门分别核验" },
+        { label: "已完成门", value: allStages.filter((stage) => stage.status === "complete").length, note: "只计算明确完成状态" },
+        { label: "开放或受阻门", value: allStages.filter((stage) => ["partial", "blocked", "not-evaluated"].includes(stage.status)).length, note: "保留下一道真实门" }
+      ];
+      const projectSummaryGrid = document.getElementById("project-summary-grid");
+      projectSummaries.forEach((item) => {
+        const card = make("article", "card");
+        card.append(make("span", "metric-label", item.label), make("strong", "metric-value", String(item.value)), make("p", "muted", item.note));
+        projectSummaryGrid.append(card);
+      });
+      const projectTable = document.getElementById("project-table-body");
+      projects.forEach((project) => {
+        const tableRow = make("tr");
+        tableRow.append(make("td", "", project.label));
+        Object.keys(stageLabels).forEach((key) => {
+          const stage = project.stages[key];
+          tableRow.append(make("td", `status-${stage.status}`, `${statusLabels[stage.status] || stage.status}${stage.note ? `：${stage.note}` : ""}`));
+        });
+        projectTable.append(tableRow);
+      });
+      if (!projectTable.children.length) {
+        const row = make("tr");
+        const cell = make("td", "muted", "没有项目完成门记录。");
+        cell.colSpan = 7;
+        row.append(cell);
+        projectTable.append(row);
+      }
+      renderNarratives("project-narrative", (section) => section.sectionId === "project-portfolio");
+
+      const timeline = document.getElementById("timeline-list");
+      (record.timeline || []).forEach((item, index) => {
+        const row = make("article", "timeline-row");
+        row.style.setProperty("--timeline-color", `var(--series-${(index % 6) + 1})`);
+        row.append(make("h3", "", text(item.period)), make("p", "", text(item.summary)), make("p", "muted", text(item.change)));
+        timeline.append(row);
+      });
+      if (!timeline.children.length) timeline.append(make("div", "empty card", "当前证据窗口没有可核验的阶段切片。"));
+      renderNarratives("timeline-narrative", (section) => section.sectionId === "growth-timeline");
+
+      const verdictGrid = document.getElementById("verdict-grid");
+      const verdictItems = [
+        ["当前判断", record.verdict?.current], ["主要边界", record.verdict?.limits], ["下一阶段", record.verdict?.next], ["不可核验项", record.verdict?.unverifiable]
+      ];
+      verdictItems.forEach(([label, value]) => {
+        const line = make("div", "verdict-line");
+        line.append(make("strong", "", `${label}：`), document.createTextNode(text(value)));
+        verdictGrid.append(line);
+      });
+      renderNarratives("verdict-narrative", (section) => section.sectionId === "final-verdict");
+      const recommendationList = document.getElementById("recommendation-list");
+      (record.narrativeAssessment?.recommendations || []).forEach((recommendation, index) => {
+        const item = make("article", "protocol-item");
+        item.append(make("span", "protocol-number", String(index + 1)));
+        const body = make("div");
+        body.append(make("strong", "", text(recommendation.title)), make("p", "", text(recommendation.action)), make("p", "muted", `完成信号：${text(recommendation.successSignal)}`));
+        item.append(body); recommendationList.append(item);
+      });
+      if (!recommendationList.children.length) recommendationList.append(make("p", "muted", text(record.verdict?.next)));
+
+      document.querySelectorAll("[data-chapter]").forEach((button) => button.addEventListener("click", () => {
+        const id = button.dataset.chapter;
+        document.querySelectorAll("[data-chapter]").forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.chapter === id)));
+        document.querySelectorAll("[data-panel]").forEach((panel) => { panel.hidden = panel.dataset.panel !== id; });
+        if (id === "overview") requestAnimationFrame(drawNetwork);
+      }));
+
+      const themeButton = document.getElementById("theme-toggle");
+      const themes = ["auto", "light", "dark"];
+      themeButton.addEventListener("click", () => { const current = document.documentElement.dataset.theme || "auto"; const next = themes[(themes.indexOf(current) + 1) % themes.length]; document.documentElement.dataset.theme = next; themeButton.textContent = `主题：${next === "auto" ? "自动" : next === "light" ? "浅色" : "深色"}`; });
+      const prepareDownload = (anchor, name, type, content) => { const prior = anchor.dataset.objectUrl; if (prior) URL.revokeObjectURL(prior); const url = URL.createObjectURL(new Blob([content()], { type })); anchor.dataset.objectUrl = url; anchor.href = url; anchor.download = name; setTimeout(() => { if (anchor.dataset.objectUrl === url) { URL.revokeObjectURL(url); delete anchor.dataset.objectUrl; anchor.href = "#"; } }, 1000); };
+      const jsonAnchor = document.getElementById("export-json");
+      const htmlAnchor = document.getElementById("export-html");
+      jsonAnchor.addEventListener("click", () => prepareDownload(jsonAnchor, `${record.recordId || "vibe-code-growth"}.json`, "application/json", () => JSON.stringify(record, null, 2)));
+      htmlAnchor.addEventListener("click", () => prepareDownload(htmlAnchor, `${record.recordId || "vibe-code-growth"}.html`, "text/html", () => "<!doctype html>\n" + document.documentElement.outerHTML.replace(/^<!doctype html>\s*/iu, "")));
+      const fallbackTextAssessment = () => {
+        const lines = [
+          "# Vibe Code 成长历程｜单份文字评估表单",
+          "",
+          `观察窗口：${text(record.evidenceWindow?.start)}—${text(record.evidenceWindow?.end)}`,
+          `量表版本：${text(record.rubricVersion)}`,
+          "",
+          "## 结论先行",
+          "",
+          text(record.narrativeAssessment?.executiveSummary, record.verdict?.current),
+          "",
+          "## 完整能力网络"
+        ];
+        (record.dimensions || []).forEach((dimension) => lines.push("", `### ${dimension.label}｜${score(dimension)}`, "", `判断：${text(dimension.judgment)}`, "", `证据：${(dimension.evidenceRefs || []).map((id) => evidenceById.get(id)?.summary || id).join("；")}`, "", `限制：${text(dimension.limits)}`, "", `下一步：${text(dimension.nextStep)}`));
+        lines.push("", "## 最终判断", "", text(record.narrativeAssessment?.closingJudgment, record.verdict?.current), "", `不可核验项：${text(record.verdict?.unverifiable)}`);
+        return `${lines.join("\n")}\n`;
+      };
+      const textAssessment = text(record.textAssessmentMarkdown, fallbackTextAssessment());
+      const textDialog = document.getElementById("text-dialog");
+      const textPreview = document.getElementById("text-assessment-preview");
+      const copyStatus = document.getElementById("copy-status");
+      textPreview.textContent = textAssessment;
+      document.getElementById("open-text-assessment").addEventListener("click", () => { copyStatus.textContent = ""; textDialog.showModal(); });
+      document.getElementById("close-text-dialog").addEventListener("click", () => textDialog.close());
+      const textAnchor = document.getElementById("export-text");
+      textAnchor.addEventListener("click", () => prepareDownload(textAnchor, `${record.recordId || "vibe-code-growth"}-assessment.md`, "text/markdown", () => textAssessment));
+      document.getElementById("copy-text-assessment").addEventListener("click", async () => {
+        try {
+          if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(textAssessment);
+          else {
+            const area = document.createElement("textarea"); area.value = textAssessment; area.style.position = "fixed"; area.style.opacity = "0"; document.body.append(area); area.select();
+            if (!document.execCommand("copy")) throw new Error("copy command rejected");
+            area.remove();
+          }
+          copyStatus.textContent = "已复制完整文字评估。";
+        } catch (error) {
+          copyStatus.textContent = "浏览器未授予剪贴板权限；请在上方文字区域手动选择并复制。";
+        }
+      });
+      const dialog = document.getElementById("history-dialog");
+      document.getElementById("local-history").addEventListener("click", () => dialog.showModal());
+      document.getElementById("close-dialog").addEventListener("click", () => dialog.close());
+      requestAnimationFrame(drawNetwork);
+    })();
+  </script>
+</body>
+</html>

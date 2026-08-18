@@ -31,8 +31,10 @@ test("TW Lite candidates add Skills without broad tool surfaces", () => {
   }
 });
 
-test("Entry catalog is a declared degraded four-Skill experiment", () => {
-  assert.equal(contract.twLite.variants.full.skillCatalogCount, 19);
+test("Full catalog tracks 20 Skills while Entry remains a degraded four-Skill experiment", () => {
+  assert.equal(contract.twLite.variants.full.skillCatalogCount, 20);
+  assert.match(full, /reflect-on-vibe-code-growth/u);
+  assert.doesNotMatch(entry, /reflect-on-vibe-code-growth/u);
   assert.deepEqual(contract.twLite.variants.entry.skillNames, ["activate-tavernweave-soul", "consult-tavernweave-library", "orchestrate-project-blueprint", "tavern-card-builder"]);
   assert.equal(contract.twLite.variants.entry.requiresDedicatedSkillRoot, true);
   assert.equal(contract.twLite.variants.entry.degradedSecondaryRouting, true);
