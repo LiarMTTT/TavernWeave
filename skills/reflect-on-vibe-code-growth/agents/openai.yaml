@@ -1,0 +1,4 @@
+interface:
+  display_name: "照镜子 · Vibe Code 成长历程"
+  short_description: "重新核验成长证据，输出完整文字评估表单与七章交互成长履历"
+  default_prompt: "Use $reflect-on-vibe-code-growth to 再次核验我的完整 Vibe Code 成长历程，同时输出一份可独立保存的详细文字评估表单和七章交互报告。"

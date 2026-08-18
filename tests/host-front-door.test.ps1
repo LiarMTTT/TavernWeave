@@ -37,6 +37,7 @@ try {
     Assert-True ($installedText.Contains("- $unicodeRule")) 'The installer discarded existing Chinese instructions.'
     Assert-True ($installedText.Contains('soul-killer-portable')) 'The managed block omitted the Soul Killer route.'
     Assert-True ($installedText.Contains('orchestrate-project-blueprint')) 'The managed block omitted the brainstorm route.'
+    Assert-True ($installedText.Contains('reflect-on-vibe-code-growth')) 'The managed block omitted the mirror-growth route.'
     Assert-True ($installedText.Contains('soul-ensemble-portable')) 'The managed block omitted the Soul ensemble route.'
     Assert-True ($installedText.Contains('runtimePersistentBlueprintBudget = 0')) 'The managed block omitted the persistent-blueprint execution guard.'
     Assert-True ($installedText.Contains('return to the parent step')) 'The managed block omitted the temporary problem-refinement return contract.'

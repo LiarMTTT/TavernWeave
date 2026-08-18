@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tavernweave.local/schemas/mirror-record.schema.json",
+  "title": "TavernWeave immutable Vibe Code growth mirror record",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "recordId",
+    "createdAt",
+    "title",
+    "assessmentMode",
+    "rubricVersion",
+    "evidenceWindow",
+    "scoringMethod",
+    "evidence",
+    "dimensions",
+    "projectPortfolio",
+    "integrity"
+  ],
+  "properties": {
+    "schemaVersion": { "enum": [1, 2] },
+    "recordId": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{7,95}$" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "title": { "const": "Vibe Code 成长历程" },
+    "assessmentMode": { "const": "full-current-evidence-reassessment" },
+    "rubricVersion": { "type": "string", "minLength": 1 },
+    "evidenceWindow": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "string", "format": "date" },
+        "end": { "type": "string", "format": "date" },
+        "coverageNote": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "scoringMethod": {
+      "type": "object",
+      "required": ["id", "description", "scoreScale"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "scoreScale": {
+          "type": "object",
+          "required": ["min", "max"],
+          "properties": {
+            "min": { "type": "number" },
+            "max": { "type": "number" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["evidenceId", "label", "measurementType", "sourceKind", "summary", "confidence"],
+        "properties": {
+          "evidenceId": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]+$" },
+          "label": { "type": "string", "minLength": 1 },
+          "measurementType": {
+            "enum": ["exact", "user-reported", "phase-estimate", "behavioral-evidence-score", "unverifiable"]
+          },
+          "sourceKind": { "type": "string", "minLength": 1 },
+          "summary": { "type": "string", "minLength": 1 },
+          "confidence": { "$ref": "#/$defs/confidence" },
+          "basis": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["dimensionId", "label", "cluster", "confidence", "scoringMethod", "evidenceRefs", "judgment"],
+        "properties": {
+          "dimensionId": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "label": { "type": "string", "minLength": 1 },
+          "cluster": { "type": "string", "minLength": 1 },
+          "score": { "type": "number" },
+          "confidence": { "$ref": "#/$defs/confidence" },
+          "scoringMethod": { "type": "string", "minLength": 1 },
+          "scoreScale": {
+            "type": "object",
+            "required": ["min", "max"],
+            "properties": { "min": { "type": "number" }, "max": { "type": "number" } },
+            "additionalProperties": false
+          },
+          "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+          "judgment": { "type": "string", "minLength": 1 },
+          "limits": { "type": "string" },
+          "nextStep": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tokenEconomics": {
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["system", "metric", "measurementType", "unit", "basis"],
+            "properties": {
+              "system": { "type": "string" },
+              "metric": { "type": "string" },
+              "value": { "type": ["number", "string", "null"] },
+              "unit": { "type": "string" },
+              "measurementType": {
+                "enum": ["exact", "user-reported", "phase-estimate", "behavioral-evidence-score", "unverifiable"]
+              },
+              "basis": { "type": "string" },
+              "note": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "projectPortfolio": {
+      "type": "object",
+      "required": ["projects"],
+      "properties": {
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["projectId", "label", "stages"],
+            "properties": {
+              "projectId": { "type": "string" },
+              "label": { "type": "string" },
+              "stages": {
+                "type": "object",
+                "required": ["definition", "implementation", "automatedVerification", "buildPackaging", "humanAcceptance", "releaseOnlineReadback"],
+                "properties": {
+                  "definition": { "$ref": "#/$defs/stage" },
+                  "implementation": { "$ref": "#/$defs/stage" },
+                  "automatedVerification": { "$ref": "#/$defs/stage" },
+                  "buildPackaging": { "$ref": "#/$defs/stage" },
+                  "humanAcceptance": { "$ref": "#/$defs/stage" },
+                  "releaseOnlineReadback": { "$ref": "#/$defs/stage" }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "narrativeAssessment": {
+      "type": "object",
+      "required": ["executiveSummary", "sections", "recommendations", "closingJudgment"],
+      "properties": {
+        "executiveSummary": { "type": "string", "minLength": 40 },
+        "sections": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["sectionId", "title", "summary", "paragraphs", "evidenceRefs", "dimensionIds"],
+            "properties": {
+              "sectionId": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+              "title": { "type": "string", "minLength": 1 },
+              "summary": { "type": "string", "minLength": 1 },
+              "paragraphs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+              "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+              "dimensionIds": { "type": "array", "items": { "type": "string" } }
+            },
+            "additionalProperties": false
+          }
+        },
+        "recommendations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["title", "action", "successSignal"],
+            "properties": {
+              "title": { "type": "string", "minLength": 1 },
+              "action": { "type": "string", "minLength": 1 },
+              "successSignal": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          }
+        },
+        "closingJudgment": { "type": "string", "minLength": 40 }
+      },
+      "additionalProperties": false
+    },
+    "comparison": {
+      "type": "object",
+      "required": ["previousRecordId", "rubricChanged", "dimensionMappings", "newDimensionIds"],
+      "properties": {
+        "previousRecordId": { "type": "string" },
+        "rubricChanged": { "type": "boolean" },
+        "dimensionMappings": { "type": "array" },
+        "newDimensionIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["algorithm", "recordHash", "reportHash", "previousRecordId", "previousRecordHash"],
+      "properties": {
+        "algorithm": { "const": "sha256" },
+        "recordHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "reportHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "assessmentHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "previousRecordId": { "type": ["string", "null"] },
+        "previousRecordHash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "schemaVersion": { "const": 2 } } },
+      "then": {
+        "required": ["narrativeAssessment"],
+        "properties": {
+          "integrity": {
+            "required": ["algorithm", "recordHash", "reportHash", "assessmentHash", "previousRecordId", "previousRecordHash"]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "confidence": { "enum": ["high", "medium", "low", "unverifiable"] },
+    "stage": {
+      "type": "object",
+      "required": ["status", "evidenceRefs"],
+      "properties": {
+        "status": { "enum": ["complete", "partial", "blocked", "not-evaluated", "not-applicable", "unverifiable"] },
+        "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

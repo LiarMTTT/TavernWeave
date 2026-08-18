@@ -44,7 +44,7 @@
     "variants": {
       "full": {
         "preset": "tw-lite-full/agent.cordis.yml",
-        "skillCatalogCount": 19,
+        "skillCatalogCount": 20,
         "installFromManifest": true
       },
       "entry": {

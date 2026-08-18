@@ -234,6 +234,18 @@
       "prompt": "我想给这个主要靠文字规则的小工具强上独立前端。先判断值不值得，并问我有没有稳定老作品能复用。",
       "expectedPrimarySkill": "orchestrate-project-blueprint",
       "expectedBehavior": "Evaluate the frontend host surface against core interaction value, explicitly recommend against an unsuitable independent UI with a lighter fallback and reopen conditions, preserve prototype and real-host gates if the driver overrides, and inspect actual stable legacy artifacts before classifying reuse."
+    },
+    {
+      "id": "mirror-vibe-code-growth-recheck",
+      "prompt": "照镜子。请从当前可访问的 Codex、Chat、项目状态和交付证据重新核验完整 Vibe Code 成长历程，和上一次履历比较后保存新节点。",
+      "expectedPrimarySkill": "reflect-on-vibe-code-growth",
+      "expectedBehavior": "Reassess the complete current capability network without treating prior scores as anchors, including deep thinking across social issues, future outlook, observed feedback, project structure, planning, and technical discussion; upstream architecture through original design or demonstrated understanding and application; and innovation through project transformation, wheel reuse, optimization, upgrades, and reference-material use. Separate exact measurements, user reports, estimates, behavioral scores, and unverifiable claims, keep Codex and Chat token scopes separate, map changed rubric dimensions before numeric deltas, return a standalone detailed text assessment plus the seven-part report, preserve the original compact Vibe Code capability-cockpit visual language instead of a TavernWeave tutorial shell, make the core, every capability cluster, and every dimension a full-hit-area native button, validate the existing immutable chain, and append redacted hashed record, report, and assessment files without overwriting history."
+    },
+    {
+      "id": "mirror-text-assessment-only",
+      "prompt": "照镜子，只要一份可以直接复制保存的完整文字评估表单，不要画板。",
+      "expectedPrimarySkill": "reflect-on-vibe-code-growth",
+      "expectedBehavior": "Produce one standalone detailed Markdown assessment from the same structured evidence model, including evidence boundaries, the complete capability network with deep thinking, upstream architecture, and innovation, four core dimensions, token economics, six project gates, history comparability, actions, and final judgment; do not require or substitute an interactive report."
     }
   ]
 }
