@@ -191,7 +191,7 @@
       "id": "library-routed-ui-selection",
       "prompt": "我要做一个适合手机酒馆状态栏的底部抽屉。先查 TW 资料库并给我三种设计和动效候选，不要把候选直接算作采用。",
       "expectedPrimarySkill": "consult-tavernweave-library",
-      "expectedBehavior": "Return A0 for the write task, route to the embedded-UI and mobile guides plus design and motion domains, keep selections proposed, and retain exact API and real-host gates."
+      "expectedBehavior": "Return A0 for the write task, route to the embedded-UI and mobile guides, query the complete design and motion catalogs with a bounded result count, return three evidence-linked candidates as proposed, and retain exact API, license, implementation, and real-host gates."
     },
     {
       "id": "soul-atong-card-guidance",

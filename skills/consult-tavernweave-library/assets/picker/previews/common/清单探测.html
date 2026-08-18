@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 清单探测</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .st { color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>Web App Manifest 是 WD。Share Target 无 TR 且仓已归档。卡 iframe <strong>不是</strong> PWA。本页只报显示模式，不装清单。不是已采用安装面。</p>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    const mode = matchMedia("(display-mode: standalone)").matches ? "standalone" : "browser";
+    document.getElementById("st").textContent = "display-mode: " + mode + " · manifest 链 " + (document.querySelector('link[rel=manifest]') ? "有" : "无");
+  </script>
+</body>
+</html>

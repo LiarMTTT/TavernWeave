@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 文件选取</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; }
+    .st { color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>本机选取仍是 WICG <code>showOpenFilePicker</code>；OPFS 是另一条。iframe 里常被拒。只读文件名，不上传。不是已采用文件栈。</p>
+    <button type="button" id="go">选一个文本文件</button>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    document.getElementById("go").addEventListener("click", async () => {
+      const st = document.getElementById("st");
+      try {
+        if (window.showOpenFilePicker) {
+          const [h] = await showOpenFilePicker({ types: [{ description: "text", accept: { "text/plain": [".txt"] } }] });
+          const f = await h.getFile();
+          st.textContent = "picker · " + f.name + " · " + f.size + " B";
+          return;
+        }
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".txt,text/plain";
+        input.onchange = () => {
+          const f = input.files[0];
+          st.textContent = f ? "input · " + f.name + " · " + f.size + " B" : "取消";
+        };
+        input.click();
+        st.textContent = "没有 showOpenFilePicker，退回 input[type=file]。";
+      } catch (err) {
+        st.textContent = err.name === "AbortError" ? "取消了。" : err.message;
+      }
+    });
+  </script>
+</body>
+</html>

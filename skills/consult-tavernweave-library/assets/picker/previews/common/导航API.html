@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 导航 API</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; }
+    .st { color: #9aa3b2; word-break: break-all; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>有 <code>navigation</code> 就读 <code>currentEntry</code>，并在同文档推一条。没有就退回 <code>history.pushState</code>。不是已采用路由栈。</p>
+    <button type="button" id="go">推一条同文档记录</button>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    const st = document.getElementById("st");
+    function paint() {
+      if (window.navigation && navigation.currentEntry) {
+        st.textContent = "Navigation API · " + navigation.currentEntry.url;
+      } else {
+        st.textContent = "没有 Navigation API · history " + location.href;
+      }
+    }
+    paint();
+    document.getElementById("go").addEventListener("click", () => {
+      const url = new URL(location.href);
+      url.hash = "n=" + Date.now();
+      if (window.navigation && navigation.navigate) {
+        navigation.navigate(url.href, { history: "push" });
+      } else {
+        history.pushState({}, "", url.href);
+      }
+      paint();
+    });
+  </script>
+</body>
+</html>

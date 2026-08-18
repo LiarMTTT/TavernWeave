@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · MathML Core</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    math { font-size: 28px; }
+    .st { color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>MathML Core 元素。现行 Rec 仍是 MathML 3；Core 是 CR。这<strong>不是</strong> MathJax，也不是已采用公式栈。</p>
+    <math display="block">
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mfrac>
+          <mrow>
+            <mo>−</mo><mi>b</mi>
+            <mo>±</mo>
+            <msqrt>
+              <msup><mi>b</mi><mn>2</mn></msup>
+              <mo>−</mo>
+              <mn>4</mn><mi>a</mi><mi>c</mi>
+            </msqrt>
+          </mrow>
+          <mrow><mn>2</mn><mi>a</mi></mrow>
+        </mfrac>
+      </mrow>
+    </math>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    document.getElementById("st").textContent = typeof MathMLElement === "function"
+      ? "这只浏览器有 MathMLElement。"
+      : "没有 MathML 元素构造器，上面可能是后备字形。";
+  </script>
+</body>
+</html>

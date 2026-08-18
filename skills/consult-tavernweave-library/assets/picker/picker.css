@@ -41,6 +41,7 @@ a { color: inherit; }
 .eyebrow, .selection-kicker { margin: 0 0 .75rem; color: var(--accent); font: 700 .72rem/1.2 ui-monospace, monospace; letter-spacing: .16em; }
 h1 { max-width: 11em; margin: 0; font-size: clamp(2.5rem, 5.8vw, 6.2rem); line-height: .94; letter-spacing: -.055em; }
 .lede { max-width: 55rem; margin: 1.4rem 0 0; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.8; }
+.library-summary { margin: .9rem 0 0; color: var(--accent); font: 700 .78rem/1.7 ui-monospace, monospace; letter-spacing: .035em; }
 .snapshot { min-width: 10rem; border: 1px solid var(--line); padding: 1rem; box-shadow: inset 0 0 0 1px rgba(255,255,255,.03); }
 .snapshot span { display: block; color: var(--muted); font: .65rem ui-monospace, monospace; letter-spacing: .12em; }
 .snapshot strong { display: block; margin-top: .5rem; font: 700 .95rem ui-monospace, monospace; }

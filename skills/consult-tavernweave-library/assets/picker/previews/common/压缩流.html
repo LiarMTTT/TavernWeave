@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 压缩流</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; }
+    .st { color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>浏览器 <code>CompressionStream("gzip")</code>。这<strong>不是</strong> HTTP <code>Content-Encoding</code>，也不是 IANA <code>zstd</code>。不是已采用压缩栈。</p>
+    <button type="button" id="go">压这段字</button>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    document.getElementById("go").addEventListener("click", async () => {
+      const st = document.getElementById("st");
+      if (typeof CompressionStream !== "function") {
+        st.textContent = "没有 CompressionStream。";
+        return;
+      }
+      const src = "蒸馏预览不是已采用。".repeat(20);
+      const bytes = new TextEncoder().encode(src);
+      const gz = new Blob([bytes]).stream().pipeThrough(new CompressionStream("gzip"));
+      const out = new Uint8Array(await new Response(gz).arrayBuffer());
+      st.textContent = "原文 " + bytes.length + " B → gzip " + out.length + " B";
+    });
+  </script>
+</body>
+</html>

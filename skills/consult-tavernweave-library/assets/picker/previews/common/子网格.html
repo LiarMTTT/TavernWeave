@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 子网格</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p, .st { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .st { color: #9aa3b2; }
+    .grid { display: grid; grid-template-columns: 1fr 2fr; gap: 8px; }
+    .card { display: grid; grid-template-columns: subgrid; grid-column: 1 / -1; background: #1a1d26; border-radius: 8px; padding: 8px; }
+    .card span { padding: 8px; background: #232833; border-radius: 6px; }
+    label { display: block; margin-top: 12px; }
+    textarea { field-sizing: content; min-height: 2.4em; width: min(360px, 100%); background: #1a1d26; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>外层两列，内卡 <code>subgrid</code> 对齐同一条线。下面文本框试 <code>field-sizing: content</code>。masonry 已改名 grid-lanes，这里不做假瀑布。不是已采用栅格。</p>
+    <div class="grid">
+      <div class="card"><span>左</span><span>右栏更宽，子网格跟外层列走</span></div>
+      <div class="card"><span>再左</span><span>再右</span></div>
+    </div>
+    <label>field-sizing</label>
+    <textarea>多打几个字看框是否跟着长</textarea>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    document.getElementById("st").textContent =
+      (CSS.supports("grid-template-columns", "subgrid") ? "认 subgrid。" : "没有 subgrid。") +
+      (CSS.supports("field-sizing", "content") ? " 认 field-sizing。" : " 没有 field-sizing。");
+  </script>
+</body>
+</html>

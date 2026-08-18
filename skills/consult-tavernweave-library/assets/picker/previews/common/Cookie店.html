@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · Cookie Store</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; }
+    .st { color: #9aa3b2; word-break: break-all; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><code>cookieStore</code> 是异步 Cookie Store。CHIPS / 6265bis 是另一层。只写本页测试键。不是已采用会话栈。</p>
+    <button type="button" id="go">写再读 afv-preview</button>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    document.getElementById("go").addEventListener("click", async () => {
+      const st = document.getElementById("st");
+      if (window.cookieStore) {
+        await cookieStore.set({ name: "afv-preview", value: "1", path: "/" });
+        const row = await cookieStore.get("afv-preview");
+        st.textContent = "cookieStore · " + (row ? row.name + "=" + row.value : "没有");
+        return;
+      }
+      document.cookie = "afv-preview=1; path=/; SameSite=Lax";
+      st.textContent = "没有 cookieStore，退回 document.cookie。含 afv-preview: " + /afv-preview=1/.test(document.cookie);
+    });
+  </script>
+</body>
+</html>

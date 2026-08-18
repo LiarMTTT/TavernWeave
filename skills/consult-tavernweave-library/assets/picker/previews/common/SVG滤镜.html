@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · SVG 滤镜</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    svg { display: block; width: min(420px, 100%); height: 160px; background: #1a1d26; border-radius: 8px; }
+    label { display: block; margin: 10px 0 4px; font-size: 12px; color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>真 <code>feGaussianBlur</code> + <code>feColorMatrix</code>。这是 SVG 滤镜，<strong>不是</strong> CSS <code>filter: url()</code> 生成艺术站，也不是已采用皮肤。</p>
+    <label>模糊 <span id="bv">4</span></label>
+    <input type="range" id="blur" min="0" max="12" value="4" />
+    <svg viewBox="0 0 420 160" aria-label="滤镜示意">
+      <filter id="f" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b" />
+        <feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 0.6 0 0 0  0 0 1.2 0 0  0 0 0 1 0" />
+      </filter>
+      <rect x="36" y="36" width="140" height="88" rx="10" fill="#e8b86d" filter="url(#f)" />
+      <text x="210" y="96" fill="#7eb8ff" font-size="36" filter="url(#f)">滤镜</text>
+    </svg>
+  </main>
+  <script>
+    const blur = document.getElementById("blur");
+    const fe = document.querySelector("feGaussianBlur");
+    blur.addEventListener("input", () => {
+      fe.setAttribute("stdDeviation", blur.value);
+      document.getElementById("bv").textContent = blur.value;
+    });
+  </script>
+</body>
+</html>

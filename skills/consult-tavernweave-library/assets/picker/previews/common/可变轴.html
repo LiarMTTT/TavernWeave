@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 可变轴</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p, .st { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .st { color: #9aa3b2; }
+    .sample { font-size: 42px; line-height: 1.2; margin: 12px 0; font-variation-settings: "wght" 400; }
+    label { display: block; font-size: 12px; color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><code>font-variation-settings: "wght"</code>。没有随库 COLRv1 字，不造假彩色字。系统若没有可变字，滑块只改 <code>font-weight</code>。不是已采用字库。</p>
+    <p class="sample" id="sample">可变轴 wght</p>
+    <label>wght <span id="v">400</span></label>
+    <input type="range" id="w" min="100" max="900" value="400" step="10" />
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    const sample = document.getElementById("sample");
+    const w = document.getElementById("w");
+    const apply = () => {
+      sample.style.fontVariationSettings = '"wght" ' + w.value;
+      sample.style.fontWeight = w.value;
+      document.getElementById("v").textContent = w.value;
+    };
+    w.addEventListener("input", apply);
+    apply();
+    document.getElementById("st").textContent = document.fonts.check("400 42px Segoe UI")
+      ? "本机有 Segoe UI 就试轴；没有就只看见字重跳。"
+      : "按字重跳。要看真轴得本机有可变字。";
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 国际化</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .rtl { direction: rtl; background: #1a1d26; padding: 10px; border-radius: 8px; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><code>Intl.DateTimeFormat</code> / <code>NumberFormat</code> + 逻辑属性 <code>margin-inline-start</code>。CLDR 数据版本以打开页为准。不是已采用 i18n 栈。</p>
+    <p id="date"></p>
+    <p id="num"></p>
+    <p class="rtl" style="margin-inline-start: 24px">RTL 段：起点在右边。</p>
+  </main>
+  <script>
+    const d = new Date("2026-08-16T02:00:00Z");
+    document.getElementById("date").textContent =
+      new Intl.DateTimeFormat("zh-CN", { dateStyle: "full", timeZone: "Asia/Shanghai" }).format(d) +
+      " · " + new Intl.DateTimeFormat("ar", { dateStyle: "full", timeZone: "Asia/Shanghai" }).format(d);
+    document.getElementById("num").textContent =
+      new Intl.NumberFormat("zh-CN", { style: "currency", currency: "CNY" }).format(1234.5) +
+      " · " + new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(1234.5);
+  </script>
+</body>
+</html>

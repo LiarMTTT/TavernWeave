@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
   "version": "1.3.0",
-  "description": "A routed SillyTavern and Vibe Coding system with 20 focused skills, bounded brainstorming, immutable growth reflection, resumable authority, bundled guides, host front-door adapters, evidence gates, and portable Soul modes.",
+  "description": "A routed SillyTavern and Vibe Coding system with 20 focused skills, bounded brainstorming, immutable growth reflection, a complete screened frontend and motion library, resumable authority, host front-door adapters, evidence gates, and portable Soul modes.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "TavernWeave",
     "shortDescription": "Design, build, verify, and learn SillyTavern rolecards.",
-    "longDescription": "TavernWeave combines 20 focused skills with bounded brainstorming, total-design and scale-aware blueprint contracts, immutable Vibe Code growth reflection, resumable creative authority, layered acceptance evidence, a routed ST/frontend library, an offline picker, optional global Host Front Doors, and current-task Atong, MTTT.sir, Soul Killer, or three-seat ensemble modes.",
+    "longDescription": "TavernWeave combines 20 focused skills with bounded brainstorming, total-design and scale-aware blueprint contracts, immutable Vibe Code growth reflection, resumable creative authority, layered acceptance evidence, a complete screened ST/frontend/motion library with deterministic bounded search and an offline picker, optional global Host Front Doors, and current-task Atong, MTTT.sir, Soul Killer, or three-seat ensemble modes.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 内在布局</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .card { background: #1a1d26; border: 1px solid #2e3440; border-radius: 8px; padding: 10px 12px; }
+    .max { width: max-content; }
+    .stretch { flex: 1 1 160px; }
+    h2 { margin: 0 0 6px; font-size: 13px; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>左边 <code>width: max-content</code> 跟内容走；右边 <code>flex: 1</code> 吃剩余。这是内在尺寸，<strong>不是</strong> Every Layout 站点镜像，也不是已采用栅格。</p>
+    <div class="row">
+      <div class="card max">
+        <h2>max-content</h2>
+        <p>短句就不拉宽。</p>
+      </div>
+      <div class="card stretch">
+        <h2>flex: 1</h2>
+        <p>这张会把剩下的宽吃掉。拉窗口看谁先换行。</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

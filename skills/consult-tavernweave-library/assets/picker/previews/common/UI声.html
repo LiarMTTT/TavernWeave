@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · UI 声</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; margin-right: 6px; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>点了才响。Web Audio <code>OscillatorNode</code>，<strong>不</strong>自动播放（WCAG 1.4.2）。不是音效库，不是已采用声栈。</p>
+    <button type="button" id="beep">短音</button>
+    <button type="button" id="stop">停</button>
+  </main>
+  <script>
+    let ctx = null;
+    let osc = null;
+    document.getElementById("beep").addEventListener("click", async () => {
+      ctx = ctx || new AudioContext();
+      if (ctx.state === "suspended") await ctx.resume();
+      if (osc) osc.stop();
+      osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+      osc.frequency.value = 660;
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.2);
+    });
+    document.getElementById("stop").addEventListener("click", () => { if (ctx) ctx.suspend(); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 音频图</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; margin-right: 6px; }
+    label { display: block; margin-top: 10px; font-size: 12px; color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>Oscillator → Gain → destination。点了才建图，不自动播。这是 Web Audio 图，<strong>不是</strong> 编解码 / WebCodecs。不是已采用播放器。</p>
+    <button type="button" id="on">开</button>
+    <button type="button" id="off">关</button>
+    <label>频率 <span id="fv">440</span></label>
+    <input type="range" id="freq" min="220" max="880" value="440" />
+  </main>
+  <script>
+    let ctx = null, osc = null, gain = null;
+    const freq = document.getElementById("freq");
+    document.getElementById("on").addEventListener("click", async () => {
+      ctx = ctx || new AudioContext();
+      if (ctx.state === "suspended") await ctx.resume();
+      if (osc) osc.stop();
+      osc = ctx.createOscillator();
+      gain = ctx.createGain();
+      gain.gain.value = 0.05;
+      osc.frequency.value = Number(freq.value);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+    });
+    document.getElementById("off").addEventListener("click", () => { if (osc) { osc.stop(); osc = null; } });
+    freq.addEventListener("input", () => {
+      document.getElementById("fv").textContent = freq.value;
+      if (osc) osc.frequency.value = Number(freq.value);
+    });
+  </script>
+</body>
+</html>

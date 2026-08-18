@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>预览 · 存储配额</title>
+  <style>
+    html, body { margin: 0; background: #12141a; color: #e8eaef; font-family: "Segoe UI", "PingFang SC", sans-serif; }
+    main { padding: 16px 18px 24px; }
+    p { font-size: 13px; line-height: 1.55; max-width: 46em; }
+    button { background: #232833; color: inherit; border: 1px solid #2e3440; border-radius: 8px; padding: 6px 10px; }
+    .st { color: #9aa3b2; }
+    code { color: #7eb8ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><code>navigator.storage.estimate()</code> 是源级配额。opaque 响应会虚报；卡 iframe 不是 PWA。不是已采用离线栈。</p>
+    <button type="button" id="go">估一次</button>
+    <p class="st" id="st"></p>
+  </main>
+  <script>
+    const mb = (n) => (n / 1048576).toFixed(2) + " MiB";
+    document.getElementById("go").addEventListener("click", async () => {
+      const st = document.getElementById("st");
+      if (!navigator.storage || !navigator.storage.estimate) {
+        st.textContent = "没有 storage.estimate。";
+        return;
+      }
+      const est = await navigator.storage.estimate();
+      st.textContent = "usage " + mb(est.usage || 0) + " / quota " + mb(est.quota || 0);
+    });
+  </script>
+</body>
+</html>
