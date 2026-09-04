@@ -9,7 +9,7 @@
 <section class="section chapter-opening capability-overview" id="tw-capabilities">
 <div class="chapter-tier"><span>先看这里</span><strong>TavernWeave 功能地图</strong><span>从你要解决的问题开始</span></div>
 <div class="section-head"><div class="section-no">TW</div><div><h2>TavernWeave 到底能做什么</h2><p class="section-kicker">从整理想法、制作角色卡，到排查问题、组装发布，TW 帮你把项目一步步做出来。</p></div></div>
-<p class="lead">TavernWeave（简称 TW）是一套面向角色卡制作与 Vibe Coding 的工作系统。v1.4.0 本地候选版包含 21 个专职 Skill，你可以把它们理解为 Agent 按任务调用的工作方法：有的负责规划，有的负责制作，有的负责检查。</p>
+<p class="lead">TavernWeave（简称 TW）是一套面向角色卡制作与 Vibe Coding 的工作系统。v1.4.0 包含 21 个专职 Skill，你可以把它们理解为 Agent 按任务调用的工作方法：有的负责规划，有的负责制作，有的负责检查。</p>
 <p>你可以用 TW 讨论一个还没想清楚的项目，制作或改进角色卡，搭建界面，精修文字，查找故障，也可以在各部分完成后组装作品、准备发布。想回顾自己一路怎么做项目、积累了哪些经验，可以调用“照镜子”，复盘你的 <strong>Vibe Code 经验与成长历程</strong>。</p>
 <p>开始时不用记住这些 Skill 的英文名。直接告诉 Agent 你想做什么，或者卡在了哪里，它会判断需要调用哪些能力。</p>
 <div class="flow"><div class="flow-node">你说需求</div><div class="flow-arrow">→</div><div class="flow-node">Agent 选择所需能力</div><div class="flow-arrow">→</div><div class="flow-node">查阅相关资料</div><div class="flow-arrow">→</div><div class="flow-node">制作与检查</div><div class="flow-arrow">→</div><div class="flow-node">需要你验收的<br/>面和点</div></div>
@@ -27,7 +27,7 @@
 <div class="cards capability-cards"><article class="card"><h4>从零搭角色卡</h4><p class="muted">先聊玩法和故事，再按需要制作设定、开局、世界书、变量与界面。哪些真的要做，取决于这张卡想怎么玩。</p></article><article class="card"><h4>旧卡增量升级</h4><p class="muted">先读懂旧卡用的变量格式和组件关系，再加功能、尽量保留原来的味道。修改部件与重新封装整卡，会分别说明范围。</p></article><article class="card"><h4>拆分与重新组装</h4><p class="muted">把大 JSON 拆成便于修改的源码部件，逐项检查后再组装。组装和发布都按你已经确认的范围执行。</p></article></div>
 <div class="callout"><strong>你可以直接这样说</strong>“帮我从零制作一张 MVU 角色卡，先访谈，不要直接写文件。”或“把这张纯文字卡改成 MVU 卡，尽量保留原来的味道。”</div>
 
-<h3 data-subsection="TW.2.1" id="tw-system-prose">文本精修：去 AI 味与去八股 <span class="new-badge">V1.4.0 · 待发布</span></h3>
+<h3 data-subsection="TW.2.1" id="tw-system-prose">文本精修：去 AI 味与去八股 <span class="new-badge">NEW · V1.4.0</span></h3>
 <p>一段话看着挺工整，读完却不知道它想说什么；几个人物一开口，像共用一个发言稿——这些都可以交给文本精修。改的是表达，事实、设定和技术结构要保住。</p>
 <div class="cards capability-cards"><article class="card new-panel"><h4>按需要改轻或改深</h4><p class="muted">只想读着顺一点，选轻润色；段落顺序不合适，选结构改写；整篇都需要换一种讲法，再选深度重写。力度再大，也不能替你编事实。</p></article><article class="card new-panel"><h4>单次、持续与持久</h4><p class="muted">可只改一段，或在当前任务持续精修；工作区和客户端持久模式分别由你同意后开启。</p></article></div>
 <div class="code-block"><div class="code-label"><span>直接交付精修稿</span><button class="copy-btn" type="button">复制</button></div><pre><code>洗稿下面这段文字：去掉套话和机械句式，保留原意、人物声音、数字、宏与变量。默认轻润色，只给我改写稿。</code></pre></div>
@@ -42,7 +42,7 @@
 <h3 data-subsection="TW.4" id="tw-system-quality">调试、审计与优化</h3>
 <p>适合“变量明明变了，状态栏没刷新”“按钮在预览页能点，进酒馆就坏”“刷新或切换聊天后功能失效”等真实运行问题。</p>
 <div class="cards capability-cards"><article class="card"><h4>沿链路找最早断点</h4><p class="muted">沿着“数据写入—读取—通知—页面更新”追查，找到最早出错的一步。数值没写进去和页面没刷新，修法完全不同。</p></article><article class="card"><h4>安全与性能审计</h4><p class="muted">检查输入和凭据处理、重复监听、渲染开销，以及页面退出后有没有留下计时器等资源。还要核对旧功能，避免修好一处又坏一处。</p></article><article class="card"><h4>真实酒馆验收</h4><p class="muted">先用离线预览查结构和样式，再用待验收产物进入真实 SillyTavern，检查点击、刷新和切换聊天。两种环境的结果分别记录。</p></article></div>
-<div class="cards capability-cards"><article class="card new-panel"><h4>全量审查 <span class="new-badge">V1.4.0 · 待发布</span></h4><p class="muted">先确定项目范围，再检查实现、配置、测试和核心流程；报告会说明哪些已看、哪些还没看。</p></article><article class="card new-panel"><h4>架构审查</h4><p class="muted">查清各部分负责什么、依赖谁、数据由谁说了算。既能查软件模块，也能查角色卡的世界书、提示词和变量；要覆盖整个项目，可用全量架构审查。</p></article></div>
+<div class="cards capability-cards"><article class="card new-panel"><h4>全量审查 <span class="new-badge">NEW · V1.4.0</span></h4><p class="muted">先确定项目范围，再检查实现、配置、测试和核心流程；报告会说明哪些已看、哪些还没看。</p></article><article class="card new-panel"><h4>架构审查</h4><p class="muted">查清各部分负责什么、依赖谁、数据由谁说了算。既能查软件模块，也能查角色卡的世界书、提示词和变量；要覆盖整个项目，可用全量架构审查。</p></article></div>
 <div class="callout warn"><strong>最有用的输入是现象</strong>把“做了什么、看见什么、本来应该发生什么”告诉 Agent，再附相关卡片或报错。比如“切换聊天后按钮消失，刷新页面才回来”，已经比一句“坏了”多了很有用的线索。</div>
 
 <h3 data-subsection="TW.5" id="tw-system-library">资料库、安装与发布 <span class="new-badge">NEW · V1.3.0</span></h3>

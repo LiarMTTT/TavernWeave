@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "TavernWeave",
     "shortDescription": "Design, build, verify, and learn SillyTavern rolecards.",
-    "longDescription": "TavernWeave 1.4.0 local candidate combines 21 skills: prose refinement with one-shot, task, approved workspace and client persistence; full and architecture reviews for software and rolecards with explicit coverage; brainstorming, immutable growth reflection, the complete library, and portable Soul modes.",
+    "longDescription": "TavernWeave 1.4.0 combines 21 skills: prose refinement with one-shot, task, approved workspace and client persistence; full and architecture reviews for software and rolecards with explicit coverage; brainstorming, immutable growth reflection, the complete library, and portable Soul modes.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
