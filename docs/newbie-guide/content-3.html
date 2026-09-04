@@ -79,7 +79,7 @@ Soul 归位</code></pre></div>
 </section>
 <section class="section" id="library-mode">
 <div class="section-head"><div class="section-no">05.3</div><div><h2>Library：技术与设计资料随 TW 一起提供</h2><p class="section-kicker">按任务查需要的部分。查到了参考，不代表已经决定照着做。</p></div></div>
-<p class="lead">v1.4.0 本地候选随包提供 A0、31 册正式 ST 指南、1 册标为待验证的 C8，以及 462 个设计、194 个动效、86 个概念和 1,609 条蒸馏记录。查询时先判断任务，再挑出相关资料；不是把整座书架一次塞进上下文。</p>
+<p class="lead">v1.4.0 随包提供 A0、31 册正式 ST 指南、1 册标为待验证的 C8，以及 462 个设计、194 个动效、86 个概念和 1,609 条蒸馏记录。查询时先判断任务，再挑出相关资料；不是把整座书架一次塞进上下文。</p>
 <div class="steps"><div class="step"><strong>写入先过 A0</strong>确认预期目标、不能改的内容和验收方式，尽早发现理解偏差。</div><div class="step"><strong>按意图查专题</strong>状态栏看 UI/移动指南，MVU 看变量指南，白屏看宿主/部署指南，不一次加载整库。</div><div class="step"><strong>设计动效只进候选</strong>挑选页可以看沙盘、来源和边界，导出的清单固定标记为 <code>proposed</code>。</div><div class="step"><strong>回到工程 Skill</strong>选好参考后，由相关 Skill 实现和验证。挑选页的演示通过，不代表你的卡在真实酒馆里已经能用。</div></div>
 <div class="callout danger"><strong>随包资料的范围</strong>公开 Library 不包含作者的 A1 驾驶员母板、命令式旧 B1、私人过程记录、原始收件箱、个人知识库或凭据。安装 TW 不会把这些私人材料一并带进来。</div>
 <p>本地安装后可打开 <code>skills/consult-tavernweave-library/assets/picker/index.html</code>。它只把候选 ID 存在浏览器本地，不要往选择单里放角色卡正文、私密设定或生产信息。</p>
@@ -88,7 +88,7 @@ Soul 归位</code></pre></div>
 <div class="section-head"><div class="section-no">05.4</div><div><h2>安装后，检查文件是否齐全、入口是否可用</h2><p class="section-kicker">文件装齐只是第一步，还要确认客户端能发现并实际调用它。</p></div></div>
 <p class="lead">例如旧安装有 16 个 Skill，只覆盖这 16 个目录，会漏掉后来新增的能力。新版文件即使已经引用 Library，调用时也可能找不到它。因此升级要对照新版本的完整清单。</p>
 <div class="steps"><div class="step"><strong>先看仓库应有清单</strong>机器清单固定列出 21 个正式 Skill，不能拿本机旧目录反推仓库内容。</div><div class="step"><strong>再比较实际安装位置</strong>安装必须计算“仓库应有目录 − 本机已有目录”，创建缺失项，而不是只覆盖旧文件。</div><div class="step"><strong>核验 Soul、Library、脑暴与 picker</strong>目录存在还不够，内容必须与当前源码逐文件匹配，离线挑选页和第 21 个 Skill 也必须在实际安装目录里。</div><div class="step"><strong>明文处理 Host Front Door</strong>先展示 Codex 或 Claude 的目标规则文件和差异，让你选择安装全局入口、先看 diff 或仅安装 Skills；写入只涉及 TW 自己的带版本区块。</div><div class="step"><strong>最后新建任务</strong>21/21 和前门 current 都不证明宿主已调用 Skill；要在新任务或重启后用直接口令另验。</div></div>
-<p>下面的完整安装模板按 v1.4.0 的 21 项清单准备。该版本仍待发布时，核验本地候选需要明确提供候选目录；如果安装线上正式版，先让 Agent 确认该版本实际应有的清单，不要拿 21/21 硬套旧版。</p>
+<p>下面的完整安装模板对应 v1.4.0 正式版的 21 项清单。安装或更新后，让 Agent 比较完整清单与宿主实际扫描的目录，确认新增的文本精修 Skill 也已装好。若使用历史版本，则按那个版本自己的清单核验。</p>
 <div class="code-block"><div class="code-label"><span>完整安装 · 可直接复制</span><button class="copy-btn" type="button">复制</button></div><pre><code>请把 TavernWeave 完整安装或更新到仓库最新版本：
 https://github.com/LiarMTTT/TavernWeave
 
@@ -134,7 +134,7 @@ https://github.com/LiarMTTT/TavernWeave
 安装、密钥、付费调用、Git、部署和发布仍需单独授权。</code></pre></div>
 </section>
 <section class="section" id="prose-refinement">
-<div class="section-head"><div class="section-no">05.6</div><div><h2>文本精修：把话写自然，把意思留下 <span class="new-badge">V1.4.0 · 待发布</span></h2><p class="section-kicker">正文、对白、文案和日常说明都能用；正式文风与必要结构按用途保留。</p></div></div>
+<div class="section-head"><div class="section-no">05.6</div><div><h2>文本精修：把话写自然，把意思留下 <span class="new-badge">NEW · V1.4.0</span></h2><p class="section-kicker">正文、对白、文案和日常说明都能用；正式文风与必要结构按用途保留。</p></div></div>
 <p>说“洗稿这段”“去 AI 味”或“去八股”，就能开始。默认轻润色，直接给一个改写版本；需要调换段落选“结构改写”，整篇要换个讲法选“深度重写”。保住的是原意与声音：人物关系、剧情事实、数字，以及“不能”“必须”等约束，都不能改松了。</p>
 <div class="table-wrap"><table><thead><tr><th>作用范围</th><th>开启</th><th>关闭</th></tr></thead><tbody>
 <tr><td>单次</td><td>洗稿这段……</td><td>交稿后结束</td></tr>
@@ -147,7 +147,7 @@ https://github.com/LiarMTTT/TavernWeave
 <div class="code-block"><div class="code-label"><span>角色对白精修</span><button class="copy-btn" type="button">复制</button></div><pre><code>洗稿下面的角色对白。保留人物身份、关系、知识范围和已发生的事；去掉雷同句式，让每个人保持自己的说话方式。不要改动宏、变量、EJS 和代码。</code></pre></div>
 </section>
 <section class="section" id="full-architecture-review">
-<div class="section-head"><div class="section-no">05.7</div><div><h2>全量审查与架构审查 <span class="new-badge">V1.4.0 · 待发布</span></h2><p class="section-kicker">先说清看多大范围，再说清重点看什么。</p></div></div>
+<div class="section-head"><div class="section-no">05.7</div><div><h2>全量审查与架构审查 <span class="new-badge">NEW · V1.4.0</span></h2><p class="section-kicker">先说清看多大范围，再说清重点看什么。</p></div></div>
 <div class="table-wrap"><table><thead><tr><th>口令</th><th>适合什么问题</th><th>你会得到什么</th></tr></thead><tbody>
 <tr><td>全量审查</td><td>整个项目还有哪些实现与验证风险？</td><td>约定范围内的检查记录、问题清单和未完成项。</td></tr>
 <tr><td>架构审查</td><td>职责、依赖、状态和关键链路是否合理？</td><td>当前关系、问题证据、影响及分阶段调整建议。</td></tr>
