@@ -16,6 +16,20 @@ test("write routes always include standing A0", () => {
   assert.ok(receipt.documents.some((doc) => doc.id === "ST-A0"));
 });
 
+test("rewrite and review intents route with a bounded zero-candidate receipt", () => {
+  for (const intent of ["洗稿", "去 AI 味", "去AI味", "去八股", "查看洗稿模式状态"]) {
+    const receipt = queryLibrary({ intent, write: true, catalogLimit: 0 });
+    assert.ok(receipt.routeIds.includes("rewrite-natural-prose"), intent);
+    assert.deepEqual(receipt.candidates, []);
+    assert.deepEqual(receipt.standing, ["ST-A0"]);
+  }
+  for (const intent of ["全量审查", "架构审查", "全量架构审查"]) {
+    const receipt = queryLibrary({ intent, catalogLimit: 0 });
+    assert.deepEqual(receipt.routeIds, ["code-quality-workflow"]);
+    assert.deepEqual(receipt.candidates, []);
+  }
+});
+
 test("database experimental route is opt-in", () => {
   const stable = queryLibrary({ skill: "sillytavern-database-rolecards", write: true });
   const experimental = queryLibrary({ skill: "sillytavern-database-rolecards", write: true, includeExperimental: true });

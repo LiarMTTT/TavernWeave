@@ -163,6 +163,51 @@ def finding_sort_key(finding: dict[str, Any]) -> tuple[Any, ...]:
     )
 
 
+def merge_coverage(reports: list[dict[str, Any]]) -> dict[str, Any]:
+    """Keep coverage evidence and disagreements without inferring a full inventory."""
+    rows: dict[tuple[str, str, str, str], dict[str, Any]] = {}
+    missing_reports: list[int] = []
+    statuses_by_path: dict[str, set[str]] = {}
+    focuses: set[str] = set()
+    for number, report in enumerate(reports, start=1):
+        focus = report.get("focus", "architecture" if report.get("mode") == "architecture-hotspot-scan" else "general")
+        if focus not in ("general", "architecture"):
+            raise ValueError("focus must be general or architecture")
+        focuses.add(focus)
+        coverage = require_object_collection(report, "coverage")
+        if not coverage:
+            missing_reports.append(number)
+        for record in coverage:
+            for field in ("path", "status", "reason", "evidence"):
+                if field in record and not isinstance(record[field], str):
+                    raise ValueError(f"coverage {field} must be a string")
+            file = normalize_file(record.get("path"))
+            status = record.get("status", "")
+            reason = record.get("reason", "").strip()
+            evidence = record.get("evidence", "").strip()
+            if not file or status not in ("reviewed", "partial", "unread", "excluded"):
+                raise ValueError("coverage requires a path and reviewed/partial/unread/excluded status")
+            if status != "reviewed" and not reason:
+                raise ValueError("partial, unread and excluded coverage require a reason")
+            if status in ("reviewed", "partial") and not evidence:
+                raise ValueError("reviewed and partial coverage require evidence")
+            key = (file, status, reason, evidence)
+            if key not in rows:
+                rows[key] = {"path": file, "status": status, "reason": reason, "evidence": evidence, "reports": []}
+            if number not in rows[key]["reports"]:
+                rows[key]["reports"].append(number)
+            statuses_by_path.setdefault(file, set()).add(status)
+    conflicts = [{"path": file, "statuses": sorted(statuses)} for file, statuses in sorted(statuses_by_path.items()) if len(statuses) > 1]
+    coverage_status = "unrecorded" if not rows else "partial" if missing_reports or conflicts or any(row["status"] in ("partial", "unread") for row in rows.values()) else "recorded"
+    return {
+        "focuses": sorted(focuses),
+        "coverage": [rows[key] for key in sorted(rows)],
+        "coverage_status": coverage_status,
+        "coverage_unrecorded_reports": missing_reports,
+        "coverage_conflicts": conflicts,
+    }
+
+
 def merge_reports(reports: Iterable[dict[str, Any]]) -> dict[str, Any]:
     report_list = list(reports)
     findings_by_key: dict[tuple[str, str, str, str], dict[str, Any]] = {}
@@ -197,6 +242,7 @@ def merge_reports(reports: Iterable[dict[str, Any]]) -> dict[str, Any]:
 
     return {
         "report_count": len(report_list),
+        **merge_coverage(report_list),
         "modes": sorted(modes),
         "targets": targets,
         "findings": sorted(findings_by_key.values(), key=finding_sort_key),
@@ -247,6 +293,19 @@ def to_markdown(summary: dict[str, Any]) -> str:
         ):
             if finding.get(field):
                 lines.append(f"  {label}: {finding[field]}")
+
+    lines.extend(["", "## Coverage", "",
+                  f"- Focus: {', '.join(summary['focuses']) or 'unrecorded'}",
+                  f"- Coverage: {summary['coverage_status']} (recorded does not prove the full project inventory or runtime acceptance)"])
+    if summary["coverage_unrecorded_reports"]:
+        lines.append("- 未记录 / unrecorded reports: " + ", ".join(map(str, summary["coverage_unrecorded_reports"])))
+    for row in summary["coverage"]:
+        lines.append(f"- [{row['status']}] {row['path']} (reports: {', '.join(map(str, row['reports']))})")
+        for field in ("reason", "evidence"):
+            if row[field]:
+                lines.append(f"  {field.title()}: {row[field]}")
+    for conflict in summary["coverage_conflicts"]:
+        lines.append(f"- Unresolved coverage conflict: {conflict['path']} — {', '.join(conflict['statuses'])}")
 
     lines.extend(["", "## Refactor Gate Candidates"])
     if not summary["refactor_signals"]:

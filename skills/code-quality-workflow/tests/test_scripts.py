@@ -132,6 +132,65 @@ class MergeAuditReportsTests(unittest.TestCase):
             merge.merge_reports([{"findings": None}])
 
 
+class CoverageReportTests(unittest.TestCase):
+    def test_old_reports_never_imply_complete_coverage(self) -> None:
+        summary = merge.merge_reports([{"mode": "full-scan", "findings": []}])
+        self.assertEqual(summary["coverage_status"], "unrecorded")
+        self.assertEqual(summary["coverage_unrecorded_reports"], [1])
+        self.assertIn("未记录", merge.to_markdown(summary))
+
+    def test_coverage_duplicates_keep_provenance_and_status_conflicts(self) -> None:
+        reviewed = {"path": ".\\src\\state.ts", "status": "reviewed", "evidence": "Traced the only writer"}
+        unread = {"path": "src/state.ts", "status": "unread", "reason": "Not available in this slice"}
+        summary = merge.merge_reports([
+            {"mode": "full-scan", "focus": "architecture", "coverage": [reviewed, reviewed]},
+            {"coverage": [reviewed, unread]},
+        ])
+        self.assertEqual(len(summary["coverage"]), 2)
+        row = next(row for row in summary["coverage"] if row["status"] == "reviewed")
+        self.assertEqual(row["reports"], [1, 2])
+        self.assertEqual(summary["coverage_status"], "partial")
+        self.assertEqual(summary["coverage_conflicts"], [{"path": "src/state.ts", "statuses": ["reviewed", "unread"]}])
+        self.assertIn("Not available in this slice", merge.to_markdown(summary))
+
+    def test_exclusions_partial_evidence_and_legacy_gaps_survive_merging(self) -> None:
+        summary = merge.merge_reports([
+            {"coverage": [
+                {"path": "dist/card.png", "status": "excluded", "reason": "Generated from maintained source"},
+                {"path": "worldbook.json", "status": "partial", "reason": "Runtime unavailable", "evidence": "Compared entry IDs"},
+            ]},
+            {"target": "old-report"},
+        ])
+        self.assertEqual(summary["coverage_status"], "partial")
+        self.assertEqual(summary["coverage_unrecorded_reports"], [2])
+        self.assertEqual(len(summary["coverage"]), 2)
+
+    def test_recorded_coverage_is_not_a_complete_inventory_claim(self) -> None:
+        summary = merge.merge_reports([{"coverage": [{"path": "a.py", "status": "reviewed", "evidence": "Inspected callers"}]}])
+        self.assertEqual(summary["coverage_status"], "recorded")
+        self.assertIn("does not prove the full project inventory", merge.to_markdown(summary))
+
+    def test_all_findings_survive_json_and_markdown(self) -> None:
+        findings = [{"file": f"src/{number}.ts", "severity": "P2", "title": f"Issue {number}", "evidence": f"Evidence {number}"} for number in range(6)]
+        summary = merge.merge_reports([{"mode": "full-scan", "focus": "architecture", "findings": findings}])
+        self.assertEqual(len(summary["findings"]), 6)
+        rendered = merge.to_markdown(summary)
+        for finding in findings:
+            self.assertIn(finding["evidence"], rendered)
+
+    def test_malformed_coverage_and_focus_are_rejected(self) -> None:
+        invalid = [
+            {"coverage": None}, {"coverage": ["not an object"]}, {"focus": "frontend"},
+            {"coverage": [{"path": "a", "status": "done"}]},
+            {"coverage": [{"path": "a", "status": "reviewed"}]},
+            {"coverage": [{"path": "a", "status": "excluded"}]},
+            {"coverage": [{"path": "a", "status": "reviewed", "evidence": 42}]},
+        ]
+        for report in invalid:
+            with self.subTest(report=report), self.assertRaises(ValueError):
+                merge.merge_reports([report])
+
+
 class CheckPatchScopeTests(unittest.TestCase):
     def test_binary_numstat_is_unknown_and_can_fail_on_warning(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:

@@ -60,10 +60,12 @@ If any check is uncertain, use `Do Not Touch Yet` or return the item to `GATE`.
 
 ## Sweep modes
 
-- `full-scan`: inspect a repository, package, or directory tree for its highest risks.
+- `full-scan`: inventory and inspect the complete agreed repository, package, or directory scope; retain unfinished and excluded areas explicitly.
 - `new-component-scan`: inspect newly added or heavily changed components before adoption.
 - `diff-regression-scan`: inspect recent changes for behavior regressions, boundary mistakes, and missing verification.
 - `architecture-hotspot-scan`: inspect state ownership, sources of truth, dependency direction, public contracts, and core flows.
+
+Scope and focus are independent: 全量审查 is `full-scan` with `focus: general`; 架构审查 is `architecture-hotspot-scan` with `focus: architecture`; 全量架构审查 is `full-scan` with `focus: architecture`. Use [architecture-review.md](architecture-review.md) for software/card/mixed projects. Lock the root and source snapshot before slicing; the merger cannot verify whether a supplied path inventory is exhaustive or whether source changed between slices.
 
 Split work by independent module, component, ownership boundary, or risk surface. Prefer a small number of independent read-only reviewers and increase parallelism only when slices do not overlap. Do not have reviewers edit files or receive expected conclusions.
 
@@ -94,6 +96,11 @@ Use this shape when reports will be merged:
 {
   "target": "src/example.ts",
   "mode": "diff-regression-scan",
+  "focus": "general",
+  "coverage": [
+    {"path": "src/example.ts", "status": "reviewed", "reason": "", "evidence": "Traced update callers and the save contract"},
+    {"path": "src/runtime.ts", "status": "unread", "reason": "Not available in this slice", "evidence": ""}
+  ],
   "findings": [
     {
       "severity": "P1",
@@ -146,6 +153,14 @@ Use this shape when reports will be merged:
 ```
 
 All collection fields are optional and default to empty collections. A supplied collection must be a JSON array of objects.
+
+### Coverage extension (v1.4.0)
+
+`focus` is optional (`general` or `architecture`); absent focus is inferred as architecture only for the legacy `architecture-hotspot-scan`, and general otherwise. `coverage` is optional for old reports. Each row uses `path`, `status`, `reason`, and `evidence`; supplied fields must be strings. Status is `reviewed`, `partial`, `unread`, or `excluded`. Non-reviewed rows require a reason; reviewed/partial rows require evidence. Include runtime gaps separately even when a file's source review is complete.
+
+Coverage merge normalizes path spelling with the existing case-preserving rule and deduplicates by `(path, status, reason, evidence)`, preserving report-number provenance. Different statuses for the same path remain separate and appear in `coverage_conflicts`; a reviewed row never overwrites an unread one. Empty/absent coverage appears in `coverage_unrecorded_reports`. No input report is silently discarded for lacking the new fields.
+
+The additive summary fields are `focuses`, `coverage`, `coverage_status`, `coverage_unrecorded_reports`, and `coverage_conflicts`. `coverage_status` is `unrecorded` when there are no rows, `partial` when any report has no rows, conflicts exist, or partial/unread rows remain, and `recorded` otherwise. **Recorded only describes supplied evidence; it is not full inventory completion, runtime acceptance or driver acceptance.** The coordinating review must reconcile it with its actual inventory. Markdown includes all coverage rows, reasons, evidence and conflicts, as well as every finding; there is no three-finding truncation.
 
 ## Deterministic merge rules
 

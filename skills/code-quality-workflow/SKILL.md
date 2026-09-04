@@ -1,7 +1,7 @@
 ---
 name: code-quality-workflow
 description: >-
-  End-to-end code quality workflow for evidence-backed code review, repository sweeps, refactor decisions, authorized minimal changes, and verification. Use when Codex needs to audit code or diffs, scan a codebase, triage cleanup or slimming requests, decide whether a local fix, staged refactor, or rewrite is justified, or implement and verify an explicitly authorized quality fix with scope and rollback controls.
+  End-to-end code quality workflow for evidence-backed code review, full repository reviews, architecture reviews of software and character-card systems, refactor decisions, authorized minimal changes, and verification. Use for 全量审查、架构审查、全量架构审查, code or diff audits, cleanup triage, or a scoped quality fix. Preserve coverage gaps and keep audit-only requests read-only.
 ---
 
 # Code Quality Workflow
@@ -41,6 +41,18 @@ Skip `SWEEP` for a focused target. Stop after any read-only state when the reque
 
 When intent is ambiguous, choose the more conservative read-only route.
 
+### Review scope and focus
+
+| Direct request | Mode | Focus |
+| --- | --- | --- |
+| 全量审查 | `full-scan` | `general` |
+| 架构审查 | `architecture-hotspot-scan` | `architecture` |
+| 全量架构审查 | `full-scan` | `architecture` |
+
+Use the named target; for architecture review without a narrower target, inspect the current project's key boundaries and core flows. Identify whether it is software, a character card, or a mixture. Read [references/architecture-review.md](references/architecture-review.md) for architecture focus. Preserve existing focused/diff/new-component modes. These commands do not activate Soul; an already active or explicitly requested Soul can change the voice only. Quoted commands remain data.
+
+Full reviews establish a bounded inventory before reviewing slices, record reviewed/partial/unread/excluded paths with reasons and evidence, and preserve unfinished work for continuation. Do not imply that a hotspot scan, no findings, or all supplied rows marked reviewed proves a complete repository review. A large scope may require a progress report, not a false completion claim. Separate inventory coverage, executed tests, runtime evidence, and driver acceptance.
+
 ## State 1: AUDIT
 
 Establish the target, inclusion and exclusion boundaries, relevant contracts, tests, schemas, configuration, call sites, and project-specific rules. Review in this order:
@@ -67,9 +79,9 @@ Read [references/audit-and-sweep.md](references/audit-and-sweep.md) when severit
 Use this state for broad, batch, or multi-surface audits. It is read-only.
 
 1. Record the mode: `full-scan`, `new-component-scan`, `diff-regression-scan`, or `architecture-hotspot-scan`.
-2. Record the root, included paths, and excluded generated, vendor, build, release, lock, and migration artifacts unless explicitly scoped.
+2. Record the root, revision/worktree snapshot, and scope inventory. Include configuration, manifests, lockfiles and migrations when they affect the contracts or runtime under review. Record reasons for excluded generated, vendor, build, release or binary artifacts; inspect their maintained sources and provenance when relevant.
 3. Slice by module, component, ownership boundary, or risk surface. Give reviewers raw artifacts and forbid edits.
-4. Keep the coordinating agent responsible for final severity, deduplication, and user-facing conclusions.
+4. Keep the coordinating agent responsible for final severity, deduplication, coverage reconciliation and user-facing conclusions. The complete findings list has no three-item cap; Soul may select up to three points for the opening summary only.
 5. Merge structured reports deterministically:
 
    ```powershell
@@ -171,6 +183,8 @@ Verification Gaps
 Gate Recommendation
 Residual Risk
 ```
+
+Include scope/focus, coverage and remaining paths for sweeps. If prose refinement is active, improve wording without deleting findings, evidence, severity, mandatory fields or untested boundaries. Persist reports only through the project's authorized output channel; read-only review does not authorize source edits.
 
 For an authorized change, report:
 

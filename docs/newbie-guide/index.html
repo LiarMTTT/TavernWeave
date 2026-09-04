@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="从一句需求到真实酒馆验收：讲人话的 TavernWeave、Agent、Zod、CoT、脚本、正则与运行时调试教程。" name="description"/>
+<meta content="从一句需求到真实酒馆验收：从驾驶员视角讲解 TavernWeave、Agent、MVU、Zod、提示词、脚本与真实运行调试。" name="description"/>
 <meta content="dark light" name="color-scheme"/>
 <meta content="#0b0d12" name="theme-color"/>
 <title>奶人教程｜从零开始驾驭 AI Agent 做 ST 开发</title>
-<link href="./style.css?v=34" rel="stylesheet"/>
-<link href="./layout-v6.css?v=34" rel="stylesheet"/>
-<meta content="1.3.0" name="tw-guide-version"/></head>
+<link href="./style.css?v=37" rel="stylesheet"/>
+<link href="./layout-v6.css?v=37" rel="stylesheet"/>
+<meta content="1.4.0" name="tw-guide-version"/></head>
 <body>
 <a class="skip-link" href="#main">跳到正文</a>
 <div class="progress" id="progress"></div>
@@ -36,6 +36,7 @@
 <a class="nav-link" href="#tw-capabilities"><span>TW</span><span>先认识 TavernWeave <strong class="nav-new">NEW</strong></span></a>
 <a class="nav-link nav-sublink" href="#tw-system-plan"><span>TW.1</span><span>项目规划与脑暴 <strong class="nav-new">NEW</strong></span></a>
 <a class="nav-link nav-sublink" href="#tw-system-card"><span>TW.2</span><span>角色卡与变量系统</span></a>
+<a class="nav-link nav-sublink" href="#tw-system-prose"><span>TW.2.1</span><span>文本精修 <strong class="nav-new">候选</strong></span></a>
 <a class="nav-link nav-sublink" href="#tw-system-frontend"><span>TW.3</span><span>前端、交互与美术 <strong class="nav-new">NEW</strong></span></a>
 <a class="nav-link nav-sublink" href="#tw-system-quality"><span>TW.4</span><span>调试、审计与优化</span></a>
 <a class="nav-link nav-sublink" href="#tw-system-library"><span>TW.5</span><span>资料库、安装与发布 <strong class="nav-new">NEW</strong></span></a>
@@ -45,7 +46,8 @@
 <details class="nav-chapter">
 <summary><span class="nav-chapter-no">Ⅰ</span><span>第一章 · 驾驭 Agent</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
 <div class="nav-chapter-links">
-<a class="nav-link" href="#intro"><span>00</span><span>Vibe Code 不是开盲盒</span></a>
+<a class="nav-link" href="#intro"><span>00</span><span>Vibe Code 不是许愿柳</span></a>
+<a class="nav-link nav-sublink" href="#driver-presence-prompts"><span>00.1</span><span>在场／无人值守提示词</span></a>
 <a class="nav-link" href="#first-run"><span>01</span><span>第一个真交付</span></a>
 <a class="nav-link" href="#agent"><span>02</span><span>Agent 怎么干活</span></a>
 <a class="nav-link nav-sublink" href="#chatgpt-mobile-subscription"><span>02.1</span><span>ChatGPT 套餐购买</span></a>
@@ -55,71 +57,73 @@
 <a class="nav-link nav-sublink" href="#agent-radar"><span>03.3</span><span>Codex / Claude 雷达</span></a>
 <a class="nav-link nav-sublink" href="#model-readiness-check"><span>03.4</span><span>开工前模型体检</span></a>
 <a class="nav-link" href="#workspace"><span>04</span><span>文件夹 / Git / GitHub</span></a>
-<a class="nav-link" href="#tw"><span>05</span><span>TW 施工队</span></a>
-<a class="nav-link nav-sublink" href="#tw-v1"><span>05.1</span><span>v1.2 五层入口</span></a>
+<a class="nav-link" href="#tw"><span>05</span><span>TW 工作系统</span></a>
+<a class="nav-link nav-sublink" href="#tw-v1"><span>05.1</span><span>v1.4 工作流程</span></a>
 <a class="nav-link nav-sublink" href="#soul-mode"><span>05.2</span><span>Soul 单席 / 三席</span></a>
 <a class="nav-link nav-sublink" href="#library-mode"><span>05.3</span><span>资料库与挑选页</span></a>
-<a class="nav-link nav-sublink" href="#install-gate"><span>05.4</span><span>19/19 + 全局前门</span></a>
+<a class="nav-link nav-sublink" href="#install-gate"><span>05.4</span><span>21/21 + 全局前门</span></a>
 <a class="nav-link nav-sublink" href="#brainstorm-blueprint"><span>05.5</span><span>脑暴与防膨胀蓝图</span></a>
+<a class="nav-link nav-sublink" href="#prose-refinement"><span>05.6</span><span>文本精修与持久模式</span></a>
+<a class="nav-link nav-sublink" href="#full-architecture-review"><span>05.7</span><span>全量／架构审查</span></a>
 <a class="nav-link" href="#db"><span>06</span><span>按任务查 DB</span></a>
-<a class="nav-link" href="#a0"><span>07</span><span>A0 开工三句话</span></a>
-<a class="nav-link" href="#workflow"><span>08</span><span>完整跑一趟</span></a>
-<a class="nav-link" href="#mistakes"><span>09</span><span>六个送命习惯</span></a>
-<a class="nav-link" href="#graduate"><span>10</span><span>收住方向盘</span></a>
+<a class="nav-link" href="#a0"><span>07</span><span>A0 预期、边界与验收</span></a>
+<a class="nav-link" href="#workflow"><span>08</span><span>折叠面板练习</span></a>
+<a class="nav-link" href="#mistakes"><span>09</span><span>六个返工习惯</span></a>
+<a class="nav-link" href="#graduate"><span>10</span><span>第一章回顾</span></a>
 </div>
 </details>
 <details class="nav-chapter">
 <summary><span class="nav-chapter-no">Ⅱ</span><span>第二章 · 角色卡机制</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
 <div class="nav-chapter-links">
-<a class="nav-link" href="#chapter-2"><span>Ⅱ</span><span>Zod、CoT 与脚本</span></a>
-<a class="nav-link" href="#zod"><span>11</span><span>Zod 记账</span></a>
+<a class="nav-link" href="#chapter-2"><span>Ⅱ</span><span>变量、提示词与脚本</span></a>
+<a class="nav-link" href="#zod"><span>11</span><span>MVU 与 Zod 分工</span></a>
 <a class="nav-link" href="#cot"><span>12</span><span>CoT 检查单</span></a>
-<a class="nav-link" href="#calc-script"><span>13</span><span>脚本接管算术</span></a>
-<a class="nav-link" href="#calc-balance"><span>14</span><span>别抢同一支笔</span></a>
-<a class="nav-link" href="#chapter-2-summary"><span>15</span><span>第二章收口</span></a>
+<a class="nav-link" href="#calc-script"><span>13</span><span>脚本计算与结算</span></a>
+<a class="nav-link" href="#calc-balance"><span>14</span><span>变量由谁更新</span></a>
+<a class="nav-link" href="#chapter-2-summary"><span>15</span><span>第二章回顾</span></a>
 </div>
 </details>
 <details class="nav-chapter">
 <summary><span class="nav-chapter-no">Ⅲ</span><span>第三章 · 脚本与正则</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
 <div class="nav-chapter-links">
 <a class="nav-link" href="#chapter-3"><span>Ⅲ</span><span>脚本动手，正则改字</span></a>
-<a class="nav-link" href="#th-script"><span>16</span><span>脚本真会干活</span></a>
+<a class="nav-link" href="#th-script"><span>16</span><span>脚本读取与操作</span></a>
 <a class="nav-link" href="#regex-vs-script"><span>17</span><span>正则不是神器</span></a>
-<a class="nav-link" href="#ui-script"><span>18</span><span>UI 不只画皮</span></a>
-<a class="nav-link" href="#ui-types"><span>19</span><span>能看与能改</span></a>
-<a class="nav-link" href="#interaction-chain"><span>20</span><span>按钮完整链</span></a>
-<a class="nav-link" href="#lifecycle"><span>21</span><span>生命周期找上门</span></a>
-<a class="nav-link" href="#variable-io"><span>22</span><span>变量别乱改</span></a>
-<a class="nav-link" href="#worldbook-script"><span>23</span><span>世界书安全装卸</span></a>
-<a class="nav-link" href="#prompt-injection"><span>24</span><span>只塞此刻所需</span></a>
-<a class="nav-link" href="#external-api"><span>25</span><span>API 失败路线</span></a>
-<a class="nav-link" href="#regex"><span>26</span><span>正则找字换字</span></a>
-<a class="nav-link" href="#hide-update"><span>27</span><span>更新块别掐死</span></a>
-<a class="nav-link" href="#regex-ui"><span>28</span><span>按钮还得通电</span></a>
-<a class="nav-link" href="#structured-output"><span>29</span><span>别让模型编前端</span></a>
-<a class="nav-link" href="#cooperation"><span>30</span><span>改字与办事</span></a>
-<a class="nav-link" href="#choose-tool"><span>31</span><span>三秒选工具</span></a>
-<a class="nav-link" href="#common-failures"><span>32</span><span>故障掉在哪层</span></a>
-<a class="nav-link" href="#real-state"><span>33</span><span>DOM 不是真相</span></a>
-<a class="nav-link" href="#acceptance"><span>34</span><span>别在离线页自嗨</span></a>
-<a class="nav-link" href="#tw-db-script"><span>35</span><span>TW 定流程，DB 查真相</span></a>
-<a class="nav-link" href="#chapter-3-summary"><span>36</span><span>第三章收口</span></a>
+<a class="nav-link" href="#ui-script"><span>18</span><span>状态栏与开局页</span></a>
+<a class="nav-link" href="#ui-types"><span>19</span><span>展示与操作界面</span></a>
+<a class="nav-link" href="#interaction-chain"><span>20</span><span>购买按钮的完整流程</span></a>
+<a class="nav-link" href="#lifecycle"><span>21</span><span>刷新与聊天切换</span></a>
+<a class="nav-link" href="#variable-io"><span>22</span><span>变量读写位置</span></a>
+<a class="nav-link" href="#worldbook-script"><span>23</span><span>世界书模块装卸</span></a>
+<a class="nav-link" href="#prompt-injection"><span>24</span><span>运行时提示词</span></a>
+<a class="nav-link" href="#external-api"><span>25</span><span>API 失败处理</span></a>
+<a class="nav-link" href="#regex"><span>26</span><span>状态文本与正则</span></a>
+<a class="nav-link" href="#hide-update"><span>27</span><span>隐藏更新块</span></a>
+<a class="nav-link" href="#regex-ui"><span>28</span><span>选项变成按钮</span></a>
+<a class="nav-link" href="#structured-output"><span>29</span><span>固定界面模板</span></a>
+<a class="nav-link" href="#cooperation"><span>30</span><span>三种组合方式</span></a>
+<a class="nav-link" href="#choose-tool"><span>31</span><span>正则还是脚本</span></a>
+<a class="nav-link" href="#common-failures"><span>32</span><span>从现象找线索</span></a>
+<a class="nav-link" href="#real-state"><span>33</span><span>页面与保存的数据</span></a>
+<a class="nav-link" href="#acceptance"><span>34</span><span>真实酒馆验收</span></a>
+<a class="nav-link" href="#tw-db-script"><span>35</span><span>按资料核对接口</span></a>
+<a class="nav-link" href="#chapter-3-summary"><span>36</span><span>第三章回顾</span></a>
 </div>
 </details>
 <div class="nav-level advanced"><span>进阶篇</span><span>第四章起</span></div>
 <details class="nav-chapter">
 <summary><span class="nav-chapter-no">Ⅳ</span><span>第四章 · 运行时调试</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
 <div class="nav-chapter-links">
-<a class="nav-link" href="#chapter-4"><span>Ⅳ</span><span>听见真实酒馆</span></a>
-<a class="nav-link" href="#runtime-evidence"><span>37</span><span>源码对，运行照样坏</span></a>
-<a class="nav-link" href="#agent-mock"><span>38</span><span>Mock 三层分工</span></a>
+<a class="nav-link" href="#chapter-4"><span>Ⅳ</span><span>记录真实运行过程</span></a>
+<a class="nav-link" href="#runtime-evidence"><span>37</span><span>运行记录能查什么</span></a>
+<a class="nav-link" href="#agent-mock"><span>38</span><span>三层调试分工</span></a>
 <a class="nav-link" href="#mock-receiver"><span>39</span><span>本机接收器</span></a>
 <a class="nav-link" href="#tavern-probe"><span>40</span><span>只报摘要的 Probe</span></a>
-<a class="nav-link" href="#agent-debug-loop"><span>41</span><span>盯最早断点</span></a>
-<a class="nav-link" href="#vscode-listener"><span>42</span><span>停在案发现场</span></a>
+<a class="nav-link" href="#agent-debug-loop"><span>41</span><span>从记录定位问题</span></a>
+<a class="nav-link" href="#vscode-listener"><span>42</span><span>断点查看变量</span></a>
 <a class="nav-link" href="#debug-compare"><span>43</span><span>时间线与断点</span></a>
-<a class="nav-link" href="#combined-debug"><span>44</span><span>先收网，再下刀</span></a>
-<a class="nav-link" href="#chapter-4-summary"><span>45</span><span>第四章收口</span></a>
+<a class="nav-link" href="#combined-debug"><span>44</span><span>定位、修复与验证</span></a>
+<a class="nav-link" href="#chapter-4-summary"><span>45</span><span>第四章回顾</span></a>
 </div>
 </details>
 <div class="nav-level release"><span>版本档案</span><span>大版本更新</span></div>
@@ -127,6 +131,7 @@
 <summary><span class="nav-chapter-no">更</span><span>更新日志</span><span aria-hidden="true" class="nav-chevron">⌄</span></summary>
 <div class="nav-chapter-links">
 <a class="nav-link" href="#release-history"><span>日志</span><span>TavernWeave 更新日志</span></a>
+<a class="nav-link nav-sublink" href="#release-v1-4-0"><span>1.4</span><span>V1.4.0 · 文本精修与审查 <strong class="nav-new">候选</strong></span></a>
 <a class="nav-link nav-sublink" href="#release-v1-3-0"><span>1.3</span><span>V1.3.0 · 照镜子与完整资料库 <strong class="nav-new">NEW</strong></span></a>
 <a class="nav-link nav-sublink" href="#release-v1-2-0"><span>1.2</span><span>V1.2.0 · 许愿工坊</span></a>
 <a class="nav-link nav-sublink" href="#release-v1-1-0"><span>1.1</span><span>V1.1.0 · Soul 与全局前门</span></a>
@@ -138,6 +143,6 @@
 <main id="main"><section class="section">正在加载教程内容…</section></main>
 </div>
 <button aria-label="返回顶部" class="icon-btn backtop" id="backtop" title="返回顶部" type="button">↑</button>
-<script src="./app.js?v=34"></script>
+<script src="./app.js?v=37"></script>
 </body>
 </html>

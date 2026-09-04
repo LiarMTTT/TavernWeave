@@ -1,4 +1,4 @@
 interface:
   display_name: "Code Quality Workflow"
-  short_description: "Audit, gate, change, and verify code safely"
-  default_prompt: "Use $code-quality-workflow to audit this code, gate any proposed change, and verify only an explicitly authorized patch."
+  short_description: "Review full projects and software or card architecture"
+  default_prompt: "Use $code-quality-workflow for 全量架构审查 of this project; preserve coverage gaps and complete evidence, and keep implementation behind its existing authorization gate."

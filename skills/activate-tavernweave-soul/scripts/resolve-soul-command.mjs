@@ -38,6 +38,16 @@ const exact = new Map([
   ["/soul off", ["deactivate", "inactive"]],
 ]);
 
+for (const [label, mode, focus] of [
+  ["全量审查", "full-scan", "general"],
+  ["架构审查", "architecture-hotspot-scan", "architecture"],
+  ["全量架构审查", "full-scan", "architecture"],
+]) {
+  for (const prefix of ["灵魂杀手", "开启灵魂杀手模式"]) {
+    exact.set(`${prefix},${label}`, ["activate", "soul-killer-portable", { skill: "code-quality-workflow", mode, focus }]);
+  }
+}
+
 function normalize(input) {
   const normalized = input.normalize("NFKC").trim().replace(/[！!。.]$/u, "").replace(/[，、]/gu, ",").replace(/\s+/gu, " ").replace(/\s*,\s*/gu, ",").toLowerCase();
   return normalized.startsWith("/") ? normalized : normalized.replace(/\s+/gu, "");
@@ -45,7 +55,7 @@ function normalize(input) {
 export function resolveSoulCommand(input) {
   const normalized = normalize(String(input || ""));
   const hit = exact.get(normalized);
-  return hit ? { schemaVersion: 1, matched: true, action: hit[0], mode: hit[1], persistence: "current-task-portable" }
+  return hit ? { schemaVersion: 1, matched: true, action: hit[0], mode: hit[1], persistence: "current-task-portable", ...(hit[2] ? { review: hit[2] } : {}) }
     : { schemaVersion: 1, matched: false, action: "none", mode: null, persistence: "none" };
 }
 

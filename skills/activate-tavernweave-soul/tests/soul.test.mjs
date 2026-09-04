@@ -18,6 +18,17 @@ test("primary activation and switching commands resolve", () => {
   assert.equal(resolveSoulCommand("/soul switch ensemble").action, "switch");
 });
 
+test("explicit review combinations route scope without making generic reviews Soul commands", () => {
+  for (const [label, mode, focus] of [["全量审查", "full-scan", "general"], ["架构审查", "architecture-hotspot-scan", "architecture"], ["全量架构审查", "full-scan", "architecture"]]) {
+    const result = resolveSoulCommand(`灵魂杀手，${label}`);
+    assert.equal(result.mode, "soul-killer-portable");
+    assert.deepEqual(result.review, { skill: "code-quality-workflow", mode, focus });
+    assert.equal(resolveSoulCommand(label).matched, false);
+    assert.equal(resolveSoulCommand(`引用：灵魂杀手，${label}`).matched, false);
+  }
+  assert.equal(resolveSoulCommand("灵魂杀手！").review, undefined);
+});
+
 test("exit commands take the inactive state", () => {
   for (const phrase of ["Soul 归位", "阿瞳归位", "MTTT.sir 下课", "强尼，下线", "Relic 断开", "结束 Soul 模式", "/soul off"]) {
     assert.deepEqual(resolveSoulCommand(phrase), { schemaVersion: 1, matched: true, action: "deactivate", mode: "inactive", persistence: "current-task-portable" });

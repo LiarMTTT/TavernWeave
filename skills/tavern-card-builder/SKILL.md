@@ -96,6 +96,8 @@ Use the focused skills when a task crosses the authoring boundary:
 - `$sillytavern-runtime-debug` for evidence from a real SillyTavern session;
 - `$sillytavern-embedded-ui` for opening pages, status bars, control centers, and dialogs;
 - `$rolecard-workshop-ops` for publishing infrastructure.
+- `$rewrite-natural-prose` for requested prose refinement or an already enabled rewriting mode; refine creative handoffs within that mode while preserving canon and protected technical fields. Ordinary card creation does not enable or persist a rewriting preference.
+- `$code-quality-workflow` for explicit full/architecture reviews of card organization and its software connections; keep authoring changes behind the existing gate.
 
 ## Author the minimum complete design
 

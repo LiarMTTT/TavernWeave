@@ -1,13 +1,67 @@
 <section class="section" id="intro">
-<div class="section-head"><div class="section-no">00</div><div><h2>Vibe Code 不是开盲盒</h2><p class="section-kicker">你掌方向盘，Agent 跑工程循环；成品不是靠抽。</p></div></div>
-<p class="lead">能长期用的 Vibe Code 很朴素：你定方向、卡边界、收结果，Agent 调查、动手、拿证据。</p>
-<div aria-label="Vibe Code 基本流程" class="flow"><div class="flow-node">你定义结果</div><div class="flow-arrow">→</div><div class="flow-node">Agent 调查项目</div><div class="flow-arrow">→</div><div class="flow-node">提出方案</div><div class="flow-arrow">→</div><div class="flow-node">修改与验证</div><div class="flow-arrow">→</div><div class="flow-node">你亲自验收</div></div>
-<div class="callout"><strong>先坐对位置</strong>你不是等成品掉下来的乘客。你是驾驶员；Agent 是能操作工作台的执行者。</div>
-<div class="cards"><article class="card"><div class="card-icon">目</div><h3>目标</h3><p class="muted">最终要出现什么可见结果，而不是笼统地说“优化一下”。</p></article><article class="card"><div class="card-icon">界</div><h3>边界</h3><p class="muted">哪些文件能动、哪些结构不能碰、哪些工作必须先获得批准。</p></article><article class="card"><div class="card-icon">验</div><h3>验收</h3><p class="muted">页面能否打开、按钮是否生效、变量是否真正写入，而不是 Agent 是否声称完成。</p></article></div>
+<div class="section-head"><div class="section-no">00</div><div><h2>Vibe Code <span style="white-space: nowrap">不是许愿柳</span></h2><p class="section-kicker">按现阶段 AI 和 Agent 的能力水平，我更愿意把它们看成“外置大脑＋力工”：帮你想办法，也替你做具体工作。</p></div></div>
+<p class="lead">在这份教程里，Vibe Code 指的是：你用自然语言说明想做什么，让 AI 协助分析、写代码、修改项目，再通过检查和实际使用逐步改进。</p>
+<p>“外置大脑”帮你整理想法、查资料、比较方案，把暂时不懂的问题解释清楚。“力工”负责阅读文件、修改代码、运行检查，遇到问题后继续修正。这两部分结合起来，才有了从讨论走到实际成果的可能。</p>
+<p><strong>把 AI 比作高达，TW 的 Skill 与 Harness 组合就相当于操控它的 OS（操作系统），你是驾驶员。</strong>Skill 提供处理具体任务的方法，Harness 把工具、执行流程与检查机制组织起来；两者配合，让你能用清楚的指令和反馈驾驭这台机器。</p>
+<p>你负责判断要做什么、接受哪些取舍，以及做出的东西是否符合自己的用途。高达已经能帮你干不少活了。至少现阶段，驾驶舱还不能空着。</p>
+<div aria-label="Vibe Code 基本流程" class="flow"><div class="flow-node">你期望的结果</div><div class="flow-arrow">→</div><div class="flow-node">Agent 调查项目</div><div class="flow-arrow">→</div><div class="flow-node">一起确定方案</div><div class="flow-arrow">→</div><div class="flow-node">Agent 修改与验证</div><div class="flow-arrow">→</div><div class="flow-node">需要你验收的<br/>面和点</div></div>
+<h3>别只做一个许愿者</h3>
+<p>“帮我做一个好用的角色状态栏”，可以作为讨论的开始。接下来还得逐渐说清楚：你想看到哪些信息，最常用什么操作，现有角色卡的哪些内容需要保留。</p>
+<div class="callout"><strong>一句“优化一下”能有多少种理解？</strong>很容易得到一份 AI 自己觉得挺满意的作业。至于你用起来满不满意，那可就未必了。</div>
+<p>你不用一开始就写出完美需求，也不用提前知道该改哪个文件。可以让 Agent 帮你梳理，拿出方案或样稿后再讨论。调查发现限制，就调整做法；实际用着不顺，就把哪里别扭告诉它。</p>
+<p>当驾驶员，也不要求你替它干完所有活。你需要做的是理解关键选择，给出判断，并在结果偏离预期时及时纠正方向。</p>
+<div class="cards"><article class="card"><div class="card-icon">目</div><h3>预期目标</h3><p class="muted">先说希望看到什么效果。比如：“打开页面就能看到角色状态，点击按钮可以展开详细信息。”具体怎么实现，可以让 Agent 调查项目后提出方案。</p></article><article class="card"><div class="card-icon">界</div><h3>修改边界</h3><p class="muted">哪些地方可以改，哪些必须保留，哪些操作需要先征得你的同意。比如：“可以调整状态栏布局，但保留现有变量名。”省得你只想修一个按钮，整页却被重新装修了。</p></article><article class="card"><div class="card-icon">验</div><h3>验收的面和点</h3><p class="muted">Agent 先完成自己能做的检查，再列出需要你验收的方面与具体操作：看哪里、点什么、预期出现什么。已验证结果和仍需亲验的项目分别写清楚。</p></article></div>
+<p>例如，验收“功能表现”时，要说明页面能否正常显示、按钮有没有反应、变量是否真的写入；验收“使用体验”时，要让你判断常用信息好不好找、操作顺不顺手。需要回到真实酒馆检查的项目，也要单列出来。“已经完成”这四个字很好写，实际效果还得看这些具体结果。</p>
+</section>
+<section class="section" id="driver-presence-prompts">
+<div class="section-head"><div class="section-no">00.1</div><div><h2><span style="white-space: nowrap">驾驶员在场</span>／<span style="white-space: nowrap">无人值守</span></h2><p class="section-kicker">两组可复制提示词：人在时一起确认方向；要离开时，先把可以推进的范围交代清楚。</p></div></div>
+<p>下面两组提示词按作者工作区的“驾驶员在场协议”整理。使用时填好方括号里的内容，再发送给 Agent。它们约定的是当前任务怎么协作；能否持续运行，还取决于客户端与任务是否保持运行，复制提示词本身不会创建定时任务。</p>
+<h3>驾驶员在场：先看计划，再确认开工</h3>
+<p>适合你正在看方案、讨论取舍，或需要边做边确认的任务。先让 Agent 说明改动面、验证方式与顺序，你确认之后，它继续完成已经授权的工作。</p>
+<div class="code-block" id="driver-attended-template"><div class="code-label"><span>驾驶员在场 · 填好后复制</span><button aria-label="复制驾驶员在场提示词" class="copy-btn" type="button">复制</button></div><pre><code>本次任务按“驾驶员在场”方式协作。
+
+任务与预期目标：[填写这次想做成什么]
+允许改动的范围：[填写项目、目录或文件]
+必须保留的内容：[填写约束；没有额外要求就写“无额外要求”]
+验收要求：[填写需要看到的结果，或请你先帮我列出]
+
+先阅读本项目的协作规则与当前进度，核对现状。续接或接到新任务时，先列行动计划：改动面、验证方式、执行顺序，等我确认再动工。
+
+同一范围已经确认后，继续完成已授权的工作，不重复询问同一道门。新增范围或需要新的授权时，说明原因再问我。普通回答、解释和只读分析直接进行。
+
+大阶段结束时列出验收对齐项：做了什么、怎么验证、哪些已通过、哪些还没验，以及需要我验收的面和点。每项写清检查对象、操作方式和预期结果；需要真实环境或我亲验的项目单列，等我确认后再记为已验收。小任务简短结算即可。
+
+只有我明确授权“自主推进”或无人值守时才切换方式；不能因为我暂时没回复，就推断我已授权。分不清时，按驾驶员在场处理。</code></pre></div>
+<h3>无人值守：在已经说清的范围内自主推进</h3>
+<p>适合你已经确认了方案，准备让 Agent 继续处理一段工作。原协议要求“按既有规约自主推进到底，事后交诚实结算”。所以先写明要做到哪一步，完成后还剩哪些检查由你回来处理。</p>
+<div class="code-block" id="driver-unattended-template"><div class="code-label"><span>无人值守 · 明确授权后使用</span><button aria-label="复制无人值守提示词" class="copy-btn" type="button">复制</button></div><pre><code>本次任务进入“无人值守”方式。我明确授权你按已确认的计划，在以下范围内自主推进。
+
+已确认的计划或进度入口：[填写文档或本次对话中的计划]
+任务与预期目标：[填写这次想做成什么]
+允许改动的范围：[填写项目、目录或文件]
+必须保留的内容：[填写约束；没有额外要求就写“无额外要求”]
+本轮停止点：[填写推进到什么状态，以及必须完成哪些检查]
+已经另行授权的操作：[逐项写明；没有就写“无”]
+
+先核对本项目规则、当前进度与已有改动。授权范围或停止点不清楚时，先补齐确认；明确后持续推进，在范围内完成调查、实现、检查和修正，不因我暂时不在而反复等待同一道授权。
+
+遇到需要扩大范围、改变核心方案或新增授权的事项，保留当前成果与问题证据。可以继续不依赖该决定、且已经获准的工作；其余事项留待我处理，不把沉默当作批准。
+
+真实安装、Git 提交或推送、打包、发布、付费调用等操作沿用项目的独立授权。已明确授权的照约定执行，未授权的不能由“无人值守”四个字自动补齐。
+
+达到本轮停止点或确实无法继续时，提交诚实结算：完成了什么、改动与产物在哪里、实际做过哪些验证、失败或未验证项是什么、下一步需要什么。
+
+大阶段另列验收对齐项，写清需要我验收的面和点、操作方式与预期结果。自动检查、本地预览、真实运行和驾驶员验收分别记录；需要我确认的项目保持待验收，不替我作结论。
+
+我回来要求切回在场方式或叫停时，以我的最新指令为准。</code></pre></div>
+<h3>回来后，先把进度接上</h3>
+<div class="code-block" id="driver-return-template"><div class="code-label"><span>返回在场 · 先看结算</span><button aria-label="复制返回在场提示词" class="copy-btn" type="button">复制</button></div><pre><code>我回来了，切回驾驶员在场方式，先暂停继续推进。
+请汇报已完成内容、当前进行到哪里、验证结果，以及需要我验收的面和点。
+先保留当前成果；等我确认下一步后再继续。</code></pre></div>
 </section>
 <section class="section" id="first-run">
-<div class="section-head"><div class="section-no">01</div><div><h2>先做出一个真能点的东西</h2><p class="section-kicker">第一课不背术语：文件出现、页面打开、按钮真有反应。</p></div></div>
-<div class="steps"><div class="step"><strong>建立一个干净的练习目录</strong>不要把桌面、系统盘或唯一一份正式项目直接交给 Agent。新建一个专用文件夹，例如“我的第一个 Vibe 项目”。</div><div class="step"><strong>用 Agent 桌面端打开文件夹</strong>先不要折腾终端、插件和复杂环境。选择一个图形化 Agent，明确它只能操作当前目录。</div><div class="step"><strong>发送一个肉眼可验收的小任务</strong>第一次只做纯 HTML、CSS 和 JavaScript 单页，不安装依赖，不碰外部目录。</div><div class="step"><strong>亲自打开并点击</strong>确认文件真的出现、页面能打开、按钮能工作。文字报告不等于完成。</div></div>
+<div class="section-head"><div class="section-no">01</div><div><h2>先做出一个真能点的东西</h2><p class="section-kicker">先做一个单页网页，亲眼看见你的要求怎样变成文件和可用的按钮。</p></div></div>
+<div class="steps"><div class="step"><strong>建立一个干净的练习目录</strong>新建一个专用文件夹，例如“我的第一个 Vibe 项目”，把本次练习都放进去。这样即使改坏，也不会影响正式作品。</div><div class="step"><strong>用 Agent 桌面端打开文件夹</strong>用你已经能正常使用的 Agent 打开它，并说明本轮只处理这个目录。第一次练习先把工作过程看明白，环境配置可以慢慢补。</div><div class="step"><strong>发送一个肉眼可验收的小任务</strong>用下面的模板做一个纯 HTML、CSS 和 JavaScript 单页，无需安装依赖。任务小一点，更容易看懂每一步。</div><div class="step"><strong>查看结果，再试一次按钮</strong>Agent 应先完成它能做的检查，再告诉你打开哪个文件、点哪里、应该看到什么。你按这些步骤试用，确认结果符合预期。</div></div>
 <div class="code-block"><div class="code-label"><span>第一次任务 · 可直接复制</span><button class="copy-btn" type="button">复制</button></div><pre><code>这是我的第一个 Vibe Code 项目。
 
 请先查看当前文件夹，不要访问文件夹以外的内容。
@@ -27,36 +81,36 @@
 - 我应该检查哪些地方。</code></pre></div>
 </section>
 <section class="section" id="agent">
-<div class="section-head"><div class="section-no">02</div><div><h2>先认清 Agent，再选你的工作台</h2><p class="section-kicker">别按“初级—高级”排队；看它能不能配合你的干活方式。</p></div></div>
+<div class="section-head"><div class="section-no">02</div><div><h2>先认清 Agent，再选你的工作台</h2><p class="section-kicker">先认识工具怎样参与工作，再选一个用起来顺手、在你的环境里能运行的工作台。</p></div></div>
 <h3>聊天 AI 出主意，Agent 下场干活</h3>
-<div class="compare"><div class="compare-side"><h4>普通聊天 AI</h4><p class="muted">回答问题、解释代码、给出建议。更像坐在旁边的顾问。</p></div><div class="compare-vs">VS</div><div class="compare-side"><h4>编码 Agent</h4><p class="muted">能阅读项目、改文件、运行命令、查看报错、执行测试并继续修正。</p></div></div>
+<div class="compare"><div class="compare-side"><h4>普通聊天 AI</h4><p class="muted">没有接入项目工具时，主要通过对话解释问题、给建议或生成文本。需要你把材料和结果来回搬运。</p></div><div class="compare-vs">VS</div><div class="compare-side"><h4>编码 Agent</h4><p class="muted">接入文件、命令行等工具后，可以读取项目、执行修改、查看运行结果，再继续处理问题。能做哪些事，要看客户端提供了什么工具和权限。</p></div></div>
 <h3>Agent 到底多了一双什么手</h3>
-<p>聊天 AI 像顾问：你提问，它给文字、代码或建议。Agent 则被允许碰工作台——搜文件、改代码、跑命令、看报错、开页面，再根据结果继续修。</p>
-<p>关键不在它更会聊天，而在于：<strong>它不只告诉你怎么做，还能在你划出的范围里真正动手。</strong></p>
-<div class="callout"><strong>最简单的比喻</strong>聊天 AI 像隔着电话告诉你怎么修东西；Agent 像来到工作台前，能够查看现场、使用工具、动手修改，再检查结果。</div>
+<p>区别在于它有没有工具可用、能不能根据工具结果继续行动。同一个模型接入不同的工作环境，能完成的任务也会不同。</p>
+<p>放回高达这个比喻里看：模型提供理解和判断能力，工具让它能操作工作台，Skill 与 Harness 则组织这些能力。<strong>驾驶员需要知道这台机器现在能干什么，哪些动作还做不到。</strong></p>
+<div class="callout"><strong>界面名字只是入口</strong>有些聊天产品也能调用工具，有些 Agent 当前却只能读文件。看它实际拿到了哪些能力，比单看产品名字更有用。</div>
 <h3>Agent 不是一锤子买卖，它会边干边查</h3>
-<p>一次靠谱交付，通常要把下面这圈跑上好几遍：</p>
+<p>以修一个按钮为例，Agent 往往需要先读源码，再改、再试；第一次没修好，就顺着报错继续查。下面这圈可能要走几遍：</p>
 <div aria-label="Agent 基本工作循环" class="flow"><div class="flow-node">听懂任务</div><div class="flow-arrow">→</div><div class="flow-node">查看现场</div><div class="flow-arrow">→</div><div class="flow-node">决定下一步</div><div class="flow-arrow">→</div><div class="flow-node">使用工具</div><div class="flow-arrow">→</div><div class="flow-node">检查结果</div><div class="flow-arrow">→</div><div class="flow-node">继续修改或交付</div></div>
 <div class="steps">
-<div class="step"><strong>听懂你要什么</strong>Agent 先判断最终想看到什么结果、当前处理哪个项目、哪些地方允许修改、哪些内容不能碰，以及做到什么程度才算完成。如果要求不清楚，它就只能猜。</div>
-<div class="step"><strong>查看项目现场</strong>它会搜索和打开文件，确认功能写在哪里、项目使用什么结构、有没有现成规则、当前有没有未保存的改动，以及应该修改源码还是构建后的成品。这一步像工人开工前先检查房间，而不是进门就砸墙。</div>
+<div class="step"><strong>听懂你要什么</strong>先弄清你期望的结果、所在项目、可改范围和验收标准。能从项目里查到的事先查，涉及你的偏好或新授权时再问你。</div>
+<div class="step"><strong>查看项目现场</strong>搜索相关文件，看看已有规则和实现，确认当前改动由谁留下、应该修改源码还是生成物。进门先认房间，总比抡起锤子才问承重墙在哪强。</div>
 <div class="step"><strong>决定下一步做什么</strong>根据刚看到的信息，它可能继续搜索、阅读说明、提出方案、修改一小部分内容、运行项目、打开页面，或者发现风险后先询问你。</div>
-<div class="step"><strong>使用工具实际动手</strong>只有使用工具时，项目才会真正发生变化。编辑文件才会写入代码，运行构建才会生成产物，打开浏览器并点击才知道按钮是否有效。</div>
-<div class="step"><strong>根据结果继续修正</strong>如果运行失败，Agent 会把错误当成新的线索，继续经历“修改—运行—发现问题—查找原因—再修改”的循环。它不是一开始就知道全部答案，而是在每次行动后读取结果，再决定下一步。</div>
-<div class="step"><strong>完成后向你交付</strong>它应说明修改了什么、动了哪些文件、实际运行了哪些检查、哪些结果已经确认，以及哪些部分仍需要你亲自验收。</div>
+<div class="step"><strong>使用工具实际动手</strong>编辑工具写入文件，命令工具运行构建或测试，浏览器工具检查页面。它在回复里说“准备修改”，只是说明意图，还要看后面实际执行了什么。</div>
+<div class="step"><strong>根据结果继续修正</strong>运行失败会提供新的线索。Agent 应读取错误、定位原因，再做有依据的修改；同一个问题反复修不好时，先重新检查假设，别继续往上糊补丁。</div>
+<div class="step"><strong>完成后向你交付</strong>说明改了什么、哪些检查通过，以及哪些结论还没验证。需要你验收的部分，应写成“看哪个页面、做什么操作、预期出现什么结果”。</div>
 </div>
-<div class="callout warn"><strong>嘴上干活不算干活</strong>“我准备修改”不等于文件变了，“应该可以”也不等于验过。盯工具动作和返回结果，别只看总结写得多漂亮。</div>
+<div class="callout warn"><strong>别被漂亮总结哄住</strong>一句“已全面优化”听着很忙，实际可能只改了按钮颜色。让它指出具体改动和检查结果，你才知道这轮工作推进到了哪里。</div>
 <h3>拿“复制按钮”跑一遍</h3>
 <div class="code-block"><div class="code-label"><span>你交给 Agent 的任务</span><button class="copy-btn" type="button">复制</button></div><pre><code>给这个页面增加一个复制按钮，
 点击后把模板复制到剪贴板。</code></pre></div>
 <p>Agent 可能会这样工作：</p>
 <ol><li>打开项目，找到页面文件；</li><li>查找模板内容和现有按钮样式；</li><li>添加复制按钮和点击逻辑；</li><li>打开页面；</li><li>实际点击按钮；</li><li>检查剪贴板内容；</li><li>如果按钮没有反应，读取报错并继续修改；</li><li>验证成功后向你报告改动。</li></ol>
-<div class="callout danger"><strong>生成代码不等于完成任务</strong>如果它只生成了一段按钮代码，却没有写入文件、打开页面和实际点击，那么它只完成了“提出答案”，还没有完成真正的交付。</div>
+<div class="callout danger"><strong>生成代码不等于完成任务</strong>这次要求的是一个可用的复制按钮。只给一段代码还没完成要求；如果受工具限制无法操作浏览器，也应交代已完成到哪一步，把点击和粘贴检查留成明确的待验收项。</div>
 <h3>别许愿，给 Agent 一张施工单</h3>
-<p>你不必先会写代码，也不用提前猜该改哪个文件。先把最重要的事钉死：<strong>最后到底要出现什么结果。</strong></p>
+<p>你不用先猜 CSS 写在哪个文件。先说出<strong>自己期望看到的结果</strong>，给必要的例子，Agent 才能据此调查和提出方案。</p>
 <div class="callout good"><strong>热知识</strong>你的知识越全面，指挥 AI 的效率就越高，所以该看教程就看。你不必先成为开发者，但越理解自己在做什么，越能给出准确目标、判断 Agent 有没有找对方向。实在不行，就给 AI 提供可靠样本，让 AI 先搞明白，再用你能听懂的方式教你。</div>
-<p>一张不容易跑偏的施工单，至少写清五件事：</p>
-<div class="flow"><div class="flow-node">目标</div><div class="flow-arrow">+</div><div class="flow-node">对象</div><div class="flow-arrow">+</div><div class="flow-node">边界</div><div class="flow-arrow">+</div><div class="flow-node">验收</div><div class="flow-arrow">+</div><div class="flow-node">遇到意外怎么办</div></div>
+<p>提出任务时，可以用下面五项检查自己有没有漏掉关键信息。不必每次填长表，小修改说清楚就够了。</p>
+<div class="flow"><div class="flow-node">预期目标</div><div class="flow-arrow">+</div><div class="flow-node">对象</div><div class="flow-arrow">+</div><div class="flow-node">边界</div><div class="flow-arrow">+</div><div class="flow-node">验收</div><div class="flow-arrow">+</div><div class="flow-node">遇到意外怎么办</div></div>
 <div class="code-block"><div class="code-label"><span>新手指挥模板</span><button class="copy-btn" type="button">复制</button></div><pre><code>我要在【哪个项目或页面】实现【什么可见结果】。
 
 请先查看当前项目，确认相关功能在哪里。
@@ -74,9 +128,9 @@
 <h3>“优化一下”到底坑在哪</h3>
 <div class="compare"><div class="compare-side"><h4>不够清楚</h4><p>帮我优化一下这个页面。</p><p class="muted">Agent 不知道你想优化颜色、排版、信息密度、手机适配、速度还是功能逻辑，只能自行猜测。</p></div><div class="compare-vs">VS</div><div class="compare-side"><h4>更容易成功</h4><p>优化奶人教程的 PC 页面，提高信息密度和正文可读性。</p><p class="muted">允许修改布局和样式，不要修改教程正文与手机端功能。1440 宽度下正文空间应更大，页面不能出现横向滚动；如果需要重做结构，先告诉我。</p></div></div>
 <p>你没有告诉 Agent 应该写哪一条 CSS，但已经把结果、边界和验收说清楚了。这就足够让它开始调查。</p>
-<h3>一句话管不住一个完整项目</h3>
-<p>项目不是生日愿望。你要一轮轮看现场、收范围、批方案、验结果：</p>
-<ol><li>先给出目标和边界；</li><li>观察 Agent 找到了什么；</li><li>对风险较高的方案先审核；</li><li>让它执行并检查；</li><li>根据实际页面继续反馈；</li><li>满足验收条件后再结束任务。</li></ol>
+<h3>项目越做越清楚，需求也会跟着调整</h3>
+<p>调查之后，你可能发现旧功能有限制；试用之后，也可能才意识到另一种做法更合适。这些调整很正常，关键是把新的决定说清楚，再按确认过的范围推进：</p>
+<ol><li>先给出预期目标和修改边界；</li><li>查看 Agent 的调查结果，修正不成立的假设；</li><li>确认本轮计划；已授权的范围内无需反复批准同一步；</li><li>让它执行并检查；</li><li>根据实际页面继续反馈；</li><li>满足验收条件后再结束任务。</li></ol>
 <p>反馈也别只扔一句“不对”“不好看”“没成功”。把操作、预期和实际表现摆出来：</p>
 <div class="code-block"><div class="code-label"><span>可执行的反馈</span><button class="copy-btn" type="button">复制</button></div><pre><code>我在 1440 宽度下查看了页面。
 
@@ -87,19 +141,19 @@
 第一章仍然默认展开，占用了大部分高度。
 
 请只修正目录默认展开逻辑，不要调整正文。</code></pre></div>
-<h3>方向盘归你，工具箱归 Agent</h3>
-<div class="table-wrap"><table><thead><tr><th>你负责</th><th>Agent 负责</th></tr></thead><tbody><tr><td>决定想要的结果</td><td>调查项目和相关资料</td></tr><tr><td>限制允许修改的边界</td><td>找到实现位置并执行修改</td></tr><tr><td>批准高风险或扩大范围的操作</td><td>运行检查并根据错误继续修正</td></tr><tr><td>判断最终结果是否可用</td><td>提交验证证据和交接说明</td></tr></tbody></table></div>
-<div class="callout good"><strong>记住这句话</strong>你不需要告诉 Agent 每一行代码怎么写，但必须告诉它要到哪里、不能撞什么，以及怎样才算真正到达。</div>
+<h3>驾驶员做判断，Agent 执行并交代结果</h3>
+<div class="table-wrap"><table><thead><tr><th>你负责</th><th>Agent 负责</th></tr></thead><tbody><tr><td>说明预期结果，并在调查和试用后调整</td><td>调查项目和相关资料</td></tr><tr><td>限制允许修改的边界</td><td>找到实现位置并执行修改</td></tr><tr><td>批准高风险或扩大范围的操作</td><td>运行检查并根据错误继续修正</td></tr><tr><td>验收使用体验与 Agent 尚未验证的面和点</td><td>提交验证证据和交接说明</td></tr></tbody></table></div>
+<div class="callout good"><strong>把精力放在值得你判断的地方</strong>查文件、跑检查、整理证据，能交给 Agent 的就交给它。你重点看方案是否符合用途、取舍能否接受，以及作品用起来究竟怎么样。</div>
 <p>理解 Agent 怎样工作后，再根据自己的工作方式选择具体工具。</p>
-<div class="selector" id="agentSelector"><h3>30 秒 Agent 选型器</h3><p class="muted">点击最符合你的工作方式，可多选。</p><div class="choices"><button aria-pressed="false" class="choice-btn" data-choice="language" type="button">主要靠说人话指挥</button><button aria-pressed="false" class="choice-btn" data-choice="preview" type="button">经常做前端，需要实时预览</button><button aria-pressed="false" class="choice-btn" data-choice="manual" type="button">愿意查看并手动改代码</button><button aria-pressed="false" class="choice-btn" data-choice="automation" type="button">需要脚本、服务器或自动化</button></div><div aria-live="polite" class="recommendation" id="recommendation">选择你的工作方式后，这里会给出推荐。</div></div>
-<div class="table-wrap"><table><thead><tr><th>工具</th><th>主要优势</th><th>更适合谁</th></tr></thead><tbody><tr><td><strong>Codex 桌面端</strong></td><td>以项目、任务线程和 Agent 调度为中心；支持差异审查、并行 Agent、Worktree 和 Skills。</td><td>主要通过自然语言管理项目，希望直接使用 TW Skill 阵列，不准备频繁手改代码。</td></tr><tr><td><strong>Claude Code Desktop</strong></td><td>集成文件编辑器、终端、应用预览、可视化 Diff、并行会话与电脑操作。</td><td>经常制作前端、状态栏或桌面工具，需要 Agent 实际打开并测试程序。</td></tr><tr><td><strong>OpenCode</strong></td><td>可以明确选择供应商、模型和 Base URL，也能接本地模型；换供应商不用连同整套 IDE 一起搬家。</td><td>国内环境中需要按真实可用性切换模型，不想被单一平台套餐锁住。</td></tr><tr><td><strong>Cursor Agents Window</strong></td><td>Agent 与完整 IDE 共存，人工编辑、跳转和调试比较顺手；但高价套餐值不值，取决于目标模型在当前地区是否真能用。</td><td>已经验证目标模型可用，而且确实需要 Cursor IDE 工作流的人；国内用户不要直接冲 Pro+ 或 Ultra。</td></tr></tbody></table></div>
-<h3>纯新手别急着钻进黑窗口</h3><p>CMD、CLI 和普通 VS Code 并不弱，只是会把目录、权限、环境和插件这些杂活一次全倒到你面前。</p>
+<div class="selector" id="agentSelector"><h3>按工作习惯选择 Agent</h3><p class="muted">点击最符合你的工作方式，可多选。</p><div class="choices"><button aria-pressed="false" class="choice-btn" data-choice="language" type="button">主要靠说人话指挥</button><button aria-pressed="false" class="choice-btn" data-choice="preview" type="button">经常做前端，需要实时预览</button><button aria-pressed="false" class="choice-btn" data-choice="manual" type="button">愿意查看并手动改代码</button><button aria-pressed="false" class="choice-btn" data-choice="automation" type="button">需要脚本、服务器或自动化</button></div><div aria-live="polite" class="recommendation" id="recommendation">选择你的工作方式后，这里会给出推荐。</div></div>
+<div class="table-wrap"><table><thead><tr><th>工具</th><th>主要优势</th><th>更适合谁</th></tr></thead><tbody><tr><td><strong>Codex 桌面端</strong></td><td>按项目组织任务，可查看改动差异，配合 Skills 和 Worktree 管理工作。具体功能以当前版本为准。</td><td>主要通过自然语言管理项目，希望直接使用 TW Skill 阵列，不准备频繁手改代码。</td></tr><tr><td><strong>Claude Code Desktop</strong></td><td>可查看文件差异、运行项目并在浏览器面板预览和检查应用；可用工具取决于系统、版本与权限。</td><td>经常制作前端、状态栏或桌面工具，需要 Agent 实际打开并测试程序。</td></tr><tr><td><strong>OpenCode</strong></td><td>可以明确选择供应商、模型和 Base URL，也能接本地模型；换供应商不用连同整套 IDE 一起搬家。</td><td>国内环境中需要按真实可用性切换模型，不想被单一平台套餐锁住。</td></tr><tr><td><strong>Cursor Agents Window</strong></td><td>Agent 与完整 IDE 共存，人工编辑、跳转和调试比较顺手；但高价套餐值不值，取决于目标模型在当前地区是否真能用。</td><td>已经验证目标模型可用，而且确实需要 Cursor IDE 工作流的人；国内用户不要直接冲 Pro+ 或 Ultra。</td></tr></tbody></table></div>
+<h3>纯新手别急着钻进黑窗口</h3><p>终端和 IDE 很有用，只是第一次接触时，目录、环境变量、插件和权限会一起冒出来。为了跑一个按钮，先修两小时环境，容易把学习热情消耗在别处。</p>
 <div class="cards"><article class="card"><h4>CLI 的额外负担</h4><p class="muted">目录、PATH、环境变量、权限提示、会话恢复、命令报错和文本 Diff 都需要自己识别。</p></article><article class="card"><h4>普通 IDE 的额外负担</h4><p class="muted">文件树、插件、终端、Git 面板、调试器、任务系统和工作区信任会同时出现。</p></article><article class="card"><h4>桌面 Agent 的价值</h4><p class="muted">把项目、会话、权限、计划、差异和运行结果集中在同一条可见任务链里。</p></article></div>
-<div class="callout good"><strong>默认建议</strong>主要靠说人话、使用 TavernWeave：Codex 桌面端。需要频繁预览和真实操作：Claude Code Desktop。愿意进入代码层、自己挑供应商：优先 OpenCode。Cursor 可以当完整 IDE 用，但国内环境不建议没验货就购买 Pro+ 或 Ultra。脚本与自动化：CLI，放进阶教程。</div>
+<div class="callout good"><strong>本教程的选择思路</strong>主要用自然语言带 TW 项目，可以从 Codex 桌面端试起；偏重应用预览，可以看看 Claude Code Desktop；想自行配置供应商，可试 OpenCode。Cursor 是否顺手和高价套餐是否值得买，要分别判断。你已有能用的工具时，先完成一次练习，再考虑换工作台。</div>
 <h3 data-subsection="02.1" id="chatgpt-mobile-subscription">手机端买 ChatGPT：先别把三张账单混了</h3>
-<div class="callout"><strong>这里只算官方套餐这笔账</strong>ChatGPT 套餐、OpenAI API 和第三方模型 API 是三套服务、三套计费。下面不讲第三方接入，也不把套餐购买硬写成手机号闯关。</div>
-<p>OpenAI 当前说明是：创建账号和使用 ChatGPT 已不再要求手机号验证。如果注册时出现手机号页面，先确认是否进入了 OpenAI Platform 的首次 API Key 流程——首次生成 API Key 目前仍可能要求手机号验证，这与购买 ChatGPT 套餐不是同一件事。</p>
-<p>中国大陆目前不在 OpenAI 公布的 ChatGPT 支持地区列表中。因此，“中国大陆手机号不能用于相关验证”和“购买 ChatGPT 套餐需要绕过手机号”不能写成同一件事；真正需要检查的是服务地区、应用商店地区、付款资料与账号归属是否一致。</p>
+<div class="callout"><strong>先认清自己买的是什么</strong>ChatGPT 订阅、OpenAI API 和第三方 API 分别计费。这里讲手机上购买 ChatGPT 订阅；买了套餐，不代表 API 账户也有可用余额。</div>
+<p>截至 2026-09-04，OpenAI 帮助页说明：创建账号和使用 ChatGPT 不再要求手机号验证；首次生成 API Key 则要求验证。如果看到了手机号页面，先确认自己进入的是哪条流程。</p>
+<p>中国大陆目前不在 ChatGPT 官方支持地区列表中。购买前要核对服务地区、商店地区和付款资格；手机内购只提供付款入口，不会改变服务的地区要求。</p>
 <h4>iPhone 与 iPad</h4>
 <p>位于支持地区、并且能从当前 Apple App Store 下载官方 ChatGPT 应用的用户，可以：</p>
 <ol><li>从 App Store 安装 OpenAI 发布的官方 ChatGPT 应用；</li><li>登录自己的 OpenAI 账号；</li><li>在应用内选择升级套餐；</li><li>通过 Apple 的订阅确认页面完成购买；</li><li>以后由 Apple 管理扣款、续订、收据和退款入口。</li></ol>
@@ -110,6 +164,6 @@
 <div class="callout warn"><strong>Google Play 礼品卡不是通用跨区付款方式</strong>Google 要求礼品卡购买地、币种、Google Play 国家资料以及用户实际所在国家或地区一致。礼品卡只能在购买国家兑换和使用。</div>
 <div class="callout"><strong>设备没有 Google Play 怎么办</strong><a href="https://github.com/jieoupen/Google-Play-Store" rel="noreferrer" target="_blank">jieoupen/Google-Play-Store</a> 是社区整理的 Google 服务框架安装资料，只能作为设备兼容性参考，不是 OpenAI、Google 或设备厂商的官方教程，也不解决商店地区和付款资格问题。仓库中包含第三方安装器、APK 镜像与虚拟空间方案；新手应优先使用设备厂商支持的 Google 服务环境，不要在未知安装器或虚拟空间中输入 Google、OpenAI 或付款账户凭据。</div>
 <div class="callout danger"><strong>移动端内购不是地区绕过方案</strong>不要使用临时接码、来源不明的成品账号、虚构的常住地区或账单资料，也不要购买与账号地区不匹配的礼品卡。Apple 和 Google 内购只是官方移动端支付渠道，不会改变 OpenAI 对服务地区的要求；从不支持地区访问或使用不受支持地区的付款方式，可能导致账号被阻止或暂停。</div>
-<p class="small muted">规则与购买流程参考：<a href="https://help.openai.com/en/articles/8983040" rel="noreferrer" target="_blank">OpenAI 手机验证说明</a> · <a href="https://help.openai.com/en/articles/7947663-chatgpt-supported-countries" rel="noreferrer" target="_blank">ChatGPT 支持地区</a> · <a href="https://help.openai.com/en/articles/9131992" rel="noreferrer" target="_blank">不支持地区说明</a> · <a href="https://help.openai.com/en/articles/7885016-chatgpt-ios-app-faq" rel="noreferrer" target="_blank">ChatGPT iOS FAQ</a> · <a href="https://support.google.com/googleplay/answer/11564359" rel="noreferrer" target="_blank">Google Play 礼品卡限制</a> · <a href="https://support.apple.com/en-ie/108285" rel="noreferrer" target="_blank">Apple 礼品卡地区限制</a></p>
+<p class="small muted">规则核对日期：2026-09-04。购买流程与地区说明：<a href="https://help.openai.com/en/articles/8983040" rel="noreferrer" target="_blank">OpenAI 手机验证说明</a> · <a href="https://help.openai.com/en/articles/7947663-chatgpt-supported-countries" rel="noreferrer" target="_blank">ChatGPT 支持地区</a> · <a href="https://help.openai.com/en/articles/9131992" rel="noreferrer" target="_blank">不支持地区说明</a> · <a href="https://help.openai.com/en/articles/7885016-chatgpt-ios-app-faq" rel="noreferrer" target="_blank">ChatGPT iOS FAQ</a> · <a href="https://support.google.com/googleplay/answer/11564359" rel="noreferrer" target="_blank">Google Play 礼品卡限制</a> · <a href="https://support.apple.com/en-ie/108285" rel="noreferrer" target="_blank">Apple 礼品卡地区限制</a></p>
 <p class="small muted">产品能力参考：<a href="https://openai.com/index/introducing-the-codex-app/" rel="noreferrer" target="_blank">OpenAI Codex app</a> · <a href="https://code.claude.com/docs/en/desktop" rel="noreferrer" target="_blank">Claude Code Desktop</a> · <a href="https://opencode.ai/docs/providers" rel="noreferrer" target="_blank">OpenCode 供应商文档</a> · <a href="https://cursor.com/changelog/3-0" rel="noreferrer" target="_blank">Cursor Agents Window</a></p>
 </section>

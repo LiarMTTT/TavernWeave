@@ -1,0 +1,4 @@
+interface:
+  display_name: "文本精修 · 去 AI 味与去八股"
+  short_description: "精修正文与日常说明，保留原意和技术结构，支持单次与受控持久模式"
+  default_prompt: "用 $rewrite-natural-prose 精修这段文字，去掉套话和模板腔，保留原意、人物声音与技术结构。"

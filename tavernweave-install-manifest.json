@@ -1,14 +1,15 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "1.3.0",
-  "skillCount": 20,
+  "version": "1.4.0",
+  "skillCount": 21,
   "skills": [
     "activate-tavernweave-soul",
     "code-quality-workflow",
     "consult-tavernweave-library",
     "orchestrate-project-blueprint",
     "reflect-on-vibe-code-growth",
+    "rewrite-natural-prose",
     "rolecard-workshop-ops",
     "shadcn-tailwind-ui",
     "sillytavern-api-reference",
@@ -37,11 +38,16 @@
     "skills/reflect-on-vibe-code-growth/scripts/render-text-assessment.mjs",
     "skills/reflect-on-vibe-code-growth/scripts/save-mirror-record.mjs",
     "skills/reflect-on-vibe-code-growth/scripts/validate-mirror-record.mjs",
-    "skills/consult-tavernweave-library/assets/picker/index.html"
+    "skills/consult-tavernweave-library/assets/picker/index.html",
+    "skills/rewrite-natural-prose/SKILL.md",
+    "skills/rewrite-natural-prose/agents/openai.yaml",
+    "skills/rewrite-natural-prose/scripts/manage-rewrite-policy.mjs",
+    "skills/rewrite-natural-prose/assets/rewrite-policy.md",
+    "skills/rewrite-natural-prose/references/persistent-modes.md"
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "1.3.0",
+    "version": "1.4.0",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",
@@ -51,7 +57,10 @@
       "host-adapters/host-map.json",
       "scripts/manage-host-front-door.ps1"
     ],
-    "formalHosts": ["Codex", "Claude"],
+    "formalHosts": [
+      "Codex",
+      "Claude"
+    ],
     "dshSupport": "preview-preset-only"
   },
   "dshPreview": {
