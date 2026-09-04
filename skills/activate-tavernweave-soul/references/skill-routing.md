@@ -16,10 +16,12 @@ Soul never copies the engineering instructions. Select the primary TavernWeave s
 | Build, pack, release artifact | `$sillytavern-card-pipeline` |
 | Security, database, extension, performance, or media | matching focused skill |
 | Code audit, refactor gate, finish slice | `$code-quality-workflow` |
+| 全量审查、架构审查、全量架构审查 of software/card/mixed projects | `$code-quality-workflow` with explicit scope/focus and coverage |
+| 洗稿、去 AI 味、去八股 or rewriting mode management | `$rewrite-natural-prose` |
 | Guide, design, motion, source, picker | `$consult-tavernweave-library` |
 
 The complete route authority is `../consult-tavernweave-library/references/route-map.json` in the TavernWeave distribution. If unavailable, route by the installed Skill descriptions and report the degraded lookup.
 
-灵魂杀手 does not replace the owning engineering Skill. Use the frontend rubric for critique, the Library for the smallest relevant design/motion references, the UI Skill for implementation, runtime debug for real-host failures, and performance/security Skills when the claim crosses into those capabilities.
+灵魂杀手 does not replace the owning engineering Skill. Use the frontend rubric for frontend critique, the quality workflow for full/architecture review, the Library for the smallest relevant references, the UI Skill for implementation, runtime debug for real-host failures, and performance/security Skills when the claim crosses into those capabilities. Keep a three-point summary separate from complete findings. Active prose refinement preserves evidence, severity and gaps; its state and exit remain independent from Soul.
 
 Soul 三席联席也不拥有项目权威。由 `$orchestrate-project-blueprint` 维护方向预算、四态决策、First Playable、蓝图体量和下一道门；三席只提供带标签的创作、工程和前端审查镜头。

@@ -43,7 +43,7 @@ test("guide navigation targets follow the rendered document order", async () => 
 test("TavernWeave subsections stay between chapter 05 and chapter 06", async () => {
   const content1 = await readGuideFile("content-1.html");
   const content3 = await readGuideFile("content-3.html");
-  const orderedIds = ["tw", "tw-v1", "soul-mode", "library-mode", "install-gate", "brainstorm-blueprint", "db"];
+  const orderedIds = ["tw", "tw-v1", "soul-mode", "library-mode", "install-gate", "brainstorm-blueprint", "prose-refinement", "full-architecture-review", "db"];
   const positions = orderedIds.map(id => content3.indexOf(`id="${id}"`));
 
   assert.ok(!content1.includes('id="tw-v1"'), "Chapter 05.1 must not render before chapter 00.");
@@ -60,7 +60,7 @@ test("radar recommendations are explicit and current-state honest", async () => 
   assert.match(content2, /id="agent-radar"/);
   assert.match(content2, /https:\/\/codexradar\.com\//);
   assert.match(content2, /https:\/\/claudecoderadar\.com\/\?lang=zh/);
-  assert.match(content2, /Claude Code Radar 当前明确公告暂时关闭/);
+  assert.match(content2, /Claude Code Radar 仍显示暂停公告/);
   assert.match(content2, /https:\/\/electricitybench\.com\//);
 });
 
@@ -81,12 +81,12 @@ test("navigation state is derived from the live document", async () => {
   assert.match(app, /target\.scrollIntoView\(\{ block: 'start', behavior:/);
   assert.match(app, /if \(body\.classList\.contains\('nav-open'\)\)/);
   assert.doesNotMatch(app, /\/ 49/);
-  assert.match(index, /style\.css\?v=34/);
-  assert.match(index, /layout-v6\.css\?v=34/);
-  assert.match(index, /app\.js\?v=34/);
-  assert.match(app, /content-0\.html\?v=34/);
-  assert.match(app, /content-8\.html\?v=34/);
-  assert.match(app, /content-9\.html\?v=34/);
+  assert.match(index, /style\.css\?v=37/);
+  assert.match(index, /layout-v6\.css\?v=37/);
+  assert.match(index, /app\.js\?v=37/);
+  assert.match(app, /content-0\.html\?v=37/);
+  assert.match(app, /content-8\.html\?v=37/);
+  assert.match(app, /content-9\.html\?v=37/);
   assert.match(app, /target\.querySelector\('\.release-entry'\)/);
 });
 
@@ -98,6 +98,7 @@ test("opening capability map explains TavernWeave by system and marks v1.2 and v
     "tw-capabilities",
     "tw-system-plan",
     "tw-system-card",
+    "tw-system-prose",
     "tw-system-frontend",
     "tw-system-quality",
     "tw-system-library",
@@ -110,8 +111,8 @@ test("opening capability map explains TavernWeave by system and marks v1.2 and v
   assert.match(content0, /NEW · V1\.2\.0/);
   assert.match(content0, /NEW · V1\.3\.0/);
   assert.match(index, /class="nav-new">NEW<\/strong>/);
-  assert.match(content0, /20 个专职 Skill/);
-  assert.match(content0, /1,609 条蒸馏账本/);
+  assert.match(content0, /21 个专职 Skill/);
+  assert.match(content0, /1,609 条蒸馏记录/);
   assert.match(content0, /项目规划与脑暴/);
   assert.match(content0, /角色卡与变量系统/);
   assert.match(content0, /前端、交互与美术/);
@@ -125,7 +126,7 @@ test("ending release chapter contains user-facing major-version logs only", asyn
   const index = await readGuideFile("index.html");
   const content8 = await readGuideFile("content-8.html");
   const content9 = await readGuideFile("content-9.html");
-  const ids = ["release-history", "release-v1-3-0", "release-v1-2-0", "release-v1-1-0", "release-v1-0-0"];
+  const ids = ["release-history", "release-v1-4-0", "release-v1-3-0", "release-v1-2-0", "release-v1-1-0", "release-v1-0-0"];
 
   ids.forEach(id => {
     assert.match(index, new RegExp(`href="#${id}"`));
@@ -133,13 +134,13 @@ test("ending release chapter contains user-facing major-version logs only", asyn
   });
   const positions = ids.map(id => content9.indexOf(`id="${id}"`));
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
-  assert.match(content9, /id="release-v1-3-0"[\s\S]*?<details class="release-entry" open>/);
+  assert.match(content9, /id="release-v1-4-0"[\s\S]*?<details class="release-entry" open>/);
   assert.match(content9, /id="release-v1-2-0"[\s\S]*?<details class="release-entry">/);
   assert.match(content9, /id="release-v1-1-0"[\s\S]*?<details class="release-entry">/);
   assert.match(content9, /id="release-v1-0-0"[\s\S]*?<details class="release-entry">/);
   assert.doesNotMatch(content9, /兼容性说明|验证结果|待验证/);
   assert.doesNotMatch(content8, /<footer class="footer">/);
-  assert.match(content9, /TavernWeave 奶人教程 · v1\.3\.0/);
+  assert.match(content9, /TavernWeave 奶人教程 · v1\.4\.0 本地候选/);
   assert.match(content9, /462 个设计、194 个动效、86 个概念、1,609 条蒸馏账本/);
   assert.match(index, /<span class="nav-chapter-no">更<\/span><span>更新日志<\/span>/);
   assert.match(index, /href="#release-history"><span>日志<\/span>/);
@@ -154,9 +155,9 @@ test("brainstorm blueprint tutorial exposes v1.2 contracts", async () => {
   assert.match(index, /href="#brainstorm-blueprint"><span>05\.5<\/span><span>脑暴与防膨胀蓝图<\/span>/);
   assert.match(content3, /脑暴模式，Soul 联席/);
   assert.match(content3, /Core Spine、First Playable、Growth Tracks、Parking Lot/);
-  assert.match(content3, /执行期持久权威蓝图预算固定为 0/);
-  assert.match(content3, /只有出现可观察错误、失败证据、未满足的退出条件或实际阻塞时/);
-  assert.match(content3, /关闭支线，回到父步骤/);
+  assert.match(content3, /不再自行新增长期有效的权威蓝图，新增预算为 0/);
+  assert.match(content3, /实际错误、失败证据、未满足的完成条件或阻塞，才开一层临时问题支线/);
+  assert.match(content3, /关闭支线，回到原步骤/);
   assert.match(content3, /driverOverride/);
   assert.match(content3, /按蓝图开跑第一版/);
 });

@@ -246,6 +246,90 @@
       "prompt": "照镜子，只要一份可以直接复制保存的完整文字评估表单，不要画板。",
       "expectedPrimarySkill": "reflect-on-vibe-code-growth",
       "expectedBehavior": "Produce one standalone detailed Markdown assessment from the same structured evidence model, including evidence boundaries, the complete capability network with deep thinking, upstream architecture, and innovation, four core dimensions, token economics, six project gates, history comparability, actions, and final judgment; do not require or substitute an interactive report."
+    },
+    {
+      "id": "rewrite-one-shot-light",
+      "prompt": "洗稿这段：在当前阶段，工具可以导出 3 种格式，但目前暂时还不支持离线同步。总而言之，这项功能具有重要意义。",
+      "expectedPrimarySkill": "rewrite-natural-prose",
+      "expectedBehavior": "Return one light revision directly, preserving 3 formats and the lack of offline sync; do not activate continuous mode or demand a file-write intake."
+    },
+    {
+      "id": "rewrite-three-strengths",
+      "prompt": "把这份原创说明分别做轻润色、结构改写和深度重写，事实和限制都不能变。",
+      "expectedPrimarySkill": "rewrite-natural-prose",
+      "expectedBehavior": "Distinguish sentence polish, reordered structure, and rebuilt expression; retain all facts, negation, constraints and uncertainty instead of inventing vivid details."
+    },
+    {
+      "id": "rewrite-character-voices",
+      "prompt": "精修这段角色设定、叙事和两个人的对白，保留寡言者与直率者的差别。",
+      "expectedPrimarySkill": "rewrite-natural-prose",
+      "expectedBehavior": "Follow the existing genre and character voices; do not impose one colloquial voice, universal banned words, or new actions and motives."
+    },
+    {
+      "id": "rewrite-protected-mixed",
+      "prompt": "只精修 JSON 的正文段落，保留 {{user}}、{{char}}、stat_data.hp、EJS、正则和脚本原样。",
+      "expectedPrimarySkill": "rewrite-natural-prose",
+      "expectedBehavior": "Identify the prose field, preserve protected literals and every other structural field, parse the output and compare untouched values and protected spans."
+    },
+    {
+      "id": "rewrite-task-output-and-exit",
+      "prompt": "开启持续洗稿模式；后续作品、计划和审查说明都自然一点。之后我说退出洗稿模式，再给一份计划。",
+      "expectedPrimarySkill": "rewrite-natural-prose",
+      "expectedBehavior": "Track task inherit/on/off explicitly; cover daily explanations lightly, stop continuous refinement on the later direct exit, preserve persistent files and permit subsequent one-shot requests."
+    },
+    {
+      "id": "rewrite-workspace-persistence",
+      "prompt": "在本工作区开启洗稿模式。",
+      "expectedPrimarySkill": "rewrite-natural-prose",
+      "expectedBehavior": "Resolve the effective Codex or Claude workspace instruction target, show scope/path/owned block diff, and wait for approval of that exact preview before the self-contained manager writes."
+    },
+    {
+      "id": "rewrite-client-persistence-and-status",
+      "prompt": "为当前客户端全局开启洗稿模式，然后查看洗稿模式状态。",
+      "expectedPrimarySkill": "rewrite-natural-prose",
+      "expectedBehavior": "Preview the actual client target separately from workspace rules, require concrete consent, and distinguish task state, both persistent scopes and unverified host loading."
+    },
+    {
+      "id": "rewrite-scope-disable",
+      "prompt": "关闭工作区洗稿模式，客户端规则保留。",
+      "expectedPrimarySkill": "rewrite-natural-prose",
+      "expectedBehavior": "Preview and remove only the workspace owned block; retain unrelated bytes and client policy, then report whether another scope still applies."
+    },
+    {
+      "id": "quality-full-scan-inventory",
+      "prompt": "全量审查这个软件项目，包含实现、配置、测试、接口、迁移和锁文件；先只给报告。",
+      "expectedPrimarySkill": "code-quality-workflow",
+      "expectedBehavior": "Use full-scan/general, inventory the agreed snapshot, review files by their actual roles, record exclusions and incomplete coverage, and remain read-only."
+    },
+    {
+      "id": "quality-software-architecture",
+      "prompt": "架构审查：没有指定模块，请追踪当前项目的关键边界和核心链路。",
+      "expectedPrimarySkill": "code-quality-workflow",
+      "expectedBehavior": "Use architecture-hotspot-scan/architecture, trace ownership, dependencies, data flow, contracts and lifecycle with source evidence; do not claim full coverage."
+    },
+    {
+      "id": "quality-card-architecture",
+      "prompt": "架构审查这张纯文字角色卡：它没有 MVU，也没有独立前端。",
+      "expectedPrimarySkill": "code-quality-workflow",
+      "expectedBehavior": "Review creative authority, relationships, worldbook organization, prompt responsibilities and source/artifact links only where present; absence of optional MVU/frontend is not a defect."
+    },
+    {
+      "id": "quality-mixed-full-architecture",
+      "prompt": "全量架构审查这套角色卡与配套前端，状态面板也在范围内。",
+      "expectedPrimarySkill": "code-quality-workflow",
+      "expectedBehavior": "Use full-scan/architecture, review software and card contracts together, trace canonical state through projections, and retain coverage and staged recommendations."
+    },
+    {
+      "id": "quality-coverage-merge-legacy",
+      "prompt": "合并旧格式与新格式报告，保留未读、部分检查、排除理由及同路径状态冲突。",
+      "expectedPrimarySkill": "code-quality-workflow",
+      "expectedBehavior": "Keep legacy findings and CLI formats, merge exact coverage duplicates, retain reasons/evidence/conflicts, show legacy coverage as unrecorded, and infer no complete inventory."
+    },
+    {
+      "id": "soul-killer-full-findings",
+      "prompt": "灵魂杀手，全量架构审查。已有五条有证据的问题，请给完整报告。",
+      "expectedPrimarySkill": "activate-tavernweave-soul",
+      "expectedBehavior": "Activate the disclosed Soul persona and route full-scan/architecture to code-quality-workflow; at most three opening summary points must not truncate any complete findings or severity."
     }
   ]
 }

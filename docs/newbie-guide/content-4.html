@@ -1,6 +1,6 @@
 <section class="section" id="workflow">
-<div class="section-head"><div class="section-no">08</div><div><h2>拿一块折叠面板，完整跑一趟</h2><p class="section-kicker">从留后悔药到真实酒馆验收，一步都别跳。</p></div></div>
-<div class="steps"><div class="step"><strong>保留安全副本或本地 Git 基线</strong>不要直接使用唯一一份正式角色卡。</div><div class="step"><strong>先只读调查</strong>让 Agent 找到控制中心代码，并查询前端挂载、按钮事件和生命周期相关指南。</div><div class="step"><strong>审核计划</strong>确认找对文件、没有准备重写整个模块、没有改无关变量，并给出了验证方式。</div><div class="step"><strong>批准小范围执行</strong>本轮只做面板基础结构和开关，不允许顺手重构。</div><div class="step"><strong>在真实 SillyTavern 中运行</strong>检查入口、打开/关闭、刷新、旧功能和浏览器控制台。</div><div class="step"><strong>反馈实际现象</strong>给出操作步骤、预期、实际表现和控制台错误，不说“还是不对”。</div><div class="step"><strong>生成交接</strong>修改摘要、文件清单、验证结果、残余风险、恢复方式和下一步。</div></div>
+<div class="section-head"><div class="section-no">08</div><div><h2>拿一块折叠面板，完整跑一趟</h2><p class="section-kicker">用一个能打开、能关闭的小面板，把调查、修改、检查和反馈连起来。</p></div></div>
+<div class="steps"><div class="step"><strong>保留安全副本或本地 Git 基线</strong>先复制角色卡，或记录可恢复的本地版本。练手时把唯一的正式卡改坏，实在没必要。</div><div class="step"><strong>先只读调查</strong>请 Agent 找到控制中心源码，查清面板装在哪里、按钮怎样接入、退出时怎样清理。</div><div class="step"><strong>审核计划</strong>看它是否找对文件，本轮是否只增加面板，以及准备怎样检查开关和原有功能。发现它打算重写整个模块，先问原因。</div><div class="step"><strong>批准小范围执行</strong>确认后，本轮只做面板基础结构和开关。其他改进先记下来，别把练习越做越大。</div><div class="step"><strong>在真实 SillyTavern 中运行</strong>Agent 完成可执行的检查后，再列出需要你在酒馆里测试的步骤：入口、开关、刷新、原有功能及相关报错。</div><div class="step"><strong>反馈实际现象</strong>哪里不符合预期，就把操作步骤和实际表现发回来。有控制台错误，一并附上，方便继续定位。</div><div class="step"><strong>生成交接</strong>留下改了哪些文件、哪些检查通过、哪里还没验、怎样恢复，以及下次从哪里接着做。</div></div>
 <div class="code-block"><div class="code-label"><span>有效的问题反馈</span><button class="copy-btn" type="button">复制</button></div><pre><code>面板可以打开，但是关闭按钮无效。
 
 实际表现：
@@ -20,13 +20,13 @@
 请先定位根因，不要重写整个面板。</code></pre></div>
 </section>
 <section class="section" id="mistakes">
-<div class="section-head"><div class="section-no">09</div><div><h2>最容易把项目送走的六个习惯</h2><p class="section-kicker">不会写代码还能学；没有边界、没有恢复点，真会把项目一锅端。</p></div></div>
-<div class="cards"><article class="card"><h4>任务太大</h4><p class="muted">一次要求世界观、变量、状态栏、地图、战斗和工坊。正确做法是拆成可独立验收的阶段。</p></article><article class="card"><h4>只描述感觉</h4><p class="muted">“高级一点”没有明确约束。应该描述层级、布局、状态、响应式和交互。</p></article><article class="card"><h4>相信完成宣言</h4><p class="muted">文件可能写了但没加载，测试可能通过但真实环境仍报错。</p></article><article class="card"><h4>允许顺手优化</h4><p class="muted">修改范围越大，出现问题后越难定位。一次只处理一个行为路径。</p></article><article class="card"><h4>没有恢复点</h4><p class="muted">没有副本、本地 Git 提交或分支时，不要进行大规模修改。</p></article><article class="card"><h4>换会话不交接</h4><p class="muted">新会话不知道旧决策。先生成项目目标、架构、进度、禁区和下一步。</p></article></div>
+<div class="section-head"><div class="section-no">09</div><div><h2>这六个习惯，容易让你反复返工</h2><p class="section-kicker">这些坑往往和会不会写代码无关，而是开工前没说清、做完后没检查。</p></div></div>
+<div class="cards"><article class="card"><h4>任务太大</h4><p class="muted">世界观、变量、状态栏、地图、战斗、工坊一口气全要，哪里出错都不好找。先做一段能独立体验和验收的流程。</p></article><article class="card"><h4>只描述感觉</h4><p class="muted">只说“高级一点”，Agent 可能理解成多加阴影。可以先给参考图，指出哪里太挤、哪个按钮难找、手机上哪里读不清。</p></article><article class="card"><h4>相信完成宣言</h4><p class="muted">看到“已完成”先看它验了什么：新文件有没有加载，按钮有没有真的点过，酒馆里的数据有没有改变。</p></article><article class="card"><h4>允许顺手优化</h4><p class="muted">本来修一个按钮，顺手改了整个面板。每多动一块，都要补上相应检查；如果暂时没这个必要，就留到下一轮。</p></article><article class="card"><h4>没有恢复点</h4><p class="muted">大改前至少保留副本或可恢复的本地 Git 版本。否则出问题后，你和 Agent 就得一起考古：昨天到底哪份能用？</p></article><article class="card"><h4>换会话不交接</h4><p class="muted">新任务未必带着前一段对话。把已定方案、当前进度、不能动的内容和下一步写进交接，省得重新争论一遍。</p></article></div>
 </section>
 <section class="section" id="graduate">
-<div class="section-head"><div class="section-no">10</div><div><h2>毕业不是会背命令，是收得住方向盘</h2><p class="section-kicker">能控范围、看证据、留退路，才算真的会带 Agent 干活。</p></div></div>
-<div class="steps"><div class="step"><strong>能让 Agent 做出一个小东西</strong>打开项目、描述任务、看到结果、给出具体反馈。</div><div class="step"><strong>能保护项目</strong>限制目录、建立副本或本地 Git、先计划后执行。</div><div class="step"><strong>能使用工程资料</strong>根据任务查询 ST DB，要求 Agent说明依据、版本和不确定项。</div><div class="step"><strong>能使用 TW Skill 阵列</strong>检查路由是否正确，避免加载无关 Skill，要求验证与交接。</div><div class="step"><strong>能管理复杂任务</strong>拆阶段、控制并行 Agent、保留行为契约和验收记录。</div></div>
+<div class="section-head"><div class="section-no">10</div><div><h2>第一章结束：你已经可以带 Agent 做小项目了</h2><p class="section-kicker">先试着独立完成一次小修改，再看自己在哪一步需要补课。</p></div></div>
+<div class="steps"><div class="step"><strong>能让 Agent 做出一个小东西</strong>从打开项目到描述需求，再到试用结果和反馈问题，自己走完一轮。</div><div class="step"><strong>能保护项目</strong>限制目录、建立副本或本地 Git、先计划后执行。</div><div class="step"><strong>能使用工程资料</strong>能让 Agent 按问题查询 ST DB，并说明采用了什么资料、是否适合当前版本。</div><div class="step"><strong>能使用 TW Skill 阵列</strong>不必背英文名，但要能看懂它为什么调用这个 Skill，以及最后应交付什么。</div><div class="step"><strong>能管理复杂任务</strong>把大任务拆成阶段；如果开多个 Agent，要分清写入范围，并保留接口约定和验收记录。</div></div>
 <h3>收工前，拿这八问拦一次</h3>
-<ul class="checklist"><li>我最终想得到什么可见结果？</li><li>Agent 可以修改哪些文件，哪些绝对不能动？</li><li>当前任务应该使用哪些 TW Skill？</li><li>应该查询 ST 开发指南 DB 的哪个方向？</li><li>Agent 准备修改什么，证据是什么？</li><li>我如何亲自验证结果？</li><li>失败后如何恢复？</li><li>切换 Agent 或新会话时，如何完成交接？</li></ul>
-<div class="callout"><strong>最后把话说透</strong>会写代码，决定你能钻多深；会驾驭 Agent，决定 AI 吐出来的东西究竟是项目，还是一团看起来很忙的文本。</div>
+<ul class="checklist"><li>我最终想得到什么可见结果？</li><li>Agent 可以修改哪些文件，哪些绝对不能动？</li><li>Agent 选了哪些 TW 能力，和这次需求对得上吗？</li><li>应该查询 ST 开发指南 DB 的哪个方向？</li><li>Agent 准备修改什么，证据是什么？</li><li>Agent 已经检查了什么，哪些面和点还需要我验收？</li><li>失败后如何恢复？</li><li>切换 Agent 或新会话时，如何完成交接？</li></ul>
+<div class="callout"><strong>驾驶员也在积累经验</strong>每做完一轮，你都会更清楚怎样提需求、怎么看方案、哪里值得亲自试。代码可以逐步学，判断力也一样。别拿 Agent 写了多少行当成绩单，看看作品离你的预期近了多少。</div>
 </section>

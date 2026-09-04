@@ -41,6 +41,9 @@ try {
     Assert-True ($installedText.Contains('soul-ensemble-portable')) 'The managed block omitted the Soul ensemble route.'
     Assert-True ($installedText.Contains('runtimePersistentBlueprintBudget = 0')) 'The managed block omitted the persistent-blueprint execution guard.'
     Assert-True ($installedText.Contains('return to the parent step')) 'The managed block omitted the temporary problem-refinement return contract.'
+    Assert-True ($installedText.Contains('rewrite-natural-prose')) 'The managed block omitted prose refinement.'
+    Assert-True ($installedText.Contains('full-scan/architecture')) 'The managed block omitted full architecture review.'
+    Assert-True (-not $installedText.Contains('tavernweave-rewrite-policy:begin')) 'Installing the front door must not enable persistent rewriting.'
     $installedBytes = [System.IO.File]::ReadAllBytes($codexTarget)
     Assert-True ($installedBytes[0] -eq 0xEF -and $installedBytes[1] -eq 0xBB -and $installedBytes[2] -eq 0xBF) 'The installer did not preserve the UTF-8 BOM.'
 
@@ -48,7 +51,7 @@ try {
     Assert-True ($secondReceipt.statusBefore -eq 'current' -and $secondReceipt.changed -eq $false) 'A repeated install was not idempotent.'
     Assert-True (-not $secondReceipt.backupPath) 'An idempotent install created an unnecessary backup.'
 
-    $outdatedText = $installedText.Replace('begin version=1.3.0', 'begin version=1.0.0')
+    $outdatedText = $installedText.Replace('begin version=1.4.0', 'begin version=1.0.0')
     [System.IO.File]::WriteAllText($codexTarget, $outdatedText, [System.Text.UTF8Encoding]::new($true))
     $outdatedReceipt = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Check -TargetInstructionFile $codexTarget -Json)
     Assert-True ($outdatedReceipt.statusBefore -eq 'outdated') 'An outdated marker version was not diagnosed.'

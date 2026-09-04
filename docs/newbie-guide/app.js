@@ -3,16 +3,16 @@
 
   try {
     const urls = [
-      './content-0.html?v=34',
-      './content-1.html?v=34',
-      './content-2.html?v=34',
-      './content-3.html?v=34',
-      './content-4.html?v=34',
-      './content-5.html?v=34',
-      './content-6.html?v=34',
-      './content-7.html?v=34',
-      './content-8.html?v=34',
-      './content-9.html?v=34',
+      './content-0.html?v=37',
+      './content-1.html?v=37',
+      './content-2.html?v=37',
+      './content-3.html?v=37',
+      './content-4.html?v=37',
+      './content-5.html?v=37',
+      './content-6.html?v=37',
+      './content-7.html?v=37',
+      './content-8.html?v=37',
+      './content-9.html?v=37',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
@@ -269,10 +269,10 @@
   const recommendation = document.getElementById('recommendation');
   const choiceButtons = [...document.querySelectorAll('.choice-btn')];
   const recommendations = {
-    codex: '<strong>推荐：Codex 桌面端</strong><br><span class="muted">你主要靠说人话带项目，还要调 TW Skill 阵列。它最像一张能直接派活的 Agent 指挥台。</span>',
-    claude: '<strong>推荐：Claude Code Desktop</strong><br><span class="muted">你的活离不开前端预览、真实点击和应用验货；能把页面当场打开，比多一块代码面板更值钱。</span>',
-    opencode: '<strong>推荐：OpenCode</strong><br><span class="muted">你准备进入代码层，也希望自己选择当前环境中真正可用的供应商、模型或自定义 API。Cursor 可以作为备用 IDE，但先别为没验过货的 Pro+ 或 Ultra 买单。</span>',
-    cli: '<strong>推荐：Agent CLI（进阶路径）</strong><br><span class="muted">你的主菜是脚本、服务器和自动化。CLI 更自由，也更容易把环境杂活一锅端上来，所以放进阶路径。</span>',
+    codex: '<strong>可以从 Codex 桌面端试起</strong><br><span class="muted">你倾向于用自然语言描述需求，再查看改动和结果。先用 TW 做一个小任务，看看这种项目管理方式是否顺手。</span>',
+    claude: '<strong>可以试试 Claude Code Desktop</strong><br><span class="muted">你经常需要运行和预览前端，可以先试它的浏览器面板与检查流程。可用能力仍要以你的系统、版本和权限为准。</span>',
+    opencode: '<strong>可以了解 OpenCode</strong><br><span class="muted">你愿意查看代码，也想自己配置供应商和模型。先接入当前环境可用的 API，再用一项真实任务确认工具调用是否正常。</span>',
+    cli: '<strong>可以考虑 Agent CLI（进阶路径）</strong><br><span class="muted">你需要脚本、服务器或自动化工作流，可以逐步学习命令行。先熟悉目录、权限与环境配置，再接入正式任务。</span>',
   };
 
   function calculateRecommendation() {

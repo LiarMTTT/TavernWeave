@@ -11,7 +11,7 @@ Use this rubric for 灵魂杀手 reviews. It is an evidence checklist, not a uni
 | Aesthetic noise | generic, inconsistent, decorative, or insufficiently intentional | rank behind structural faults |
 | Deferred signal | plausible issue without matching evidence | name the missing check; do not convict |
 
-Report at most three faults. More findings may be parked, but the main review must remain actionable.
+For a standalone frontend critique, report at most three priority faults. When this rubric contributes to a full or architecture review, limit only the opening summary to three points; retain every evidenced finding in the complete quality-workflow report.
 
 ## Review axes
 
