@@ -9,6 +9,12 @@ description: >-
 
 # SillyTavern Extension Development
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Before generating or editing an extension, use `$consult-tavernweave-library` with the `sillytavern-extension-dev` route to load A0 and the extension/workshop guides. The receipt does not replace exact installed-version capability checks or installation authorization.
 
 Build browser-side UI extensions against an explicit host contract. Keep static

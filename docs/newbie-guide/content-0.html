@@ -2,19 +2,46 @@
 <div class="eyebrow">TAVERNWEAVE · VIBE CODE 制卡 STARTER</div>
 <h1 id="hero-title">用 TavernWeave，把想法做成能玩的作品。</h1>
 <p class="hero-lead">想做角色卡，却不知道从哪下手？这份教程从你和 Agent 怎么配合讲起，再带你认识变量、脚本和前端，最后到真实酒馆里检查作品是否按预期运行。</p>
-<div class="hero-actions"><a class="primary-btn" href="#tw-capabilities">先看 TW 能做什么 ↓</a><button class="ghost-btn" data-copy-target="a0-template" type="button">复制 A0 轻量模板</button></div>
+<div class="hero-actions"><a class="primary-btn" href="#tw-start-here">从我想做的事开始 ↓</a><button class="ghost-btn" data-copy-target="tw-first-request" type="button">复制开工说法</button></div>
 <div class="hero-tags"><span class="tag">开篇 · TW 功能地图</span><span class="tag">第一至三章 · 入门</span><span class="tag">第四章起 · 进阶</span><span class="tag">SillyTavern 制卡开发</span></div>
 </section>
 
 <section class="section chapter-opening capability-overview" id="tw-capabilities">
 <div class="chapter-tier"><span>先看这里</span><strong>TavernWeave 功能地图</strong><span>从你要解决的问题开始</span></div>
 <div class="section-head"><div class="section-no">TW</div><div><h2>TavernWeave 到底能做什么</h2><p class="section-kicker">从整理想法、制作角色卡，到排查问题、组装发布，TW 帮你把项目一步步做出来。</p></div></div>
-<p class="lead">TavernWeave（简称 TW）是一套面向角色卡制作与 Vibe Coding 的工作系统。v1.4.0 包含 21 个专职 Skill，你可以把它们理解为 Agent 按任务调用的工作方法：有的负责规划，有的负责制作，有的负责检查。</p>
+<p class="lead">TavernWeave（简称 TW）是一套面向角色卡制作与 Vibe Coding 的工作系统。这里介绍 v1.5.0 的 21 个专职 Skill，你可以把它们理解为 Agent 按任务调用的工作方法：有的负责规划，有的负责制作，有的负责检查。当前正式版为 v1.5.0。</p>
 <p>你可以用 TW 讨论一个还没想清楚的项目，制作或改进角色卡，搭建界面，精修文字，查找故障，也可以在各部分完成后组装作品、准备发布。想回顾自己一路怎么做项目、积累了哪些经验，可以调用“照镜子”，复盘你的 <strong>Vibe Code 经验与成长历程</strong>。</p>
 <p>开始时不用记住这些 Skill 的英文名。直接告诉 Agent 你想做什么，或者卡在了哪里，它会判断需要调用哪些能力。</p>
 <div class="flow"><div class="flow-node">你说需求</div><div class="flow-arrow">→</div><div class="flow-node">Agent 选择所需能力</div><div class="flow-arrow">→</div><div class="flow-node">查阅相关资料</div><div class="flow-arrow">→</div><div class="flow-node">制作与检查</div><div class="flow-arrow">→</div><div class="flow-node">需要你验收的<br/>面和点</div></div>
 <div class="callout good"><strong>不知道该怎么提需求？</strong>先描述你遇到的情况就行。比如：“角色的数值已经变了，状态栏却还是旧的，帮我查一下原因。”你不必提前知道问题出在哪个文件，也不必先选对 Skill。交付时，Agent 应说明做了哪些检查，以及哪些地方需要你亲自查看和试用。</div>
 
+<h3 data-subsection="TW.0" id="tw-start-here">先选你现在想做的事 <span class="new-badge">NEW · V1.5.0</span></h3>
+<p>不必先想好所有功能，也不用背英文口令。从下面最像你的情况开始，TW 会帮助整理需求，每次优先问一两个真正影响结果的问题。拿不准时可以说“不知道，你推荐”，再根据理由作选择。</p>
+<div class="table-wrap"><table class="tw-onboarding-table"><thead><tr><th>你现在的情况</th><th>可以直接这样说</th><th>先得到什么</th></tr></thead><tbody>
+<tr><td>有想法，想从零开始</td><td>“我想做一个……，帮我先做出能试用的小版本。”</td><td>保留核心想法的第一份小成果</td></tr>
+<tr><td>接手了一张角色卡</td><td>“先帮我看懂原卡，我想沿原作续更／做二创。”</td><td>原卡说明、保留项和第一次改动方案</td></tr>
+<tr><td>改进熟悉的作品</td><td>“接着已有进度，把……改成……。”</td><td>沿已确认方向继续的修改</td></tr>
+<tr><td>有地方坏了</td><td>“我做了……，本来应该……，实际却……。”</td><td>有依据的原因说明和修复办法</td></tr>
+<tr><td>完全不知道从哪开始</td><td>“我想先体验一下，帮我挑个小例子。”</td><td>一次能亲手操作、再改一次的体验</td></tr>
+</tbody></table></div>
+<div class="code-block" id="tw-first-request"><div class="code-label"><span>先把愿望说出来</span><button class="copy-btn" type="button">复制</button></div><pre><code>我想做【你想要的作品或效果】。目前有【已有文件；没有也可以说没有】。
+请先帮我整理成一个能试用的小成果，用大白话解释推荐理由和需要我决定的事情。
+拿不准的地方可以给我推荐；先说明计划，等我确认再改文件。</code></pre></div>
+<h3 data-subsection="TW.0.1" id="tw-guidance-levels">四个挡位，由你自己选</h3>
+<div class="table-wrap"><table class="tw-onboarding-table tw-guidance-table"><thead><tr><th>挡位</th><th>推进节奏</th><th>解释方式</th></tr></thead><tbody>
+<tr><td>新人</td><td>一次一个小步骤</td><td>详细说明在哪里操作、为什么这样做、会看到什么</td></tr>
+<tr><td>入门</td><td>一次一个小阶段</td><td>同样详细解释步骤关系、做法、取舍与检查方法</td></tr>
+<tr><td>熟练</td><td>按任务或阶段推进</td><td>合并常规操作，交代关键决定和依据</td></tr>
+<tr><td>老手</td><td>直接对齐结果与改动</td><td>减少重复基础教学，给出差异、证据和待决定事项</td></tr>
+</tbody></table></div>
+<p>直接告诉 TW“以后用入门档”即可提出选择；保存前会说明实际位置和范围。你没选时不会被自动分档，成功或失败也不会让 TW 擅自给你升降档。“这次详细一点”或“这次简短点”只影响对应回复。教程的“入门篇／进阶篇”是章节分类，不会替你设置挡位。</p>
+<div class="callout good"><strong>大白话始终适用，修 bug 默认解释清楚</strong>所有挡位都保留必要术语并解释当前含义。新人和入门都详细讲；熟练和老手在需要理解新机制、作重要选择或修 bug 时，也会详细说明，除非你明确说这次没必要。切换 Soul、退出洗稿或升级 TW，都不应清除你的挡位。</div>
+<h3 data-subsection="TW.0.2" id="tw-card-takeover">接手旧卡：先看懂，再二创或续更</h3>
+<p>只有 PNG 或 JSON 卡文件也可以开始。TW 先检查角色、玩法、开场和依赖，说明拿到了什么、还缺什么；再确认你想沿原作更新还是做二创，以及必须保留哪些内容。第一次只挑一处你最想改变的地方，保留原件，导出另一份测试卡，试用后再改一次。</p>
+<p>如果作者的维护源码没有提供，TW 会明确说明缺失。涉及旧聊天和存档时，要讲清对旧进度有什么影响，以及怎样检查；添加新开场通常先在新聊天中试用，不能用覆盖原卡代替比较。</p>
+<div class="code-block"><div class="code-label"><span>接手卡的第一句话</span><button class="copy-btn" type="button">复制</button></div><pre><code>我接手了这张卡，想【沿原作继续更新／做二创】。
+先检查实际文件，用大白话说明原卡怎么玩、有哪些依赖、缺什么材料。
+再和我确认必须保留的内容，选第一次改动；保留原件和旧聊天，先交方案。</code></pre></div>
 <h3 data-subsection="TW.1" id="tw-system-plan">项目规划与脑暴 <span class="new-badge">NEW · V1.2.0</span></h3>
 <p>适合“我有一个想法，但不知道该怎么落地”“项目太大，Agent 越做越散”或者“先帮我想清楚，不要马上写文件”。</p>
 <div class="cards capability-cards"><article class="card new-panel"><h4>把愿望收成第一版</h4><p class="muted">先聊清楚作品给谁用、最想让人体验什么，再决定第一版做哪些内容、以后加什么。别一开场就把十年的更新计划塞进第一版。</p></article><article class="card new-panel"><h4>按体量生成蓝图</h4><p class="muted">小项目用一份蓝图说明白；项目大了，再按模块拆开。每一步都要对应实际工作，不能为了显得专业，先给你盖一排空文件夹。</p></article><article class="card new-panel"><h4>Soul 三席联席</h4><p class="muted">阿瞳关注你想表达什么，MTTT.sir 检查技术和逻辑，强尼·银手看界面方向。三种视角围绕同一份方案讨论，最后留下统一的决定与待办。</p></article><article class="card new-panel"><h4>照镜子：复盘 Vibe Code 经验 <span class="new-badge">NEW · V1.3.0</span></h4><p class="muted">回顾你如何提出需求、选择方案、发现问题和纠正方向，看清哪些地方更熟练了，哪些问题还在反复出现。评估依据当前能查到的对话、项目记录与实际交付，给出文字评估和七章交互报告，并说明资料缺口。有历史履历时，只比较前后口径一致的部分。</p></article></div>

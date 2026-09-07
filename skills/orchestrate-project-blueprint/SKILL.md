@@ -5,7 +5,15 @@ description: Turn a vague product, character-card, frontend, or Vibe Coding wish
 
 # 脑暴模式 · 许愿工坊
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 把“我想要一个东西”收束为可恢复、可验收、不会在执行中无限长大的项目权威链。它不是一句话盲跑器；它把一句愿望变成最短的可靠闭环。
+
+用户可以直接说愿望，不必先说“脑暴模式”。从零创作时先帮其形成可试用的小成果；完全没想法时给一两个贴合兴趣的小例子。接手角色卡二创/续更先交给 `tavern-card-builder` 看懂原卡；熟悉作品的增改先续接原决定；故障按实际现象交给相关能力。普通问答不强制进入完整引导；完整引导需要用户选择挡位，但暂未选择也不能自动归档或阻止有用的帮助。
 
 开始任何写入前，先读取仓库 `AGENTS.md`、`NEXT.md`、现有总设计案、蓝图和 Git 状态。若项目会写文件，再通过 `$consult-tavernweave-library` 路由 A0 与最小资料包；角色卡创作继续交给 `$tavern-card-builder`，本 Skill 只拥有项目级收束和执行编排。
 
@@ -30,7 +38,7 @@ node scripts/resolve-brainstorm-command.mjs "脑暴模式，Soul 联席"
 
 先判断这是新项目、续接项目，还是老作品重置。续接时以现有权威文件和已验收事实为准；不得另造一套平行总设计案。老作品只作为候选复用源，先问用户是否有稳定作品或组件可供检查。
 
-读取 [brainstorm-protocol.md](references/brainstorm-protocol.md)，然后每轮只推进一个相邻方向，共享提出 2–4 个真正会改变产物的决策。每个方向都有讨论上限，达到上限必须冻结、停车、换方向，或由用户明确追加一轮。
+读取 [brainstorm-protocol.md](references/brainstorm-protocol.md)，每轮只推进一个相邻方向，优先提出 1–2 个真正会改变产物的必要决策，三席合计最多 4 个。允许用户说“不知道，你推荐”，并解释推荐的结果与取舍。每个方向都有讨论上限，达到上限必须冻结、停车、换方向，或由用户明确追加一轮。
 
 ### 2. 选项目类型和承载面
 
@@ -53,10 +61,10 @@ node scripts/resolve-brainstorm-command.mjs "脑暴模式，Soul 联席"
 
 按 [first-version-contract.md](references/first-version-contract.md) 把构思分成：
 
-1. Core Spine：不可缺的本体骨架；
-2. First Playable：第一版必须真实可用/可玩的最小闭环；
-3. Growth Tracks：长期更新路线；
-4. Parking Lot：本轮不做但不丢失的想法。
+1. Core Spine（核心骨架）：缺了就不是用户想要的那个作品的内容；
+2. First Playable（首个能玩的版本）：用户能进入、做一次核心操作并看到结果的小作品；
+3. Growth Tracks（后续更新方向）：首版验证后再逐步加入的内容；
+4. Parking Lot（暂存想法）：这次先不做、以后还能重新讨论的提议。
 
 不要用“以后再说”混淆首版缺口。必须写清入口、核心循环、状态源、失败路径、交付物和验收证据。
 
@@ -91,7 +99,7 @@ node scripts/validate-project-authority.mjs <project-root>/.tavernweave/project-
 4. 临时问题支线解决、否定或确认阻塞后必须关闭并回到父步骤原有顺序与退出条件；不得在支线内继续递归生成持久层级。
 5. 只有问题已经形成独立领域、独立交付物和独立验收门，且父蓝图无法清楚容纳时，才停止当前执行、提交 `rescope proposal` 并等待驾驶员决定是否提取子蓝图。
 6. 每个阶段满足退出条件后更新 `NEXT.md`，再进入下一阶段；不能以“代码写了”替代证据。
-7. 首版闭环完成后停在驾驶员验收，不自动滚入 Growth Tracks。
+7. 首版闭环完成后带用户亲手试用，解释失败恢复方法，再帮助其提出一次有具体目标的修改；在用户许可内完成第二次修改并再次试用。然后停在本次驾驶员验收，不自动滚入 Growth Tracks，也不以“教学”为由擅自修改文件。
 
 ## 复用稳定作品
 

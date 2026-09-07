@@ -1,4 +1,4 @@
-[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
+﻿[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
 param(
     [string]$PluginRoot,
     [Parameter(Mandatory = $true)]
@@ -67,11 +67,11 @@ if ($TargetInstructionFile -and $AgentHost -eq 'None') {
 
 function Invoke-HostFrontDoorStep([bool]$PreviewOnly = $false) {
     if ($HostFrontDoorAction -eq 'Skip') {
-        Write-Output 'Host Front Door: skipped by explicit choice. Soul activation remains dependent on Skill discovery.'
+        Write-Output '已按你的选择只安装 Skills。使用 TW 时会遵守大白话规则；跨任务全局加载尚未配置，挡位没有自动设置。'
         return
     }
     if ($AgentHost -eq 'None') {
-        Write-Output 'HOST FRONT DOOR RECOMMENDED: install it into the current agent client global instruction file for the best Soul activation, A0 loop, and cross-project TavernWeave routing experience.'
+        Write-Output '建议配置 TW 全局入口，让大白话和任务引导随客户端新任务加载；用户挡位会单独保存，安装不会替你选择。'
         Write-Output 'Choose the host explicitly: -AgentHost Codex or -AgentHost Claude; then use -HostFrontDoorAction Prompt, Preview, or Install.'
         return
     }
@@ -79,8 +79,8 @@ function Invoke-HostFrontDoorStep([bool]$PreviewOnly = $false) {
     $resolvedAction = if ($PreviewOnly) { 'Preview' } else { $HostFrontDoorAction }
     if ($resolvedAction -eq 'Recommend') { $resolvedAction = 'Check' }
     if ($resolvedAction -eq 'Prompt') {
-        Write-Output "HOST FRONT DOOR RECOMMENDED for ${AgentHost}: global installation provides the best Soul activation and A0 loop experience."
-        $choice = (Read-Host 'Choose [I]nstall (recommended), [V]iew proposed block, or [S]kills only').Trim().ToUpperInvariant()
+        Write-Output "为 ${AgentHost} 配置全局入口后，可在新任务验证持续大白话和任务路由。已有挡位会保留。"
+        $choice = (Read-Host '选择 [I] 安装全局入口、[V] 查看将写入的内容、[S] 只装 Skills').Trim().ToUpperInvariant()
         $resolvedAction = switch ($choice) {
             'I' { 'Install' }
             'V' { 'Preview' }

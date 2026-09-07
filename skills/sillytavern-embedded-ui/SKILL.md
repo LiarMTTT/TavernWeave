@@ -5,6 +5,12 @@ description: Design, implement, or review framework-neutral embedded interfaces 
 
 # SillyTavern Embedded UI
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Before designing or changing an embedded interface, use `$consult-tavernweave-library` with the `sillytavern-embedded-ui` route. Read A0, the smallest matching UI/mobile guides, and selected design/motion references; every selection remains `proposed` until the project authority adopts it.
 
 Build the smallest maintainable interface that fits the rolecard's actual lifecycle. Use semantic HTML, CSS, and JavaScript as the portable baseline. Adopt a framework only when the existing project already uses it or the interaction complexity clearly justifies it.

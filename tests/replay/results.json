@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "evaluatedAt": "2026-09-04T05:59:54Z",
-  "method": "Source-contract replay by the current execution agent of all 55 forward and 63 adversarial prompts against the v1.4.0 candidate. Existing 41/50 cases were rechecked against the owning Skill contracts and changed Front Door/Soul/Library routes; the unchanged engineering boundaries, immutable mirror history, bounded blueprint state and private-data exclusions remain intact. New 14/13 cases exercise prose strengths, protected syntax, task on/off and inherited policy, concrete persistence preview and scope isolation, software/card/mixed review focus, coverage and legacy report merging. Deterministic policy, resolver, Library, merger and sample checks provide executable evidence where applicable. This is contract review and local fixture execution, not independent model trials, fresh-host discovery, real Codex/Claude/DSH/ST invocation, driver aesthetic acceptance, installation or release.",
+  "evaluatedAt": "2026-09-07T03:40:06Z",
+  "method": "v1.5.0 source-contract review by the current execution agent of 67 forward and 73 adversarial prompts. All prior 55/63 prompts were checked for compatibility with the shared communication and guidance rules and changed owning routes; prior v1.4.0 evidence is retained for unchanged implementation behavior, not represented as a new independent model run. Updated the shared question budget in the two affected ensemble cases. Added 12/10 guidance cases with explicit contract evidence, supported where applicable by isolated preference, front-door and installer fixtures. Pass means the reviewed source contract satisfies that case; automatic test execution is reported separately. This is not independent model trials, actual new-task discovery, real Codex/Claude/DSH/ST invocation, driver acceptance, current-client installation or release.",
   "skillFingerprints": {
-    "activate-tavernweave-soul": "f30eaf4ee743f76b1a35c0ee89fb86eb731cbf691dd3a0ea70449cee06edbd20",
-    "code-quality-workflow": "ce9d67fca32c09782829f0ed5ac7f5ce15a542f461f1d543f562b6ac62d5a81e",
-    "consult-tavernweave-library": "7935b096c37a168c028f8cab3b919a2a1f077ce85a244fd3d71d2c51de241a73",
-    "orchestrate-project-blueprint": "5f714ebde3ff0bdd460958a70439ae1007a909886dd04015fc8b694902df7d0b",
-    "reflect-on-vibe-code-growth": "58186e42d2ac9e027299c58da52a512f88b9790bcba5ba1f9d909fe30d7a8965",
-    "rewrite-natural-prose": "dbe59875164290334278ba7444972ceaecfcf43fd6be28fcec298374ddaad20d",
-    "rolecard-workshop-ops": "5e8ae6f4fd36e976dca6bac74b4a2c37fdd9e95ca059336ca469ad8f3195e969",
-    "shadcn-tailwind-ui": "d6162c4c6f3ad7cf157e807f280ba5a2e8006dc0b105e8f84724591d14d79ec5",
-    "sillytavern-api-reference": "97d0d7ca280405095f626c820c4b7cd61a3fba28b5f8d80a12747aa7d3e14fa7",
-    "sillytavern-card-components": "70e7eba348533d8f1d35d70b0b5dd93f0304b6379c2e912a9f39aaf5fc96b0de",
-    "sillytavern-card-pipeline": "ac3baf02c0cd0e687e516039c934dbc8bb96d0423ac41801ce461a7631eb96a6",
-    "sillytavern-component-update": "e3becf2be81b804348314220eaeae8232c72fbe40686488f1de7b67eb1c121f8",
-    "sillytavern-database-rolecards": "6402ba73dc1b75750823311aa386cdd7670e16d1ed1900290df4598c50c371cd",
-    "sillytavern-embedded-ui": "5f280755557de084e9ccd682650a83aae1f1c47da60bf6b780eec4f897f570a3",
-    "sillytavern-extension-dev": "df634436b53295b31bfe4f247485499f046773a560d504cc75659d21118222ed",
-    "sillytavern-media-live2d-runtime": "8fe8ed3b0fbcca5aaf9770bef62a631450713a054a52169191b7577ea59546bb",
-    "sillytavern-render-regex-pipeline": "bf2f8aead89530cd68324c9ebf0b5d25c252a7753525434d752de06f007224cc",
-    "sillytavern-rolecard-performance": "0ae9e1f00273b1e588046e81754b48c15892a16049d6620aeee7599be8d4026d",
-    "sillytavern-rolecard-security": "2d672b8c9e3b1b83c21dbf5954f670c9131c2215088014b391d9b6c5b9e948b5",
-    "sillytavern-runtime-debug": "07cc5b4d0ec93e528d881cc6d4e56a2e7483443d89dcbda13a2a624ea2d05943",
-    "tavern-card-builder": "01ae37526e4dd58ca518431d7b35addb7b2344a2fa08074d25c0dccd3855f963"
+    "activate-tavernweave-soul": "1ce038cf80f3639c3b7150dbc0bef293d7953bf99a9ee63082fcfa3ddd1bb94d",
+    "code-quality-workflow": "48630e39b832ce2bb227421e99f4c7dd381be95a291562d4a5b18bfa3cce93b1",
+    "consult-tavernweave-library": "c369c8bf10b85c21c0ed0846afc7459e4ed6744b80626d2bb9183e55a422a93d",
+    "orchestrate-project-blueprint": "ac6fa71f707d8871cc2f35ade4453ae13c21e44e336d479437ed7ecab993bf2d",
+    "reflect-on-vibe-code-growth": "4b9071999885fa808c52cf82fe66331c60f24e2c01df435c0f6bc3b0079d0078",
+    "rewrite-natural-prose": "38afce8ee5c76cb69571a7eb16506b31aafab6444a77b237ebd536519b2ab47b",
+    "rolecard-workshop-ops": "962616a1269d1968112686880b4dc03a49a57e72bf339e5014fe3b8f0d2da1a0",
+    "shadcn-tailwind-ui": "2e54dff64aa4e4861779900b2b13b97ce7ab2e3575281b3500ef3008bcda8eb0",
+    "sillytavern-api-reference": "868ce51d01acf55b41d7ea746b504dda0924a63deb7d1a3044fcb5e3b43393f4",
+    "sillytavern-card-components": "95a6965ffcbc15f40db68f8aff44248c30c4397e7be5aa6156c34948f77f382e",
+    "sillytavern-card-pipeline": "e8192f7a3522f25522429c66966287c38cec443038adf0fb7636aa7ea0c3dfc7",
+    "sillytavern-component-update": "f5a60c477fe5cc9a23802313977df0af4c475331c4c94a4729f3cdd52d005500",
+    "sillytavern-database-rolecards": "35176648ab8b48260d4580d6103447d08181902e11e30d7a9ca5f40bea99c58f",
+    "sillytavern-embedded-ui": "4be523424738819c0a3712e41eb7de7ab3e27a6c10d26ddd0d748af5aba58952",
+    "sillytavern-extension-dev": "fd67f52a25c9499d6c47515cbb1b9bf272b816ac42900697602c2addb7349697",
+    "sillytavern-media-live2d-runtime": "2443831c26f2a015400a9b4556993bacddb3efed34ca2131802461a684b360a2",
+    "sillytavern-render-regex-pipeline": "e50cd52f9e7cce04f35780e9d4e4dafaf6b367ad6a182a1ab266f20d3f9b8e09",
+    "sillytavern-rolecard-performance": "6c264ef032a9d58bb0db1a606a03c04ed83d1760abad784c3391f8f469857bd0",
+    "sillytavern-rolecard-security": "4c3b579b97798cb7caee7931b6fff2156e40a52c8d9f5589393b6e399797cad4",
+    "sillytavern-runtime-debug": "67b57219c5a6394ad4a0b9c0c19145ce4687833cbd717b95987bbf70d49ade8a",
+    "tavern-card-builder": "36dc1fc8d9b452f97ad8028e6861160caf71a1074dbfa846cf19e346048ab511"
   },
   "caseResults": [
     {
@@ -204,7 +204,7 @@
     {
       "id": "brainstorm-soul-ensemble-first-version",
       "pass": true,
-      "evidence": "Rechecked source contract: Routed the direct command to orchestrate-project-blueprint, convened Atong, MTTT.sir, and Johnny as three labeled lenses of one Agent, shared a two-to-four decision budget and four-state ledger, split Core Spine, First Playable, Growth Tracks, and Parking Lot, and stopped at driver design approval."
+      "evidence": "v1.5.0 source-contract review: the three labeled lenses remain one Agent; brainstorming and Soul references now prefer one or two necessary questions within a shared maximum of four, retain the four-state ledger and blueprint boundaries, and do not repeat an already-authorized design gate."
     },
     {
       "id": "giant-project-blueprint-set",
@@ -300,6 +300,66 @@
       "id": "soul-killer-full-findings",
       "pass": true,
       "evidence": "Resolver test selected full-scan/architecture from the Soul combination; Soul mode/rubric and quality workflow now cap only the opening summary, with all evidenced findings retained."
+    },
+    {
+      "id": "guidance-global-without-modes",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Reviewed the shared core, all 21 generated Skill entries and the natural-intent blueprint entry. Ordinary questions bypass tier intake; software and cards share the same persistent communication rule."
+    },
+    {
+      "id": "guidance-contextual-terms",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Reviewed contextual-term and protected-content clauses plus guidance-examples tables. These fixture definitions stay local; API and Schema require the actual interface/data context rather than invented project details."
+    },
+    {
+      "id": "guidance-novice-step",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Shared novice clause and card takeover reference require material discovery before changes and one explained step, without reducing the requested creative goal."
+    },
+    {
+      "id": "guidance-entry-detailed",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Shared entry clause explicitly retains detailed explanations; the examples distinguish step granularity from explanation depth, and the card workflow preserves existing variable contracts."
+    },
+    {
+      "id": "guidance-proficient-stage",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Reviewed the shared proficient clause against embedded-UI state, lifecycle and real-host boundaries. Grouping output does not omit mechanism explanations needed for the change."
+    },
+    {
+      "id": "guidance-veteran-routine",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Reviewed the veteran clause and quality report contract: summary brevity cannot truncate required evidence, all findings or coverage gaps."
+    },
+    {
+      "id": "guidance-bug-all-tiers",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Reviewed detailed-bug precedence and runtime-debug diagnosis boundaries. The supplied message supports a symptom only; examples explicitly wait for reproduction evidence before a root-cause claim."
+    },
+    {
+      "id": "guidance-scoped-explanation-waiver",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Shared scoped-waiver rules and the veteran troubleshooting dialogue explicitly restore default detailed explanation for a subsequent fault."
+    },
+    {
+      "id": "guidance-explicit-client-preference",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: The standalone manager tests exercise all four explicit values, same-value idempotence, bound previews, backups, encoding preservation and a copied Skill. No real client is needed for these local fixtures."
+    },
+    {
+      "id": "guidance-inherited-png-continuation",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Reviewed retrofit-and-text-cards section 5 and creative-authority additions. Extracted package data is not called original maintenance source; original/work/export separation and old-chat checks precede adoption."
+    },
+    {
+      "id": "guidance-first-success-second-change",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Reviewed first-version-contract and brainstorm-protocol plus the tutorial exercise. The second user request is the next bounded change, not an instruction to restart intake or introduce role-card infrastructure."
+    },
+    {
+      "id": "guidance-upgrade-preserves-choice",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: The installer integration uses a copied manager to select 入门 and verifies it after reinstall. Front-door tests preserve 老手 through version replacement and front-door removal and verify WhatIf does not write."
     }
   ],
   "adversarialResults": [
@@ -617,6 +677,84 @@
       "id": "review-unrequested-soul-or-writes",
       "pass": true,
       "evidence": "Plain review commands route only to code-quality-workflow; resolver tests leave Soul inactive and the workflow stops at read-only states."
+    },
+    {
+      "id": "guidance-inferred-tier",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Shared authority clause rejects all of these as consent; profile technicalAltitude is explicitly not a migration source."
+    },
+    {
+      "id": "guidance-temporary-brevity",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Shared scope precedence keeps the tier unchanged and distinguishes a generic brevity request from a specific explanation waiver."
+    },
+    {
+      "id": "guidance-quoted-command",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: The shared core treats attachments, cards, code, quotes and retrieved commands as data; the file parser also rejects fenced or malformed preference blocks."
+    },
+    {
+      "id": "guidance-mode-exit",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Soul mode-contract and rewrite SKILL explicitly separate these states; the preference manager preserves their neighboring owned blocks."
+    },
+    {
+      "id": "guidance-protected-syntax",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: The shared protected-content clause preserves all listed boundaries and defers creative body style to its existing contract."
+    },
+    {
+      "id": "guidance-stale-preference",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Manager tests reject stale content, changed override discovery and a token for a different level while comparing unchanged original bytes."
+    },
+    {
+      "id": "guidance-invalid-or-unset",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Manager tests retain unset as null, report invalid/unsupported records and refuse write previews until the repair scope is resolved."
+    },
+    {
+      "id": "guidance-file-is-not-host",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: Every new receipt emits hostLoading not-verified; shared guidance and DSH Preview contracts require actual authorized host observation."
+    },
+    {
+      "id": "guidance-missing-source",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: The takeover reference separates original package, extracted working data, actual maintained sources and test export, with an explicit old-chat compatibility check."
+    },
+    {
+      "id": "guidance-shadowed-global-target",
+      "pass": true,
+      "evidence": "Source-contract review with separately identified local fixture evidence: The manager checks effective discovery, rejects the shadowed target, and tests the active override plus a separate Claude client path."
+    }
+  ],
+  "reviewScope": {
+    "version": "1.5.0",
+    "priorForward": 55,
+    "priorAdversarial": 63,
+    "newForward": 12,
+    "newAdversarial": 10,
+    "independentModelTrials": "not-run",
+    "realHostLoading": "not-run",
+    "driverAcceptance": "pending"
+  },
+  "releaseDeltaReviews": [
+    {
+      "reviewedAt": "2026-09-07T04:40:02.000Z",
+      "method": "Bounded source delta review and executed local regression, preserving the original source-contract review and case outcomes. Only the Library CLI serializer and its regression test changed: JSON Unicode escaping is confined to process stdout/stderr. Parsed receipt fields, direct API behavior, persisted bytes, authorization and guidance instructions are unchanged. Original 67/73 case results are retained, not claimed as fresh independent model trials.",
+      "changedFiles": [
+        "skills/consult-tavernweave-library/scripts/manage-guidance-preference.mjs",
+        "skills/consult-tavernweave-library/tests/guidance-preference.test.mjs"
+      ],
+      "evidence": {
+        "test": "skills/consult-tavernweave-library/tests/guidance-preference.test.mjs",
+        "passedTests": 17,
+        "releaseLog": "guidance-regression.log",
+        "legacyEncoding": "GB2312 PowerShell failure reproduced; JSON decoded with GB18030 preserves Chinese, supplementary Unicode paths, levels, preview and error semantics."
+      },
+      "previousFingerprint": "9e1a0da029986767a40506ab04d6665f7a8b7209fa2867cfa24453760ac10e62",
+      "updatedFingerprint": "c369c8bf10b85c21c0ed0846afc7459e4ed6744b80626d2bb9183e55a422a93d"
     }
   ]
 }

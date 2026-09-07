@@ -5,6 +5,12 @@ description: Plan and author maintainable SillyTavern character cards, including
 
 # Tavern Card Builder
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Design the card as a set of explicit contracts. Keep authoring decisions here and route engineering work to the owning specialist.
 
 Before a write-capable design, use `$consult-tavernweave-library` with the `tavern-card-builder` route so A0 and the smallest matching ST guides are actually read. Keep the route receipt with the project authority; a bundled database that was not routed and read is not evidence.
@@ -12,6 +18,8 @@ Before a write-capable design, use `$consult-tavernweave-library` with the `tave
 For a new or long-running card, establish the resumable creative authority in [creative-authority.md](references/creative-authority.md) before producing large prose. For source novels, notes, chats, or research, add the chain in [material-provenance.md](references/material-provenance.md). For persistent knowledge, state, narrative recall, or creator-profile requests, keep the four stores separate using [memory-architecture.md](references/memory-architecture.md).
 
 ## Start with the target
+
+For “接手一张卡 / 二创 / 继续更新别人留下的卡”, start with the inherited-card path in [retrofit-and-text-cards.md](references/retrofit-and-text-cards.md). Explain the actual card before proposing changes; distinguish continuation from a derivative work, preserve the user's chosen anchors, and plan one first modification plus a second iteration. A PNG/JSON export does not prove maintained authoring sources exist. Resume existing confirmed decisions instead of reopening them.
 
 1. Read repository instructions and inspect the existing card before proposing a design.
 2. Identify the target SillyTavern, Tavern Helper, prompt-template, and MVU implementations or versions when behavior depends on them.

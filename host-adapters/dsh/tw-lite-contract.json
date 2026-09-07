@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "adapterVersion": "1.4.0",
+  "adapterVersion": "1.5.0",
   "status": "offline-candidate",
   "supportLevel": "developer-preview",
   "runtimeAccepted": false,
@@ -91,7 +91,8 @@
     "same-task-ab-comparison",
     "real-sillytavern-separate-when-applicable",
     "prose-one-shot-task-mode-and-exit",
-    "full-and-architecture-review-coverage"
+    "full-and-architecture-review-coverage",
+    "plain-language-user-selected-guidance-and-bug-explanation"
   ],
   "forbiddenClaimsBeforeRuntimeAcceptance": [
     "official-minimal-supports-skills",
@@ -99,5 +100,10 @@
     "codex-or-claude-parity",
     "cross-platform-support",
     "real-sillytavern-accepted"
-  ]
+  ],
+  "guidance": {
+    "plainLanguage": "shared-skill-contract",
+    "persistentPreference": "unsupported",
+    "runtimeVerified": false
+  }
 }

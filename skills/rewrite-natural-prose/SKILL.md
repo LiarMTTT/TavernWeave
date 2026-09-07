@@ -6,6 +6,12 @@ description: >-
 
 # 文本精修 · 去 AI 味与去八股
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Write in the language and voice requested by the user. For a supplied passage, return one finished revision directly. Explain only material tradeoffs; provide comparisons or variants when requested. A chat revision is not a filesystem write: do not require an engineering questionnaire before editing a passage in chat. Before authorized file changes, use `$consult-tavernweave-library` with this skill's route, `--write --limit 0`, and the project's existing write gate. Do not ask again for an already approved scope.
 
 ## Choose the amount of change
@@ -43,6 +49,8 @@ Continuous/persistent mode covers creative prose, user-facing copy, everyday exp
 Read [persistent-modes.md](references/persistent-modes.md) before any policy operation. The bundled [manager](scripts/manage-rewrite-policy.mjs) and [rule body](assets/rewrite-policy.md) work from a skills-only installation. Codex and Claude Code are supported; DSH receives offline routing only.
 
 Persistence changes only a marked prose-policy block. Installation/update of TavernWeave does not enable it. A file receipt is not proof that a new task loaded the rule or discovered this skill. If the skill cannot be loaded, report that fact; the small installed prose rules remain understandable without pretending a successful skill invocation.
+
+Global plain language and the user's guidance level are independent of rewriting. One-shot editing, task off and persistent disable must leave both intact. A short mode receipt still explains conflicts, failures and necessary decisions in detail unless the user explicitly waives that scope; it never treats “退出洗稿” as “关闭大白话” or as permission to clear a guidance preference.
 
 ## Verification and handoff
 

@@ -527,3 +527,11 @@
     padding-top: 28px;
   }
 }
+
+/* Keep the new onboarding comparisons readable without horizontal scrolling. */
+@media (max-width: 640px) {
+  table.tw-onboarding-table { min-width: 0; table-layout: fixed; }
+  .tw-onboarding-table th, .tw-onboarding-table td { padding: 10px 8px; overflow-wrap: anywhere; }
+  .tw-guidance-table th:first-child { width: 19%; }
+  .tw-guidance-table th:nth-child(2) { width: 29%; }
+}

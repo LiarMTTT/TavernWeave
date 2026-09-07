@@ -5,6 +5,12 @@ description: Reassess a user's complete Vibe Code capability network from curren
 
 # 照镜子 · Vibe Code 成长历程
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 把当前可用证据整理成一次新的完整能力评估，并在用户明确要求保存时追加为不可改写的本地履历节点。上一次履历只是一份历史证据，不是本次评分锚点、能力上限、固定分母或永久量表。
 
 ## 恢复证据边界

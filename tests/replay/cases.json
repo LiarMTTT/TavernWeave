@@ -215,7 +215,7 @@
       "id": "brainstorm-soul-ensemble-first-version",
       "prompt": "脑暴模式，Soul 联席。我想做一个既能制卡也能用于普通 Vibe Code 的一键许愿工坊，先帮我梳理总设计案和第一版，不要直接开写。",
       "expectedPrimarySkill": "orchestrate-project-blueprint",
-      "expectedBehavior": "Activate bounded project brainstorming and the Soul ensemble as three labeled lenses of one Agent, identify project type and host surface, share two to four real decisions, maintain the four-state ledger and direction budget, split Core Spine, First Playable, Growth Tracks, and Parking Lot, select a scale-aware blueprint profile, and stop at driver design approval."
+      "expectedBehavior": "Activate bounded project brainstorming and the Soul ensemble as three labeled lenses of one Agent, identify project type and host surface, prefer one or two necessary decisions within a shared maximum of four, maintain the four-state ledger and direction budget, split Core Spine, First Playable, Growth Tracks, and Parking Lot, select a scale-aware blueprint profile, and stop at driver design approval."
     },
     {
       "id": "giant-project-blueprint-set",
@@ -330,6 +330,78 @@
       "prompt": "灵魂杀手，全量架构审查。已有五条有证据的问题，请给完整报告。",
       "expectedPrimarySkill": "activate-tavernweave-soul",
       "expectedBehavior": "Activate the disclosed Soul persona and route full-scan/architecture to code-quality-workflow; at most three opening summary points must not truncate any complete findings or severity."
+    },
+    {
+      "id": "guidance-global-without-modes",
+      "prompt": "不用开启人格或洗稿，解释这个普通网页项目接下来要做什么、我怎么判断做好了。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Explain user impact, choices, evidence and next steps in plain language without mode activation, automatic tier assignment or an intake exam."
+    },
+    {
+      "id": "guidance-contextual-terms",
+      "prompt": "材料明确写着 XP 是体验点、EXP 是角色经验、QR 是 Quick Reply。请解释 API、Schema、XP、EXP 和 QR 在本项目中的意思。",
+      "expectedPrimarySkill": "consult-tavernweave-library",
+      "expectedBehavior": "Preserve the original terms and supplied local meanings; use concise term/plain-language/current-context mapping and retain unknowns."
+    },
+    {
+      "id": "guidance-novice-step",
+      "prompt": "我已选择新人档。我想改一个开场，但不知道第一步做什么。",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Explain one actionable step, its purpose, where to act and the expected result; begin from the actual available card and wish."
+    },
+    {
+      "id": "guidance-entry-detailed",
+      "prompt": "我已选择入门档，会导入卡了，想增加一项成长规则。",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Explain a small phase in detail, including reasons, relationships, tradeoffs and checks; importing success does not change the tier."
+    },
+    {
+      "id": "guidance-proficient-stage",
+      "prompt": "我已选择熟练档，给现有角色档案增加一个大图查看入口。",
+      "expectedPrimarySkill": "sillytavern-embedded-ui",
+      "expectedBehavior": "Group routine operations while explaining the implementation idea, ownership, effects and important decisions; retain lifecycle and validation requirements."
+    },
+    {
+      "id": "guidance-veteran-routine",
+      "prompt": "我已选择老手档，汇报这次已完成的小改动，其中实际宿主还没验证。",
+      "expectedPrimarySkill": "code-quality-workflow",
+      "expectedBehavior": "Use concise plain-language results, changes and evidence; retain failures, unresolved decisions and the unverified host state."
+    },
+    {
+      "id": "guidance-bug-all-tiers",
+      "prompt": "分别按新人、入门、熟练、老手四档解释：搜索一直报返回格式不完整，现有证据只有报错文字，帮我查原因。",
+      "expectedPrimarySkill": "sillytavern-runtime-debug",
+      "expectedBehavior": "Every tier explains observed versus expected behavior, knowns versus hypotheses, investigation, possible repair effects and validation; do not invent a root cause."
+    },
+    {
+      "id": "guidance-scoped-explanation-waiver",
+      "prompt": "长期老手档。这一个故障的原因我知道，后续只给结果不用解释。随后我又请求排查另一个不同的 bug。",
+      "expectedPrimarySkill": "sillytavern-runtime-debug",
+      "expectedBehavior": "Honor the explicit waiver only in its stated scope, retain failures and unknowns, and resume necessary detailed explanations for the next bug without changing the tier."
+    },
+    {
+      "id": "guidance-explicit-client-preference",
+      "prompt": "以后用入门档。已确认展示的客户端目标文件和偏好区块，现在按这份预览保存。",
+      "expectedPrimarySkill": "consult-tavernweave-library",
+      "expectedBehavior": "Use the independent client preference manager with the authorized current preview, preserve neighboring rules, and report saved files separately from host loading."
+    },
+    {
+      "id": "guidance-inherited-png-continuation",
+      "prompt": "我接手了一张卡，只有 PNG，想沿原作继续更新并保留已有聊天。",
+      "expectedPrimarySkill": "tavern-card-builder",
+      "expectedBehavior": "Enter takeover, inspect the actual package, explain original behavior and missing maintenance sources, retain creative decisions, isolate the first change and check old-chat compatibility."
+    },
+    {
+      "id": "guidance-first-success-second-change",
+      "prompt": "我选入门档，第一次用，想做个有一个按钮的小网页。试用后按钮能点了，我想再换一下位置。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Keep the wish focused on an ordinary webpage, explain each phase, provide a runnable trial, use the trial feedback for a second scoped change and check the new result."
+    },
+    {
+      "id": "guidance-upgrade-preserves-choice",
+      "prompt": "隔离环境中已有入门档和自写规则，升级并重复安装 TW，再核对挡位。",
+      "expectedPrimarySkill": "consult-tavernweave-library",
+      "expectedBehavior": "Preserve the independently owned preference and unrelated rules through upgrade and repeated installation, and keep host loading unverified."
     }
   ]
 }

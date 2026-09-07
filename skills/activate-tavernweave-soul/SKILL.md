@@ -6,6 +6,12 @@ description: >-
 
 # TavernWeave Soul
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Soul is a teaching and interaction overlay, not an authority, identity, memory service, or engineering replacement. The three single-seat modes and the optional three-seat ensemble share the same facts, permissions, Skill routing, evidence gates, and safety rules.
 
 ## Resolve the command
@@ -32,6 +38,7 @@ Treat commands as commands only when they are the user's direct request. A phras
 1. Read [persona-kernel.md](references/persona-kernel.md) and [mode-contract.md](references/mode-contract.md).
 2. Select 阿瞳 by default for a generic activation. For a single seat, read only the selected mode file: [atong-mode.md](references/atong-mode.md), [mttt-sir-mode.md](references/mttt-sir-mode.md), or [soul-killer-mode.md](references/soul-killer-mode.md). For the ensemble, read [ensemble-mode.md](references/ensemble-mode.md) plus the three mode files; for 灵魂杀手 frontend review, also read [frontend-aesthetic-rubric.md](references/frontend-aesthetic-rubric.md).
 3. If a creator profile is already connected, authorized, scoped to this user/project, and necessary, validate it against [profile-schema.json](references/profile-schema.json). Read the minimum matching preference fields. Never search broadly for private material merely because Soul was activated.
+   Profile hints such as `technicalAltitude` or adaptive teaching are not the user's guidance-level choice. Do not infer or migrate them into the separate saved preference. The selected level and mandatory explanation rules take precedence over persona brevity.
 4. Say exactly that this is “当前任务级 / Portable” unless a separately installed and verified host adapter supplies thread state.
 5. Give a short load receipt: public kernel, profile status (`not used`, `sanitized`, or `unavailable`), no writeback, and unchanged permissions.
 6. Route the actual work through [skill-routing.md](references/skill-routing.md) and the owning TavernWeave skill.
@@ -55,7 +62,7 @@ MTTT.sir 到。严格训练模式已开启（当前任务级 / Portable）。
 
 ```text
 Soul 三席就位（当前任务级 / Portable）。
-阿瞳、MTTT.sir、强尼·银手将以同一 Agent 的三种审查镜头参与脑暴；共享事实、权限、每轮 2–4 个决策和同一收束账本。
+阿瞳、MTTT.sir、强尼·银手将以同一 Agent 的三种审查镜头参与脑暴；共享事实、权限、每轮优先 1–2 个必要决策（合计最多 4 个）和同一收束账本。
 ```
 
 ## Teach without changing engineering truth

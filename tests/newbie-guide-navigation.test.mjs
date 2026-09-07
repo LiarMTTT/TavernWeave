@@ -43,7 +43,7 @@ test("guide navigation targets follow the rendered document order", async () => 
 test("TavernWeave subsections stay between chapter 05 and chapter 06", async () => {
   const content1 = await readGuideFile("content-1.html");
   const content3 = await readGuideFile("content-3.html");
-  const orderedIds = ["tw", "tw-v1", "soul-mode", "library-mode", "install-gate", "brainstorm-blueprint", "prose-refinement", "full-architecture-review", "db"];
+  const orderedIds = ["tw", "tw-v1", "soul-mode", "library-mode", "install-gate", "brainstorm-blueprint", "prose-refinement", "full-architecture-review", "tw-guidance-setup", "db"];
   const positions = orderedIds.map(id => content3.indexOf(`id="${id}"`));
 
   assert.ok(!content1.includes('id="tw-v1"'), "Chapter 05.1 must not render before chapter 00.");
@@ -81,12 +81,12 @@ test("navigation state is derived from the live document", async () => {
   assert.match(app, /target\.scrollIntoView\(\{ block: 'start', behavior:/);
   assert.match(app, /if \(body\.classList\.contains\('nav-open'\)\)/);
   assert.doesNotMatch(app, /\/ 49/);
-  assert.match(index, /style\.css\?v=38/);
-  assert.match(index, /layout-v6\.css\?v=38/);
-  assert.match(index, /app\.js\?v=38/);
-  assert.match(app, /content-0\.html\?v=38/);
-  assert.match(app, /content-8\.html\?v=38/);
-  assert.match(app, /content-9\.html\?v=38/);
+  assert.match(index, /style\.css\?v=41/);
+  assert.match(index, /layout-v6\.css\?v=41/);
+  assert.match(index, /app\.js\?v=41/);
+  assert.match(app, /content-0\.html\?v=41/);
+  assert.match(app, /content-8\.html\?v=41/);
+  assert.match(app, /content-9\.html\?v=41/);
   assert.match(app, /target\.querySelector\('\.release-entry'\)/);
 });
 
@@ -96,6 +96,9 @@ test("opening capability map explains TavernWeave by system and marks v1.2 and v
   const content1 = await readGuideFile("content-1.html");
   const ids = [
     "tw-capabilities",
+    "tw-start-here",
+    "tw-guidance-levels",
+    "tw-card-takeover",
     "tw-system-plan",
     "tw-system-card",
     "tw-system-prose",
@@ -126,7 +129,7 @@ test("ending release chapter contains user-facing major-version logs only", asyn
   const index = await readGuideFile("index.html");
   const content8 = await readGuideFile("content-8.html");
   const content9 = await readGuideFile("content-9.html");
-  const ids = ["release-history", "release-v1-4-0", "release-v1-3-0", "release-v1-2-0", "release-v1-1-0", "release-v1-0-0"];
+  const ids = ["release-history", "release-v1-5-0", "release-v1-4-0", "release-v1-3-0", "release-v1-2-0", "release-v1-1-0", "release-v1-0-0"];
 
   ids.forEach(id => {
     assert.match(index, new RegExp(`href="#${id}"`));
@@ -140,7 +143,7 @@ test("ending release chapter contains user-facing major-version logs only", asyn
   assert.match(content9, /id="release-v1-0-0"[\s\S]*?<details class="release-entry">/);
   assert.doesNotMatch(content9, /兼容性说明|验证结果|待验证/);
   assert.doesNotMatch(content8, /<footer class="footer">/);
-  assert.match(content9, /TavernWeave 奶人教程 · v1\.4\.0<\/strong>/);
+  assert.match(content9, /TavernWeave 奶人教程 · v1\.5\.0<\/strong>/);
   assert.match(content9, /462 个设计、194 个动效、86 个概念、1,609 条蒸馏账本/);
   assert.match(index, /<span class="nav-chapter-no">更<\/span><span>更新日志<\/span>/);
   assert.match(index, /href="#release-history"><span>日志<\/span>/);

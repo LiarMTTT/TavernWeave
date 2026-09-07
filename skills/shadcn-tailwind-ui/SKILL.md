@@ -5,6 +5,12 @@ description: Build, restyle, or review accessible React interfaces that use shad
 
 # shadcn + Tailwind UI
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Before UI writes, use `$consult-tavernweave-library` with the `shadcn-tailwind-ui` route to load A0, responsive/CSS guides, and candidate design/motion references. Selecting a library or visual direction does not authorize dependency installation or overwrite existing configuration.
 
 Use this skill for implementation work inside an existing React codebase. Preserve the project's framework, package manager, component conventions, tokens, and installed shadcn components before introducing anything new.

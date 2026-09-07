@@ -51,18 +51,65 @@ try {
     Assert-True ($secondReceipt.statusBefore -eq 'current' -and $secondReceipt.changed -eq $false) 'A repeated install was not idempotent.'
     Assert-True (-not $secondReceipt.backupPath) 'An idempotent install created an unnecessary backup.'
 
-    $outdatedText = $installedText.Replace('begin version=1.4.0', 'begin version=1.0.0')
+    $guidanceManager = Join-Path $PluginRoot 'skills\consult-tavernweave-library\scripts\manage-guidance-preference.mjs'
+    $selectedLevel = -join ([char[]]@(0x8001, 0x624B))
+    $preferenceArgs = @('--host', 'codex', '--scope-root', (Split-Path -Parent $codexTarget), '--target', $codexTarget)
+    $preferencePreview = (& node $guidanceManager @preferenceArgs --action preview --level $selectedLevel | Out-String) | ConvertFrom-Json
+    if ($LASTEXITCODE -ne 0) { throw 'Preference preview failed.' }
+    $preferenceSet = (& node $guidanceManager @preferenceArgs --action set --level $selectedLevel --approved --expected-token $preferencePreview.previewToken --backup-dir (Join-Path $testRoot 'preference-backups') | Out-String) | ConvertFrom-Json
+    if ($LASTEXITCODE -ne 0) { throw 'Preference selection failed.' }
+    Assert-True ($preferenceSet.level -ceq $selectedLevel) 'The selected level was not saved.'
+    $installedText = Get-Content -LiteralPath $codexTarget -Raw -Encoding UTF8
+    $outdatedText = $installedText.Replace("begin version=$($installReceipt.adapterVersion)", 'begin version=1.4.0')
+    if ($installReceipt.adapterVersion -eq '1.4.0') { $outdatedText = $installedText.Replace('begin version=1.4.0', 'begin version=1.0.0') }
     [System.IO.File]::WriteAllText($codexTarget, $outdatedText, [System.Text.UTF8Encoding]::new($true))
     $outdatedReceipt = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Check -TargetInstructionFile $codexTarget -Json)
     Assert-True ($outdatedReceipt.statusBefore -eq 'outdated') 'An outdated marker version was not diagnosed.'
+    $beforeWhatIf = [System.IO.File]::ReadAllBytes($codexTarget)
+    $whatIfReceipt = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Install -TargetInstructionFile $codexTarget -WhatIf -Json)
+    Assert-True (-not $whatIfReceipt.changed -and $whatIfReceipt.wouldChange) 'WhatIf claimed an actual write.'
+    Assert-True ([Convert]::ToBase64String([System.IO.File]::ReadAllBytes($codexTarget)) -ceq [Convert]::ToBase64String($beforeWhatIf)) 'WhatIf changed file bytes.'
     $upgradeReceipt = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Install -TargetInstructionFile $codexTarget -Confirm:$false -Json)
     Assert-True ($upgradeReceipt.statusAfter -eq 'current') 'The outdated block did not upgrade to current.'
+    Assert-True ($upgradeReceipt.guidanceLevel -ceq $selectedLevel) 'Upgrade reset the user-selected level.'
+    Assert-True ($upgradeReceipt.hostLoading -eq 'not-verified') 'File verification claimed host loading.'
 
     $removeReceipt = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Remove -TargetInstructionFile $codexTarget -Confirm:$false -Json)
     Assert-True ($removeReceipt.statusAfter -eq 'missing-block') 'Removal did not remove only the managed block.'
     $removedText = Get-Content -LiteralPath $codexTarget -Raw -Encoding UTF8
     Assert-True ($removedText.Contains("- $unicodeRule")) 'Removal discarded the user-owned global instructions.'
     Assert-True (-not $removedText.Contains('tavernweave-host-front-door:begin')) 'Removal left the managed begin marker behind.'
+    Assert-True ($removedText.Contains('TW_GUIDANCE_LEVEL=' + $selectedLevel)) 'Removing the front door deleted user preferences.'
+
+    $overrideDirectory = Join-Path $testRoot 'override-client'
+    New-Item -ItemType Directory -Path $overrideDirectory -Force | Out-Null
+    $overrideTarget = Join-Path $overrideDirectory 'AGENTS.override.md'
+    [System.IO.File]::WriteAllText($overrideTarget, 'existing override rules', [System.Text.UTF8Encoding]::new($false))
+    $shadowedFailed = $false
+    try { & $managerScript -PluginRoot $PluginRoot -Host Codex -Action Install -TargetInstructionFile (Join-Path $overrideDirectory 'AGENTS.md') -Confirm:$false | Out-Null } catch { $shadowedFailed = $true }
+    Assert-True $shadowedFailed 'A shadowed global rule target was accepted.'
+    $overrideReceipt = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Install -TargetInstructionFile $overrideTarget -Confirm:$false -Json)
+    Assert-True ($overrideReceipt.statusAfter -eq 'current') 'The effective override target was rejected.'
+
+    $previousCodexHome = $env:CODEX_HOME
+    $previousClaudeConfig = $env:CLAUDE_CONFIG_DIR
+    try {
+        $env:CODEX_HOME = Join-Path $testRoot 'configured-codex'
+        New-Item -ItemType Directory -Path $env:CODEX_HOME -Force | Out-Null
+        [System.IO.File]::WriteAllText((Join-Path $env:CODEX_HOME 'AGENTS.override.md'), '', [System.Text.UTF8Encoding]::new($false))
+        $emptyOverride = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Check -Json)
+        Assert-True ($emptyOverride.targetInstructionFile -eq (Join-Path $env:CODEX_HOME 'AGENTS.md')) 'An empty override did not fall back to AGENTS.md.'
+        [System.IO.File]::WriteAllText((Join-Path $env:CODEX_HOME 'AGENTS.override.md'), 'active rules', [System.Text.UTF8Encoding]::new($false))
+        $configuredOverride = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Codex -Action Check -Json)
+        Assert-True ($configuredOverride.targetInstructionFile -eq (Join-Path $env:CODEX_HOME 'AGENTS.override.md')) 'Configured Codex override discovery failed.'
+        $env:CLAUDE_CONFIG_DIR = Join-Path $testRoot 'configured-claude'
+        $configuredClaude = Read-Receipt (& $managerScript -PluginRoot $PluginRoot -Host Claude -Action Check -Json)
+        Assert-True ($configuredClaude.targetInstructionFile -eq (Join-Path $env:CLAUDE_CONFIG_DIR 'CLAUDE.md')) 'Configured Claude directory discovery failed.'
+        Assert-True (-not (Test-Path -LiteralPath $env:CLAUDE_CONFIG_DIR)) 'Read-only discovery created the configured directory.'
+    } finally {
+        $env:CODEX_HOME = $previousCodexHome
+        $env:CLAUDE_CONFIG_DIR = $previousClaudeConfig
+    }
 
     $badMarkerTarget = Join-Path $testRoot 'bad\AGENTS.md'
     New-Item -ItemType Directory -Path (Split-Path -Parent $badMarkerTarget) -Force | Out-Null
@@ -95,7 +142,7 @@ try {
     }
     Assert-True $linkedPathFailed 'The manager accepted a path through a linked directory.'
 
-    Write-Output 'Host Front Door tests passed: missing/preview/install/idempotence/upgrade/remove/UTF-8/invalid-marker/wrong-host/linked-path gates passed.'
+    Write-Output 'Host Front Door tests passed: missing/preview/install/idempotence/upgrade/remove/UTF-8/invalid-marker/wrong-host/linked-path plus guidance preservation/effective override/WhatIf/loading evidence passed.'
 } finally {
     $tempRoot = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath()).TrimEnd([char]92, [char]47)
     $resolvedTestRoot = [System.IO.Path]::GetFullPath($testRoot).TrimEnd([char]92, [char]47)

@@ -14,6 +14,12 @@ description: >-
 
 # SillyTavern Card Components
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Before decomposition or registry writes, use `$consult-tavernweave-library` with the `sillytavern-card-components` route, read A0 and the returned card-format/regex guidance, and record the receipt in the roundtrip plan.
 
 Treat reusable component sources and packed card artifacts as different layers. Keep

@@ -3,7 +3,7 @@
   "owner": {
     "name": "LiarMTTT"
   },
-  "description": "TavernWeave skills, bounded brainstorming, blueprint contracts, routed library, Host Front Doors, evidence gates, and portable Soul modes for rolecard and Vibe Coding projects.",
+  "description": "TavernWeave: plain-language guidance, inherited-card onboarding and 21 focused skills for making and improving rolecards and software.",
   "plugins": [
     {
       "name": "tavernweave-agent-skills",
@@ -11,7 +11,7 @@
         "source": "github",
         "repo": "LiarMTTT/TavernWeave"
       },
-      "description": "Brainstorm, design, build, validate, debug, and release maintainable SillyTavern or Vibe Coding projects with bounded blueprints and explicit evidence gates."
+      "description": "Describe what you want to make or change; get a scoped plan, understandable explanations, working artifacts and clear checks."
     }
   ]
 }

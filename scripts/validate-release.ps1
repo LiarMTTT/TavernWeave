@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-    [string]$PluginRoot
+    [string]$PluginRoot,
+    [string]$TestRoot
 )
 
 $ErrorActionPreference = 'Stop'
@@ -9,6 +10,21 @@ $PluginRoot = [System.IO.Path]::GetFullPath($PluginRoot).TrimEnd([char]92, [char
 $pluginRootPrefix = $PluginRoot + [System.IO.Path]::DirectorySeparatorChar
 $utf8Strict = [System.Text.UTF8Encoding]::new($false, $true)
 $errors = [System.Collections.Generic.List[string]]::new()
+$twPreviousEnvironment = @{}
+if ($TestRoot) {
+    if (-not [System.IO.Path]::IsPathRooted($TestRoot)) { throw 'TestRoot must be an explicit absolute directory.' }
+    $TestRoot = [System.IO.Path]::GetFullPath($TestRoot).TrimEnd([char]92, [char]47)
+    if ($TestRoot.Equals($PluginRoot, [System.StringComparison]::OrdinalIgnoreCase) -or $TestRoot.StartsWith($pluginRootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw 'TestRoot must be outside the source repository.'
+    }
+    New-Item -ItemType Directory -Path $TestRoot -Force | Out-Null
+    foreach ($name in @('TEMP', 'TMP', 'TMPDIR', 'TW_TEST_ROOT')) {
+        $twPreviousEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process')
+        [Environment]::SetEnvironmentVariable($name, $TestRoot, 'Process')
+    }
+}
+
+try {
 
 function Add-ValidationError([string]$Message) {
     $errors.Add($Message)
@@ -64,6 +80,7 @@ if (-not (Test-Path -LiteralPath $manifestPath)) {
         if ($manifest.name -ne 'tavernweave-agent-skills') { Add-ValidationError 'Plugin name does not match the repository folder.' }
         if ($manifest.version -notmatch '^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$') { Add-ValidationError 'Plugin version is not valid SemVer.' }
         if ($manifest.license -ne 'PolyForm-Noncommercial-1.0.0') { Add-ValidationError 'Plugin license must remain PolyForm-Noncommercial-1.0.0.' }
+        if (@($manifest.interface.defaultPrompt).Count -gt 3) { Add-ValidationError 'Codex supports at most 3 interface.defaultPrompt entries; longer lists are ignored by the host.' }
     } catch {
         Add-ValidationError "Invalid plugin manifest JSON: $($_.Exception.Message)"
     }
@@ -321,6 +338,13 @@ if ($nodeFiles.Count -gt 0) {
     if (-not $nodeCommand) {
         Add-ValidationError 'Node.js is required to validate JavaScript files.'
     } else {
+        $guidanceSync = Join-Path $PluginRoot 'scripts\sync-guidance.mjs'
+        if (-not (Test-Path -LiteralPath $guidanceSync -PathType Leaf)) {
+            Add-ValidationError 'Shared guidance synchronization check is missing.'
+        } else {
+            $guidanceOutput = @(& $nodeCommand.Source $guidanceSync --check 2>&1)
+            if ($LASTEXITCODE -ne 0) { Add-ValidationError "Shared guidance copies are stale: $($guidanceOutput -join ' ')" }
+        }
         foreach ($nodeFile in $nodeFiles) {
             $nodeCheckOutput = @(& $nodeCommand.Source --check $nodeFile.FullName 2>&1)
             if ($LASTEXITCODE -ne 0) {
@@ -436,3 +460,8 @@ if ($errors.Count -gt 0) {
 }
 
 Write-Output "Validation passed: $($skillDirs.Count) skills, $($textFiles.Count) text files."
+} finally {
+    foreach ($name in $twPreviousEnvironment.Keys) {
+        [Environment]::SetEnvironmentVariable($name, $twPreviousEnvironment[$name], 'Process')
+    }
+}

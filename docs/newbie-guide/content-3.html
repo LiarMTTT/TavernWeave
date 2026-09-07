@@ -57,8 +57,8 @@ https://github.com/LiarMTTT/TavernWeave</code></pre></div>
 8. 在我批准前不要修改文件。</code></pre></div>
 </section>
 <section class="section" id="tw-v1">
-<div class="section-head"><div class="section-no">05.1</div><div><h2>v1.4 工作流程：从接到需求到交付结果</h2><p class="section-kicker">前门识别需求，Soul 调整交流方式，脑暴整理方案，Library 查资料，再由相关 Skill 执行。</p></div></div>
-<div aria-label="TavernWeave v1.4 五层入口" class="flow"><div class="flow-node">Host Front Door · 推荐全局入口</div><div class="flow-arrow">→</div><div class="flow-node">Soul · 可选教学/审查模式</div><div class="flow-arrow">→</div><div class="flow-node">脑暴编排 · 总设计案与首版</div><div class="flow-arrow">→</div><div class="flow-node">Library · A0 与最小资料集</div><div class="flow-arrow">→</div><div class="flow-node">21 个 Skill · 真正施工和验收</div></div>
+<div class="section-head"><div class="section-no">05.1</div><div><h2>TW 工作流程：从接到需求到交付结果</h2><p class="section-kicker">全局入口识别需求，按需要整理方案、查资料，再调用制作或检查能力。大白话和你选择的挡位贯穿全程；Soul 人格可以按需启用。</p></div></div>
+<div aria-label="TavernWeave 五层入口" class="flow"><div class="flow-node">Host Front Door · 推荐全局入口</div><div class="flow-arrow">→</div><div class="flow-node">Soul · 可选教学/审查模式</div><div class="flow-arrow">→</div><div class="flow-node">脑暴编排 · 总设计案与首版</div><div class="flow-arrow">→</div><div class="flow-node">Library · A0 与最小资料集</div><div class="flow-arrow">→</div><div class="flow-node">21 个 Skill · 真正施工和验收</div></div>
 <div class="cards"><article class="card"><div class="card-icon">魂</div><h3>Soul</h3><p class="muted">调整解释、提问与审查口吻。三席联席是同一个 Agent 分别采用三种视角，不是凭空多出三个独立执行者。</p></article><article class="card"><div class="card-icon">愿</div><h3>许愿工坊</h3><p class="muted">把想法整理成明确决定：作品核心、第一版、后续路线和暂存想法。方案确认后，执行范围不能自行越长越大。</p></article><article class="card"><div class="card-icon">库</div><h3>Library</h3><p class="muted">写入型任务先过 A0，再按意图加载少量 ST 指南、设计、动效或来源 Wiki。</p></article><article class="card"><div class="card-icon">工</div><h3>工程阵列</h3><p class="muted">21 个 Skill 按任务分工，覆盖规划、创作、精修、技术实现、检查与交付。相关动作仍按项目约定和你的授权执行。</p></article></div>
 <div class="callout"><strong>最重要的边界</strong>安装了资料库，不等于 Agent 每轮都读完整个资料库；开了人格，也不等于人格获得文件、Git、联网、发布或生产权限。</div>
 </section>
@@ -79,7 +79,7 @@ Soul 归位</code></pre></div>
 </section>
 <section class="section" id="library-mode">
 <div class="section-head"><div class="section-no">05.3</div><div><h2>Library：技术与设计资料随 TW 一起提供</h2><p class="section-kicker">按任务查需要的部分。查到了参考，不代表已经决定照着做。</p></div></div>
-<p class="lead">v1.4.0 随包提供 A0、31 册正式 ST 指南、1 册标为待验证的 C8，以及 462 个设计、194 个动效、86 个概念和 1,609 条蒸馏记录。查询时先判断任务，再挑出相关资料；不是把整座书架一次塞进上下文。</p>
+<p class="lead">v1.5.0继续随包提供 A0、31 册正式 ST 指南、1 册标为待验证的 C8，以及 462 个设计、194 个动效、86 个概念和 1,609 条蒸馏记录。查询时先判断任务，再挑出相关资料；不是把整座书架一次塞进上下文。</p>
 <div class="steps"><div class="step"><strong>写入先过 A0</strong>确认预期目标、不能改的内容和验收方式，尽早发现理解偏差。</div><div class="step"><strong>按意图查专题</strong>状态栏看 UI/移动指南，MVU 看变量指南，白屏看宿主/部署指南，不一次加载整库。</div><div class="step"><strong>设计动效只进候选</strong>挑选页可以看沙盘、来源和边界，导出的清单固定标记为 <code>proposed</code>。</div><div class="step"><strong>回到工程 Skill</strong>选好参考后，由相关 Skill 实现和验证。挑选页的演示通过，不代表你的卡在真实酒馆里已经能用。</div></div>
 <div class="callout danger"><strong>随包资料的范围</strong>公开 Library 不包含作者的 A1 驾驶员母板、命令式旧 B1、私人过程记录、原始收件箱、个人知识库或凭据。安装 TW 不会把这些私人材料一并带进来。</div>
 <p>本地安装后可打开 <code>skills/consult-tavernweave-library/assets/picker/index.html</code>。它只把候选 ID 存在浏览器本地，不要往选择单里放角色卡正文、私密设定或生产信息。</p>
@@ -88,7 +88,7 @@ Soul 归位</code></pre></div>
 <div class="section-head"><div class="section-no">05.4</div><div><h2>安装后，检查文件是否齐全、入口是否可用</h2><p class="section-kicker">文件装齐只是第一步，还要确认客户端能发现并实际调用它。</p></div></div>
 <p class="lead">例如旧安装有 16 个 Skill，只覆盖这 16 个目录，会漏掉后来新增的能力。新版文件即使已经引用 Library，调用时也可能找不到它。因此升级要对照新版本的完整清单。</p>
 <div class="steps"><div class="step"><strong>先看仓库应有清单</strong>机器清单固定列出 21 个正式 Skill，不能拿本机旧目录反推仓库内容。</div><div class="step"><strong>再比较实际安装位置</strong>安装必须计算“仓库应有目录 − 本机已有目录”，创建缺失项，而不是只覆盖旧文件。</div><div class="step"><strong>核验 Soul、Library、脑暴与 picker</strong>目录存在还不够，内容必须与当前源码逐文件匹配，离线挑选页和第 21 个 Skill 也必须在实际安装目录里。</div><div class="step"><strong>明文处理 Host Front Door</strong>先展示 Codex 或 Claude 的目标规则文件和差异，让你选择安装全局入口、先看 diff 或仅安装 Skills；写入只涉及 TW 自己的带版本区块。</div><div class="step"><strong>最后新建任务</strong>21/21 和前门 current 都不证明宿主已调用 Skill；要在新任务或重启后用直接口令另验。</div></div>
-<p>下面的完整安装模板对应 v1.4.0 正式版的 21 项清单。安装或更新后，让 Agent 比较完整清单与宿主实际扫描的目录，确认新增的文本精修 Skill 也已装好。若使用历史版本，则按那个版本自己的清单核验。</p>
+<p>下面的完整安装模板按你实际取得版本的 21 项清单核验。v1.5.0加入共用大白话和用户挡位保存，正式下载版为 v1.5.0。安装或更新后，让 Agent 比较完整清单与客户端实际扫描的目录；若使用历史版本，就按那个版本自己的清单检查。</p>
 <div class="code-block"><div class="code-label"><span>完整安装 · 可直接复制</span><button class="copy-btn" type="button">复制</button></div><pre><code>请把 TavernWeave 完整安装或更新到仓库最新版本：
 https://github.com/LiarMTTT/TavernWeave
 
@@ -117,7 +117,7 @@ https://github.com/LiarMTTT/TavernWeave
 1. 由阿瞳判断项目类型、承载面和核心价值；
 2. 由 MTTT.sir 拆技术、功能、状态和交互逻辑门；
 3. 由强尼·银手判断前端是否值得做、预期视觉和动效；
-4. 每轮只讨论一个方向，共享 2～4 个真决定；
+4. 每轮只讨论一个方向，优先问我 1～2 个必要问题，三席合计最多 4 个；
 5. 把构思分成 Core Spine、First Playable、Growth Tracks、Parking Lot；
 6. 按体量选择一个蓝图或蓝图集，不要预建空子蓝图；
 7. 输出总设计案与下一道驾驶员确认门。</code></pre></div>
@@ -158,6 +158,19 @@ https://github.com/LiarMTTT/TavernWeave
 <div class="code-block"><div class="code-label"><span>保留完整发现的审查入口</span><button class="copy-btn" type="button">复制</button></div><pre><code>灵魂杀手，全量架构审查
 检查当前项目的软件与角色卡架构。先建立范围清单，说明覆盖缺口；给我完整问题清单、证据和分阶段建议，本轮只读。</code></pre></div>
 <p>单独说“灵魂杀手！”仍默认审前端；普通审查口令不会自动开启 Soul。精修模式开启时，报告表达可以更简洁，证据、严重程度与未验证项仍然保留。</p>
+</section>
+<section class="section" id="tw-guidance-setup">
+<div class="section-head"><div class="section-no">05.8</div><div><h2>装好以后：选挡位，确认新任务能接上</h2><p class="section-kicker">v1.5.0把大白话作为共同要求；你的挡位由你决定，并单独保存。</p></div></div>
+<p>安装结束先看三件事：工作能力是否装齐，全局规则是否写到有效位置，新任务是否真的读取并使用了它们。前两项是文件检查，最后一项需要打开新任务实际观察。</p>
+<div class="steps"><div class="step"><strong>先确认安装完整</strong>让 Agent 按当前版本清单核对 21 项能力和共用引导文件，说明缺什么；有缺失就按报错修复安装。</div><div class="step"><strong>查看已有挡位，或自己选择</strong>已有选择直接沿用；没有选择时，可以说“以后用入门档”。保存前会说明当前客户端的目标位置与修改范围，升级不会替你换档。</div><div class="step"><strong>新开任务试一小步</strong>让 TW 用大白话解释一个小改动，核对显示的挡位与你所选一致；再提出一次修改。若没有加载，先核对实际客户端、安装目录与规则文件，保留报错，不反复覆盖原文件。</div></div>
+<div class="code-block"><div class="code-label"><span>查看选择与加载情况</span><button class="copy-btn" type="button">复制</button></div><pre><code>请检查 TW 是否安装完整，以及我的引导挡位是否已经保存。
+不要替我选择或改变挡位。把文件检查结果和当前任务是否实际加载分别说明。
+如果已经就绪，请用大白话解释我这个项目下一步能做的一项小改动，并给必要术语的对照。</code></pre></div>
+<h3>术语要放回当前事情里解释</h3>
+<div class="table-wrap"><table class="tw-onboarding-table"><thead><tr><th>原术语</th><th>大白话</th><th>这次具体意思</th></tr></thead><tbody><tr><td>Skill</td><td>完成一类工作的能力与方法</td><td>TW 按你的任务选择制作、检查或调试能力</td></tr><tr><td>Host Front Door</td><td>客户端每次开任务时读取的 TW 入口规则</td><td>用于持续大白话与任务分流，需要确认客户端实际加载</td></tr><tr><td>持久保存</td><td>把选择留下来，后续任务继续使用</td><td>把你选的挡位存进独立区域，更新 TW 的规则时保留</td></tr><tr><td>回归检查</td><td>修改后再试原来能用的地方</td><td>新增开场后，也检查原开场、设定和旧聊天相关行为</td></tr></tbody></table></div>
+<h3>修 bug 时，老手也应该听得明白</h3>
+<p>例如状态栏第二次打开后不更新，TW 应先说明已确认的现象，再检查原因；不能直接把“可能没收到通知”说成已经证实。查明后解释改哪里、为什么有效、对原功能有什么影响，以及检查结果。你明确说“这次原因不用再解释”，才省略对应长解释；下次新故障仍默认讲清楚。</p>
+<div class="callout"><strong>退出人格或洗稿，不会清掉你的选择</strong>Soul 管语气和教学方式，洗稿管指定文本的改写；大白话和挡位有各自的规则。只安装 Skills 或使用尚无持久适配的客户端时，TW 应说明实际生效范围，不能只凭一条保存提示就声称后续任务都已生效。</div>
 </section>
 <section class="section" id="db">
 <div class="section-head"><div class="section-no">06</div><div><h2>别背 DB，出事时查它</h2><p class="section-kicker">遇到变量、界面或 API 问题时，按专题查资料，不必从头背到尾。</p></div></div>

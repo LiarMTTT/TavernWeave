@@ -11,6 +11,12 @@ description: >-
 
 # SillyTavern Component Update
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Before a write-capable update, use `$consult-tavernweave-library` with the `sillytavern-component-update` route to load A0 and the smallest matching ST guides. Keep the receipt with the component-mode scope lock; it does not authorize repacking the full card.
 
 Keep the selected component as the unit of change. Produce importable test artifacts
