@@ -1,4 +1,4 @@
-[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
+﻿[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
 param(
     [string]$PluginRoot,
     [Parameter(Mandatory = $true)]
@@ -18,7 +18,8 @@ $PluginRoot = [System.IO.Path]::GetFullPath($PluginRoot).TrimEnd([char]92, [char
 $adapterRoot = Join-Path $PluginRoot 'host-adapters'
 $hostMapPath = Join-Path $adapterRoot 'host-map.json'
 $templatePath = Join-Path $adapterRoot 'tavernweave-front-door.md'
-foreach ($requiredFile in @($hostMapPath, $templatePath)) {
+$guidanceManager = Join-Path $PluginRoot 'skills\consult-tavernweave-library\scripts\manage-guidance-preference.mjs'
+foreach ($requiredFile in @($hostMapPath, $templatePath, $guidanceManager)) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
         throw "Host Front Door source is missing: $requiredFile"
     }
@@ -42,11 +43,22 @@ if (-not $TargetInstructionFile) {
     }
     if (-not $hostHome) { $hostHome = Join-Path $userProfilePath ([string]$hostConfig.defaultDirectory) }
     $TargetInstructionFile = Join-Path $hostHome ([string]$hostConfig.instructionFileName)
+    if ($hostKey -eq 'codex') {
+        $overridePath = Join-Path $hostHome 'AGENTS.override.md'
+        if (Test-Path -LiteralPath $overridePath -PathType Leaf) {
+            $overrideText = Get-Content -LiteralPath $overridePath -Raw -Encoding UTF8
+            if (-not [string]::IsNullOrWhiteSpace($overrideText)) {
+                $TargetInstructionFile = $overridePath
+            }
+        }
+    }
 }
 $TargetInstructionFile = [System.IO.Path]::GetFullPath($TargetInstructionFile)
 
 $expectedFileName = [string]$hostConfig.instructionFileName
-if (-not ([System.IO.Path]::GetFileName($TargetInstructionFile)).Equals($expectedFileName, [System.StringComparison]::OrdinalIgnoreCase)) {
+$allowedFileNames = @($expectedFileName)
+if ($hostKey -eq 'codex') { $allowedFileNames += 'AGENTS.override.md' }
+if ([System.IO.Path]::GetFileName($TargetInstructionFile) -notin $allowedFileNames) {
     throw "The $AgentHost Host Front Door target must end with ${expectedFileName}: $TargetInstructionFile"
 }
 if (Test-Path -LiteralPath $TargetInstructionFile -PathType Container) {
@@ -71,6 +83,15 @@ while ($ancestor) {
     $nextAncestor = Split-Path -Parent $ancestor
     if (-not $nextAncestor -or $nextAncestor -eq $ancestor) { break }
     $ancestor = $nextAncestor
+}
+
+$nodeCommand = Get-Command node -ErrorAction SilentlyContinue
+if (-not $nodeCommand) { throw '需要 Node.js 来核对用户挡位和有效规则位置；请先安装项目要求的 Node.js。' }
+$guidanceOutput = & $nodeCommand.Source $guidanceManager --host $hostKey --scope-root $targetParent --target $TargetInstructionFile
+if ($LASTEXITCODE -ne 0) { throw '有效全局规则或用户挡位检查失败；未修改全局入口。' }
+$guidanceState = ($guidanceOutput | Out-String) | ConvertFrom-Json
+if ($Action -in @('Install', 'Remove') -and $guidanceState.statusAfter -notin @('unset', 'selected')) {
+    throw '用户挡位区块损坏、重复或结构不受支持；请先核对修复范围，未覆盖用户选择。'
 }
 
 $utf8Strict = [System.Text.UTF8Encoding]::new($false, $true)
@@ -166,6 +187,7 @@ $proposedText = if ($Action -eq 'Remove') {
 }
 $changed = $fileState.Text -cne $proposedText
 $backupPath = $null
+$didWrite = $false
 
 if ($Action -in @('Install', 'Remove') -and $changed) {
     if ($frontDoorState.Status -eq 'invalid-markers') {
@@ -188,6 +210,7 @@ if ($Action -in @('Install', 'Remove') -and $changed) {
         if ($afterState.Status -ne $expectedAfterStatus) {
             throw "Host Front Door post-write verification failed: expected $expectedAfterStatus, got $($afterState.Status)"
         }
+        $didWrite = $true
     }
 }
 
@@ -206,10 +229,14 @@ $receipt = [pscustomobject][ordered]@{
     statusBefore = $frontDoorState.Status
     installedVersionBefore = $frontDoorState.InstalledVersion
     statusAfter = $finalState.Status
-    changed = [bool]($Action -in @('Install', 'Remove') -and $changed)
+    changed = $didWrite
+    wouldChange = $changed
     backupPath = $backupPath
     rediscovery = [string]$hostConfig.rediscovery
-    recommendation = 'Install or update the global Host Front Door for the most reliable Soul activation and A0 loop experience.'
+    guidancePreferenceStatus = [string]$guidanceState.statusAfter
+    guidanceLevel = $guidanceState.level
+    hostLoading = 'not-verified'
+    recommendation = '全局入口负责持续大白话与任务路由；挡位由你选择并单独保存。文件检查后仍需用新任务确认客户端实际加载。'
 }
 
 if ($Json) {
@@ -217,7 +244,7 @@ if ($Json) {
     if ($Action -eq 'Preview') { $payload.proposedManagedBlock = $templateText }
     Write-Output ($payload | ConvertTo-Json -Depth 6)
 } else {
-    Write-Output 'TavernWeave Host Front Door receipt'
+    Write-Output 'TavernWeave 全局入口检查结果'
     Write-Output "Host: $($receipt.host)"
     Write-Output "Action: $($receipt.action)"
     Write-Output "Target: $($receipt.targetInstructionFile)"
@@ -226,7 +253,8 @@ if ($Json) {
     Write-Output "Changed: $($receipt.changed)"
     Write-Output "Backup: $(if ($receipt.backupPath) { $receipt.backupPath } else { 'none' })"
     Write-Output "Rediscovery: $($receipt.rediscovery)"
-    Write-Output 'RECOMMENDED: install or update this global front door for the best Soul activation and A0 loop experience.'
+    Write-Output "引导挡位：$(if ($receipt.guidanceLevel) { $receipt.guidanceLevel } elseif ($receipt.guidancePreferenceStatus -eq 'unset') { '尚未选择' } else { '记录无效，请核对' })"
+    Write-Output $receipt.recommendation
     if ($Action -eq 'Preview') {
         Write-Output '--- proposed managed block ---'
         Write-Output $templateText

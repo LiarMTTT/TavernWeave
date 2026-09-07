@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "skillCount": 21,
   "skills": [
     "activate-tavernweave-soul",
@@ -43,11 +43,14 @@
     "skills/rewrite-natural-prose/agents/openai.yaml",
     "skills/rewrite-natural-prose/scripts/manage-rewrite-policy.mjs",
     "skills/rewrite-natural-prose/assets/rewrite-policy.md",
-    "skills/rewrite-natural-prose/references/persistent-modes.md"
+    "skills/rewrite-natural-prose/references/persistent-modes.md",
+    "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+    "skills/consult-tavernweave-library/references/guidance-examples.md",
+    "skills/consult-tavernweave-library/scripts/manage-guidance-preference.mjs"
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "1.4.0",
+    "version": "1.5.0",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",
@@ -55,7 +58,10 @@
     "requiredSourcePaths": [
       "host-adapters/tavernweave-front-door.md",
       "host-adapters/host-map.json",
-      "scripts/manage-host-front-door.ps1"
+      "scripts/manage-host-front-door.ps1",
+      "scripts/sync-guidance.mjs",
+      "skills/consult-tavernweave-library/scripts/manage-guidance-preference.mjs",
+      "skills/consult-tavernweave-library/references/communication-and-guidance.md"
     ],
     "formalHosts": [
       "Codex",
@@ -68,5 +74,18 @@
     "contract": "host-adapters/dsh/tw-lite-contract.json",
     "fullPreset": "host-adapters/dsh/tw-lite-full/agent.cordis.yml",
     "entryPreset": "host-adapters/dsh/tw-lite-entry/agent.cordis.yml"
+  },
+  "communication": {
+    "reference": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+    "preferenceManager": "skills/consult-tavernweave-library/scripts/manage-guidance-preference.mjs",
+    "preferenceSchemaVersion": 1,
+    "levels": [
+      "新人",
+      "入门",
+      "熟练",
+      "老手"
+    ],
+    "defaultLevel": null,
+    "hostLoading": "requires-observed-new-task"
   }
 }

@@ -3,16 +3,16 @@
 
   try {
     const urls = [
-      './content-0.html?v=38',
-      './content-1.html?v=38',
-      './content-2.html?v=38',
-      './content-3.html?v=38',
-      './content-4.html?v=38',
-      './content-5.html?v=38',
-      './content-6.html?v=38',
-      './content-7.html?v=38',
-      './content-8.html?v=38',
-      './content-9.html?v=38',
+      './content-0.html?v=41',
+      './content-1.html?v=41',
+      './content-2.html?v=41',
+      './content-3.html?v=41',
+      './content-4.html?v=41',
+      './content-5.html?v=41',
+      './content-6.html?v=41',
+      './content-7.html?v=41',
+      './content-8.html?v=41',
+      './content-9.html?v=41',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);

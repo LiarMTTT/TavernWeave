@@ -5,6 +5,12 @@ description: Diagnose, review, operate, or deploy a generic rolecard workshop ma
 
 # Rolecard Workshop Ops
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Before any operational write, use `$consult-tavernweave-library` with the `rolecard-workshop-ops` route to load A0 and the deployment/workshop guides. Keep public guidance separate from production coordinates, credentials, live state, and deployment authorization.
 
 Use this skill for workshop infrastructure and the contract between a rolecard client, a public catalog, a package Gateway, identity provider, review tools, and storage. Keep local rolecard UI work out of this skill unless the failure crosses that boundary.

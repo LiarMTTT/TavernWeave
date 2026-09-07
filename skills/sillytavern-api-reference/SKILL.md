@@ -5,6 +5,12 @@ description: Verify exact SillyTavern, Tavern Helper / JS-Slash-Runner, STScript
 
 # SillyTavern API Reference
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Use `$consult-tavernweave-library` with the `sillytavern-api-reference` route for the smallest relevant ST guide set, then verify exact symbols against the identified target version. A guide route is navigation evidence, not a substitute for the installed runtime or pinned source. Add A0 only if the task becomes write-capable.
 
 Treat this skill as an authority-routing procedure, not as a frozen copy of an evolving API. The public baselines in [references/core-facts.md](references/core-facts.md) are dated navigation snapshots, not claims about the latest release. The target runtime always wins.

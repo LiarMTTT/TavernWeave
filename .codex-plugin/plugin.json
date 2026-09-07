@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.4.0",
-  "description": "A routed SillyTavern and Vibe Coding system with 21 focused skills, natural prose refinement, full and architecture reviews, bounded brainstorming, immutable growth reflection, a complete screened library, evidence gates, and portable Soul modes.",
+  "version": "1.5.0",
+  "description": "Build and improve rolecards and software with 21 focused skills, plain-language explanations, user-selected guidance levels, inherited-card onboarding, prose refinement and evidence-based reviews.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -16,8 +16,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "TavernWeave",
-    "shortDescription": "Design, build, verify, and learn SillyTavern rolecards.",
-    "longDescription": "TavernWeave 1.4.0 combines 21 skills: prose refinement with one-shot, task, approved workspace and client persistence; full and architecture reviews for software and rolecards with explicit coverage; brainstorming, immutable growth reflection, the complete library, and portable Soul modes.",
+    "shortDescription": "Make, improve, and understand rolecards and software.",
+    "longDescription": "TavernWeave 1.5.0: 21 skills share plain language and contextual terminology. Users select 新人/入门/熟练/老手 guidance, with detailed needed and bug explanations at every level. Inherited-card onboarding covers derivative work and continued updates. Existing prose, review, brainstorming, library and Soul capabilities remain available.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
@@ -25,24 +25,9 @@
       "Write"
     ],
     "defaultPrompt": [
-      "洗稿这段文字，保留原意、人物声音和技术结构。",
-      "全量架构审查这个项目，保留覆盖缺口和全部有证据的发现，先交只读报告。",
-      "脑暴模式，Soul 联席：帮我把这个想法收束成总设计案、第一版合同和不会递归膨胀的执行蓝图。",
-      "按蓝图开跑第一版；只执行已确认的 First Playable，运行时不要新增子蓝图。",
-      "照镜子：从当前可用证据重新核验我的完整 Vibe Code 成长历程；同时给我一份完整文字评估表单和七章交互报告，如有旧履历，只比较量表可比的维度。",
-      "阿瞳助我！用当前任务级温柔指导模式帮我完成这张角色卡。",
-      "MTTT.sir，拷打我！检查我是否真的理解这次 Vibe Code 的架构与验收。",
-      "灵魂杀手！用强尼·银手彩蛋人格审查这个前端，并给出最多三条有证据的 Relic 故障。",
-      "Route this task through TavernWeave Library, read A0, and load only the smallest relevant guide set.",
-      "Design a maintainable SillyTavern rolecard and choose the right TavernWeave skill.",
-      "Update only a rolecard regex or Tavern Helper script and emit an importable test artifact without repacking the card.",
-      "Validate this rolecard's regex stages, security surface, and structured data migrations with deterministic fixtures.",
-      "Scaffold and statically validate a SillyTavern UI extension without installing it into the host.",
-      "Measure a large rolecard against static and captured runtime performance budgets.",
-      "Validate rolecard audio and Live2D assets, preload policy, fallbacks, and lifecycle cleanup.",
-      "Detect which rolecard dependencies must be embedded, enabled in the host, or loaded remotely.",
-      "Audit this rolecard source and prepare the smallest safe release workflow.",
-      "Reproduce this rolecard UI issue in SillyTavern and identify the owning layer."
+      "我接手了这张角色卡，想沿原作继续更新；先帮我看懂原卡，再选第一次改动。",
+      "我想做一个小作品，请用大白话帮我整理想法，解释术语和推荐理由。",
+      "查看我当前的 TW 引导挡位，解释四档的区别，先不要更改设置。"
     ]
   }
 }

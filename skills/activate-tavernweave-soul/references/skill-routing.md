@@ -4,6 +4,9 @@ Soul never copies the engineering instructions. Select the primary TavernWeave s
 
 | Intent | Primary skill |
 | --- | --- |
+| 选择、查询或更改新人/入门/熟练/老手引导挡位 | `$consult-tavernweave-library` and its shared guidance reference |
+| 接手角色卡、二创、沿原作继续更新 | `$tavern-card-builder` inherited-card path |
+| 不知道从哪里开始，想先体验一次 | `$orchestrate-project-blueprint` first-result path |
 | Brainstorm, total design, blueprint set, first playable/usable | `$orchestrate-project-blueprint` |
 | Card concept, long material, worldbook, MVU, custom CoT | `$tavern-card-builder` |
 | Component extraction or registry | `$sillytavern-card-components` |

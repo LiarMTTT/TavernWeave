@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.4.0",
-  "description": "A routed SillyTavern and Vibe Coding system with 21 focused skills, natural prose refinement, full and architecture reviews, bounded brainstorming, immutable growth reflection, a complete screened library, evidence gates, and portable Soul modes.",
+  "version": "1.5.0",
+  "description": "Build and improve rolecards and software with 21 focused skills, plain-language explanations, user-selected guidance levels, inherited-card onboarding, prose refinement and evidence-based reviews.",
   "author": {
     "name": "LiarMTTT"
   },

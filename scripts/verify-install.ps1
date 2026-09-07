@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$PluginRoot,
     [Parameter(Mandatory = $true)]
@@ -129,12 +129,20 @@ foreach ($requiredPathValue in @($installManifest.requiredPaths)) {
 }
 
 $manifestVersionMismatches = [System.Collections.Generic.List[string]]::new()
+$codexCachebusterVersion = $null
 if ($Layout -eq 'plugin') {
     foreach ($relativeManifest in @('.codex-plugin\plugin.json', '.claude-plugin\plugin.json')) {
         $targetManifestPath = Join-Path $TargetRoot $relativeManifest
         if (Test-Path -LiteralPath $targetManifestPath -PathType Leaf) {
             $targetManifest = Get-Content -LiteralPath $targetManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-            if ([string]$targetManifest.version -ne [string]$installManifest.version) {
+            $targetVersion = [string]$targetManifest.version
+            $expectedVersion = [string]$installManifest.version
+            # Codex's local plugin updater appends this discovery-cache suffix.
+            # Accept it only for the Codex manifest and the exact product version.
+            $isCodexCachebuster = $relativeManifest -eq '.codex-plugin\plugin.json' -and
+                $targetVersion -cmatch ('^' + [regex]::Escape($expectedVersion) + '\+codex\.[a-z0-9]+(?:-[a-z0-9]+)*$')
+            if ($isCodexCachebuster) { $codexCachebusterVersion = $targetVersion }
+            if ($targetVersion -cne $expectedVersion -and -not $isCodexCachebuster) {
                 $manifestVersionMismatches.Add("$relativeManifest=$($targetManifest.version)")
             }
         }
@@ -173,6 +181,7 @@ $receipt = [pscustomobject][ordered]@{
     driftedSkills = @($driftedSkills)
     missingRequiredPaths = @($missingRequiredPaths)
     manifestVersionMismatches = @($manifestVersionMismatches)
+    codexCachebusterVersion = $codexCachebusterVersion
     extraTargetDirectories = $extraTargetDirectories
     librarySkill = if ('consult-tavernweave-library' -in $matchedSkills) { 'present-and-matched' } else { 'missing-or-drifted' }
     libraryPicker = if ('skills/consult-tavernweave-library/assets/picker/index.html' -notin $missingRequiredPaths) { 'present' } else { 'missing' }
@@ -180,6 +189,9 @@ $receipt = [pscustomobject][ordered]@{
     hostFrontDoor = if ($frontDoorReceipt) { [string]$frontDoorReceipt.statusAfter } else { 'not-checked' }
     hostFrontDoorTarget = if ($frontDoorReceipt) { [string]$frontDoorReceipt.targetInstructionFile } else { $null }
     hostFrontDoorVersion = if ($frontDoorReceipt) { [string]$frontDoorReceipt.adapterVersion } else { $null }
+    guidancePreferenceStatus = if ($frontDoorReceipt) { [string]$frontDoorReceipt.guidancePreferenceStatus } else { 'not-checked' }
+    guidanceLevel = if ($frontDoorReceipt) { $frontDoorReceipt.guidanceLevel } else { $null }
+    hostLoading = 'not-verified'
     hostRediscovery = [string]$installManifest.hostRediscovery
     failures = @($failures)
 }
@@ -197,6 +209,7 @@ if ($Json) {
     Write-Output "Drifted skills: $(ConvertTo-DisplayList @($receipt.driftedSkills))"
     Write-Output "Missing required paths: $(ConvertTo-DisplayList @($receipt.missingRequiredPaths))"
     Write-Output "Manifest version mismatches: $(ConvertTo-DisplayList @($receipt.manifestVersionMismatches))"
+    if ($receipt.codexCachebusterVersion) { Write-Output "Codex local cache version: $($receipt.codexCachebusterVersion)" }
     Write-Output "Unrelated target directories preserved: $(ConvertTo-DisplayList @($receipt.extraTargetDirectories))"
     Write-Output "Library: $($receipt.librarySkill)"
     Write-Output "Library picker: $($receipt.libraryPicker)"
@@ -204,6 +217,8 @@ if ($Json) {
     Write-Output "Host Front Door: $($receipt.hostFrontDoor)"
     if ($receipt.hostFrontDoorTarget) { Write-Output "Host Front Door target: $($receipt.hostFrontDoorTarget)" }
     Write-Output "Host rediscovery: $($receipt.hostRediscovery)"
+    Write-Output "引导挡位：$(if ($receipt.guidanceLevel) { $receipt.guidanceLevel } else { $receipt.guidancePreferenceStatus })"
+    Write-Output '以上核对的是安装文件。请新开任务确认客户端能调用 TW，再按你的选择保存引导挡位；大白话与必要解释适用于所有挡位。'
 }
 
 if ($failures.Count -gt 0) {

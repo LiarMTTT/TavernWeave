@@ -84,6 +84,8 @@ Read [material-provenance.md](material-provenance.md) for material and claim rec
 
 ## Resume protocol
 
+For inherited cards, include received originals, extracted working material and available maintained sources in the existing material index. Record continuation/derivative direction and preservation decisions in the existing decision sections, and old-chat/save compatibility in the acceptance ledger. These are card facts; user guidance levels remain client preferences and are not copied into this authority or the exported card. Do not create a replacement authority merely because a new maintainer arrives.
+
 When the user says “继续”, “续接”, or returns after an interruption:
 
 1. Locate the repository instructions and the declared creative-authority file.

@@ -1,13 +1,21 @@
 ---
 name: consult-tavernweave-library
-description: Route TavernWeave work to the smallest relevant set of bundled ST development guides, the standing A0 engineering checklist, the screened frontend design and motion catalogs, the concept index, the distilled source ledger, and the offline picker. Use before a TavernWeave write task, when the user asks how to build or choose a SillyTavern feature, when another TavernWeave skill needs domain guidance or design references, or when the user says the agent keeps ignoring the guide database. Also use to search catalog candidates or inspect source, license, snapshot, and selection receipts. Do not load the whole library into context, publish excluded driver or inbox material, or treat a catalog candidate as an adopted implementation.
+description: Route TavernWeave work to bundled development guides, the standing A0 checklist, screened design and motion catalogs, concept/source references, and the offline picker. Also provide TW plain-language guidance and explicit user-selected 新人/入门/熟练/老手 preference management. Use before TW file writes, for relevant domain or design guidance, or when the user asks to choose, query or change an onboarding level. Do not load the entire library, publish excluded private material, infer a user level, or treat a catalog candidate as adopted work.
 ---
 
 # TavernWeave Library
 
+<!-- tw-guidance-entry:begin -->
+## Shared communication
+
+Apply [TW plain-language and guidance rules](references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+<!-- tw-guidance-entry:end -->
+
 Use the bundled knowledge snapshot as a routed reference layer. A single TavernWeave install carries the library, but each task loads only the standing check and the smallest matching domain set.
 
 ## Route first
+
+For guidance-level selection, queries or changes, read [communication-and-guidance.md](references/communication-and-guidance.md) and use its bounded preference manager. Do not search design catalogs for a settings-only request. Query and preview are read-only; a persistent choice uses the user's explicit scope and the existing write gate, without asking twice for the same approved operation. Missing preferences stay unset. For ordinary work, apply the common explanation rules and continue the engineering route below.
 
 1. Identify the primary engineering skill and whether the request is read-only or write-capable.
 2. For a write-capable task, read `references/st-guides/A0_驾驭工程从零搭建检查单.md` or explicitly confirm its three opening gates: goal, red lines, and acceptance.
