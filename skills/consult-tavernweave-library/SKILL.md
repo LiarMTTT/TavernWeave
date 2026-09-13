@@ -15,6 +15,8 @@ Use the bundled knowledge snapshot as a routed reference layer. A single TavernW
 
 ## Route first
 
+For 小说转库、作品/同人资料整理、联网文图与二创资料包, route to `$build-work-library`. Those are user-owned work sources, separate from this bundled development/design catalog; do not return UI design-token entries for model-token budgeting. In-card MVU tables still belong to `$sillytavern-database-rolecards`.
+
 For guidance-level selection, queries or changes, read [communication-and-guidance.md](references/communication-and-guidance.md) and use its bounded preference manager. Do not search design catalogs for a settings-only request. Query and preview are read-only; a persistent choice uses the user's explicit scope and the existing write gate, without asking twice for the same approved operation. Missing preferences stay unset. For ordinary work, apply the common explanation rules and continue the engineering route below.
 
 1. Identify the primary engineering skill and whether the request is read-only or write-capable.

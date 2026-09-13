@@ -4,8 +4,9 @@
   "method": "v1.5.0 source-contract review by the current execution agent of 67 forward and 73 adversarial prompts. All prior 55/63 prompts were checked for compatibility with the shared communication and guidance rules and changed owning routes; prior v1.4.0 evidence is retained for unchanged implementation behavior, not represented as a new independent model run. Updated the shared question budget in the two affected ensemble cases. Added 12/10 guidance cases with explicit contract evidence, supported where applicable by isolated preference, front-door and installer fixtures. Pass means the reviewed source contract satisfies that case; automatic test execution is reported separately. This is not independent model trials, actual new-task discovery, real Codex/Claude/DSH/ST invocation, driver acceptance, current-client installation or release.",
   "skillFingerprints": {
     "activate-tavernweave-soul": "1ce038cf80f3639c3b7150dbc0bef293d7953bf99a9ee63082fcfa3ddd1bb94d",
+    "build-work-library": "d3524b7edd06570891527765bdff94159d4f04eb10b519090e9fef533aa93921",
     "code-quality-workflow": "48630e39b832ce2bb227421e99f4c7dd381be95a291562d4a5b18bfa3cce93b1",
-    "consult-tavernweave-library": "c369c8bf10b85c21c0ed0846afc7459e4ed6744b80626d2bb9183e55a422a93d",
+    "consult-tavernweave-library": "aee4ad685ed810442400062bbe67d7a30a376998c3a04677d0ac18f7e4cad788",
     "orchestrate-project-blueprint": "ac6fa71f707d8871cc2f35ade4453ae13c21e44e336d479437ed7ecab993bf2d",
     "reflect-on-vibe-code-growth": "4b9071999885fa808c52cf82fe66331c60f24e2c01df435c0f6bc3b0079d0078",
     "rewrite-natural-prose": "38afce8ee5c76cb69571a7eb16506b31aafab6444a77b237ebd536519b2ab47b",
@@ -15,7 +16,7 @@
     "sillytavern-card-components": "95a6965ffcbc15f40db68f8aff44248c30c4397e7be5aa6156c34948f77f382e",
     "sillytavern-card-pipeline": "e8192f7a3522f25522429c66966287c38cec443038adf0fb7636aa7ea0c3dfc7",
     "sillytavern-component-update": "f5a60c477fe5cc9a23802313977df0af4c475331c4c94a4729f3cdd52d005500",
-    "sillytavern-database-rolecards": "35176648ab8b48260d4580d6103447d08181902e11e30d7a9ca5f40bea99c58f",
+    "sillytavern-database-rolecards": "3db90ca18aefeb8653465222758738c9a21f8a28e43174634d2ae3cb4392cad9",
     "sillytavern-embedded-ui": "4be523424738819c0a3712e41eb7de7ab3e27a6c10d26ddd0d748af5aba58952",
     "sillytavern-extension-dev": "fd67f52a25c9499d6c47515cbb1b9bf272b816ac42900697602c2addb7349697",
     "sillytavern-media-live2d-runtime": "2443831c26f2a015400a9b4556993bacddb3efed34ca2131802461a684b360a2",
@@ -360,6 +361,36 @@
       "id": "guidance-upgrade-preserves-choice",
       "pass": true,
       "evidence": "Source-contract review with separately identified local fixture evidence: The installer integration uses a copied manager to select 入门 and verifies it after reinstall. Front-door tests preserve 老手 through version replacement and front-door removal and verify WhatIf does not write."
+    },
+    {
+      "id": "work-library-novel",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: SKILL.md and data-and-commands.md define the Markdown authority and sample/plan inputs; local tests exercise source units, exact citations and export readback."
+    },
+    {
+      "id": "work-library-fanwork",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: validate_record rejects canon promotion from fanon/reference and cross-continuity evidence; deterministic fixtures cover both errors."
+    },
+    {
+      "id": "work-library-web",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: research-and-media.md separates search candidates from opened pages; add_source requires web URL/retrieval metadata and freezes provided excerpts. No real network collection is claimed."
+    },
+    {
+      "id": "work-library-image",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: Image sources retain URL, inspection receipt and reference-only use; fixture tests reject unviewed conclusions and accept a synthetic viewed-receipt shape, without claiming real pixel inspection."
+    },
+    {
+      "id": "work-library-creator-pack",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: query reads current Markdown, supports aliases and as-of filters, excludes unknown-stage entries under a stage bound; SKILL.md routes downstream card creation."
+    },
+    {
+      "id": "work-library-handoff",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: Fixtures exercise CRLF manual edits, current hash retrieval, stale-base rejection, idempotent batches, recovery after interrupted writes and SQLite readback."
     }
   ],
   "adversarialResults": [
@@ -727,6 +758,46 @@
       "id": "guidance-shadowed-global-target",
       "pass": true,
       "evidence": "Source-contract review with separately identified local fixture evidence: The manager checks effective discovery, rejects the shadowed target, and tests the active override plus a separate Claude client path."
+    },
+    {
+      "id": "work-library-canon-laundering",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: validate_record checks both source realm and exact continuity; tested with separate fanwork and adaptation evidence."
+    },
+    {
+      "id": "work-library-forged-evidence",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: Exact source hash, unit bounds and Unicode character quote equality are checked; negative fixtures leave records untouched."
+    },
+    {
+      "id": "work-library-unseen-image",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: SKILL.md and research-and-media.md require actual inspection; not-viewed is accepted only as source metadata, while visual record validation rejects it. Caller honesty remains a disclosed boundary."
+    },
+    {
+      "id": "work-library-unknown-token-zero",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: usage_valid requires null unavailable counts and provenance; next stops token-gated work when any calls are unmeasured, and plan requires positive bounded allocations."
+    },
+    {
+      "id": "work-library-stale-edit",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: commit_batch checks current byte hash and recover preflights all destinations; fixtures preserve new human bytes and pending conflict evidence."
+    },
+    {
+      "id": "work-library-overwrite-export",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: init rejects existing roots; export uses a new target and exclusive creation. Export overwrite and integrity/readback are covered in the manual-edit fixture."
+    },
+    {
+      "id": "work-library-source-instruction",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: The new Skill explicitly treats webpages, novels and image text as research data; no deterministic helper evaluates or executes source text. This is source-contract review, not a runtime injection trial."
+    },
+    {
+      "id": "work-library-fake-background",
+      "pass": true,
+      "evidence": "1.6.0-rc.1 bounded source-contract review: batching-and-routing.md requires observed host support, serial fallback and one writer; local tool contains no model/network/daemon execution."
     }
   ],
   "reviewScope": {
@@ -755,6 +826,36 @@
       },
       "previousFingerprint": "9e1a0da029986767a40506ab04d6665f7a8b7209fa2867cfa24453760ac10e62",
       "updatedFingerprint": "c369c8bf10b85c21c0ed0846afc7459e4ed6744b80626d2bb9183e55a422a93d"
+    },
+    {
+      "reviewedAt": "2026-09-13T07:30:33.065884+00:00",
+      "version": "1.6.0-rc.1",
+      "method": "Bounded source delta review, not a whole-suite fresh model replay. Preserve prior 67 forward/73 adversarial source-contract results and the original reviewScope. Rechecked the six existing forward contracts owned by the changed Library/database Skills: design selection, contextual terms, preference writes, upgrade preservation, MVU migrations and bindings. Added 6 forward and 8 adversarial work-library source-contract reviews. Unchanged 19 Skill fingerprints are byte-normalized equal to the historical evidence. New/changed deterministic tests and the complete release suite are separate execution evidence; no fresh host loading, actual browsing/image inspection, real-model token measurement or driver acceptance is claimed.",
+      "changedSkills": [
+        "build-work-library",
+        "consult-tavernweave-library",
+        "sillytavern-database-rolecards"
+      ],
+      "previousFingerprints": {
+        "build-work-library": null,
+        "consult-tavernweave-library": "c369c8bf10b85c21c0ed0846afc7459e4ed6744b80626d2bb9183e55a422a93d",
+        "sillytavern-database-rolecards": "35176648ab8b48260d4580d6103447d08181902e11e30d7a9ca5f40bea99c58f"
+      },
+      "updatedFingerprints": {
+        "build-work-library": "d3524b7edd06570891527765bdff94159d4f04eb10b519090e9fef533aa93921",
+        "consult-tavernweave-library": "aee4ad685ed810442400062bbe67d7a30a376998c3a04677d0ac18f7e4cad788",
+        "sillytavern-database-rolecards": "3db90ca18aefeb8653465222758738c9a21f8a28e43174634d2ae3cb4392cad9"
+      },
+      "newForward": 6,
+      "newAdversarial": 8,
+      "localEvidence": [
+        "skills/build-work-library/tests/test_work_library.py: 16 passed",
+        "skills/consult-tavernweave-library/tests/library.test.mjs: 9 passed",
+        "Official Codex validators: all 22 skills and plugin passed"
+      ],
+      "realModelTrials": "not-run",
+      "realHostLoading": "not-run",
+      "driverAcceptance": "pending"
     }
   ]
 }

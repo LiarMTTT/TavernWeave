@@ -11,6 +11,8 @@ description: >-
 
 # SillyTavern Database Rolecards
 
+For source-backed novel/work/fan-creation libraries, web/image references and Markdown/JSONL/SQLite research exports, use `$build-work-library`. This skill owns the in-card MVU/message-floor model and its consumers.
+
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 

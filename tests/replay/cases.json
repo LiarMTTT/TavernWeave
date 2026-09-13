@@ -402,6 +402,42 @@
       "prompt": "隔离环境中已有入门档和自写规则，升级并重复安装 TW，再核对挡位。",
       "expectedPrimarySkill": "consult-tavernweave-library",
       "expectedBehavior": "Preserve the independently owned preference and unrelated rules through upgrade and repeated installation, and keep host loading unverified."
+    },
+    {
+      "id": "work-library-novel",
+      "prompt": "把这部小说转成可编辑资料库，先做样本和 token 对照，再分批继续。",
+      "expectedPrimarySkill": "build-work-library",
+      "expectedBehavior": "Use editable Markdown with derived JSONL and optional SQLite; inspect representative samples before a corpus-bound plan."
+    },
+    {
+      "id": "work-library-fanwork",
+      "prompt": "整理这部作品的原作和同人资料，不同改编版本分开，便于二创调用。",
+      "expectedPrimarySkill": "build-work-library",
+      "expectedBehavior": "Preserve canon/fanon, continuity, edition and evidence certainty; keep conflicting versions explicit."
+    },
+    {
+      "id": "work-library-web",
+      "prompt": "联网收集这部作品的官方设定文字，带出处整理成作品资料库。",
+      "expectedPrimarySkill": "build-work-library",
+      "expectedBehavior": "Open actual source pages via available host tools and register bounded excerpts with provenance; record unavailable access."
+    },
+    {
+      "id": "work-library-image",
+      "prompt": "给二创资料库补充人物服装图片参考，保留原图出处。",
+      "expectedPrimarySkill": "build-work-library",
+      "expectedBehavior": "Actually inspect images before visual conclusions; register reference metadata and preserve selected-material download scope."
+    },
+    {
+      "id": "work-library-creator-pack",
+      "prompt": "从作品资料库整理开局的人物别名、关系和场景，给我二创资料包。",
+      "expectedPrimarySkill": "build-work-library",
+      "expectedBehavior": "Query current documents by identity, continuity and knowledge stage; retain citations and distinguish new creative additions."
+    },
+    {
+      "id": "work-library-handoff",
+      "prompt": "长任务停下后我润色了人物文档，读取编辑后的内容继续转库并人工导出。",
+      "expectedPrimarySkill": "build-work-library",
+      "expectedBehavior": "Read current Markdown/hash, rebuild observed edit log, resume the same batch and reject stale writes; export without a model call."
     }
   ]
 }
