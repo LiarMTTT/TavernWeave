@@ -332,6 +332,16 @@ if (-not (Test-Path -LiteralPath $hostFrontDoorTest -PathType Leaf)) {
 }
 
 $nodeFiles = @($publicFiles | Where-Object { $_.Extension -iin @('.js', '.mjs') })
+$workLibraryTests = Join-Path $PluginRoot 'skills\build-work-library\tests\test_work_library.py'
+if (Test-Path -LiteralPath $workLibraryTests -PathType Leaf) {
+    $workLibraryPython = Get-Command python -ErrorAction SilentlyContinue
+    if (-not $workLibraryPython) {
+        Add-ValidationError 'Python is required to validate the work-library tools.'
+    } else {
+        $workLibraryOutput = @(& $workLibraryPython.Source -B $workLibraryTests 2>&1)
+        if ($LASTEXITCODE -ne 0) { Add-ValidationError "Work library tests failed: $($workLibraryOutput -join ' ')" }
+    }
+}
 $nodeTests = @($nodeFiles | Where-Object { $_.FullName -match '[\\/]tests[\\/].*\.test\.mjs$' })
 if ($nodeFiles.Count -gt 0) {
     $nodeCommand = Get-Command node -ErrorAction SilentlyContinue

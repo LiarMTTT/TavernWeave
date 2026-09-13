@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.5.0",
-  "description": "Build and improve rolecards and software with 21 focused skills, plain-language explanations, user-selected guidance levels, inherited-card onboarding, prose refinement and evidence-based reviews.",
+  "version": "1.6.0",
+  "description": "Build and improve rolecards and software with 22 focused skills, source-backed work libraries for fan creation, plain-language guidance and evidence-based reviews.",
   "author": {
     "name": "LiarMTTT"
   },

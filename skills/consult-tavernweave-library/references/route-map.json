@@ -1,8 +1,9 @@
 {
   "schemaVersion": 1,
-  "snapshotVersion": "2026-09-07",
+  "snapshotVersion": "2026-09-13",
   "standingGuide": "ST-A0",
   "routes": [
+    {"id":"build-work-library","terms":["作品资料库","小说转资料库","小说转数据库","同人资料","同人内容转","联网收集文图","二创资料库","二创资料包"],"guides":[],"domains":[]},
     {"id":"tavern-card-builder","terms":["制卡","角色卡","世界书","设定","开局","mvu","变量","提示词","预设","接手","二创","续更","继续更新原卡"],"guides":["ST-A2","ST-A3","ST-A4","ST-A6","ST-B1","ST-C10"],"domains":[]},
     {"id":"sillytavern-card-components","terms":["拆卡","组件","registry","recipe"],"guides":["ST-A2","ST-A6"],"domains":[]},
     {"id":"sillytavern-component-update","terms":["组件更新","正则更新","脚本更新"],"guides":["ST-A2","ST-A6","ST-B2"],"domains":[]},

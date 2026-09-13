@@ -31,23 +31,23 @@ try {
 
     $legacyRoot = Join-Path $testRoot 'legacy\skills'
     New-Item -ItemType Directory -Path $legacyRoot -Force | Out-Null
-    foreach ($skillName in @($manifest.skills | Where-Object { $_ -ne 'rewrite-natural-prose' })) {
+    foreach ($skillName in @($manifest.skills | Where-Object { $_ -ne 'build-work-library' })) {
         Copy-Item -LiteralPath (Join-Path $sourceSkillRoot $skillName) -Destination (Join-Path $legacyRoot $skillName) -Recurse -Force
     }
-    Assert-True (@(Get-ChildItem -LiteralPath $legacyRoot -Directory).Count -eq 20) 'The v1.3.0 inventory fixture must contain exactly 20 official skills.'
+    Assert-True (@(Get-ChildItem -LiteralPath $legacyRoot -Directory).Count -eq 21) 'The v1.5.0 inventory fixture must contain exactly 21 official skills.'
     New-Item -ItemType Directory -Path (Join-Path $legacyRoot 'unrelated-user-skill') -Force | Out-Null
-    Assert-VerifyFails $legacyRoot 'A 20-skill legacy inventory must fail before it can claim current TavernWeave source completeness.'
+    Assert-VerifyFails $legacyRoot 'A 21-skill legacy inventory must fail before it can claim current TavernWeave source completeness.'
 
     & $installScript -PluginRoot $PluginRoot -TargetSkillRoot $legacyRoot -Confirm:$false | Out-Null
     $legacyReceipt = @(& $verifyScript -PluginRoot $PluginRoot -TargetRoot $legacyRoot -Layout skills)
-    Assert-True ($legacyReceipt -contains 'INSTALLATION VERIFIED: 21/21') 'The upgraded legacy target did not reach 21/21.'
-    Assert-True (Test-Path -LiteralPath (Join-Path $legacyRoot 'rewrite-natural-prose\scripts\manage-rewrite-policy.mjs') -PathType Leaf) 'The upgrade did not create the new prose Skill and its self-contained policy manager.'
+    Assert-True ($legacyReceipt -contains 'INSTALLATION VERIFIED: 22/22') 'The upgraded legacy target did not reach 22/22.'
+    Assert-True (Test-Path -LiteralPath (Join-Path $legacyRoot 'build-work-library\scripts\work_library.py') -PathType Leaf) 'The upgrade did not create the new work-library Skill and its self-contained local tool.'
     Assert-True (Test-Path -LiteralPath (Join-Path $legacyRoot 'unrelated-user-skill') -PathType Container) 'The installer removed an unrelated user skill.'
 
     $cleanRoot = Join-Path $testRoot 'clean\skills'
     & $installScript -PluginRoot $PluginRoot -TargetSkillRoot $cleanRoot -Confirm:$false | Out-Null
     $cleanReceipt = @(& $verifyScript -PluginRoot $PluginRoot -TargetRoot $cleanRoot -Layout skills)
-    Assert-True ($cleanReceipt -contains 'INSTALLATION VERIFIED: 21/21') 'A clean install did not reach 21/21.'
+    Assert-True ($cleanReceipt -contains 'INSTALLATION VERIFIED: 22/22') 'A clean install did not reach 22/22.'
 
     $frontDoorTarget = Join-Path $testRoot 'host-front-door\AGENTS.md'
     & $installScript -PluginRoot $PluginRoot -TargetSkillRoot $cleanRoot -AgentHost Codex -HostFrontDoorAction Install -TargetInstructionFile $frontDoorTarget -Confirm:$false | Out-Null
@@ -94,7 +94,7 @@ try {
     Assert-True $sourceTreeVerificationFailed 'The verifier must not let the source repository impersonate an installed target.'
 
     $sourceReceipt = @(& $verifyScript -PluginRoot $PluginRoot -TargetRoot $PluginRoot -Layout plugin -AllowSourceTree)
-    Assert-True ($sourceReceipt -contains 'INSTALLATION VERIFIED: 21/21') 'Maintainer source verification must require and honor AllowSourceTree.'
+    Assert-True ($sourceReceipt -contains 'INSTALLATION VERIFIED: 22/22') 'Maintainer source verification must require and honor AllowSourceTree.'
 
     $pluginFixture = Join-Path $testRoot 'codex-plugin'
     New-Item -ItemType Directory -Path $pluginFixture -Force | Out-Null
@@ -108,7 +108,7 @@ try {
     $codexManifest.version = "$($manifest.version)+codex.20260907040405"
     [System.IO.File]::WriteAllText($codexManifestPath, ($codexManifest | ConvertTo-Json -Depth 10), [System.Text.UTF8Encoding]::new($false))
     $cacheReceipt = (& $verifyScript -PluginRoot $PluginRoot -TargetRoot $pluginFixture -Layout plugin -Json | Out-String) | ConvertFrom-Json
-    Assert-True ($cacheReceipt.status -eq 'PASS' -and $cacheReceipt.matchedSkills -eq 21) 'An official Codex cache suffix must not hide a matching installation.'
+    Assert-True ($cacheReceipt.status -eq 'PASS' -and $cacheReceipt.matchedSkills -eq 22) 'An official Codex cache suffix must not hide a matching installation.'
     Assert-True ($cacheReceipt.codexCachebusterVersion -ceq $codexManifest.version) 'The receipt must retain the actual Codex cache version.'
     Assert-True ($cacheReceipt.hostLoading -eq 'not-verified') 'Cache version recognition must not claim host loading.'
     foreach ($badVersion in @('0.0.0+codex.20260907040405', "$($manifest.version)+other.20260907040405", "$($manifest.version)+codex.", "$($manifest.version)+codex.first+codex.second")) {
@@ -147,7 +147,7 @@ try {
     Assert-True $rollbackInstallFailed 'The installer must refuse a linked official skill directory.'
     Assert-True (Test-Path -LiteralPath $rollbackMarker -PathType Leaf) 'A failed install did not restore the previously replaced official skill.'
 
-    Write-Output 'Install gate tests passed: legacy gap rejected, 21/21 upgrade passed, clean install passed, Host Front Door install/receipt/idempotence passed, Codex cache suffix recognized with version/content checks preserved, drift rejected, picker loss rejected, unsafe target rejected, source-tree impersonation rejected, linked-target rollback passed.'
+    Write-Output 'Install gate tests passed: legacy gap rejected, 22/22 upgrade passed, clean install passed, Host Front Door install/receipt/idempotence passed, Codex cache suffix recognized with version/content checks preserved, drift rejected, picker loss rejected, unsafe target rejected, source-tree impersonation rejected, linked-target rollback passed.'
 } finally {
     $tempRoot = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath()).TrimEnd([char]92, [char]47)
     $resolvedTestRoot = [System.IO.Path]::GetFullPath($testRoot).TrimEnd([char]92, [char]47)

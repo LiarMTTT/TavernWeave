@@ -1,10 +1,11 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "1.5.0",
-  "skillCount": 21,
+  "version": "1.6.0",
+  "skillCount": 22,
   "skills": [
     "activate-tavernweave-soul",
+    "build-work-library",
     "code-quality-workflow",
     "consult-tavernweave-library",
     "orchestrate-project-blueprint",
@@ -46,11 +47,17 @@
     "skills/rewrite-natural-prose/references/persistent-modes.md",
     "skills/consult-tavernweave-library/references/communication-and-guidance.md",
     "skills/consult-tavernweave-library/references/guidance-examples.md",
-    "skills/consult-tavernweave-library/scripts/manage-guidance-preference.mjs"
+    "skills/consult-tavernweave-library/scripts/manage-guidance-preference.mjs",
+    "skills/build-work-library/SKILL.md",
+    "skills/build-work-library/agents/openai.yaml",
+    "skills/build-work-library/scripts/work_library.py",
+    "skills/build-work-library/references/data-and-commands.md",
+    "skills/build-work-library/references/research-and-media.md",
+    "skills/build-work-library/references/batching-and-routing.md"
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "1.5.0",
+    "version": "1.6.0",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",

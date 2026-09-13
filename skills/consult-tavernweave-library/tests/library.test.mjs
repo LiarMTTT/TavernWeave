@@ -16,6 +16,17 @@ test("write routes always include standing A0", () => {
   assert.ok(receipt.documents.some((doc) => doc.id === "ST-A0"));
 });
 
+test("work libraries own novel and fanwork research without importing the design catalog", () => {
+  for (const intent of ["小说转数据库，先测 token", "作品资料库，联网收集文图", "同人资料整理成二创资料包"]) {
+    const receipt = queryLibrary({ intent, write: true });
+    assert.deepEqual(receipt.routeIds, ["build-work-library"]);
+    assert.deepEqual(receipt.standing, ["ST-A0"]);
+    assert.deepEqual(receipt.candidates, []);
+  }
+  assert.ok(queryLibrary({ intent: "同层数据库" }).routeIds.includes("sillytavern-database-rolecards"));
+  assert.ok(queryLibrary({ intent: "设计库筛选页" }).routeIds.includes("consult-tavernweave-library"));
+});
+
 test("rewrite and review intents route with a bounded zero-candidate receipt", () => {
   for (const intent of ["洗稿", "去 AI 味", "去AI味", "去八股", "查看洗稿模式状态"]) {
     const receipt = queryLibrary({ intent, write: true, catalogLimit: 0 });

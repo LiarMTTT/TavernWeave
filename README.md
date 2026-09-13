@@ -6,11 +6,11 @@
 
 <p align="center"><strong>把灵感、资料、代码与验收，织成一张真正可维护的角色卡。</strong></p>
 
-TavernWeave（TW）帮助你把想法做成能使用、能继续修改的角色卡、网页或小工具。你可以直接说想做什么，或哪里出了问题；TW 会整理需求、提出方案、制作和检查，并说明接下来怎样试用。它通过 21 个 Skill（按任务调用的工作能力）组织这些工作，支持 Codex、Claude Code，并提供 DeepSeek Harness 实验适配。
+TavernWeave（TW）帮助你把想法做成能使用、能继续修改的角色卡、网页或小工具。你可以直接说想做什么，或哪里出了问题；TW 会整理需求、提出方案、制作和检查，并说明接下来怎样试用。它通过 22 个 Skill（按任务调用的工作能力）组织这些工作，支持 Codex、Claude Code，并提供 DeepSeek Harness 实验适配。
 
-当前正式版为 **[v1.5.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.5.0)：全局大白话与四档引导**。所有能力共同遵守大白话和术语解释；新人、入门、熟练、老手由用户选择，接手旧卡的二创/续更有独立引导。客户端全局入口配置后仍需在新任务中核对实际加载。
+当前正式版为 **[v1.6.0：作品资料库](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.6.0)**，共 22 个原生 Skill。新增小说、原作／同人资料与联网文图参考整理，默认交付可编辑 Markdown＋JSONL 索引，并可导出 SQLite。按来源、改编版本和知情阶段检索，方便二创时回查与调用。见[作品资料库使用说明](docs/work-library.md)。
 
-本版包含 21 个原生 Skill，继续提供文本精修、全量与架构审查、脑暴、Library 和 Soul。新版奶人教程补齐五类任务入口、四档引导、接手旧卡与首次试用后的再次修改。
+所有能力继续遵守大白话和术语解释；新人、入门、熟练、老手由用户选择。文本精修、全量与架构审查、脑暴、内置设计 Library、Soul 和接手旧卡引导继续提供。安装核验以本版 22 项清单为准；客户端实际加载与具体作品质量／token 测量保留独立检查。
 
 > TavernWeave 原创内容采用 [PolyForm Noncommercial License 1.0.0](LICENSE)。允许非商业使用、修改和分发；未经版权方另行授权，原版、修改版及再分发版本均不得用于商业目的。分发时须保留许可证和版权声明。第三方内容仍适用其[各自的许可证](THIRD_PARTY_NOTICES.md)。
 
@@ -123,7 +123,7 @@ Host Front Door（可选全局入口，推荐）
   -> Soul（阿瞳 / MTTT.sir / 灵魂杀手 / 三席，可选）
     -> 脑暴编排（总设计案 + First Playable + 蓝图/蓝图集，可选）
       -> Library（A0 + ST 指南 + 设计/动效 + 来源 Wiki + 挑选页）
-        -> 21 个工程 Skill（创作、组件、API、UI、调试、成长核验、构建、验收等）
+        -> 22 个工程 Skill（创作、组件、API、UI、调试、成长核验、构建、验收等）
 ```
 
 - **Host Front Door（全局入口）** 将持续大白话、任务路由与协作规则接入客户端。用户挡位单独保存，更新入口时保留；文件匹配与客户端实际加载分别检查。
@@ -137,6 +137,7 @@ Host Front Door（可选全局入口，推荐）
 | Skill | 主要职责 |
 | --- | --- |
 | `activate-tavernweave-soul` | 开启、互切或关闭阿瞳 / MTTT.sir / 灵魂杀手当前任务级模式；强尼是前端审查彩蛋人格，不保存私有 RAG |
+| `build-work-library` | 整理小说、原作与同人资料、联网文字和图片参考；来源回查、版本/阶段筛选、人工编辑、分批接续、Markdown＋JSONL 与 SQLite 导出 |
 | `consult-tavernweave-library` | 强制路由 A0、31 册正式 ST 指南与 C8 实验指南，并按需查询 462 个设计、194 个动效、86 个概念、1,609 条蒸馏账本及离线挑选页 |
 | `orchestrate-project-blueprint` | 将角色卡或普通 Vibe Code 愿望收束为总设计案、First Playable、分级蓝图集、NEXT 和反递归执行门；可召集 Soul 三席联席 |
 | `reflect-on-vibe-code-growth` | 从当前 Codex/Chat/项目与交付证据重新评估完整 Vibe Code 能力网络，同时输出可独立复制的完整文字评估表单与七章交互报告，按可比量表对照不可改写的历史节点，并保存脱敏的 append-only 本地履历 |
@@ -200,7 +201,7 @@ skills/consult-tavernweave-library/assets/picker/index.html
 请完整安装并启用这个 Skill 仓库：
 https://github.com/LiarMTTT/TavernWeave
 
-不要只覆盖本机已经存在的 Skill。请以仓库 skills/ 的完整目录为准；安装后核对 21/21，并单独确认 activate-tavernweave-soul、consult-tavernweave-library、orchestrate-project-blueprint、reflect-on-vibe-code-growth、rewrite-natural-prose 和 Library 离线挑选页存在。
+不要只覆盖本机已经存在的 Skill。请以仓库 skills/ 的完整目录为准；安装后核对 22/22，并单独确认 build-work-library、activate-tavernweave-soul、consult-tavernweave-library、orchestrate-project-blueprint、reflect-on-vibe-code-growth、rewrite-natural-prose 和 Library 离线挑选页存在。
 
 请检测我使用的是 Codex 还是 Claude Code，明文推荐安装 TavernWeave Host Front Door 到该客户端的全局规则文件；先展示目标路径、受控区块和 diff，得到我确认后再安装。不要改写受控区块以外的用户规则。
 ```
@@ -248,18 +249,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-install.ps1
 通过回执必须包含：
 
 ```text
-INSTALLATION VERIFIED: 21/21
+INSTALLATION VERIFIED: 22/22
 Library: present-and-matched
 Library picker: present
 Soul: present-and-matched
 Host rediscovery: required-new-task
 ```
 
-如果核验时同时指定宿主与规则文件，回执还会显示 `Host Front Door: current|missing-block|outdated|drifted`；它是推荐状态，不改变 21/21 Skill 文件完整性的判定。
+如果核验时同时指定宿主与规则文件，回执还会显示 `Host Front Door: current|missing-block|outdated|drifted`；它是推荐状态，不改变 22/22 Skill 文件完整性的判定。
 
-目标目录中的无关个人 Skill 会保留；21 个 TavernWeave 官方目录必须与当前源码逐文件匹配。写入目标最后一级必须明确名为 `skills`；安装脚本拒绝盘符根、用户目录根、源码仓库内部目标和目录链接，替换失败时会回滚已有官方 Skill。
+目标目录中的无关个人 Skill 会保留；22 个 TavernWeave 官方目录必须与当前源码逐文件匹配。写入目标最后一级必须明确名为 `skills`；安装脚本拒绝盘符根、用户目录根、源码仓库内部目标和目录链接，替换失败时会回滚已有官方 Skill。
 
-完成 21/21 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul、脑暴编排、照镜子与 Library；安装回执不能冒充宿主发现。v1.5.0 的完整 ZIP 与 SHA-256 校验文件可从 [正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.5.0) 下载。
+完成 22/22 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul、脑暴编排、照镜子与 Library；安装回执不能冒充宿主发现。v1.6.0 的完整 ZIP 与 SHA-256 校验文件可从 [正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.6.0) 下载。
 
 维护者若只是在发布前自检源码树，可显式使用 `-AllowSourceTree`；该开关不能用于普通用户的安装回执。
 
@@ -269,5 +270,5 @@ Host rediscovery: required-new-task
 
 - 官方 `minimal` 只挂载 bash 与 `str_replace_editor`，没有 Skill filesystem/loader，因此不能调用 TW；
 - 官方 `standard` / `code` 具备 Skill 发现与加载面，但仍需真实安装和调用验收；
-- `TW Lite Full` 用精简工具面暴露 21 个 Skill；`TW Lite Entry` 只暴露 Soul、Library、Project Blueprint、Builder 四个入口，用于同题 A/B，但二级路由会降级；
+- `TW Lite Full` 用精简工具面暴露 22 个 Skill；`TW Lite Entry` 只暴露 Soul、Library、Project Blueprint、Builder 四个入口，用于同题 A/B，但二级路由会降级；
 - 目前没有安装 DSH、没有读取 API Key、没有真实模型/额度调用，也没有 Windows/Linux/WSL 或真实 SillyTavern 验收；不得宣传“最大化 V4 智力”或正式兼容。

@@ -1,0 +1,4 @@
+interface:
+  display_name: "作品资料库 · 小说与联网文图"
+  short_description: "把原作、同人与联网文图整理成可追溯、可编辑、可查询的二创资料库"
+  default_prompt: "使用 $build-work-library 整理这个作品的二创资料，先核对版本和来源，再评估样本质量与用量，输出 Markdown、JSONL 和按需 SQLite。"

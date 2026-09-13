@@ -3,7 +3,7 @@
   "owner": {
     "name": "LiarMTTT"
   },
-  "description": "TavernWeave: plain-language guidance, inherited-card onboarding and 21 focused skills for making and improving rolecards and software.",
+  "description": "Build and improve rolecards and software with 22 focused skills, source-backed work libraries for fan creation, plain-language guidance and evidence-based reviews.",
   "plugins": [
     {
       "name": "tavernweave-agent-skills",

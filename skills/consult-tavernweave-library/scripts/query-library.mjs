@@ -68,6 +68,9 @@ export function queryLibrary({ skill = "", intent = "", write = false, includeEx
   const normalized = `${skill} ${intent}`.toLowerCase();
   let routes = routeMap.routes.filter((route) => route.id === skill);
   if (!routes.length) routes = routeMap.routes.filter((route) => route.terms.some((term) => normalized.includes(term.toLowerCase())));
+  // Work-source research owns these specific wishes; generic database/catalog terms
+  // must not pull in MVU or the bundled UI design catalog for a novel/fanwork task.
+  if (!skill && routes.some((route) => route.id === "build-work-library")) routes = routes.filter((route) => route.id === "build-work-library");
   const guideIds = new Set();
   const routedDomains = new Set();
   if (write) guideIds.add(routeMap.standingGuide);
@@ -89,7 +92,7 @@ export function queryLibrary({ skill = "", intent = "", write = false, includeEx
     documents: documents.map(({ id, path: documentPath, status }) => ({ id, path: documentPath, status })),
     domains: catalogDomains,
     catalogSummary: Object.fromEntries(Object.entries(catalog.catalogs).map(([domain, value]) => [domain, value.items.length])),
-    candidates: searchCatalog({ query: intent, domains: catalogDomains, limit: catalogLimit }),
+    candidates: routes.some((route) => route.id === "build-work-library") ? [] : searchCatalog({ query: intent, domains: catalogDomains, limit: catalogLimit }),
     experimentalIncluded: includeExperimental,
     selectionState: "proposed",
     unresolved: routes.length || requestedDomains.length ? [] : ["no matching route; choose a primary TavernWeave skill"],

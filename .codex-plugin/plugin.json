@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.5.0",
-  "description": "Build and improve rolecards and software with 21 focused skills, plain-language explanations, user-selected guidance levels, inherited-card onboarding, prose refinement and evidence-based reviews.",
+  "version": "1.6.0",
+  "description": "Build and improve rolecards and software with 22 focused skills, source-backed work libraries for fan creation, plain-language guidance and evidence-based reviews.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "TavernWeave",
     "shortDescription": "Make, improve, and understand rolecards and software.",
-    "longDescription": "TavernWeave 1.5.0: 21 skills share plain language and contextual terminology. Users select 新人/入门/熟练/老手 guidance, with detailed needed and bug explanations at every level. Inherited-card onboarding covers derivative work and continued updates. Existing prose, review, brainstorming, library and Soul capabilities remain available.",
+    "longDescription": "TavernWeave 1.6.0: 22 skills add editable work libraries from novels, fanwork, researched text and inspected image references, with source citations, canon/fanon and stage filters, resumable batches and SQLite export. Shared plain language and user-selected 新人/入门/熟练/老手 guidance remain available. Host rediscovery and real-work token evaluation remain separate checks.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
@@ -26,7 +26,7 @@
     ],
     "defaultPrompt": [
       "我接手了这张角色卡，想沿原作继续更新；先帮我看懂原卡，再选第一次改动。",
-      "我想做一个小作品，请用大白话帮我整理想法，解释术语和推荐理由。",
+      "把这部作品整理成二创资料库，原作与同人分开；先核对代表样本的质量和 token，再分批继续。",
       "查看我当前的 TW 引导挡位，解释四档的区别，先不要更改设置。"
     ]
   }
