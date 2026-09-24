@@ -1,0 +1,24 @@
+.guide-return { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; gap: 12px 24px; padding: 12px max(16px, calc((100% - 944px) / 2)); background: #fff; border-bottom: 1px solid #d8dee4; font-size: 14px; }
+.guide-return a { color: #0969da; text-decoration: none; }
+.guide-return a:hover { text-decoration: underline; }
+[id] { scroll-margin-top: 90px; }
+.guide-editor-note { font-size: 13px; }
+.guide-table { max-width: 100%; overflow-x: auto; margin: 12px 0; }
+.guide-table > table { margin: 0; min-width: 640px; }
+.wrap { overflow-wrap: anywhere; }
+.prompt { overflow-wrap: anywhere; }
+.mermaid { overflow-x: auto; text-align: left; }
+.mermaid svg { display: block; margin-inline: auto; }
+.mermaid:not([data-processed]) { white-space: pre-wrap; font: 12px/1.6 Consolas, monospace; }
+.diagram-fallback { text-align: left; }
+.diagram-fallback p { font: 14px/1.7 "Segoe UI", "Microsoft YaHei", sans-serif; color: #57606a; }
+.diagram-fallback pre { white-space: pre; }
+@media (max-width: 640px) {
+  .wrap { padding: 24px 16px 56px; }
+  header.doc h1 { font-size: 24px; }
+  h2 { font-size: 19px; }
+  .mermaid { padding: 8px; }
+  .mermaid::before { content: '流程图可左右滑动，步骤表在下方'; display: block; margin-bottom: 10px; font: 12px/1.5 "Segoe UI", "Microsoft YaHei", sans-serif; color: #57606a; }
+  .mermaid svg { width: max(640px, var(--diagram-width, 640px)); height: auto; max-width: none !important; }
+}
+@media print { .guide-return { display: none; } }

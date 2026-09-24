@@ -14,9 +14,9 @@ async function readGuideFile(name) {
 
 test("guide navigation targets follow the rendered document order", async () => {
   const index = await readGuideFile("index.html");
-  const content = (await Promise.all(
-    Array.from({ length: 10 }, (_, index) => readGuideFile(`content-${index}.html`)),
-  )).join("\n");
+  const app = await readGuideFile("app.js");
+  const files = [...app.matchAll(/'\.\/([^'?]+\.html)\?v=\d+'/g)].map(match => match[1]);
+  const content = (await Promise.all(files.map(readGuideFile))).join("\n");
   const navIds = [...index.matchAll(/<a class="nav-link[^"]*" href="#([^"]+)"/g)]
     .map(match => match[1]);
 
@@ -81,12 +81,12 @@ test("navigation state is derived from the live document", async () => {
   assert.match(app, /target\.scrollIntoView\(\{ block: 'start', behavior:/);
   assert.match(app, /if \(body\.classList\.contains\('nav-open'\)\)/);
   assert.doesNotMatch(app, /\/ 49/);
-  assert.match(index, /style\.css\?v=42/);
-  assert.match(index, /layout-v6\.css\?v=42/);
-  assert.match(index, /app\.js\?v=42/);
-  assert.match(app, /content-0\.html\?v=42/);
-  assert.match(app, /content-8\.html\?v=42/);
-  assert.match(app, /content-9\.html\?v=42/);
+  assert.match(index, /style\.css\?v=45/);
+  assert.match(index, /layout-v6\.css\?v=45/);
+  assert.match(index, /app\.js\?v=45/);
+  assert.match(app, /content-0\.html\?v=45/);
+  assert.match(app, /content-8\.html\?v=45/);
+  assert.match(app, /content-9\.html\?v=45/);
   assert.match(app, /target\.querySelector\('\.release-entry'\)/);
 });
 
@@ -121,7 +121,7 @@ test("opening capability map explains TavernWeave by system and marks v1.2 and v
   assert.match(content0, /前端、交互与美术/);
   assert.match(content0, /调试、审计与优化/);
   assert.match(content0, /资料库、安装与发布/);
-  assert.match(content0, /id="hero-title"/);
+  assert.match(await readGuideFile("welcome.html"), /id="hero-title"/);
   assert.doesNotMatch(content1, /id="hero-title"/);
 });
 

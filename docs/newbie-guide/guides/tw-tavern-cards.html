@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TavernWeave × tavern-cards 双套件混合使用指南</title>
+<style>
+  :root{
+    --ink:#24292f; --muted:#57606a; --line:#d8dee4;
+    --a:#8250df; --a-bg:#f6f2ff;          /* TavernWeave 紫 */
+    --b:#0b6b3a; --b-bg:#eefaf3;          /* tavern-cards 绿 */
+    --shared:#0969da; --shared-bg:#eef5ff;/* 共用层 蓝 */
+    --warn-bg:#fff8e6; --warn:#9a6700; --warn-line:#d4a72c;
+    --danger-bg:#fff1f0; --danger:#cf1322; --danger-line:#ffa39e;
+    --gate:#d48806; --gate-bg:#fff7e6;
+  }
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);
+       margin:0;background:#fafbfc;line-height:1.75;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 28px 80px}
+  header.doc{border-bottom:3px solid var(--ink);padding-bottom:18px;margin-bottom:26px}
+  header.doc h1{font-size:26px;margin:0 0 8px}
+  header.doc .meta{color:var(--muted);font-size:13px}
+  h2{font-size:20px;margin:44px 0 12px;padding:6px 12px;border-left:5px solid var(--ink);background:#fff;border-radius:0 6px 6px 0}
+  h3{font-size:16px;margin:26px 0 8px}
+  p{margin:8px 0}
+  table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:#f2f4f6}
+  code{background:#eff1f3;border-radius:4px;padding:1px 5px;font-size:12.5px;font-family:Consolas,Menlo,monospace}
+  pre{background:#f6f8fa;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:13px;line-height:1.6}
+  pre code{background:none;padding:0}
+  .prompt{background:#f6f8fa;border:1px solid var(--line);border-left:4px solid var(--shared);
+          border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13.5px;white-space:pre-wrap;
+          font-family:Consolas,"Microsoft YaHei",monospace}
+  .prompt.b{border-left-color:var(--b)} .prompt.a{border-left-color:var(--a)}
+  .prompt .who{display:inline-block;font-family:"Segoe UI","Microsoft YaHei",sans-serif;font-weight:600;font-size:12px;
+       color:#fff;background:var(--shared);border-radius:10px;padding:0 9px;margin-bottom:6px}
+  .prompt.b .who{background:var(--b)} .prompt.a .who{background:var(--a)}
+  .callout{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:12px 0;background:#fff}
+  .callout.warn{background:var(--warn-bg);border-color:var(--warn-line)}
+  .callout.danger{background:var(--danger-bg);border-color:var(--danger-line)}
+  .callout.tip{background:var(--shared-bg);border-color:#a5c8ff}
+  .callout b.tag{display:inline-block;font-size:12px;border-radius:4px;padding:0 8px;color:#fff;margin-right:6px}
+  .warn b.tag{background:var(--warn)} .danger b.tag{background:var(--danger)} .tip b.tag{background:var(--shared)}
+  .badge{display:inline-block;font-size:11.5px;font-weight:600;border-radius:10px;padding:1px 9px;vertical-align:1px}
+  .badge.a{background:var(--a-bg);color:var(--a);border:1px solid #d3c1f5}
+  .badge.b{background:var(--b-bg);color:var(--b);border:1px solid #b3e2c8}
+  .badge.s{background:var(--shared-bg);color:var(--shared);border:1px solid #a5c8ff}
+  .gate{color:var(--gate);font-weight:700}
+  .star{color:var(--danger);font-weight:700}
+  .mermaid{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;margin:14px 0;
+           overflow-x:auto;text-align:center}
+  .toc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 20px;font-size:14px}
+  .toc a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--muted)}
+  .toc ol{margin:6px 0;padding-left:22px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:820px){.two{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:10px;padding:12px 16px;background:#fff}
+  .card h4{margin:2px 0 6px;font-size:14.5px}
+  footer{margin-top:56px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:14px}
+  @media print{.mermaid{break-inside:avoid} table{break-inside:auto} h2{break-after:avoid}}
+</style>
+<link rel="stylesheet" href="./mix-guide.css?v=43">
+</head>
+<body>
+<nav class="guide-return" aria-label="教程导航"><a href="../index.html#mix-guides">← 返回奶人教程 · 混搭指南</a><a href="../index.html#qa-cards">阅读相关 QA</a></nav>
+<div class="wrap">
+
+<header class="doc">
+  <h1>TavernWeave × tavern-cards 双套件混合使用指南</h1>
+  <div class="meta">
+    适用环境：ZCode / Claude Code / Codex 等 skill 宿主 · 生成日期 2026-08-30 ·
+    套件版本：TavernWeave v1.3.0（20 skill）＋ ai4rpg/tavern-cards（3 skill + 4 子代理 + forge CLI）<br>
+    前提：两套 skill 已安装并通过宿主重新发现（<b>本指南所有口令请在「新会话」中使用</b>）；
+    Node.js 与 Git for Windows 已就位；写卡工作区已备好 <code>.cardrc.json</code>。
+  </div>
+</header>
+<div class="callout tip guide-editor-note"><b class="tag">教程收录说明 · 2026-09-24</b><p>Soul 是当前任务的可选教学／审查层。当前宿主能发现并实际调用 <code>activate-tavernweave-soul</code> 时才可用；全局 Front Door 属于可选配置，可帮助路由，不能代替调用证据。若仅在 TW 项目级安装，另一个工作根不保证可用。Soul 不改变所选主干、写入权限和验收要求。</p><p>以下 A 主干流程是从零且需要完整规划时的示例；接手续更、局部修改和排错可按已有项目直接进入对应 Skill。跨套检查按本文的只读示例开始；需要真实 ST 调试、媒体等其他能力时，逐项说清负责人和允许修改的范围。</p></div>
+
+<div class="toc">
+  <b>目录</b>
+  <ol>
+    <li><a href="#s1">三分钟上手：三条铁律 + 贴身模板</a></li>
+    <li><a href="#s2">全景架构图：谁共享、谁排他</a></li>
+    <li><a href="#s3">开局判定：从零开始 / 从现有卡开始（含流程图）</a></li>
+    <li><a href="#s4">B 主干全程人工指挥地图（12 道门 + 流程图）</a></li>
+    <li><a href="#s5">A 主干全程人工指挥地图（7 道门 + 流程图）</a></li>
+    <li><a href="#s6">提示词手册（按意图分类）</a></li>
+    <li><a href="#s7">防掣肘五规 + 项目主干声明模板</a></li>
+    <li><a href="#s8">常见翻车与自救</a></li>
+    <li><a href="#s9">附录：口令速查 · 文件词汇表</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s1">1. 三分钟上手：三条铁律 + 贴身模板</h2>
+
+<div class="callout danger"><b class="tag">铁律 1</b>
+<b>开工先报主干。</b>两套 skill 都监听「角色卡 / 世界书」关键词。每个项目开工的第一句话必须是「项目主干声明」（模板见 §7），否则 Agent 只能靠描述猜，猜错一次就会混账。
+</div>
+<div class="callout danger"><b class="tag">铁律 2</b>
+<b>一项目一事实来源。</b>B 主干记在 <code>design-spec.md + 创作规划.yaml + tavern-cards-state.json</code>；A 主干记在「创作权威」文档。同一张卡绝不双记账——想换体系就单向迁移，不做并行维护。
+</div>
+<div class="callout danger"><b class="tag">铁律 3</b>
+<b>验收只能你亲口说。</b>无论哪套管线，「验收通过 / driver-accepted / 授权打包」永远由你本人说出，Agent 只能递交证据和等待。
+</div>
+
+<div class="callout tip"><b class="tag">贴身模板</b>
+每次开工把这段话发给 Agent（按实际选择改 3 行），可以挡掉 90% 的路由冲突：
+<div class="prompt"><span class="who">你说</span>【项目主干声明】本项目《XX》：
+1) 主干：B 管线（tavern-design → tavern-cards → tavern-ui + forge CLI）。
+2) 唯一事实来源：cards/XX/ 下的 design-spec.md、创作规划.yaml、tavern-cards-state.json。
+3) TavernWeave 只允许使用：A0 检查单、consult-tavernweave-library 资料查询、
+   sillytavern-rolecard-security / rolecard-performance / api-reference 只读审计。
+4) 禁止：用 TavernWeave 的 builder / components / card-pipeline 改写或重打包本项目；禁止维护第二份规划文档。
+5) 每进入一个新阶段前，先列出该阶段的人工确认点，等我确认再动手。</div>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s2">2. 全景架构图：谁共享、谁排他</h2>
+<p>混合使用的关键是分清「层」：<span class="badge s">蓝色</span>驾驶层与资料层在宿主实际发现对应能力后可共用；<span class="badge a">紫 / 绿</span>生产主干层每张卡二选一；只读审计层可以叠在任何一张卡上。</p>
+
+<div class="mermaid">
+flowchart TB
+  subgraph DR["① 驾驶层 —— 宿主发现后可共用"]
+    direction LR
+    FD["Host Front Door<br/>全局口令路由"]
+    SO["Soul 人格层<br/>阿瞳 / MTTT.sir / 灵魂杀手"]
+    A0["A0 写入前置检查单"]
+  end
+  subgraph KNOW["② 资料层 —— 宿主发现后可共用"]
+    LIB["TavernWeave Library<br/>31 册 ST 指南 · 设计/动效挑选页 · 概念 Wiki"]
+  end
+  subgraph MAIN["③ 生产主干层 —— 每张卡二选一"]
+    direction LR
+    B["B 主干 · tavern-cards 套件<br/>tavern-design → tavern-cards → tavern-ui<br/>4 子代理 + forge CLI"]
+    A["A 主干 · TavernWeave<br/>脑暴编排 → tavern-card-builder<br/>→ components / card-pipeline / embedded-ui"]
+  end
+  subgraph AUDIT["④ 只读审计层 —— 跨主干通用"]
+    direction LR
+    SEC["rolecard-security<br/>只读扫描"]
+    PERF["rolecard-performance<br/>预算评估"]
+    APIR["api-reference<br/>版本敏感查证"]
+    CA["check-agent<br/>禁词扫描（B 内部）"]
+  end
+  DR --> KNOW --> MAIN
+  AUDIT -. 只读审计 / 查证供料 .-> MAIN
+</div>
+
+<div class="guide-table"><table>
+  <tr><th style="width:18%">层</th><th>内容</th><th style="width:26%">混合规则</th></tr>
+  <tr><td><b>① 驾驶层</b></td><td>Front Door 全局规则、Soul、A0</td><td class="badge s">共用</td></tr>
+  <tr><td><b>② 资料层</b></td><td>Library：ST 指南、462 设计 + 194 动效条目、离线挑选页</td><td class="badge s">共用</td></tr>
+  <tr><td><b>③ 生产主干层</b></td><td>从叙事设计到打包的完整主权链</td><td class="badge a">每卡二选一（A 或 B）</td></tr>
+  <tr><td><b>④ 审计层</b></td><td>安全 / 性能 / API 查证（A 出品）＋ 禁词扫描（B 内部）</td><td class="badge s">只读，跨主干通用</td></tr>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="s3">3. 开局判定：从零开始 / 从现有卡开始</h2>
+
+<div class="mermaid">
+flowchart TD
+  START(["我要开工"]) --> Q1{"手头有没有<br/>现成的卡或工程？"}
+  Q1 -- "从零" --> Q2{"有没有现成文字材料<br/>（小说 / 脚本 / 设定集）？"}
+  Q2 -- "有，需要转化" --> BE["tavern-design + conversion-agent<br/>材料 → 故事大纲.yaml → design-spec.md"]
+  Q2 -- "没有" --> Q3{"想要哪种驾驶体验？"}
+  Q3 -- "工程化 · 规划驱动" --> BE2["tavern-design 七维度讨论<br/>→ design-spec.md"]
+  Q3 -- "TavernWeave 证据链" --> AE["脑暴模式 → 总设计案<br/>→ First Playable → 蓝图"]
+  Q1 -- "有" --> Q4{"卡的来路是？"}
+  Q4 -- "forge 工程（tavern-cards-state.json）" --> BR["tavern-cards 断点续接<br/>resume.md"]
+  Q4 -- "TavernWeave 组件工程" --> AR["TavernWeave 继续流程<br/>先恢复创作权威"]
+  Q4 -- "裸 PNG / JSON" --> Q5{"后续主要做什么？"}
+  Q5 -- "条目修改后重新打包" --> BUX["forge unpack → modify-existing<br/>解包 → 修改 → pack"]
+  Q5 -- "组件化拆解 / 复用 / 多卡共享" --> AUX["card-components 无损拆卡<br/>registry / recipe"]
+  BE --> CONF(["进入 B 主干（§4）"])
+  BE2 --> CONF
+  BR --> CONF
+  BUX --> CONF
+  AE --> CONFA(["进入 A 主干（§5）"])
+  AR --> CONFA
+  AUX --> CONFA
+</div>
+
+<h3>3.1 从零开始 · 入口提示词</h3>
+<div class="prompt b"><span class="who">B 主干 · 无材料</span>用 tavern-cards 套件从零做一张角色卡，项目名《XX》。
+先走 tavern-design 的七维度大方向讨论（项目定位 / 世界观 / 角色 / 互动与动态 / 创作方向 / 开场 / SFW-NSFW），
+每个维度给我 2–3 个候选方向让我选，不要替我决定。走完产出 design-spec.md 后暂停等我确认。</div>
+<div class="prompt b"><span class="who">B 主干 · 有材料</span>用 tavern-design 把「D:\path\小说.txt」转化成故事大纲（conversion-agent 分片处理，
+引用必须逐字来自原文），完成后结合大纲产出 design-spec.md，暂停等我确认。</div>
+<div class="prompt a"><span class="who">A 主干 · 官方开工句</span>请用 TavernWeave 帮我做这张卡。先读 A0，识别任务应该由哪个 Skill 负责，
+再告诉我目标、红线和验收。</div>
+<div class="prompt a"><span class="who">A 主干 · 脑暴起手</span>脑暴模式
+<span style="color:#57606a">（要三席联席：脑暴模式，Soul 联席）</span></div>
+
+<h3>3.2 从现有卡开始 · 入口提示词</h3>
+<div class="prompt b"><span class="who">裸卡 → B 主干</span>这是一张已有的卡「D:\path\card.png」，按 tavern-cards 的 modify-existing 流程处理：
+forge unpack 解包成工程目录，先给我呈现结构分析（条目清单 / 变量 / 正则 / 配置），
+等我提修改需求，不要急着改。</div>
+<div class="prompt b"><span class="who">forge 工程 → 断点续接</span>继续 cards/XX 项目：先读 tavern-cards-state.json 和创作规划.yaml 恢复进度，
+告诉我「已完成 / 进行中 / 下一道人工门」各是什么，确认后继续。</div>
+<div class="prompt a"><span class="who">裸卡 → A 主干（组件化）</span>用 TavernWeave 的 sillytavern-card-components 把「D:\path\card.png」无损拆解成组件，
+建立 registry 和 recipe。我要做可复用组件库，先给我拆解方案再动手。</div>
+<div class="prompt a"><span class="who">TavernWeave 工程 → 续接</span>继续本项目：先恢复创作权威、Git 工作树、制品和下一道门，不要重复访问已冻结设定。</div>
+<div class="callout warn"><b class="tag">注意</b>旧版 forge 工程（commit 5204425 之前）需要先迁移：优先「重新解包」自动适配新版 state。提示词见 §6-D。</div>
+
+<!-- ============================================================ -->
+<h2 id="s4">4. B 主干全程人工指挥地图（tavern-cards 套件）</h2>
+
+<div class="mermaid">
+flowchart TD
+  subgraph PH1["阶段一 · 叙事设计（tavern-design）"]
+    G1["G1 立项"] --> G2["G2 七维度讨论"] --> G3["G3 design-spec 确认 ★"]
+  end
+  subgraph PH2["阶段二 · 项目与规划（tavern-cards）"]
+    P1["init 项目创建"] --> G4["G4 技术收尾拍板"] --> G5["G5 创作规划.yaml 审定 ★★"]
+  end
+  subgraph PH3["阶段三 · 条目与变量"]
+    P2["条目创作循环<br/>CoT 自检 → 注册 → check-agent"] --> G6["G6 批次抽读"] --> P3["schema-agent 写 schema.ts"] --> G7["G7 变量结构确认"] --> P4["initvar + 更新规则<br/>forge validate-mvu"]
+  end
+  subgraph PH4["阶段四 · 交付内容"]
+    P5["forge configure"] --> G8["G8 推导核对"] --> P6["开场白创作"] --> G9["G9 开场白确认"] --> P7["UI 开发<br/>tavern-ui / 纯文本 / 无"] --> G10["G10 UI 确认"]
+  end
+  subgraph PH5["阶段五 · 打包与验收"]
+    P8["pack 检查清单<br/>＋跨套只读审计"] --> G11["G11 打包授权"] --> P9["forge pack"] --> P10["导入真实酒馆实测"] --> G12["G12 人工验收 ★★★"]
+  end
+  PH1 --> PH2 --> PH3 --> PH4 --> PH5
+  classDef gate fill:#fff7e6,stroke:#d48806,stroke-width:2px;
+  classDef star fill:#fff1f0,stroke:#cf1322,stroke-width:2px;
+  class G1,G2,G4,G6,G7,G8,G9,G10,G11 gate;
+  class G3,G5,G12 star;
+</div>
+<p>★ 越多 = 越值得你亲自把关的门。G3 / G5 / G12 是全流程的三大支柱。</p>
+
+<div class="guide-table"><table>
+  <tr><th style="width:6%">门</th><th style="width:17%">阶段</th><th style="width:33%">系统会做什么</th><th style="width:22%">你要看什么</th><th>你说什么（提示词）</th></tr>
+  <tr><td class="gate">G1</td><td>立项</td><td>建 <code>cards/项目名/</code> 目录</td><td>项目名、题材、SFW/NSFW 倾向</td><td>§3.1 的 B 主干开工句 + 主干声明</td></tr>
+  <tr><td class="gate">G2</td><td>大方向</td><td>逐维度给候选，忠实记录你的选择</td><td>每个维度是否如实记录，未被代答</td><td>「第 2 维选 B 方案，理由……继续下一维度。」</td></tr>
+  <tr><td class="star">G3</td><td>叙事设计出口</td><td>产出 <code>design-spec.md</code> 并<b>强制暂停</b></td><td>目标体验、红线、风格意向有没有被曲解</td><td>「design-spec 确认，进入项目创建。」</td></tr>
+  <tr><td class="gate">G4</td><td>项目创建</td><td>init 建目录与状态文件</td><td>MVU/EJS 用不用、typeLists、头像、ui_mode</td><td>「启用 MVU 和 EJS；ui_mode = frontend；头像用占位。」</td></tr>
+  <tr><td class="star">G5</td><td>创作规划</td><td>产出 <code>创作规划.yaml</code>（项目级事实来源）</td><td>条目清单、变量结构草案、文风基线、first_messages 计划</td><td>「创作规划确认。此后任何改动都先改规划、给我看 diff、再动正文。」</td></tr>
+  <tr><td class="gate">G6</td><td>条目批次</td><td>写完一组 → check-agent 禁词扫描</td><td>抽读 2–3 条关键条目的「活人感」</td><td>「本组通过。」/「这两条打回，理由：……重写后再扫。」</td></tr>
+  <tr><td class="gate">G7</td><td>MVU 结构</td><td>schema-agent 产出 <code>schema.ts</code></td><td>变量结构树是否符合你在 G5 的意图</td><td>「schema 确认。继续 initvar 和更新规则，跑 forge validate-mvu。」</td></tr>
+  <tr><td class="gate">G8</td><td>配置推导</td><td>forge configure 自动推导 strategy/position/order</td><td>推导变化点清单</td><td>「推导合理，继续。」/「第 X 条改成 constant，重跑。」</td></tr>
+  <tr><td class="gate">G9</td><td>开场白</td><td>叙事式由 first-message-agent 直写文件</td><td>前三行钩子、玩家动机、结尾互动点、字数</td><td>「开场白 1 通过。」/「开场白 2 结尾互动点改成……」</td></tr>
+  <tr><td class="gate">G10</td><td>UI（如 frontend）</td><td>tavern-ui 追加 UI 设计段到 design-spec</td><td>视觉基调、组件树、语义色彩命名</td><td>「UI 设计段确认，开始编码。」</td></tr>
+  <tr><td class="gate">G11</td><td>打包门</td><td>pack 检查清单；可插跨套审计</td><td>清单逐项 + 安全/性能审计报告</td><td>「检查通过，执行 forge pack。」</td></tr>
+  <tr><td class="star">G12</td><td>最终验收</td><td>等你导入真实酒馆实测</td><td>实际渲染、变量更新、正则、开场白</td><td>「实测通过，项目验收。」/「实测问题：……按 modify-existing 流程修。」</td></tr>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="s5">5. A 主干全程人工指挥地图（TavernWeave）</h2>
+
+<div class="mermaid">
+flowchart TD
+  S["开工句：A0 + 目标/红线/验收"] --> BP["脑暴模式<br/>每轮 2–4 个决策 · 四态决策"]
+  BP --> G1["G1 总设计案确认 ★"]
+  G1 --> FR["冻结 First Playable 边界<br/>出分级蓝图集 + NEXT"]
+  FR --> G2["G2 蓝图冻结"]
+  G2 --> RUN["按蓝图开跑第一版<br/>预算 0 · 反递归门"]
+  RUN --> EV["证据链逐层递交<br/>源码→测试→制品→预览→真实 ST"]
+  EV --> G3["G3 人工验收 driver-accepted ★★<br/>只能你亲口说"]
+  G3 --> G4["G4 发布授权 ★★"]
+  classDef gate fill:#fff7e6,stroke:#d48806,stroke-width:2px;
+  classDef star fill:#fff1f0,stroke:#cf1322,stroke-width:2px;
+  class G1,G2 gate;
+  class G3,G4 star;
+</div>
+
+<div class="guide-table"><table>
+  <tr><th style="width:6%">门</th><th style="width:20%">阶段</th><th style="width:38%">系统会做什么</th><th>你说什么（提示词）</th></tr>
+  <tr><td class="gate">G1</td><td>总设计案</td><td>脑暴编排收束愿望 → 总设计案 + First Playable + 蓝图</td><td>「总设计案确认。冻结 First Playable 边界，出蓝图。」</td></tr>
+  <tr><td class="gate">G2</td><td>蓝图冻结</td><td>产出分级蓝图集与 NEXT，反递归门生效</td><td>「蓝图确认。之后按蓝图开跑。」</td></tr>
+  <tr><td class="gate">—</td><td>执行期</td><td>只执行冻结的首版范围；活动步骤最多开一个非持久细分</td><td>「按蓝图开跑第一版」</td></tr>
+  <tr><td class="gate">—</td><td>证据递交</td><td>每层证据单独记录，自动化永不冒充人工验收</td><td>「给我看当前步骤的验收标准、已完成证据和下一道门。」</td></tr>
+  <tr><td class="star">G3</td><td>人工验收</td><td>等你真实运行并检查</td><td>「我已完成真实酒馆验收，标记 driver-accepted。」</td></tr>
+  <tr><td class="star">G4</td><td>发布授权</td><td>打包 / 推送 / 发布均需显式授权</td><td>「授权打包发布。」</td></tr>
+</table></div>
+<div class="callout tip"><b class="tag">叠加</b>Soul 可随时叠加在任一主干上：「阿瞳助我！」（温柔指导）、「MTTT.sir，拷打我！」（严格拷问）、「灵魂杀手！」（前端审查彩蛋）、「Soul 归位」（退出）。人格只改变教学与审查风格，不扩权、不改验收。</div>
+
+<!-- ============================================================ -->
+<h2 id="s6">6. 提示词手册（按意图分类）</h2>
+
+<h3>A. 启动与判定</h3>
+<div class="guide-table"><table>
+  <tr><th style="width:22%">意图</th><th>提示词</th></tr>
+  <tr><td>声明主干（每次必发）</td><td>§7 的【项目主干声明】模板</td></tr>
+  <tr><td>不知道怎么选</td><td>「帮我判定：这个任务该走 B 主干还是 A 主干？按开局判定图给结论和理由，等我确认再开工。」</td></tr>
+  <tr><td>从零 · B</td><td>「用 tavern-cards 套件从零做角色卡《XX》，先七维度讨论。」</td></tr>
+  <tr><td>从零 · A</td><td>「请用 TavernWeave 帮我做这张卡。先读 A0，识别任务应该由哪个 Skill 负责，再告诉我目标、红线和验收。」</td></tr>
+  <tr><td>从裸卡 · B</td><td>「forge unpack 解包这张卡，先结构分析，等我提需求。」</td></tr>
+  <tr><td>从裸卡 · A</td><td>「用 sillytavern-card-components 无损拆卡，先给拆解方案。」</td></tr>
+</table></div>
+
+<h3>B. 过程指挥（推进 / 继续 / 收紧）</h3>
+<div class="guide-table"><table>
+  <tr><th style="width:22%">意图</th><th>提示词</th></tr>
+  <tr><td>推进下一阶段</td><td>「本门通过，进入下一阶段，先列该阶段的人工确认点。」</td></tr>
+  <tr><td>断点续接（B）</td><td>「继续 cards/XX：读 tavern-cards-state.json 和创作规划恢复进度，报『已完成 / 进行中 / 下一道人工门』。」</td></tr>
+  <tr><td>断点续接（A）</td><td>「继续：先恢复创作权威、Git 工作树、制品和下一道门。」</td></tr>
+  <tr><td>查状态</td><td>「现在进行到哪个阶段？列出已完成 / 进行中 / 待我确认的事项。」</td></tr>
+  <tr><td>收紧范围</td><td>「只做我点名的事，不要顺手优化或重构其他内容。」</td></tr>
+  <tr><td>暂停</td><td>「暂停，先不要进行下一步。」</td></tr>
+</table></div>
+
+<h3>C. 干预与纠偏（中途插手）</h3>
+<div class="guide-table"><table>
+  <tr><th style="width:22%">意图</th><th>提示词</th></tr>
+  <tr><td>改需求（B · 规划同步）</td><td>「需求变更：&lt;内容&gt;。先更新创作规划.yaml 并给我看 diff，我确认后再改条目正文。」</td></tr>
+  <tr><td>改需求（A · 不越冻结线）</td><td>「需求变更：&lt;内容&gt;。按 revision 流程处理，不要直接改已冻结设定。」</td></tr>
+  <tr><td>否决候选</td><td>「否决当前候选，理由：&lt;…&gt;。给我 2 个新候选。」</td></tr>
+  <tr><td>回滚</td><td>「把 &lt;文件 / 条目&gt; 回滚到我上次确认的版本。」</td></tr>
+  <tr><td>打回重写</td><td>「这两条打回，理由：&lt;…&gt;。重写后再跑一次 check-agent。」</td></tr>
+  <tr><td>展示 diff 再写</td><td>「先展示你要写入 &lt;文件&gt; 的 diff，我确认后再写。」<span style="color:#57606a">（把「先看 diff」习惯带给任何管线）</span></td></tr>
+</table></div>
+
+<h3>D. 专项动作</h3>
+<div class="guide-table"><table>
+  <tr><th style="width:22%">意图</th><th>提示词</th></tr>
+  <tr><td>MVU 全流程（B）</td><td>「调 schema-agent 依据创作规划的 mvu 段写 schema.ts，给我变量结构树确认后，再写 initvar 和更新规则，最后 forge validate-mvu。」</td></tr>
+  <tr><td>打包（B）</td><td>「列 pack 检查清单，逐项核对后 forge pack。」</td></tr>
+  <tr><td>旧工程迁移（B）</td><td>「这是 commit 5204425 之前的旧版 forge 工程，按 README 用重新解包方式迁移到新版。」</td></tr>
+  <tr><td>执行冻结首版（A）</td><td>「按蓝图开跑第一版」</td></tr>
+  <tr><td>成长核验（A）</td><td>「照镜子」／「照镜子，只要文字评估表单，不要画板」</td></tr>
+</table></div>
+
+<h3>E. 审计与资料（跨套通用）</h3>
+<div class="guide-table"><table>
+  <tr><th style="width:22%">意图</th><th>提示词</th></tr>
+  <tr><td>安全审计（只读）</td><td>「用 sillytavern-rolecard-security 只读扫描 &lt;项目 / 成品卡&gt;，只报告不修改。」</td></tr>
+  <tr><td>性能审计（只读）</td><td>「用 sillytavern-rolecard-performance 评估这张卡的脱敏预算和回归点。」</td></tr>
+  <tr><td>API 查证</td><td>「用 sillytavern-api-reference 查证 &lt;宏 / EJS 特性 / 接口&gt; 在当前 ST 与酒馆助手版本的可用性。」</td></tr>
+  <tr><td>查资料</td><td>「用 consult-tavernweave-library 查 &lt;主题&gt;：先 A0，再给设计 / 动效挑选页候选。」</td></tr>
+  <tr><td>禁词扫描（B 内部）</td><td>「请 check-agent 检查以下内容：&lt;路径或文本&gt;」</td></tr>
+</table></div>
+
+<h3>F. 验收（只能人工）</h3>
+<div class="guide-table"><table>
+  <tr><th style="width:22%">意图</th><th>提示词</th></tr>
+  <tr><td>验收通过</td><td>「实测通过，项目验收。」（B）／「我已完成真实酒馆验收，标记 driver-accepted。」（A）</td></tr>
+  <tr><td>验收不通过</td><td>「实测发现：&lt;现象 + 复现步骤&gt;。按对应流程修复后重新递交证据。」</td></tr>
+  <tr><td>发布授权</td><td>「授权打包发布。」</td></tr>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="s7">7. 防掣肘五规 + 项目主干声明模板</h2>
+<div class="guide-table"><table>
+  <tr><th style="width:6%">#</th><th style="width:22%">规则</th><th>内容</th></tr>
+  <tr><td>1</td><td><b>开工先报主干</b></td><td>第一句话发主干声明；中途切主干 = 重新声明 + 单向迁移，禁止并行双记账。</td></tr>
+  <tr><td>2</td><td><b>一项目一事实来源</b></td><td>B 记创作规划.yaml + tavern-cards-state.json；A 记创作权威。检查口令：「检查本项目是否存在两份规划文档；有则以 &lt;哪份&gt; 为准，另一份归档只读。」</td></tr>
+  <tr><td>3</td><td><b>修改先看来路</b></td><td>forge 工程走 B 的 modify-existing；TavernWeave 组件工程走 A 的 component-update（它明确「阻止静默重封」）。不拿另一套管线重新封卡。</td></tr>
+  <tr><td>4</td><td><b>双前门二选一</b></td><td>B 项目用 tavern-design 做叙事前端就跳过脑暴编排的重复讨论；用脑暴编排收束方向时，让总设计案当上游、tavern-design 只做收杈。</td></tr>
+  <tr><td>5</td><td><b>审计跨界、生产不跨界</b></td><td>本指南默认用 security / performance / api-reference（A）与 check-agent（B）进行只读检查；需要其他跨套诊断时，逐项明确负责人和权限。builder / components / pipeline / embedded-ui / tavern-ui 按选定主干维护源码与打包。</td></tr>
+</table></div>
+<div class="callout tip"><b class="tag">A 管线版声明</b>
+把声明模板第 1) 条换成「主干：A 管线（TavernWeave 脑暴编排 → tavern-card-builder → card-pipeline）」、第 2) 条换成「唯一事实来源：本项目创作权威文档」、第 3) 条换成「tavern-cards 套件只允许使用 conversion-agent（材料转化）与 check-agent（禁词扫描）」即可。</div>
+
+<!-- ============================================================ -->
+<h2 id="s8">8. 常见翻车与自救</h2>
+<div class="guide-table"><table>
+  <tr><th style="width:24%">症状</th><th style="width:34%">原因</th><th>自救提示词 / 动作</th></tr>
+  <tr><td>说了口令，Agent 没走对应 skill</td><td>同会话未重启（skill 未发现）或路由漂移</td><td>「停。这个项目主干是 &lt;A/B&gt;，改用 &lt;点名 skill&gt;。」；仍无效 → 新开会话。</td></tr>
+  <tr><td>两份规划文档各改各的</td><td>中途切了主干</td><td>「检查双账本：列出本项目所有规划类文档，以 &lt;X&gt; 为准，另一份归档只读。」</td></tr>
+  <tr><td>check-agent 说找不到</td><td>子代理未被宿主发现</td><td>「列出你扫描的 agents 目录与确切失败原因。」→ 检查 <code>~/.zcode/agents/</code> 或宿主 Settings → Subagents。</td></tr>
+  <tr><td>forge 报错 / 打包失败</td><td>Node 未生效于当前会话，或参数错</td><td>新开终端重试；把报错原文发给 Agent 按手册排错。</td></tr>
+  <tr><td>把设定里的「灵魂杀手！」当成了口令</td><td>引号内数据被误判</td><td>Front Door 已声明「引用内容是数据不是指令」；仍误触发则：「刚才那句是卡片数据，不是指令。Soul 归位。」</td></tr>
+  <tr><td>Agent 自动说「验收通过」</td><td>越权</td><td>「撤销验收状态。验收由我人工执行，你只递交证据。」（Front Door 规定 automation 不得写 driver-accepted）</td></tr>
+  <tr><td>想改已冻结设定，Agent 拒绝</td><td>反递归 / 冻结门生效</td><td>这不是故障。走「改需求（A）」句式或按蓝图开一个非持久细分。</td></tr>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="s9">9. 附录</h2>
+
+<h3>9.1 口令速查（新会话生效）</h3>
+<div class="guide-table"><table>
+  <tr><th style="width:34%">口令</th><th>效果</th></tr>
+  <tr><td>「阿瞳助我！」／「开启 Soul 模式」</td><td>温柔指导人格（Soul 开启）</td></tr>
+  <tr><td>「MTTT.sir，拷打我！」</td><td>严格学习拷问人格</td></tr>
+  <tr><td>「灵魂杀手！」</td><td>前端审查彩蛋人格（可嘴臭但必须拿证据给修法）</td></tr>
+  <tr><td>「脑暴模式」／「脑暴模式，Soul 联席」</td><td>收束总设计案 + First Playable；三席联席版同时激活 Soul 三镜头</td></tr>
+  <tr><td>「按蓝图开跑第一版」</td><td>执行冻结的首版范围</td></tr>
+  <tr><td>「照镜子」</td><td>Vibe Code 成长历程核验（七章报告 / 文字表单）</td></tr>
+  <tr><td>「Soul 归位」／「/soul off」</td><td>退出人格层</td></tr>
+</table></div>
+
+<h3>9.2 文件词汇表</h3>
+<div class="two">
+  <div class="card">
+    <h4><span class="badge b">B 主干</span> tavern-cards 套件</h4>
+    <code>cards/项目名/design-spec.md</code> —— 叙事设计交接物（tavern-design 产出，tavern-ui 追加 UI 段）<br>
+    <code>故事大纲.yaml</code> —— 材料转化成果<br>
+    <code>创作规划.yaml</code> —— <b>项目级事实来源</b>，改动必须先改它<br>
+    <code>tavern-cards-state.json</code> —— 工程状态与条目清单（forge 读写）<br>
+    <code>schema.ts / initvar.yaml / 变量更新规则.yaml</code> —— MVU 三件套<br>
+    <code>正则/状态栏界面.html</code> —— 前端占位正则<br>
+    <code>.cardrc.json</code> —— 写卡工作区根目录的配置
+  </div>
+  <div class="card">
+    <h4><span class="badge a">A 主干</span> TavernWeave</h4>
+    <b>创作权威</b> —— Markdown + YAML front matter 的唯一权威文档，确认/候选/否决/实现分区混写即违规<br>
+    <b>总设计案 / 蓝图集 / NEXT</b> —— 脑暴编排三件套<br>
+    <code>registry / recipe</code> —— 组件拆卡的注册表与配方<br>
+    <b>证据链</b> —— 源码→自动测试→离线制品→浏览器→真实 ST→人工验收→发布授权<br>
+    <code>driver-accepted</code> —— 只能人工写入的验收标记<br>
+    <b>A0</b> —— 写入型任务的常驻前置检查单
+  </div>
+</div>
+
+<footer>
+  本指南基于两套套件的公开 README 与 SKILL.md 整理 · 流程图为 Mermaid 渲染（首次打开需联网加载渲染库，之后浏览器有缓存）·
+  浏览器「打印 → 另存为 PDF」可导出离线版 ·
+  搭配阅读：<a href="../index.html#community-help">TavernWeave 奶人教程 · Q＆A与skill联动</a>
+</footer>
+
+</div>
+
+
+
+<script src="./mix-guide.js?v=43"></script>
+</body>
+</html>

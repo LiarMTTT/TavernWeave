@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - 'docs/newbie-guide/**'
+      - 'docs/community-qa.md'
+      - 'docs/tavern-cards-community-qa.md'
+      - 'scripts/build-guide-qa.py'
+      - 'requirements-dev.txt'
       - '.github/workflows/newbie-guide-pages.yml'
   workflow_dispatch:
 
@@ -26,6 +30,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build Q&A pages from Markdown
+        run: |
+          python -m pip install -r requirements-dev.txt
+          python scripts/build-guide-qa.py
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
