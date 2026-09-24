@@ -535,3 +535,28 @@
   .tw-guidance-table th:first-child { width: 19%; }
   .tw-guidance-table th:nth-child(2) { width: 29%; }
 }
+
+/* Community reading uses the same colors and spacing as the lessons. */
+.community-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.community-cards h3 { font-size: 21px; }
+.qa-section { overflow-wrap: anywhere; }
+.qa-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.qa-item { margin: 12px 0; border: 1px solid var(--line); border-radius: 14px; background: var(--panel-solid); }
+.qa-item > summary { padding: 18px 20px; cursor: pointer; font-weight: 700; line-height: 1.65; }
+.qa-item > summary:hover, .qa-item[open] > summary { color: var(--accent); background: var(--accent-soft); border-radius: 14px 14px 0 0; }
+.qa-item > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.qa-answer { padding: 2px 20px 20px; }
+.qa-answer blockquote { margin: 16px 0; padding: 6px 16px; border-left: 3px solid var(--accent); background: var(--accent-soft); }
+.qa-section table { min-width: 0; }
+.qa-section th, .qa-section td { overflow-wrap: anywhere; }
+.qa-section .code-block { min-width: 0; }
+.qa-original-title { font-size: 14px; }
+@media (max-width: 640px) {
+  .community-cards { grid-template-columns: 1fr; }
+  .qa-item > summary { padding: 14px; }
+  .qa-answer { padding: 2px 14px 14px; }
+  .qa-section th, .qa-section td { padding: 10px 8px; }
+}
+@media print {
+  .qa-actions { display: none; }
+}

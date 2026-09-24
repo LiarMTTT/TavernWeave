@@ -3,16 +3,19 @@
 
   try {
     const urls = [
-      './content-0.html?v=42',
-      './content-1.html?v=42',
-      './content-2.html?v=42',
-      './content-3.html?v=42',
-      './content-4.html?v=42',
-      './content-5.html?v=42',
-      './content-6.html?v=42',
-      './content-7.html?v=42',
-      './content-8.html?v=42',
-      './content-9.html?v=42',
+      './welcome.html?v=45',
+      './content-0.html?v=45',
+      './community.html?v=45',
+      './community-qa-content.html?v=45',
+      './content-1.html?v=45',
+      './content-2.html?v=45',
+      './content-3.html?v=45',
+      './content-4.html?v=45',
+      './content-5.html?v=45',
+      './content-6.html?v=45',
+      './content-7.html?v=45',
+      './content-8.html?v=45',
+      './content-9.html?v=45',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);
@@ -264,6 +267,28 @@
     const target = document.getElementById(button.dataset.copyTarget);
     copyText(target.querySelector('code').innerText, button);
   }));
+
+  document.querySelectorAll('.qa-section').forEach(section => {
+    const items = [...section.querySelectorAll('.qa-item')];
+    section.querySelector('[data-qa-expand]').addEventListener('click', () => {
+      items.forEach(item => { item.open = true; });
+      requestActiveNavUpdate();
+    });
+    section.querySelector('[data-qa-collapse]').addEventListener('click', () => {
+      items.forEach(item => { item.open = false; });
+      requestActiveNavUpdate();
+    });
+    items.forEach(item => item.addEventListener('toggle', requestActiveNavUpdate));
+  });
+
+  function revealQuestionFromHash() {
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    if (target?.classList.contains('qa-item')) target.open = true;
+  }
+  window.addEventListener('hashchange', revealQuestionFromHash);
+  revealQuestionFromHash();
 
   const choices = new Set();
   const recommendation = document.getElementById('recommendation');

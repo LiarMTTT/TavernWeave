@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TavernWeave × 墨月 双套件混搭指南</title>
+<style>
+  :root{
+    --ink:#24292f; --muted:#57606a; --line:#d8dee4;
+    --a:#8250df; --a-bg:#f6f2ff;          /* TavernWeave 紫 —— 根 A */
+    --m:#0e7c86; --m-bg:#e6f7f8;          /* 墨月 青 —— 根 B */
+    --shared:#0969da; --shared-bg:#eef5ff;/* 用户级只读桥 蓝 */
+    --warn-bg:#fff8e6; --warn:#9a6700; --warn-line:#d4a72c;
+    --danger-bg:#fff1f0; --danger:#cf1322; --danger-line:#ffa39e;
+    --gate:#d48806; --gate-bg:#fff7e6;
+  }
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);
+       margin:0;background:#fafbfc;line-height:1.75;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 28px 80px}
+  header.doc{border-bottom:3px solid var(--ink);padding-bottom:18px;margin-bottom:26px}
+  header.doc h1{font-size:26px;margin:0 0 8px}
+  header.doc .meta{color:var(--muted);font-size:13px}
+  h2{font-size:20px;margin:44px 0 12px;padding:6px 12px;border-left:5px solid var(--ink);background:#fff;border-radius:0 6px 6px 0}
+  h3{font-size:16px;margin:26px 0 8px}
+  p{margin:8px 0}
+  table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:#f2f4f6}
+  .scroll{overflow-x:auto}
+  code{background:#eff1f3;border-radius:4px;padding:1px 5px;font-size:12.5px;font-family:Consolas,Menlo,monospace}
+  pre{background:#f6f8fa;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:13px;line-height:1.6}
+  pre code{background:none;padding:0}
+  .prompt{background:#f6f8fa;border:1px solid var(--line);border-left:4px solid var(--shared);
+          border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13.5px;white-space:pre-wrap;
+          font-family:Consolas,"Microsoft YaHei",monospace}
+  .prompt.a{border-left-color:var(--a)} .prompt.m{border-left-color:var(--m)}
+  .prompt .who{display:inline-block;font-family:"Segoe UI","Microsoft YaHei",sans-serif;font-weight:600;font-size:12px;
+       color:#fff;background:var(--shared);border-radius:10px;padding:0 9px;margin-bottom:6px}
+  .prompt.a .who{background:var(--a)} .prompt.m .who{background:var(--m)}
+  .callout{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:12px 0;background:#fff}
+  .callout.warn{background:var(--warn-bg);border-color:var(--warn-line)}
+  .callout.danger{background:var(--danger-bg);border-color:var(--danger-line)}
+  .callout.tip{background:var(--shared-bg);border-color:#a5c8ff}
+  .callout b.tag{display:inline-block;font-size:12px;border-radius:4px;padding:0 8px;color:#fff;margin-right:6px}
+  .warn b.tag{background:var(--warn)} .danger b.tag{background:var(--danger)} .tip b.tag{background:var(--shared)}
+  .badge{display:inline-block;font-size:11.5px;font-weight:600;border-radius:10px;padding:1px 9px;vertical-align:1px}
+  .badge.a{background:var(--a-bg);color:var(--a);border:1px solid #d3c1f5}
+  .badge.m{background:var(--m-bg);color:var(--m);border:1px solid #9fd8dd}
+  .badge.s{background:var(--shared-bg);color:var(--shared);border:1px solid #a5c8ff}
+  .gate{color:var(--gate);font-weight:700}
+  .star{color:var(--danger);font-weight:700}
+  .mermaid{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;margin:14px 0;
+           overflow-x:auto;text-align:center}
+  .toc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 20px;font-size:14px}
+  .toc a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--muted)}
+  .toc ol{margin:6px 0;padding-left:22px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:820px){.two{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:10px;padding:12px 16px;background:#fff}
+  .card h4{margin:2px 0 6px;font-size:14.5px}
+  footer{margin-top:56px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:14px}
+  @media print{.mermaid{break-inside:avoid} table{break-inside:auto} h2{break-after:avoid}}
+</style>
+<link rel="stylesheet" href="./mix-guide.css?v=43">
+</head>
+<body>
+<nav class="guide-return" aria-label="教程导航"><a href="../index.html#mix-guides">← 返回奶人教程 · 混搭指南</a><a href="../index.html#qa-tw">阅读相关 QA</a></nav>
+<div class="wrap">
+
+<header class="doc">
+  <h1>TavernWeave × 墨月 双套件混搭指南</h1>
+  <div class="meta">
+    适用环境：Claude Code / Codex 等 skill 宿主 · 生成日期 2026-09-07<br>
+    套件版本：TavernWeave v1.4.0（21 skill）＋ 墨月本地写卡工坊 2026-08-29（9 个 <code>moyu-*</code> skill ＋ <code>必读/</code> 三篇 ＋ 知识库 ＋ 4 个检查脚本 ＋ <code>tavern_sync</code> 构建链）<br>
+    前提：TavernWeave 已安装并被宿主重新发现；你手里有一份<b>完整</b>的墨月工坊文件夹（请向作者获取；本指南只描述它，文件与下载源一概不含）。
+    <b>本指南所有口令请在「新会话」中使用。</b>
+  </div>
+</header>
+<div class="callout tip guide-editor-note"><b class="tag">教程收录说明 · 2026-09-24</b><p>Soul 是当前任务的可选教学／审查层。当前宿主能发现并实际调用 <code>activate-tavernweave-soul</code> 时才可用；全局 Front Door 属于可选配置，可帮助路由，不能代替调用证据。若仅在 TW 项目级安装，另一个工作根不保证可用。Soul 不改变所选主干、写入权限和验收要求。</p><p>以下 A 主干流程是从零且需要完整规划时的示例；接手续更、局部修改和排错可按已有项目直接进入对应 Skill。跨套检查按本文的只读示例开始；需要真实 ST 调试、媒体等其他能力时，逐项说清负责人和允许修改的范围。</p></div>
+
+<div class="callout danger"><b class="tag">先读</b>
+  这份指南里，TavernWeave 和墨月是<b>平行的两条主干</b>，每张卡二选一。但墨月当主干的条件只有一个：<b>整包用，让它自己的文件夹当根</b>。把它的 9 个 skill 拆出来装进 TavernWeave 的目录，24 条路径会断（§2 有文件证据）。
+</div>
+
+<div class="toc">
+  <b>目录</b>
+  <ol>
+    <li><a href="#s1">三分钟上手：五条铁律 + 贴身模板</a></li>
+    <li><a href="#s2">全景架构图：两个根，一座只读的桥</a></li>
+    <li><a href="#s3">开局判定：这张卡走哪条主干</a></li>
+    <li><a href="#s4">A 主干全程人工指挥地图（TavernWeave · 7 步 4 门）＋ 墨月知识挂点</a></li>
+    <li><a href="#s5">B 主干全程人工指挥地图（墨月 · 8 步 10 个确认点）＋ TW 审计挂点</a></li>
+    <li><a href="#s6">两主干对照表：进了哪个文件夹就整套跟哪边</a></li>
+    <li><a href="#s7">提示词手册（按意图分类）</a></li>
+    <li><a href="#s8">防掣肘七规 + 双版本项目主干声明模板</a></li>
+    <li><a href="#s9">常见翻车与自救</a></li>
+    <li><a href="#s10">附录：口令速查 · 文件词汇表 · 目录地图 · 落地检查清单 · 出处与许可 · Claude Code 入口壳 · 参考副本与路由表</a></li>
+  </ol>
+</div>
+
+<!-- ===== 1 ===== -->
+<h2 id="s1">1. 三分钟上手：五条铁律 + 贴身模板</h2>
+
+<div class="guide-table"><table>
+<tr><th style="width:110px">铁律</th><th>内容</th></tr>
+<tr><td><b>铁律 1</b></td><td><b>开工先报主干。</b>TavernWeave 的 22 个 skill 和墨月的 9 个都监听「角色卡 / 世界书 / MVU / 状态栏」。不共根之后撞车概率低了，但装在用户级的 TW skill 在墨月文件夹里照样看得见。在哪个文件夹开工，第一句话都发「项目主干声明」（模板见 §8）。</td></tr>
+<tr><td><b>铁律 2</b></td><td><b>一项目一事实来源。</b>A 主干记「创作权威」文档；B 主干记 <code>src/&lt;卡名&gt;/项目状态.md</code> ＋ <code>index.yaml</code>，<code>创作台.md</code> 是你自己的原文，秋青子只读不改（<code>moyu-project/SKILL.md</code> 第 35 行）。同一张卡绝不双记账。</td></tr>
+<tr><td><b>铁律 3</b></td><td><b>验收只能你亲口说。</b>TW 的 <code>driver-accepted</code>、墨月的酒馆实测，都只能由你说出。墨月自己在 <code>moyu-package/SKILL.md</code> 第 13 行写明：打包成功只说明结构能生成，酒馆运行、模型效果、视觉效果都还没过。</td></tr>
+<tr><td><b>铁律 4</b></td><td><b>墨月整包用，不拆。</b>它的 9 个 skill 是薄路由（每个 19–36 行），全靠 <code>../../../</code> 往上读 <code>知识库/</code>、<code>必读/</code>、<code>@types/</code>、<code>初始模板/</code>，9 个文件共 <b>24 处</b>；调用顺序由根层入口 → <code>必读/02_专项路由.md</code> 决定；4 个脚本写死 <code>src/&lt;卡名&gt;/</code> 与 <code>tavern_sync.yaml</code>。把 <code>moyu-*</code> 拷进别的目录，24 条路径全断，作者本人也提醒过这一点。要用它，让它自己的文件夹当根。</td></tr>
+<tr><td><b>铁律 5</b></td><td><b>两条主干不共根。</b>TavernWeave 工作区是一个文件夹，墨月工坊是另一个。跨界只有两条<b>只读</b>的路：① TW 的审计 skill 装到宿主的用户级目录，去看墨月的卡；② TW 主干的卡按路由表点名读墨月知识库，读的是一份<b>入口已移出</b>的参考副本（§10.7），主干那份另放。</td></tr>
+</table></div>
+
+<h3>贴身模板（墨月主干版；TavernWeave 主干版见 §8）</h3>
+<div class="prompt m"><span class="who">你说</span>【项目主干声明】本项目《XX》：
+1) 主干：墨月本地写卡工坊（秋青子 → moyu-project 排序 → 各专项 → moyu-package 打包）。工作根：本文件夹。
+2) 唯一事实来源：src/XX/项目状态.md 与 index.yaml。创作台.md 是我的原文，只读。
+3) TavernWeave 只允许使用：sillytavern-rolecard-security / rolecard-performance / api-reference 只读审计与查证，并读取必需的 consult-tavernweave-library；不改任何文件。
+4) 顺序、确认点、目录布局、构建与打包全部按墨月自己的来；不引入 TavernWeave 的创作权威、总设计案、蓝图、cards/ 目录。
+5) 禁止：用 TavernWeave 的 tavern-card-builder / card-components / card-pipeline / embedded-ui 改写或重打包本项目；维护第二份状态文件。
+6) 每进入一个新专项前，先复述你对我需求的理解和本专项的确认点，等我确认再写正式文件。</div>
+
+<!-- ===== 2 ===== -->
+<h2 id="s2">2. 全景架构图：两个根，一座只读的桥</h2>
+
+<p>这套组合是「<b>两个根、各一条主干</b>」：TavernWeave 工作区一个根，墨月工坊一个根。唯一共用的东西是宿主的用户级 skill 目录，里面只放 TavernWeave 的只读审计 skill。</p>
+
+<div class="mermaid">
+flowchart TB
+  subgraph USER["用户级 skill 目录：两个根都看得见，只放只读 skill"]
+    SEC["rolecard-security
+只读扫描"]
+    PERF["rolecard-performance
+预算评估"]
+    APIR["api-reference
+版本敏感查证"]
+    LIB["consult-tavernweave-library
+资料路由（必需依赖）"]
+  end
+  subgraph ROOTA["根 A · TavernWeave 工作区（项目级安装）"]
+    FD["Front Door + A0 + Soul"] --> TWS["22 个 TW skill"] --> CARDS["cards/卡名/
+创作权威 · 证据链 · driver-accepted"]
+    REF["参考副本 .local/moyue/
+入口已移出停用区
+按路由表点名读单篇"]
+  end
+  subgraph ROOTB["根 B · 墨月本地写卡工坊（整包，自己当根）"]
+    ENTRY["根层入口 AGENTS.md
+（自带 CLAUDE.md 指针；Claude Code 另加 .claude/skills 壳）
+秋青子 + 必读/ 三篇"] --> MSK["9 个 moyu-* skill"] --> KB["知识库/ · @types/ · 初始模板/"]
+    SRC["src/卡名/
+项目状态.md · index.yaml · 创作台.md"]
+    BUILD["scripts/ + tavern_sync + webpack
+检查 · 构建 · 打包"]
+  end
+  USER -. 只读审计 .-> CARDS
+  USER -. 只读审计 .-> SRC
+  CARDS -. 读单篇 .-> REF
+  classDef a fill:#f6f2ff,stroke:#8250df,stroke-width:1.5px;
+  classDef m fill:#e6f7f8,stroke:#0e7c86,stroke-width:1.5px;
+  classDef s fill:#eef5ff,stroke:#0969da,stroke-width:1.5px;
+  class FD,TWS,CARDS a;
+  class REF,ENTRY,MSK,KB,SRC,BUILD m;
+  class SEC,PERF,APIR,LIB s;
+</div>
+
+<div class="guide-table"><table>
+<tr><th style="width:150px">层</th><th>内容</th><th style="width:210px">混合规则</th></tr>
+<tr><td><span class="badge s">用户级桥</span></td><td>TavernWeave 的 <code>sillytavern-rolecard-security</code>、<code>sillytavern-rolecard-performance</code>、<code>sillytavern-api-reference</code>，<code>consult-tavernweave-library</code>（必需依赖）。这三项均引用同级 <code>consult-tavernweave-library</code> 的沟通规则与资料路由。使用本指南的用户级只读桥时，把四个完整目录放在同一处宿主实际扫描的 skills 根，再开新任务核查调用。这是混搭的局部布置，不等于 README 中正式的 <code>22/22</code> 完整安装。</td><td>只读；两个根都能叫到；<b>不放</b>生产类 skill</td></tr>
+<tr><td><span class="badge a">根 A</span> TavernWeave 工作区</td><td>Front Door、A0、Soul 人格层（阿瞳 / MTTT.sir / 灵魂杀手）、22 个 skill 项目级安装、<code>cards/&lt;卡名&gt;/</code>、创作权威、证据链。另放一份墨月<b>参考副本</b>（<code>.local/moyue/</code>，入口文件移入停用区），供 A 主干的卡按路由表读知识库。</td><td>A 主干的完整主权链</td></tr>
+<tr><td><span class="badge m">根 B</span> 墨月工坊</td><td>整个墨月文件夹原样：根层入口（秋青子人格 + 工作总则 + 大白话拆解 + 专项路由）、9 个 <code>moyu-*</code>、<code>知识库/</code>、<code>@types/</code>（32 个 d.ts）、<code>初始模板/</code>、<code>scripts/</code>、<code>tavern_sync</code>、每张卡一个 <code>src/&lt;卡名&gt;/</code>。</td><td>B 主干的完整主权链；<b>一个文件都不改</b>（Claude Code 只加入口壳，§10.6）</td></tr>
+</table></div>
+
+<div class="callout warn"><b class="tag">为什么不共根</b>
+  下面每条都是文件事实，能打开核对：
+  <ul style="margin:6px 0 0">
+    <li><code>墨月使用教程.md</code> 第 11 行写的用法是用本地 IDE 打开<b>整个</b>工坊文件夹；第 55 行说作者不用进 <code>src/</code> 手动拼装。它设计成当宿主。</li>
+    <li>9 个 SKILL.md 共 24 处 <code>../../../</code>。从 <code>.agents/skills/moyu-xx/</code> 往上三级正好是工坊根；拷到别处，三级上去什么都没有。</li>
+    <li><code>moyu-project/SKILL.md</code> 第 26 行把大白话解析归为秋青子本人的理解过程，即默认根层入口已经把秋青子装进上下文。没有入口，skill 在引用一个不在场的人。</li>
+    <li><code>moyu-package/SKILL.md</code> 第 11 行要求用 <code>tavern_sync.mjs</code> 打包；<code>scripts/new-card.mjs</code> 第 29、51、55 行与 <code>check-card.mjs</code> 第 52 行写死 <code>src/&lt;卡名&gt;/</code>；<code>bundle-card.mjs</code> 第 27 行读根层 <code>tavern_sync.yaml</code>。</li>
+    <li>调用侧由 <code>必读/02_专项路由.md</code> 第 7–15 行把「用户正在做什么」映射到 <code>.agents/skills/moyu-*/SKILL.md</code>，第 17 行规定多目标先过 <code>moyu-project</code> 排序。这张路由表是从根层入口进来的。</li>
+  </ul>
+  两个根各自完整，桥只读。这就是「结合」的全部，多一步就是拆包。
+</div>
+
+<!-- ===== 3 ===== -->
+<h2 id="s3">3. 开局判定：这张卡走哪条主干</h2>
+
+<p>两条主干都能做人物、世界书、MVU、前端、打包，功能上分不出高下。分叉点在<b>驾驭体验</b>：你想自己指挥每一道门、看证据逐层递交，还是想大白话进、让秋青子替你拆专项、少被问技术选型。</p>
+
+<div class="mermaid">
+flowchart TD
+  START(["我要开工"]) --> Q1{"手头有没有
+现成的卡或工程？"}
+  Q1 -- "从零" --> Q2{"想要哪种驾驭体验？"}
+  Q2 -- "自己指挥每道门
+证据链逐层递交" --> AE["打开 TW 工作区
+脑暴模式 → 总设计案
+→ First Playable → 蓝图"]
+  Q2 -- "大白话进
+秋青子带着拆 · 少问技术" --> ME["打开墨月工坊文件夹
+一句话说想法
+→ 秋青子复述 → 拆专项"]
+  Q1 -- "有" --> Q3{"卡的来路是？"}
+  Q3 -- "TW 组件工程
+（有创作权威）" --> AR["TW 续接
+先恢复创作权威"]
+  Q3 -- "墨月 src/卡名/ 工程
+（有项目状态.md）" --> MR["墨月续接
+「继续《XX》」"]
+  Q3 -- "裸 PNG / JSON" --> Q4{"后续主要做什么？"}
+  Q4 -- "组件化拆解 / 复用 / 多卡共享" --> AUX["card-components 无损拆卡
+registry / recipe"]
+  Q4 -- "想在墨月里继续养" --> MIG["解包只有 card-components 能做
+→ 先拆出文本
+→ 墨月新建卡后手工搬入
+（单向迁移 · 未测）"]
+  AE --> CONFA(["进入 A 主干（§4）"])
+  AR --> CONFA
+  AUX --> CONFA
+  ME --> CONFM(["进入 B 主干（§5）"])
+  MR --> CONFM
+  MIG --> CONFM
+  classDef a fill:#f6f2ff,stroke:#8250df,stroke-width:1.5px;
+  classDef m fill:#e6f7f8,stroke:#0e7c86,stroke-width:1.5px;
+  class AE,AR,AUX,CONFA a;
+  class ME,MR,MIG,CONFM m;
+</div>
+
+<div class="callout tip"><b class="tag">只在 TavernWeave 一侧做的事</b>
+  解包、正则方法、安全审计、性能预算、真机调试、拆卡与组件化、扩展开发、媒体与 Live2D、卡内数据库建模。墨月这边对应的位置是空的：<code>scripts/</code> 只有 <code>new-card</code> / <code>check-card</code> / <code>bundle-card</code> / <code>check-workshop</code> 四个脚本，<code>知识库/墨月写卡方法/正则/</code> 是空目录。这些一律在 TW 工作区做，或用用户级审计 skill 只读地看。
+</div>
+
+<h3>3.1 入口提示词</h3>
+
+<div class="prompt a"><span class="who">A 主干 · 从零 · 官方开工句</span>请用 TavernWeave 帮我做这张卡。先读 A0，识别任务应该由哪个 Skill 负责，
+再告诉我目标、红线和验收。</div>
+<div class="prompt a"><span class="who">A 主干 · 脑暴起手</span>脑暴模式　　（要三席联席：脑暴模式，Soul 联席）</div>
+<div class="prompt m"><span class="who">B 主干 · 从零 · 一句话进</span>（先发 §1 的墨月主干声明，然后：）
+我想做一张《XX》。现在只有这些零散想法：<把不通顺的、互相矛盾的都倒出来>。
+先复述你理解到的方向和你觉得含义不清的地方，不要直接写人设。</div>
+<div class="prompt m"><span class="who">B 主干 · 已经想清楚了</span>新建《XX》，先做人物基础信息。这是我写好的材料：<材料>。
+保持其中的事实，不替我增加过去经历；写之前先告诉我你打算怎么分层。</div>
+<div class="prompt a"><span class="who">A 主干 · 续接</span>继续本项目：先恢复创作权威、Git 工作树、制品和下一道门，不要重复访问已冻结设定。</div>
+<div class="prompt m"><span class="who">B 主干 · 续接</span>继续《XX》。先读 src/XX/项目状态.md，只告诉我当前做到哪里、下一步是什么、有没有未验收的项，确认后再动。</div>
+<div class="prompt a"><span class="who">裸卡 → A 主干</span>用 sillytavern-card-components 把「<路径>」无损拆解成组件，建立 registry 和 recipe。先给我拆解方案再动手。</div>
+
+<!-- ===== 4 ===== -->
+<h2 id="s4">4. A 主干全程人工指挥地图（TavernWeave · 7 步 4 门）＋ 墨月知识挂点</h2>
+
+<div class="mermaid">
+flowchart TD
+  S["开工句：A0 + 目标/红线/验收"] --> BP["脑暴模式
+每轮 2–4 个决策 · 四态决策"]
+  BP --> G1["G1 总设计案确认 ★"]
+  G1 --> FR["冻结 First Playable 边界
+出分级蓝图集 + NEXT"]
+  FR --> G2["G2 蓝图冻结"]
+  G2 --> RUN["按蓝图开跑第一版
+预算 0 · 反递归门"]
+  RUN --> EV["证据链逐层递交
+源码→测试→制品→预览→真实 ST"]
+  EV --> G3["G3 人工验收 driver-accepted ★★
+只能你亲口说"]
+  G3 --> G4["G4 发布授权 ★★"]
+  classDef gate fill:#fff7e6,stroke:#d48806,stroke-width:2px;
+  classDef star fill:#fff1f0,stroke:#cf1322,stroke-width:2px;
+  class G1,G2 gate;
+  class G3,G4 star;
+</div>
+
+<div class="scroll">
+<div class="guide-table"><table>
+<tr><th style="width:52px">门</th><th style="width:88px">阶段</th><th>系统会做什么</th><th>你要看什么</th><th>你说什么（提示词）</th></tr>
+<tr><td>—</td><td>开工句</td><td>读 A0；识别负责 skill；三格复述目标 / 红线 / 验收</td><td>三格复述对不对；有没有把「不做什么」说出来</td><td>§3.1 官方开工句 ＋ §8 A 版声明</td></tr>
+<tr><td class="gate">G1</td><td>总设计案</td><td>脑暴编排收束愿望 → 总设计案 ＋ First Playable ＋ 蓝图</td><td>每轮决策是否只有 2–4 个；First Playable 边界有没有画小</td><td>「总设计案确认。冻结 First Playable 边界，出蓝图。」</td></tr>
+<tr><td class="gate">G2</td><td>蓝图冻结</td><td>产出分级蓝图集与 NEXT，反递归门生效</td><td>蓝图有没有超出 First Playable；NEXT 的下一步是不是单个可验单元</td><td>「蓝图确认。之后按蓝图开跑。」</td></tr>
+<tr><td>—</td><td>执行期</td><td>只执行冻结的首版范围；活动步骤最多开一个非持久细分</td><td>Agent 有没有顺手做冻结线外的事</td><td>「按蓝图开跑第一版」</td></tr>
+<tr><td>—</td><td>证据递交</td><td>每层证据单独记录；自动化永不冒充人工验收</td><td>源码 / 测试 / 制品 / 预览 / 真实 ST 五层各有没有证据；哪层是空的</td><td>「给我看当前步骤的验收标准、已完成证据和下一道门。」</td></tr>
+<tr><td class="star">G3</td><td>人工验收</td><td>等你真实运行并检查</td><td>你自己在真实酒馆里看到的</td><td>「我已完成真实酒馆验收，标记 driver-accepted。」</td></tr>
+<tr><td class="star">G4</td><td>发布授权</td><td>打包 / 推送 / 发布均需显式授权</td><td>要发出去的是不是你验过的那一版</td><td>「授权打包发布。」</td></tr>
+</table></div>
+</div>
+
+<p><b>叠加：</b>Soul 可随时叠在 A 主干上：「阿瞳助我！」「MTTT.sir，拷打我！」「灵魂杀手！」「Soul 归位」。人格只改教学与审查风格，权限与验收照旧。<b>秋青子只在根 B。</b></p>
+
+<h3>4.2 A 主干的墨月知识挂点（读参考副本，一次一篇）</h3>
+
+<p>门的顺序不变，只多一列「此处可读墨月哪篇」。路径相对参考副本根（§10.7）。五个挂点都是可选项；查了就在创作权威里留一句「本步参考了墨月〈哪一篇〉」。</p>
+
+<div class="scroll">
+<div class="guide-table"><table>
+<tr><th style="width:150px">步 / 门</th><th>此处可读墨月</th><th>只借什么 · 不借什么</th></tr>
+<tr><td>脑暴模式 · 人物材料零散时</td><td><code>知识库/墨月写卡方法/人物生境/🧭_人设起点-原始构想整理与分流.txt</code></td><td>借「宽进窄出」的材料切割法；追问节奏用 A 自己的四态决策</td></tr>
+<tr><td>G1 前 · 世界规模未定时</td><td><code>知识库/墨月写卡方法/世界观/🧭_世界观规模判断与分流.txt</code></td><td>借规模判定；条目切分进总设计案后由 builder 契约接管</td></tr>
+<tr><td>写人物正文前</td><td><code>知识库/写卡核心/写卡禁忌与规范.md</code> 全读；再按当前写哪一层挑 <code>人物生境/</code> 1 篇；写玩家 persona 读 <code>知识库/写卡核心/用户信息写法教程.md</code></td><td>借边界与检查项；不借「专项外材料切出」流程</td></tr>
+<tr><td>写世界书</td><td><code>知识库/墨月写卡方法/世界观/</code> 小 / 中 / 大之一；<code>知识库/写卡知识库/世界书配置/世界书配置指南.txt</code> 作对照表</td><td>版本敏感参数以 <code>api-reference</code> 为准</td></tr>
+<tr><td>写 MVU</td><td><code>知识库/墨月写卡方法/MVU/</code> 里的初始变量设计篇</td><td>只借「筛掉没人读的变量」这条判断；<b>顺序用 A 自己的契约先行</b>，initvar 先行留在墨月</td></tr>
+<tr><td>写开场白</td><td><code>知识库/墨月写卡方法/通用创作/🎬_开场白-文风与成稿.txt</code></td><td>借「先定文风合同再写正文」</td></tr>
+<tr><td>写脚本 / 前端</td><td><code>知识库/写卡知识库/酒馆助手接口/00_索引_先看这个.txt</code> → 对应 1 篇</td><td>速查看墨月，签名以 <code>api-reference</code> ＋ 真机为准；不借 webpack / <code>tavern_sync</code> 构建链</td></tr>
+<tr><td>证据递交前</td><td><code>知识库/写卡知识库/自查/</code> 挑 1 篇</td><td>内容层自检；<b>不替代预览门 / 真机门 / driver-accepted</b></td></tr>
+</table></div>
+</div>
+
+<!-- ===== 5 ===== -->
+<h2 id="s5">5. B 主干全程人工指挥地图（墨月 · 8 步 10 个确认点）＋ TW 审计挂点</h2>
+
+<div class="callout tip"><b class="tag">编号说明</b>
+  下面的 M1–M10 是本指南为了和 A 主干的门对齐<b>加</b>的编号，墨月原文没有编号。每个确认点后面括号里是它在墨月哪份文件的哪一行，打开就能核对出处。
+</div>
+
+<div class="mermaid">
+flowchart TD
+  subgraph P1["① 建立作品（moyu-project）"]
+    S1["秋青子复述理解 → 拆专项排序"] --> M1["M1 方向确认 ★"]
+  end
+  subgraph P2["② 人物（moyu-character）"]
+    S2["基础信息 → 生活结构 → 人物性情
+（场景表达 / 穿衣 / NPC 可选）"] --> M2["M2 进入正式创作"] --> S3["写入 世界书/角色/ + index.yaml"] --> M3["M3 空卡实测 ★★
+你带回片段"]
+  end
+  subgraph P3["③ 世界与规则（moyu-worldbook）"]
+    S4["规模判断 → 拆条目 → 触发配置"] --> M4["M4 条目清单确认"]
+  end
+  subgraph P4["④ 开场白（moyu-opening）"]
+    S5["先定文风合同"] --> M5["M5 文风确认"] --> S6["写正文 → 第一条消息/"]
+  end
+  subgraph P5["⑤ 变量与阶段（moyu-mvu / moyu-ejs）"]
+    S7["玩法讨论筛变量"] --> M6["M6 变量清单确认"] --> S8["initvar → 更新规则"] --> M7["M7 更新规则确认"] --> S9["schema.ts → 注册脚本 → 检查"]
+  end
+  subgraph P6["⑥ 界面与脚本（moyu-tavern-frontend / -script）"]
+    S10["以 @types 为准写 → 手机排版"] --> M8["M8 行为确认"]
+  end
+  subgraph P7["⑦ 实测与回流"]
+    S11["带回实测片段 → 定位到哪一层改"]
+  end
+  subgraph P8["⑧ 检查与打包（moyu-package）"]
+    S12["引用检查 → 类型/构建 → tavern_sync 出 JSON/PNG"] --> M9["M9 打包授权"] --> S13["导入真实酒馆"] --> M10["M10 酒馆实测 ★★★
+只能你亲口说"]
+  end
+  P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7 --> P8
+  classDef gate fill:#fff7e6,stroke:#d48806,stroke-width:2px;
+  classDef star fill:#fff1f0,stroke:#cf1322,stroke-width:2px;
+  class M2,M4,M5,M6,M7,M8,M9 gate;
+  class M1,M3,M10 star;
+</div>
+
+<p>★ 越多越值得你亲自把关。<b>M1 方向确认、M3 空卡实测、M10 酒馆实测</b>是墨月流程的三根柱子：第一根保证出来的是你要的人；第二根是墨月自己的核心主张：人物写完必须放进空白卡聊过，光靠加设定保证不了完整（<code>墨月使用教程.md</code> 第 71 行）；第三根是铁律 3。</p>
+
+<div class="scroll">
+<div class="guide-table"><table>
+<tr><th style="width:56px">确认点</th><th style="width:90px">步</th><th>秋青子在做什么</th><th>你要看什么</th><th>你说什么（提示词）</th><th style="width:150px">TW 能叠什么（只读）</th></tr>
+<tr><td class="star">M1</td><td>① 建立作品</td><td>用你的原话复述目标，区分已确认 / 倾向 / 留白 / 冲突，拆成专项排顺序；建 <code>src/XX/</code>、空 <code>项目状态.md</code>、你的 <code>创作台.md</code>，登记 <code>tavern_sync.yaml</code>。<b>方向确认前只出计划</b>，正式文件等你点头（<code>moyu-project/SKILL.md</code> 第 36 行）</td><td>复述里有没有被她「补成另一种作品」；她列的缺口是不是真缺口；只问了 1–3 个紧密相关的问题而不是问卷</td><td>「方向确认：<一句话>。先进人物专项，其他先记进项目状态。」</td><td>—</td></tr>
+<tr><td class="gate">M2</td><td>② 人物</td><td>每轮只解决一组影响人物根本方向的问题；当内容够让人物在陌生场景里自然做选择时，主动说这一层够了，停笔</td><td>示例角色的设定有没有混进你的角色；她有没有把你未确认的推测写成事实；「够用就停」有没有真停</td><td>「基础信息这一层我确认，进正式创作。」</td><td>—</td></tr>
+<tr><td class="star">M3</td><td>② 人物</td><td>写入 <code>世界书/角色/</code> 独立文件并在 <code>index.yaml</code> 配为「角色定义之后」（<code>moyu-character/SKILL.md</code> 第 29 行）；然后<b>等你的空卡实测</b>（同文件「对话与写入」第 6 条）</td><td>你自己在空白卡里聊出来的：她像不像客服、会不会自己做选择、在意的东西对不对</td><td>「我拿回一段实测回复：<片段>。先判断问题在哪一层，再说改哪个文件。」</td><td>—</td></tr>
+<tr><td class="gate">M4</td><td>③ 世界与规则</td><td>先规模判断，再拆条目，写入 <code>世界书/</code> 并维护 <code>index.yaml</code> 的启用 / 触发 / 位置 / 顺序 / 递归（<code>moyu-worldbook/SKILL.md</code> 第 30 行）</td><td>条目数与规模判定是否一致；哪些常驻、哪些关键词触发；每轮发给模型的设定量是否已经收窄</td><td>「条目清单确认。常驻的只留这三条，其余关键词触发。」</td><td><code>api-reference</code> 查证触发参数在当前 ST 版本的行为</td></tr>
+<tr><td class="gate">M5</td><td>④ 开场白</td><td>先和你定这一次开场用的文风，再写正文；文风讨论<b>不进</b>角色卡长期字段（<code>moyu-opening/SKILL.md</code> 描述行）；正文写入 <code>第一条消息/&lt;序号&gt;.txt</code> 并维护 <code>index.yaml</code>（第 19 行）</td><td>文风合同你认不认；多个开场是不是分文件、不互相覆盖</td><td>「文风确认。写开场白 1。」／「开场白 2 的结尾互动点改成……」</td><td>—</td></tr>
+<tr><td class="gate">M6</td><td>⑤ 变量</td><td>先用大白话讨论玩法，<b>筛掉不会被规则、界面或脚本使用的变量</b>（<code>moyu-mvu/SKILL.md</code>「真实顺序」第 1 条）</td><td>每个变量有没有说清「谁读它」；「以后也许有用」的有没有被划掉</td><td>「变量清单确认，就这几个。写 initvar。」</td><td>—</td></tr>
+<tr><td class="gate">M7</td><td>⑤ 变量</td><td>initvar.yaml → 变量更新规则 → 纯 <code>schema.ts</code>（Zod 4，幂等）→ 注册脚本 / 变量列表 / 固定输出 → 运行 Schema 与初始值检查（「真实顺序」第 2–6 条）。<b>这个顺序跟墨月，不改</b></td><td>更新规则有没有覆盖每个变量的变化时机；schema 与 initvar 字段是否一致（检查结果）</td><td>「更新规则确认。写 schema 并跑检查，把不一致逐条列给我。」</td><td>—</td></tr>
+<tr><td class="gate">M8</td><td>⑥ 界面与脚本</td><td>前端以 <code>初始模板/前端界面/</code> 为结构依据（<code>moyu-tavern-frontend/SKILL.md</code> 第 13 行）；脚本接口先读索引再开一篇，<b>最终以项目 <code>@types/</code> 声明为准</b>（<code>moyu-tavern-script/SKILL.md</code> 第 10 行）；手机改上下排列</td><td>状态栏显示的是 M6 定下的变量，没多没少；长文本会不会撑坏；脚本用到的 API 名在 <code>@types/</code> 里存在</td><td>「界面行为确认。手机宽度下再截一张给我。」</td><td><code>api-reference</code> 复核签名；<code>rolecard-security</code> 只读扫脚本（不改）</td></tr>
+<tr><td>—</td><td>⑦ 实测与回流</td><td>你带回实际回复 / 白话感受 / 反复出现的问题 / 想保留的意外；她判断属于基础事实、生活结构、性情、场景表达、世界规则、开场白还是聊天预设本身，避免全往人设里塞</td><td>她定位的那一层对不对；有没有借「修一处」顺手重写整个模块</td><td>「实测里她总像客服。先定位层，别急着改。」</td><td>—</td></tr>
+<tr><td class="gate">M9</td><td>⑧ 检查与打包</td><td>读 <code>项目状态.md</code> 与 <code>index.yaml</code> 确认目标卡 → 检查所有引用文件存在 → MVU 三件一致 → EJS 语法 → 定向类型 / 构建检查 → <code>tavern_sync</code> 出 JSON / PNG 并回读关键字段（<code>moyu-package/SKILL.md</code> 第 17–22 行）。没头像只出 JSON，不声称出了 PNG</td><td>检查清单逐项；回读的内嵌世界书条目数对不对</td><td>「检查通过，打包。只出 JSON，PNG 等我放头像。」</td><td><code>rolecard-security</code> 扫产出 JSON；<code>rolecard-performance</code> 出预算报告。<b>只报告，不修改</b></td></tr>
+<tr><td class="star">M10</td><td>⑧ 验收</td><td>等你导入真实酒馆实测。她<b>必须</b>区分自动检查与你 / 浏览器的验收（<code>moyu-package/SKILL.md</code> 第 23 行）</td><td>实际渲染、变量更新、开场白、手机端</td><td>「实测通过，这张卡验收。」／「实测问题：<现象 + 复现步骤>。回到第 ⑦ 步。」</td><td>—</td></tr>
+</table></div>
+</div>
+
+<p><b>事实来源与续接：</b>每个单元完成后秋青子更新 <code>项目状态.md</code>（<code>必读/01_大白话拆解与项目推进.md</code> 第 42 行），只记当前目标 / 已确认决定 / 进行中 / 下一步 / 已知问题与验收结果（<code>必读/00_AI工作总则.md</code>「项目状态」段）。暂停后只需打开同一文件夹说「继续《XX》」。<code>创作台.md</code> 你随时往里倒想法，她只读。</p>
+
+<p><b>人格：</b>秋青子随根层入口原样在场，另装、拆人格段都省了。<b>本指南的项目级布置只保证根 A 具备 Soul 文件。</b>是否能在其他工作根使用，按前面的实际发现条件检查。想要严格拷问式审查，把卡的产出 JSON 拿到根 A 用审计 skill 只读地看。</p>
+
+<!-- ===== 6 ===== -->
+<h2 id="s6">6. 两主干对照表：进了哪个文件夹就整套跟哪边</h2>
+
+<p>两根不共，运行时碰不到一起；剩下的差别在<b>换文件夹时的习惯切换</b>。这张表告诉你同一件事两边各怎么做，进了哪个根就整套跟那边：A 的门留在 A，B 的顺序留在 B。</p>
+
+<div class="scroll">
+<div class="guide-table"><table>
+<tr><th style="width:110px">事项</th><th><span class="badge a">根 A</span> TavernWeave 主干</th><th><span class="badge m">根 B</span> 墨月主干</th><th style="width:190px">跨界规则</th></tr>
+<tr><td>事实来源</td><td>创作权威文档（确认 / 候选 / 否决 / 实现分区）</td><td><code>src/XX/项目状态.md</code> ＋ <code>index.yaml</code>；<code>创作台.md</code> 作者原文只读</td><td>各记各的，一张卡只在一个根里</td></tr>
+<tr><td>目录布局</td><td>不规定布局，规定证据；常见 <code>cards/&lt;卡名&gt;/</code></td><td><code>src/&lt;卡名&gt;/</code>，脚本写死</td><td>不互搬</td></tr>
+<tr><td>MVU 顺序</td><td>契约先行：来源 / 字段 / 读写者 / 迁移 / 失败行为，再实现</td><td>玩法讨论筛变量 → initvar → 更新规则 → 纯 schema.ts → 注册脚本 → 检查</td><td>A 只借 B 的「筛变量」判断；B 不借 A 的契约表</td></tr>
+<tr><td>人格层</td><td>Soul：阿瞳 / MTTT.sir / 灵魂杀手，口令进出</td><td>秋青子，随入口常驻，无开关</td><td>默认各用本根人格；跨根 Soul 按实际发现和明确启用决定</td></tr>
+<tr><td>验收门</td><td>预览门 → 真机门 → <code>driver-accepted</code>（G3）→ 发布授权（G4）</td><td>M3 空卡实测 → M9 打包授权 → M10 酒馆实测</td><td>两边都只能你亲口说</td></tr>
+<tr><td>文风规则</td><td><code>rewrite-natural-prose</code>（TW 内）</td><td><code>知识库/写卡核心/写卡禁忌与规范.md</code>（六类硬禁忌 ＋ 白描边界 ＋ 漫画分镜检查法）</td><td>A 可按路由表读 B 的禁忌篇作补充条目；B 不引 A 的 skill</td></tr>
+<tr><td>构建链</td><td><code>card-pipeline</code></td><td><code>scripts/</code> ＋ <code>tavern_sync.mjs</code> ＋ webpack（<code>package.json</code>：new / check:card / bundle:card / build / watch / sync）</td><td>不互用</td></tr>
+<tr><td>接口查证</td><td><code>api-reference</code>（版本敏感）＋ ST 指南</td><td><code>知识库/写卡知识库/酒馆助手接口/</code> 20 篇速查 ＋ 项目 <code>@types/</code> 为准</td><td><code>api-reference</code> 在用户级，B 也能叫它复核</td></tr>
+<tr><td>材料入口</td><td>脑暴编排收束愿望；builder 契约</td><td>一句大白话 / 倒进 <code>创作台.md</code>；秋青子四层转换（原意 → 事实与未决 → 专项 → 验收方式）</td><td>—</td></tr>
+<tr><td>修改现有卡</td><td>TW 组件工程走 <code>component-update</code>（阻止静默重封）</td><td>墨月 <code>src/</code> 工程说「继续《XX》」，回到对应专项</td><td>裸卡只有 A 能拆；拆完想进 B 是单向迁移（未测）</td></tr>
+<tr><td>前端图标</td><td>无硬规</td><td>用户可见前端禁 Emoji，用内联 SVG</td><td>各跟各的</td></tr>
+<tr><td>只读审计</td><td>security / performance / api-reference 原生</td><td>同三个 skill 从用户级进来，只出报告不改文件</td><td><b>这是唯一的桥</b></td></tr>
+</table></div>
+</div>
+
+<!-- ===== 7 ===== -->
+<h2 id="s7">7. 提示词手册（按意图分类）</h2>
+
+<h3>A. 启动与判定</h3>
+<div class="guide-table"><table>
+<tr><th style="width:190px">意图</th><th>提示词</th></tr>
+<tr><td>声明主干（每次必发）</td><td>§8 的 A 版或 B 版【项目主干声明】</td></tr>
+<tr><td>不知道怎么选</td><td>「帮我判定：这张卡该走 TavernWeave 还是墨月？按驾驭体验分叉（自己指挥每道门 vs 大白话进秋青子带着拆）给结论和理由，等我确认再开工。」</td></tr>
+<tr><td>从零 · A</td><td>§3.1 官方开工句</td></tr>
+<tr><td>从零 · B</td><td>§3.1「一句话进」</td></tr>
+</table></div>
+
+<h3>B. A 主干过程指挥（在 TW 工作区）</h3>
+<div class="guide-table"><table>
+<tr><th style="width:190px">意图</th><th>提示词</th></tr>
+<tr><td>推进下一阶段</td><td>「本门通过，进入下一阶段，先列该阶段的人工确认点。」</td></tr>
+<tr><td>续接</td><td>「继续：先恢复创作权威、Git 工作树、制品和下一道门。」</td></tr>
+<tr><td>查状态</td><td>「现在进行到哪个阶段？列出已完成 / 进行中 / 待我确认的事项。」</td></tr>
+<tr><td>改需求（不越冻结线）</td><td>「需求变更：<内容>。按 revision 流程处理，不要直接改已冻结设定。」</td></tr>
+<tr><td>收紧范围</td><td>「只做我点名的事，不要顺手优化或重构其他内容。」</td></tr>
+<tr><td>查墨月单篇</td><td>「按参考副本的 查什么去哪查.md 只读 &lt;哪一篇&gt;，其余不读。读完在创作权威里记一句来源。」</td></tr>
+</table></div>
+
+<h3>C. B 主干过程指挥（在墨月文件夹）</h3>
+<div class="guide-table"><table>
+<tr><th style="width:190px">意图</th><th>提示词</th></tr>
+<tr><td>只要复述，不要成品</td><td>「先复述你理解到的方向和不清楚的地方，不要写人设。」</td></tr>
+<tr><td>确认方向进专项</td><td>「方向确认：<一句话>。进人物专项，其他先记进项目状态。」</td></tr>
+<tr><td>一层够了</td><td>「这一层我确认，够用了，进正式创作。」</td></tr>
+<tr><td>带回实测</td><td>「实测片段：<片段>。先判断问题在哪一层，再说改哪个文件，别整模块重写。」</td></tr>
+<tr><td>续接</td><td>「继续《XX》。先读项目状态，只报当前进度和下一步。」</td></tr>
+<tr><td>改方向</td><td>「方向改成 <新目标>。先说哪些已完成的结构会受影响，再改路线，不要为保旧方案堆补丁。」</td></tr>
+<tr><td>检查并打包</td><td>「检查这张卡并打包。逐项报检查结果；没头像就只出 JSON。」</td></tr>
+<tr><td>只看不改</td><td>「只检查，不要顺手改内容；发现不是本项目生成的内容，保留并报来源边界。」</td></tr>
+</table></div>
+
+<h3>D. 跨界（唯一允许的两条路）</h3>
+<div class="guide-table"><table>
+<tr><th style="width:190px">意图</th><th>提示词</th></tr>
+<tr><td>TW 审计进墨月的卡</td><td>（在墨月文件夹里）「用 sillytavern-rolecard-security 只读扫描 src/XX/ 和 dist/ 下的产出，只报告，不修改任何文件。」</td></tr>
+<tr><td>TW 性能预算看墨月的卡</td><td>「用 sillytavern-rolecard-performance 评估这张卡的预算和回归点，只出报告。」</td></tr>
+<tr><td>TW 查证给墨月的脚本用</td><td>「用 sillytavern-api-reference 查证 <接口 / 宏 / EJS 特性> 在当前酒馆助手版本的签名，与项目 @types/ 对照，差异列出来。」</td></tr>
+<tr><td>TW 的卡读墨月知识</td><td>（在 TW 工作区里）「动笔前先读参考副本 知识库/写卡核心/写卡禁忌与规范.md，列出本次最容易踩的 5 条，然后再写。只读这一篇。」</td></tr>
+</table></div>
+
+<h3>E. 干预与纠偏</h3>
+<div class="guide-table"><table>
+<tr><th style="width:190px">意图</th><th>提示词</th></tr>
+<tr><td>Agent 在 TW 工作区说「按墨月流程先做 initvar」</td><td>「停。这个文件夹的主干是 TavernWeave，按它的契约先行来；墨月那篇只借判断。」</td></tr>
+<tr><td>Agent 在墨月文件夹说「先读 A0 / 建创作权威」</td><td>「停。这个文件夹的主干是墨月，按秋青子的专项顺序来；TavernWeave 只允许只读审计。」</td></tr>
+<tr><td>Agent 想把 moyu-* 拷进 TW 目录</td><td>「不拷。墨月整包用，它的 skill 离开自己的根路径全断。要用它就换到墨月文件夹开新会话。」</td></tr>
+<tr><td>Agent 整目录读知识库</td><td>「只读点名的那一篇，其余不读。」</td></tr>
+<tr><td>Agent 自动说「验收通过」</td><td>「撤销验收状态。验收由我人工执行，你只递交证据。」</td></tr>
+<tr><td>先看 diff 再写</td><td>「先展示你要写入 <文件> 的 diff，我确认后再写。」（两边通用）</td></tr>
+</table></div>
+
+<h3>F. 验收（只能人工）</h3>
+<div class="guide-table"><table>
+<tr><th style="width:190px">意图</th><th>提示词</th></tr>
+<tr><td>验收通过</td><td>「我已完成真实酒馆验收，标记 driver-accepted。」（A）／「实测通过，这张卡验收。」（B）</td></tr>
+<tr><td>验收不通过</td><td>「实测发现：<现象 + 复现步骤>。按对应流程修复后重新递交证据。」（A）／「实测问题：<现象 + 复现步骤>。回到实测与回流那一步。」（B）</td></tr>
+<tr><td>发布授权</td><td>「授权打包发布。」（A）／「打包这一版，我要拿去发。」（B）</td></tr>
+</table></div>
+
+<!-- ===== 8 ===== -->
+<h2 id="s8">8. 防掣肘七规 + 双版本项目主干声明模板</h2>
+
+<div class="guide-table"><table>
+<tr><th style="width:36px">#</th><th style="width:150px">规则</th><th>内容</th></tr>
+<tr><td>1</td><td>开工先报主干</td><td>第一句话发主干声明。换主干 = 换文件夹 + 重新声明 + 单向迁移，禁止一张卡两边各记一份。</td></tr>
+<tr><td>2</td><td>一项目一事实来源</td><td>A 记创作权威；B 记 <code>项目状态.md</code> ＋ <code>index.yaml</code>。检查口令：「检查本项目是否存在两份规划 / 状态文档；有则以 &lt;哪份&gt; 为准，另一份归档只读。」</td></tr>
+<tr><td>3</td><td>修改先看来路</td><td>TW 组件工程走 A 的 <code>component-update</code>；墨月 <code>src/</code> 工程回墨月文件夹说「继续」；裸卡只有 A 能拆。不拿另一条管线重新封卡。</td></tr>
+<tr><td>4</td><td>墨月整包不拆</td><td><code>moyu-*</code> 不拷进别处；SKILL.md 里的路径不改；<code>必读/</code> 与根层入口不删。Claude Code 宿主只加入口<b>壳</b>（§10.6），不动它任何一个原文件。</td></tr>
+<tr><td>5</td><td>两根不共</td><td>墨月主干放在 TW 工作区外；TW 工作区里那份是入口已移出的参考副本。主干份与参考副本是两份文件（§10.7 说为什么）。</td></tr>
+<tr><td>6</td><td>审计跨界、生产不跨界</td><td>用户级只放 security / performance / api-reference（连同必需的 consult-library）。<code>tavern-card-builder</code> / <code>card-components</code> / <code>card-pipeline</code> / <code>embedded-ui</code> 严格留在根 A；若你已把 TW 整套装在用户级，墨月文件夹里第一句声明<b>不可省</b>，且要在声明里点名禁用这些生产类 skill。</td></tr>
+<tr><td>7</td><td>读单篇不读目录</td><td>参考副本按 <code>查什么去哪查.md</code> 点名一篇；读了记来源。参考副本的停用区永不读。</td></tr>
+</table></div>
+
+<h3>A 版（TavernWeave 主干 · 在 TW 工作区发）</h3>
+<div class="prompt a"><span class="who">你说</span>【项目主干声明】本项目《XX》：
+1) 主干：TavernWeave（脑暴编排 → tavern-card-builder → card-pipeline）。
+2) 唯一事实来源：本项目创作权威文档。
+3) 墨月只作参考：按 .local/moyue/查什么去哪查.md 点名读单篇，用于人物 / 世界书 / 开场白 / MVU 字段取舍 / 模块自查；
+   不借它的 initvar 顺序、确认点、src/ 布局、构建链、人格。
+4) 禁止：维护第二份规划文档；整目录读墨月知识库；读参考副本的停用区。
+5) 每进入一个新阶段前，先列出该阶段的人工确认点，等我确认再动手。</div>
+
+<h3>B 版（墨月主干 · 在墨月文件夹发）</h3>
+<div class="prompt m"><span class="who">你说</span>【项目主干声明】本项目《XX》：
+1) 主干：墨月本地写卡工坊（秋青子 → moyu-project 排序 → 各专项 → moyu-package 打包）。工作根：本文件夹。
+2) 唯一事实来源：src/XX/项目状态.md 与 index.yaml。创作台.md 是我的原文，只读。
+3) TavernWeave 只允许使用：sillytavern-rolecard-security / rolecard-performance / api-reference 只读审计与查证，并读取必需的 consult-tavernweave-library；不改任何文件。
+4) 顺序、确认点、目录布局、构建与打包全部按墨月自己的来；不引入 TavernWeave 的创作权威、总设计案、蓝图、cards/ 目录。
+5) 禁止：用 TavernWeave 的 tavern-card-builder / card-components / card-pipeline / embedded-ui 改写或重打包本项目；维护第二份状态文件。
+6) 每进入一个新专项前，先复述你对我需求的理解和本专项的确认点，等我确认再写正式文件。</div>
+
+<!-- ===== 9 ===== -->
+<h2 id="s9">9. 常见翻车与自救</h2>
+
+<div class="scroll">
+<div class="guide-table"><table>
+<tr><th style="width:230px">现象</th><th style="width:230px">原因</th><th>自救</th></tr>
+<tr><td>把 9 个 <code>moyu-*</code> 拷进 TW 的 skill 目录后，Agent 报「找不到 <code>../../../知识库/…</code>」</td><td>拼接了。24 条向上路径落到了 TW 工作区根</td><td>删掉拷过去的目录。回到两根：要用墨月就到墨月文件夹开新会话。</td></tr>
+<tr><td>在墨月文件夹里，Agent 开口就「先读 A0 / 建创作权威 / 脑暴模式」</td><td>TW 整套装在用户级，<code>tavern-card-builder</code> 抢到了「角色卡」</td><td>第一句补 B 版声明并点名禁用生产类 skill；长期解决：TW 改项目级安装，用户级保留审计三件与必需的 consult-library。</td></tr>
+<tr><td>在 TW 工作区里，Agent 说「按墨月流程，先做 initvar」</td><td>把参考副本当主干用了</td><td>「停。这个文件夹的主干是 TavernWeave。」规则 5。</td></tr>
+<tr><td>在 TW 工作区里输出出现秋青子的语气和她对你的默认称呼</td><td>参考副本的入口文件没移进停用区，被宿主自动加载了</td><td>检查 <code>.local/moyue/</code> 根层无 AGENTS.md / CLAUDE.md / GEMINI.md / <code>.cursor</code>（§10.7 四步）。</td></tr>
+<tr><td>在墨月文件夹里（Claude Code），秋青子<b>没</b>出现，也没走专项路由</td><td>墨月自带的 <code>CLAUDE.md</code> 是一段让模型去读 <code>AGENTS.md</code> 的散文指针，没有用 <code>@</code> 导入语法，模型可能没跟着去读；且 <code>.agents/skills</code> 在本机观察里不被 Claude Code 扫描</td><td>先确认 <code>.claude/skills</code> 壳在（§10.6）；再在第一句里明说「先完整读根目录 AGENTS.md」，并把这次记进本表。这一步只加一个指向它的壳，墨月本身原样。</td></tr>
+<tr><td>在墨月文件夹里叫 <code>rolecard-security</code>，Agent 说找不到</td><td>没装到用户级；或同会话未重新发现</td><td>核对宿主用户级 skill 目录里有那个目录；新开会话。</td></tr>
+<tr><td>秋青子说「打包成功」，你以为验收了</td><td>把机检当门</td><td>铁律 3。<code>moyu-package</code> 自己写了打包 ≠ 验收。M10 只能你说。</td></tr>
+<tr><td>一句话里同时提了人物、变量、状态栏，秋青子直接开始写代码</td><td>没过 <code>moyu-project</code> 排序（<code>必读/02</code> 第 17 行）</td><td>「停。先按 moyu-project 把这几件事排序、复述理解，方向确认后再进第一个专项。」</td></tr>
+<tr><td>方向还没确认，秋青子已经写了一版主角人设</td><td>越过 M1</td><td>「撤回。现在只要计划：先复述理解和缺口，等我确认方向。」（<code>moyu-project/SKILL.md</code> 第 36 行）</td></tr>
+<tr><td>参考副本和主干份的知识库不一致</td><td>其中一份更新了</td><td>从主干份重新拷<b>知识库</b>到参考副本；只拷知识库与 <code>@types/</code>，入口文件不拷。</td></tr>
+<tr><td>两份状态 / 规划文档各改各的</td><td>换主干时没单向迁移</td><td>规则 2 检查口令。</td></tr>
+<tr><td>Agent 自动说「验收通过」</td><td>越权</td><td>「撤销验收状态。验收由我人工执行，你只递交证据。」两边通用。</td></tr>
+</table></div>
+</div>
+
+<!-- ===== 10 ===== -->
+<h2 id="s10">10. 附录</h2>
+
+<h3>10.1 口令速查</h3>
+<div class="guide-table"><table>
+<tr><th style="width:300px">口令</th><th>效果</th></tr>
+<tr><td>【项目主干声明】…（A 版 / B 版）</td><td>每次开工第一句</td></tr>
+<tr><td>「继续：先恢复创作权威、Git 工作树、制品和下一道门」</td><td>A 断点续接</td></tr>
+<tr><td>「继续《XX》。先读项目状态，只报当前进度和下一步」</td><td>B 断点续接</td></tr>
+<tr><td>「按 查什么去哪查.md 只读 &lt;哪一篇&gt;」</td><td>A 主干点名查墨月参考副本</td></tr>
+<tr><td>「检查这张卡并打包」</td><td>B 的 <code>moyu-package</code></td></tr>
+<tr><td>「阿瞳助我！」「MTTT.sir，拷打我！」「灵魂杀手！」「脑暴模式，Soul 联席」／「Soul 归位」</td><td>Soul 人格层进出；其他工作根须先确认宿主实际发现和调用，再由你明确启用</td></tr>
+</table></div>
+
+<h3>10.2 文件词汇表</h3>
+<div class="two">
+  <div class="card">
+    <h4><span class="badge a">根 A</span> TavernWeave</h4>
+    <ul style="margin:4px 0;padding-left:18px">
+      <li><b>创作权威</b>：唯一事实来源，确认 / 候选 / 否决 / 实现分区</li>
+      <li><b>总设计案 / 分级蓝图集 / NEXT</b>：脑暴编排三件套</li>
+      <li><b>运行时依赖账本、CoT 契约</b>：builder 产物</li>
+      <li><b>registry / recipe</b>：组件拆卡的注册表与配方</li>
+      <li><b>证据链</b>：源码 → 测试 → 制品 → 预览 → 真实 ST → 人工验收 → 发布授权</li>
+      <li><b>driver-accepted</b>：只能人工写入的验收标记</li>
+      <li><b>A0</b>：写入型任务的常驻前置检查单</li>
+      <li><b>参考副本</b>：<code>.local/moyue/</code>，入口已移出的墨月知识库；<code>查什么去哪查.md</code> 是它唯一入口</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4><span class="badge m">根 B</span> 墨月本地写卡工坊</h4>
+    <ul style="margin:4px 0;padding-left:18px">
+      <li><b>根层入口</b>（AGENTS.md）：秋青子人格 ＋ 工作总则 ＋ 必读路由，整份原样。<code>CLAUDE.md</code> / <code>GEMINI.md</code> 是自带的 255 字节指针，只说先完整读 AGENTS.md</li>
+      <li><b><code>必读/</code> 三篇</b>：00 AI 工作总则 / 01 大白话拆解与项目推进 / 02 专项路由</li>
+      <li><b><code>src/&lt;卡名&gt;/</code></b>：一张卡一个；由 <code>scripts/new-card.mjs</code> 建</li>
+      <li><b><code>项目状态.md</code></b>：秋青子维护的续接索引，只记 5 项</li>
+      <li><b><code>创作台.md</code></b>：你的原文，秋青子只读</li>
+      <li><b><code>index.yaml</code></b>：这张卡的配置：世界书条目、第一条消息列表、启用 / 触发 / 位置 / 顺序</li>
+      <li><b><code>schema.ts</code> / initvar / 更新规则</b>：MVU 三件；<code>schema.ts</code> 是纯 Zod 4，无注册副作用</li>
+      <li><b><code>tavern_sync.yaml</code> / <code>tavern_sync.mjs</code></b>：卡登记与同步 / 打包（StageDog 上游）</li>
+      <li><b><code>知识库/</code></b>：写卡核心 3 篇 · 写卡知识库 37 篇 · 墨月写卡方法 28 篇</li>
+      <li><b><code>@types/</code></b>：32 个 d.ts，脚本接口以它为准</li>
+    </ul>
+  </div>
+</div>
+<div class="card" style="margin-top:14px">
+  <h4><span class="badge s">桥</span> 用户级只读 skill</h4>
+  <code>sillytavern-rolecard-security</code>（只读扫描）· <code>sillytavern-rolecard-performance</code>（预算评估）· <code>sillytavern-api-reference</code>（版本敏感查证）· <code>consult-tavernweave-library</code>（必需依赖）（资料路由）。这三项均引用同级 <code>consult-tavernweave-library</code> 的沟通规则与资料路由。使用本指南的用户级只读桥时，把四个完整目录放在同一处宿主实际扫描的 skills 根，再开新任务核查调用。这是混搭的局部布置，不等于 README 中正式的 <code>22/22</code> 完整安装。
+</div>
+
+<h3>10.3 目录地图</h3>
+<pre><code>~/.claude/skills/                         桥：只放 TW 审计三件 + 必需的 consult-library
+├── sillytavern-rolecard-security/
+├── sillytavern-rolecard-performance/
+├── sillytavern-api-reference/
+└── consult-tavernweave-library/
+
+&lt;TW 工作区&gt;/                              根 A
+├── CLAUDE.md / AGENTS.md                 TW Front Door（+ 你自己的项目规则）
+├── .agents/skills/  .claude/skills/      TW 22 个（项目级）
+├── cards/&lt;卡名&gt;/                        每张 A 主干的卡；创作权威
+├── ST开发指南DB/                          TW 指南源 · 本指南
+└── .local/                               （gitignore）
+    └── moyue/                            墨月参考副本：入口已移入 _原始入口（已停用）/
+        ├── 查什么去哪查.md               参考副本唯一入口
+        ├── 知识库/  @types/  示例/
+        └── _原始入口（已停用）/          永不读
+
+&lt;墨月本地写卡工坊&gt;/                        根 B：放在 TW 工作区之外
+├── AGENTS.md                             根层入口（原样，约 6.7 KB）
+├── CLAUDE.md  GEMINI.md                  自带的 255 字节指针：让模型先读 AGENTS.md（原样）
+├── .agents/skills/moyu-*/                9 个（原样）
+├── .claude/skills → ../.agents/skills    Claude Code 入口壳（§10.6，唯一新增）
+├── 必读/  知识库/  @types/  初始模板/  示例/  util/
+├── scripts/  tavern_sync.mjs  tavern_sync.yaml  package.json  webpack.config.ts
+└── src/&lt;卡名&gt;/                          每张 B 主干的卡
+    ├── 项目状态.md  创作台.md  index.yaml
+    ├── 世界书/  第一条消息/  界面/  脚本/
+    └── schema.ts</code></pre>
+
+<h3>10.4 落地检查清单</h3>
+<p>按顺序勾。前九条是结构，后四条是效果。<b>结构全勾之后，效果四条仍要单独跑。</b>本指南成稿时十三条都没勾。</p>
+<div class="scroll">
+<div class="guide-table"><table>
+<tr><th style="width:36px">☐</th><th>项</th><th>怎么验</th></tr>
+<tr><td>☐</td><td>TW 项目级装好，宿主重新发现</td><td>TW 工作区新会话说「阿瞳助我！」有反应</td></tr>
+<tr><td>☐</td><td>用户级只有审计三件 + 必需的 consult-library，<b>没有</b>生产类 TW skill</td><td>列宿主用户级 skill 目录；若有 builder / components / pipeline / embedded-ui，移走或接受「墨月文件夹里声明不可省」</td></tr>
+<tr><td>☐</td><td>墨月主干份在 TW 工作区<b>之外</b>，一个原文件都没改</td><td>与你拿到的原包逐文件比对（<code>diff -r</code> 或逐文件 CRC），只允许多出 <code>.claude/skills</code> 与 <code>node_modules/</code></td></tr>
+<tr><td>☐</td><td>（Claude Code）入口壳已加</td><td>墨月根层自带的 <code>CLAUDE.md</code> 原样在；<code>.claude/skills</code> 软链指向 <code>../.agents/skills</code>，<code>ls</code> 能列出 9 个 <code>moyu-*</code></td></tr>
+<tr><td>☐</td><td>墨月依赖装好</td><td>在墨月根 <code>npm run check:workshop</code>（或 pnpm）能出结果</td></tr>
+<tr><td>☐</td><td>参考副本在 <code>.local/moyue/</code>，入口四件已移入停用区</td><td>参考副本根层 <code>ls</code> 无 AGENTS.md / CLAUDE.md / GEMINI.md / .cursor；<code>git check-ignore .local</code> 有输出</td></tr>
+<tr><td>☐</td><td>参考副本有 <code>查什么去哪查.md</code></td><td>表内每条路径 <code>ls</code> 存在</td></tr>
+<tr><td>☐</td><td>你的项目规则文件写了「开工先发主干声明；墨月参考副本只按路由表读单篇」</td><td>grep「主干声明」≥ 1，grep「查什么去哪查」= 1</td></tr>
+<tr><td>☐</td><td>两份声明模板存在手边</td><td>§8 复制到你的剪贴板工具</td></tr>
+<tr><td>☐</td><td><b>效果 · B 主干路由</b>：墨月文件夹新会话，发 B 版声明后说一句大白话</td><td>秋青子先复述、指出缺口、拆专项，<b>没有</b>直出人设 → 勾；直出了 → 效果为零，回头看 §10.6 壳有没有生效</td></tr>
+<tr><td>☐</td><td><b>效果 · 桥</b>：墨月文件夹里叫 <code>rolecard-security</code> 只读扫一张卡</td><td>出报告且 <code>git status</code> / 文件时间戳显示没有任何文件被改</td></tr>
+<tr><td>☐</td><td><b>效果 · A 主干路由</b>：TW 工作区新会话说「帮我理一下 XX 的基础信息」，<b>不提墨月</b></td><td>动笔前它自己去读了禁忌规范和人物生境-基础信息 → 勾；没读 → 改 §4.2 挂点表或你的规则措辞</td></tr>
+<tr><td>☐</td><td><b>效果 · 隔离</b>：TW 工作区里问「有没有 moyu-character 这个 skill」</td><td>答「没有」→ 勾；答「有」→ 有人拼过去了，回 §9 第一行</td></tr>
+</table></div>
+</div>
+
+<h3>10.5 出处与许可</h3>
+<div class="guide-table"><table>
+<tr><th style="width:190px">套件</th><th>许可 / 授权状态</th><th>对使用者的意义</th></tr>
+<tr><td>TavernWeave</td><td><a href="https://github.com/LiarMTTT/TavernWeave/blob/main/LICENSE">当前仓库 LICENSE</a>（TavernWeave-PolyForm-NC-1.0.0）</td><td>非商业</td></tr>
+<tr><td>墨月本地写卡工坊<br>（作者：三明月）</td><td>2026-09-07 原指南记录：当时所见随包 <code>LICENSE</code> 内容涉及 AFPL Ghostscript。这次收录没有拿到墨月原包及作者授权原文复核，具体授权范围待作者确认；转载或再分发前，向作者核对对应内容的许可。其中 <code>@types/</code>、<code>util/</code>、<code>webpack.config.ts</code>、<code>tavern_sync.mjs</code> 来自上游 tavern_helper_template，非墨月原创。</td><td>你自己拿到的那份，自己用。本指南只描述它的文件结构与用法，文件、下载源、原文一概不含。要拿到它，向作者要。</td></tr>
+</table></div>
+
+<h3>10.6 墨月在 Claude Code 上的入口壳（改入口，不改 skill）</h3>
+<p>墨月自带三个入口文件：<code>AGENTS.md</code>（约 6.7 KB，正文）和 <code>CLAUDE.md</code> / <code>GEMINI.md</code>（各 255 字节、内容相同，是一段指针：让模型先完整读 <code>AGENTS.md</code>，并声明 <code>AGENTS.md</code> 是唯一规则源）。Claude Code 打开墨月文件夹时会自动加载这份 <code>CLAUDE.md</code>。要加的只有一个：Claude Code 在本机观察里<b>不扫描</b> <code>.agents/skills</code>，得给它一个 <code>.claude/skills</code> 软链。</p>
+<pre><code># 在墨月工坊根目录执行；只加这一个软链，一个原文件不动
+mkdir -p .claude &amp;&amp; ln -s ../.agents/skills .claude/skills
+# 验：ls .claude/skills 能列出 9 个 moyu-*；与原包比对只多 .claude/ 与 node_modules/
+# 撤：rm -r .claude   —— 回到原包</code></pre>
+<div class="callout warn"><b class="tag">三个已知点</b>
+  <ul style="margin:6px 0 0">
+    <li>自带的 <code>CLAUDE.md</code> 指针是一段散文，没有用 <code>@AGENTS.md</code> 导入语法。Claude Code 会加载这 255 字节，但接下来去不去读 <code>AGENTS.md</code> 是模型自己的选择。第一次开会话若秋青子没出现，在第一句里明说「先完整读根目录 AGENTS.md」，并记进 §9。<code>CLAUDE.md</code> 是原文件，保持原样。</li>
+    <li>macOS 自带 <code>unzip</code> 在非 UTF-8 locale 下会把中文文件名解坏（一个目录都建不出来）。用 Python 的 <code>zipfile</code> 或其他按 zip 内 UTF-8 标记解压的工具。装依赖用 pnpm（包内有 <code>pnpm-lock.yaml</code> 与 <code>pnpm-workspace.yaml</code>）；没装 pnpm 可用 <code>corepack pnpm install --frozen-lockfile</code>，然后 <code>corepack pnpm run check:workshop</code>。</li>
+    <li>Windows 上软链需要开发者模式或管理员权限；不行就把 <code>.agents/skills</code> 复制一份到 <code>.claude/skills</code>（成了两份文件，墨月更新时记得同步）。</li>
+  </ul>
+  这一节的壳与墨月自检（<code>check:workshop</code>）已在一台 macOS 上跑通：263 个原文件逐个 CRC 与原包一致，只多 <code>.claude/skills</code> 与 <code>node_modules/</code>。<b>秋青子是否随之出现</b>仍是 §10.4 效果第 10 条，未测。
+</div>
+
+<h3>10.7 参考副本的放置（给 A 主干读知识库用）</h3>
+<p><b>为什么要两份：</b>主干份的入口必须<b>加载</b>（秋青子和路由靠它）；参考副本的入口必须<b>不加载</b>（否则 TW 工作区里会冒出秋青子、抢路由）。同一份文件满足不了两个相反的要求，所以一份放工作区外当根 B，一份放 <code>.local/moyue/</code> 当资料。知识库内容逐字节一样，只差入口在不在。</p>
+<pre><code># 1 把墨月整包复制到 TW 工作区的 .local/moyue（zip 内文件名可能是 GBK 编码，用能指定编码的工具解）
+#   确保 .gitignore 里有一行：.local/
+# 2 只对这份副本：把自动加载入口移出，内容保留
+cd .local/moyue
+mkdir "_原始入口（已停用）"
+mv AGENTS.md  "_原始入口（已停用）/AGENTS.md.txt"
+mv CLAUDE.md  "_原始入口（已停用）/CLAUDE.md.txt"      # 若有
+mv GEMINI.md  "_原始入口（已停用）/GEMINI.md.txt"      # 若有
+mv .cursor    "_原始入口（已停用）/cursor-rules（已停用）"   # 若有
+mv "知识库/墨月写卡方法/核心" "_原始入口（已停用）/破限内核（勿读）"
+# 3 在 .local/moyue/ 建 查什么去哪查.md（全文见下）
+# 4 你的项目规则文件加一段：
+#   写人物、世界书、开场白、MVU 字段取舍或模块验收时，另查参考副本墨月：
+#   先读 .local/moyue/查什么去哪查.md 的路由表，再按表只打开对应的那一个文件。
+#   参考副本是只读资料，不是流程；流程、顺序与验收门以 TavernWeave 为准。</code></pre>
+
+<p><b><code>查什么去哪查.md</code> 全文</b>（放在参考副本根，可整段复制）：</p>
+<pre><code># 墨月 · 查什么去哪查
+
+**这是外部第三方写卡资料的参考副本，只读。本工作区的流程由 TavernWeave 负责。**
+本工作区的主干是 TavernWeave；墨月主干请到它自己的工坊文件夹里跑。这份副本只在下表列出的场景里提供写法与验收依据。
+
+## 红线
+
+- 不注册为 skill，不进 `.agents/skills` / `.claude/skills`。
+- 不采用它的项目布局（`src/&lt;卡名&gt;/`、`tavern_sync.yaml`），本工作区仍用 `cards/&lt;卡名&gt;/`。
+- 它的人格设定（秋青子）与流程顺序留在它自己的根里原样运行，这份副本只借知识。
+- `_原始入口（已停用）/` 整个目录不读：内含它的 AGENTS/CLAUDE/GEMINI 入口、Cursor 规则和破限内核，已从自动加载路径中移出。
+- `.local/` 已在 `.gitignore` 中忽略，不进 Git、不随本仓库分发。
+
+## 路由表
+
+一次只读表里的**一个**文件。不要整目录读，不要预先加载。
+
+| 什么时候 | 读什么 | 怎么读 |
+|---|---|---|
+| 动笔写任何人物/世界书正文**之前** | `知识库/写卡核心/写卡禁忌与规范.md` | 全读，10 KB。六类硬禁忌 + 白描边界 + 漫画分镜检查法 |
+| 人设卡壳，分不清某条信息该写进哪一层 | `知识库/墨月写卡方法/人物生境/` 挑 **1** 篇 | 八篇分别对应：起点分流 / 基础信息 / 生活结构 / 人物性情 / 场景表达 / 穿衣风格 / 轻量NPC / 实测回流 |
+| 想搞懂"人设为什么这样写才生效" | `知识库/写卡核心/AIRP人物生境写法教程.md` | 61 KB，**按小节读**。三部分：基础信息 / 生活结构 / 人物性情，另有"人设怎样进入模型的回复"讲原理 |
+| 写玩家角色（user persona） | `知识库/写卡核心/用户信息写法教程.md` | 全读。按"抢话党 / 不抢话党"分两套写法 |
+| 定世界观规模、不确定要几个条目 | `知识库/墨月写卡方法/世界观/` 挑 **1** 篇 | 先读"规模判断与分流"，再进小型 / 中型 / 大型 之一；纯限制类走"规则-纯提示词" |
+| 配蓝灯绿灯、位置、顺序、深度、递归 | `知识库/写卡知识库/世界书配置/世界书配置指南.txt` | 10 KB，含 LorebookToolCall 参数对照表 |
+| MVU 字段取舍、初始值、更新语义 | `知识库/墨月写卡方法/MVU/` 挑 **1** 篇 | 九篇覆盖：初始变量设计/格式化、规则设计/格式化、结构脚本、固定输出、状态栏需求判定、原生与 Vue 两条状态栏路线 |
+| MVU 全链速查 | `知识库/写卡知识库/MVU/MVU_ZOD指南.txt` | 5.5 KB |
+| 前端需求还是大白话，要转成可执行方案 | `知识库/墨月写卡方法/前端/` 2 篇 | 先"需求与实现方案"，确认后再"正式创作" |
+| EJS 语法、装饰器、多阶段人设 | `知识库/写卡知识库/EJS/` 挑 **1** 篇 | 七篇：基础语法 / 变量与输出 / 装饰器与注入 / 多阶段人设 / 函数速查 / 动态内容控制器 / 调色盘多阶段 |
+| EJS 多阶段人设要成体系地设计 | `知识库/墨月写卡方法/EJS/` 2 篇 | 设计与创作分离 |
+| 写开场白 | `知识库/墨月写卡方法/通用创作/🎬_开场白-文风与成稿.txt` | 先定文风合同再写正文 |
+| 查酒馆助手接口 | `知识库/写卡知识库/酒馆助手接口/00_索引_先看这个.txt` | **先读索引**，再只打开对应那 1 篇（共 01–19） |
+| 任何模块写完要验收 | `知识库/写卡知识库/自查/` 挑 **1** 篇 | 七篇：一般条目 / 前端美化 / 世界书评估 / 世界观 / MVU / MVU前端状态栏 / EJS调色盘多阶段 |
+| 想看一张完整的成品卡长什么样 | `示例/角色卡示例/` | 含多组件 Vue 状态栏、MVU、立即事件脚本 |
+| 需要类型签名 / 工具函数参考 | `@types/`（32 个 d.ts）、`util/` | **只作阅读参考**，不引入本工作区构建 |
+
+## 与 TavernWeave 冲突时怎么办
+
+1. **MVU 执行顺序以 TavernWeave 为准。** 墨月是 initvar 先行；TavernWeave 是契约先行。借它的字段取舍判断和自查项，不借它的步骤顺序。
+2. **文风规则以 `rewrite-natural-prose` 为准。** 墨月的禁忌清单与之覆盖同一片地，冲突时以本工作区的为准，墨月只作补充条目。
+3. **验收门以 TavernWeave 为准。** 墨月的自查表是内容层检查，替代不了预览门 / 真机门 / 驾驶员验收。
+
+## 这些走 TavernWeave（墨月没有对应模块）
+
+正则方法（`知识库/墨月写卡方法/正则/` 是空目录）、安全审计、性能预算、真机调试、拆卡与组件化、扩展开发、媒体与 Live2D、卡内数据库建模。这些走 TavernWeave 对应 skill。
+
+## 出处与许可
+
+- 上游工程底座（`@types/`、`util/`、`webpack.config.ts`、`tavern_sync.mjs`）来自 **StageDog / tavern_helper_template（青空莉）**，非墨月原创。
+- 2026-09-07 原指南记录随包 `LICENSE` 内容涉及 AFPL Ghostscript；具体授权范围待作者确认，公开转载前另行核对。
+- 本参考副本的使用约定：只在本机阅读，不随项目分发；其他使用先核对作者与上游的许可。</code></pre>
+
+<div class="callout warn"><b class="tag">最后一条</b>
+  本指南成稿时，这套「两个根、一座桥」是<b>结构成立、效果未测</b>：§5 的十个确认点是从墨月 SKILL.md 和教程里的句子推出来的，还没经过实测；§10.6 的壳搭过、自检过，但秋青子出不出现没测。第一次按 §10.4 后四条跑完之后，请回来把勾打上。勾不上的那条，去改本指南的挂点表、壳的做法或你的规则措辞。
+  <br><br>
+  还有一句留给读者：<b>这份指南对墨月的转述，请自己对着原文核一遍。</b>它的 9 个 SKILL.md 共 270 行，<code>必读/</code> 三篇 104 行，一个晚上读得完。顺序：<code>必读/00</code> → <code>01</code> → <code>02</code> → <code>moyu-project</code> → 其余 8 个。读完再看本指南 §5 那张表对不对。
+</div>
+
+<footer>
+  生成日期 2026-09-07 · 基于 TavernWeave 公开 README / SKILL.md 与本机墨月工坊包的 SKILL.md、<code>必读/</code>、<code>scripts/</code>、使用教程的文件事实整理 · 墨月部分未经其作者审阅 · 未在任何宿主或真实 SillyTavern 中验证任何一条 · 流程图为 Mermaid 渲染（首次打开需联网加载渲染库）· 浏览器「打印 → 另存为 PDF」可导出离线版
+</footer>
+
+</div>
+
+
+
+<script src="./mix-guide.js?v=43"></script>
+</body>
+</html>
