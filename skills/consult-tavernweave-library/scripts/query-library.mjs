@@ -71,6 +71,9 @@ export function queryLibrary({ skill = "", intent = "", write = false, includeEx
   // Work-source research owns these specific wishes; generic database/catalog terms
   // must not pull in MVU or the bundled UI design catalog for a novel/fanwork task.
   if (!skill && routes.some((route) => route.id === "build-work-library")) routes = routes.filter((route) => route.id === "build-work-library");
+  const sandboxWish = /前端沙盒|联合模拟|状态对照|滑条调试|封装前打磨/u.test(intent);
+  const realHostFailure = /(?:真实酒馆|真实宿主|实机|sillytavern).*(?:故障|报错|不更新|白屏|验收)/iu.test(intent);
+  if (!skill && sandboxWish && !realHostFailure && !routes.some((route) => route.id === "build-work-library")) routes = routes.filter((route) => route.id === "sillytavern-embedded-ui");
   const guideIds = new Set();
   const routedDomains = new Set();
   if (write) guideIds.add(routeMap.standingGuide);

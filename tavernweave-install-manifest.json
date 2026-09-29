@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "skillCount": 22,
   "skills": [
     "activate-tavernweave-soul",
@@ -53,11 +53,14 @@
     "skills/build-work-library/scripts/work_library.py",
     "skills/build-work-library/references/data-and-commands.md",
     "skills/build-work-library/references/research-and-media.md",
-    "skills/build-work-library/references/batching-and-routing.md"
+    "skills/build-work-library/references/batching-and-routing.md",
+    "skills/sillytavern-embedded-ui/references/sandbox-workflow.md",
+    "skills/sillytavern-embedded-ui/references/sandbox-recipes.md",
+    "skills/sillytavern-embedded-ui/references/adapter-contract.md"
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "1.6.0",
+    "version": "1.7.0",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",

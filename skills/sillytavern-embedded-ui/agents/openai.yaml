@@ -1,4 +1,4 @@
 interface:
   display_name: "SillyTavern Embedded UI"
-  short_description: "Design and implement rolecard embedded interfaces"
-  default_prompt: "Use $sillytavern-embedded-ui to improve this rolecard interface and prepare its runtime handoff."
+  short_description: "Build rolecard UI and project-specific sandbox workflows"
+  default_prompt: "Use $sillytavern-embedded-ui to improve this rolecard interface, use its specifications to build an optional project-specific sandbox from maintained source, and prepare its real-runtime handoff."

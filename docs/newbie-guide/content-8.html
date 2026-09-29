@@ -6,6 +6,17 @@
 <div class="callout good"><strong>这里的 Mock Receiver 是什么</strong>它是教学用的本机调试接收器，接收 Probe 发来的记录。酒馆和事件都来自真实运行实例；“Mock”这个名字不表示另外造了一套假酒馆。</div>
 </section>
 
+<section class="section" id="frontend-sandbox">
+<div class="section-head"><div class="section-no">可选</div><div><h2>封装前，用前端沙盒打磨界面</h2><p class="section-kicker">先在本机看完整维护源码的界面表现，再把新构建放回真实酒馆验收。</p></div></div>
+<p>如果角色卡有状态栏、控制中心、开局页等前端，你可以让 Agent 按作品源码搭建本地前端沙盒：单独看一个模块，或把共享状态与事件的模块放在一起看。TW 提供搭建规范，页面与调试控件沿用作品风格、按实际需要安排。它推荐用于封装前的打磨，但不是必经步骤；选择跳过，就照常继续构建和真实酒馆测试，不记作失败。作者在实际制卡中，通过封装前的沙盒打磨，减少了后续实机验收中的反复调整和 Bug；具体效果取决于项目与使用方式。</p>
+<div class="cards"><article class="card"><h4>先核对源码</h4><p class="muted">沙盒列出实际装载的完整模块清单、源码路径、修订和 SHA-256。项目接入要导入维护中的真实组件，不用仿制页面冒充原组件。</p></article><article class="card"><h4>数据先预览再确认</h4><p class="muted">查看旧值与新值、影响的模块和事件后，再确认或取消。恢复、重置、多步情景也有确认步骤；临时 UI 参数可用滑块即时调整，并与游戏数据分开。</p></article><article class="card"><h4>把证据分层</h4><p class="muted">沙盒能帮助发现界面与组件协作问题；真实 SillyTavern 的 iframe、扩展、消息楼层、模型行为和最终视觉体验，仍要分别检查。</p></article></div>
+<div class="callout good"><strong>和本章的 Mock Receiver 不是一回事</strong>前端沙盒在本机预览组件；下文的 Mock Receiver 是接收真实酒馆 Probe 记录的本机服务。它名字里有“Mock”，记录的酒馆操作仍来自真实 SillyTavern。</div>
+<div class="code-block"><div class="code-label"><span>采用或跳过，由你决定</span><button class="copy-btn" type="button">复制</button></div><pre><code>按我的作品搭建封装前沙盒，沿用项目的源码、技术栈和预览方式。先核对本次范围内的真实源码、全部模块与宿主依赖，推荐单模块或联合模拟。测试数据先展示来源、目标与差异，等我确认后注入；UI 参数可即时预览，保留基线与导出。最后列出未覆盖项和回落实机需要复验的重点。
+
+如果本次不需要：跳过沙盒，按已有制作与封装流程继续。</code></pre></div>
+<p>搭建规范、场景参考和证据边界见<a href="https://github.com/LiarMTTT/TavernWeave/blob/main/docs/frontend-sandbox.md" target="_blank" rel="noopener noreferrer">前端沙盒搭建说明</a>。让 Agent 在项目测试目录里实现，测试场景优先用合成数据；私人作品与原聊天留在项目自己的测试目录。</p>
+</section>
+
 <section class="section" id="runtime-evidence">
 <div class="section-head"><div class="section-no">37</div><div><h2>为什么还要记录真实运行过程</h2><p class="section-kicker">每种检查只能回答对应的问题，报告里要说明依据和范围。</p></div></div>
 <div class="compare"><div class="compare-side"><h4>离线检查能证明</h4><p class="muted">文件存在、语法可解析、构建能完成、HTML 与 CSS 在普通页面中能显示。</p></div><div class="compare-vs">≠</div><div class="compare-side"><h4>运行记录可以帮助确认</h4><p class="muted">配合构建标记、事件检查点与数据复读，确认产物、事件和写入位置。是否经得住刷新与聊天切换，还要实际操作对应路径。</p></div></div>

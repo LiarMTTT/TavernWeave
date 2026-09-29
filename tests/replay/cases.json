@@ -438,6 +438,24 @@
       "prompt": "长任务停下后我润色了人物文档，读取编辑后的内容继续转库并人工导出。",
       "expectedPrimarySkill": "build-work-library",
       "expectedBehavior": "Read current Markdown/hash, rebuild observed edit log, resume the same batch and reject stale writes; export without a model call."
+    },
+    {
+      "id": "frontend-sandbox-single",
+      "prompt": "采用前端沙盒，单独检查这个有三层 iframe 的状态栏，保留变量桥和真实源码。",
+      "expectedPrimarySkill": "sillytavern-embedded-ui",
+      "expectedBehavior": "Verify source and mount topology, declare simulated coverage, prepare isolated fixtures for explicit confirmation, and retain real-host acceptance."
+    },
+    {
+      "id": "frontend-sandbox-joint",
+      "prompt": "做多前端联合模拟，状态对照和滑条调试，一起看 HUD、手机和控制中心。",
+      "expectedPrimarySkill": "sillytavern-embedded-ui",
+      "expectedBehavior": "Load actual modules with shared state/events, expose missing interfaces, compare each mapped view, isolate UI parameters and export source-bound results."
+    },
+    {
+      "id": "frontend-sandbox-skip",
+      "prompt": "这次跳过沙盒，继续之前的前端制作。",
+      "expectedPrimarySkill": "sillytavern-embedded-ui",
+      "expectedBehavior": "Reuse skip decision, create no sandbox, and preserve existing development and runtime checks without marking failure."
     }
   ]
 }

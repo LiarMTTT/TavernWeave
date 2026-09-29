@@ -1,6 +1,6 @@
 ---
 name: sillytavern-embedded-ui
-description: Design, implement, or review framework-neutral embedded interfaces for SillyTavern rolecards, including opening pages, status bars, control centers, drawers, and popups. Use for HTML/CSS/JavaScript structure, interaction states, responsive behavior, accessibility, safe rendering, host-integration contracts, source-side real-time compilation loops, supporting checks, and defining the real-runtime handoff. Do not use as the primary skill to reproduce or close behavior in a live SillyTavern instance; hand that work to sillytavern-runtime-debug.
+description: Design, implement, or review framework-neutral embedded interfaces for SillyTavern rolecards, including opening pages, status bars, control centers, drawers, and popups. Use for HTML/CSS/JavaScript structure, interaction states, responsive behavior, accessibility, safe rendering, specifications for optional project-specific frontend sandboxes using real source, and the real-runtime handoff. Do not use as the primary skill to close behavior in a live SillyTavern instance; hand that work to sillytavern-runtime-debug.
 ---
 
 # SillyTavern Embedded UI
@@ -123,6 +123,20 @@ A connected listener does not prove the newest source compiled, and a successful
 build does not prove SillyTavern loaded it. Keep both receipts. Use the live loop to
 shorten implementation feedback, then run the production build and hand its exact
 artifact to the final runtime acceptance pass.
+
+## Optional frontend sandbox before packaging
+
+When the author wants to polish an embedded UI, offer the local frontend sandbox as an optional working loop, especially before packaging. It can expose layout, interaction, state, and cross-module problems while changes are still cheap. An author may skip it; skipping is not a failed gate and never blocks the normal build and real-runtime path. Time saved and bugs found vary by project; do not promise a fixed reduction in runtime passes.
+
+TavernWeave supplies specifications and working methods for this loop. Build a project-specific sandbox from the author's maintained sources in the agreed test workspace, reusing the project's preview service and development stack. Do not introduce a generic TW workbench, demo application, or adoption landing page. Reuse an existing adopt/skip decision; a request to build the sandbox already supplies adoption. If skipped, create no sandbox and continue the existing workflow.
+
+Read [sandbox workflow](references/sandbox-workflow.md) for scope, implementation steps and evidence boundaries; [integration contract](references/adapter-contract.md) for state, events and UI parameters; and [scenario recipes](references/sandbox-recipes.md) when selecting single-module or joint checks. These are implementation requirements, not APIs of a shipped runtime. Adapt names and layout to the project. The [user guide](../../docs/frontend-sandbox.md) provides a ready-to-use request.
+
+Load the complete maintained component source through the project's minimal host adapter and list every selected module with its actual source path, revision, and SHA-256. If a supplied hash is marked `unverified`, report it as unverified rather than treating it as an integrity check. Preserve the required iframe/blob hierarchy and API window locations. Full simulation covers all modules, entries and capabilities in the agreed scope; separately show loaded, not connected, unsupported and untested items. Use one module for a focused pass or mount related modules together when shared state or events matter. A screenshot of a replacement mock cannot establish source fidelity.
+
+Keep game data separate from temporary UI settings. Show the data source, batch, target chat/floor, before/after difference and expected events; require explicit confirmation bound to that batch, scope and state revision before injection. Confirm initial presets and complete scenario sequences too; an approved sequence needs no repeated approval for each internal step. Cancel without writes; invalidate approval on target or revision changes. Compare the actual committed state with each module's observed fields. UI sliders and exact inputs preview immediately within the adopted scope; provide baseline comparison, reset, presets and parameter export. Do not resize the user's viewport during manual tuning. Remove temporary overrides after backporting selected changes and rerun the same scene from maintained source. Export the scenario record and remaining host gaps, then hand the exact built artifact to `sillytavern-runtime-debug`. Sandbox checks never set `driverAccepted` or replace real host, device, model, and human visual evidence.
+
+Use synthetic mechanism examples in public documentation. Keep private card source, original chats, player data and local evidence in the project's test workspace, outside the public repository and release.
 
 ## Opening pages
 

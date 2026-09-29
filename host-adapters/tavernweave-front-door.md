@@ -1,4 +1,4 @@
-<!-- tavernweave-host-front-door:begin version=1.6.0 -->
+<!-- tavernweave-host-front-door:begin version=1.7.0 -->
 ## TavernWeave Host Front Door
 
 <!-- tw-guidance-generated:begin -->

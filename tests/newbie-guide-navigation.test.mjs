@@ -81,12 +81,12 @@ test("navigation state is derived from the live document", async () => {
   assert.match(app, /target\.scrollIntoView\(\{ block: 'start', behavior:/);
   assert.match(app, /if \(body\.classList\.contains\('nav-open'\)\)/);
   assert.doesNotMatch(app, /\/ 49/);
-  assert.match(index, /style\.css\?v=45/);
-  assert.match(index, /layout-v6\.css\?v=45/);
-  assert.match(index, /app\.js\?v=45/);
-  assert.match(app, /content-0\.html\?v=45/);
-  assert.match(app, /content-8\.html\?v=45/);
-  assert.match(app, /content-9\.html\?v=45/);
+  assert.match(index, /style\.css\?v=48/);
+  assert.match(index, /layout-v6\.css\?v=48/);
+  assert.match(index, /app\.js\?v=48/);
+  assert.match(app, /content-0\.html\?v=48/);
+  assert.match(app, /content-8\.html\?v=48/);
+  assert.match(app, /content-9\.html\?v=48/);
   assert.match(app, /target\.querySelector\('\.release-entry'\)/);
 });
 
@@ -129,7 +129,7 @@ test("ending release chapter contains user-facing major-version logs only", asyn
   const index = await readGuideFile("index.html");
   const content8 = await readGuideFile("content-8.html");
   const content9 = await readGuideFile("content-9.html");
-  const ids = ["release-history", "release-v1-6-0", "release-v1-5-0", "release-v1-4-0", "release-v1-3-0", "release-v1-2-0", "release-v1-1-0", "release-v1-0-0"];
+  const ids = ["release-history", "release-v1-7-0", "release-v1-6-0", "release-v1-5-0", "release-v1-4-0", "release-v1-3-0", "release-v1-2-0", "release-v1-1-0", "release-v1-0-0"];
 
   ids.forEach(id => {
     assert.match(index, new RegExp(`href="#${id}"`));
@@ -143,7 +143,7 @@ test("ending release chapter contains user-facing major-version logs only", asyn
   assert.match(content9, /id="release-v1-0-0"[\s\S]*?<details class="release-entry">/);
   assert.doesNotMatch(content9, /兼容性说明|验证结果|待验证/);
   assert.doesNotMatch(content8, /<footer class="footer">/);
-  assert.match(content9, /TavernWeave 奶人教程 · v1\.6\.0<\/strong>/);
+  assert.match(content9, /TavernWeave 奶人教程 · v1\.7\.0<\/strong>/);
   assert.match(content9, /462 个设计、194 个动效、86 个概念、1,609 条蒸馏账本/);
   assert.match(index, /<span class="nav-chapter-no">更<\/span><span>更新日志<\/span>/);
   assert.match(index, /href="#release-history"><span>日志<\/span>/);

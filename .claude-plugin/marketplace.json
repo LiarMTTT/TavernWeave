@@ -3,7 +3,7 @@
   "owner": {
     "name": "LiarMTTT"
   },
-  "description": "Build and improve rolecards and software with 22 focused skills, source-backed work libraries for fan creation, plain-language guidance and evidence-based reviews.",
+  "description": "22 focused Skills for rolecards and software; version 1.7.0 adds specifications for optional project-specific frontend sandboxes using real source and confirmed test data.",
   "plugins": [
     {
       "name": "tavernweave-agent-skills",

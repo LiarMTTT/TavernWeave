@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.6.0",
-  "description": "Build and improve rolecards and software with 22 focused skills, source-backed work libraries for fan creation, plain-language guidance and evidence-based reviews.",
+  "version": "1.7.0",
+  "description": "22 Skills for rolecards and Vibe Coding; 1.7.0 adds specifications for optional project-specific frontend sandboxes, real source, confirmed test data and UI tuning.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "TavernWeave",
     "shortDescription": "Make, improve, and understand rolecards and software.",
-    "longDescription": "TavernWeave 1.6.0: 22 skills add editable work libraries from novels, fanwork, researched text and inspected image references, with source citations, canon/fanon and stage filters, resumable batches and SQLite export. Shared plain language and user-selected 新人/入门/熟练/老手 guidance remain available. Host rediscovery and real-work token evaluation remain separate checks.",
+    "longDescription": "TavernWeave 1.7.0, 22 skills. Provides specifications and scenarios for Agents to build optional project-specific frontend sandboxes from maintained source: single or joint modules, explicit test-data confirmation, state comparison and manual UI tuning. Reuse the project stack and preview service. Work libraries, plain language and user-selected guidance remain available. Sandbox evidence does not replace real-host or driver acceptance.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
