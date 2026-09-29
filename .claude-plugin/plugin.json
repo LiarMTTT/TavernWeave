@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.6.0",
-  "description": "Build and improve rolecards and software with 22 focused skills, source-backed work libraries for fan creation, plain-language guidance and evidence-based reviews.",
+  "version": "1.7.0",
+  "description": "22 Skills for rolecards and Vibe Coding; 1.7.0 adds specifications for optional project-specific frontend sandboxes, real source, confirmed test data and UI tuning.",
   "author": {
     "name": "LiarMTTT"
   },

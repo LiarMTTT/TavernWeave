@@ -8,7 +8,9 @@
 
 TavernWeave（TW）帮助你把想法做成能使用、能继续修改的角色卡、网页或小工具。你可以直接说想做什么，或哪里出了问题；TW 会整理需求、提出方案、制作和检查，并说明接下来怎样试用。它通过 22 个 Skill（按任务调用的工作能力）组织这些工作，支持 Codex、Claude Code，并提供 DeepSeek Harness 实验适配。
 
-当前正式版为 **[v1.6.0：作品资料库](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.6.0)**，共 22 个原生 Skill。新增小说、原作／同人资料与联网文图参考整理，默认交付可编辑 Markdown＋JSONL 索引，并可导出 SQLite。按来源、改编版本和知情阶段检索，方便二创时回查与调用。见[作品资料库使用说明](docs/work-library.md)。
+当前正式版为 **[v1.7.0：前端沙盒打磨](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.7.0)**，共 22 个原生 Skill。升级既有 `sillytavern-embedded-ui`，提供按作品搭建可选前端沙盒的规范与场景参考，由 Agent 使用项目真实源码和现有技术栈实现单模块／联合模拟、确认注入、状态对照与手动调参。可直接跳过沙盒，继续原有制作与封装流程。见[前端沙盒搭建说明](docs/frontend-sandbox.md)。
+
+作品资料库继续支持小说、原作／同人资料与联网文图参考整理，默认交付可编辑 Markdown＋JSONL 索引，并可导出 SQLite；按来源、改编版本和知情阶段检索。见[作品资料库使用说明](docs/work-library.md)。
 
 所有能力继续遵守大白话和术语解释；新人、入门、熟练、老手由用户选择。文本精修、全量与架构审查、脑暴、内置设计 Library、Soul 和接手旧卡引导继续提供。安装核验以本版 22 项清单为准；客户端实际加载与具体作品质量／token 测量保留独立检查。
 
@@ -153,7 +155,7 @@ Host Front Door（可选全局入口，推荐）
 | `sillytavern-card-pipeline` | 依赖预检、实时开发适配、组装、JSON/PNG、世界书同步和发布门 |
 | `sillytavern-api-reference` | 查证 ST、Tavern Helper、STScript、EJS、宏与 MVU 的版本敏感 API |
 | `sillytavern-runtime-debug` | 在真实 SillyTavern 追踪 iframe、控制台、DOM、样式、数据和生命周期 |
-| `sillytavern-embedded-ui` | 开局页、状态栏、控制中心、抽屉、浮窗和移动端交互 |
+| `sillytavern-embedded-ui` | 开局页、状态栏、控制中心、抽屉、浮窗和移动端交互；按作品搭建可选沙盒的规范、联合模拟、状态对照与滑条调试 |
 | `code-quality-workflow` | 全量／架构审查、覆盖记录、完整发现、门控、最小修复、回归与 Finish Mode |
 | `rewrite-natural-prose` | 保留原意与技术结构的文本精修，支持单次、任务持续及分别授权的工作区／客户端持久模式 |
 | `shadcn-tailwind-ui` | 使用 React、shadcn/ui、Radix 和 Tailwind 构建可访问产品界面 |
@@ -260,7 +262,7 @@ Host rediscovery: required-new-task
 
 目标目录中的无关个人 Skill 会保留；22 个 TavernWeave 官方目录必须与当前源码逐文件匹配。写入目标最后一级必须明确名为 `skills`；安装脚本拒绝盘符根、用户目录根、源码仓库内部目标和目录链接，替换失败时会回滚已有官方 Skill。
 
-完成 22/22 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul、脑暴编排、照镜子与 Library；安装回执不能冒充宿主发现。v1.6.0 的完整 ZIP 与 SHA-256 校验文件可从 [正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.6.0) 下载。
+完成 22/22 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul、脑暴编排、照镜子与 Library；安装回执不能冒充宿主发现。v1.7.0 的完整 ZIP 与 SHA-256 校验文件可从 [正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.7.0) 下载。
 
 维护者若只是在发布前自检源码树，可显式使用 `-AllowSourceTree`；该开关不能用于普通用户的安装回执。
 

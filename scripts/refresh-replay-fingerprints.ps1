@@ -52,6 +52,17 @@ function Get-SkillFingerprint([string]$Directory) {
 }
 
 $results = Get-Content -LiteralPath $resultsPath -Raw -Encoding UTF8 | ConvertFrom-Json
+foreach ($pair in @(@('cases.json', 'caseResults'), @('adversarial-cases.json', 'adversarialResults'))) {
+    $definitions = Get-Content -LiteralPath (Join-Path $PluginRoot ('tests\replay\' + $pair[0])) -Raw -Encoding UTF8 | ConvertFrom-Json
+    $expectedIds = @($definitions.cases | ForEach-Object { [string]$_.id })
+    $actualIds = @($results.($pair[1]) | ForEach-Object { [string]$_.id })
+    if (($expectedIds | Sort-Object -Unique).Count -ne $expectedIds.Count -or ($actualIds | Sort-Object -Unique).Count -ne $actualIds.Count) {
+        throw "Duplicate replay case IDs: $($pair[0])"
+    }
+    if (@(Compare-Object -ReferenceObject $expectedIds -DifferenceObject $actualIds).Count -gt 0) {
+        throw "Replay results do not cover the exact current case IDs: $($pair[0])"
+    }
+}
 foreach ($collectionName in @('caseResults', 'adversarialResults')) {
     foreach ($result in @($results.$collectionName)) {
         if ($result.pass -ne $true -or -not [string]$result.evidence) {

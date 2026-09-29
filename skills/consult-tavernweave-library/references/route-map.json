@@ -16,7 +16,7 @@
     {"id":"sillytavern-card-pipeline","terms":["构建","打包","发布","部署","json","png"],"guides":["ST-A2","ST-D1","ST-D4"],"domains":[]},
     {"id":"sillytavern-api-reference","terms":["api","签名","事件","stscript","quickreplies","宏"],"guides":["ST-A5","ST-B1","ST-B2","ST-C1","ST-D3"],"domains":[]},
     {"id":"sillytavern-runtime-debug","terms":["调试","白屏","空白","控制台","宿主","不更新","报错","坏了"],"guides":["ST-C1","ST-D4"],"domains":[]},
-    {"id":"sillytavern-embedded-ui","terms":["状态栏","控制中心","抽屉","浮窗","悬浮球","开局页","美化","移动端"],"guides":["ST-C1","ST-C2","ST-C3","ST-C9","ST-C10","ST-C11","ST-C12","ST-C13","ST-D7"],"domains":["design","motion"]},
+    {"id":"sillytavern-embedded-ui","terms":["状态栏","控制中心","抽屉","浮窗","悬浮球","开局页","美化","移动端","前端沙盒","联合模拟","状态对照","滑条调试","封装前打磨"],"guides":["ST-C1","ST-C2","ST-C3","ST-C9","ST-C10","ST-C11","ST-C12","ST-C13","ST-D7"],"domains":["design","motion"]},
     {"id":"code-quality-workflow","terms":["代码质量","重构","优化","收尾","全量审查","架构审查","全量架构审查"],"guides":[],"domains":[]},
     {"id":"shadcn-tailwind-ui","terms":["shadcn","tailwind","react","产品界面"],"guides":["ST-C3","ST-D7"],"domains":["design","motion"]},
     {"id":"rolecard-workshop-ops","terms":["工坊","发布链","网关","存储","502"],"guides":["ST-D1","ST-D4","ST-E5"],"domains":[]},
