@@ -3,7 +3,7 @@
   "owner": {
     "name": "LiarMTTT"
   },
-  "description": "22 focused Skills for rolecards and software; version 1.7.0 adds specifications for optional project-specific frontend sandboxes using real source and confirmed test data.",
+  "description": "22 focused Skills for rolecards and software; 1.8.0 adds project progress and review synchronized from total design and NEXT.",
   "plugins": [
     {
       "name": "tavernweave-agent-skills",

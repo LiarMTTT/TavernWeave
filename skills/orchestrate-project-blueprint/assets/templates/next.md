@@ -24,6 +24,12 @@ updated: {{DATE}}
 
 等待驾驶员确认总设计案和 First Playable。
 
+## 项目画板状态来源（可选）
+
+本文件仍是唯一当前续接入口。需要进度画板时，按已安装 TavernWeave 的 `orchestrate-project-blueprint/references/progress-board.md`，在本节下方补入完整的 `tw-progress-state` 标记块（标记之间须有完整的 `json` 代码围栏），并与总设计案中的 `tw-progress-scope` 定义逐项核对。没有两个完整且一致的块时，保留现有续接流程；这段预留说明不代表已记录任何实现或验收结果。
+
+<!-- 可选画板状态块预留：核对设计定义后，按 progress-board.md 放入完整的 begin / JSON / end 标记。 -->
+
 ## 一句续接
 
 读取总设计案、活动蓝图和本文件，从下一道门继续，不重开项目。

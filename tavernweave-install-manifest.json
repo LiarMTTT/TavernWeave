@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "skillCount": 22,
   "skills": [
     "activate-tavernweave-soul",
@@ -32,6 +32,15 @@
     "skills/consult-tavernweave-library/SKILL.md",
     "skills/orchestrate-project-blueprint/SKILL.md",
     "skills/orchestrate-project-blueprint/assets/templates/total-design.md",
+    "skills/orchestrate-project-blueprint/references/progress-board.md",
+    "skills/orchestrate-project-blueprint/scripts/project-board.mjs",
+    "skills/orchestrate-project-blueprint/scripts/project-board-core.mjs",
+    "skills/orchestrate-project-blueprint/scripts/record-progress-feedback.mjs",
+    "skills/orchestrate-project-blueprint/assets/templates/progress/index.html",
+    "skills/orchestrate-project-blueprint/assets/templates/progress/board.css",
+    "skills/orchestrate-project-blueprint/assets/templates/progress/board.js",
+    "skills/orchestrate-project-blueprint/assets/templates/progress/progress-math.mjs",
+    "skills/orchestrate-project-blueprint/assets/templates/progress/board-input.example.json",
     "skills/reflect-on-vibe-code-growth/SKILL.md",
     "skills/reflect-on-vibe-code-growth/agents/openai.yaml",
     "skills/reflect-on-vibe-code-growth/assets/vibe-code-growth-report.html",
@@ -56,11 +65,12 @@
     "skills/build-work-library/references/batching-and-routing.md",
     "skills/sillytavern-embedded-ui/references/sandbox-workflow.md",
     "skills/sillytavern-embedded-ui/references/sandbox-recipes.md",
-    "skills/sillytavern-embedded-ui/references/adapter-contract.md"
+    "skills/sillytavern-embedded-ui/references/adapter-contract.md",
+    "skills/orchestrate-project-blueprint/scripts/project-board-sources.mjs"
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "1.7.0",
+    "version": "1.8.0",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",

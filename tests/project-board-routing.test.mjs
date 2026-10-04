@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import test from 'node:test';
+import { queryLibrary } from '../skills/consult-tavernweave-library/scripts/query-library.mjs';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+test('project-board requests have a route and project-local resources without adding a skill', async () => {
+  const read = (p) => fs.readFile(path.join(root, p), 'utf8');
+  const routes = JSON.parse(await read('skills/consult-tavernweave-library/references/route-map.json'));
+  const route = routes.routes.find((r) => r.id === 'orchestrate-project-blueprint');
+  for (const term of ['项目进度画板', '百分比进度条', '审核进度', '记录新想法', 'bug回报记录']) assert.ok(route.terms.includes(term));
+  for (const term of ['画板同步', 'next同步', '总设计案同步']) assert.ok(route.terms.includes(term));
+  assert.deepEqual(queryLibrary({ intent: '把项目进度画板和总设计案、NEXT同步' }).routeIds, ['orchestrate-project-blueprint']);
+  assert.deepEqual(JSON.parse(await read('docs/newbie-guide/tavernweave-route-map.json')), routes);
+  const manifest = JSON.parse(await read('tavernweave-install-manifest.json'));
+  assert.equal(manifest.skillCount, 22);
+  assert.ok(manifest.requiredPaths.includes('skills/orchestrate-project-blueprint/scripts/record-progress-feedback.mjs'));
+  assert.ok(manifest.requiredPaths.includes('skills/orchestrate-project-blueprint/scripts/project-board-sources.mjs'));
+  for (const p of manifest.requiredPaths.filter((p) => p.includes('orchestrate-project-blueprint/'))) await fs.access(path.join(root, p));
+  const index = await read('docs/newbie-guide/index.html'); const content = await read('docs/newbie-guide/content-0.html');
+  assert.ok(index.indexOf('href="#tw-system-plan"') < index.indexOf('href="#tw-progress-board"'));
+  assert.ok(index.indexOf('href="#tw-progress-board"') < index.indexOf('href="#tw-system-card"'));
+  assert.match(content, /id="tw-progress-board"[\s\S]*?NEW · V1\.8\.0/);
+});

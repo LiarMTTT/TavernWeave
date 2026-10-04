@@ -88,7 +88,7 @@ Soul 归位</code></pre></div>
 <div class="section-head"><div class="section-no">05.4</div><div><h2>安装后，检查文件是否齐全、入口是否可用</h2><p class="section-kicker">文件装齐只是第一步，还要确认客户端能发现并实际调用它。</p></div></div>
 <p class="lead">例如旧安装有 16 个 Skill，只覆盖这 16 个目录，会漏掉后来新增的能力。新版文件即使已经引用 Library，调用时也可能找不到它。因此升级要对照新版本的完整清单。</p>
 <div class="steps"><div class="step"><strong>先看仓库应有清单</strong>机器清单固定列出 22 个正式 Skill，不能拿本机旧目录反推仓库内容。</div><div class="step"><strong>再比较实际安装位置</strong>安装必须计算“仓库应有目录 − 本机已有目录”，创建缺失项，而不是只覆盖旧文件。</div><div class="step"><strong>核验 Soul、Library、脑暴与 picker</strong>目录存在还不够，内容必须与当前源码逐文件匹配，离线挑选页和第 22 个 Skill 也必须在实际安装目录里。</div><div class="step"><strong>明文处理 Host Front Door</strong>先展示 Codex 或 Claude 的目标规则文件和差异，让你选择安装全局入口、先看 diff 或仅安装 Skills；写入只涉及 TW 自己的带版本区块。</div><div class="step"><strong>最后新建任务</strong>22/22 和前门 current 都不证明宿主已调用 Skill；要在新任务或重启后用直接口令另验。</div></div>
-<p>下面的完整安装模板按你实际取得版本的 22 项清单核验。v1.6.0加入作品资料库，并保留共用大白话和用户挡位保存；正式下载版为 v1.7.0，增加按作品搭建可选前端沙盒的规范。安装或更新后，让 Agent 比较完整清单与客户端实际扫描的目录；若使用历史版本，就按那个版本自己的清单检查。</p>
+<p>下面的完整安装模板按你实际取得版本的 22 项清单核验。v1.6.0加入作品资料库，v1.7.0增加可选前端沙盒规范；当前正式下载版为 v1.8.0，增加与总设计案／NEXT 同步的项目进度画板。共用大白话和用户挡位继续保留。安装或更新后，让 Agent 比较完整清单与客户端实际扫描的目录；若使用历史版本，就按那个版本自己的清单检查。</p>
 <div class="code-block"><div class="code-label"><span>完整安装 · 可直接复制</span><button class="copy-btn" type="button">复制</button></div><pre><code>请把 TavernWeave 完整安装或更新到仓库最新版本：
 https://github.com/LiarMTTT/TavernWeave
 

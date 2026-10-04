@@ -3,7 +3,7 @@
 <p class="lead"><strong>v1.7.0：前端沙盒打磨。</strong>提供搭建规范，让 Agent 按你的作品源码建立可选沙盒：单模块或多前端联合模拟，确认注入、状态对照和滑条调 UI。可以跳过，不阻塞原有流程。<a href="#frontend-sandbox">查看用法与提示词</a>。</p>
 <div class="chapter-tier"><span>先看这里</span><strong>TavernWeave 功能地图</strong><span>从你要解决的问题开始</span></div>
 <div class="section-head"><div class="section-no">TW</div><div><h2>TavernWeave 到底能做什么</h2><p class="section-kicker">从整理想法、制作角色卡，到排查问题、组装发布，TW 帮你把项目一步步做出来。</p></div></div>
-<p class="lead">TavernWeave（简称 TW）是一套面向角色卡制作与 Vibe Coding 的工作系统。这里介绍 22 个专职 Skill 及 v1.7.0 的升级，你可以把它们理解为 Agent 按任务调用的工作方法：有的负责规划，有的负责制作，有的负责检查。当前正式版为 v1.7.0。</p>
+<p class="lead">TavernWeave（简称 TW）是一套面向角色卡制作与 Vibe Coding 的工作系统。这里介绍 22 个专职 Skill 及 v1.8.0 的升级，你可以把它们理解为 Agent 按任务调用的工作方法：有的负责规划，有的负责制作，有的负责检查。当前正式版为 v1.8.0。</p>
 <p>你可以用 TW 讨论一个还没想清楚的项目，制作或改进角色卡，搭建界面，精修文字，查找故障，也可以在各部分完成后组装作品、准备发布。想回顾自己一路怎么做项目、积累了哪些经验，可以调用“照镜子”，复盘你的 <strong>Vibe Code 经验与成长历程</strong>。</p>
 <p>开始时不用记住这些 Skill 的英文名。直接告诉 Agent 你想做什么，或者卡在了哪里，它会判断需要调用哪些能力。</p>
 <div class="flow"><div class="flow-node">你说需求</div><div class="flow-arrow">→</div><div class="flow-node">Agent 选择所需能力</div><div class="flow-arrow">→</div><div class="flow-node">查阅相关资料</div><div class="flow-arrow">→</div><div class="flow-node">制作与检查</div><div class="flow-arrow">→</div><div class="flow-node">需要你验收的<br/>面和点</div></div>
@@ -42,6 +42,17 @@
 <div class="code-block"><div class="code-label"><span>先脑暴，再决定是否开工</span><button class="copy-btn" type="button">复制</button></div><pre><code>脑暴模式，Soul 联席
 
 先判断项目类型，帮我收束总设计案、第一版核心和后续更新路线。不要直接写文件。</code></pre></div>
+
+<h3 data-subsection="TW.1.1" id="tw-progress-board">项目进度画板 <span class="new-badge">NEW · V1.8.0</span></h3>
+<p>项目做久了，打开画板就能看到哪里已实现、哪里待实测、哪里还没做，以及你随手记下的新想法、Bug 和审核意见。它属于现有的项目编排能力，每个项目有自己的画板；v1.8.0 已提供这项能力。</p>
+<div class="cards capability-cards"><article class="card new-panel"><h4>实现与验收分别看</h4><p class="muted">整体和各模块都有百分比进度条。点开事项能查看检查点与证据；代码完成、浏览器通过、真实宿主通过、驾驶员确认分别记录。没有确认范围就不猜百分比。</p></article><article class="card new-panel"><h4>反馈能保存、能追踪</h4><p class="muted">记录新想法、Bug 和审核原话，保留处理历史。已确认阻断 Bug 留下复测缺口，关闭要有复测依据；新的点子先保存，采纳后再纳入项目范围。</p></article></div>
+<div class="callout"><strong>和总设计案、NEXT 同步</strong>总设计案定义本轮范围、模块、权重和验收要求，NEXT 记录当前步骤、证据、开放问题与下一道门。Agent 维护这两份项目文档，先展示画板同步差异，再更新画板；核对期间来源、反馈或证据变了，旧预览就失效。画板中的意见由 Agent 处理后回到项目文档，不自动改范围或替你验收。</div>
+<div class="code-block"><div class="code-label"><span>让 Agent 建立项目内画板</span><button class="copy-btn" type="button">复制</button></div><pre><code>给这个项目建一个进度画板：先读取现有设计、蓝图、NEXT 和验收记录，复用已确认的范围。
+加整体和分模块的实现／验收百分比，能展开查看分母、检查点、证据和未通过的门。
+把画板和项目总设计案、NEXT 同步：范围、现状、证据和下一道门各有来源，更新先核对差异。
+我要能保存新想法、Bug 和审核原话；处理意见后更新相关项目文档再同步，冲突保留草稿。
+先列改动范围，不覆盖旧画板，不自动扩大第一版或代替驾驶员验收。</code></pre></div>
+<div class="callout"><strong>进度变动要说得清</strong>暂存想法不进分母，调整范围或权重需要新基线与历史记录。来源改了先标旧记录，证据文件缺失就保留缺口；100% 不自动授权封装、安装或发布。<a href="https://github.com/LiarMTTT/TavernWeave/blob/main/docs/project-progress-board.md" target="_blank" rel="noopener noreferrer">查看画板说明与命令</a>。</div>
 
 <h3 data-subsection="TW.2" id="tw-system-card">角色卡与变量系统</h3>
 <p>适合从零做卡、把纯文字卡改成变量卡，或者为旧卡增加背包、任务、关系、商城、世界书和状态栏。</p>

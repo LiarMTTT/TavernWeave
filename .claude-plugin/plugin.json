@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.7.0",
-  "description": "22 Skills for rolecards and Vibe Coding; 1.7.0 adds specifications for optional project-specific frontend sandboxes, real source, confirmed test data and UI tuning.",
+  "version": "1.8.0",
+  "description": "22 Skills for rolecards and Vibe Coding; 1.8.0 adds project progress and review boards synchronized from project design and NEXT documents.",
   "author": {
     "name": "LiarMTTT"
   },

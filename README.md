@@ -8,7 +8,9 @@
 
 TavernWeave（TW）帮助你把想法做成能使用、能继续修改的角色卡、网页或小工具。你可以直接说想做什么，或哪里出了问题；TW 会整理需求、提出方案、制作和检查，并说明接下来怎样试用。它通过 22 个 Skill（按任务调用的工作能力）组织这些工作，支持 Codex、Claude Code，并提供 DeepSeek Harness 实验适配。
 
-当前正式版为 **[v1.7.0：前端沙盒打磨](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.7.0)**，共 22 个原生 Skill。升级既有 `sillytavern-embedded-ui`，提供按作品搭建可选前端沙盒的规范与场景参考，由 Agent 使用项目真实源码和现有技术栈实现单模块／联合模拟、确认注入、状态对照与手动调参。可直接跳过沙盒，继续原有制作与封装流程。见[前端沙盒搭建说明](docs/frontend-sandbox.md)。
+当前正式版为 **[v1.8.0：项目进度与审核](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.8.0)**，共 22 个原生 Skill。升级现有 `orchestrate-project-blueprint`，为各项目提供进度画板，并与总设计案和 NEXT 同步。
+
+升级现有 `orchestrate-project-blueprint`，在各项目内生成画板：显示整体和分模块的实现／验收进度条，展开检查点与证据，保存想法、Bug 和审核原话。画板可从项目总设计案读取范围与验收要求，从 NEXT 读取当前状态、证据和下一道门；同步先预览差异，来源、反馈或证据变化后重新核对。新增想法不自动扩大已确认范围，百分比不自动代替驾驶员或真实宿主验收。使用方法见[项目进度画板](docs/project-progress-board.md)。
 
 作品资料库继续支持小说、原作／同人资料与联网文图参考整理，默认交付可编辑 Markdown＋JSONL 索引，并可导出 SQLite；按来源、改编版本和知情阶段检索。见[作品资料库使用说明](docs/work-library.md)。
 
@@ -141,7 +143,7 @@ Host Front Door（可选全局入口，推荐）
 | `activate-tavernweave-soul` | 开启、互切或关闭阿瞳 / MTTT.sir / 灵魂杀手当前任务级模式；强尼是前端审查彩蛋人格，不保存私有 RAG |
 | `build-work-library` | 整理小说、原作与同人资料、联网文字和图片参考；来源回查、版本/阶段筛选、人工编辑、分批接续、Markdown＋JSONL 与 SQLite 导出 |
 | `consult-tavernweave-library` | 强制路由 A0、31 册正式 ST 指南与 C8 实验指南，并按需查询 462 个设计、194 个动效、86 个概念、1,609 条蒸馏账本及离线挑选页 |
-| `orchestrate-project-blueprint` | 将角色卡或普通 Vibe Code 愿望收束为总设计案、First Playable、分级蓝图集、NEXT 和反递归执行门；可召集 Soul 三席联席 |
+| `orchestrate-project-blueprint` | 将角色卡或普通 Vibe Code 愿望收束为总设计案、First Playable、分级蓝图集、NEXT 和反递归执行门；可召集 Soul 三席联席；项目进度画板、百分比与反馈记录及总设计案／NEXT 同步 |
 | `reflect-on-vibe-code-growth` | 从当前 Codex/Chat/项目与交付证据重新评估完整 Vibe Code 能力网络，同时输出可独立复制的完整文字评估表单与七章交互报告，按可比量表对照不可改写的历史节点，并保存脱敏的 append-only 本地履历 |
 | `tavern-card-builder` | 识别卡型与依赖，维护创作权威、材料来源链、世界书、MVU、CoT、开局与记忆架构边界 |
 | `sillytavern-card-components` | 无损拆卡、组件边界、registry/recipe 与往返一致性 |
@@ -262,7 +264,7 @@ Host rediscovery: required-new-task
 
 目标目录中的无关个人 Skill 会保留；22 个 TavernWeave 官方目录必须与当前源码逐文件匹配。写入目标最后一级必须明确名为 `skills`；安装脚本拒绝盘符根、用户目录根、源码仓库内部目标和目录链接，替换失败时会回滚已有官方 Skill。
 
-完成 22/22 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul、脑暴编排、照镜子与 Library；安装回执不能冒充宿主发现。v1.7.0 的完整 ZIP 与 SHA-256 校验文件可从 [正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.7.0) 下载。
+完成 22/22 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul、脑暴编排、照镜子与 Library；安装回执不能冒充宿主发现。v1.8.0 的完整 ZIP 与 SHA-256 校验文件可从 [正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.8.0) 下载。
 
 维护者若只是在发布前自检源码树，可显式使用 `-AllowSourceTree`；该开关不能用于普通用户的安装回执。
 
