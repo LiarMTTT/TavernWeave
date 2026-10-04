@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>项目进度画板 · TavernWeave</title>
+  <link rel="stylesheet" href="./board.css">
+  <script type="module" src="./board.js"></script>
+</head>
+<body>
+  <header class="masthead"><a href="#main" class="brand">TW <span>PROJECT BOARD</span></a><span id="connection" class="pill">正在读取</span></header>
+  <main id="main">
+    <section class="hero" aria-labelledby="project-title">
+      <div class="eyebrow">项目进度 · 审核 · 随手记录</div>
+      <h1 id="project-title">项目进度画板</h1>
+      <p id="project-meta" class="muted">读取项目文件后，显示本轮范围与证据。</p>
+      <div class="toolbar"><button id="reload" class="secondary">重新读取</button><button id="export-md" class="secondary">导出 Markdown</button><button id="export-json" class="secondary">导出 JSON</button><a href="#feedback-section" class="button primary">记想法 / 报 Bug</a></div>
+      <p id="load-message" role="status" aria-live="polite"></p>
+    </section>
+    <div id="source-warning" class="notice" hidden></div>
+    <section id="handoff" class="panel" aria-labelledby="handoff-title" hidden><h2 id="handoff-title">从项目文档同步的当前续接</h2><p id="current-step"></p><p id="next-gate"></p><ul id="open-risks"></ul><p id="feedback-refs" class="muted"></p><p id="authority-versions" class="muted"></p></section>
+    <section class="progress-overview" aria-label="总体进度">
+      <article class="metric"><div class="metric-label">实现进度 <span>有实现证据的检查点</span></div><strong id="implemented-value">—</strong><div id="implemented-bar" class="meter" role="progressbar" aria-label="实现进度"><span></span></div><p id="implemented-detail" class="muted"></p></article>
+      <article class="metric acceptance"><div class="metric-label">验收进度 <span>所有适用验收门通过</span></div><strong id="accepted-value">—</strong><div id="accepted-bar" class="meter" role="progressbar" aria-label="验收进度"><span></span></div><p id="accepted-detail" class="muted"></p></article>
+    </section>
+    <details id="calculation" class="panel"><summary>查看范围、分母与来源</summary><div id="calculation-body"></div></details>
+    <section class="module-section" aria-label="模块进度"><div class="section-heading"><h2>各模块进度</h2><p class="muted">实现与验收分别核对</p></div><div id="modules" class="module-grid"></div><div id="gates" class="gate-grid"></div></section>
+    <section aria-labelledby="work-title">
+      <div class="section-heading"><h2 id="work-title">本轮事项</h2><div class="filters"><label class="sr-only" for="search">搜索事项</label><input id="search" type="search" placeholder="搜索标题、现状、模块"><label class="sr-only" for="module-filter">筛选模块</label><select id="module-filter"><option value="">全部模块</option></select></div></div>
+      <div id="columns" class="board-columns"></div>
+    </section>
+    <section id="feedback-section" class="feedback-section" aria-labelledby="feedback-title">
+      <div class="section-heading"><h2 id="feedback-title">想法、Bug 与审核</h2><p id="feedback-meta" class="muted"></p></div>
+      <div class="feedback-layout">
+        <form id="feedback-form" class="panel form-panel">
+          <h3>记录一条</h3><p id="write-mode" class="muted">正在检查保存通道</p>
+          <div class="form-row"><label>记录类型<select name="type"><option value="idea">新想法</option><option value="bug">Bug 回报</option><option value="review">审核意见</option></select></label><label>优先级<select name="priority"><option value="P1">P1 · 常规</option><option value="P0">P0 · 优先处理</option><option value="P2">P2 · 稍后处理</option></select></label></div>
+          <label>标题<input name="title" required maxlength="200" placeholder="简短描述这一条"></label>
+          <label>原话 / 具体内容<textarea name="text" required rows="6" maxlength="12000" placeholder="可以记新点子，也可以写出现条件、实际表现和预期结果。"></textarea></label>
+          <label>关联事项<select id="related-item" name="itemId"><option value="">项目整体</option></select></label>
+          <label id="blocking-label" class="check-label" hidden><input type="checkbox" name="blocking">建议作为阻断 Bug（经确认后影响相关验收进度）</label>
+          <div class="toolbar"><button id="save-feedback" class="primary" type="submit">保存到项目</button><button id="export-draft" class="secondary" type="button">导出草稿</button></div>
+          <button id="rebase-draft" class="secondary" type="button" hidden>已核对，使用当前版本</button>
+          <p id="save-message" role="status" aria-live="polite"></p>
+        </form>
+        <div><div class="feedback-filter"><label for="feedback-filter">记录筛选</label><select id="feedback-filter"><option value="">全部记录</option><option value="idea">想法</option><option value="bug">Bug</option><option value="review">审核</option></select></div><div id="feedback-list" class="feedback-list"></div></div>
+      </div>
+    </section>
+    <footer>画板展示项目记录。新的想法需要按原流程确认后纳入范围；百分比不会自动替代真实宿主、驾驶员、提交或发布验收。</footer>
+  </main>
+  <dialog id="item-dialog"><div class="dialog-head"><h2 id="item-dialog-title"></h2><button class="icon-button" data-close="item-dialog" aria-label="关闭事项详情">×</button></div><div id="item-dialog-body"></div></dialog>
+  <dialog id="feedback-dialog"><div class="dialog-head"><h2 id="feedback-dialog-title">处理记录</h2><button class="icon-button" data-close="feedback-dialog" aria-label="关闭反馈详情">×</button></div><div id="feedback-original"></div><form id="update-form"><label>状态<select name="state"></select></label><label>本次处理理由<textarea name="reason" required rows="3" maxlength="4000"></textarea></label><label id="update-blocking-label" class="check-label"><input name="blocking" type="checkbox">确认该 Bug 会阻断关联事项的验收</label><div id="bug-resolution-fields"><label>处理结果<textarea name="resolution" rows="2" maxlength="4000"></textarea></label><label>复测结果<textarea name="verification" rows="2" maxlength="4000"></textarea></label><label>项目内复测证据路径（每行一条）<textarea name="verificationEvidence" rows="2" placeholder="checks/retest.md"></textarea></label></div><div class="toolbar"><button id="update-save" class="primary">保存处理记录</button><button id="export-update-draft" type="button" class="secondary">导出处理草稿</button></div><button id="rebase-update" class="secondary" type="button" hidden>已核对，使用当前版本</button><p id="update-message" role="status" aria-live="polite"></p></form><details><summary>查看变更历史</summary><pre id="feedback-history"></pre></details></dialog>
+</body>
+</html>

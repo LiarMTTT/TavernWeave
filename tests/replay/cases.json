@@ -456,6 +456,30 @@
       "prompt": "这次跳过沙盒，继续之前的前端制作。",
       "expectedPrimarySkill": "sillytavern-embedded-ui",
       "expectedBehavior": "Reuse skip decision, create no sandbox, and preserve existing development and runtime checks without marking failure."
+    },
+    {
+      "id": "project-board-evidence-percentages",
+      "prompt": "给已有项目建进度画板，显示整体和模块百分比，不迁移旧蓝图。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Inspect existing authority and NEXT, reuse approved scope, initialize only a missing project-local board, calculate separate weighted implementation and acceptance progress from checkpoints and evidence, keep parked ideas out of the denominator, and expose stale sources and missing files."
+    },
+    {
+      "id": "project-board-persisted-feedback",
+      "prompt": "在画板保存新想法、Bug和审核原话。两个标签页提交时保留冲突，重开还能读到记录。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Use project-local feedback files with version and source-context checks, atomic save and readback, preserve originals and history, keep failed or conflicting drafts, and distinguish static draft export from persistent save."
+    },
+    {
+      "id": "project-board-blocking-bug-retest",
+      "prompt": "一项已经实现的功能确认有阻断Bug，本轮先不修；后续复测通过再关闭。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Keep implementation evidence separate, retain acceptance gaps for confirmed blocking bugs including deferred fixes, require retest state, resolution and existing evidence files for closure, and do not promote a feedback record to driver acceptance."
+    },
+    {
+      "id": "project-board-design-next-sync",
+      "prompt": "把项目进度画板和已有总设计案、NEXT同步：设计案定义范围，NEXT更新后展示进度和下一道门。",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Opt into exact design scope and NEXT state blocks using the actual project paths, derive the board from those sources, review a plan bound to board/feedback revisions and source/evidence hashes before application, preserve history, and keep real-host and driver gates separate."
     }
   ]
 }

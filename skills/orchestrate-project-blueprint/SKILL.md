@@ -1,6 +1,6 @@
 ---
 name: orchestrate-project-blueprint
-description: Turn a vague product, character-card, frontend, or Vibe Coding wish into a bounded total design, first-playable contract, scale-appropriate blueprint, resumable NEXT handoff, and evidence-gated first implementation. Use when the user says 脑暴模式, asks to梳理构思/总设计案/蓝图/子蓝图/第一版, wants one-command project kickoff, or needs to stop a long task from recursively expanding. It may convene the TavernWeave Soul trio for labeled critique. Do not use it to bypass repository instructions, driver approval, real-host acceptance, or a focused implementation skill.
+description: Turn a vague product, character-card, frontend, or Vibe Coding wish into a bounded total design, first-playable contract, scale-appropriate blueprint, resumable NEXT handoff, and evidence-gated first implementation. Use when the user says 脑暴模式, asks to 梳理构思/总设计案/蓝图/子蓝图/第一版, wants one-command project kickoff, wants a project progress board with evidence-based percentages and feedback, or needs to stop a long task from recursively expanding. It may convene the TavernWeave Soul trio for labeled critique. Do not use it to bypass repository instructions, driver approval, real-host acceptance, or a focused implementation skill.
 ---
 
 # 脑暴模式 · 许愿工坊
@@ -98,8 +98,16 @@ node scripts/validate-project-authority.mjs <project-root>/.tavernweave/project-
 3. 当前步骤出现可观察错误、失败证据、未满足的退出条件或实际阻塞时，允许建立一层最小必要的临时问题支线。它必须绑定父步骤、保存触发证据、不扩大产品范围，也不新增完成分母。
 4. 临时问题支线解决、否定或确认阻塞后必须关闭并回到父步骤原有顺序与退出条件；不得在支线内继续递归生成持久层级。
 5. 只有问题已经形成独立领域、独立交付物和独立验收门，且父蓝图无法清楚容纳时，才停止当前执行、提交 `rescope proposal` 并等待驾驶员决定是否提取子蓝图。
-6. 每个阶段满足退出条件后更新 `NEXT.md`，再进入下一阶段；不能以“代码写了”替代证据。
+6. 每个阶段满足退出条件后更新 `NEXT.md`，再进入下一阶段；不能以“代码写了”替代证据。已采用画板同步的项目，先维护总设计案的范围块与 NEXT 的状态块，预览并核对差异后同步画板；范围变更先走原有决定门。
 7. 首版闭环完成后带用户亲手试用，解释失败恢复方法，再帮助其提出一次有具体目标的修改；在用户许可内完成第二次修改并再次试用。然后停在本次驾驶员验收，不自动滚入 Growth Tracks，也不以“教学”为由擅自修改文件。
+
+## 项目进度画板
+
+用户要审核进度、看百分比、记新想法、报 Bug 或留审核意见时，读取 [progress-board.md](references/progress-board.md)。只在用户选择的项目内建立 `progress/`；先恢复已有总设计案、活动蓝图、`NEXT.md` 与验收证据，避免给旧项目另立进度正典。
+
+`progress/progress.json` 是带来源版本的展示投影，`NEXT.md` 仍是唯一当前续接指针。实现进度与验收进度分别按已确认范围、检查点权重和证据计算；范围未确认时不展示百分比，100% 也不代替真实宿主、驾驶员或交付门。想法、Bug 与审核意见独立记录，只有明确决定及相应证据才能回写项目权威；记录意见本身不授予 Git、安装或发布权限。页面无法真正落盘时须明确显示只读或待提交草稿。
+
+用户选择与项目文档同步时，总设计案的 `tw-progress-scope` 块定义事项、权重与验收要求，NEXT 的 `tw-progress-state` 块记录当前事实、证据和下一道门。使用 `init-sources` 初建，或 `source-plan` / `sync-sources` 接入与更新已有画板；按实际旧项目路径选来源。标记损坏、遗漏事项、版本不一致要先修正文档，不能退回手工 JSON 补成成功。预览绑定来源、画板、反馈与证据版本，变化后重新核对；新驾驶员通过记录仍须明确确认依据。反馈处理后维护相关权威，再生成画板；正文和结构块一致性须由 Agent 审查。
 
 ## 复用稳定作品
 
@@ -128,3 +136,5 @@ node scripts/validate-project-authority.mjs <project-root>/.tavernweave/project-
 6. 老作品复用账本；
 7. 已取得的自动化/静态/真实宿主/驾驶员证据；
 8. 下一道门和一句可执行续接指令。
+
+若本轮使用画板，再给出基线与来源版本、实现/验收百分比的计算范围、反馈保存回执或失败原因，以及仍待确认的门；不把百分比写成驾驶员验收结论。

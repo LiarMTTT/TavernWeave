@@ -29,6 +29,6 @@ Mermaid 流程图库来自指南原有的 CDN，并保留备用域；网络不�
 
 ## v1.7.0 可选沙盒章节
 
-教程缓存为 v48。第四章 `content-8.html` 的 `frontend-sandbox` 位于章节导语后、`runtime-evidence` 前；保留原 37–45 编号。功能地图、当前正式版与历史日志分别维护，当前正式下载为 v1.7.0。候选锚点 release-v1-7-0-rc-1 保留为正式小节的兼容入口。Q＆A与skill联动仍位于 TW 导航下方，95 问来源不变。
+教程缓存为 v51（v1.8.0 项目进度与审核正式版）。画板同步按总设计案范围块与 NEXT 状态块生成，先核对版本绑定的差异。第四章 `content-8.html` 的 `frontend-sandbox` 位于章节导语后、`runtime-evidence` 前；保留原 37–45 编号。功能地图、当前正式版与历史日志分别维护，当前正式下载为 v1.8.0。候选锚点 release-v1-7-0-rc-1 与 release-v1-8-0-rc-1 保留为对应正式小节的兼容入口。Q＆A与skill联动仍位于 TW 导航下方，95 问来源不变。
 
 沙盒方法见 `docs/frontend-sandbox.md` 与 `skills/sillytavern-embedded-ui/references/`。TW 只提供搭建规范与场景参考，由 Agent 在项目测试目录按真实源码搭建，沿用项目的技术栈、预览入口和视觉风格。公开场景只用合成数据；私有作品与浏览器原始记录保留在外部测试目录。维护时检查采用／跳过、确认注入、旧确认失效、字段对照和参数复位；Mock Receiver 的真实记录职责保持原义。

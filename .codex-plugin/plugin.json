@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.7.0",
-  "description": "22 Skills for rolecards and Vibe Coding; 1.7.0 adds specifications for optional project-specific frontend sandboxes, real source, confirmed test data and UI tuning.",
+  "version": "1.8.0",
+  "description": "22 Skills for rolecards and Vibe Coding; 1.8.0 adds project progress and review boards synchronized from project design and NEXT documents.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "TavernWeave",
     "shortDescription": "Make, improve, and understand rolecards and software.",
-    "longDescription": "TavernWeave 1.7.0, 22 skills. Provides specifications and scenarios for Agents to build optional project-specific frontend sandboxes from maintained source: single or joint modules, explicit test-data confirmation, state comparison and manual UI tuning. Reuse the project stack and preview service. Work libraries, plain language and user-selected guidance remain available. Sandbox evidence does not replace real-host or driver acceptance.",
+    "longDescription": "TavernWeave 1.8.0, 22 skills. Project-local progress and review boards show weighted implementation and acceptance separately, preserve ideas, bugs and review history, and project scope from total design with current evidence and handoff from NEXT. Review version-bound differences before synchronization. Optional frontend sandbox specifications, work libraries and plain language remain available. Board percentages do not replace real-host, driver or release gates.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [

@@ -11,7 +11,9 @@ jobs:
       - uses: actions/checkout@v6
       - name: Validate public boundary and skill structure
         shell: pwsh
-        run: ./scripts/validate-release.ps1
+        run: |
+          $env:TW_BOARD_TEST_ROOT = Join-Path $env:RUNNER_TEMP "tw-board-tests"
+          ./scripts/validate-release.ps1 -TestRoot (Join-Path $env:RUNNER_TEMP "tw-release-tests")
       - name: Compile Python helpers
         shell: pwsh
         run: |
