@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.9.0",
-  "description": "TavernWeaveX无限月读 1.9.0: 22 Skills with integrated rolecard authoring guidance and safer field-binding diagnostics.",
+  "version": "1.9.1",
+  "description": "TavernWeaveX无限月读 1.9.1: 22 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs across supported hosts.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -14,10 +14,15 @@
     "code-quality"
   ],
   "skills": "./skills/",
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/consult-tavernweave-library/SKILL.md"
+    }
+  },
   "interface": {
     "displayName": "TavernWeaveX无限月读",
-    "shortDescription": "Make, improve, and understand rolecards and software.",
-    "longDescription": "TavernWeaveX无限月读 1.9.0, with 22 skills for rolecards and Vibe Coding. Integrates card architecture, worldbook and variable design, character methods, researched frontend design and natural expression into the existing TW workflow. Standalone rolecard prompt rules retain the author’s intended strength and scope; malformed binding inventories return structured diagnostics. The existing installation identity and skill names remain unchanged. Windows component-export rollback preserves external replacements and reports remaining files. Host rediscovery and real SillyTavern acceptance still require verification in the user environment.",
+    "shortDescription": "角色卡与软件制作，支持云端任务续接",
+    "longDescription": "TavernWeaveX无限月读 1.9.1 provides 22 skills for rolecards and software projects. The same plugin serves local hosts and cloud task workflows, including dots where supported. It checks available files, tools and permissions before work, records bounded milestones in the existing project handoff, and verifies evidence before resuming. Cloud scheduling, runtimes, storage and plugin availability are supplied by the host. Local global-instruction setup is optional and is not a cloud prerequisite. Rolecard architecture, worldbooks, variables, frontend design, source-backed libraries and natural expression share the existing TavernWeave workflow. Real SillyTavern and device acceptance remain separate from source and package checks.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [
@@ -25,9 +30,9 @@
       "Write"
     ],
     "defaultPrompt": [
+      "用 TavernWeave 开始这项云端长任务。先核对可用素材、工具和续接记录，再在已授权范围内分阶段推进；每阶段保留成果和下一步。",
       "我接手了这张角色卡，想沿原作继续更新；先帮我看懂原卡，再选第一次改动。",
-      "把这部作品整理成二创资料库，原作与同人分开；先核对代表样本的质量和 token，再分批继续。",
-      "查看我当前的 TW 引导挡位，解释四档的区别，先不要更改设置。"
+      "把这部作品整理成二创资料库，原作与同人分开；先核对代表样本，再分批继续并留下可恢复的交接记录。"
     ]
   }
 }

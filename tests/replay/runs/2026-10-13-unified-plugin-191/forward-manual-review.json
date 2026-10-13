@@ -1,0 +1,1137 @@
+{
+  "schemaVersion": 1,
+  "reviewType": "manual source-contract reassessment of prior complete written responses; not fresh model replay",
+  "reviewer": "/root/unified_plugin_contract",
+  "reviewedAt": "2026-10-13",
+  "method": "Read each of 80 original forward prompts and expected behaviors, its complete frozen rc2 observedResponse, and its prior assessment; made an explicit case-specific judgment against the new plugin entry and runtime contract. The prior assessment informed but did not decide the new pass field.",
+  "inputSha256": {
+    "definitions": "596460dc90a33061f0b955c14013e130f8e13869d81708a119d48eb547501a28",
+    "responses": "00902c543a00dbe8b25b38cc05b496b0d18f25065289c91c291f5b08bcac96f5",
+    "assessments": "d5db1e47033e97dcc360fbe88a81043752349fb362301356948b3af060773f44",
+    "runtimeContract": "c79faa59ee67788a200bac12a9e32576dd6a0c946481c52cf927f2e4966b47c5"
+  },
+  "caseCount": 80,
+  "passed": 80,
+  "failed": 0,
+  "limitations": [
+    "This is source-contract compatibility review of preserved rc2 answers, not new model responses or live plugin execution.",
+    "Actual dots Skill loading, connected-computer access, current account entitlement, and real SillyTavern behavior remain untested."
+  ],
+  "cases": [
+    {
+      "id": "fixed-greeting-mvu",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "bdfdd99bb698ef4b88d0db403840090237c51e393f28b12be6e90ba9dc5e4be9",
+      "pass": true,
+      "rationale": "答复把三条开场与分支变量绑定，并要求拿到维护源、schema 和目标版本后逐条验证存储与切换。它没有在无文件或无真实酒馆时宣称已执行，符合云端先核实材料和宿主的要求。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Preserve the detected dialect, select per-greeting initialization, and retain a real-runtime acceptance gate.",
+      "priorAssessmentRationale": "答复选择原生备选开场、公共默认值加逐开场分支初始化，并要求按目标版本与现有 schema 决定块形式；逐条核对实际存储、重载和切换，未伪造初始化。"
+    },
+    {
+      "id": "mvu-dual-update-routing",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "359f7e1b332b5598d8af5182ed20bf32d7a2d3ebc090e1f0023f3e7a1a8b1f61",
+      "pass": true,
+      "rationale": "答复先核实目标 MVU Zod 是否支持条目路由，再区分剧情与更新模型，最后要求两条路径实测。新增宿主合同只约束何处能运行这些检查，没有改变该卡内路由。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Verify runtime support, keep the variable list intentionally shared, route update rules and output format to the update model, route plot-only instructions to the plot model, preserve normal activation, and require both-mode acceptance.",
+      "priorAssessmentRationale": "答复先核对目标 MVU Zod 的条目名路由支持，分开标记剧情与更新内容，仅让双方需要的状态投影共享，并要求两种路径实测。"
+    },
+    {
+      "id": "text-card-custom-cot",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "386411877e3007b022f3f6e2b0d31851eb9b9d13f3a10f6dda8555f3e02b523e",
+      "pass": true,
+      "rationale": "答复直接给可复制的纯文字 CoT、信息不足回退和三种可观察用例，没有捏造脚本或运行结果。即使云端没有终端，这部分文本工作也可以完成。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置"
+      ],
+      "originalCriterion": "Treat custom CoT as an independent author-written decision protocol, provide a concrete lightweight template with observable checks and fallback, and keep visible inner thoughts separate from system judgment.",
+      "priorAssessmentRationale": "答复给了可直接放入世界书的轻量判断正文、信息不足时的回退，以及普通对话等可观察检查；明确不展示检查过程或索取隐藏推理，符合制卡 CoT 契约。"
+    },
+    {
+      "id": "preset-card-cot-stitching",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "5388512d6edf63d3aa4f46ff12f8512c3bab6206390232c929361bbdb2a52db8",
+      "pass": true,
+      "rationale": "答复把预设主 CoT 留在原位，用稳定规则 ID 装配卡片增量，并把完整回退稿限定为有维护源时构建。它要求先看实际阶段和路由，没有假设云端可访问用户预设。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Keep the main CoT in the preset, declare card and conditional increments against stable phases and rule IDs, deduplicate and order them, protect the main structure, and provide a generated full fallback when stitching is unavailable.",
+      "priorAssessmentRationale": "修订在保留预设主 CoT 与卡片常驻/战斗条件增量的基础上，明确阶段依赖、稳定 ID、可复现排序和去重；拼接不可用时由独立维护源生成带来源版本的完整回退稿。与 cot-design-and-authoring §6 的增量合同一致，原两项缺口已补齐。"
+    },
+    {
+      "id": "ensemble-cot-update-script-split",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "431c4f058d3057ad2fe405d77bdeb1ddc7153ebc0a69c85787db83b996cab8a4",
+      "pass": true,
+      "rationale": "答复给剧情模型、更新模型和确定性脚本分配互不竞争的写入职责，并要求现有 schema、预设和脚本入口后才落成可导入文本。云端工具可用性检查不会改变该所有权合同。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置"
+      ],
+      "originalCriterion": "Give the plot model ensemble scheduling and narrative CoT, limit the update model to semantic source events and legal updates, assign deterministic derived calculations to scripts, and prohibit competing writers.",
+      "priorAssessmentRationale": "剧情模型负责在场 NPC 调度，更新模型仅抽取成立事件与合法更新，确定性数值交脚本，并明确每字段唯一写入者。"
+    },
+    {
+      "id": "card-type-runtime-ledger",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "d97139f2b8eb9ac60d6afc88c454a6addf5ffc9ab43e28879d0469b93ff521f7",
+      "pass": true,
+      "rationale": "答复把已随卡封装的 Schema/地区脚本、宿主 Tavern Helper、远程 import 和开发用 Zod 分开，明确尚未见卡包与实例。新增合同同样禁止凭插件环境推断真实宿主已可用。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Return an mvu_zod primary type from the schema, registration path, and packaged loader evidence; require the embedded schema plus both promised regional scripts with their declared enabled states; separate their Git CDN targets and Tavern Helper host requirement; and do not add a standalone Zod installation step.",
+      "priorAssessmentRationale": "修订答复将 mvu_zod 作为题述目标类型，同时要求从实际包独立核对 Schema 注册调用与加载器就绪，缺证据时标类型待核。双地区脚本、启用状态、Tavern Helper、Git CDN 和开发用 Zod 分列，覆盖类型与依赖账本。"
+    },
+    {
+      "id": "safe-decompose",
+      "kind": "forward",
+      "primarySkill": "sillytavern-card-components",
+      "priorResponseHash": "161ad1d88aefa4df43e5bc3a933fbac63c2b6ea10085a394cad6a4c7dd1b252a",
+      "pass": true,
+      "rationale": "答复要求实际 JSON 路径与获准沙盒，原件哈希、组件依赖和重组比对都有明确位置；末尾直说目前无文件、未拆分。它不把 Windows 路径或本机脚本当云端既有能力。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Snapshot the input, decompose in a sandbox, declare dependencies, and require roundtrip comparison.",
+      "priorAssessmentRationale": "修订保留原件哈希、独立沙盒和重组比对，并明确每个组件的依赖、冲突、运行依赖类别、交付方式和组装阻断条件。与 card-components 的组件合同一致，原缺项已补齐。"
+    },
+    {
+      "id": "release-package",
+      "kind": "forward",
+      "primarySkill": "sillytavern-card-pipeline",
+      "priorResponseHash": "f0ac27e4927daee4dcd1cc3cf9a7447d26faf9571b19f7e94b9e2c3bd4a4f44d",
+      "pass": true,
+      "rationale": "答复先索取维护源、manifest、版本与构建入口，未见材料不报已打包；离线 JSON/PNG 回读和真实酒馆导入分门。云端可用工作区和工具检查只会限制可实际完成的阶段。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Discover the project adapter, keep source and artifacts separate, and stop at explicit release gates.",
+      "priorAssessmentRationale": "答复要求维护源、profile/manifest 和项目构建入口，采用暂存构建并回读 JSON/PNG，保留真实酒馆加载与交互为后续门；未因缺材料虚报产物。"
+    },
+    {
+      "id": "runtime-dependency-preflight",
+      "kind": "forward",
+      "primarySkill": "sillytavern-card-pipeline",
+      "priorResponseHash": "778c7bfc861fcd7f16eb1f8eb59a0542506fdd01df5c742d1d3e3f3f9dea35c6",
+      "pass": true,
+      "rationale": "答复要求源码与候选包对账，缺必需资源即阻断打包，并区分内嵌、宿主、远程和开发依赖。它明确现在不能声称齐全或已打包，保留 ST 实测。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Reconcile detected and declared card capabilities, block a missing schema or promised regional script and any enabled-state mismatch, and report embedded assets, Tavern Helper setup, remote imports, and development-only exclusions separately.",
+      "priorAssessmentRationale": "先对账检测能力与 active profile/manifest；缺正则、Schema、承诺地区脚本及启用状态冲突均明确阻断打包。嵌入、宿主、远程和开发依赖分别报告，符合 Prepare/Compose 门。"
+    },
+    {
+      "id": "bound-worldbook-version-sync",
+      "kind": "forward",
+      "primarySkill": "sillytavern-card-pipeline",
+      "priorResponseHash": "6e10fc6f4ffd3724a4a6a7f7c4b0595d95ff962789271c467226b17d0d2524cd",
+      "pass": true,
+      "rationale": "答复用 active manifest 的稳定 ID 和版本面拒绝旧世界书，且在拿到维护源和已验收提交前不报已封装。新增合同的来源核实与真实产物回读要求与之相符。",
+      "relevantNewSections": [
+        "使用现有权限与资料",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Resolve both artifacts from the active manifest by stable ID, require a machine-checkable version surface, compare attached and standalone worldbooks with maintained source, and reject the stale version.",
+      "priorAssessmentRationale": "答复明确从 active manifest 用稳定 ID 锁定附着与独立世界书，要求机器可读版本面、维护源语义对比，并把 2.3.0 拒绝写成负向检查。"
+    },
+    {
+      "id": "exact-runtime-signature",
+      "kind": "forward",
+      "primarySkill": "sillytavern-api-reference",
+      "priorResponseHash": "9bc5b89a8ca02e19830177a5b65ffbe2c8d0423862e206ac228cdeb9f4962273",
+      "pass": true,
+      "rationale": "答复因缺具体 hook 与目标版本拒报精确签名，要求匹配源码和正确 iframe 的实际探针；它没有假设云端拥有本机安装源码或真实酒馆。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Verify an identified source/version and distinguish confirmed facts from inference.",
+      "priorAssessmentRationale": "没有具体 hook 与安装版本时拒报精确签名，要求匹配源码和正确 iframe 探针，区分声明类型与实际触发。"
+    },
+    {
+      "id": "blank-ui-runtime",
+      "kind": "forward",
+      "primarySkill": "sillytavern-runtime-debug",
+      "priorResponseHash": "bad6a02519b202e20bc048db1376c769d6e2c786e13dcf575ad3217248ed1d4a",
+      "pass": true,
+      "rationale": "答复只承认离线渲染链，并要求导入包、宿主版本和控制台错误后在新聊天复现 iframe、状态与 DOM。新增合同保留云端预览和真实酒馆的独立证据门。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Reproduce in a real runtime and trace DOM, console, iframe, permissions, data, and render evidence.",
+      "priorAssessmentRationale": "在真实 ST 新聊天复现并追控制台、楼层数据、DOM 与渲染；逐层核对 iframe 所有权、同源、sandbox、父子窗口权限和变量桥，补齐运行层。"
+    },
+    {
+      "id": "embedded-control-center",
+      "kind": "forward",
+      "primarySkill": "sillytavern-embedded-ui",
+      "priorResponseHash": "525d37fdf27dd13dfcf1a6c58d8ab83cd14c47b23c6391ac4663e12cb80ca50b",
+      "pass": true,
+      "rationale": "答复给移动布局、可访问性与草稿状态的具体审查基线，但因缺真实源码和挂载位置不报修复或验收。云端只有文本时仍可提供这类有界审查。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Review the embedded UI contract without introducing a React stack by default.",
+      "priorAssessmentRationale": "答复围绕真实控制中心的移动布局、可访问性、草稿与正式状态分离和变更预览开展；没有默认引入 React，也未把审查冒充宿主验收。"
+    },
+    {
+      "id": "vague-cleanup",
+      "kind": "forward",
+      "primarySkill": "code-quality-workflow",
+      "priorResponseHash": "ca0e30441189978149ada786d387664e93f194eac7f368694089c3a9067a45d8",
+      "pass": true,
+      "rationale": "答复先要求模块路径和只读证据，再决定是否有最小修复，未凭审美直接重写。插件入口的宿主检查不会扩大改动或授权范围。",
+      "relevantNewSections": [
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Audit and gate first; do not edit without evidence and implementation authorization.",
+      "priorAssessmentRationale": "先只读审查调用者、行为合同和故障证据；仅在可复现问题成立后提出最小修复与验证门，没有凭审美直接改稳定模块。"
+    },
+    {
+      "id": "react-product-ui",
+      "kind": "forward",
+      "primarySkill": "shadcn-tailwind-ui",
+      "priorResponseHash": "d700e421992dbf0698ae456f8a61552df813b33f4da83a98f01581750eef04e4",
+      "pass": true,
+      "rationale": "答复要求实际项目路径、依赖与配置，写入前预览差异并保留现有 token 和本地改动；没有项目时不报已构建。云端执行同样须先证明工作区可见。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Use the requested stack, detect the project setup, and guard all generated writes.",
+      "priorAssessmentRationale": "核对 React/Tailwind/shadcn 现状，明确复用 shadcn/ui、Radix 与 Tailwind token；新增组件或配置先 dry-run 看差异并保护本地改动。"
+    },
+    {
+      "id": "workshop-incident",
+      "kind": "forward",
+      "primarySkill": "rolecard-workshop-ops",
+      "priorResponseHash": "0a0b5b5f3cf110257d6bfb0925d793a75b114ef87fb39f90afca98d9f62fc5b1",
+      "pass": true,
+      "rationale": "答复把 502 沿代理、Gateway 和对象存储分段只读定位，并将部署与密钥变更各列独立授权门。新增云端合同不把插件连接或诊断权限升级为生产写入权。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Trace the configurable public/gateway/storage chain read-only and require authorization before deploy or secret changes.",
+      "priorAssessmentRationale": "修订把 Gateway 到对象存储的包载荷上传/读取、返回码和超时纳入只读 502 追踪，并把生产部署与密钥轮换/替换分别列为明确授权门。符合 workshop-ops 的链路和变更边界。"
+    },
+    {
+      "id": "component-only-regex-update",
+      "kind": "forward",
+      "primarySkill": "sillytavern-component-update",
+      "priorResponseHash": "61e06c323a39ed05100475d4c6e08cf1052df1876eb6ea1f0c2a63408a7a60fc",
+      "pass": true,
+      "rationale": "答复冻结组件模式，只产可导入正则 JSON 和验证报告，要求原规则与目标版本，真实导入另验。共享合同不会把云端离线检查提升成整卡或宿主验收。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Freeze component mode, preserve the stable ID and untouched fields, emit only an importable regex artifact plus validation evidence, and produce no card JSON or PNG.",
+      "priorAssessmentRationale": "明确锁定 component 模式，只给可导入正则 JSON 与验证报告，保留稳定 ID、启用状态、顺序及未知字段，不产整卡。"
+    },
+    {
+      "id": "component-full-card-handoff",
+      "kind": "forward",
+      "primarySkill": "sillytavern-component-update",
+      "priorResponseHash": "5aa4e83d8b563e15207517ae1d898e5054e5f935ff6067231914c224d1e57fb0",
+      "pass": true,
+      "rationale": "答复用脚本稳定 ID 与不动表面哈希移交整卡流水线，明确缺维护源时不能称已封装，导入和旧聊天另验。新增合同只要求执行前检查文件、工具与真实产物。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Freeze full-card mode, build validated script artifacts and an assembly handoff with an untouched-surface hash, then route composition and packaging to sillytavern-card-pipeline.",
+      "priorAssessmentRationale": "锁定 full-card，按稳定 ID 验证两段脚本；交接明确包含 assembly.targetCard、assembly.componentId 和不动表面的 expectedUntouchedHash，整卡组装/封装交给 pipeline。"
+    },
+    {
+      "id": "regex-placement-depth-fixtures",
+      "kind": "forward",
+      "primarySkill": "sillytavern-render-regex-pipeline",
+      "priorResponseHash": "de2d8435a74371348789178a65d7e8c5bb251fb4a323e08a617bd022e3225e77",
+      "pass": true,
+      "rationale": "答复给四个 display/prompt/depth 断言，要求目标版本确认 placement 数值，离线 fixture 之后仍需真实酒馆复核。云端工具若不可用也不能虚报这些断言已运行。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Validate the regex dialect and flags, use the supplied numeric placement without guessing, run display/prompt/depth fixtures, and emit an ordered stage trace.",
+      "priorAssessmentRationale": "答复核对 RegexScriptData 方言与标志，不凭记忆猜 AI placement 数值；列出 display/prompt 与深度 0、4、5 断言和有序阶段 trace，保留实机门。"
+    },
+    {
+      "id": "regex-host-disagreement",
+      "kind": "forward",
+      "primarySkill": "sillytavern-render-regex-pipeline",
+      "priorResponseHash": "b7222938c77ac7295badcffff767dc2dfb5ecfa75801bee41605050329a6e970",
+      "pass": true,
+      "rationale": "答复明确 fixture 只覆盖选择条件与 JS 替换语义，列出未模拟的宏、Markdown、提示词和扩展顺序，并以实际安装版本和楼层重现为准。新增合同与其证据分层一致。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Keep the deterministic fixture result, list unsupported host stages, treat the installed runtime as authoritative, and hand exact runtime reproduction to sillytavern-runtime-debug.",
+      "priorAssessmentRationale": "保留离线 fixture 的有限结论，列出未模拟宏、Markdown、提示词组装等宿主阶段，并以目标 ST 的版本、导入规则和楼层证据复现。"
+    },
+    {
+      "id": "rolecard-static-security-audit",
+      "kind": "forward",
+      "primarySkill": "sillytavern-rolecard-security",
+      "priorResponseHash": "f6d0fe8a2a14816a28147b5ac79e6deec1d470aae589ebe67750f1906fe86415",
+      "pass": true,
+      "rationale": "答复因缺卡文件不报发现或安全结论，只规划脱敏静态扫描且不导入、不执行、不访问远端。新增合同的工作区可见性和私有材料边界与这项只读审查一致。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Perform a read-only redacted scan, report rule IDs and locations without executing content or exposing credential values, and separate suspicious patterns from confirmed reachability.",
+      "priorAssessmentRationale": "答复限定只读静态扫描、文件哈希、危险模式与输入可达性，说明位置/规则/严重度及脱敏，并排除了导入、执行和远程访问；符合安全 Skill 的扫描与分诊边界。"
+    },
+    {
+      "id": "rolecard-security-baseline",
+      "kind": "forward",
+      "primarySkill": "sillytavern-rolecard-security",
+      "priorResponseHash": "f1174dee0e082cf3823063ef121f574408e25776b2cd0ced0860010da863c379",
+      "pass": true,
+      "rationale": "答复要求候选与批准基线的实际文件和哈希，再按稳定规则 ID 比较正增量；命令是待执行步骤而非已运行事实。它保留静态与宿主验证分层，也不读取凭据内容。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Compare counts by stable rule ID, report positive deltas as regressions, and avoid treating a baseline as a suppression list.",
+      "priorAssessmentRationale": "答复要求候选/基线哈希，按稳定规则 ID 比较计数并阻断正增量，明确不通过改名或降级严重性规避，未把基线当豁免清单。"
+    },
+    {
+      "id": "database-rolecard-migration",
+      "kind": "forward",
+      "primarySkill": "sillytavern-database-rolecards",
+      "priorResponseHash": "4a9e580792826be9d2bd8c24069aced592b6b661d353a8acf441986db207d1af",
+      "pass": true,
+      "rationale": "答复在多楼层模型下给出 rename/add 的具体 fixture、冲突停机和第二次运行不变检查，并把旧聊天持久性留给目标酒馆。新增合同要求当前脚本可用和恢复时核对哈希，不改变迁移数据合同。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Validate the multi-floor model, run a deterministic rename plus add-field fixture, preserve unknown data, compare expected output, and prove the second run is unchanged.",
+      "priorAssessmentRationale": "修订答复给出多楼层 stat_data 模型预检和确定性的 rename-field(status→state)、add-field(progress=0) fixture；示例明确旧 status 移除、无关 custom 保留、双字段冲突报错且第二次运行结果不变。旧聊天持久性仍留给目标宿主验证。"
+    },
+    {
+      "id": "database-rolecard-bindings",
+      "kind": "forward",
+      "primarySkill": "sillytavern-database-rolecards",
+      "priorResponseHash": "b21d3ae481a4cb85dbb8a93a795125ba3396bfa80a16c1b2584d821fe5ce8cdf",
+      "pass": true,
+      "rationale": "答复要求 schema 与 binding 实物，声明级检查只证明路径一致；编辑、swipe、切聊和重载在真实多楼层 ST 回读。云端静态检查仍不能替代这些宿主生命周期门。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Validate stable binding IDs, table and field references, access owner and refresh events, keep UI implementation separate, and retain real multi-floor lifecycle acceptance.",
+      "priorAssessmentRationale": "要求每条 binding 有稳定 ID、表/主键/字段、权限、所有者和刷新事件；静态检查与 embedded-ui 实现分责，仍保留真实多楼层编辑、swipe 等生命周期验收。"
+    },
+    {
+      "id": "extension-static-scaffold",
+      "kind": "forward",
+      "primarySkill": "sillytavern-extension-dev",
+      "priorResponseHash": "8f9e2b4b666a71a7f5619e4d4739c7f8f1aebee9966176ea2e298bc1db938102",
+      "pass": true,
+      "rationale": "答复把写入限于 dry-run 后的独立 staging，缺扩展 ID、目标版本与输出目录时不报兼容，也明确不安装启用。插件运行合同不会把云端工作区写入推成真实 ST 安装。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Freeze the UI-extension boundary, plan before writing, generate only the minimal scaffold, validate manifest paths and hook exports, and perform no host installation or reload.",
+      "priorAssessmentRationale": "答复锁定 UI 扩展的 manifest、ES 模块、可选 CSS 与能力合同，先 dry-run 后 staging 写入，验证路径和能力，并明确不安装或启用。"
+    },
+    {
+      "id": "extension-capability-snapshot",
+      "kind": "forward",
+      "primarySkill": "sillytavern-extension-dev",
+      "priorResponseHash": "a46769236f15b0c3a5a541bded4a09f956b2da48fa5a6ba0ea8d7166843b9e10",
+      "pass": true,
+      "rationale": "答复只以实际能力快照比较最低版本和必需符号，缺快照时不报通过；签名、事件和清理仍需同一实例验证。新增合同恰好要求不凭另一环境或插件安装推断宿主能力。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Validate the inert capability snapshot, block missing required symbols or minimum versions, activate declared optional fallbacks, and keep signatures and live behavior unclaimed.",
+      "priorAssessmentRationale": "修订答复把 SillyTavern 与 Tavern Helper 的 minimum 版本逐一比较，低于最低版本或缺必需符号均阻断；可选符号仅按合同 fallback 降级，预发行版本与快照能力边界也说清楚。"
+    },
+    {
+      "id": "large-rolecard-budget-regression",
+      "kind": "forward",
+      "primarySkill": "sillytavern-rolecard-performance",
+      "priorResponseHash": "74074fa2f7cfd4e74b3afd5d40072ab73c3f21525cb67cbe1a7a6f50c8c54662",
+      "pass": true,
+      "rationale": "答复要求候选与基线同口径文件及阈值后才测量，缺文件不编造数值，报告只含脱敏指标；真实设备流畅度另验。云端无相关文件或工具时按新增合同标未运行。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Measure both artifacts with the same redacted metric surface, apply hard limits and declared growth deltas, identify owners, and avoid deleting behavior merely because it is large.",
+      "priorAssessmentRationale": "答复要求同版工具同口径测候选和基线，列各类数值、差额和硬上限，只输出指标不泄露内容；超标后按所有者作最小修正，实机性能另列。"
+    },
+    {
+      "id": "rolecard-runtime-performance-sample",
+      "kind": "forward",
+      "primarySkill": "sillytavern-rolecard-performance",
+      "priorResponseHash": "0b2456bfbbcc0a1078098de69da26e4d0b6c4e60fc3d4202dce6482fac115a43",
+      "pass": true,
+      "rationale": "答复指定具名 ST/设备、两场景至少五个样本和预算，脚本计算尚待原始采样，静态体积与实机 p95 分门。它没有凭云端浏览器或脚本路径宣称样本已存在。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Require a named environment and sufficient captured samples, calculate deterministic percentiles per scenario, and keep static and real-runtime gates independent.",
+      "priorAssessmentRationale": "答复要求具名 ST/浏览器/设备及卡哈希，两个场景各至少五个有效样本，以最近秩 p50/p95 和预算判定，静态大小与实机计时分门。"
+    },
+    {
+      "id": "media-live2d-contract",
+      "kind": "forward",
+      "primarySkill": "sillytavern-media-live2d-runtime",
+      "priorResponseHash": "efe85cd1170003b7bccd6a15d4627150bd3233295b21fb06b4c5f01b8a911c6b",
+      "pass": true,
+      "rationale": "答复要求媒体清单与 provider 版本，本地文件才核哈希，远端保持未取回，并把 CORS/WebGL 等留给实机。云端与本机文件位置不互通的新增规则不影响这份静态/运行边界。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Verify local containment, bytes and hashes, leave remote sources uncontacted, require an explicit Live2D provider and fallback, and pair load/play actions with teardown.",
+      "priorAssessmentRationale": "答复逐项核对本地路径、字节和 SHA-256，远端不接触；要求具体 provider/能力探针和静态回退，并覆盖 PAGEHIDE 与切聊天清理。"
+    },
+    {
+      "id": "media-preload-audio-lifecycle",
+      "kind": "forward",
+      "primarySkill": "sillytavern-media-live2d-runtime",
+      "priorResponseHash": "7cbc1d6a0a295280b2b2df949958622ddbf5bf52e1f62afcdef068da501791ec",
+      "pass": true,
+      "rationale": "答复给非联网分组、字节及数量预算、局部 BGM 设置和确定性停止路径；缺清单预算时不报通过，自动播放与销毁在目标酒馆验。新增合同不会把脚本计划说成后台实测。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Produce a non-network preload plan, enforce declared byte and count limits, use only BGM or ambient audio contracts, preserve existing settings, and validate deterministic cleanup.",
+      "priorAssessmentRationale": "非联网清单区分 eager/lazy/on-demand，同时核对 eagerBytes、lazyBytes 与 eagerAssets 数量上限；bgm/ambient 局部更新保留播放列表，并列切聊天/PAGEHIDE 停止与解绑路径。"
+    },
+    {
+      "id": "creative-authority-resume",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "211df9696b474a4e1e732c2a97f4c9b81953136941d05431e02ede27ea2c6241",
+      "pass": true,
+      "rationale": "答复先读项目创作权威和 NEXT，再比对工作树与产物，缺入口时不编造已确认设定，也不重新询问冻结内容。新增合同要求沿唯一既有续接指针，方向完全一致。",
+      "relevantNewSections": [
+        "使用现有权限与资料",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Read the Markdown/YAML creative authority and actual worktree first, preserve state buckets, restate only genuine conflicts or open decisions, and continue from the recorded next gate.",
+      "priorAssessmentRationale": "答复先读创作权威、NEXT 与实际工作树，分别保留已确认、候选、待决、证据和下一门；只在权威与实物冲突时提出分歧，未重问冻结设定。"
+    },
+    {
+      "id": "library-routed-ui-selection",
+      "kind": "forward",
+      "primarySkill": "consult-tavernweave-library",
+      "priorResponseHash": "d4062e3304c63ae7fc759d4c52cb5bf5e68f550c2e2f579575debb2e35df965f",
+      "pass": true,
+      "rationale": "答复给出具名快照、A0 路由、三项目录 ID 与来源，并保持候选/许可/API/实机分门；旧回放有冻结库来源证据。新版在 dots 中仍须先确认这些随包目录确实可读，不能把旧回执挪作新任务已加载证明。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Return A0 for the write task, route to the embedded-UI and mobile guides, query the complete design and motion catalogs with a bounded result count, return three evidence-linked candidates as proposed, and retain exact API, license, implementation, and real-host gates.",
+      "priorAssessmentRationale": "修订答复给出写入前 ST-A0 的目标、红线和验收回执，路由 ST-C12/C2/D7；从完整设计与动效目录有界选出 design:h8、motion:m4-mspring、motion:prm，三项 ID、来源 URL 和本地预览均与冻结目录一致，并保持 proposed、许可、精确 API 和真实宿主门。"
+    },
+    {
+      "id": "soul-atong-card-guidance",
+      "kind": "forward",
+      "primarySkill": "activate-tavernweave-soul",
+      "priorResponseHash": "56ab08e71051ac8fda243512fa85f0269f98e5583498b1d7a547ef95fa126c32",
+      "pass": true,
+      "rationale": "答复把阿瞳限定当前任务 Portable，公开内核与私有画像分开，小说样本再路由资料库和制卡 Skill。新合同不提供额外云端记忆或权限，旧答复也没有宣称它们。",
+      "relevantNewSections": [
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Activate Atong as current-task Portable mode, disclose unchanged permissions and profile status, use warm scaffolding, and route the technical work to tavern-card-builder and the library.",
+      "priorAssessmentRationale": "给出阿瞳 Portable 回执与权限/画像状态，以小样本建立底本、出处和推断边界；明确 Library 负责 A0/资料路由、build-work-library 负责资料成库、tavern-card-builder 负责制卡。"
+    },
+    {
+      "id": "soul-mttt-sir-teachback",
+      "kind": "forward",
+      "primarySkill": "activate-tavernweave-soul",
+      "priorResponseHash": "a0f22db51304300fc980f01ca07e8de527a40df7e68ba7a143afddf9e486da71",
+      "pass": true,
+      "rationale": "答复让用户复述 Node fixture 能证明的范围和真实酒馆还缺的导入、滑动、编辑证据；Portable 人格没有改变证据门。云端执行时同样不能把 fixture 当目标实例结果。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Activate strict but respectful Portable mode, demand the exact capability and evidence boundary, require teach-back, preserve the real-host gate, and avoid personal humiliation.",
+      "priorAssessmentRationale": "答复明确当前任务 Portable 严格模式，要求说清 Node fixture 的能力边界和反例，并请用户复述真实宿主门所需证据；未羞辱用户。"
+    },
+    {
+      "id": "soul-killer-frontend-review",
+      "kind": "forward",
+      "primarySkill": "activate-tavernweave-soul",
+      "priorResponseHash": "86fcb7d9db172a860b3db04584d62d1836c878963a7d853b02f9290b077b63e5",
+      "pass": true,
+      "rationale": "答复因无源码/截图/实机材料而不编造优点或故障，后续修复交设计库与嵌入 UI Skill，浏览器、ST 和观感分门。插件宿主检查不会让审查自动获得修改权。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Activate soul-killer-portable with a disclosed Johnny Silverhand fan-roleplay receipt, distinguish available visual evidence from untested gates, report at most three ranked Relic faults with evidence, impact, correction, and recheck, name a concrete strength, and route implementation to the owning Library and UI skills without expanding authority.",
+      "priorAssessmentRationale": "修订答复说明当前缺页面/截图/实机材料，明确现有强项也无法评估，不凭空编造故障；承诺有证据时按最多三项给影响、修复、复验，并把后续修复交 Library 选材和 embedded-UI 承接，审查与修改门分开。"
+    },
+    {
+      "id": "brainstorm-soul-ensemble-first-version",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "1d55c4c00cea7086ef3a325f99e9cb202a507d50caab1924fbd1f573fcef91a0",
+      "pass": true,
+      "rationale": "答复明确三席是一名 Agent 的镜头、当前任务 Portable；四态账本、方向预算和首版设计确认门均清楚，本轮不写源码。新增云端持续执行合同没有制造多个后台 Agent 或扩大权限。",
+      "relevantNewSections": [
+        "使用现有权限与资料",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Activate bounded project brainstorming and the Soul ensemble as three labeled lenses of one Agent, identify project type and host surface, prefer one or two necessary decisions within a shared maximum of four, maintain the four-state ledger and direction budget, split Core Spine, First Playable, Growth Tracks, and Parking Lot, select a scale-aware blueprint profile, and stop at driver design approval.",
+      "priorAssessmentRationale": "三席限定为同一 Agent，提出项目类型与宿主两项必要决定；四态账本、foundational 0/4 轮与硬上限、四段首版分层及 blueprint-set 档位均写出，停在设计确认前。"
+    },
+    {
+      "id": "giant-project-blueprint-set",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "40857447ab5ecdf02cc11343619ed7780753260050e4c727fc792bc9cefbc9dc",
+      "pass": true,
+      "rationale": "答复只在多领域验收边界成立时选大型蓝图，保留一个 NEXT、零持久子蓝图预算和可观察失败才开临时支线。它正符合新合同的唯一续接源与有界长任务要求。",
+      "relevantNewSections": [
+        "使用现有权限与资料",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Select the program blueprint profile only from real multi-domain boundaries, create a master index with bounded depth and child limits, extract domain blueprints progressively, freeze runtimePersistentBlueprintBudget at zero for every active step, keep ordinary checklists non-authoritative, and preserve a resumable NEXT handoff.",
+      "priorAssessmentRationale": "修订先核实多宿主、长期迁移和独立领域验收门，再有条件地选 program 档；保留三层九直属上限、渐进提取与唯一 NEXT，并明确每步零持久预算及普通检查单不构成新权威或完成分母。原两项缺口已补齐。"
+    },
+    {
+      "id": "runtime-problem-refinement-return",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "12f40e902b3c38bc96d10694c92944b370552b10aeffe6da5dcdc36878f072c4",
+      "pass": true,
+      "rationale": "答复把 390px 真机问题绑在 P7 的非持久支线，记录同机复测后回到原退出条件，不新增进度分母。新合同的阶段证据和停止条件没有改变此边界。",
+      "relevantNewSections": [
+        "有界长任务与恢复",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Open one evidence-triggered non-persistent problem refinement bound to P7, use only the minimal diagnostic, repair, and recheck actions, preserve the product scope and completion denominator, record resolution evidence, close the refinement, and return to P7 and its original exit condition.",
+      "priorAssessmentRationale": "把 390px 真机问题绑定 P7 的非持久单支线，限定诊断、修复和同机复测，保留分母并说明通过后关闭支线回 P7。"
+    },
+    {
+      "id": "frontend-fit-decline-and-legacy-reuse",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "26edace4f1da8ee536ff38b205dbdd88cee1dcd9e069033521f4db2b3c2f7f1f",
+      "pass": true,
+      "rationale": "答复先判断文字工具不适合独立前端，要求旧作品路径/版本/试用证据后才分类复用，并保留原型与真实宿主门。新合同只是要求这些旧作品在当前云端或本机任务中实际可见。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Evaluate the frontend host surface against core interaction value, explicitly recommend against an unsuitable independent UI with a lighter fallback and reopen conditions, preserve prototype and real-host gates if the driver overrides, and inspect actual stable legacy artifacts before classifying reuse.",
+      "priorAssessmentRationale": "答复明确不推荐独立前端，给文字优先的轻量替代与重开条件；旧作品先要路径/版本/实证再分复用类别，坚持独立前端时保留原型与实机门。"
+    },
+    {
+      "id": "mirror-vibe-code-growth-recheck",
+      "kind": "forward",
+      "primarySkill": "reflect-on-vibe-code-growth",
+      "priorResponseHash": "73b3588ef17d6917687354ce310fd9170579cf01b329eaa3c78d29b61357e380",
+      "pass": true,
+      "rationale": "答复要求当前可访问证据、校验旧链和脱敏追加三文件，缺履历根时不报评分或已保存；Chat/Codex 口径与人验收分开。新增合同对云端可见文件及持久写入的核实与之相容。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Reassess the complete current capability network without treating prior scores as anchors, including deep thinking across social issues, future outlook, observed feedback, project structure, planning, and technical discussion; upstream architecture through original design or demonstrated understanding and application; and innovation through project transformation, wheel reuse, optimization, upgrades, and reference-material use. Separate exact measurements, user reports, estimates, behavioral scores, and unverifiable claims, keep Codex and Chat token scopes separate, map changed rubric dimensions before numeric deltas, return a standalone detailed text assessment plus the seven-part report, preserve the original compact Vibe Code capability-cockpit visual language instead of a TavernWeave tutorial shell, make the core, every capability cluster, and every dimension a full-hit-area native button, validate the existing immutable chain, and append redacted hashed record, report, and assessment files without overwriting history.",
+      "priorAssessmentRationale": "修订具体覆盖深度思考、上游架构和创新的评价面，区分 exact/自报/估算/行为评分/不可核验及 Codex/Chat Token 口径；保留可比维度映射、详细文字和七章报告，写明驾驶舱视觉、全节点原生按钮及脱敏追加三件文件分别哈希。无当前材料时未虚报评分或保存。"
+    },
+    {
+      "id": "mirror-text-assessment-only",
+      "kind": "forward",
+      "primarySkill": "reflect-on-vibe-code-growth",
+      "priorResponseHash": "6fa68ac1c81cd58247eab9f3751a570c673d38cf62a5f54d0ef14f063e6261dc",
+      "pass": true,
+      "rationale": "答复按只要文字的请求给可复制完整表单，明确本轮没有项目证据、不能评分或保存；六道门和 Token 口径分开。云端无可写目录时这种消息交接正是新合同允许的有限成果。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Produce one standalone detailed Markdown assessment from the same structured evidence model, including evidence boundaries, the complete capability network with deep thinking, upstream architecture, and innovation, four core dimensions, token economics, six project gates, history comparability, actions, and final judgment; do not require or substitute an interactive report.",
+      "priorAssessmentRationale": "修订答复已成为可独立阅读的 Markdown 文字评估：逐项列完整能力网络的当前判断、证据缺口、限制与取证动作，并另述四核心、Token 经济、六门、历史可比性、下一步和最终判断；缺证据处明确不可评分且未强行生成互动报告。"
+    },
+    {
+      "id": "rewrite-one-shot-light",
+      "kind": "forward",
+      "primarySkill": "rewrite-natural-prose",
+      "priorResponseHash": "b939177f10ac5a8848c9e94b8501b4c711b099a378028cb59cab2a74db9956f2",
+      "pass": true,
+      "rationale": "答复直接完成一句话轻润色，保留三种格式和不能离线同步的否定事实，没有要求文件写入或打开持续模式。新插件入口不会让纯文本任务多出持久化门。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置"
+      ],
+      "originalCriterion": "Return one light revision directly, preserving 3 formats and the lack of offline sync; do not activate continuous mode or demand a file-write intake.",
+      "priorAssessmentRationale": "直接给出一版自然句，保留 3 种格式和暂不支持离线同步，删去空泛结语；未开启持续模式或设置文件门。"
+    },
+    {
+      "id": "rewrite-three-strengths",
+      "kind": "forward",
+      "primarySkill": "rewrite-natural-prose",
+      "priorResponseHash": "2f105f1a28008103202b8dde7c335b1adb0b0ee2d9db4cd2945caf5827aaf398",
+      "pass": true,
+      "rationale": "答复因缺原文不捏造三版成稿，说明轻润色、结构改写和深度重写各自边界，并保护事实、否定和技术片段。云端也只需已提供的文本即可开始。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置"
+      ],
+      "originalCriterion": "Distinguish sentence polish, reordered structure, and rebuilt expression; retain all facts, negation, constraints and uncertainty instead of inventing vivid details.",
+      "priorAssessmentRationale": "原说明未提供，答复没有虚构成稿；三档分别限定句面清理、结构重排、表达重建，明确保留事实、数字、否定、限制、不确定性及受保护技术片段。"
+    },
+    {
+      "id": "rewrite-character-voices",
+      "kind": "forward",
+      "primarySkill": "rewrite-natural-prose",
+      "priorResponseHash": "0012db9104feee0d805632a7296ffff803dd39ce438cd739fa2b43106d4c073d",
+      "pass": true,
+      "rationale": "答复要求原段落后才成稿，明确保留寡言和直率两种声音，不自添动作或动机。共享云端合同不改变创作正文约束，也不要求额外本机工具。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置"
+      ],
+      "originalCriterion": "Follow the existing genre and character voices; do not impose one colloquial voice, universal banned words, or new actions and motives.",
+      "priorAssessmentRationale": "原段落缺失时索取文本，并具体承诺保留寡言与直率两种声音、既有事实和视角，不以口语化或添动作替代精修。"
+    },
+    {
+      "id": "rewrite-protected-mixed",
+      "kind": "forward",
+      "primarySkill": "rewrite-natural-prose",
+      "priorResponseHash": "8f6789afe20c44624b14ff8a8aea38b97291f3caadbca42b3a965a1cb393ac8e",
+      "pass": true,
+      "rationale": "答复限定 JSON 正文字段并要求解析、结构和受保护字符串逐字比对；缺原 JSON 时不称已保存。当前宿主若无文件或解析工具，还须按新合同标明该验证未运行。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Identify the prose field, preserve protected literals and every other structural field, parse the output and compare untouched values and protected spans.",
+      "priorAssessmentRationale": "答复要求实际 JSON，限定仅正文字符串，解析后核对结构与所有列明的宏、变量、EJS、正则和脚本原样，并回查数字与否定；没有材料时没有伪造改稿。"
+    },
+    {
+      "id": "rewrite-task-output-and-exit",
+      "kind": "forward",
+      "primarySkill": "rewrite-natural-prose",
+      "priorResponseHash": "13b6d587ed924f7f59492b4a4b74ab43b17c49784e5284f1636eabb962026c60",
+      "pass": true,
+      "rationale": "答复明示 inherit→on→off 只属当前任务，不写客户端/工作区文件；退出后仍保留单次改稿与已授权工程。新增合同对云端无持久偏好能力的处理与之一致。",
+      "relevantNewSections": [
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Track task inherit/on/off explicitly; cover daily explanations lightly, stop continuous refinement on the later direct exit, preserve persistent files and permit subsequent one-shot requests.",
+      "priorAssessmentRationale": "修订明确本任务 inherit→on→off 状态、退出后持续精修停止且不改持久规则，并说明 off 后单次“洗稿这段”仍可执行且保持 off；与 rewrite-natural-prose 的状态合同一致。"
+    },
+    {
+      "id": "rewrite-workspace-persistence",
+      "kind": "forward",
+      "primarySkill": "rewrite-natural-prose",
+      "priorResponseHash": "eb37202c454e16cac5a05538f648d4857d03da60fcb4c439b7588e4f4517d3bc",
+      "pass": true,
+      "rationale": "答复只在实际 Codex 工作区识别非空 AGENTS.override 与备用文件链，先预览受控区块再写，文件回读和新任务加载另验。新合同使这段本机流程仅在可见有效目标时适用，不能照搬到 dots 云端。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Resolve the effective Codex or Claude workspace instruction target, show scope/path/owned block diff, and wait for approval of that exact preview before the self-contained manager writes.",
+      "priorAssessmentRationale": "答复先识别 Codex 有效指令链，预览实际目标与受控区块，等待针对该差异的确认后写入和回读，并留新任务加载验证。"
+    },
+    {
+      "id": "rewrite-client-persistence-and-status",
+      "kind": "forward",
+      "primarySkill": "rewrite-natural-prose",
+      "priorResponseHash": "9e43502ec5815c085c0c1ee5b72e2dd79cf1182f03db2c28ca9ca3e7818b1f6c",
+      "pass": true,
+      "rationale": "答复要求实际客户端目标与预览，随后分别报告任务、工作区、全局文件和新任务加载；没有目标时不报已开启。新增合同把这套持久化限定为可核实的本机适配。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Preview the actual client target separately from workspace rules, require concrete consent, and distinguish task state, both persistent scopes and unverified host loading.",
+      "priorAssessmentRationale": "答复先找客户端有效目标、预览区块和备份，具体同意后写入回读；状态分列任务、工作区、客户端和新任务宿主加载，符合持久模式职责。"
+    },
+    {
+      "id": "rewrite-scope-disable",
+      "kind": "forward",
+      "primarySkill": "rewrite-natural-prose",
+      "priorResponseHash": "723a11d3e8aabf02606cf44cf07e6e3b7af50f96e81ce49fbb13a20f819474ce",
+      "pass": true,
+      "rationale": "答复只删除工作区受控洗稿块，保留客户端规则与其他字节，并要求目标路径、预览和回读；没有路径时不虚报已关闭。云端无有效本机文件时不能执行此本机步骤，旧答复未声称已执行。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Preview and remove only the workspace owned block; retain unrelated bytes and client policy, then report whether another scope still applies.",
+      "priorAssessmentRationale": "答复限定删除工作区受控区块，保留客户端规则和其他字节，先预览/备份再用当前令牌执行并回读，还分列其他作用域状态。"
+    },
+    {
+      "id": "quality-full-scan-inventory",
+      "kind": "forward",
+      "primarySkill": "code-quality-workflow",
+      "priorResponseHash": "a0fc1ca2798aa51dd7b117270c4f04394e559ead5143c60780fbb542483dfd87",
+      "pass": true,
+      "rationale": "答复把全量审查限定只读，要求项目根和工作树快照，覆盖已读/部分/未读/排除并保留缺口。新合同要求云端实际可访问的工作区，缺文件时也不能把旧计划报成全量已审。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Use full-scan/general, inventory the agreed snapshot, review files by their actual roles, record exclusions and incomplete coverage, and remain read-only.",
+      "priorAssessmentRationale": "明确 full-scan/general 只读，纳入配置、测试、接口、迁移和锁文件；按已读/部分/未读/排除记录覆盖并不以绿灯冒充全量。"
+    },
+    {
+      "id": "quality-software-architecture",
+      "kind": "forward",
+      "primarySkill": "code-quality-workflow",
+      "priorResponseHash": "cc1cafad40afc7af48698f2114ebd0c6cb2ac539f202b4166d657de8e85b047d",
+      "pass": true,
+      "rationale": "答复先索取项目根与版本，围绕一条真实核心链追所有权、API 合同和生命周期，并明确热点扫描不等于全仓覆盖。云端没有项目文件时也不会凭插件入口生成发现。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Use architecture-hotspot-scan/architecture, trace ownership, dependencies, data flow, contracts and lifecycle with source evidence; do not claim full coverage.",
+      "priorAssessmentRationale": "选 architecture-hotspot-scan/architecture，沿核心操作追入口、拥有者、消费者与依赖；新增公开 API 输入输出/错误/版本合同和初始化至关闭的清理检查，明确不等于全仓覆盖。"
+    },
+    {
+      "id": "quality-card-architecture",
+      "kind": "forward",
+      "primarySkill": "code-quality-workflow",
+      "priorResponseHash": "e802d17f79a67db1fd7c9dfebc239a4461008d417d2ca14bb49fe5f7c2a387ed",
+      "pass": true,
+      "rationale": "答复按纯文字卡的创作权威、人物关系、世界书与源产物追踪，只读且缺卡时不编造发现；MVU/独立前端未被当缺陷。新增宿主合同只影响资料和工具是否可见。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Review creative authority, relationships, worldbook organization, prompt responsibilities and source/artifact links only where present; absence of optional MVU/frontend is not a defect.",
+      "priorAssessmentRationale": "修订把现有创作权威、人物身份与角色间关系的定义归属及开场/世界书一致性纳入只读架构审查，同时保留提示词、源产物和可选 MVU/前端边界。原关系与权威缺口已补齐。"
+    },
+    {
+      "id": "quality-mixed-full-architecture",
+      "kind": "forward",
+      "primarySkill": "code-quality-workflow",
+      "priorResponseHash": "7f67f659ddfe1a523415794ccbf6f75063f73838daeb71e3bb16b9b124551079",
+      "pass": true,
+      "rationale": "答复把卡、stat_data、消息楼层和前端串成待证的结构图，未见材料标待核，建议不冒充授权补丁。新合同要求真实工作区与证据分层，正好防止云端空文件审查被宣称完成。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Use full-scan/architecture, review software and card contracts together, trace canonical state through projections, and retain coverage and staged recommendations.",
+      "priorAssessmentRationale": "修订答复明确 full-scan/architecture 的只读混合审查，要求画出软件、卡片和 stat_data 投影/楼层/UI 的当前关系并标待核边，保留覆盖表与 P0–P3 发现；分阶段建议明确只是后续候选，不冒充已授权补丁。"
+    },
+    {
+      "id": "quality-coverage-merge-legacy",
+      "kind": "forward",
+      "primarySkill": "code-quality-workflow",
+      "priorResponseHash": "3136818fe035c8e4f0390e38a6cc8f64d6606e66ece91d01f86f167cce0a162f",
+      "pass": true,
+      "rationale": "答复要求两份实际报告与快照，保留旧发现、unrecorded 覆盖、同路径相反状态和来源，不虚报已合并。云端续接时新合同同样要求当前版本和真实产物回读。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Keep legacy findings and CLI formats, merge exact coverage duplicates, retain reasons/evidence/conflicts, show legacy coverage as unrecorded, and infer no complete inventory.",
+      "priorAssessmentRationale": "保留旧 CLI 与发现格式，缺 coverage 标 unrecorded；按 path/status/reason/evidence 精确去重并保留来源，同路径相反状态并存列冲突，不推成完整盘点。"
+    },
+    {
+      "id": "soul-killer-full-findings",
+      "kind": "forward",
+      "primarySkill": "activate-tavernweave-soul",
+      "priorResponseHash": "17e51f50ccfcaa9ecc5b2fc7710be85fddb686e11e60fdd9b356028acb3aa224",
+      "pass": true,
+      "rationale": "答复将人格限定当前任务，只把最多三项用于开头摘要，完整五条发现仍需原始证据，当前不伪称已核实；审查保持只读。云端插件不会让 Soul 扩大写入权或补齐缺失仓库。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Activate the disclosed Soul persona and route full-scan/architecture to code-quality-workflow; at most three opening summary points must not truncate any complete findings or severity.",
+      "priorAssessmentRationale": "primarySkill 已改为 activate-tavernweave-soul；正文披露强尼·银手只是模式内同人彩蛋人格，审查路由给 code-quality-workflow，按 full-scan/architecture 保留五条完整发现而开头摘要不超过三条。符合 Soul 与全量报告合同。"
+    },
+    {
+      "id": "guidance-global-without-modes",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "b1608f27d96c92e47ab26cb59e686e1d099717360927047cec73a7f3fbdcb261",
+      "pass": true,
+      "rationale": "答复沿现有需求/设计/NEXT 规划网页首版，但因项目文件未给不填进度或另造蓝图；自动、浏览器与用户试用分门。大白话不依赖 Soul/洗稿或本机偏好写入。",
+      "relevantNewSections": [
+        "使用现有权限与资料",
+        "有界长任务与恢复",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Explain user impact, choices, evidence and next steps in plain language without mode activation, automatic tier assignment or an intake exam.",
+      "priorAssessmentRationale": "primarySkill 已改为 orchestrate-project-blueprint；答复用普通网页的首个可用流程收束目标、范围、失败恢复与验收层，保持大白话且不自行启用人格或更改引导档。"
+    },
+    {
+      "id": "guidance-contextual-terms",
+      "kind": "forward",
+      "primarySkill": "consult-tavernweave-library",
+      "priorResponseHash": "152e61cc91bb7ff592bce2f09af60bfc313bf89dc08dd78b298183253d2875e3",
+      "pass": true,
+      "rationale": "答复保留用户给定 XP、EXP、QR 含义，API/Schema 只作上下文解释，未知增减规则仍待项目定义。纯文本答复在无终端云端任务中也可直接完成。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置"
+      ],
+      "originalCriterion": "Preserve the original terms and supplied local meanings; use concise term/plain-language/current-context mapping and retain unknowns.",
+      "priorAssessmentRationale": "答复对 API、Schema 给了大白话，对 XP、EXP、QR 保留用户给定的本地含义，还指出增长规则未知，符合语境术语解释。"
+    },
+    {
+      "id": "guidance-novice-step",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "836c7f36110fb231f9b7089440a5fecdcd94e24fbb690e0fd9ea6da4a6d337b2",
+      "pass": true,
+      "rationale": "答复尊重已选新人档，先索取开场句和原卡，缺维护源可用 PNG/JSON 作为材料，后续试读仍待实际卡。新增合同不会把已选挡位自动持久化，也不会假定云端已看到原卡。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Explain one actionable step, its purpose, where to act and the expected result; begin from the actual available card and wish.",
+      "priorAssessmentRationale": "primarySkill 已改为 tavern-card-builder；正文仍以可取得的原卡和开场句为第一可操作步骤，解释用途、所需材料与下一次可见改稿/试读结果，符合新人档及改卡主路由。"
+    },
+    {
+      "id": "guidance-entry-detailed",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "43ac16a495f02fdf46ccdc3b025d0c27a6c79072343dcb8059b61bf5444ac4ee",
+      "pass": true,
+      "rationale": "答复保持入门档，从现有卡状态协议定义一条成长规则，区分叙事与跨回合持久需求，并列新旧聊天测试；它未因会导入卡就改档。云端缺文件时先取材料再实施。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Explain a small phase in detail, including reasons, relationships, tradeoffs and checks; importing success does not change the tier.",
+      "priorAssessmentRationale": "修订答复明说保持入门档，以一条成长规则为小阶段，解释为何先查原卡状态、怎样串起触发到持久显示、纯叙事与跨回合累计的取舍，以及新旧聊天的检查方式。"
+    },
+    {
+      "id": "guidance-proficient-stage",
+      "kind": "forward",
+      "primarySkill": "sillytavern-embedded-ui",
+      "priorResponseHash": "98a47d0b1230ad239b38f0b1254b300a2b586bc2fb52b4e3e71a99f4ca170a9b",
+      "pass": true,
+      "rationale": "答复按熟练档给大图入口、焦点、幂等挂载和清理路径，因缺维护源码与图源不报功能已加；目标宿主交互仍需验证。新增合同的云端工具核实和偏好不改档均相符。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Group routine operations while explaining the implementation idea, ownership, effects and important decisions; retain lifecycle and validation requirements.",
+      "priorAssessmentRationale": "主技能改为 sillytavern-embedded-ui。大图入口、弹层焦点与窄屏行为具体；补齐重复挂载、切聊天、关闭和卸载时事件/滚动锁/DOM 清理，保留熟练档节奏。"
+    },
+    {
+      "id": "guidance-veteran-routine",
+      "kind": "forward",
+      "primarySkill": "code-quality-workflow",
+      "priorResponseHash": "500e44858801d4576840bf2e684574b7d2696ab8f3276a73528ad39502409a93",
+      "pass": true,
+      "rationale": "答复给老手档的简洁汇报格式，但因没有本次 diff/检查回执不填真实文件或通过数值；真实 ST 仍明确待验。新合同同样要求云端与本机证据分层。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Use concise plain-language results, changes and evidence; retain failures, unresolved decisions and the unverified host state.",
+      "priorAssessmentRationale": "primarySkill 已改为 code-quality-workflow；正文仍按老手档简洁报告改动、证据、未做的真实宿主验证和下一道门，且不虚构本次实测结果。原主技能路由缺口已补齐。"
+    },
+    {
+      "id": "guidance-bug-all-tiers",
+      "kind": "forward",
+      "primarySkill": "sillytavern-runtime-debug",
+      "priorResponseHash": "f08593a649ba9b7fb3f694766ade59ceb22f023d6bb5e6f187ed6dd4ea2ca406",
+      "pass": true,
+      "rationale": "答复四档都区分返回格式报错的实际/预期和待证原因，并要求同一宿主复现与修前后回执；没有从报错文字推断根因。新增合同不会以云端工具或离线 fixture 代替真实环境。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Every tier explains observed versus expected behavior, knowns versus hypotheses, investigation, possible repair effects and validation; do not invent a root cause.",
+      "priorAssessmentRationale": "primarySkill 已改为 sillytavern-runtime-debug；共同事实段对四档交代实际/预期、已知与待证假设、修复影响和同环境复验，各档再给符合深度的调查、可能修复与检查，未从报错句子断言根因。"
+    },
+    {
+      "id": "guidance-scoped-explanation-waiver",
+      "kind": "forward",
+      "primarySkill": "sillytavern-runtime-debug",
+      "priorResponseHash": "4fcd85ebff709d9e845e144d86bee427108c18fe69cf6b55dfb35ea79f739082",
+      "pass": true,
+      "rationale": "答复把免解释限定前一个故障，新 bug 恢复证据、原因与复验说明且长期老手档不变。云端无法核实的部分仍须保留未知和未验证。",
+      "relevantNewSections": [
+        "使用现有权限与资料",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Honor the explicit waiver only in its stated scope, retain failures and unknowns, and resume necessary detailed explanations for the next bug without changing the tier.",
+      "priorAssessmentRationale": "主技能改为 sillytavern-runtime-debug；只对前一个故障沿用免解释，仍保留失败与未验证，新 bug 恢复目标环境复现、因果解释和复验，老手档不变。"
+    },
+    {
+      "id": "guidance-explicit-client-preference",
+      "kind": "forward",
+      "primarySkill": "consult-tavernweave-library",
+      "priorResponseHash": "82e85ac43fb18990a26cc866f7c88004e9ac0339f7cc04be789465fdcb4f2c77",
+      "pass": true,
+      "rationale": "答复承认用户已授权同一具体预览，但缺实际文件和令牌时不伪报永久保存；只在本机有效目标可见时用管理器写入回读，新任务加载另验。新合同明确云端无正式存储时不能套用此路径。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Use the independent client preference manager with the authorized current preview, preserve neighboring rules, and report saved files separately from host loading.",
+      "priorAssessmentRationale": "答复识别已确认的长期入门档与具体预览，使用独立偏好管理器及当前令牌/备份，保留邻近规则，文件回读与新任务加载分列；缺实际令牌时未伪报保存。"
+    },
+    {
+      "id": "guidance-inherited-png-continuation",
+      "kind": "forward",
+      "primarySkill": "tavern-card-builder",
+      "priorResponseHash": "5c64a030f44da17de6e716c23d9756f5a67d11aafa1d1362e6cb9ab22858c2ae",
+      "pass": true,
+      "rationale": "答复保留原 PNG 与聊天，区分发行载体和维护源，先解读原卡再最小修改，旧/新聊天分别实测。云端没有本机 PNG 时必须先确认材料可见，旧答复没有虚报已检查。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "有界长任务与恢复",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Enter takeover, inspect the actual package, explain original behavior and missing maintenance sources, retain creative decisions, isolate the first change and check old-chat compatibility.",
+      "priorAssessmentRationale": "答复保留 PNG 与聊天，明确导出包不等于维护源码，计划先解读原卡、锁定首改，并分别试旧聊天和新开局兼容。"
+    },
+    {
+      "id": "guidance-first-success-second-change",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "f3ed7645a9086ffd276585465a5e7c84e8b789ff58e62e594360ce9b0156f8ce",
+      "pass": true,
+      "rationale": "答复沿用户已试过的按钮网页做第二次位置修改，缺实际页面文件时不报新版已交，仍安排同入口点击、键盘与窄屏复测。新合同不会让已有一次成功代替云端当前产物验证。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Keep the wish focused on an ordinary webpage, explain each phase, provide a runnable trial, use the trial feedback for a second scoped change and check the new result.",
+      "priorAssessmentRationale": "主技能改为 orchestrate-project-blueprint；承认题干中已完成的可运行网页首次试用，以按钮位置反馈界定第二次改动，并说明沿同一运行入口交新版及点击、键盘、窄屏复验。缺页面文件时未虚称改动完成。"
+    },
+    {
+      "id": "guidance-upgrade-preserves-choice",
+      "kind": "forward",
+      "primarySkill": "consult-tavernweave-library",
+      "priorResponseHash": "3c4dcae80c6f09bf1234f7319c8e219702d754b3dded9030a9c21e48ce594800",
+      "pass": true,
+      "rationale": "答复把升级和重复安装限于题设隔离环境，前后用字节/哈希核对长期入门档与自写规则，并让新任务加载单独观察；没有证据不报安装通过。云端合同保留本机偏好与安装边界。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Preserve the independently owned preference and unrelated rules through upgrade and repeated installation, and keep host loading unverified.",
+      "priorAssessmentRationale": "答复在隔离环境记录偏好和自写规则的字节/哈希，升级及重复安装后核对两者未变，并把真实新任务加载留为独立检查。"
+    },
+    {
+      "id": "work-library-novel",
+      "kind": "forward",
+      "primarySkill": "build-work-library",
+      "priorResponseHash": "a0cb2deba8233a15f13ceaa3dd4c7d8e2ccb37c4a611ec63c04bc5782272d9ce",
+      "pass": true,
+      "rationale": "答复先取合法文本与代表样本，再按真实用量回执和失败重试有界分批，缺后台能力时不保证关会话继续。新合同把 dots 平台持续性作为需观察的能力，未改变资料库批次合同。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Use editable Markdown with derived JSONL and optional SQLite; inspect representative samples before a corpus-bound plan.",
+      "priorAssessmentRationale": "采用可编辑 Markdown、派生 JSONL 和按需导出，先用章节与跨阶段样本核对来源和检索，再测 token 与重试用量后有界分批。"
+    },
+    {
+      "id": "work-library-fanwork",
+      "kind": "forward",
+      "primarySkill": "build-work-library",
+      "priorResponseHash": "141329e4973fb2a3c2cb4194c9c35324df762f3f0fd0ce233d9fabf478bb5a99",
+      "pass": true,
+      "rationale": "答复将原作/改编/同人与确定性分栏，跨版本冲突并列，缺作品和原文时不虚构已建库；样本允许先人工核验。新增云端合同要求只用实际提供的私有或公开素材。",
+      "relevantNewSections": [
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Preserve canon/fanon, continuity, edition and evidence certainty; keep conflicting versions explicit.",
+      "priorAssessmentRationale": "将 canon/fanon 与 continuity/edition 分开，并把 confirmed/inference/uncertain 作为独立证据确定性；跨版本冲突并列、来源位置与哈希可回查。"
+    },
+    {
+      "id": "work-library-web",
+      "kind": "forward",
+      "primarySkill": "build-work-library",
+      "priorResponseHash": "29ba27e80abaa4d409d4e83dc3307a8899617f951c12b00ffc96dd581eb4476a",
+      "pass": true,
+      "rationale": "答复要求作品身份后实际打开官网等原始页，搜索只作线索，保留短摘录、URL 和来源哈希；无作品名或页面时不伪报联网完成。新合同进一步要求核实当前云端浏览器连接是否可用。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Open actual source pages via available host tools and register bounded excerpts with provenance; record unavailable access.",
+      "priorAssessmentRationale": "场景未给作品名，答复要求关键身份与范围后才用宿主工具打开官网等原始页；记录实际 URL、版本、短摘录与哈希，无法访问时不造官方结论。"
+    },
+    {
+      "id": "work-library-image",
+      "kind": "forward",
+      "primarySkill": "build-work-library",
+      "priorResponseHash": "27795841945d7be45da42e29c4a39e4a8a1ce59a9f54224893e1d093dd3da7a6",
+      "pass": true,
+      "rationale": "答复要求实际打开原图才写服装观察，打不开只列候选；下载、裁切和分发留具体图片授权与许可。新合同要求云端浏览器及素材范围真实可用，不会把搜索摘要当已看图。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Actually inspect images before visual conclusions; register reference metadata and preserve selected-material download scope.",
+      "priorAssessmentRationale": "要求实际打开原图才记服装观察，登记页面、原图、版本和回执；默认仅参考链接，长期下载和打包留具体选材授权。"
+    },
+    {
+      "id": "work-library-creator-pack",
+      "kind": "forward",
+      "primarySkill": "build-work-library",
+      "priorResponseHash": "8e12cfd52ce46d38b6516723dc91300bf01c730d468f1431c9531bb7d2b58949",
+      "pass": true,
+      "rationale": "答复只从当前资料库取开局可知条目，保存身份、阶段和来源，并把新创作钩子单列；缺项目路径不编造人物。新合同要求沿可见项目素材与既有索引继续。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "使用现有权限与资料"
+      ],
+      "originalCriterion": "Query current documents by identity, continuity and knowledge stage; retain citations and distinguish new creative additions.",
+      "priorAssessmentRationale": "答复按开局知识阶段、原作/改编/同人身份和版本筛选当前库，条目保留 ID 与来源，新增开局钩子单独标本次创作；未编造缺失人物。"
+    },
+    {
+      "id": "work-library-handoff",
+      "kind": "forward",
+      "primarySkill": "build-work-library",
+      "priorResponseHash": "283577725f9cea8c9fafdc3b6aadca6ec9f77d514da5ced5c499e3b621c42c7d",
+      "pass": true,
+      "rationale": "答复先读人工润色后的 Markdown/哈希和原 active 批次，拒绝旧 base_sha256 覆盖，reindex 与 SQLite 导出不新增模型调用；未见账本不报已续接。它直接满足新合同的恢复核对与防重复写入。",
+      "relevantNewSections": [
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Read current Markdown/hash, rebuild observed edit log, resume the same batch and reject stale writes; export without a model call.",
+      "priorAssessmentRationale": "修订明确读取当前 Markdown/哈希后按实际差异重建观察性编辑日志，不猜改稿者；继续原 active 批次并拒绝旧 base_sha256 覆盖，reindex 与本地导出不新增模型调用。与 work-library 长任务续接合同一致。"
+    },
+    {
+      "id": "frontend-sandbox-single",
+      "kind": "forward",
+      "primarySkill": "sillytavern-embedded-ui",
+      "priorResponseHash": "055e0c61a00b126e8fed5628418703fba80f6f62712d14b2900bac32c06ed04d",
+      "pass": true,
+      "rationale": "答复要求真实维护源码与三层 iframe 桥，数据注入按预览确认写回读，沙盒结果之后仍留真实 ST、设备和人工视觉门。云端若没有源码/宿主能力，新增合同要求报告缺口而不是假沙盒。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Verify source and mount topology, declare simulated coverage, prepare isolated fixtures for explicit confirmation, and retain real-host acceptance.",
+      "priorAssessmentRationale": "答复坚持装载真实维护源码，保留三层 iframe 拓扑与桥位置，声明缺接口，数据预览确认后注入并回读，真实 ST 验收另列。"
+    },
+    {
+      "id": "frontend-sandbox-joint",
+      "kind": "forward",
+      "primarySkill": "sillytavern-embedded-ui",
+      "priorResponseHash": "bbfd9cda5960d6129b3b6f8ff8e0c191991595d60f08ba10a1545289e557421f",
+      "pass": true,
+      "rationale": "答复只装载真实 HUD/手机/控制中心源码，明确未接入接口，三界面共享隔离状态，滑条结果绑定源版本并回落复测；缺源码不宣称联合模拟已跑。真实酒馆仍独立。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Load actual modules with shared state/events, expose missing interfaces, compare each mapped view, isolate UI parameters and export source-bound results.",
+      "priorAssessmentRationale": "要求装载真实 HUD/手机/控制中心源码并列明入口及哈希，公开未接入接口和能力缺口；三界面共用隔离状态/事件，场景与滑条参数导出绑定维护源及测试副本版本/SHA-256，保留 ST 实测门。"
+    },
+    {
+      "id": "frontend-sandbox-skip",
+      "kind": "forward",
+      "primarySkill": "sillytavern-embedded-ui",
+      "priorResponseHash": "066f779f9f47acd353fbe38c90471c61c58b68313848cb33395c07f285bf1d01",
+      "pass": true,
+      "rationale": "答复沿用已选跳过沙盒，不再建沙盒，按现有前端维护源做构建和真实 ST 检验，缺续接指针时不报构建版本。新增合同同样要求先读原项目唯一续接源。",
+      "relevantNewSections": [
+        "使用现有权限与资料",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Reuse skip decision, create no sandbox, and preserve existing development and runtime checks without marking failure.",
+      "priorAssessmentRationale": "答复沿用跳过决定，不创建沙盒，也不把跳过记失败；继续原维护源构建和真实 ST 验证且未冒充已完成。"
+    },
+    {
+      "id": "project-board-evidence-percentages",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "fbe0fc8e05af4a0f1f2ea9133994cc1e2ccd00bcb0d7599b84b411a1ccbf5a4b",
+      "pass": true,
+      "rationale": "答复先读总设计/蓝图/NEXT 和证据，用已确认范围算实现与验收两类比例，来源或证据变动时暂停有效数字；缺文件不造进度。新合同的唯一指针和分层证据要求与之兼容。",
+      "relevantNewSections": [
+        "使用现有权限与资料",
+        "有界长任务与恢复",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Inspect existing authority and NEXT, reuse approved scope, initialize only a missing project-local board, calculate separate weighted implementation and acceptance progress from checkpoints and evidence, keep parked ideas out of the denominator, and expose stale sources and missing files.",
+      "priorAssessmentRationale": "修订答复将 parked 与未采纳想法排除当前分母，按已确认范围与证据分算实现率/验收率；来源变化标过期，证据缺失或哈希变化暂停有效百分比，且把真实宿主与驾驶员等门分列。"
+    },
+    {
+      "id": "project-board-persisted-feedback",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "1aab24ffb59b981d9a4c1b9193ed24eb79b9bd9fe2775066be1ffa7f50d55174",
+      "pass": true,
+      "rationale": "答复把反馈写在项目内并用 revision 防双标签覆盖，原子写入后回读；只有静态页面时明确只是草稿而非已保存。云端无可写工作区时新增合同同样禁止虚报持久化。",
+      "relevantNewSections": [
+        "先认清任务实际运行位置",
+        "有界长任务与恢复"
+      ],
+      "originalCriterion": "Use project-local feedback files with version and source-context checks, atomic save and readback, preserve originals and history, keep failed or conflicting drafts, and distinguish static draft export from persistent save.",
+      "priorAssessmentRationale": "明确项目内 progress/feedback.json 与 boardRevision、baselineId、sourceHashes，保留原话和历史；双标签按版本冲突处理，成功原子落盘并写后回读，静态页草稿导出不冒充持久保存。"
+    },
+    {
+      "id": "project-board-blocking-bug-retest",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "c9c2f397f23a2ae2d1e3776c7d7df216f398109a394e21ee866f284176e36b82",
+      "pass": true,
+      "rationale": "答复保留实现证据但把阻断 Bug 的验收退回待复测，NEXT 记录复测入口，关闭需实际复测文件而非反馈原话。新合同不会让云端自动检查替代真实宿主或驾驶员门。",
+      "relevantNewSections": [
+        "有界长任务与恢复",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Keep implementation evidence separate, retain acceptance gaps for confirmed blocking bugs including deferred fixes, require retest state, resolution and existing evidence files for closure, and do not promote a feedback record to driver acceptance.",
+      "priorAssessmentRationale": "答复保留已实现证据，把阻断 Bug 关联检查点并退回待复测；延后修复仍留缺口，关闭需 resolution、verification 与实际文件，进度两类比例分开且未把反馈当驾驶员验收。"
+    },
+    {
+      "id": "project-board-design-next-sync",
+      "kind": "forward",
+      "primarySkill": "orchestrate-project-blueprint",
+      "priorResponseHash": "3d54cdcd4ff57964ffd254060424331ae27a7c0c301ec238d76102e34934c78c",
+      "pass": true,
+      "rationale": "答复沿总设计范围块和 NEXT 状态块生成有版本/哈希约束的投影，来源改变即拒旧计划，缺实际项目文件不报进度。它没有另建云端状态权威，实机与驾驶员门也分列。",
+      "relevantNewSections": [
+        "使用现有权限与资料",
+        "有界长任务与恢复",
+        "交付时分别报告（末段）"
+      ],
+      "originalCriterion": "Opt into exact design scope and NEXT state blocks using the actual project paths, derive the board from those sources, review a plan bound to board/feedback revisions and source/evidence hashes before application, preserve history, and keep real-host and driver gates separate.",
+      "priorAssessmentRationale": "修订答复将计划绑定画板与反馈 revision、全部来源及证据文件 SHA-256，任一变化拒绝旧计划；同步后保存旧值历史并回读，真实宿主与驾驶员门独立呈现，材料缺失时不虚报进度。"
+    }
+  ]
+}

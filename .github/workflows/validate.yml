@@ -28,3 +28,38 @@ jobs:
           foreach ($test in $tests) {
             python $test.FullName
           }
+      - name: Test committed plugin packaging
+        shell: pwsh
+        run: |
+          $env:PYTHONUTF8 = '1'
+          $env:TW_TEST_ROOT = Join-Path $env:RUNNER_TEMP "tw-plugin-tests"
+          New-Item -ItemType Directory -Path $env:TW_TEST_ROOT -Force | Out-Null
+          python -B tests/test_plugin_packages.py
+
+  portable-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Check plugin packaging on Linux
+        env:
+          PYTHONUTF8: '1'
+          TW_TEST_ROOT: ${{ runner.temp }}/tw-plugin-tests
+        run: |
+          mkdir -p "$TW_TEST_ROOT"
+          python -B tests/test_plugin_packages.py
+          python -B scripts/build-plugin-packages.py --repo "$GITHUB_WORKSPACE" --ref HEAD --output-dir "$RUNNER_TEMP/plugin-packages"
+      - name: Exercise bundled helpers on Linux
+        env:
+          PYTHONUTF8: '1'
+          PYTHONDONTWRITEBYTECODE: '1'
+          TW_TEST_ROOT: ${{ runner.temp }}/tw-plugin-helpers
+        run: |
+          mkdir -p "$TW_TEST_ROOT"
+          node skills/consult-tavernweave-library/scripts/query-library.mjs --skill tavern-card-builder --intent "rolecard" --limit 1
+          python -B skills/build-work-library/tests/test_work_library.py

@@ -1,0 +1,38 @@
+{
+  "baselineCommit": "08ca87bd064cdfcaf918090a6ae0d06fed1f9ce7",
+  "oldSkillFiles": 449,
+  "currentSkillFiles": 450,
+  "unchangedSkillFiles": 427,
+  "onlyAdditiveEntryChanges": [
+    "skills/activate-tavernweave-soul/SKILL.md",
+    "skills/build-work-library/SKILL.md",
+    "skills/code-quality-workflow/SKILL.md",
+    "skills/consult-tavernweave-library/SKILL.md",
+    "skills/orchestrate-project-blueprint/SKILL.md",
+    "skills/reflect-on-vibe-code-growth/SKILL.md",
+    "skills/rewrite-natural-prose/SKILL.md",
+    "skills/rolecard-workshop-ops/SKILL.md",
+    "skills/shadcn-tailwind-ui/SKILL.md",
+    "skills/sillytavern-api-reference/SKILL.md",
+    "skills/sillytavern-card-components/SKILL.md",
+    "skills/sillytavern-card-pipeline/SKILL.md",
+    "skills/sillytavern-component-update/SKILL.md",
+    "skills/sillytavern-database-rolecards/SKILL.md",
+    "skills/sillytavern-embedded-ui/SKILL.md",
+    "skills/sillytavern-extension-dev/SKILL.md",
+    "skills/sillytavern-media-live2d-runtime/SKILL.md",
+    "skills/sillytavern-render-regex-pipeline/SKILL.md",
+    "skills/sillytavern-rolecard-performance/SKILL.md",
+    "skills/sillytavern-rolecard-security/SKILL.md",
+    "skills/sillytavern-runtime-debug/SKILL.md",
+    "skills/tavern-card-builder/SKILL.md"
+  ],
+  "addedSkillFiles": [
+    "skills/consult-tavernweave-library/references/plugin-runtime.md"
+  ],
+  "originalSkillBodiesByteIdenticalAfterRemovingDeclaredAdditions": true,
+  "newFileSha256": {
+    "skills/consult-tavernweave-library/references/plugin-runtime.md": "c79faa59ee67788a200bac12a9e32576dd6a0c946481c52cf927f2e4966b47c5"
+  },
+  "limitations": "Byte comparison proves scope only; source-contract reviews and actual host operation are separate."
+}

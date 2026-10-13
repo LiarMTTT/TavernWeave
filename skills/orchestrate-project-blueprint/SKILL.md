@@ -11,6 +11,12 @@ description: Turn a vague product, character-card, frontend, or Vibe Coding wish
 Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
 <!-- tw-guidance-entry:end -->
 
+<!-- tw-plugin-runtime-entry:begin -->
+## Plugin runtime
+
+When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+<!-- tw-plugin-runtime-entry:end -->
+
 把“我想要一个东西”收束为可恢复、可验收、不会在执行中无限长大的项目权威链。它不是一句话盲跑器；它把一句愿望变成最短的可靠闭环。
 
 用户可以直接说愿望，不必先说“脑暴模式”。从零创作时先帮其形成可试用的小成果；完全没想法时给一两个贴合兴趣的小例子。接手角色卡二创/续更先交给 `tavern-card-builder` 看懂原卡；熟悉作品的增改先续接原决定；故障按实际现象交给相关能力。普通问答不强制进入完整引导；完整引导需要用户选择挡位，但暂未选择也不能自动归档或阻止有用的帮助。

@@ -11,6 +11,12 @@ description: Build source-backed work reference libraries for fan creation from 
 Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
 <!-- tw-guidance-entry:end -->
 
+<!-- tw-plugin-runtime-entry:begin -->
+## Plugin runtime
+
+When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+<!-- tw-plugin-runtime-entry:end -->
+
 把一个作品整理成创作者能查、能改、能回原文核对的资料库。小说精读、按人物/专题定向采证、联网补资料、图片参考和同人设定整理都走同一条来源链；不要求先完成全书均匀精读。默认交付 Markdown 资料正文、JSONL 镜像索引，按需导出 SQLite。作品资料不是 TW 随包设计库，也不是酒馆聊天楼层中的数据库。
 
 ## 从当前用途进入

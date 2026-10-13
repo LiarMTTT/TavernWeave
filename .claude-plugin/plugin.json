@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.9.0",
-  "description": "TavernWeaveX无限月读 1.9.0: 22 Skills with integrated rolecard authoring guidance and safer field-binding diagnostics.",
+  "version": "1.9.1",
+  "description": "TavernWeaveX无限月读 1.9.1: 22 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs. Actual execution depends on host tools and permissions.",
   "author": {
     "name": "LiarMTTT"
   },

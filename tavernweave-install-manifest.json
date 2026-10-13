@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "skillCount": 22,
   "skills": [
     "activate-tavernweave-soul",
@@ -28,6 +28,7 @@
     "tavern-card-builder"
   ],
   "requiredPaths": [
+    "skills/consult-tavernweave-library/references/plugin-runtime.md",
     "skills/activate-tavernweave-soul/SKILL.md",
     "skills/consult-tavernweave-library/SKILL.md",
     "skills/orchestrate-project-blueprint/SKILL.md",
@@ -84,7 +85,7 @@
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "1.9.0",
+    "version": "1.9.1",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",

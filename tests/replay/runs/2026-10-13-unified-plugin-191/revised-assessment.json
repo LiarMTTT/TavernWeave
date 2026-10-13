@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "reviewType": "independent-written-response-review",
+  "source": "revised-response.json",
+  "scope": "Written answer checked against plugin-runtime.md and communication-and-guidance.md; no dots host execution, model replay, preference write, or next-task loading observed.",
+  "cases": [
+    {
+      "id": "guidance-inferred-tier",
+      "pass": true,
+      "rationale": "新版答复保留用户直接选择的新人档用于当前任务，明确三次成功、沉默和材料建议都不构成升到熟练档的授权。它把长期保存及跨任务沿用限定在当前宿主确有正式持久目标并能回读的证据上；没有该能力时只确认本任务生效。以后换档仍要求用户直接提出，并在真实可用、已获授权的目标上预览受控改动与回读，符合两份来源规则。",
+      "unmet": []
+    }
+  ]
+}
