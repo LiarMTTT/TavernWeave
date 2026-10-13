@@ -4,11 +4,28 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { queryLibrary, searchCatalog } from "../scripts/query-library.mjs";
+import { correctGuide } from "../scripts/guide-corrections.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..");
 const catalog = JSON.parse(fs.readFileSync(path.join(root, "assets", "picker", "catalog.json"), "utf8"));
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "references", "library-manifest.json"), "utf8"));
+
+test("reviewed C3 corrections survive refresh and refuse unexpected source drift", () => {
+  const name = "C3_HTML美化与CSS.md";
+  const current = fs.readFileSync(path.join(root, "references/st-guides", name), "utf8").replace(/\r\n?/gu, "\n");
+  const changes = JSON.parse(fs.readFileSync(path.join(root, "references/guide-corrections.json"), "utf8")).guides[name];
+  let historical = current;
+  for (const { before, after } of [...changes].reverse()) historical = historical.replace(after, before);
+  assert.equal(correctGuide(name, historical), current);
+  assert.equal(correctGuide(name, current), current);
+  assert.equal(correctGuide("unrelated.md", "unchanged"), "unchanged");
+  assert.throws(() => correctGuide(name, historical.replace(changes[1].before, "upstream changed")), /source drift/u);
+  assert.match(current, /v1\.14\.0 基准没有证实后者可用/u);
+  assert.match(current, /读取失败本身不能证明未初始化/u);
+  assert.match(current, /迟到的旧结果丢弃/u);
+  assert.match(current, /显示刷新保持只读/u);
+});
 
 test("write routes always include standing A0", () => {
   const receipt = queryLibrary({ skill: "tavern-card-builder", intent: "设计 MVU 卡", write: true });

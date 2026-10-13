@@ -50,9 +50,32 @@ replacement.
 
 ## Card-type and runtime-dependency checks
 
-Detect one primary type (`text`, `mvu`, `mvu_zod`, or `hybrid`) plus capability flags
+Detect one primary type (`text`, `mvu_zod`, or `hybrid`) plus capability flags
 from maintained source. Reconcile detection with profile and manifest declarations.
-Record whether each fact is declared, detected, or inferred.
+Record whether each fact is declared, detected, or inferred. `unknown` may remain in
+an unfinished design authority, but is not a fourth type or a resolved whole-card
+delivery declaration. Single/multi-character content is a separate dimension.
+
+Do not produce a new declaration of type `mvu`. Read a legacy value only through an
+explicit compatibility path, report it as legacy MVU with any missing Zod evidence,
+and preserve the original while performing authorized local maintenance. The target
+category is `mvu_zod`; relabeling alone is not migration or runtime proof. Do not call
+it `hybrid` merely to hide missing schema/registration/loaders. Migration of source,
+protocols, or saves requires its own authorized scope. An unchanged legacy release
+must retain its historical limitations instead of being reported as a compliant new
+MVU Zod delivery.
+
+Every completed card requires both a usable greeting and a substantive worldbook.
+Validate the actual content, explicit attachment or companion-book binding, and
+consistency with each opening's initial conditions. An empty greeting, empty book,
+or placeholder does not satisfy the contract. Plans and partial component work may
+record missing cores with an owner and a later gate; do not widen component-only
+delivery into an unrequested whole-card repair or call the whole card complete.
+
+New cards normally keep `description`, `personality`, `scenario`, `mes_example`,
+`system_prompt`, and `post_history_instructions` empty, with their material in the
+worldbook. Do not clear effective inherited fields during packaging. Preserve the
+source-selected values; investigate contradictions rather than normalizing them.
 
 For each runtime dependency, require fields equivalent to:
 
@@ -138,6 +161,7 @@ or component source.
 Express both positive and negative invariants. Depending on the card, cover:
 
 - required and forbidden worldbook entries, regex scripts, and helper scripts;
+- usable greeting, substantive worldbook, binding, and opening/state consistency;
 - card-type/capability evidence and runtime dependency classes;
 - required embedded schema/loaders and regional alternative selection;
 - forbidden player-facing claims that development-only Zod/Node packages must be

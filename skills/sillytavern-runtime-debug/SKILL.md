@@ -240,6 +240,28 @@ Select the rows relevant to the change and record pass/fail evidence:
 
 Runtime work is complete only when the source-built artifact passes the selected real-SillyTavern checks. Keep offline tests in the report as supporting evidence, not as a substitute.
 
+### Message content pages and MVU displays
+
+For a [message content page](../sillytavern-embedded-ui/references/message-content-ui.md),
+trace the actual output rule and recipient through message text, mounting, parsing
+and visible content. Select cases for surrounding prose, missing or incomplete
+boundaries, repeated items and inert model text. Check whether a button is local
+navigation or an authorized send. If message creation succeeds but generation
+fails, verify that retry does not duplicate the player message.
+
+For an [MVU status bar](../sillytavern-embedded-ui/references/mvu-statusbar-design.md),
+verify the actual floor/scope, event-driven refresh and lifecycle cleanup. Compare
+displayed zero, false, empty and invalid values with their field semantics. Check
+collection changes and a removed selection, preserving appropriate view state.
+Read-only refresh must not initialize, repair or write game state. Use a declared
+test scope and authorized data; do not modify a real save to manufacture a case.
+
+Use only cases relevant to the changed artifact. Record observed layout against
+the shared [frontend quality standard](../consult-tavernweave-library/references/frontend-design-quality.md)
+without treating a reference-site comparison as host acceptance. A protocol or UI
+defect returns to its implementation owner; do not substitute a patched console
+copy for the maintained artifact.
+
 ## Report
 
 Return:

@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.8.0",
-  "description": "22 Skills for rolecards and Vibe Coding; 1.8.0 adds project progress and review boards synchronized from project design and NEXT documents.",
+  "version": "1.9.0",
+  "description": "TavernWeaveX无限月读 1.9.0: 22 Skills with integrated rolecard authoring guidance and safer field-binding diagnostics.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -15,9 +15,9 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "TavernWeave",
+    "displayName": "TavernWeaveX无限月读",
     "shortDescription": "Make, improve, and understand rolecards and software.",
-    "longDescription": "TavernWeave 1.8.0, 22 skills. Project-local progress and review boards show weighted implementation and acceptance separately, preserve ideas, bugs and review history, and project scope from total design with current evidence and handoff from NEXT. Review version-bound differences before synchronization. Optional frontend sandbox specifications, work libraries and plain language remain available. Board percentages do not replace real-host, driver or release gates.",
+    "longDescription": "TavernWeaveX无限月读 1.9.0, with 22 skills for rolecards and Vibe Coding. Integrates card architecture, worldbook and variable design, character methods, researched frontend design and natural expression into the existing TW workflow. Standalone rolecard prompt rules retain the author’s intended strength and scope; malformed binding inventories return structured diagnostics. The existing installation identity and skill names remain unchanged. Windows component-export rollback preserves external replacements and reports remaining files. Host rediscovery and real SillyTavern acceptance still require verification in the user environment.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [

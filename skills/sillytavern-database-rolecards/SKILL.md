@@ -47,7 +47,9 @@ node scripts/validate-rolecard-schema.mjs model.json
 
 Require a stable model ID and version, a `stat_data` storage root, `multi-floor`
 strategy, explicit tables, primary keys, typed fields, valid defaults, and unique
-identifiers. Reject same-floor strategy in this release.
+identifiers. Follow the shared [variable design contract](../tavern-card-builder/references/variable-systems.md): empty collections still need complete future element/child shapes. The local model supports recursive `items`, fixed `properties`, and typed `additionalProperties`; it is a bounded interchange format, not a substitute for the actual runtime Schema. Reject same-floor strategy in this release.
+
+Legacy shallow models remain readable with `--allow-shallow` for inventory only. Their report has `structureComplete: false` and unresolved paths; this mode cannot close schema or binding acceptance. Normal validation rejects missing collection shapes.
 
 ## Run migration fixtures
 
@@ -66,7 +68,7 @@ node scripts/check-field-bindings.mjs --schema model.json --bindings bindings.js
 ```
 
 Every binding must reference a declared table and field, name its reader or writer,
-identify the UI or prompt surface, and state refresh events. Route UI implementation
+identify the UI or prompt surface, and state refresh events. Enforce one writer owner per field and write phase; multiple entry points of the same owner are allowed. Initialization and migration require explicit conditions and must finish before runtime writing starts. Static declarations do not prove that these conditions hold in the host. Route UI implementation
 to `$sillytavern-embedded-ui` and packaging to `$sillytavern-card-pipeline`.
 
 ## Keep runtime acceptance open

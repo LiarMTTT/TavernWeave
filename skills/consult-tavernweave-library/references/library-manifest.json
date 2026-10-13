@@ -215,8 +215,8 @@
       "source": "STDB/C3_HTML美化与CSS.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "5e58e3966fb66f53ce4945ff5db1c71da1a5ba3c4e36b9520a484843051a4b9e",
-      "targetHash": "6445cf991fac3f06011cbc34de0a12a677db2d4cabbe41363b1c3f9fd53250ee",
-      "bytes": 35661,
+      "targetHash": "4f33d6dc1e78fbf475315db45890ae7fdf507e6b265c3a9d8d7748cd2638d696",
+      "bytes": 38031,
       "redactions": 2,
       "pathRedactions": 2,
       "credentialRedactions": 0
@@ -1860,7 +1860,7 @@
     },
     {
       "path": "assets/picker/manifest-data.js",
-      "hash": "54f869a00172827fa5193719279ad8c1c4f138d599d3e63c2176f1e8a5d45ee9",
+      "hash": "ce8928cdf0a017308af9c43022186f8f39a5a69716cee91fe3e0b4a14f6c06fe",
       "bytes": 54815
     },
     {

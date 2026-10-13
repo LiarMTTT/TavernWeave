@@ -2,7 +2,7 @@
 name: sillytavern-render-regex-pipeline
 description: >-
   Validate and trace SillyTavern regex behavior with deterministic fixtures across
-  source placement, display or prompt destination, depth, enabled state, and optional
+  source placement, display/prompt or card-only raw stage, depth, enabled state, and optional
   boolean flags. Use when authoring or debugging character-local Tavern regex JSON,
   comparing card and Tavern Helper regex dialects, reproducing a replacement outside
   the host, or explaining which render stage accepted or skipped a rule. Do not treat
@@ -41,14 +41,19 @@ numeric placement codes from memory.
 node scripts/validate-tavern-regex.mjs regex.json
 ```
 
-Block invalid JSON, missing IDs, duplicate IDs, invalid depth ranges, contradictory
-`markdownOnly` and `promptOnly`, or un-compilable patterns. Report deprecated or
+Block invalid JSON, missing IDs, duplicate IDs, invalid depth ranges, or un-compilable
+patterns. Empty or whitespace-only replacement strings are valid and kept verbatim.
+`markdownOnly` and `promptOnly` can both be true; each enables its corresponding
+stage. Both false or absent select the raw-message stage. Report deprecated or
 unknown fields without deleting them.
 
 ## Run deterministic fixtures
 
-Define every fixture with input, source or numeric placement, destination, depth, and
-expected output. Then run:
+Define every fixture with string input, the selector required by its dialect, and a
+destination. Card rules require integer `placement`; helper rules require `source`;
+mixed sets require both. Supply depth when testing its bounds and a string `expected`
+for an assertion. Omitting `expected` makes a trace-only case, reported separately
+from passed assertions. Then run:
 
 ```text
 node scripts/run-regex-fixtures.mjs --regex regex.json --fixtures fixtures.json

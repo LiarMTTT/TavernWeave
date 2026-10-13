@@ -13,6 +13,13 @@ Apply [TW plain-language and guidance rules](references/communication-and-guidan
 
 Use the bundled knowledge snapshot as a routed reference layer. A single TavernWeave install carries the library, but each task loads only the standing check and the smallest matching domain set.
 
+For frontend design, visual implementation or review, also read
+[frontend-design-quality.md](references/frontend-design-quality.md). It sets the
+default Awwwards quality direction, proactive web research, visual explanation and
+clean-page rules. Apply it independently of whether Soul is active. Individual
+catalog selections remain proposed; the shared quality standard is already the
+default. An ordinary reference query need not load this design workflow.
+
 ## Route first
 
 For 小说转库、作品/同人资料整理、联网文图与二创资料包, route to `$build-work-library`. Those are user-owned work sources, separate from this bundled development/design catalog; do not return UI design-token entries for model-token budgeting. In-card MVU tables still belong to `$sillytavern-database-rolecards`.
@@ -63,6 +70,12 @@ node scripts/validate-library.mjs
 ```
 
 The snapshot command copies A0, 31 formal guides, the explicitly experimental C8 guide, 462 design records, 194 motion records, 86 concept records and their Wiki pages, 1,609 distilled ledger records, and 89 owned preview sandboxes. It cross-checks the 243 completed source screening receipts but never distributes those inbox JSON files. It produces portable hashes and refuses excluded filenames, private absolute paths, missing dependencies, count drift, duplicate IDs, and broken preview/Wiki references. AFV Git or Release state is provenance metadata, not a prerequisite for this content snapshot.
+
+Reviewed guide corrections are maintained in [guide-corrections.json](references/guide-corrections.json).
+The snapshot reapplies them after copying the dated source, preserves the original
+source hash, and records the corrected target hash. Unexpected source drift stops
+that correction for review. In C3, the historical HUD cache excerpt is not a general
+adapter: use the current MVU status-bar contract for scope and missing/stale states.
 
 ## Handoff
 

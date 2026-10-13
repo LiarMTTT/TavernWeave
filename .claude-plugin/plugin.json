@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.8.0",
-  "description": "22 Skills for rolecards and Vibe Coding; 1.8.0 adds project progress and review boards synchronized from project design and NEXT documents.",
+  "version": "1.9.0",
+  "description": "TavernWeaveX无限月读 1.9.0: 22 Skills with integrated rolecard authoring guidance and safer field-binding diagnostics.",
   "author": {
     "name": "LiarMTTT"
   },

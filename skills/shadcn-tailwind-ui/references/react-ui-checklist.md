@@ -43,6 +43,15 @@ Use this checklist after inspecting the installed versions and the project's exi
 - Extend existing token scales before inventing one-off arbitrary values.
 - Follow the installed Tailwind version's configuration model.
 
+## Visual and copy review
+
+Apply the shared [frontend design quality](../../consult-tavernweave-library/references/frontend-design-quality.md)
+standard. Check the design against the user's purpose and the references actually
+inspected. Record why the chosen arrangement is preferable to a generic template.
+Review a rendered view and the important interactions; remove purposeless small
+copy and extra English labels while retaining meaningful content and accessible names.
+Keep missing visual or interaction evidence explicit.
+
 ## Verification
 
 - Run typecheck, lint, focused tests, and production build where available.

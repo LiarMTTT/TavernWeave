@@ -46,7 +46,8 @@ function validateRegex(value, errors, prefix) {
     errors.push(`${prefix} must be an object`);
     return;
   }
-  for (const field of ['id', 'scriptName', 'findRegex', 'replaceString']) requireString(value[field], `${prefix}.${field}`, errors);
+  for (const field of ['id', 'scriptName', 'findRegex']) requireString(value[field], `${prefix}.${field}`, errors);
+  if (typeof value.replaceString !== 'string') errors.push(`${prefix}.replaceString must be a string`);
   if (!Array.isArray(value.trimStrings) || value.trimStrings.some(item => typeof item !== 'string')) {
     errors.push(`${prefix}.trimStrings must be an array of strings`);
   }
@@ -61,9 +62,6 @@ function validateRegex(value, errors, prefix) {
   validateDepth(value.maxDepth, `${prefix}.maxDepth`, errors);
   if (Number.isInteger(value.minDepth) && Number.isInteger(value.maxDepth) && value.minDepth > value.maxDepth) {
     errors.push(`${prefix}.minDepth must not exceed maxDepth`);
-  }
-  if (value.markdownOnly === true && value.promptOnly === true) {
-    errors.push(`${prefix}.markdownOnly and promptOnly cannot both be true`);
   }
   try {
     parseRegex(value.findRegex);
@@ -124,14 +122,25 @@ function validateFolder(value, errors, prefix) {
     errors.push(`${prefix}.scripts must be a non-empty array`);
     return;
   }
-  const ids = new Set();
   value.scripts.forEach((script, index) => {
     validateScript(script, errors, `${prefix}.scripts[${index}]`);
-    if (isObject(script) && typeof script.id === 'string') {
-      if (ids.has(script.id)) errors.push(`${prefix}.scripts contains duplicate id ${script.id}`);
-      ids.add(script.id);
-    }
   });
+}
+
+export function collectComponentIds(kind, value, prefix = 'value') {
+  if (!isObject(value)) return [];
+  const ids = typeof value.id === 'string' ? [{ id: value.id, path: `${prefix}.id` }] : [];
+  if (kind === 'helper-folder' && Array.isArray(value.scripts)) {
+    value.scripts.forEach((script, index) => ids.push(...collectComponentIds('helper-script', script, `${prefix}.scripts[${index}]`)));
+  }
+  return ids;
+}
+
+export function checkComponentIds(identifiers, seen, errors) {
+  for (const { id, path: location } of identifiers) {
+    if (seen.has(id)) errors.push(`duplicate component id: ${id} at ${location} (already declared at ${seen.get(id)})`);
+    else seen.set(id, location);
+  }
 }
 
 export function validateComponentValue(kind, value, prefix = 'value') {
@@ -140,6 +149,7 @@ export function validateComponentValue(kind, value, prefix = 'value') {
   else if (kind === 'helper-script') validateScript(value, errors, prefix);
   else if (kind === 'helper-folder') validateFolder(value, errors, prefix);
   else errors.push(`unsupported kind: ${kind}`);
+  checkComponentIds(collectComponentIds(kind, value, prefix), new Map(), errors);
   return errors;
 }
 
@@ -164,7 +174,7 @@ export function planSpec(spec, outDirectory) {
   if (!Array.isArray(spec.items) || spec.items.length === 0) errors.push('items must be a non-empty array');
 
   const names = new Set();
-  const ids = new Set();
+  const ids = new Map();
   const files = [];
   if (Array.isArray(spec.items) && KINDS.has(spec.kind)) {
     spec.items.forEach((item, index) => {
@@ -182,11 +192,7 @@ export function planSpec(spec, outDirectory) {
         files.push(`${item.artifactName}.${artifactSuffix(spec.kind)}.json`);
       }
       errors.push(...validateComponentValue(spec.kind, item.value, `${prefix}.value`));
-      const id = isObject(item.value) ? item.value.id : undefined;
-      if (typeof id === 'string') {
-        if (ids.has(id)) errors.push(`duplicate component id: ${id}`);
-        ids.add(id);
-      }
+      checkComponentIds(collectComponentIds(spec.kind, item.value, `${prefix}.value`), ids, errors);
     });
   }
 
@@ -205,12 +211,23 @@ export function planSpec(spec, outDirectory) {
   }
 
   const outRoot = path.resolve(outDirectory);
+  try {
+    if (!fs.statSync(outRoot).isDirectory()) errors.push(`output root is not a directory: ${outRoot}`);
+  } catch (error) {
+    if (error.code !== 'ENOENT') errors.push(`unable to inspect output root: ${error.message}`);
+  }
   const planned = [...files, 'component-update-manifest.json'];
   if (spec.deliveryMode === 'full-card') planned.push('assembly-handoff.json');
   for (const relative of planned) {
     const resolved = path.resolve(outRoot, relative);
     if (resolved !== outRoot && !resolved.startsWith(`${outRoot}${path.sep}`)) errors.push(`output escapes staging root: ${relative}`);
     if (/\.(?:png|card\.json)$/i.test(relative)) errors.push(`forbidden direct card output: ${relative}`);
+    try {
+      fs.lstatSync(resolved);
+      errors.push(`output already exists: ${relative}; use a new staging directory`);
+    } catch (error) {
+      if (error.code !== 'ENOENT') errors.push(`unable to inspect output ${relative}: ${error.message}`);
+    }
   }
 
   return {

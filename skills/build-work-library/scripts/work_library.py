@@ -334,7 +334,7 @@ def record_usage(root, report):
     return {'recorded': True, 'calls': state['calls'], 'measured_tokens': state['measured_tokens'], 'unmeasured_calls': state['unmeasured_calls']}
 
 
-def validate_record(root, record, allowed_units=None):
+def validate_record(root, record, allowed_units=None, retained_evidence=()):
     identifier(record.get('id'))
     require(record.get('kind') in ('character', 'event', 'place', 'faction', 'rule', 'relationship', 'visual', 'question'), 'Unknown record kind')
     require(record.get('status') in ('confirmed', 'inference', 'uncertain'), 'Keep evidence certainty explicit')
@@ -348,7 +348,7 @@ def validate_record(root, record, allowed_units=None):
         require(isinstance(ev, dict), 'Each evidence item must be an object')
         uid = ev.get('unit_id', '')
         require(re.fullmatch(r'[a-z0-9][a-z0-9_-]{0,95}/u\d{6}', uid), 'Invalid evidence unit')
-        require(allowed_units is None or uid in allowed_units, 'Evidence outside the allocated batch')
+        require(allowed_units is None or uid in allowed_units or any(dump(ev) == dump(previous) for previous in retained_evidence), 'Evidence outside the allocated batch; only an unchanged previous evidence item may be retained')
         sid, unit_id = uid.split('/')
         src = source(root, sid)
         require(ev.get('source_sha256') == src['_descriptor_sha256'], 'Evidence source fingerprint changed or missing')
@@ -442,8 +442,7 @@ def commit_batch(root, candidate):
         if expected:
             previous_evidence = parse_record(root, safe(root, name).read_text(encoding='utf-8'), name)['evidence']
         # Existing evidence may be retained verbatim when an allocated later batch updates a dossier.
-        allowed = set(active['units']) | {ev['unit_id'] for ev in previous_evidence if ev in record['evidence']}
-        validate_record(root, record, allowed)
+        validate_record(root, record, set(active['units']), retained_evidence=previous_evidence)
         overlay[name] = render(record)
         writes[name] = (overlay[name], expected)
     rows, index_writes = reindex_writes(root, overlay)

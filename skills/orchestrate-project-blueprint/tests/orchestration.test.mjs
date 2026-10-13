@@ -3,6 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import { initializeProjectAuthority } from "../scripts/init-project-authority.mjs";
 import { resolveBrainstormCommand } from "../scripts/resolve-brainstorm-command.mjs";
 import { validateProjectAuthority, validateProjectAuthorityFile } from "../scripts/validate-project-authority.mjs";
@@ -14,6 +15,43 @@ function tempProject() {
 function loadManifest(root) {
   return JSON.parse(fs.readFileSync(path.join(root, ".tavernweave", "project-orchestration.json"), "utf8"));
 }
+
+test("bundled domain blueprint satisfies the project heading contract", () => {
+  const root = tempProject();
+  try {
+    initializeProjectAuthority({ root, profile: "blueprint-set", projectId: "demo", title: "演示", date: "2026-08-17" });
+    const data = loadManifest(root);
+    const relative = "蓝图集/BP-A.md";
+    const template = fs.readFileSync(fileURLToPath(new URL("../assets/templates/domain-blueprint.md", import.meta.url)), "utf8");
+    fs.writeFileSync(path.join(root, relative), template.replaceAll("{{PROJECT_ID}}", "demo").replaceAll("{{BLUEPRINT_ID}}", "BP-A").replaceAll("{{TITLE}}", "领域").replaceAll("{{DATE}}", "2026-10-13"));
+    data.blueprintPolicy.blueprints.push({ id: "BP-A", parentId: "BP-ROOT", depth: 2, status: "candidate", path: relative });
+    assert.deepEqual(validateProjectAuthority(data, { root }), []);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
+
+test("blueprint topology rejects cycles, detached nodes and false depths", () => {
+  const root = tempProject();
+  try {
+    initializeProjectAuthority({ root, profile: "program-blueprint-set", projectId: "demo", title: "演示", date: "2026-08-17" });
+    const base = loadManifest(root);
+    const node = (id, parentId, depth) => ({ id, parentId, depth, status: "candidate", path: `${id}.md` });
+    const check = (...extra) => {
+      const data = structuredClone(base);
+      data.blueprintPolicy.blueprints.push(...extra);
+      return validateProjectAuthority(data);
+    };
+    assert.deepEqual(check(node("BP-A", "BP-ROOT", 2), node("BP-B", "BP-A", 3)), []);
+    assert.ok(check(node("BP-A", "BP-B", 2), node("BP-B", "BP-A", 2)).some(error => error.includes("parent cycle")));
+    assert.ok(check(node("BP-A", "BP-A", 2)).some(error => error.includes("parent cycle")));
+    assert.ok(check(node("BP-A", "missing", 2)).some(error => error.includes("not reachable")));
+    assert.ok(check(node("BP-A", null, 1)).some(error => error.includes("not reachable")));
+    assert.ok(check(node("BP-A", "BP-ROOT", 3)).some(error => error.includes("actual depth 2")));
+    assert.ok(check(node("BP-A", "BP-ROOT", 2), node("BP-B", "BP-A", 3), node("BP-C", "BP-B", 3)).some(error => error.includes("exceeds maxDepth")));
+    const malformed = structuredClone(base);
+    malformed.blueprintPolicy.blueprints.push(null);
+    assert.ok(validateProjectAuthority(malformed).includes("blueprint id is required"));
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
 
 test("direct brainstorm commands resolve without matching quoted fixtures", () => {
   assert.equal(resolveBrainstormCommand("脑暴模式！").mode, "neutral");

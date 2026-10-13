@@ -20,6 +20,15 @@ Define the transformation before writing a pattern:
 
 Do not use regex to conceal a broken variable or prompt chain. Test raw, streaming, and final states with adversarial text.
 
+For letters, forums, journals, and other message content pages, use the embedded-UI
+[message content method](../../sillytavern-embedded-ui/references/message-content-ui.md).
+Keep the model-facing output rule, message boundary, mounting transformation, and
+parser/display mapping consistent. The Agent's design worksheet is not worldbook
+body text: exclude visual rationale, implementation notes and unresolved slots
+from the runtime prompt. Reuse an existing suitable output rule and preserve prose
+outside the agreed page region. A regex match alone proves neither correct parsing
+nor successful rendering.
+
 ## 2. Script contracts
 
 For every requested script, specify:

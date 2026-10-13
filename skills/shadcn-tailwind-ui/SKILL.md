@@ -15,6 +15,12 @@ Before UI writes, use `$consult-tavernweave-library` with the `shadcn-tailwind-u
 
 Use this skill for implementation work inside an existing React codebase. Preserve the project's framework, package manager, component conventions, tokens, and installed shadcn components before introducing anything new.
 
+Use the shared [frontend design quality](../consult-tavernweave-library/references/frontend-design-quality.md)
+standard for design and review. Actively research relevant precedents, develop a
+coherent main design from the user's intent and explain it visually when useful.
+Apply the default Awwwards quality criteria and remove meaningless small copy or
+extra English decoration. Reuse an adopted project direction within the requested scope.
+
 ## Scope
 
 - React, Vite, and Next.js applications.

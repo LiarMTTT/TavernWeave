@@ -63,7 +63,7 @@ export function measureCard(value, rawText, identity = {}) {
       metrics.embeddedDataBytes += dataUriBytes(node);
       metrics.remoteUrlCount += (node.match(/https?:\/\/[^\s"'<>]+/gi) ?? []).length;
       const field = parts.at(-1);
-      if (PROMPT_FIELDS.has(field)) metrics.promptBytes += bytes;
+      if (PROMPT_FIELDS.has(field) || (typeof field === 'number' && parts.at(-2) === 'alternate_greetings')) metrics.promptBytes += bytes;
       if (field === 'content' && inWorldbook(parts)) metrics.worldbookBytes += bytes;
       if (REGEX_FIELDS.has(field) && parts.includes('regex_scripts')) metrics.regexBytes += bytes;
       if (field === 'content' && inHelperScripts(parts)) metrics.helperScriptBytes += bytes;

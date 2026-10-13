@@ -11,6 +11,10 @@ next_gate: Confirm goal, exclusions, and first acceptance object
 
 # Creative authority
 
+`target_card_type` starts as `unknown` until identified. New records use `text`,
+`mvu_zod`, or `hybrid`; record the actual runtime evidence separately. Do not prefill
+a runtime choice from a template or use a new label as proof of migration.
+
 ## Goal and exclusions
 
 - Goal: describe one observable outcome.
@@ -43,6 +47,11 @@ next_gate: Confirm goal, exclusions, and first acceptance object
 
 ## Entry and component map
 
+Record both required cores: a usable greeting and a substantive worldbook with its
+binding. They may be pending during planning. Add selected regexes, helper scripts,
+UI, and resources with their owners and consumers; use the project's existing entry
+record format.
+
 ```twa-entries
 {
   "schemaVersion": 1,
@@ -58,6 +67,10 @@ next_gate: Confirm goal, exclusions, and first acceptance object
 - Development-only: none confirmed.
 
 ## Acceptance ledger
+
+Whole-card delivery needs greeting/worldbook content and consistency evidence, plus
+the selected runtime's required components. Structural validation of this document
+does not establish those facts or real-host acceptance.
 
 ```twa-acceptance
 {

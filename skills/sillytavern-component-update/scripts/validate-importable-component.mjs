@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { pathToFileURL } from 'node:url';
-import { canonicalJson, validateComponentValue } from './plan-component-update.mjs';
+import { canonicalJson, checkComponentIds, collectComponentIds, validateComponentValue } from './plan-component-update.mjs';
 
 function fileHash(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
@@ -26,7 +26,7 @@ export function validateFile(file, expectedKind) {
   const kind = expectedKind ?? detectKind(value);
   if (!kind) errors.push('unable to detect component kind');
   else errors.push(...validateComponentValue(kind, value, path.basename(file)));
-  return { file, kind, errors };
+  return { file, kind, errors, componentIds: collectComponentIds(kind, value, path.basename(file)) };
 }
 
 export function validateTarget(target) {
@@ -52,6 +52,7 @@ export function validateTarget(target) {
   if (manifest.schemaVersion !== 1) errors.push('manifest schemaVersion must be 1');
   if (!Array.isArray(manifest.artifacts) || manifest.artifacts.length === 0) errors.push('manifest artifacts must be non-empty');
   const seenIds = new Set();
+  const componentIds = new Map();
   for (const artifact of manifest.artifacts ?? []) {
     const file = path.resolve(resolved, artifact.relativePath ?? '');
     if (!file.startsWith(`${resolved}${path.sep}`)) {
@@ -68,6 +69,7 @@ export function validateTarget(target) {
     const result = validateFile(file, artifact.kind);
     files.push(result);
     errors.push(...result.errors.map(error => `${artifact.relativePath}: ${error}`));
+    checkComponentIds(result.componentIds ?? [], componentIds, errors);
   }
   if (manifest.deliveryMode === 'component' && fs.existsSync(path.join(resolved, 'assembly-handoff.json'))) {
     errors.push('component mode must not include assembly-handoff.json');

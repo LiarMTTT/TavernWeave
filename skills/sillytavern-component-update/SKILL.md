@@ -60,7 +60,11 @@ node scripts/build-importable-component.mjs --spec update-spec.json --out stagin
 ```
 
 The build command is dry-run unless `--write` is present. Accept the script's output
-paths only when they remain inside the declared staging directory.
+paths only when they remain inside the declared staging directory. The plan rejects
+every existing target, including the manifest and handoff. Use a new staging
+directory for a revised batch. Writing reserves all targets exclusively, and a
+caught write failure removes only this batch's created files; report any rollback
+failure and do not present a partial batch as delivered.
 
 For `component` mode, reject any plan that emits a card JSON or PNG. For `full-card`
 mode, require `assembly.targetCard`, `assembly.componentId`, and
@@ -78,7 +82,7 @@ node scripts/validate-importable-component.mjs staging
 Require:
 
 - valid UTF-8 JSON and a recognized component kind;
-- stable, unique IDs;
+- stable IDs unique across every folder and child script in the entire batch;
 - compilable regex patterns and non-empty helper-script content;
 - preserved enabled state, ordering, buttons, data, and extension fields;
 - no whole-card output in `component` mode;

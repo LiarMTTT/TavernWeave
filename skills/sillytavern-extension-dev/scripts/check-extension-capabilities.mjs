@@ -3,18 +3,41 @@ import { pathToFileURL } from 'node:url';
 import { canonicalJson } from './validate-extension-manifest.mjs';
 
 const OWNERS = new Set(['sillytavern', 'tavern-helper', 'provider']);
-const SEMVER = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
+const SEMVER = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$/;
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
-function compareVersion(left, right) {
-  const normalize = value => value.split(/[+-]/, 1)[0].split('.').map(Number);
-  const a = normalize(left);
-  const b = normalize(right);
+function parseVersion(value) {
+  const match = typeof value === 'string' ? SEMVER.exec(value) : null;
+  if (!match) return null;
+  const prerelease = match[4]?.split('.') ?? [];
+  if (prerelease.some(part => /^\d+$/.test(part) && part.length > 1 && part.startsWith('0'))) return null;
+  return { core: match.slice(1, 4), prerelease };
+}
+
+function compareNumeric(left, right) {
+  return left.length !== right.length ? left.length - right.length : left < right ? -1 : left > right ? 1 : 0;
+}
+
+function compareVersion(a, b) {
   for (let index = 0; index < 3; index += 1) {
-    if (a[index] !== b[index]) return a[index] - b[index];
+    const difference = compareNumeric(a.core[index], b.core[index]);
+    if (difference) return difference;
+  }
+  if (!a.prerelease.length || !b.prerelease.length) return Number(!a.prerelease.length) - Number(!b.prerelease.length);
+  for (let index = 0; index < Math.max(a.prerelease.length, b.prerelease.length); index += 1) {
+    if (a.prerelease[index] === undefined) return -1;
+    if (b.prerelease[index] === undefined) return 1;
+    const left = a.prerelease[index];
+    const right = b.prerelease[index];
+    if (left === right) continue;
+    const leftNumeric = /^\d+$/.test(left);
+    const rightNumeric = /^\d+$/.test(right);
+    if (leftNumeric && rightNumeric) return compareNumeric(left, right);
+    if (leftNumeric !== rightNumeric) return leftNumeric ? -1 : 1;
+    return left < right ? -1 : 1;
   }
   return 0;
 }
@@ -48,15 +71,22 @@ export function checkCapabilities(contract, snapshot) {
     }
   }
 
+  for (const [owner, version] of Object.entries(snapshot?.versions ?? {})) {
+    if (version !== null && !parseVersion(version)) errors.push(`snapshot version missing or invalid: ${owner}`);
+  }
   for (const [owner, minimum] of Object.entries(contract?.minimum ?? {})) {
     if (minimum === null) continue;
-    if (typeof minimum !== 'string' || !SEMVER.test(minimum)) {
+    const minimumVersion = parseVersion(minimum);
+    if (!minimumVersion) {
       errors.push(`minimum.${owner} must be semantic version or null`);
       continue;
     }
     const installed = snapshot?.versions?.[owner];
-    if (typeof installed !== 'string' || !SEMVER.test(installed)) errors.push(`snapshot version missing or invalid: ${owner}`);
-    else if (compareVersion(installed, minimum) < 0) errors.push(`${owner} ${installed} is below minimum ${minimum}`);
+    const installedVersion = parseVersion(installed);
+    if (!installedVersion) {
+      const message = `snapshot version missing or invalid: ${owner}`;
+      if (!errors.includes(message)) errors.push(message);
+    } else if (compareVersion(installedVersion, minimumVersion) < 0) errors.push(`${owner} ${installed} is below minimum ${minimum}`);
   }
 
   const observed = new Set(snapshot?.symbols ?? []);

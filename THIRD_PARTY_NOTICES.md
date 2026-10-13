@@ -40,3 +40,45 @@ The public snapshot intentionally excludes the A1 driver master, archived comman
 The private source used as a design input carried inconsistent license metadata and unverified font assets. TavernWeave does not redistribute those fonts, coverage output, or unknown-license assets. Any retained third-party code must keep its original notice in the corresponding skill and is not relicensed by TavernWeave's repository-level license.
 
 This notice must be updated before release whenever third-party text, code, or assets are added.
+
+## Rolecard authoring integration candidate
+
+The three-type architecture, character/player/stage/portrayal methods, variable-design
+and worldbuilding/worldbook guidance
+in this candidate was newly written for TavernWeave using the maintainer's explicit
+task decisions and selected local Moyue workshop method documents as design inputs.
+Those decisions include required greetings and worldbooks, normally empty legacy
+prompt fields, player-confirmed world scale, structured prose and knowledge degrees,
+character-entry activation conventions, keyword scan depth 2 and disabled recursion.
+The character integration additionally separates player facts from portrayal permission,
+stable foundations from state-selected differences, and observed feedback from
+diagnostic hypotheses. Independent clarification is optional and does not create facts
+or advance state. Current methods are not a mandatory revival of older palette or
+three-face structures; effective inherited designs are preserved.
+They are authoring conventions rather than claims that every SillyTavern version
+requires the same content or exposes the same field names.
+
+The source prompt corpus, workshop assistant persona, prompt-assembly macros, forced reasoning/output
+wrappers, project scripts, bundled type declarations, runtime utilities, assets,
+build/sync/pack tools and dependency environment are not redistributed by this
+integration. Input references and hashes are recorded in the separate review
+evidence. A local source file's presence does not establish a redistribution license
+for its unrelated code or assets. Existing upstream licenses and runtime boundaries
+remain unchanged.
+
+## Opening, frontend and natural-prose method extension
+
+This candidate adds newly written opening-style and small-piece authoring methods,
+message content UI and MVU statusbar design guidance, author-facing assessment,
+and natural Chinese review. Selected local Moyue methods and the maintainer's
+Chinese prose requirements from an existing project were design inputs. No original
+project setting, private decision log or full source corpus is redistributed.
+
+The default Awwwards quality direction, proactive online design research, visual
+proposal requirement, clean-page copy rules and strict restraint on rhetorical
+three-part lists are explicit maintainer decisions for this integration. The
+[Awwwards Self Aware score page](https://www.awwwards.com/sites/self-aware) provides
+the published scoring dimensions; [mobile guidance](https://www.awwwards.com/mobile-excellence-guidelines.pdf)
+provides relevant usability considerations. These outbound references do not imply
+affiliation, an award, or inclusion of third-party site assets. Existing notices and
+runtime responsibilities remain in effect.

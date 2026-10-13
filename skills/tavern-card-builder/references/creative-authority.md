@@ -10,7 +10,7 @@ authority_schema: tavernweave/creative-authority/v1
 project_id: stable-project-id
 title: Human-readable title
 status: implementation-candidate
-target_card_type: text | mvu | mvu_zod | hybrid | unknown
+target_card_type: text | mvu_zod | hybrid | unknown
 target_host: SillyTavern version or unresolved
 updated: YYYY-MM-DD
 next_gate: one concrete gate
@@ -29,6 +29,36 @@ driver-accepted
 ```
 
 Only the driver may set `driver-approved-design` or `driver-accepted`. Automation may report evidence and propose the transition, but must not perform it.
+
+`target_card_type` accepts the three current types, or `unknown` while the target is
+still unresolved. `unknown` is not a fourth card type. Keep a desired target separate
+from detected runtime evidence in the component/dependency records. In particular,
+writing `mvu_zod` here does not prove the schema, registration path, or loaders exist.
+
+For this one-line field, the validator accepts plain values, single/double-quoted
+values, and inline comments separated from the value by whitespace. It compares the
+whole decoded value: `text#suffix`, `"text # suffix"`, and extra tokens after a quoted
+value remain invalid. This bounded normalization is not general YAML support and does
+not change parsing of other front-matter fields.
+
+Older records with `target_card_type: mvu` may be read with the explicit compatibility
+option below. Do not emit that value in a new authority, rewrite history to hide the
+gap, or perform an unrequested card/save migration.
+
+```sh
+node scripts/validate-creative-authority.mjs <authority.md> --allow-legacy-mvu
+```
+
+By default the validator rejects legacy `mvu` and any other unrecognized type. The
+compatibility option emits a warning that Zod remains unverified and no migration was
+performed. The script only reads the document. The exported
+`validateAuthority(text, { automation, allowLegacyMvu, warnings })` still returns an
+array of errors; callers may supply a `warnings` array to collect legacy/unresolved
+notices. `--automation` retains its independent ban on driver-only statuses.
+
+Validation confirms document structure and these status/type rules, not the contents
+or execution of a card. Core greeting/worldbook readiness and MVU Zod capability must
+still be checked against the actual source and artifacts at the relevant gate.
 
 ## Required sections
 
@@ -81,6 +111,12 @@ Use fenced blocks for data that scripts must validate. JSON is used inside the M
 ```
 
 Read [material-provenance.md](material-provenance.md) for material and claim records. Read [acceptance-ledger.md](../../sillytavern-card-pipeline/references/acceptance-ledger.md) for evidence records.
+
+Use the existing entry/component map for the required greeting and worldbook and any
+selected regexes, scripts, UI, and resources. At planning time they may be pending.
+Before a whole-card delivery, link evidence for substantive content, worldbook
+attachment/binding, and consistency with each opening's initial state. Empty blocks
+make the authority structurally valid; they do not make the card complete.
 
 ## Resume protocol
 

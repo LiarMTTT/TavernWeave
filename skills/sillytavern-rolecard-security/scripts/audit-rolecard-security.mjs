@@ -89,9 +89,76 @@ function relativeFile(file, root) {
   return path.relative(root, file).replaceAll('\\', '/');
 }
 
-function addFinding(findings, rule, file, text, index) {
+function addFinding(findings, rule, file, text, index, jsonPath) {
   const location = lineColumn(text, index);
-  findings.push({ ruleId: rule.ruleId, severity: rule.severity, file, ...location, message: rule.message });
+  findings.push({ ruleId: rule.ruleId, severity: rule.severity, file, ...location, ...(jsonPath === undefined ? {} : { jsonPath }), message: rule.message });
+}
+
+function scanText(findings, file, source, value, offsets, jsonPath) {
+  for (const rule of RULES) {
+    rule.pattern.lastIndex = 0;
+    for (let match = rule.pattern.exec(value); match; match = rule.pattern.exec(value)) {
+      addFinding(findings, rule, file, source, offsets ? offsets[match.index] : match.index, jsonPath);
+      if (match[0].length === 0) rule.pattern.lastIndex += 1;
+    }
+  }
+}
+
+// Only call after JSON.parse succeeds. Walk JSON tokens without evaluating any
+// string as code, retaining each decoded UTF-16 unit's original source offset.
+function scanJson(findings, file, source) {
+  let cursor = 0;
+  const whitespace = () => { while (/\s/.test(source[cursor] ?? '') && cursor < source.length) cursor += 1; };
+  const readString = () => {
+    const start = cursor++;
+    const offsets = [];
+    while (source[cursor] !== '"') {
+      offsets.push(cursor);
+      if (source[cursor] === '\\') cursor += source[cursor + 1] === 'u' ? 6 : 2;
+      else cursor += 1;
+    }
+    cursor += 1;
+    return { start, offsets, value: JSON.parse(source.slice(start, cursor)) };
+  };
+  const visit = (jsonPath, key) => {
+    whitespace();
+    if (source[cursor] === '"') {
+      const token = readString();
+      scanText(findings, file, source, token.value, token.offsets, jsonPath);
+      if (/^(?:api[_-]?key|access[_-]?token|client[_-]?secret|password)$/i.test(key ?? '') && token.value.length > 0) {
+        addFinding(findings, RULES.find(rule => rule.ruleId === 'TWSEC-SECRET-001'), file, source, token.start, jsonPath);
+      }
+    } else if (source[cursor] === '{') {
+      cursor += 1;
+      whitespace();
+      while (source[cursor] !== '}') {
+        const property = readString().value;
+        whitespace();
+        cursor += 1; // colon
+        visit(`${jsonPath}[${JSON.stringify(property)}]`, property);
+        whitespace();
+        if (source[cursor] !== ',') break;
+        cursor += 1;
+        whitespace();
+      }
+      cursor += 1;
+    } else if (source[cursor] === '[') {
+      cursor += 1;
+      whitespace();
+      let index = 0;
+      while (source[cursor] !== ']') {
+        visit(`${jsonPath}[${index++}]`);
+        whitespace();
+        if (source[cursor] !== ',') break;
+        cursor += 1;
+        whitespace();
+      }
+      cursor += 1;
+    } else {
+      while (cursor < source.length && !/[\s,\]}]/.test(source[cursor])) cursor += 1;
+    }
+  };
+  visit('$');
 }
 
 export function auditTarget(target) {
@@ -109,16 +176,15 @@ export function auditTarget(target) {
     }
     const relative = relativeFile(file, resolved);
     if (path.extname(file).toLowerCase() === '.json') {
-      try { JSON.parse(text); }
-      catch (error) { findings.push({ ruleId: 'TWSEC-PARSE-002', severity: 'medium', file: relative, line: 1, column: 1, message: `JSON parse failed: ${error.message}` }); }
-    }
-    for (const rule of RULES) {
-      rule.pattern.lastIndex = 0;
-      for (let match = rule.pattern.exec(text); match; match = rule.pattern.exec(text)) {
-        addFinding(findings, rule, relative, text, match.index);
-        if (match[0].length === 0) rule.pattern.lastIndex += 1;
+      try {
+        JSON.parse(text);
+        scanJson(findings, relative, text);
+      } catch {
+        // Parser exception text can echo private source values.
+        findings.push({ ruleId: 'TWSEC-PARSE-002', severity: 'medium', file: relative, line: 1, column: 1, message: 'JSON parse failed; source details are redacted' });
+        scanText(findings, relative, text, text);
       }
-    }
+    } else scanText(findings, relative, text, text);
   }
   findings.sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line || a.column - b.column || a.ruleId.localeCompare(b.ruleId));
   const byRule = {};

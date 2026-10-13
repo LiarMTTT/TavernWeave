@@ -41,6 +41,8 @@ Supported surfaces are `status-bar`, `control-center`, `script`, and `prompt`.
 Access is `read`, `write`, or `read-write`. Each binding needs a stable ID, declared
 table and field, owner, and at least one refresh event.
 
+For `write` and `read-write`, `writePhase` is `runtime` by default; a field may have multiple entry points only when they share the same owner. Different owners in the same field/phase are rejected. `initialization` and `migration` require a non-empty `writeCondition` describing when they run and stop, such as a new-chat gate or an exact version transition before runtime resumes. A condition does not exempt two runtime writers from the ownership rule. Read-only bindings cannot declare write-phase metadata. These declarations must agree with the [shared variable lifecycle](../../tavern-card-builder/references/variable-systems.md); the checker does not prove real-host mutual exclusion.
+
 ## Acceptance matrix
 
 Require real SillyTavern evidence for:

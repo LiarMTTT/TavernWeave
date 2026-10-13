@@ -185,6 +185,49 @@ class WorkLibraryTests(unittest.TestCase):
         self.assertEqual(lib.load(self.root / '.state/state.json')['batches'], 1)
         self.assertTrue(self.call(lib.commit_batch, self.candidate(pack))['already_committed'])
 
+    def test_retained_evidence_does_not_authorize_new_quotes_from_its_old_unit(self):
+        self.first_commit()
+        pack = self.call(lib.next_batch)
+        self.usage(pack)
+        candidate = self.candidate(pack, 'lan', '岚迁往南城。')
+        record = candidate['records'][0]
+        file = self.root / 'records/lan.md'
+        before = file.read_bytes()
+        old = self.call(lib.query)['records'][0]
+        record['base_sha256'] = lib.file_hash(file)
+        record['evidence'] += copy.deepcopy(old['evidence'])
+        extra = dict(old['evidence'][0], start=self.text.index('代号青鸟'), quote='代号青鸟')
+        record['evidence'].append(extra)
+        with self.assertRaisesRegex(lib.LibraryError, 'unchanged previous evidence item'):
+            self.call(lib.commit_batch, candidate)
+        self.assertEqual(file.read_bytes(), before)
+        self.assertEqual(lib.load(self.root / '.state/state.json')['active']['id'], pack['batch_id'])
+        record['evidence'].pop()
+        self.call(lib.commit_batch, candidate)
+        self.assertEqual(len(self.call(lib.query)['records'][0]['evidence']), 2)
+
+    def test_changed_old_evidence_requires_a_new_allocation_even_without_retaining_original(self):
+        self.first_commit()
+        pack = self.call(lib.next_batch)
+        self.usage(pack)
+        candidate = self.candidate(pack, 'lan', '岚迁往南城。')
+        file = self.root / 'records/lan.md'
+        old = self.call(lib.query)['records'][0]
+        candidate['records'][0]['base_sha256'] = lib.file_hash(file)
+        candidate['records'][0]['evidence'].append(dict(old['evidence'][0], quote='岚住在北港'))
+        with self.assertRaisesRegex(lib.LibraryError, 'outside the allocated batch'):
+            self.call(lib.commit_batch, candidate)
+
+    def test_currently_allocated_unit_can_supply_an_additional_exact_quote(self):
+        self.setup_plan()
+        pack = self.call(lib.next_batch)
+        self.usage(pack)
+        candidate = self.candidate(pack)
+        evidence = candidate['records'][0]['evidence']
+        evidence.append(dict(evidence[0], start=self.text.index('代号青鸟'), quote='代号青鸟'))
+        self.call(lib.commit_batch, candidate)
+        self.assertEqual(len(self.call(lib.query)['records'][0]['evidence']), 2)
+
     def test_recovery_preserves_intervening_human_edit(self):
         file = self.root / 'records/x.md'
         pending = {'operation': 'fixture', 'writes': [{'path': 'records/x.md', 'before': None, 'text': 'planned'}]}

@@ -1,6 +1,6 @@
 # TW 项目进度画板
 
-**v1.8.0 提供项目进度画板与总设计案／NEXT 同步。** 完整包见 [v1.8.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.8.0)；画板属于现有 `orchestrate-project-blueprint`，TW 仍有 22 个 Skill。用于角色卡与普通软件项目；各项目有自己的文件、主题、范围和记录。
+**v1.8.0 开始提供项目进度画板与总设计案／NEXT 同步。** 当前完整包见 [v1.9.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.0)，首次发布记录保留在 [v1.8.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.8.0)；画板属于现有 `orchestrate-project-blueprint`，TW 仍有 22 个 Skill。用于角色卡与普通软件项目；各项目有自己的文件、主题、范围和记录。
 
 ## 可以直接这样说
 

@@ -43,7 +43,8 @@ Use UTF-8 JSON:
 
 Supported `kind` values are `regex`, `helper-script`, and `helper-folder`.
 `artifactName` must be a portable lowercase filename stem. Each item ID must be
-unique inside the spec.
+unique inside the spec. Folder IDs and every child-script ID share that same batch
+namespace, including children in different folders.
 
 For `full-card`, also require:
 
@@ -65,6 +66,20 @@ spec or handoff.
 The builder writes one JSON artifact per item and `component-update-manifest.json`.
 Full-card mode additionally writes `assembly-handoff.json`. Output filenames are
 derived from `artifactName`; collisions and paths outside `--out` are blocking.
+
+Planning checks all output targets before writing, including the manifest and
+handoff. Existing files, directories, or links at those targets are conflicts even
+when their content happens to match. Use a fresh staging directory for another
+delivery; this builder has no overwrite option. Unrelated files in the staging
+directory are preserved.
+
+The writer creates every target exclusively before filling the files. A target
+created concurrently after planning cannot be overwritten. On a caught reservation
+or write failure, close handles and remove only outputs created by this batch.
+Return a failed result with any cleanup errors or remaining files. This is recovery
+from handled failures, not a crash-atomic filesystem transaction; after a forced
+process termination, inspect the staging directory and use a new directory for the
+retry. Do not treat a partial manifest or the mere existence of a file as delivery.
 
 The manifest records artifact kind, relative path, SHA-256, stable ID, and delivery
 mode. It never contains card bytes.

@@ -21,6 +21,13 @@ Before changing an existing card, inventory:
 
 Preserve the original experience unless the user explicitly requests redesign.
 
+Existing personality palettes, face-based descriptions, stage controllers and effective
+field uses do not need conversion to the current [character-design method](character-design.md).
+For portrayal feedback, use [character-review-and-correction.md](character-review-and-correction.md)
+to distinguish source ambiguity, scene/preset effects and runtime delivery before
+proposing a change. Preserve player portrayal permission and existing saves; a
+creative diagnosis is not permission to install a stage runtime or rewrite the card.
+
 ## 2. Minimal MVU retrofit
 
 Start with the smallest state that unlocks the requested behavior. Add schema, shared initialization, update rules, and model projection as one complete chain. Do not variable-ize every noun merely because MVU is available.
