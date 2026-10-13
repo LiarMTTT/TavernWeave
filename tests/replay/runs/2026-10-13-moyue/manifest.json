@@ -1,0 +1,36 @@
+{
+  "method": "Fresh batched written scenario replay against current candidate skills, followed by independent case-by-case comparison to the unchanged original acceptance criteria. Initial response writers were instructed not to read acceptance fields or historical results; any later revisions followed explicit review feedback and retain the original attempt. This is source-contract and written-handling evidence, not 170 isolated end-to-end model trials, real-host execution, installation, publication, or driver acceptance.",
+  "caseDefinitionHashes": {
+    "cases.json": "596460dc90a33061f0b955c14013e130f8e13869d81708a119d48eb547501a28",
+    "adversarial-cases.json": "de121917420b532f87e854acfbda568afb581c96855e14e4b40f9594d56e5b07"
+  },
+  "beforeResultsSha256": "5cb5a8c2b2259d75b40b63bcf1bfa0efcbb27bf78f3788521cd97c799582622c",
+  "responsesSha256": "b97623e7f6857315518ae9ebd2077a49dbdaa5fa035671c75144307baf9cd267",
+  "assessmentsSha256": "6671912300e2acdd47bd75991adc4591d409b145c6b3216470b0de334eed3d61",
+  "forwardCases": 80,
+  "adversarialCases": 90,
+  "passed": 170,
+  "responsesRevisedAfterFirstAssessment": 17,
+  "firstAttemptRecordHashes": {
+    "assessments-a.json": "ab3c14e2136689687e71d85c5dc664c225cabb59a8b3ea4673fc58a603f5e3ed",
+    "assessments-b.json": "0f671465452e6724a2682438bab331c1378ac231734f4f6fa613f006d9adabd1",
+    "assessments-c.json": "bcea68bc424d626699a66fc9b4a8f3d3769f21fadd631d2987a955ee90d8de59",
+    "responses-a.json": "5762e042ccae7c40befd42a9a1e651b3e5973f12d8fbbcd3c16b6de9b34202c0",
+    "responses-b.json": "51ae2ba9bd52c895325540a37263c0f83453eee2a83a2295df173905b0001ef7",
+    "responses-c.json": "27d24fe27df9cffb14b4db107c8d280fd37f6c9e5ef02f391f45836a4feb7f94"
+  },
+  "sourceSkillFilesUnchangedDuringReplay": true,
+  "inputRecords": {
+    "responses-a.json": "a1680fa429678075c4130ad3e83ebd374ee7edebe91b540fd4cdf09dc54700a9",
+    "assessments-a.json": "2b935cdf7929025d94e0fbd58b94304960d39e34e5c36c4f2f8b6ae2f6e3dd2e",
+    "responses-b.json": "c0edc625e37dd9b4735f365b2beecb1770ba3bda48f52e92d61b43d9d2757de4",
+    "assessments-b.json": "ceecfd2db4e1fc9b44e4db53c52aec0572f3d195185ed48370b90de068335e51",
+    "responses-c.json": "4de03135130e9270a3be353e9ad122aff8431ea98702739877c6eadaf6c37376",
+    "assessments-c.json": "468625c846950f024cccb6efab12a1d13e762e5bc6ad3d0297507f80c22633f4"
+  },
+  "limitations": [
+    "Batched written responses, not independent per-case model sessions.",
+    "Requested host operations were described, not executed.",
+    "Any response revision retains its initial attempt in that case record."
+  ]
+}

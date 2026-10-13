@@ -55,3 +55,12 @@ node scripts/query-library.mjs --skill consult-tavernweave-library --intent "玻
 ```
 
 The 243 AFV screening receipts are source-side audit inputs. TavernWeave stores only their aggregate counts and the resulting public catalogs; it does not distribute the inbox JSON files.
+
+## Creative pieces and technical events
+
+Match explicit in-card creative phrases to the builder. A plot event is different
+from an API event listener; a bare ambiguous "事件" does not choose the API route.
+Conjunctions in a mixed request may legitimately return several specialist route IDs.
+The result is a matched-route list, not a claim that every task has one primary owner.
+Explicit `--skill` and existing work-library and sandbox exceptions retain priority.
+The newbie-guide JSON is a generated mirror of this route map, not a second matcher.

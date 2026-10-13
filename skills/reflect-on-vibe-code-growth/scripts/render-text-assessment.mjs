@@ -1,3 +1,5 @@
+export const DEFAULT_CORE_DIMENSION_IDS = ["decisiveness", "correction", "learning-speed", "driver-sync"];
+
 const MEASUREMENT_LABELS = {
   exact: "精确统计",
   "user-reported": "用户自报",
@@ -64,7 +66,8 @@ function renderComparison(record, dimensionsById) {
   for (const mapping of record.comparison.dimensionMappings ?? []) {
     const before = dimensionsById.get(mapping.previousDimensionId)?.label ?? mapping.previousDimensionId;
     const after = mapping.currentDimensionId ? (dimensionsById.get(mapping.currentDimensionId)?.label ?? mapping.currentDimensionId) : "已退役";
-    rows.push(`| ${markdownCell(before)} | ${markdownCell(after)} | ${mapping.status === "comparable" ? "可比" : "量表变化，不直接比较"} | ${markdownCell(mapping.comparisonLabel)} | ${markdownCell(mapping.note)} |`);
+    const status = mapping.status === "comparable" ? "可比" : mapping.status === "unscored" ? "同维度，暂无可比数值" : "量表变化，不直接比较";
+    rows.push(`| ${markdownCell(before)} | ${markdownCell(after)} | ${status} | ${markdownCell(mapping.comparisonLabel)} | ${markdownCell(mapping.note)} |`);
   }
   if ((record.comparison.newDimensionIds ?? []).length > 0) {
     rows.push("", `新增维度：${record.comparison.newDimensionIds.map((id) => dimensionsById.get(id)?.label ?? id).join("、")}。`);
@@ -120,7 +123,7 @@ export function renderTextAssessment(record) {
   section(lines, "三、完整能力网络总表", dimensionRows);
 
   const coreBody = [];
-  const coreIds = record.coreDimensionIds ?? [];
+  const coreIds = record.coreDimensionIds ?? DEFAULT_CORE_DIMENSION_IDS;
   for (const [index, dimensionId] of coreIds.entries()) {
     const dimension = dimensionsById.get(dimensionId);
     if (!dimension) continue;

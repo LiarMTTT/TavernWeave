@@ -1,18 +1,23 @@
 # Impact validation and release gate
 
 Use the smallest sufficient validation during iteration, then require the complete
-gate for a release candidate.
+gate for a release candidate. The matrix below describes source checks. Staged JSON
+or PNG is required only when the requested checkpoint, delivery or release already
+authorizes that artifact. A source-only edit can finish with its source evidence;
+record artifact and real-host checks as pending instead of asking for packing merely
+to satisfy this matrix. Existing approved live-watch output stays within its adapter
+contract and is not a release authorization.
 
-## Impact-based validation matrix
+## Impact-based source validation matrix
 
 | Changed surface | Minimum evidence |
 | --- | --- |
-| Worldbook or rule text | UTF-8/JSON parse, model-visible lint, targeted contract, staged JSON pack. |
-| Card-bound worldbook or version surface | Stable-ID and version resolution, attachment check, maintained-source semantic parity, stale-version negative fixture, staged JSON pack. |
-| Initial variables or schema | Parse or syntax check, full field-chain trace, required/forbidden contract, staged JSON pack. |
-| Update protocol or output format | Parser and protocol contract, examples/fixtures, model-text lint, reverse forbidden check, staged JSON pack. |
-| Helper or runtime script | Language syntax, dependency/API contract, focused fixtures, staged JSON pack. |
-| Regex or embedded UI | Syntax, selector and placeholder contract, native/fail-soft checks, staged JSON and PNG when payload changes, real-host acceptance pending. |
+| Worldbook or rule text | UTF-8/JSON parse, model-visible lint, targeted contract. |
+| Card-bound worldbook or version surface | Stable-ID and version resolution, attachment check, maintained-source semantic parity, stale-version negative fixture. |
+| Initial variables or schema | Parse or syntax check, full field-chain trace, required/forbidden contract. |
+| Update protocol or output format | Parser and protocol contract, examples/fixtures, model-text lint, reverse forbidden check. |
+| Helper or runtime script | Language syntax, dependency/API contract, focused fixtures. |
+| Regex or embedded UI | Syntax, selector and placeholder contract, native/fail-soft checks, real-host acceptance pending. |
 | Card type or runtime dependency ledger | Detection evidence, declared/detected reconciliation, dependency classes, embedded ownership, regional selection, user notice. |
 | Remote or regional loader | URL/ref and fallback contract, exactly-one selection when declared, staged script preservation, real execution pending. |
 | Profile or manifest | Schema, path containment, version alignment, referenced-file existence, packaging-policy checks. |
@@ -23,6 +28,14 @@ gate for a release candidate.
 
 Widen the check set whenever a change crosses two rows. A runtime-facing change remains
 open after offline checks until the relevant SillyTavern behavior is exercised.
+
+## Artifact checks after packaging authorization
+
+For an authorized artifact stage, the worldbook, schema, protocol and helper changes
+above require a staged JSON pack and source-to-artifact comparison. Regex/UI payload
+changes also require the requested PNG round trip when PNG delivery is in scope.
+Run these before calling the artifact verified; source-only evidence cannot stand
+in for them. Full-card packaging remains separate from component-only export.
 
 ## Preparation gate
 

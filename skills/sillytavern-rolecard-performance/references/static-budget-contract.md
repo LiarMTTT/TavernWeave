@@ -14,7 +14,7 @@ not predict browser frame time or model latency by themselves.
 | `stringBytes` | Sum of UTF-8 bytes in all JSON string values. |
 | `maxStringBytes` | Largest single string value, with a redacted JSON path. |
 | `embeddedDataBytes` | Decoded bytes of base64 data-URI values. |
-| `promptBytes` | Strings under known prompt-bearing field names. |
+| `promptBytes` | Static UTF-8 size of strings under known prompt-bearing field names, including every string in `alternate_greetings`. |
 | `worldbookEntries` / `worldbookBytes` | Discovered character-book/worldbook entries and their content. |
 | `regexCount` / `regexBytes` | Regex records and pattern/replacement bytes. |
 | `helperScriptCount` / `helperScriptBytes` | Tavern Helper script records and content bytes. |
@@ -23,6 +23,8 @@ not predict browser frame time or model latency by themselves.
 The walker counts duplicate payloads wherever they appear. That is deliberate: a
 duplicated top-level extension surface still costs bytes even if its semantics match
 `data.extensions`.
+
+`promptBytes` adds all opening alternatives for artifact-size comparison. It is not the size of a single model request and is not a token estimate; only the selected greeting may be used in an actual conversation. Compare candidate and baseline with the same measurement version.
 
 ## Budget file
 

@@ -412,6 +412,9 @@
     (() => {
       "use strict";
       const root = document.getElementById("mirror-report");
+      // Portable HTML may contain the previous render. Rebuild owned content once.
+      const renderedIds = ["summary-grid", "overview-table-body", "comparison-summary", "capability-network", "cluster-key", "detail-list", "capability-flow", "dimension-table-body", "network-narrative", "core-list", "token-grid", "token-table-body", "token-narrative", "project-summary-grid", "project-table-body", "project-narrative", "timeline-list", "timeline-narrative", "verdict-grid", "recommendation-list", "verdict-narrative"];
+      renderedIds.forEach((id) => document.getElementById(id).replaceChildren());
       const raw = document.getElementById("mirror-record-data").textContent.trim();
       const emptyRecord = {
         title: "Vibe Code 成长历程",
@@ -617,11 +620,12 @@
           list.append(item);
         });
         document.querySelectorAll(".network-node").forEach((node) => node.setAttribute("aria-pressed", String(node.dataset.nodeId === id)));
-        if (redraw) drawNetwork();
+        if (redraw) svg.querySelectorAll(".network-edge").forEach((edge) => edge.classList.toggle("active", edge.dataset.to === id));
       };
 
       function drawNetwork() {
         if (!svg || svg.closest("[data-panel]")?.hidden) return;
+        const focusedId = svg.contains(document.activeElement) ? document.activeElement.dataset.nodeId : null;
         const width = Math.max(300, Math.round(svg.getBoundingClientRect().width || svg.parentElement.getBoundingClientRect().width || 700));
         const narrow = width < 520;
         const positions = {};
@@ -712,6 +716,7 @@
             cluster.series
           ));
         });
+        if (focusedId) [...svg.querySelectorAll(".network-node")].find((node) => node.dataset.nodeId === focusedId)?.focus({ preventScroll: true });
       }
 
       const clusterKey = document.getElementById("cluster-key");
@@ -747,7 +752,7 @@
       });
       renderNarratives("network-narrative", (section) => !["token-economy", "project-portfolio", "growth-timeline", "final-verdict"].includes(section.sectionId));
 
-      const coreIds = record.coreDimensionIds || ["decisiveness", "correction", "learning-speed", "driver-sync"];
+      const coreIds = record.coreDimensionIds ?? ["decisiveness", "correction", "learning-speed", "driver-sync"];
       const coreList = document.getElementById("core-list");
       coreIds.map((id) => byId.get(id)).filter(Boolean).forEach((dimension) => {
         const row = make("article", "card dimension-card");
@@ -871,7 +876,13 @@
       const jsonAnchor = document.getElementById("export-json");
       const htmlAnchor = document.getElementById("export-html");
       jsonAnchor.addEventListener("click", () => prepareDownload(jsonAnchor, `${record.recordId || "vibe-code-growth"}.json`, "application/json", () => JSON.stringify(record, null, 2)));
-      htmlAnchor.addEventListener("click", () => prepareDownload(htmlAnchor, `${record.recordId || "vibe-code-growth"}.html`, "text/html", () => "<!doctype html>\n" + document.documentElement.outerHTML.replace(/^<!doctype html>\s*/iu, "")));
+      const portableHtml = () => {
+        const copy = document.documentElement.cloneNode(true);
+        copy.querySelectorAll("[data-object-url]").forEach((anchor) => { anchor.removeAttribute("data-object-url"); anchor.setAttribute("href", "#"); });
+        copy.querySelectorAll("dialog[open]").forEach((dialog) => dialog.removeAttribute("open"));
+        return "<!doctype html>\n" + copy.outerHTML;
+      };
+      htmlAnchor.addEventListener("click", () => prepareDownload(htmlAnchor, `${record.recordId || "vibe-code-growth"}.html`, "text/html", portableHtml));
       const fallbackTextAssessment = () => {
         const lines = [
           "# Vibe Code 成长历程｜单份文字评估表单",

@@ -4,36 +4,49 @@ import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 
-const allowedTop = new Set(["schemaVersion", "profileId", "version", "scope", "confirmedAt", "privacy", "preferences", "sources"]);
-const allowedPreferences = new Set(["language", "conclusionFirst", "technicalAltitude", "decisionBatchSize", "creativeOpenness", "acceptanceStyle", "frontendCritiqueDirectness", "designPriorities", "motionPreference"]);
+const schema = JSON.parse(fs.readFileSync(new URL("../references/profile-schema.json", import.meta.url), "utf8"));
 const sensitive = /(?:credential|password|token|secret|private[_-]?key|chat[_-]?export|raw[_-]?conversation|a1[_ ·_]?驾驶员同步检查)/i;
+
+// Implements the keywords used by the bundled profile schema, including nested sources.
+function check(value, rule, errors, pointer = "profile") {
+  const object = value !== null && typeof value === "object" && !Array.isArray(value);
+  const matches = { object, array: Array.isArray(value), string: typeof value === "string", boolean: typeof value === "boolean", integer: Number.isInteger(value) };
+  if (rule.type && !matches[rule.type]) { errors.push(`${pointer} must be ${rule.type}`); return; }
+  if ("const" in rule && value !== rule.const) errors.push(`${pointer} must be ${rule.const}`);
+  if (rule.enum && !rule.enum.includes(value)) errors.push(`${pointer} is outside the allowed values`);
+  if (typeof value === "string") {
+    const length = [...value].length;
+    if (rule.minLength !== undefined && length < rule.minLength) errors.push(`${pointer} is too short`);
+    if (rule.maxLength !== undefined && length > rule.maxLength) errors.push(`${pointer} is too long`);
+    if (rule.pattern && !new RegExp(rule.pattern, "u").test(value)) errors.push(`${pointer} has an invalid format`);
+    if (rule.format === "date" && (!/^\d{4}-\d{2}-\d{2}$/u.test(value) || !Number.isFinite(Date.parse(value)) || new Date(value).toISOString().slice(0, 10) !== value)) errors.push(`${pointer} must be a real calendar date`);
+  }
+  if (typeof value === "number" && ((rule.minimum !== undefined && value < rule.minimum) || (rule.maximum !== undefined && value > rule.maximum))) errors.push(`${pointer} is outside the allowed range`);
+  if (Array.isArray(value)) {
+    if (rule.maxItems !== undefined && value.length > rule.maxItems) errors.push(`${pointer} has too many items`);
+    if (rule.uniqueItems && new Set(value).size !== value.length) errors.push(`${pointer} must contain unique items`);
+    if (rule.items) value.forEach((item, index) => check(item, rule.items, errors, `${pointer}[${index}]`));
+  }
+  if (object) {
+    for (const key of rule.required ?? []) if (!Object.hasOwn(value, key)) errors.push(`${pointer} is missing ${key}`);
+    for (const [key, child] of Object.entries(value)) {
+      if (Object.hasOwn(rule.properties ?? {}, key)) check(child, rule.properties[key], errors, `${pointer}.${key}`);
+      else if (rule.additionalProperties === false) errors.push(`unknown field: ${pointer}.${key}`);
+    }
+  }
+}
+
+function scanPrivatePaths(value, errors, pointer = "profile") {
+  if (typeof value === "string" && /(?:[A-Z]:[\\/]|\\\\[^\\/\s]+[\\/])Users[\\/][^\\/\s]+(?:[\\/]|$)/iu.test(value)) errors.push(`${pointer} contains a private absolute path`);
+  else if (Array.isArray(value)) value.forEach((item, index) => scanPrivatePaths(item, errors, `${pointer}[${index}]`));
+  else if (value && typeof value === "object") for (const [key, child] of Object.entries(value)) scanPrivatePaths(child, errors, `${pointer}.${key}`);
+}
 
 export function validateSoulProfile(profile) {
   const errors = [];
-  if (!profile || typeof profile !== "object" || Array.isArray(profile)) return ["profile must be an object"];
-  for (const key of Object.keys(profile)) if (!allowedTop.has(key)) errors.push(`unknown top-level field: ${key}`);
-  for (const key of allowedTop) if (!(key in profile)) errors.push(`missing field: ${key}`);
-  if (profile.schemaVersion !== 1) errors.push("schemaVersion must be 1");
-  if (profile.privacy !== "private-adapter") errors.push("privacy must be private-adapter");
-  if (!/^[a-z0-9][a-z0-9._-]{2,63}$/.test(profile.profileId || "")) errors.push("invalid profileId");
-  if (!/^\d+\.\d+\.\d+$/.test(profile.version || "")) errors.push("invalid version");
-  if (!["user", "project"].includes(profile.scope)) errors.push("invalid scope");
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(profile.confirmedAt || "")) errors.push("invalid confirmedAt");
-  if (!profile.preferences || typeof profile.preferences !== "object" || Array.isArray(profile.preferences)) errors.push("preferences must be an object");
-  else {
-    for (const key of Object.keys(profile.preferences)) if (!allowedPreferences.has(key)) errors.push(`unknown preference: ${key}`);
-    if (profile.preferences.decisionBatchSize != null && (!Number.isInteger(profile.preferences.decisionBatchSize) || profile.preferences.decisionBatchSize < 1 || profile.preferences.decisionBatchSize > 4)) errors.push("decisionBatchSize must be 1-4");
-    if (profile.preferences.frontendCritiqueDirectness != null && !["measured", "blunt", "relic"].includes(profile.preferences.frontendCritiqueDirectness)) errors.push("frontendCritiqueDirectness is invalid");
-    if (profile.preferences.motionPreference != null && !["reduced", "purposeful", "expressive", "adaptive"].includes(profile.preferences.motionPreference)) errors.push("motionPreference is invalid");
-    if (profile.preferences.designPriorities != null) {
-      const priorities = profile.preferences.designPriorities;
-      if (!Array.isArray(priorities) || priorities.length > 8 || new Set(priorities).size !== priorities.length || priorities.some((item) => typeof item !== "string" || item.length < 1 || item.length > 48)) errors.push("designPriorities must contain at most 8 unique short strings");
-    }
-  }
-  if (!Array.isArray(profile.sources) || profile.sources.length > 12) errors.push("sources must be an array of at most 12 records");
-  const serialized = JSON.stringify(profile);
-  if (sensitive.test(serialized)) errors.push("profile contains a forbidden sensitive field or content class");
-  if (/[A-Z]:\\Users\\[^\\\s]+\\/i.test(serialized)) errors.push("profile contains a private absolute path");
+  check(profile, schema, errors);
+  if (sensitive.test(JSON.stringify(profile))) errors.push("profile contains a forbidden sensitive field or content class");
+  scanPrivatePaths(profile, errors);
   return errors;
 }
 

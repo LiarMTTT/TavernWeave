@@ -60,3 +60,30 @@ test('manifest validator rejects paths outside the extension root', () => {
     fs.rmSync(directory, { recursive: true, force: true });
   }
 });
+
+function versionCheck(minimum, installed) {
+  return checkCapabilities({ schemaVersion: 1, minimum: { sillytavern: minimum }, requirements: [] }, { schemaVersion: 1, capturedAt: '2026-10-13T00:00:00Z', versions: { sillytavern: installed }, symbols: [] });
+}
+
+test('version preflight orders prereleases and ignores build metadata', () => {
+  assert.equal(versionCheck('1.18.0', '1.18.0-beta.1').pass, false);
+  assert.equal(versionCheck('1.18.0-beta.1', '1.18.0').pass, true);
+  const ordered = ['1.18.0-alpha', '1.18.0-alpha.1', '1.18.0-alpha.beta', '1.18.0-beta', '1.18.0-beta.2', '1.18.0-beta.11', '1.18.0-rc.1', '1.18.0'];
+  for (let index = 1; index < ordered.length; index += 1) {
+    assert.equal(versionCheck(ordered[index], ordered[index - 1]).pass, false, ordered[index]);
+    assert.equal(versionCheck(ordered[index - 1], ordered[index]).pass, true, ordered[index]);
+  }
+  assert.equal(versionCheck('1.18.0+build.2', '1.18.0+other.1').pass, true);
+  assert.equal(versionCheck('1.18.0-1+00', '1.18.0-1+01').pass, true);
+  assert.equal(versionCheck('1.18.0-beta.9007199254740993', '1.18.0-beta.9007199254740992').pass, false);
+  assert.equal(versionCheck('9007199254740993.0.0', '9007199254740992.0.0').pass, false);
+});
+
+test('version preflight rejects malformed versions on either side', () => {
+  for (const invalid of ['01.18.0', '1.018.0', '1.18.00', '1.18', 'v1.18.0', '1.18.0-', '1.18.0-alpha..1', '1.18.0-01', '1.18.0-beta.01', '1.18.0+build..1', '1.18.0+']) {
+    assert.equal(versionCheck(invalid, '1.18.0').pass, false, invalid);
+    assert.equal(versionCheck('1.18.0', invalid).pass, false, invalid);
+    assert.equal(versionCheck(null, invalid).pass, false, invalid);
+  }
+  assert.equal(versionCheck(null, null).pass, true);
+});

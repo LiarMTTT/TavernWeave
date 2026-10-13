@@ -201,7 +201,23 @@
       "properties": {
         "previousRecordId": { "type": "string" },
         "rubricChanged": { "type": "boolean" },
-        "dimensionMappings": { "type": "array" },
+        "dimensionMappings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["previousDimensionId", "currentDimensionId", "status", "note", "comparisonLabel"],
+            "properties": {
+              "previousDimensionId": { "type": "string" },
+              "currentDimensionId": { "type": ["string", "null"] },
+              "status": { "enum": ["comparable", "unscored", "scale-changed", "merged", "retired"] },
+              "note": { "type": "string" },
+              "comparisonLabel": { "type": "string" },
+              "delta": { "type": "number" }
+            },
+            "allOf": [{ "if": { "properties": { "status": { "const": "comparable" } } }, "then": { "required": ["delta"] }, "else": { "not": { "required": ["delta"] } } }],
+            "additionalProperties": false
+          }
+        },
         "newDimensionIds": { "type": "array", "items": { "type": "string" } }
       }
     },

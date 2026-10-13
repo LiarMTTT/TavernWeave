@@ -31,6 +31,8 @@ Use schema version 1:
 Never add a captured credential value, full token, cookie, private URL, browser
 storage value, or long code excerpt. A file and line are enough for review.
 
+Valid JSON is traversed as inert data. Scan decoded string values, including escaped script/HTML content, and flag non-empty string values under credential-shaped keys. A finding inside JSON adds `jsonPath`; its `line` and `column` refer to the original JSON source, including the original escape location. No embedded code is executed. Malformed-JSON reports redact parser excerpts because parser messages may contain private values. A valid JSON container is not a security exemption; these pattern findings still need reachability review.
+
 ## Severity
 
 - `high`: dynamic execution, credential-shaped literal, executable remote loader, or

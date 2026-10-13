@@ -39,9 +39,9 @@ function evaluateEligibility(rule, fixture) {
 
   let destinationPass = false;
   if (dialect === 'card') {
-    destinationPass = fixture.destination === 'display'
-      ? rule.promptOnly !== true
-      : fixture.destination === 'prompt' && rule.markdownOnly !== true;
+    destinationPass = (fixture.destination === 'display' && rule.markdownOnly === true)
+      || (fixture.destination === 'prompt' && rule.promptOnly === true)
+      || (fixture.destination === 'raw' && rule.markdownOnly !== true && rule.promptOnly !== true);
   } else {
     destinationPass = rule.destination?.[fixture.destination] === true;
   }
@@ -66,15 +66,34 @@ export function runCases(regexValue, fixtureValue) {
   const validation = validateRules(regexValue);
   const errors = [...validation.errors];
   const rules = validation.rules;
-  if (fixtureValue?.schemaVersion !== 1 || !Array.isArray(fixtureValue.cases)) errors.push('fixtures must use schemaVersion 1 and a cases array');
+  const validEnvelope = fixtureValue?.schemaVersion === 1 && Array.isArray(fixtureValue.cases);
+  if (!validEnvelope) errors.push('fixtures must use schemaVersion 1 and a cases array');
+  const dialects = new Set(rules.map(detectDialect));
   const seen = new Set();
   const results = [];
-  for (const fixture of fixtureValue?.cases ?? []) {
-    if (typeof fixture.id !== 'string' || fixture.id === '') errors.push('fixture id must be a non-empty string');
-    else if (seen.has(fixture.id)) errors.push(`duplicate fixture id: ${fixture.id}`);
+  for (const fixture of validEnvelope ? fixtureValue.cases : []) {
+    const caseErrors = [];
+    if (!fixture || typeof fixture !== 'object' || Array.isArray(fixture)) {
+      errors.push('each fixture must be an object');
+      results.push({ id: null, status: 'invalid', pass: false, trace: [] });
+      continue;
+    }
+    if (typeof fixture.id !== 'string' || fixture.id.trim() === '') caseErrors.push('fixture id must be a non-empty string');
+    else if (seen.has(fixture.id)) caseErrors.push(`duplicate fixture id: ${fixture.id}`);
     else seen.add(fixture.id);
-    if (typeof fixture.input !== 'string') errors.push(`fixture ${fixture.id} input must be a string`);
-    if (!['display', 'prompt'].includes(fixture.destination)) errors.push(`fixture ${fixture.id} destination must be display or prompt`);
+    if (typeof fixture.input !== 'string') caseErrors.push(`fixture ${fixture.id} input must be a string`);
+    const destinations = dialects.has('helper') ? ['display', 'prompt'] : ['display', 'prompt', 'raw'];
+    if (!destinations.includes(fixture.destination)) caseErrors.push(`fixture ${fixture.id} destination must be ${destinations.join(', ')}`);
+    if (dialects.has('card') && !Number.isInteger(fixture.placement)) caseErrors.push(`fixture ${fixture.id} placement must be an integer for card rules`);
+    if (dialects.has('helper') && (typeof fixture.source !== 'string' || fixture.source.trim() === '')) caseErrors.push(`fixture ${fixture.id} source must be a non-empty string for helper rules`);
+    if (fixture.depth !== undefined && fixture.depth !== null && !Number.isInteger(fixture.depth)) caseErrors.push(`fixture ${fixture.id} depth must be an integer or null when present`);
+    const hasExpected = Object.hasOwn(fixture, 'expected');
+    if (hasExpected && typeof fixture.expected !== 'string') caseErrors.push(`fixture ${fixture.id} expected must be a string when present`);
+    errors.push(...caseErrors);
+    if (caseErrors.length || validation.errors.length) {
+      results.push({ id: fixture.id ?? null, input: fixture.input, output: null, expected: hasExpected ? fixture.expected : null, status: 'invalid', pass: false, trace: [] });
+      continue;
+    }
     let output = fixture.input;
     const trace = [];
     for (const rule of rules) {
@@ -83,13 +102,13 @@ export function runCases(regexValue, fixtureValue) {
       if (eligibility.eligible) output = applyRule(rule, output);
       trace.push({ ruleId: rule.id, ...eligibility, input: before, output, applied: eligibility.eligible && before !== output });
     }
-    const hasExpected = typeof fixture.expected === 'string';
     results.push({
       id: fixture.id,
       input: fixture.input,
       output,
       expected: hasExpected ? fixture.expected : null,
-      pass: !hasExpected || output === fixture.expected,
+      status: hasExpected ? (output === fixture.expected ? 'passed' : 'failed') : 'trace-only',
+      pass: hasExpected ? output === fixture.expected : null,
       trace
     });
   }
@@ -97,8 +116,9 @@ export function runCases(regexValue, fixtureValue) {
     schemaVersion: 1,
     ruleCount: rules.length,
     caseCount: results.length,
-    passed: results.filter(result => result.pass).length,
-    failed: results.filter(result => !result.pass).length,
+    passed: results.filter(result => result.status === 'passed').length,
+    failed: results.filter(result => result.status === 'failed' || result.status === 'invalid').length,
+    traceOnly: results.filter(result => result.status === 'trace-only').length,
     errors,
     warnings: validation.warnings,
     results

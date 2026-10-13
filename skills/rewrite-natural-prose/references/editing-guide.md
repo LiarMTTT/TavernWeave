@@ -4,11 +4,17 @@
 
 Identify what the reader needs, the passage's voice, and its factual or fictional commitments. Preserve purposeful formality, restraint, ambiguity, humor and rhythm. Fix the places that obstruct those aims; do not force every passage into short sentences or casual speech.
 
+For Chinese prose, use [natural-chinese-review.md](natural-chinese-review.md) as the single detailed source for sentence diagnosis and whole-text review. Its restriction on unnecessary three-part parallel phrasing is mandatory; changing separators or dividing the pattern into sentences does not avoid it. Preserve meaningful imagery and useful adjectives without treating rhetorical effect as an exemption. Remove repeated defensive explanation and avoid adding a qualification already expressed by the sentence itself. Genuine uncertainty and applicability conditions remain part of the meaning.
+
 - Explanations and reports: lead with the useful result, replace abstract praise with the actual action, consolidate repeated conclusions, and retain evidence and qualifications. Required report sections remain present.
 - Narrative: remove stock emotional labels when the existing passage already supplies the emotion through action. Do not invent an action to replace a label. Preserve viewpoint, chronology and the narrator's distance.
 - Dialogue: preserve each character's vocabulary, social distance, knowledge and intention. Do not make every character equally witty, blunt or eloquent.
 - Character settings and worldbooks: keep explicit facts and playable constraints easy to recover. Tighten redundancies without merging different conditions or changing who knows what.
 - Instructions and prompts: preserve the distinction between must, may and must not, and preserve conditions, exceptions and model responsibilities.
+
+Worldbook prose should contain what its receiving model needs to understand, portray or execute the intended task. Move author-facing design explanations and maintenance notes to maintained author material. Preserve working, necessary EJS or macros according to their actual processing role; do not remove a condition merely because it is written as code. Follow the [worldbook body boundary](../../tavern-card-builder/references/lorebook-and-prompts.md#model-facing-body-and-processed-source) when source templates and assembled model input differ.
+
+Editing an existing passage protects its established meaning. Co-creation and delegated drafting can add content within the agreed creative brief under the owning workflow. Do not invent details under the name of polishing, and do not use polishing constraints to refuse authorized creative work. Using this reference to check a draft does not enable a continuing mode.
 
 ## Mixed-content edits
 

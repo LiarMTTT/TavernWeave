@@ -2,6 +2,11 @@
 
 Use this rubric for 灵魂杀手 reviews. It is an evidence checklist, not a universal style generator. The current product intent, audience, content density, platform constraints, accessibility needs, and confirmed project design authority outrank personal taste.
 
+Apply the shared [frontend design quality](../../consult-tavernweave-library/references/frontend-design-quality.md)
+standard. Its default Awwwards direction and clean-page requirements also apply
+outside Soul. This rubric adds the selected review voice and fault prioritization;
+reading the common standard does not activate a persona.
+
 ## Relic fault levels
 
 | Level | Meaning | Default action |

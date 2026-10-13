@@ -1,0 +1,74 @@
+{
+  "runId": "2026-10-13-twx-190-rc1",
+  "method": "Fresh written scenario responses against the frozen 1.9.0-rc.1 source, followed by a different agent reviewing each batch against unchanged original acceptance criteria. Initial writers received prompts without expected fields or historical responses; revisions use explicit review feedback with initial attempts retained. Shared batch context: not 170 isolated end-to-end model trials, installed host discovery, real SillyTavern execution or driver acceptance.",
+  "caseDefinitionHashes": {
+    "cases.json": "596460dc90a33061f0b955c14013e130f8e13869d81708a119d48eb547501a28",
+    "adversarial-cases.json": "de121917420b532f87e854acfbda568afb581c96855e14e4b40f9594d56e5b07"
+  },
+  "beforeResultsSha256": "93230a33179a1799fac77870145383edc9fe56ee7f0047ec6f84b3d93ac96b61",
+  "responsesSha256": "b7c7f688d2a4031cdb7fc4d1fed2cddb1e86d03951756cc47e520a03322dda7f",
+  "assessmentsSha256": "d21365b3e2c6e9fbb5079e00acd1e3cd55109b2dd39ae28531891e024f7bcfcf",
+  "forwardCases": 80,
+  "adversarialCases": 90,
+  "initialPassed": 154,
+  "passed": 170,
+  "responsesRevisedAfterFirstAssessment": 16,
+  "sourceStableDuringReplay": true,
+  "batches": [
+    {
+      "batch": "a",
+      "writerAgent": "/root/rc1_replay_a",
+      "reviewerAgent": "/root/rc1_replay_b",
+      "cases": 62,
+      "responsePath": "evidence/replay/2026-10-13-twx-190-rc1/responses-a.json",
+      "responseSha256": "98937a30bfcbf2dcc6daf8d85be5efe18f4926545fe43c1bf1f22a845afc6385",
+      "assessmentPath": "evidence/replay/2026-10-13-twx-190-rc1/assessments-a.json",
+      "assessmentSha256": "498e8ba3b4720a16a847ee98177d1cd28a1e72f7636a8116c7036568b3bc86a7"
+    },
+    {
+      "batch": "b",
+      "writerAgent": "/root/rc1_replay_b",
+      "reviewerAgent": "/root/rc1_replay_c",
+      "cases": 60,
+      "responsePath": "evidence/replay/2026-10-13-twx-190-rc1/responses-b.json",
+      "responseSha256": "0944853e3189057a7c06b6ba166d781095d665f4c29e93084f1210f018d69d89",
+      "assessmentPath": "evidence/replay/2026-10-13-twx-190-rc1/assessments-b.json",
+      "assessmentSha256": "349ce810fb1962fdea173c25a9e1d80a92af52979046084e879866fa1f0ef3a4"
+    },
+    {
+      "batch": "c",
+      "writerAgent": "/root/rc1_replay_c",
+      "reviewerAgent": "/root/rc1_replay_a",
+      "cases": 48,
+      "responsePath": "evidence/replay/2026-10-13-twx-190-rc1/responses-c.json",
+      "responseSha256": "0b67a78323f6766c9301cc985bd38d8bb240b7f0524bd30eafab375feaaab351",
+      "assessmentPath": "evidence/replay/2026-10-13-twx-190-rc1/assessments-c.json",
+      "assessmentSha256": "5c2509495516696abbafe08ef1d6c4949a417adc983f3345bbf62aab1e05b852"
+    }
+  ],
+  "externalEvidence": {
+    "evidence/replay/2026-10-13-twx-190-rc1/assessments-a.json": "498e8ba3b4720a16a847ee98177d1cd28a1e72f7636a8116c7036568b3bc86a7",
+    "evidence/replay/2026-10-13-twx-190-rc1/assessments-b.json": "349ce810fb1962fdea173c25a9e1d80a92af52979046084e879866fa1f0ef3a4",
+    "evidence/replay/2026-10-13-twx-190-rc1/assessments-c.json": "5c2509495516696abbafe08ef1d6c4949a417adc983f3345bbf62aab1e05b852",
+    "evidence/replay/2026-10-13-twx-190-rc1/assignment-ledger.json": "a69836afd832d2e943b7fb4d4731ecbf391aa8bb1a2cd9ff8eccff27fce67519",
+    "evidence/replay/2026-10-13-twx-190-rc1/definition-hashes.json": "0e10f5b8a3964495ecd6d7c8f5d04ecb5f730cc1dae54ce662301af3182e0245",
+    "evidence/replay/2026-10-13-twx-190-rc1/dispatch-evidence.json": "29902294b7735f6c6a0247da7af7b19a5515a67aab39e9bfd06e8e7865a7cbad",
+    "evidence/replay/2026-10-13-twx-190-rc1/first-attempt/assessments-a.json": "1f9384e1ffd1a1e1661c79b1bc1bb05441393f2834c7d14b5309fef7be9e06b5",
+    "evidence/replay/2026-10-13-twx-190-rc1/first-attempt/assessments-b.json": "80356734ff31dd793f945f41026126e2f47e228d246db52c9f940f084e2e11dc",
+    "evidence/replay/2026-10-13-twx-190-rc1/first-attempt/assessments-c.json": "294e50cac1231d138942a7ce4a48aada55cb96d3c22a7bc16e2980c71f7c397f",
+    "evidence/replay/2026-10-13-twx-190-rc1/first-attempt/responses-a.json": "f8216f71d1a7c89ac2f1fcb762c0761d63787dcbcaf2d9c9c09ce1aa0ce81c5b",
+    "evidence/replay/2026-10-13-twx-190-rc1/first-attempt/responses-b.json": "4fb022713446947de9bc6b0008f34b68abeac5b3e9d75a36baf061918048bc1d",
+    "evidence/replay/2026-10-13-twx-190-rc1/first-attempt/responses-c.json": "b67487d0f10f0e8e65584d731bb4da66b3c4c27dad02b8b4a2a5c925407d2520",
+    "evidence/replay/2026-10-13-twx-190-rc1/prompts-a.json": "caf15361a2121282df494856240f1406a03b8582328418b833bd04b687d8fad9",
+    "evidence/replay/2026-10-13-twx-190-rc1/prompts-b.json": "16a56e799769e8fcb80a061f1ae4536350847611a38ad37361144d03e544e53c",
+    "evidence/replay/2026-10-13-twx-190-rc1/prompts-c.json": "cbf41020eeb9caa490606d1f495e46ad9db7006e127b80a60eab6fe33cca63ba",
+    "evidence/replay/2026-10-13-twx-190-rc1/responses-a.json": "98937a30bfcbf2dcc6daf8d85be5efe18f4926545fe43c1bf1f22a845afc6385",
+    "evidence/replay/2026-10-13-twx-190-rc1/responses-b.json": "0944853e3189057a7c06b6ba166d781095d665f4c29e93084f1210f018d69d89",
+    "evidence/replay/2026-10-13-twx-190-rc1/responses-c.json": "0b67a78323f6766c9301cc985bd38d8bb240b7f0524bd30eafab375feaaab351"
+  },
+  "limitations": [
+    "Shared batch context, not isolated model trials.",
+    "Host operations described rather than performed.",
+    "Assignment evidence shows separate agent tasks; it is not cryptographic attestation of model independence."
+  ]
+}

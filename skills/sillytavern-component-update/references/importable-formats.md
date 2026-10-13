@@ -18,6 +18,12 @@ placement codes, booleans for flags, and numeric or null depth bounds. Do not in
 the meaning of a numeric placement code; pin it from the target runtime or a verified
 export fixture.
 
+The replacement can be empty or intentional whitespace and is kept verbatim.
+`markdownOnly` and `promptOnly` may both be true. They select display and prompt
+processing independently; when both are false or absent in a source artifact, the
+host applies the rule at the raw-message stage. The export spec's existing required
+boolean fields remain required; do not silently fill missing flags during import.
+
 ## Tavern Helper script
 
 Use:
@@ -51,8 +57,10 @@ color: string
 scripts: Script[]
 ```
 
-Require unique folder and child-script IDs. A folder contains scripts, not nested
-folders, under the pinned interface.
+Require folder and child-script IDs to be unique across the entire batch, including
+folder/child collisions and children of different folders. Directory validation
+checks IDs from the actual component bodies as well as manifest IDs. A folder
+contains scripts, not nested folders, under the pinned interface.
 
 ## API versus import dialect
 

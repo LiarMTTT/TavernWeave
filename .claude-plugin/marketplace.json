@@ -3,7 +3,7 @@
   "owner": {
     "name": "LiarMTTT"
   },
-  "description": "22 focused Skills for rolecards and software; 1.8.0 adds project progress and review synchronized from total design and NEXT.",
+  "description": "TavernWeaveX无限月读 1.9.0: 22 Skills with integrated rolecard authoring guidance and safer field-binding diagnostics.",
   "plugins": [
     {
       "name": "tavernweave-agent-skills",
@@ -11,7 +11,7 @@
         "source": "github",
         "repo": "LiarMTTT/TavernWeave"
       },
-      "description": "Describe what you want to make or change; get a scoped plan, understandable explanations, working artifacts and clear checks."
+      "description": "TavernWeaveX无限月读 1.9.0. Describe the card or software change you want; TW scopes the work and reports actual checks."
     }
   ]
 }

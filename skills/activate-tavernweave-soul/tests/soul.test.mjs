@@ -44,3 +44,24 @@ test("sanitized profile accepts preferences and rejects secrets", () => {
   assert.deepEqual(validateSoulProfile(valid), []);
   assert.ok(validateSoulProfile({ ...valid, private_key: "redacted-placeholder" }).length > 0);
 });
+
+test("profile validation enforces every preference type and source record contract", () => {
+  const valid = { schemaVersion: 1, profileId: "creator.test", version: "1.2.0", scope: "project", confirmedAt: "2024-02-29", privacy: "private-adapter", preferences: { language: "中".repeat(32), conclusionFirst: false, technicalAltitude: "adaptive", decisionBatchSize: 4, creativeOpenness: "guided", acceptanceStyle: "compact", frontendCritiqueDirectness: "measured", designPriorities: ["叙事阅读", "键盘操作"], motionPreference: "adaptive" }, sources: [{ type: "project-authority", label: "confirmed", confirmedAt: "2024-02-29" }] };
+  assert.deepEqual(validateSoulProfile(valid), []);
+  for (const [key, values] of Object.entries({ language: [42, "a".repeat(33), null], conclusionFirst: ["true", 1, null], technicalAltitude: ["beginner", false], decisionBatchSize: [0, 5, 1.5, "2"], creativeOpenness: ["maybe", 4], acceptanceStyle: ["any", true], frontendCritiqueDirectness: ["high"], motionPreference: ["never"], designPriorities: [["same", "same"], [""], [2], Array.from({ length: 9 }, (_, i) => String(i)), ["x".repeat(49)]] })) {
+    for (const value of values) assert.ok(validateSoulProfile({ ...valid, preferences: { ...valid.preferences, [key]: value } }).length, `must reject ${key}: ${JSON.stringify(value)}`);
+  }
+  for (const source of [42, [], null, {}, { type: "invented", label: "x", confirmedAt: "2024-02-29" }, { type: "approved-summary", label: 42, confirmedAt: "2024-02-29" }, { type: "approved-summary", label: "x".repeat(121), confirmedAt: "2024-02-29" }, { type: "approved-summary", label: "x", confirmedAt: "2026-02-30" }, { ...valid.sources[0], extra: true }]) assert.ok(validateSoulProfile({ ...valid, sources: [source] }).length);
+  for (const changed of [{ sources: Array(13).fill(valid.sources[0]) }, { preferences: [] }, { profileId: 1234 }, { version: 120 }, { confirmedAt: "2026-02-29" }, { schemaVersion: "1" }, { privacy: "public" }, { extra: true }]) assert.ok(validateSoulProfile({ ...valid, ...changed }).length);
+  const missing = structuredClone(valid); delete missing.sources;
+  assert.ok(validateSoulProfile(missing).length);
+});
+
+test("private Windows paths are checked in decoded strings including nested preferences and sources", () => {
+  const valid = { schemaVersion: 1, profileId: "creator.test", version: "1.0.0", scope: "user", confirmedAt: "2026-10-13", privacy: "private-adapter", preferences: {}, sources: [] };
+  for (const location of ["C:\\Users\\Sample\\notes", "C:/Users/Sample/notes", "\\\\server\\Users\\Sample\\notes"]) {
+    const fromJson = JSON.parse(JSON.stringify({ ...valid, sources: [{ type: "approved-summary", label: location, confirmedAt: "2026-10-13" }] }));
+    assert.ok(validateSoulProfile(fromJson).some((error) => error.includes("private absolute path")), location);
+  }
+  assert.ok(validateSoulProfile({ ...valid, preferences: { designPriorities: ["C:\\Users\\Sample\\notes"] } }).some((error) => error.includes("private absolute path")));
+});

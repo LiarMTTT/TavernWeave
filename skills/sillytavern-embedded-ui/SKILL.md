@@ -1,6 +1,6 @@
 ---
 name: sillytavern-embedded-ui
-description: Design, implement, or review framework-neutral embedded interfaces for SillyTavern rolecards, including opening pages, status bars, control centers, drawers, and popups. Use for HTML/CSS/JavaScript structure, interaction states, responsive behavior, accessibility, safe rendering, specifications for optional project-specific frontend sandboxes using real source, and the real-runtime handoff. Do not use as the primary skill to close behavior in a live SillyTavern instance; hand that work to sillytavern-runtime-debug.
+description: Design, implement, or review framework-neutral embedded interfaces for SillyTavern rolecards, including message content pages, opening pages, MVU status bars, control centers, drawers, and popups. Use for creative visual design, message-to-page protocols, state-to-display mapping, HTML/CSS/JavaScript, interaction states, responsive behavior, accessibility, safe rendering, optional project-specific frontend sandboxes using real source, and the real-runtime handoff. Do not use as the primary skill to close behavior in a live SillyTavern instance; hand that work to sillytavern-runtime-debug.
 ---
 
 # SillyTavern Embedded UI
@@ -13,7 +13,11 @@ Apply [TW plain-language and guidance rules](../consult-tavernweave-library/refe
 
 Before designing or changing an embedded interface, use `$consult-tavernweave-library` with the `sillytavern-embedded-ui` route. Read A0, the smallest matching UI/mobile guides, and selected design/motion references; every selection remains `proposed` until the project authority adopts it.
 
+Apply the shared [frontend design quality standard](../consult-tavernweave-library/references/frontend-design-quality.md) as the default design requirement. Actively search and inspect relevant web designs, develop a distinctive solution from the author's intent, and express the layout visually. Awwwards-level quality is the direction; clean composition and useful copy are requirements, not optional gallery inspiration. Avoid decorative microcopy and redundant English captions while preserving the author's language and real functional labels. Use the shared reference for the complete workflow and evidence limits.
+
 Build the smallest maintainable interface that fits the rolecard's actual lifecycle. Use semantic HTML, CSS, and JavaScript as the portable baseline. Adopt a framework only when the existing project already uses it or the interaction complexity clearly justifies it.
+
+Develop the proposal rather than requiring the author to fill a technical questionnaire. One coherent design is enough; do not manufacture choices or reopen approved decisions. Continue authorized work, asking only about an unresolved material choice. Optional worksheets record the Agent's work and may be replaced by equivalent project records.
 
 ## Own the implementation boundary
 
@@ -27,12 +31,15 @@ Choose the surface before designing components:
 
 | Surface | Primary job | Lifecycle |
 | --- | --- | --- |
+| Message content page | Present message-derived content such as a letter, journal or forum | Follows the intended message and its rendering lifecycle |
 | Opening page | Configure one opening and submit a real player message | Ends after successful opening commit |
 | Status bar / HUD | Show frequently read game state near messages | Recreated or refreshed with message/runtime lifecycle |
 | Control center | Manage settings, packages, world data, and advanced actions | Usually long-lived and singleton |
 | Popup / drawer / modal | Focus one detail or decision without losing surrounding state | Temporary, with explicit open and close behavior |
 
 Do not turn a small set of alternate greetings into an application, or make a status bar carry control-center workflows.
+
+For a message-derived page, read [message content pages](references/message-content-ui.md) and use its [optional worksheet](assets/templates/message-content-ui.md) when helpful. For an MVU read-only display, read [MVU status-bar design](references/mvu-statusbar-design.md) and its [optional worksheet](assets/templates/mvu-statusbar-design.md). The branches share the quality standard but keep their content authorities separate. A mixed surface must declare the source of each displayed fact; it does not automatically require a new card type or state system.
 
 ## Inspect before designing
 
@@ -155,6 +162,7 @@ Treat `first_mes` as a real assistant message that participates in context, swip
 
 ## Status bars and HUDs
 
+- Turn the player's reading task into a field-to-display mapping using [MVU status-bar design](references/mvu-statusbar-design.md) when MVU supplies the state. Reuse the current schema and resolve missing structure upstream; do not create variables to fill a layout.
 - Optimize for repeated scanning, not spectacle.
 - Show useful loading, empty, unavailable, malformed-data, and stale states.
 - Centralize variable paths and formatting. Never scatter schema paths through component code.
@@ -164,6 +172,7 @@ Treat `first_mes` as a real assistant message that participates in context, swip
 - Preserve the active tab, scroll position, expanded sections, and user-selected map/view state across data refreshes.
 - Prevent duplicate frames or mounts after swipe, edit, or rerender.
 - Use a signature or focused update to avoid rerendering unchanged sections, but provide a deliberate forced refresh after user actions.
+- Distinguish valid zero and `false` from missing, null or invalid data according to the field contract. Read-only refresh and local view controls must not initialize or repair game state.
 
 ## Control centers
 
@@ -213,6 +222,8 @@ Select the relevant runtime cases and include them in the handoff:
 | Data | Correct scope/floor, event refresh, persistence after reread, no unrelated mutation, and no duplicate commit |
 | Security | User/model text remains inert; remote markup cannot execute business logic; no secrets appear in DOM or logs |
 
+For message content pages, select protocol cases from [message content pages](references/message-content-ui.md), including preserved surrounding prose and incomplete content where applicable. For MVU displays, select field and collection cases from [MVU status-bar design](references/mvu-statusbar-design.md), including read-only refresh. Regex fixtures alone do not establish parser or visual behavior. Keep these checks within the actual change instead of creating an unrelated demo application.
+
 For an opening page, request this end-to-end runtime gate: open page, edit draft, refresh and restore, preview, confirm, create a real user message, receive a real assistant message, and observe the intended variable initialization. For a HUD or control center, request swipe/edit/chat-switch lifecycle checks and actual computed-style inspection.
 
 ## Deliverable
@@ -220,6 +231,7 @@ For an opening page, request this end-to-end runtime gate: open page, edit draft
 Report:
 
 - the selected surface and state ownership;
+- inspected design references, the visual proposal, and any unverified quality evidence;
 - the smallest implementation or review findings;
 - security and accessibility decisions;
 - supporting checks and desktop or narrow-layout evidence;

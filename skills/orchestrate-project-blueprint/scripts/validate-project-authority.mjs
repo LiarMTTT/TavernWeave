@@ -74,14 +74,40 @@ export function validateProjectAuthority(data, { root, automation = false } = {}
         if (!blueprintStatuses.has(item.status)) errors.push(`invalid blueprint status for ${item.id}: ${item.status}`);
         if (item.parentId !== null) children.set(item.parentId, (children.get(item.parentId) || 0) + 1);
       }
-      const declaredChildren = policy.blueprints.filter((item) => item.parentId !== null).length;
+      const nodes = policy.blueprints.filter((item) => isRecord(item) && item.id);
+      const declaredChildren = nodes.filter((item) => item.parentId !== null).length;
       if (declaredChildren > limits.maxChildren) errors.push(`blueprint set exceeds total child budget ${limits.maxChildren}`);
-      for (const item of policy.blueprints) {
+      for (const item of nodes) {
         if (item.parentId !== null && !ids.has(item.parentId)) errors.push(`blueprint ${item.id} has missing parent ${item.parentId}`);
       }
       for (const [parentId, count] of children) if (count > limits.maxChildren) errors.push(`blueprint ${parentId} exceeds maxChildren ${limits.maxChildren}`);
-      const roots = policy.blueprints.filter((item) => item.parentId === null);
+      const roots = nodes.filter((item) => item.parentId === null);
       if (roots.length !== 1 || roots[0]?.id !== "BP-ROOT") errors.push("exactly one BP-ROOT blueprint must be the root");
+      const byId = new Map(nodes.map((item) => [item.id, item]));
+      for (const item of nodes) {
+        const seen = new Set();
+        let cursor = item;
+        let actualDepth = 0;
+        let reachesRoot = false;
+        while (cursor) {
+          if (seen.has(cursor.id)) {
+            errors.push(`blueprint ${item.id} has a parent cycle at ${cursor.id}`);
+            break;
+          }
+          seen.add(cursor.id);
+          actualDepth += 1;
+          if (cursor.parentId === null) {
+            reachesRoot = cursor.id === "BP-ROOT";
+            break;
+          }
+          cursor = byId.get(cursor.parentId);
+        }
+        if (!reachesRoot) errors.push(`blueprint ${item.id} is not reachable from BP-ROOT`);
+        else {
+          if (item.depth !== actualDepth) errors.push(`blueprint ${item.id} depth must equal actual depth ${actualDepth}`);
+          if (actualDepth > limits.maxDepth) errors.push(`blueprint ${item.id} exceeds maxDepth ${limits.maxDepth}`);
+        }
+      }
     }
   }
 
@@ -163,7 +189,7 @@ export function validateProjectAuthority(data, { root, automation = false } = {}
     const next = safeTarget(root, data.nextFile, "nextFile", errors);
     if (authority) requireHeadings(authority, ["目标与非目标", "项目类型与承载面", "四态决策账本", "Core Spine", "First Playable / First Usable", "Growth Tracks", "Parking Lot", "前端适配结论", "验收账本", "下一道门"], "authority file", errors);
     if (next) requireHeadings(next, ["当前权威", "已确认事实", "最近证据", "开放风险", "下一道门", "一句续接"], "NEXT file", errors);
-    for (const blueprint of policy?.blueprints || []) {
+    for (const blueprint of (Array.isArray(policy?.blueprints) ? policy.blueprints : []).filter(isRecord)) {
       const target = safeTarget(root, blueprint.path, `blueprint ${blueprint.id} path`, errors);
       if (target) requireHeadings(target, ["停止条件", "下一道门"], `blueprint ${blueprint.id}`, errors);
     }

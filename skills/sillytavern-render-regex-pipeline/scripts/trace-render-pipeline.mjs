@@ -29,10 +29,10 @@ function main() {
         'message-lifecycle'
       ],
       errors: report.errors,
-      cases: report.results.map(result => ({ id: result.id, input: result.input, output: result.output, expected: result.expected, pass: result.pass, stages: result.trace }))
+      cases: report.results.map(result => ({ id: result.id, input: result.input, output: result.output, expected: result.expected, status: result.status, pass: result.pass, stages: result.trace }))
     };
     process.stdout.write(canonicalJson(trace));
-    if (report.errors.length) process.exitCode = 1;
+    if (report.errors.length || report.failed) process.exitCode = 1;
   } catch (error) {
     process.stderr.write(`${error.message}\n`);
     process.exitCode = 1;

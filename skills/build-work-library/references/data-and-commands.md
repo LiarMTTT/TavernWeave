@@ -97,7 +97,7 @@ python scripts/work_library.py recover --project <项目目录>
 
 文字证据为 `unit_id / source_sha256 / start / quote`：使用 next 的来源哈希和定位范围，start 是原文全文的 Unicode 字符位置，quote 必须逐字匹配且落在该单元内。视觉证据为 `unit_id / source_sha256 / locator / observation`：来源须已实际查看并带回执。视觉结论的语义真实性由实际查看者核验，本地工具只能检查登记与范围。
 
-跨批次更新人物/专题档案可以原样保留旧条目的证据；新增证据必须来自本批分配单元。重复 batch_id＋相同候选返回 already_committed；不同内容不能冒用已提交批次。引用通过只证明原文存在，review_note 不能代替真实核验。
+跨批次更新人物/专题档案可以原样保留旧条目的证据；例外按完整证据项逐条比较，不按整个旧单元放行。保留旧引文后再从同一旧单元增加引文，或修改旧引文、定位、附加说明，都需要该单元实际分配给当前批次。新增证据必须来自本批分配单元。重复 batch_id＋相同候选返回 already_committed；不同内容不能冒用已提交批次。引用通过只证明原文存在，review_note 不能代替真实核验。
 
 Markdown 记录由工具生成，顶部是 `tw-work-record:v1` 标记与 JSON 元数据代码块，其后全部是资料正文。人可直接改正文；改元数据时保持 JSON 有效与来源关系正确。人完成编辑后，Agent 读当前正文再重建索引；不从旧索引回写覆盖。
 

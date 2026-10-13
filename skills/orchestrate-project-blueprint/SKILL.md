@@ -119,6 +119,7 @@ node scripts/validate-project-authority.mjs <project-root>/.tavernweave/project-
 - 精确 ST/酒馆助手/MVU API：`$sillytavern-api-reference`；
 - 同层/嵌入式前端：`$sillytavern-embedded-ui`；
 - 通用前端设计与实现：按 Library 设计路由选择 UI Skill 和资料；
+- 前端设计交接统一引用[前端质量规范](../consult-tavernweave-library/references/frontend-design-quality.md)。Agent 主动检索相关设计，从作者想法形成主方案，并尽量可视化说明；按 Awwwards 默认质量要求审阅，去掉无意义小字和额外英文说明。沿用已有设计授权，不增加工作表确认门；
 - 拆分、组装、测试、发布：分别交给对应 TavernWeave 专职 Skill；
 - 真机行为：`$sillytavern-runtime-debug` 或目标宿主的真实运行门。
 

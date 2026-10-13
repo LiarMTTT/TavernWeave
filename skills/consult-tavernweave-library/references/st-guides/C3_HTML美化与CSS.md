@@ -1,6 +1,7 @@
 # HTML 美化与 CSS 参考手册
 
 > 文档版本：v1.0.0 ｜ 最后更新：2026-07-14
+> TW 本地修订：2026-10-13，仅校正 messageFormatter 适用范围与历史 HUD 缓存示例边界；其余采集日期和项目证据保持原义。
 
 > 面向 SillyTavern 角色卡开发的可检索参考文档
 > 收集日期：2026-06-28 ｜ 回源基于 SillyTavern v1.14.0 + 本地成熟卡（卡A 2.5.0 / 卡B 2.6.0）
@@ -58,14 +59,14 @@
 
 ### 核心结论
 
-ST 消息楼层有**两条** HTML 注入路径，两条路径的产物都经过 DOMPurify 净化。
+本节对照正则扩展和旧资料描述的 messageFormatter 路径。本册 v1.14.0 基准没有证实后者可用，不能据此选择实现路线。消息内容仍须遵守目标渲染管线的净化边界。
 
 ### 路径对比表
 
 | 路径 | 入口 | 触发时机 | DOMPurify 前后 | 来源 | 置信度 |
 |---|---|---|---|---|---|
 | A：正则扩展 | Extensions → Regex，"Replace With" 字段 | afterMarkdown 前 | 产物进入 DOMPurify | 文档·多源 + 运行时 | **high** [文档·多源] |
-| B：Extension messageFormatter 钩子 | `beforeRegex` / `afterRegex` / `afterMarkdown` | 各自阶段 | DOMPurify 之前处理 | 文档·多源 | **high** [文档·多源] |
+| B：旧资料描述的 messageFormatter 钩子 | `beforeRegex` / `afterRegex` / `afterMarkdown` | 不适用于本册 v1.14.0 基准 | 不据此判断渲染位置 | 同包 A5 的源码校准 | **low** [历史孤证]；采用前须查证实际目标能力 |
 
 ### 路径 A 使用前提
 
@@ -74,10 +75,9 @@ ST 消息楼层有**两条** HTML 注入路径，两条路径的产物都经过 
 - 本项目（卡B/卡A）实战用法：正则匹配消息末尾的 JSON 数据块，替换为注入 iframe 的指令，iframe 内加载完整 HTML 文档。  
   **来源**：r5 文件头即 `<!doctype html>` 完整文档 ｜ **置信度**：high [运行时源码]
 
-### 路径 B 钩子约束
+### 路径 B 的版本边界
 
-- 所有三个钩子回调必须**同步返回字符串**，不支持 async/Promise 返回。  
-  **来源**：ST 扩展开发文档 <https://docs.sillytavern.app/for-contributors/writing-extensions/> ｜ **置信度**：high [文档·多源]
+[A5 的校准记录](A5_渲染管线与宏.md#6-messageformatter-hook-api) 已指出：v1.14.0 的 `getContext()` 不提供此字段，不能把旧描述作为该版本的可用接口。2026-10-13 复查固定标签的 [extensions.js](https://github.com/SillyTavern/SillyTavern/blob/1.14.0/public/scripts/extensions.js) 也只转出实际上下文接口；其他版本或第三方扩展是否提供钩子，需要 `sillytavern-api-reference` 核对提供者、签名和调用路径。同步返回、执行阶段和净化位置均随目标实现查证，不继承旧结论。
 
 ---
 
@@ -452,9 +452,9 @@ $('.tab-btn').each(function(){
 | `SillyTavern.getContext()` | ST 核心 | 访问 chat/characters/chatMetadata（扩展 JS 中用） | high [文档·多源] |
 | `SillyTavern.libs.DOMPurify` | ST 核心 | 扩展内手动净化 HTML | high [文档·多源] |
 
-### 完整变量读取函数（含双链路降级）
+### 历史 r5 读取摘录（不是通用缓存适配器）
 
-**来源**：r5 第 4673–4683 行 ｜ **置信度**：high [运行时源码]
+**来源**：r5 第 4673–4683 行。摘录存在本身为 high [运行时源码]；缓存的跨聊天正确性和移植安全性未由这段代码证明。下面保留历史原文供辨认，不能直接复制为新卡的完整读取函数。当前状态栏设计以 [MVU 状态栏规范](../../../sillytavern-embedded-ui/references/mvu-statusbar-design.md) 为准。
 
 ```js
 function readCurrentHudVariables() {
@@ -473,6 +473,16 @@ function readCurrentHudVariables() {
   return lastGoodHudData || { stat_data: {} };
 }
 ```
+
+**移植时必须补齐的边界：**
+
+- 缓存键至少绑定当前聊天标识、消息楼层及 swipe 分支，并绑定状态版本或更新序号。先捕获读取目标，再核对回调返回时目标仍一致；迟到的旧结果丢弃。
+- 只在同一目标的有效读取失败时，按界面已经约定的策略展示旧值，并明确标记“旧数据/未刷新”。切换目标不能把上一目标的缓存当成当前值；清理旧订阅并切到当前目标的缓存或缺失状态。
+- `ready`（当前有效值）、`stale`（同目标旧值）、`uninitialized`（已确认未初始化）、`unavailable`（读取失败或来源未就绪）分别处理。读取失败本身不能证明未初始化；也不能将 `{stat_data:{}}` 当成成功结果。
+- 0、false 和已定义的空集合可以是有效值；先按实际 Schema 判断，不能靠真值检查把它们当缺失。缺字段或非法值须保留问题状态。
+- 两条读取链只有在作用域、结构和版本语义一致时才可互为备用。备用链不负责初始化、自动修存档或发送消息；显示刷新保持只读。
+
+新实现须分别检查新聊天未初始化、同目标读取失败、聊天/楼层/swipe 切换、迟到回调和重新加载。以上是当前实现要求，未据此宣称历史 r5 已发生串聊天，也不代表目标酒馆已经通过实测。
 
 ---
 

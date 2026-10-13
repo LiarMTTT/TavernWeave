@@ -5,6 +5,7 @@ import path from "node:path";
 import process from "node:process";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
+import { correctGuide } from "./guide-corrections.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const skillRoot = path.resolve(here, "..");
@@ -62,10 +63,10 @@ function safeCopy(source, target) {
   const credentialPattern = /((?:api[_-]?key|access[_-]?token|client[_-]?secret|password)\s*[:=]\s*)["'][^"']{8,}["']/gi;
   const pathMatches = sourceText.match(privatePathPattern) || [];
   const credentialMatches = sourceText.match(credentialPattern) || [];
-  const targetText = sourceText
+  const targetText = correctGuide(path.basename(target), sourceText
     .replace(/\r\n?/g, "\n")
     .replace(privatePathPattern, "<local-user-path>/")
-    .replace(credentialPattern, "$1<redacted-at-snapshot>");
+    .replace(credentialPattern, "$1<redacted-at-snapshot>"));
   const targetBytes = Buffer.from(targetText, "utf8");
   fs.writeFileSync(target, targetBytes);
   return {

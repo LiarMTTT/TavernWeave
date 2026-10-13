@@ -7,7 +7,7 @@ export const MEASUREMENT_TYPES = new Set(["exact", "user-reported", "phase-estim
 const CONFIDENCE_VALUES = new Set(["high", "medium", "low", "unverifiable"]);
 const STAGE_STATUSES = new Set(["complete", "partial", "blocked", "not-evaluated", "not-applicable", "unverifiable"]);
 const STAGE_KEYS = ["definition", "implementation", "automatedVerification", "buildPackaging", "humanAcceptance", "releaseOnlineReadback"];
-const MAPPING_STATUSES = new Set(["comparable", "scale-changed", "merged", "retired"]);
+const MAPPING_STATUSES = new Set(["comparable", "unscored", "scale-changed", "merged", "retired"]);
 const SENSITIVE_KEY = /^(?:rawChat|fullTranscript|completeChat|conversationDump|privateLog|rawLog|apiKey|accessToken|clientSecret|password|credential|credentials|secret|sessionKey|cookie|authorization)$/iu;
 const SECRET_LITERAL = /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|(?:api[_-]?key|access[_-]?token|client[_-]?secret|password)\s*[:=]\s*["'][^"']{8,}["']/iu;
 
@@ -114,15 +114,20 @@ export function buildComparison(current, previous, requestedMappings) {
       status: mapping.status,
       note: String(mapping.note ?? "")
     };
-    if (mapping.status === "comparable") {
+    if (mapping.status === "comparable" || mapping.status === "unscored") {
       const before = prior.get(previousDimensionId);
       const after = now.get(currentDimensionId);
       if (before.scoringMethod !== after.scoringMethod || !sameScale(scaleFor(previous, before), scaleFor(current, after))) {
         throw new Error(`comparable mapping changed scale or scoring method: ${previousDimensionId}`);
       }
-      if (!Number.isFinite(before.score) || !Number.isFinite(after.score)) throw new Error(`comparable mapping requires numeric scores: ${previousDimensionId}`);
-      output.delta = Number((after.score - before.score).toFixed(6));
-      output.comparisonLabel = output.delta === 0 ? "无数值变化" : output.delta > 0 ? `+${output.delta}` : String(output.delta);
+      if (!Number.isFinite(before.score) || !Number.isFinite(after.score)) {
+        output.status = "unscored";
+        output.comparisonLabel = "同维度，暂无可比数值";
+      } else {
+        output.status = "comparable";
+        output.delta = Number((after.score - before.score).toFixed(6));
+        output.comparisonLabel = output.delta === 0 ? "无数值变化" : output.delta > 0 ? `+${output.delta}` : String(output.delta);
+      }
     } else {
       output.comparisonLabel = "量表变化，不直接比较";
     }
@@ -283,23 +288,33 @@ function expectedIndexEntry(record, relativeDirectory) {
   return entry;
 }
 
+// Transaction recovery validates the immutable prior chain against journaled pointers.
+// Only the one prospective appended node is excluded; other unindexed nodes still fail.
+export function validateHistoryBeforeAppend(root, index, latest, pendingRecordId) {
+  return inspectHistory(root, { index, latest, pendingRecordId });
+}
+
 export function validateHistory(root) {
+  return inspectHistory(root);
+}
+
+function inspectHistory(root, snapshot = null) {
   const resolvedRoot = path.resolve(root);
   const errors = [];
   const indexPath = path.join(resolvedRoot, "index.json");
   const latestPath = path.join(resolvedRoot, "latest.json");
   const recordsRoot = path.join(resolvedRoot, "records");
-  const hasIndex = fs.existsSync(indexPath);
-  const hasLatest = fs.existsSync(latestPath);
-  const directories = fs.existsSync(recordsRoot) ? fs.readdirSync(recordsRoot, { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort() : [];
+  const hasIndex = snapshot ? snapshot.index !== null : fs.existsSync(indexPath);
+  const hasLatest = snapshot ? snapshot.latest !== null : fs.existsSync(latestPath);
+  const directories = fs.existsSync(recordsRoot) ? fs.readdirSync(recordsRoot, { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => entry.name).filter((name) => name !== snapshot?.pendingRecordId).sort() : [];
 
   if (!hasIndex && !hasLatest && directories.length === 0) return { valid: true, empty: true, errors: [], records: [], latest: null, root: resolvedRoot };
   if (!hasIndex || !hasLatest) return { valid: false, empty: false, errors: ["index.json and latest.json must either both exist or both be absent"], records: [], latest: null, root: resolvedRoot };
 
   let index;
   let latest;
-  try { index = readJson(indexPath); } catch (error) { errors.push(`invalid index.json: ${error.message}`); }
-  try { latest = readJson(latestPath); } catch (error) { errors.push(`invalid latest.json: ${error.message}`); }
+  try { index = snapshot ? snapshot.index : readJson(indexPath); } catch (error) { errors.push(`invalid index.json: ${error.message}`); }
+  try { latest = snapshot ? snapshot.latest : readJson(latestPath); } catch (error) { errors.push(`invalid latest.json: ${error.message}`); }
   if (!index || !latest) return { valid: false, empty: false, errors, records: [], latest: null, root: resolvedRoot };
   add(errors, index.schemaVersion === 1 && Array.isArray(index.entries), "index.json schema is invalid");
   const records = [];

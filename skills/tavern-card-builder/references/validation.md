@@ -2,14 +2,67 @@
 
 ## Contents
 
+0. Review scope and author-facing assessment
 1. Static chain checks
+   - Character material, player agency and portrayal review
 2. CoT-specific checks
 3. Artifact checks
 4. Runtime acceptance
 5. Handoff report
 
+## 0. Review scope and author-facing assessment
+
+Start from the requested scope and actual supplied material: a complete card,
+worldbook, character, opening, UI or passage. Identify each relevant part's purpose
+and the systems the card actually adopts before choosing checks. A partial excerpt
+cannot establish that the whole card lacks a greeting. Optional stages or frontends
+are not mandatory completeness requirements. Required greetings and worldbooks still
+apply when judging a completed whole card.
+
+Use the following distinctions rather than one undifferentiated pass/fail label:
+
+| Status | Meaning |
+|---|---|
+| Satisfied | The relevant requirement has supporting evidence. |
+| Needs improvement | An observed issue has a specific consequence. |
+| Required but missing | Within the inspected complete scope, necessary content is absent. |
+| Optional and not adopted | This design does not use the optional feature. |
+| Material not supplied | The current materials do not establish presence or completeness. |
+| Not verified | The part exists but the corresponding runtime or effect evidence is absent. |
+
+Assess creative ideas against the author's intended experience when requested. Offer
+reasoned alternatives, distinguishing an actual contradiction from a taste-based
+suggestion. Preserve effective work; neither praise nor findings need a quota.
+Separate prose quality, entry configuration, model-bound delivery and actual portrayal.
+Use existing specialist checks rather than creating another full-card test regime.
+
+For editable prose, apply [natural Chinese review](../../rewrite-natural-prose/references/natural-chinese-review.md).
+Review nonessential three-part lists by meaning, including conjunctions and adjacent
+clauses. Remove defensive repetition when the content already carries the limitation.
+Inspect the model-visible worldbook body separately from author notes and necessary
+runtime templates. Do not infer model behaviour or aesthetic acceptance from text checks.
+
 ## 1. Static chain checks
 
+- A completed card has a usable greeting and an available, relevant worldbook;
+  empty placeholders do not close this gate. A planning record may still be incomplete.
+- Target type is `text`, `mvu_zod` or `hybrid`; `unknown` remains a discovery state.
+  Legacy `mvu` is read only through the explicit compatibility path and is not proof
+  of Zod support or migration. A normal MVU Zod card with UI/scripts is not hybrid.
+- New cards normally leave the traditional prompt fields empty and use worldbook
+  content. Existing effective fields are not cleared as a side effect of a narrow edit.
+- New worldbook design has a player-confirmed 小型 / 中型 / 大型 choice and an
+  explanation of the corresponding work. A prior explicit choice is reused.
+- World prose prefers structure and preserves conditions, exceptions, knowledge
+  scope and degree, including partial, mistaken or outdated understanding.
+- Character-entry activation follows the single/multiple-character convention;
+  effective keyword scan depth is 2 and both recursion directions are disabled for
+  every entry. Verify actual target fields; scan depth is not insertion depth.
+- Each maintained entry has matching content and configuration. Known source-format
+  edits preserve IDs, unrelated settings, unknown fields and protected text.
+- Each variable has a consumer, complete type/collection shape, initial-value basis
+  and update/keep conditions where needed. Unknown input is not silently coerced
+  into a guessed initial value; a derived value has no competing writers.
 - Every state field has an owner and lifecycle.
 - Schema, initialization, updates, projection, UI requirements, cleanup, and examples agree.
 - Lorebook routing reaches the intended model/stage in every supported update mode.
@@ -26,6 +79,42 @@
   MVU Zod script, their declared enabled states, remote import targets, and required
   host extension.
 - Model-visible text contains no developer-only explanation or secret.
+
+### Character material, player agency and portrayal review
+
+Use the relevant parts of [character-design.md](character-design.md),
+[player-profile-and-agency.md](player-profile-and-agency.md),
+[character-stages.md](character-stages.md) and
+[character-review-and-correction.md](character-review-and-correction.md).
+Review only the current scope; these checks do not require every optional feature.
+
+- The request's organize/collaborate/delegate scope is respected. Proposals do not
+  become confirmed facts merely through generated prose, and unknowns may stay open.
+- Foundation, living circumstances, disposition and expression are responsibilities,
+  not four compulsory documents. Lightweight NPCs and optional clothing information
+  are proportional to their use; inherited palettes and other effective structures stay.
+- Player facts do not imply delegation. Each opening and later play respect the
+  actual allowed speech/action/thought/feeling/reaction scope and duration. Objective
+  effects follow agreed rules; the player's intent does not dictate another person's
+  knowledge, feelings or acceptance. No global Persona is silently edited or exported.
+- Stage differences use the current schema/initialization/update authority. Conditions
+  cover legal states within each axis, boundaries and permitted multidimensional
+  combinations; invalid/unknown values are not the highest or initial stage by default.
+- A stage reader writes no state. Reliable foundations remain when unsupported
+  differences are suspended; any safe specified fallback has a confirmed meaning.
+- Clarifications have a concrete author-identified or evidenced purpose, retain the
+  foundation and stage conditions, and add no facts, fixed response menu or state advance.
+- Diagnosis distinguishes original facts, observed output, author feedback and
+  hypotheses, including scene/history/preset/model and delivery causes. Author-only
+  records stay out of the prompt, and no-change/removal remain valid outcomes.
+
+Representative cases: a brief delegated concept without invented canonical trauma;
+a sufficient compact NPC; opening-only limited player delegation; repetition traceable
+to a fixed source gesture; shared preset style mistaken for several character defects;
+high trust without confirmed relationship identity; low trust with that identity still
+present; threshold/missing/null/invalid stage state; one character learning a fact;
+and a narrow inherited-card edit. Check the expected distinction, not a required prose
+string or a fixed number of trial runs. Paper review establishes static evidence only.
 
 ## 2. CoT-specific checks
 
@@ -100,9 +189,36 @@ For runtime-affecting work, verify in real SillyTavern:
 - UI on target devices and reload paths;
 - console errors, network failures, and safe fallback.
 
+For worldbook changes, additionally inspect actual model-bound content for first
+entry into a scene, continued presence without repeated names, departure, ambiguous
+aliases, and state-controlled selection. Do not silently increase scan depth or
+enable recursion to make a case pass. Keep the agreed configuration and diagnose
+keyword, content-boundary or state-loading needs. Separate selection evidence from
+whether a model follows or writes the intended content.
+
 Offline HTML or headless checks do not close this gate.
 
+For portrayal quality, collect relevant actual outputs and the author goal through
+[character-review-and-correction.md](character-review-and-correction.md). A novel
+scene can check whether the character works beyond a quoted example. Diagnose
+whether the required material reached the intended model before blaming the prose.
+Existing chat evidence permits bounded analysis; creating test chats, model calls or
+imports requires the corresponding task scope. Do not invent observations, require
+hidden reasoning, or claim stable portrayal from static checks or one unexplained sample.
+
 ## 5. Handoff report
+
+For an author-facing assessment, use the applicable columns below; a narrow answer
+need not become a full table. Give exact source locations where possible.
+
+| Object and purpose | Status and evidence | Effect on play or comprehension | Smallest useful response | Missing evidence |
+|---|---|---|---|---|
+| Actual reviewed part | Applicable requirement and observed result | Specific consequence | Retain, revise, clarify or investigate as warranted | Only the checks still needed |
+
+A review does not authorize rewriting the source. When repair is authorized, address
+the supported cause. Runtime delivery problems belong to their owner and do not by
+themselves justify adding character text.
+
 
 Separate:
 
