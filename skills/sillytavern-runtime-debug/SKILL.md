@@ -11,6 +11,12 @@ description: Reproduce, diagnose, collect execution evidence for, and close acce
 Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
 <!-- tw-guidance-entry:end -->
 
+<!-- tw-plugin-runtime-entry:begin -->
+## Plugin runtime
+
+When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+<!-- tw-plugin-runtime-entry:end -->
+
 Use `$consult-tavernweave-library` with the `sillytavern-runtime-debug` route for the relevant host and deployment guidance. Add A0 before any write or host mutation, and keep recalled guide advice separate from evidence captured in the named real SillyTavern instance.
 
 Close runtime bugs with evidence from the real target SillyTavern instance. An offline HTML preview can support development, but it cannot establish import behavior, message rendering, extension injection, iframe access, event timing, persistence, or MVU updates.

@@ -11,6 +11,14 @@ description: Route TavernWeave work to bundled development guides, the standing 
 Apply [TW plain-language and guidance rules](references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
 <!-- tw-guidance-entry:end -->
 
+<!-- tw-plugin-runtime-entry:begin -->
+## Plugin runtime
+
+When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+<!-- tw-plugin-runtime-entry:end -->
+
+For first use after enabling the plugin, check that this Skill and the shared runtime reference are readable, identify the actual host and available tools, then route only the current user goal to the smallest needed Skill and references. Use existing user materials and authorization; do not scan the whole library or write a global instruction file as a setup ritual. Distinguish a readable file from observed loading in a new task.
+
 Use the bundled knowledge snapshot as a routed reference layer. A single TavernWeave install carries the library, but each task loads only the standing check and the smallest matching domain set.
 
 For frontend design, visual implementation or review, also read

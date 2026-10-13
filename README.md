@@ -8,11 +8,13 @@
 
 TavernWeaveX无限月读（沿用 TW 简称）帮助你把想法做成能使用、能继续修改的角色卡、网页或小工具。你可以直接说想做什么，或哪里出了问题；TW 会整理需求、提出方案、制作和检查，并说明接下来怎样试用。它通过 22 个 Skill（按任务调用的工作能力）组织这些工作，支持 Codex、Claude Code，并提供 DeepSeek Harness 实验适配。
 
-当前版本为 **TavernWeaveX无限月读 1.9.0**，保持 22 个原生 Skill。机器安装标识 `tavernweave-agent-skills`、技能名称和仓库地址沿用原版，便于核对升级。完整发行包与 SHA-256 校验文件见 **[v1.9.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.0)**。
+当前版本为 **TavernWeaveX无限月读 1.9.1 正式版**，保持 22 个原生 Skill。机器安装标识 `tavernweave-agent-skills`、技能名称和仓库地址沿用原版，便于核对升级。完整包和校验文件见 [v1.9.1 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)；[v1.9.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.0)保留。
 
-本版把已经确认的墨月创作方法融入 TW 的现有分工：完整卡以开场白和世界书为核心，按纯文字、MVU Zod、hybrid 组织制作，补充世界观、变量与人物创作方法。前端先研究需求与相关设计，默认参照 Awwwards 的设计要求；界面保持干净，正文按用途避免套话。
+**统一插件的主要用途是让有权限的用户在 dots 云端长任务中调用 TW。** Codex 与 dots 使用同一个 `TavernWeave-Codex-v1.9.1.zip`，不另开 cloud 版。TW 提供 Skill 和参考资料；云端执行、续接、持久存储与工具来自实际宿主。本机安装不会自动同步到 dots 账户。使用方法和账户入口说明见 **[统一插件指南](docs/plugin-guide.md)**。
 
-只想写一条角色卡提示词规则时，也能直接提出要求。Agent 会保留原意与约束强度，按请求交付正文或世界书条目。字段绑定工具遇到 `bindings` 类型错误时返回明确诊断，不再直接抛出数组方法异常。本次修订还修复了 Windows 上组件导出失败后可能留下半成品的问题；无法清理的文件会明确列出。版本改动见 [更新日志](CHANGELOG.md)。
+沿用 1.9.0 已确认的墨月创作方法：完整卡以开场白和世界书为核心，按纯文字、MVU Zod、hybrid 组织制作，补充世界观、变量与人物创作方法。前端先研究需求与相关设计，默认参照 Awwwards 的设计要求；界面保持干净，正文按用途避免套话。
+
+只想写一条角色卡提示词规则时，也能直接提出要求。Agent 会保留原意与约束强度，按请求交付正文或世界书条目。字段绑定工具遇到 `bindings` 类型错误时返回明确诊断，不再直接抛出数组方法异常。1.9.0 已修复 Windows 上组件导出失败后可能留下半成品的问题；无法清理的文件会明确列出。版本改动见 [更新日志](CHANGELOG.md)。
 
 项目进度画板继续由 `orchestrate-project-blueprint` 在各项目内生成：显示整体和分模块的实现／验收进度条，展开检查点与证据，保存想法、Bug 和审核原话。画板可从项目总设计案读取范围与验收要求，从 NEXT 读取当前状态、证据和下一道门；同步先预览差异，来源、反馈或证据变化后重新核对。新增想法不自动扩大已确认范围，百分比不自动代替驾驶员或真实宿主验收。使用方法见[项目进度画板](docs/project-progress-board.md)。
 
@@ -127,14 +129,14 @@ Soul 仍是当前任务级 Portable 覆盖层。阿瞳与 MTTT.sir 是公开 MTT
 ## 五层入口
 
 ```text
-Host Front Door（可选全局入口，推荐）
+Host Front Door（可选本地入口）
   -> Soul（阿瞳 / MTTT.sir / 灵魂杀手 / 三席，可选）
     -> 脑暴编排（总设计案 + First Playable + 蓝图/蓝图集，可选）
       -> Library（A0 + ST 指南 + 设计/动效 + 来源 Wiki + 挑选页）
         -> 22 个工程 Skill（创作、组件、API、UI、调试、成长核验、构建、验收等）
 ```
 
-- **Host Front Door（全局入口）** 将持续大白话、任务路由与协作规则接入客户端。用户挡位单独保存，更新入口时保留；文件匹配与客户端实际加载分别检查。
+- **Host Front Door（可选本地入口）** 将持续大白话、任务路由与协作规则接入本地客户端。用户挡位单独保存，更新入口时保留；文件匹配与客户端实际加载分别检查。
 - **Soul（可选人格）** 在用户选定的引导挡位内改变语气与教学方式，不改变事实、权限和验收结果。
 - **脑暴编排** 控制方向轮数、四态决策、第一版边界和蓝图体量；任意活动步骤都不能无依据递归增殖。真实问题可以临时细分，解决或确认阻塞后必须关闭支线并回到父步骤。
 - **Library** 单体分发、按需读取；安装一次不等于每轮塞入整个资料库。
@@ -203,7 +205,7 @@ skills/consult-tavernweave-library/assets/picker/index.html
 
 ## 安装与更新
 
-把仓库链接交给 Codex 或 Claude Code。安装器必须以仓库 `skills/` 的完整清单为源，创建缺失目录，不能只覆盖本机已经存在的 Skill；同时必须明文提示：**把 Host Front Door 安装到当前客户端全局规则，可获得最稳定的 Soul 激活、A0 半人工验收 loop 与跨项目路由体验，推荐安装。** 用户可以先看 diff，也可以只装 Skills：
+以下步骤用于 Codex 或 Claude Code 的**本地安装**。dots 账户中的插件启用与使用见[统一插件指南](docs/plugin-guide.md)，本地安装不会自动同步到云端。安装器必须以仓库 `skills/` 的完整清单为源，创建缺失目录，不能只覆盖本机已经存在的 Skill。Host Front Door 是可选本地增强；安装前先看目标规则文件和差异：
 
 ```text
 请完整安装并启用这个 Skill 仓库：
@@ -211,7 +213,7 @@ https://github.com/LiarMTTT/TavernWeave
 
 不要只覆盖本机已经存在的 Skill。请以仓库 skills/ 的完整目录为准；安装后核对 22/22，并单独确认 build-work-library、activate-tavernweave-soul、consult-tavernweave-library、orchestrate-project-blueprint、reflect-on-vibe-code-growth、rewrite-natural-prose 和 Library 离线挑选页存在。
 
-请检测我使用的是 Codex 还是 Claude Code，明文推荐安装 TavernWeave Host Front Door 到该客户端的全局规则文件；先展示目标路径、受控区块和 diff，得到我确认后再安装。不要改写受控区块以外的用户规则。
+请检测我使用的是 Codex 还是 Claude Code，说明 TavernWeave Host Front Door 是可选本地增强；先展示目标路径、受控区块和 diff，得到我确认后再安装。不要改写受控区块以外的用户规则。
 ```
 
 更新：
@@ -220,7 +222,7 @@ https://github.com/LiarMTTT/TavernWeave
 请把已安装的 TavernWeave 完整更新到这个仓库的最新版本：
 https://github.com/LiarMTTT/TavernWeave
 
-更新必须比较“仓库应有目录”和“实际安装目录”，创建新增 Skill，不能只修改旧目录；同时检查 Host Front Door 是否缺失、过期或漂移，明文给出“更新前门（推荐）/先看 diff/仅更新 Skills”三种选择。完成后返回两份回执，再新建任务验证宿主发现。
+更新必须比较“仓库应有目录”和“实际安装目录”，创建新增 Skill，不能只修改旧目录；同时检查 Host Front Door 是否缺失、过期或漂移，明文给出“更新前门/先看 diff/仅更新 Skills”三种选择。完成后返回两份回执，再新建任务验证本地宿主发现。dots 账户导入另按插件指南验证。
 ```
 
 如果宿主或 Agent 使用“把每个 Skill 复制到某个项目级目录”的便携安装方式，可在仓库根运行：
@@ -268,7 +270,7 @@ Host rediscovery: required-new-task
 
 目标目录中的无关个人 Skill 会保留；22 个 TavernWeave 官方目录必须与当前源码逐文件匹配。写入目标最后一级必须明确名为 `skills`；安装脚本拒绝盘符根、用户目录根、源码仓库内部目标和目录链接，替换失败时会回滚已有官方 Skill。
 
-完成 22/22 核验后新建任务或重启会话，使宿主重新发现 Skill。新任务中仍需实际调用 Soul、脑暴编排、照镜子与 Library；安装回执不能冒充宿主发现。v1.9.0 的完整 ZIP 与 SHA-256 校验文件可从 [正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.0) 下载。
+完成 22/22 核验后新建任务或重启会话，使本地宿主重新发现 Skill。新任务中仍需实际调用 Soul、脑暴编排、照镜子与 Library；安装回执不能冒充宿主发现。v1.9.1 完整 ZIP 与 SHA-256 校验文件见 [正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)。
 
 维护者若只是在发布前自检源码树，可显式使用 `-AllowSourceTree`；该开关不能用于普通用户的安装回执。
 
