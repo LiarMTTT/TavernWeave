@@ -3,7 +3,7 @@
   "owner": {
     "name": "LiarMTTT"
   },
-  "description": "TavernWeaveX无限月读 1.9.1: 22 shared skills with host capability checks and resumable project handoffs.",
+  "description": "TavernWeaveX无限月读 2.0.0: 23 shared skills with host capability checks and resumable project handoffs.",
   "plugins": [
     {
       "name": "tavernweave-agent-skills",
@@ -11,7 +11,7 @@
         "source": "github",
         "repo": "LiarMTTT/TavernWeave"
       },
-      "description": "TavernWeaveX无限月读 1.9.1. Describe the card or software task; TW checks host capabilities, works within the agreed scope and records evidence for continuation."
+      "description": "TavernWeaveX无限月读 2.0.0. Describe the card or software task; TW checks host capabilities, works within the agreed scope and records evidence for continuation."
     }
   ]
 }

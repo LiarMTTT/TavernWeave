@@ -1,0 +1,1714 @@
+{
+  "schemaVersion": 1,
+  "kind": "forward",
+  "method": "incremental-written-response-compatibility-review",
+  "reviewer": "/root/v4_forward_compat",
+  "sourceEvidenceLimitations": [
+    "Each preserved observedResponse and case expectation was read against current v4 source files and the supplied full-diff.patch. Prior pass flags and 1.9.1 reviews were not treated as v4 pass evidence.",
+    "priorResponseSha256 is SHA-256 over each observedResponse encoded as UTF-8. Each sourceEvidence.sha256 is SHA-256 over the current working-tree file bytes. Git HEAD still points to the 1.9.1 baseline and is not a v4 content identifier.",
+    "This is a compatibility review of 80 preserved written responses, not 80 new model generations, plugin execution, real SillyTavern or device testing, or driver acceptance.",
+    "The 80 cases do not directly test the new independent worldbook-design-and-writing primary route, the prompt-spec contract, or the usable frontend greeting without duplicate prose. Their compatibility cannot prove those new capabilities."
+  ],
+  "cases": [
+    {
+      "id": "fixed-greeting-mvu",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "bdfdd99bb698ef4b88d0db403840090237c51e393f28b12be6e90ba9dc5e4be9",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "旧答复把三条原生备选开场与各自初始变量关联，共享默认值、分支差异和逐分支存储回读齐全；v4 新增可用开场前端选项，并不否定题目指定的固定 MVU 开场路径。",
+      "sourceEvidence": [
+        {
+          "path": "skills/tavern-card-builder/references/opening-strategies.md",
+          "heading": "1. Fixed greetings",
+          "sha256": "0f35a16c24ae0e9bde055ad96c784d918ea6afe1d3ca59d99aa341ca44c63b9d"
+        },
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Select the opening strategy",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        }
+      ]
+    },
+    {
+      "id": "mvu-dual-update-routing",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "359f7e1b332b5598d8af5182ed20bf32d7a2d3ebc090e1f0023f3e7a1a8b1f61",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "它先核实 `[mvu_plot]`/`[mvu_update]` 是否由目标 MVU Zod 支持，再分收件人并审查未标记共享条目，两种更新路径都留宿主门；这是 builder 保留的整卡模型路由，并非新技能承接的独立世界书拆合。",
+      "sourceEvidence": [
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Start with the target",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/variable-systems.md",
+          "heading": "7. Update-model routing",
+          "sha256": "875d60ab757edb214c2495878059b5d021f988985213a1d5ffbde645512a02a0"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/SKILL.md",
+          "heading": "Ownership and handoff",
+          "sha256": "6ed905414811ed2eac48a09f6cde8068ed6038d8aa428e2d1ada56e7ae93b3df"
+        }
+      ]
+    },
+    {
+      "id": "text-card-custom-cot",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "386411877e3007b022f3f6e2b0d31851eb9b9d13f3a10f6dda8555f3e02b523e",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "无 MVU 的文字卡仍可有作者 CoT；答复给出可直接放入常驻规则的轻量判断步骤、缺事实回退和不外显检查过程。当前 CoT 设计仍归 builder，具体条目写入时才需新世界书技能配置配对。",
+      "sourceEvidence": [
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Start with the target",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/cot-design-and-authoring.md",
+          "heading": "1. 定义与边界",
+          "sha256": "aefe6b6dbce6434379ff6935db8756f3422da9c9736990fd28cd4b82d5148fbb"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/SKILL.md",
+          "heading": "Ownership and handoff",
+          "sha256": "6ed905414811ed2eac48a09f6cde8068ed6038d8aa428e2d1ada56e7ae93b3df"
+        }
+      ]
+    },
+    {
+      "id": "preset-card-cot-stitching",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "5388512d6edf63d3aa4f46ff12f8512c3bab6206390232c929361bbdb2a52db8",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "预设主 CoT 未被复制；旧答复给两个卡专属增量、稳定 ID、阶段依赖、去重顺序和不可拼接时的生成回退。v4 的世界书迁移保留 builder 的 CoT 拼接责任。",
+      "sourceEvidence": [
+        {
+          "path": "skills/tavern-card-builder/references/cot-design-and-authoring.md",
+          "heading": "6. 预设主 CoT 与卡片增量拼接",
+          "sha256": "aefe6b6dbce6434379ff6935db8756f3422da9c9736990fd28cd4b82d5148fbb"
+        },
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Build the contract before prose",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/SKILL.md",
+          "heading": "Ownership and handoff",
+          "sha256": "6ed905414811ed2eac48a09f6cde8068ed6038d8aa428e2d1ada56e7ae93b3df"
+        }
+      ]
+    },
+    {
+      "id": "ensemble-cot-update-script-split",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "431c4f058d3057ad2fe405d77bdeb1ddc7153ebc0a69c85787db83b996cab8a4",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "群像调度交剧情模型，语义事件和合法更新交额外更新模型，确定性计算交脚本，字段唯一写入者明确；没有把世界书选择器当成写状态者。",
+      "sourceEvidence": [
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Build the contract before prose",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/cot-design-and-authoring.md",
+          "heading": "5.3 复杂群像 / 系统卡 CoT",
+          "sha256": "aefe6b6dbce6434379ff6935db8756f3422da9c9736990fd28cd4b82d5148fbb"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/cot-design-and-authoring.md",
+          "heading": "8. MVU 与脚本计算分工",
+          "sha256": "aefe6b6dbce6434379ff6935db8756f3422da9c9736990fd28cd4b82d5148fbb"
+        }
+      ]
+    },
+    {
+      "id": "card-type-runtime-ledger",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "d97139f2b8eb9ac60d6afc88c454a6addf5ffc9ab43e28879d0469b93ff521f7",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "`mvu_zod` 只是待实际包中 schema 注册链确认的目标类型；答复区分随卡两区脚本启用态、宿主 Tavern Helper、远程 Git CDN 与开发期 Zod，没有增加玩家安装步骤。",
+      "sourceEvidence": [
+        {
+          "path": "skills/tavern-card-builder/references/card-types-and-runtime-dependencies.md",
+          "heading": "7. Runtime dependency ledger",
+          "sha256": "27f0ce271fa5d362ad58484460d5cb1a3c6c6482f630b1fb2a71c8e38eadffd2"
+        },
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Stable rules",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        }
+      ]
+    },
+    {
+      "id": "safe-decompose",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "161ad1d88aefa4df43e5bc3a933fbac63c2b6ea10085a394cad6a4c7dd1b252a",
+      "primarySkill": "sillytavern-card-components",
+      "rationale": "原包哈希、独立沙盒、稳定 ID/指针映射、组件依赖和重组语义回读都在；新世界书作者技能不接管 JSON 组件拆解。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-card-components/references/safe-disassembly.md",
+          "heading": "Non-destructive invariants",
+          "sha256": "80b3998c30fa936ea4f7bc3d27405b14591a9a09c3a53dd119edb7335ee5c8ac"
+        },
+        {
+          "path": "skills/sillytavern-card-components/SKILL.md",
+          "heading": "Disassemble cards safely",
+          "sha256": "8cdc1462e0645ebc1028c622ce3ac20fe1dec53b90fa87df858830b085513af0"
+        },
+        {
+          "path": "skills/sillytavern-card-components/SKILL.md",
+          "heading": "Model the component library",
+          "sha256": "8cdc1462e0645ebc1028c622ce3ac20fe1dec53b90fa87df858830b085513af0"
+        }
+      ]
+    },
+    {
+      "id": "release-package",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "f0ac27e4927daee4dcd1cc3cf9a7447d26faf9571b19f7e94b9e2c3bd4a4f44d",
+      "primarySkill": "sillytavern-card-pipeline",
+      "rationale": "先索要真实维护源和 active manifest，暂存构建、回读 JSON/PNG 与 SHA-256、实际 ST 门分离。新世界书技能明确把导入和发布留给流水线。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-card-pipeline/SKILL.md",
+          "heading": "Compose and package",
+          "sha256": "123c9a4a1a5eb952674613b2e4bff87d4f2d70df0b063cf5e2cba470cb1e461d"
+        }
+      ]
+    },
+    {
+      "id": "runtime-dependency-preflight",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "778c7bfc861fcd7f16eb1f8eb59a0542506fdd01df5c742d1d3e3f3f9dea35c6",
+      "primarySkill": "sillytavern-card-pipeline",
+      "rationale": "对 detected 与 declared 能力逐项对账，缺 schema、任一区脚本或启用态不符阻断；四类交付依赖分开，不把离线检查冒充 ST 可用。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-card-pipeline/SKILL.md",
+          "heading": "Compose and package",
+          "sha256": "123c9a4a1a5eb952674613b2e4bff87d4f2d70df0b063cf5e2cba470cb1e461d"
+        },
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Stable rules",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        }
+      ]
+    },
+    {
+      "id": "bound-worldbook-version-sync",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "6e10fc6f4ffd3724a4a6a7f7c4b0595d95ff962789271c467226b17d0d2524cd",
+      "primarySkill": "sillytavern-card-pipeline",
+      "rationale": "卡和附着/独立世界书按稳定 ID、可机检版本面绑定，明确拒绝旧 2.3.0 并比对源语义；这是打包责任，世界书正文新技能不取代版本封装门。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-card-pipeline/references/configuration-contracts.md",
+          "heading": "Card-bound worldbook version checks",
+          "sha256": "aff8fc06af137741c559b57fe7dae10cb1f380d95cef07e2da4c1f6a02f676c6"
+        },
+        {
+          "path": "skills/sillytavern-card-pipeline/SKILL.md",
+          "heading": "Compose and package",
+          "sha256": "123c9a4a1a5eb952674613b2e4bff87d4f2d70df0b063cf5e2cba470cb1e461d"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/SKILL.md",
+          "heading": "Ownership and handoff",
+          "sha256": "6ed905414811ed2eac48a09f6cde8068ed6038d8aa428e2d1ada56e7ae93b3df"
+        }
+      ]
+    },
+    {
+      "id": "exact-runtime-signature",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "9bc5b89a8ca02e19830177a5b65ffbe2c8d0423862e206ac228cdeb9f4962273",
+      "primarySkill": "sillytavern-api-reference",
+      "rationale": "未见 hook 与目标版本时拒报精确事件签名，要求源码声明/实现和宿主探针分层；与 v4 E03 版本核验边界一致。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-api-reference/SKILL.md",
+          "heading": "Verification workflow",
+          "sha256": "9de30dcece4c668635e18bafcfa7f41a47477257ea67ebd388e5e3279fbc9c44"
+        }
+      ]
+    },
+    {
+      "id": "blank-ui-runtime",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "bad6a02519b202e20bc048db1376c769d6e2c786e13dcf575ad3217248ed1d4a",
+      "primarySkill": "sillytavern-runtime-debug",
+      "rationale": "旧答复沿导入包、脚本、数据、iframe 拓扑和 DOM 定位首个错误，离线显示不升格实机；当前世界书/开场变更不影响真实宿主诊断 owner。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-runtime-debug/SKILL.md",
+          "heading": "Diagnose by layer",
+          "sha256": "e29c10fc777ed1cd0bed4b010224d474164dca1b1c11d56f701ec79dcb29a79b"
+        }
+      ]
+    },
+    {
+      "id": "embedded-control-center",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "525d37fdf27dd13dfcf1a6c58d8ab83cd14c47b23c6391ac4663e12cb80ca50b",
+      "primarySkill": "sillytavern-embedded-ui",
+      "rationale": "针对移动、焦点、读屏、草稿与已提交状态分离提出基线，缺真实源时不宣称已修；没有强塞 React 或把前端草稿写成游戏状态。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-embedded-ui/SKILL.md",
+          "heading": "Control centers",
+          "sha256": "4708ea07ab4d0a934261e24723fe67c0a4ae3209bf9da205e0367d93bacb1a9a"
+        },
+        {
+          "path": "skills/sillytavern-embedded-ui/SKILL.md",
+          "heading": "Accessibility gate",
+          "sha256": "4708ea07ab4d0a934261e24723fe67c0a4ae3209bf9da205e0367d93bacb1a9a"
+        }
+      ]
+    },
+    {
+      "id": "vague-cleanup",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "ca0e30441189978149ada786d387664e93f194eac7f368694089c3a9067a45d8",
+      "primarySkill": "code-quality-workflow",
+      "rationale": "“丑但稳定”先做证据审查和最小门控，不把无依据重写当授权；当前质量工作流仍要求先定位可证实缺陷。",
+      "sourceEvidence": [
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "heading": "Route the request",
+          "sha256": "719a234fbac929bb9475544329652cef85fbce21c4b401f2fd307511c3fac6b7"
+        }
+      ]
+    },
+    {
+      "id": "react-product-ui",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "d700e421992dbf0698ae456f8a61552df813b33f4da83a98f01581750eef04e4",
+      "primarySkill": "shadcn-tailwind-ui",
+      "rationale": "按题目明确栈读取项目配置、复用组件，保留键盘/窄屏与写前预览；该普通 React UI 不被新增世界书或提示规格路由改派。",
+      "sourceEvidence": [
+        {
+          "path": "skills/shadcn-tailwind-ui/SKILL.md",
+          "heading": "Workflow",
+          "sha256": "417a931af2af254769f4a7474468026fc13054e37bf7a16e449a9fb8e9a4a656"
+        }
+      ]
+    },
+    {
+      "id": "workshop-incident",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "0a0b5b5f3cf110257d6bfb0925d793a75b114ef87fb39f90afca98d9f62fc5b1",
+      "primarySkill": "rolecard-workshop-ops",
+      "rationale": "502 的代理、Gateway、对象存储链只读取证，具体生产变更和密钥另设授权；v4 调整未扩大生产权限。",
+      "sourceEvidence": [
+        {
+          "path": "skills/rolecard-workshop-ops/SKILL.md",
+          "heading": "Read-Only Diagnostic Sequence",
+          "sha256": "5c393dbff7c3d31b368e65e04dcce9b9a6e62d98e2ff2d946027ed81fc411533"
+        },
+        {
+          "path": "skills/rolecard-workshop-ops/SKILL.md",
+          "heading": "Change and Deployment Gate",
+          "sha256": "5c393dbff7c3d31b368e65e04dcce9b9a6e62d98e2ff2d946027ed81fc411533"
+        },
+        {
+          "path": "skills/rolecard-workshop-ops/SKILL.md",
+          "heading": "Architecture Boundary",
+          "sha256": "5c393dbff7c3d31b368e65e04dcce9b9a6e62d98e2ff2d946027ed81fc411533"
+        },
+        {
+          "path": "skills/rolecard-workshop-ops/SKILL.md",
+          "heading": "Stop Conditions",
+          "sha256": "5c393dbff7c3d31b368e65e04dcce9b9a6e62d98e2ff2d946027ed81fc411533"
+        }
+      ]
+    },
+    {
+      "id": "component-only-regex-update",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "61e06c323a39ed05100475d4c6e08cf1052df1876eb6ea1f0c2a63408a7a60fc",
+      "primarySkill": "sillytavern-component-update",
+      "rationale": "只产可导入角色本地正则测试 JSON 与报告，保 ID 和未触碰字段，未承诺整卡包；符合组件模式与实机门。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-component-update/SKILL.md",
+          "heading": "Freeze the delivery mode",
+          "sha256": "2bc8762ff8304ca887c5fe00a1052b84becdc1f9ed3904dfd842f2ef89732e8b"
+        }
+      ]
+    },
+    {
+      "id": "component-full-card-handoff",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "5aa4e83d8b563e15207517ae1d898e5054e5f935ff6067231914c224d1e57fb0",
+      "primarySkill": "sillytavern-component-update",
+      "rationale": "两段脚本和不动表面哈希交给整卡流水线，组件 owner 不抢封装；缺维护源时不虚称已生成。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-component-update/SKILL.md",
+          "heading": "Freeze the delivery mode",
+          "sha256": "2bc8762ff8304ca887c5fe00a1052b84becdc1f9ed3904dfd842f2ef89732e8b"
+        },
+        {
+          "path": "skills/sillytavern-card-pipeline/SKILL.md",
+          "heading": "Compose and package",
+          "sha256": "123c9a4a1a5eb952674613b2e4bff87d4f2d70df0b063cf5e2cba470cb1e461d"
+        }
+      ]
+    },
+    {
+      "id": "regex-placement-depth-fixtures",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "de2d8435a74371348789178a65d7e8c5bb251fb4a323e08a617bd022e3225e77",
+      "primarySkill": "sillytavern-render-regex-pipeline",
+      "rationale": "placement 数值留待目标版本查证，display/prompt 与深度 0/4/5 断言完整，离线结果与导入实测隔离。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-render-regex-pipeline/SKILL.md",
+          "heading": "Run deterministic fixtures",
+          "sha256": "449d47d9d61449becc29f895c0b134753af44973ac40afee7af545e402c21c85"
+        },
+        {
+          "path": "skills/sillytavern-render-regex-pipeline/references/tavern-regex-contract.md",
+          "heading": "Eligibility",
+          "sha256": "8baa49b17dca967540eb6555da8ab8e450e5c106f3bbfd8e58422a7cc7b7afa5"
+        }
+      ]
+    },
+    {
+      "id": "regex-host-disagreement",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "b7222938c77ac7295badcffff767dc2dfb5ecfa75801bee41605050329a6e970",
+      "primarySkill": "sillytavern-render-regex-pipeline",
+      "rationale": "用分阶段 trace 保留 fixture 结果，以目标 ST 为宿主事实并列出未模拟宏/Markdown/提示组装，下一步由 runtime-debug 实机复现。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-render-regex-pipeline/SKILL.md",
+          "heading": "Trace the stages",
+          "sha256": "449d47d9d61449becc29f895c0b134753af44973ac40afee7af545e402c21c85"
+        }
+      ]
+    },
+    {
+      "id": "rolecard-static-security-audit",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "f6d0fe8a2a14816a28147b5ac79e6deec1d470aae589ebe67750f1906fe86415",
+      "primarySkill": "sillytavern-rolecard-security",
+      "rationale": "先锁文件哈希，脱敏静态追踪可达性，没卡时不编发现数或执行远端；v4 未改变安全扫描界线。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-rolecard-security/SKILL.md",
+          "heading": "Establish the boundary",
+          "sha256": "36c313a5d7d91cbc5a30ff74df838aa8832ee94df887d5f2ba9d40c4077fbd88"
+        },
+        {
+          "path": "skills/sillytavern-rolecard-security/SKILL.md",
+          "heading": "Run the static audit",
+          "sha256": "36c313a5d7d91cbc5a30ff74df838aa8832ee94df887d5f2ba9d40c4077fbd88"
+        }
+      ]
+    },
+    {
+      "id": "rolecard-security-baseline",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "f1174dee0e082cf3823063ef121f574408e25776b2cd0ced0860010da863c379",
+      "primarySkill": "sillytavern-rolecard-security",
+      "rationale": "按稳定规则 ID 计数，新增/增长阻断，未把旧基线变白名单；未见文件时拒绝假通过。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-rolecard-security/SKILL.md",
+          "heading": "Compare an approved baseline",
+          "sha256": "36c313a5d7d91cbc5a30ff74df838aa8832ee94df887d5f2ba9d40c4077fbd88"
+        },
+        {
+          "path": "skills/sillytavern-rolecard-security/SKILL.md",
+          "heading": "Triage",
+          "sha256": "36c313a5d7d91cbc5a30ff74df838aa8832ee94df887d5f2ba9d40c4077fbd88"
+        }
+      ]
+    },
+    {
+      "id": "database-rolecard-migration",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "4a9e580792826be9d2bd8c24069aced592b6b661d353a8acf441986db207d1af",
+      "primarySkill": "sillytavern-database-rolecards",
+      "rationale": "先核多楼层模型，`status→state` 与缺值 `progress=0` 用 before/expected 加二次运行验幂等，冲突停止且保自定义字段。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-database-rolecards/SKILL.md",
+          "heading": "Run migration fixtures",
+          "sha256": "06ad3d85cbd1243fb9c857cd0343c493bd84660e06c4d8ccb97063d94ea6409e"
+        },
+        {
+          "path": "skills/sillytavern-database-rolecards/references/rolecard-data-model.md",
+          "heading": "Migration format",
+          "sha256": "36dcd5fa764aa0b20caafd66986be3e7a52370b936f9f89fb2d5a03d461ce43b"
+        }
+      ]
+    },
+    {
+      "id": "database-rolecard-bindings",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "b21d3ae481a4cb85dbb8a93a795125ba3396bfa80a16c1b2584d821fe5ce8cdf",
+      "primarySkill": "sillytavern-database-rolecards",
+      "rationale": "binding 稳定 ID、字段权限、刷新事件与 UI 宿主生命周期分开；同层 C8 仍未验证，不因 v4 世界书路由误当状态写入。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-database-rolecards/SKILL.md",
+          "heading": "Check every consumer",
+          "sha256": "06ad3d85cbd1243fb9c857cd0343c493bd84660e06c4d8ccb97063d94ea6409e"
+        },
+        {
+          "path": "skills/sillytavern-database-rolecards/references/floor-and-ui-binding.md",
+          "heading": "Binding format",
+          "sha256": "f0938735c08a8e9dd435f191bf902bef8443718fba56ee04a3a94a4fc310d705"
+        }
+      ]
+    },
+    {
+      "id": "extension-static-scaffold",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "8f9e2b4b666a71a7f5619e4d4739c7f8f1aebee9966176ea2e298bc1db938102",
+      "primarySkill": "sillytavern-extension-dev",
+      "rationale": "manifest、ES 模块和能力合同的最小独立 staging，先 dry-run，明确不安装宿主；新增技能不改变扩展 owner。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-extension-dev/SKILL.md",
+          "heading": "Scaffold only when needed",
+          "sha256": "c30cce992b7e256fa561cb15be7e293bf9c87b344339dbe2bdb993caf50f0953"
+        },
+        {
+          "path": "skills/sillytavern-extension-dev/references/extension-contract.md",
+          "heading": "Manifest fields",
+          "sha256": "dbf7ab800143680d516281c11da5069b2b3d2264cd376fdd1462c44a3fef7271"
+        }
+      ]
+    },
+    {
+      "id": "extension-capability-snapshot",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "a46769236f15b0c3a5a541bded4a09f956b2da48fa5a6ba0ea8d7166843b9e10",
+      "primarySkill": "sillytavern-extension-dev",
+      "rationale": "必需版本/符号阻断，可选项按合同回退，预发布不偷算稳定版；快照不证明签名和实际事件。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-extension-dev/SKILL.md",
+          "heading": "Validate the project",
+          "sha256": "c30cce992b7e256fa561cb15be7e293bf9c87b344339dbe2bdb993caf50f0953"
+        },
+        {
+          "path": "skills/sillytavern-extension-dev/references/capability-preflight.md",
+          "heading": "Evidence limits",
+          "sha256": "a5eb1a9f0cc9c3d6ba3ea1b5c65d66d7679fc4333cb992974a999b50d099addb"
+        },
+        {
+          "path": "skills/sillytavern-extension-dev/references/capability-preflight.md",
+          "heading": "Captured snapshot",
+          "sha256": "a5eb1a9f0cc9c3d6ba3ea1b5c65d66d7679fc4333cb992974a999b50d099addb"
+        }
+      ]
+    },
+    {
+      "id": "large-rolecard-budget-regression",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "74074fa2f7cfd4e74b3afd5d40072ab73c3f21525cb67cbe1a7a6f50c8c54662",
+      "primarySkill": "sillytavern-rolecard-performance",
+      "rationale": "同口径数值对比候选与基线，保留内容不外泄；世界书新分路仍受最终上下文预算检查，不因文件大小直接删规则。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-rolecard-performance/SKILL.md",
+          "heading": "Measure without exposing content",
+          "sha256": "686b826ed4a31cd3f26e0b341341e3b173ffea73844e0003def84f31d734ceed"
+        },
+        {
+          "path": "skills/sillytavern-rolecard-performance/SKILL.md",
+          "heading": "Apply declared budgets",
+          "sha256": "686b826ed4a31cd3f26e0b341341e3b173ffea73844e0003def84f31d734ceed"
+        }
+      ]
+    },
+    {
+      "id": "rolecard-runtime-performance-sample",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "0b2456bfbbcc0a1078098de69da26e4d0b6c4e60fc3d4202dce6482fac115a43",
+      "primarySkill": "sillytavern-rolecard-performance",
+      "rationale": "首屏与 swipe 分场景计算具名 p95，静态卡大小另列，缺样本不报通过；v4 E06 内容预算不替代运行性能证据。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-rolecard-performance/references/runtime-sampling.md",
+          "heading": "Sample file",
+          "sha256": "fc5b3b8f183a5af6c62a1e734f67badd6b4e888803ea7c7054c9a0867d32dc5b"
+        },
+        {
+          "path": "skills/sillytavern-rolecard-performance/SKILL.md",
+          "heading": "Validate captured runtime samples",
+          "sha256": "686b826ed4a31cd3f26e0b341341e3b173ffea73844e0003def84f31d734ceed"
+        }
+      ]
+    },
+    {
+      "id": "media-live2d-contract",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "efe85cd1170003b7bccd6a15d4627150bd3233295b21fb06b4c5f01b8a911c6b",
+      "primarySkill": "sillytavern-media-live2d-runtime",
+      "rationale": "本地文件核路径/字节/哈希，远端不取回，provider、回退与清理成对；实机 CORS/自动播放仍待验。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-media-live2d-runtime/SKILL.md",
+          "heading": "Inventory the runtime surface",
+          "sha256": "9e32903865dc99a40c7fa9ee86e3633ee8389b2642b6f343362f0608e4fdeb7c"
+        }
+      ]
+    },
+    {
+      "id": "media-preload-audio-lifecycle",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "7cbc1d6a0a295280b2b2df949958622ddbf5bf52e1f62afcdef068da501791ec",
+      "primarySkill": "sillytavern-media-live2d-runtime",
+      "rationale": "eager/lazy/on-demand 同时核字节和数量上限，远端未知大小不能算通过；BGM 保播放列表并定义 PAGEHIDE 解绑。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-media-live2d-runtime/SKILL.md",
+          "heading": "Plan preload under a budget",
+          "sha256": "9e32903865dc99a40c7fa9ee86e3633ee8389b2642b6f343362f0608e4fdeb7c"
+        },
+        {
+          "path": "skills/sillytavern-media-live2d-runtime/SKILL.md",
+          "heading": "Validate bindings",
+          "sha256": "9e32903865dc99a40c7fa9ee86e3633ee8389b2642b6f343362f0608e4fdeb7c"
+        }
+      ]
+    },
+    {
+      "id": "creative-authority-resume",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "211df9696b474a4e1e732c2a97f4c9b81953136941d05431e02ede27ea2c6241",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "先读权威、NEXT、工作树与产物，分 Confirmed/Proposed/Open/evidence 和下一门，只问真实冲突；契合 v4 A0 沿用已有上下文的修订。",
+      "sourceEvidence": [
+        {
+          "path": "skills/tavern-card-builder/references/creative-authority.md",
+          "heading": "Resume protocol",
+          "sha256": "3ce492a9529b1a147938120a0cd214bddb9e868dc82a4f8f63506b52633909b0"
+        },
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Start with the target",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        }
+      ]
+    },
+    {
+      "id": "library-routed-ui-selection",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "d4062e3304c63ae7fc759d4c52cb5bf5e68f550c2e2f579575debb2e35df965f",
+      "primarySkill": "consult-tavernweave-library",
+      "rationale": "A0 三格、移动抽屉指南、目录有界候选与 proposed 标签均完整；当前路由实查仍含 ST-C2/C12/D7 与这三个候选 ID，许可证/宿主门未越界。",
+      "sourceEvidence": [
+        {
+          "path": "skills/consult-tavernweave-library/SKILL.md",
+          "heading": "Route first",
+          "sha256": "65f79367c8059cea7adee1cc38876c413da1d2c54dcb366b39bbfd401a0f01f5"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/references/st-guides/A0_驾驭工程从零搭建检查单.md",
+          "heading": "第 2 层 · 开工同步",
+          "sha256": "b10e9476c1801c7b3627e085b38ac76c1feeaea87a5ec33836e9b0b39a4f921e"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/references/st-guides/C12_抽屉式状态栏-移动端方案.md",
+          "heading": "1. 使用场景与非目标",
+          "sha256": "d41210839164bbc820ac24198158dd3e12bbee6ec74088b80d97da1fe0dc349c"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/references/library-usage.md",
+          "heading": "Candidate selection",
+          "sha256": "5674fb335947d17ae33f30c2b8f41045dcb3c28740e89f4f149c03489b4e4390"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/assets/picker/catalog.json",
+          "heading": "Apple Sheets",
+          "sha256": "5c4c90960e6753136785bc7a372bdbd58eace68b4c224518ff58350f2110336c"
+        }
+      ]
+    },
+    {
+      "id": "soul-atong-card-guidance",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "56ab08e71051ac8fda243512fa85f0269f98e5583498b1d7a547ef95fa126c32",
+      "primarySkill": "activate-tavernweave-soul",
+      "rationale": "Portable 人格只改教学，资料来源链/整卡/成库分别路由；所问底本版本和首个对象是做样本的实质缺项，未擅自改挡位或权限。",
+      "sourceEvidence": [
+        {
+          "path": "skills/activate-tavernweave-soul/SKILL.md",
+          "heading": "Activate as Portable mode",
+          "sha256": "e6391ebb0864f871717d5ee6ac294df874fb47d3a630f9dc62cbe194151f0ec3"
+        },
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Start with the target",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        }
+      ]
+    },
+    {
+      "id": "soul-mttt-sir-teachback",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "a0f22db51304300fc980f01ca07e8de527a40df7e68ba7a143afddf9e486da71",
+      "primarySkill": "activate-tavernweave-soul",
+      "rationale": "严格追问 fixture 输入断言与反例，明确真实 ST 导入、滑动/编辑需另取证；人格语气未转成人身攻击。",
+      "sourceEvidence": [
+        {
+          "path": "skills/activate-tavernweave-soul/SKILL.md",
+          "heading": "Activate as Portable mode",
+          "sha256": "e6391ebb0864f871717d5ee6ac294df874fb47d3a630f9dc62cbe194151f0ec3"
+        },
+        {
+          "path": "skills/activate-tavernweave-soul/references/mttt-sir-mode.md",
+          "heading": "Default moves",
+          "sha256": "71437f8b081f621350c2cac005af405e1d1adc8230a77e6cfe1a9680f551e55c"
+        }
+      ]
+    },
+    {
+      "id": "soul-killer-frontend-review",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "86fcb7d9db172a860b3db04584d62d1836c878963a7d853b02f9290b077b63e5",
+      "primarySkill": "activate-tavernweave-soul",
+      "rationale": "无源码/画面时不编优点或故障，未来最多三项摘要且保不同证据层；实现仍交 UI owner。",
+      "sourceEvidence": [
+        {
+          "path": "skills/activate-tavernweave-soul/SKILL.md",
+          "heading": "Activate as Portable mode",
+          "sha256": "e6391ebb0864f871717d5ee6ac294df874fb47d3a630f9dc62cbe194151f0ec3"
+        },
+        {
+          "path": "skills/activate-tavernweave-soul/references/soul-killer-mode.md",
+          "heading": "Default moves",
+          "sha256": "3cf803df2f086546e5166cae12b45ddba1c0b60149893b5d8155bb50c63f7572"
+        }
+      ]
+    },
+    {
+      "id": "brainstorm-soul-ensemble-first-version",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "1d55c4c00cea7086ef3a325f99e9cb202a507d50caab1924fbd1f573fcef91a0",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "三席是同一 Agent 的三个视角，四态账本、方向预算、首版与停车场均有界；两个待决问题影响首个样本与宿主，不违反 v4 无固定问卷的规则。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "heading": "脑暴流程",
+          "sha256": "c816a68b6c3047107eb5ae0da49b40cd6c1e9deb40b8468d095354fa665f5d68"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/brainstorm-protocol.md",
+          "heading": "动态讨论上限",
+          "sha256": "3d23dba385d965441a6e9f5ce98bd036a9afd07889e6ce9e7a041b024af72385"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/blueprint-scaling.md",
+          "heading": "选择蓝图规模",
+          "sha256": "21dc1fd3890d14715a1ef881921daa93384b290df06c9472723df76d002e8009"
+        },
+        {
+          "path": "skills/activate-tavernweave-soul/references/ensemble-mode.md",
+          "heading": "席位",
+          "sha256": "8a1292dd11a6d00522acbbb6bcbdbdd128e5bdbb49eff1d0b8deb8a4df201e30"
+        }
+      ]
+    },
+    {
+      "id": "giant-project-blueprint-set",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "40857447ab5ecdf02cc11343619ed7780753260050e4c727fc792bc9cefbc9dc",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "先核实多领域边界才选 program 档，三层九子上限、零持久递归和单一 NEXT 保持，符合目前蓝图防膨胀合同。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/references/blueprint-scaling.md",
+          "heading": "渐进提取",
+          "sha256": "21dc1fd3890d14715a1ef881921daa93384b290df06c9472723df76d002e8009"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "heading": "按蓝图执行",
+          "sha256": "c816a68b6c3047107eb5ae0da49b40cd6c1e9deb40b8468d095354fa665f5d68"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/blueprint-scaling.md",
+          "heading": "选择蓝图规模",
+          "sha256": "21dc1fd3890d14715a1ef881921daa93384b290df06c9472723df76d002e8009"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/anti-fractal-execution.md",
+          "heading": "先区分三种结构",
+          "sha256": "6073ea38d471e52c7f010bb6d335574ccc9e49497fdacd061e83e1407fdc728b"
+        }
+      ]
+    },
+    {
+      "id": "runtime-problem-refinement-return",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "12f40e902b3c38bc96d10694c92944b370552b10aeffe6da5dcdc36878f072c4",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "真机 390px 失败触发单条非持久支线，修复复测后回 P7 且不增分母；没有把局部 Bug 升成新蓝图。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "heading": "按蓝图执行",
+          "sha256": "c816a68b6c3047107eb5ae0da49b40cd6c1e9deb40b8468d095354fa665f5d68"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/anti-fractal-execution.md",
+          "heading": "临时问题支线",
+          "sha256": "6073ea38d471e52c7f010bb6d335574ccc9e49497fdacd061e83e1407fdc728b"
+        }
+      ]
+    },
+    {
+      "id": "frontend-fit-decline-and-legacy-reuse",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "26edace4f1da8ee536ff38b205dbdd88cee1dcd9e069033521f4db2b3c2f7f1f",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "文字规则工具缺独立 UI 价值时给轻量替代和重评条件；旧作品复用待实际路径版本证据，用户覆盖仍保原型/宿主门。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/references/frontend-fit.md",
+          "heading": "建议劝退的信号",
+          "sha256": "0b3b7c1a895b085ffc496f1ea9f7143c1a3f92a045898b080946d978aea162e0"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/legacy-reuse.md",
+          "heading": "稳定作品复用协议",
+          "sha256": "768e274ada0ba9e5c706c935ff2a07323ff3c165d8eb6ff4ec21d86ec94d1307"
+        }
+      ]
+    },
+    {
+      "id": "mirror-vibe-code-growth-recheck",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "73b3588ef17d6917687354ce310fd9170579cf01b329eaa3c78d29b61357e380",
+      "primarySkill": "reflect-on-vibe-code-growth",
+      "rationale": "当前材料不足时不编分数或保存回执，旧履历只作历史证据；文本/七章报告、维度可比、Token 口径和六道交付门仍吻合当前专职合同。",
+      "sourceEvidence": [
+        {
+          "path": "skills/reflect-on-vibe-code-growth/SKILL.md",
+          "heading": "执行再次核验协议",
+          "sha256": "c86f733f478f3e88cb0544e9bef134b5788ffdb0518530db43d944f7982851eb"
+        },
+        {
+          "path": "skills/reflect-on-vibe-code-growth/SKILL.md",
+          "heading": "生成报告与保存履历",
+          "sha256": "c86f733f478f3e88cb0544e9bef134b5788ffdb0518530db43d944f7982851eb"
+        },
+        {
+          "path": "skills/reflect-on-vibe-code-growth/SKILL.md",
+          "heading": "恢复证据边界",
+          "sha256": "c86f733f478f3e88cb0544e9bef134b5788ffdb0518530db43d944f7982851eb"
+        },
+        {
+          "path": "skills/reflect-on-vibe-code-growth/SKILL.md",
+          "heading": "重新评估完整能力网络",
+          "sha256": "c86f733f478f3e88cb0544e9bef134b5788ffdb0518530db43d944f7982851eb"
+        }
+      ]
+    },
+    {
+      "id": "mirror-text-assessment-only",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "6fa68ac1c81cd58247eab9f3751a570c673d38cf62a5f54d0ef14f063e6261dc",
+      "primarySkill": "reflect-on-vibe-code-growth",
+      "rationale": "已给独立可复制完整文字表单，所有缺证据维度标不可评分，未额外要求画板或假设已保存。",
+      "sourceEvidence": [
+        {
+          "path": "skills/reflect-on-vibe-code-growth/SKILL.md",
+          "heading": "生成报告与保存履历",
+          "sha256": "c86f733f478f3e88cb0544e9bef134b5788ffdb0518530db43d944f7982851eb"
+        },
+        {
+          "path": "skills/reflect-on-vibe-code-growth/SKILL.md",
+          "heading": "重新评估完整能力网络",
+          "sha256": "c86f733f478f3e88cb0544e9bef134b5788ffdb0518530db43d944f7982851eb"
+        }
+      ]
+    },
+    {
+      "id": "rewrite-one-shot-light",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "b939177f10ac5a8848c9e94b8501b4c711b099a378028cb59cab2a74db9956f2",
+      "primarySkill": "rewrite-natural-prose",
+      "rationale": "直接精修 supplied passage，`3 种格式` 与“还不支持离线同步”两个硬事实完整保留，未切持续模式。",
+      "sourceEvidence": [
+        {
+          "path": "skills/rewrite-natural-prose/SKILL.md",
+          "heading": "Choose the amount of change",
+          "sha256": "f414ff438f232a8a54337b860a9cc2bb4402d162a55ec268e9004ac9b55af365"
+        }
+      ]
+    },
+    {
+      "id": "rewrite-three-strengths",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "2f105f1a28008103202b8dde7c335b1adb0b0ee2d9db4cd2945caf5827aaf398",
+      "primarySkill": "rewrite-natural-prose",
+      "rationale": "无原稿时不虚构三版，预告三种改动深度且守数值/否定/限制；属于真正缺材料才问。",
+      "sourceEvidence": [
+        {
+          "path": "skills/rewrite-natural-prose/SKILL.md",
+          "heading": "Choose the amount of change",
+          "sha256": "f414ff438f232a8a54337b860a9cc2bb4402d162a55ec268e9004ac9b55af365"
+        }
+      ]
+    },
+    {
+      "id": "rewrite-character-voices",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "0012db9104feee0d805632a7296ffff803dd39ce438cd739fa2b43106d4c073d",
+      "primarySkill": "rewrite-natural-prose",
+      "rationale": "缺正文时请求原文，承诺分开保留寡言与直率的声音，不制造角色行动或动机。",
+      "sourceEvidence": [
+        {
+          "path": "skills/rewrite-natural-prose/SKILL.md",
+          "heading": "Choose the amount of change",
+          "sha256": "f414ff438f232a8a54337b860a9cc2bb4402d162a55ec268e9004ac9b55af365"
+        }
+      ]
+    },
+    {
+      "id": "rewrite-protected-mixed",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "8f6789afe20c44624b14ff8a8aea38b97291f3caadbca42b3a965a1cb393ac8e",
+      "primarySkill": "rewrite-natural-prose",
+      "rationale": "限定 JSON 正文字串，键/类型及宏、EJS、正则、脚本逐字核对；没原件不假称已写。",
+      "sourceEvidence": [
+        {
+          "path": "skills/rewrite-natural-prose/SKILL.md",
+          "heading": "Choose the amount of change",
+          "sha256": "f414ff438f232a8a54337b860a9cc2bb4402d162a55ec268e9004ac9b55af365"
+        },
+        {
+          "path": "skills/rewrite-natural-prose/references/editing-guide.md",
+          "heading": "Mixed-content edits",
+          "sha256": "69701e5b0b2b6172e397417e7fca89c2e7e7deb04afc392538f0ea1745aeb662"
+        }
+      ]
+    },
+    {
+      "id": "rewrite-task-output-and-exit",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "13b6d587ed924f7f59492b4a4b74ab43b17c49784e5284f1636eabb962026c60",
+      "primarySkill": "rewrite-natural-prose",
+      "rationale": "任务态 on/off 与持久文件分开，直接退出仅停持续精修，后续单次精修仍可用；引导档位与工程授权不被覆盖。",
+      "sourceEvidence": [
+        {
+          "path": "skills/rewrite-natural-prose/SKILL.md",
+          "heading": "Modes and state",
+          "sha256": "f414ff438f232a8a54337b860a9cc2bb4402d162a55ec268e9004ac9b55af365"
+        }
+      ]
+    },
+    {
+      "id": "rewrite-workspace-persistence",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "eb37202c454e16cac5a05538f648d4857d03da60fcb4c439b7588e4f4517d3bc",
+      "primarySkill": "rewrite-natural-prose",
+      "rationale": "工作区有效规则链、受控区块和备份先作具体预览，再按受控持久化门写读；v4 A0 的免重复询问不取消该显式预览边界。",
+      "sourceEvidence": [
+        {
+          "path": "skills/rewrite-natural-prose/SKILL.md",
+          "heading": "Persistent rules",
+          "sha256": "f414ff438f232a8a54337b860a9cc2bb4402d162a55ec268e9004ac9b55af365"
+        },
+        {
+          "path": "skills/rewrite-natural-prose/references/persistent-modes.md",
+          "heading": "Resolve a real target before preview",
+          "sha256": "36730c53ac4f6ecbc062b994fbc698dc00379f6067f037a9e2487b9193a3bead"
+        }
+      ]
+    },
+    {
+      "id": "rewrite-client-persistence-and-status",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "9e43502ec5815c085c0c1ee5b72e2dd79cf1182f03db2c28ca9ca3e7818b1f6c",
+      "primarySkill": "rewrite-natural-prose",
+      "rationale": "客户端与工作区分开预览，任务状态、文件状态和新任务加载证据分列；无目标文件不报已全局启用。",
+      "sourceEvidence": [
+        {
+          "path": "skills/rewrite-natural-prose/SKILL.md",
+          "heading": "Modes and state",
+          "sha256": "f414ff438f232a8a54337b860a9cc2bb4402d162a55ec268e9004ac9b55af365"
+        },
+        {
+          "path": "skills/rewrite-natural-prose/references/persistent-modes.md",
+          "heading": "Commands",
+          "sha256": "36730c53ac4f6ecbc062b994fbc698dc00379f6067f037a9e2487b9193a3bead"
+        }
+      ]
+    },
+    {
+      "id": "rewrite-scope-disable",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "723a11d3e8aabf02606cf44cf07e6e3b7af50f96e81ce49fbb13a20f819474ce",
+      "primarySkill": "rewrite-natural-prose",
+      "rationale": "仅删工作区受控区块，客户端和其他字节保留；目标根未给时仍需定位与预览，不能假称已关闭。",
+      "sourceEvidence": [
+        {
+          "path": "skills/rewrite-natural-prose/SKILL.md",
+          "heading": "Modes and state",
+          "sha256": "f414ff438f232a8a54337b860a9cc2bb4402d162a55ec268e9004ac9b55af365"
+        },
+        {
+          "path": "skills/rewrite-natural-prose/references/persistent-modes.md",
+          "heading": "Resolve a real target before preview",
+          "sha256": "36730c53ac4f6ecbc062b994fbc698dc00379f6067f037a9e2487b9193a3bead"
+        }
+      ]
+    },
+    {
+      "id": "quality-full-scan-inventory",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "a0fc1ca2798aa51dd7b117270c4f04394e559ead5143c60780fbb542483dfd87",
+      "primarySkill": "code-quality-workflow",
+      "rationale": "`full-scan/general` 纳入配置测试迁移锁文件并保存覆盖缺口，只读报告不冒充全仓已读。",
+      "sourceEvidence": [
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "heading": "State 2: SWEEP",
+          "sha256": "719a234fbac929bb9475544329652cef85fbce21c4b401f2fd307511c3fac6b7"
+        }
+      ]
+    },
+    {
+      "id": "quality-software-architecture",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "cc1cafad40afc7af48698f2114ebd0c6cb2ac539f202b4166d657de8e85b047d",
+      "primarySkill": "code-quality-workflow",
+      "rationale": "`architecture-hotspot-scan/architecture` 追入口、状态、依赖、API、生命周期，明确热点扫描非全量。",
+      "sourceEvidence": [
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "heading": "Review scope and focus",
+          "sha256": "719a234fbac929bb9475544329652cef85fbce21c4b401f2fd307511c3fac6b7"
+        },
+        {
+          "path": "skills/code-quality-workflow/references/architecture-review.md",
+          "heading": "Software",
+          "sha256": "319f74c9d8a7b721a8ded244edf080f948088ff92e6facb77bef080365c12c17"
+        }
+      ]
+    },
+    {
+      "id": "quality-card-architecture",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "e802d17f79a67db1fd7c9dfebc239a4461008d417d2ca14bb49fe5f7c2a387ed",
+      "primarySkill": "code-quality-workflow",
+      "rationale": "纯文字卡审人物/世界书/提示关系，不把缺 MVU 或前端判缺陷；新世界书技能细化方法，不改变质量审查 owner。",
+      "sourceEvidence": [
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "heading": "Review scope and focus",
+          "sha256": "719a234fbac929bb9475544329652cef85fbce21c4b401f2fd307511c3fac6b7"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/card-types-and-runtime-dependencies.md",
+          "heading": "2. Type and capability model",
+          "sha256": "27f0ce271fa5d362ad58484460d5cb1a3c6c6482f630b1fb2a71c8e38eadffd2"
+        },
+        {
+          "path": "skills/code-quality-workflow/references/architecture-review.md",
+          "heading": "Character cards",
+          "sha256": "319f74c9d8a7b721a8ded244edf080f948088ff92e6facb77bef080365c12c17"
+        }
+      ]
+    },
+    {
+      "id": "quality-mixed-full-architecture",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "7f67f659ddfe1a523415794ccbf6f75063f73838daeb71e3bb16b9b124551079",
+      "primarySkill": "code-quality-workflow",
+      "rationale": "混合卡与前端按 `full-scan/architecture` 跨状态/模型/UI 追链，未见材料的边待核，报告保覆盖及分阶段建议。",
+      "sourceEvidence": [
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "heading": "Review scope and focus",
+          "sha256": "719a234fbac929bb9475544329652cef85fbce21c4b401f2fd307511c3fac6b7"
+        },
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "heading": "Report contract",
+          "sha256": "719a234fbac929bb9475544329652cef85fbce21c4b401f2fd307511c3fac6b7"
+        }
+      ]
+    },
+    {
+      "id": "quality-coverage-merge-legacy",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "3136818fe035c8e4f0390e38a6cc8f64d6606e66ece91d01f86f167cce0a162f",
+      "primarySkill": "code-quality-workflow",
+      "rationale": "旧格式无 coverage 标未记录，精确行去重和同路径冲突并存，不从合并报告推断完整库存。",
+      "sourceEvidence": [
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "heading": "Report contract",
+          "sha256": "719a234fbac929bb9475544329652cef85fbce21c4b401f2fd307511c3fac6b7"
+        },
+        {
+          "path": "skills/code-quality-workflow/references/audit-and-sweep.md",
+          "heading": "Coverage extension (v1.4.0)",
+          "sha256": "82a099d16796efe190c97a958884715b679c3a18a96555da4749d45fb7830313"
+        }
+      ]
+    },
+    {
+      "id": "soul-killer-full-findings",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "17e51f50ccfcaa9ecc5b2fc7710be85fddb686e11e60fdd9b356028acb3aa224",
+      "primarySkill": "activate-tavernweave-soul",
+      "rationale": "Portable 人格只影响摘要语气，五条原始发现仍要完整呈现；未见证据不虚构已审缺陷。",
+      "sourceEvidence": [
+        {
+          "path": "skills/activate-tavernweave-soul/references/soul-killer-mode.md",
+          "heading": "Scope selection",
+          "sha256": "3cf803df2f086546e5166cae12b45ddba1c0b60149893b5d8155bb50c63f7572"
+        },
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "heading": "State 2: SWEEP",
+          "sha256": "719a234fbac929bb9475544329652cef85fbce21c4b401f2fd307511c3fac6b7"
+        },
+        {
+          "path": "skills/activate-tavernweave-soul/SKILL.md",
+          "heading": "Activate as Portable mode",
+          "sha256": "e6391ebb0864f871717d5ee6ac294df874fb47d3a630f9dc62cbe194151f0ec3"
+        }
+      ]
+    },
+    {
+      "id": "guidance-global-without-modes",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "b1608f27d96c92e47ab26cb59e686e1d099717360927047cec73a7f3fbdcb261",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "普通网页按已有设计/NEXT 解释首版和三层验收，没有启用人格、洗稿或猜挡位；缺项目文件才请求路径。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "heading": "脑暴流程",
+          "sha256": "c816a68b6c3047107eb5ae0da49b40cd6c1e9deb40b8468d095354fa665f5d68"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "heading": "设计确认门",
+          "sha256": "c816a68b6c3047107eb5ae0da49b40cd6c1e9deb40b8468d095354fa665f5d68"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "TW 大白话与用户引导",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        }
+      ]
+    },
+    {
+      "id": "guidance-contextual-terms",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "152e61cc91bb7ff592bce2f09af60bfc313bf89dc08dd78b298183253d2875e3",
+      "primarySkill": "consult-tavernweave-library",
+      "rationale": "XP/EXP/QR 按题中局部定义解释，API/Schema 用当前任务含义且未知调用随版本核验，不擅自把两种点数混同。",
+      "sourceEvidence": [
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "TW 大白话与用户引导",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        }
+      ]
+    },
+    {
+      "id": "guidance-novice-step",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "836c7f36110fb231f9b7089440a5fecdcd94e24fbb690e0fd9ea6da4a6d337b2",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "新人只做取当前开场与卡的第一步，说明在哪里拿、为什么、拿到后可见结果；不凭空写旧卡具体设定。",
+      "sourceEvidence": [
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "场景与输出组织",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/opening-strategies.md",
+          "heading": "1. Fixed greetings",
+          "sha256": "0f35a16c24ae0e9bde055ad96c784d918ea6afe1d3ca59d99aa341ca44c63b9d"
+        }
+      ]
+    },
+    {
+      "id": "guidance-entry-detailed",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "43ac16a495f02fdf46ccdc3b025d0c27a6c79072343dcb8059b61bf5444ac4ee",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "入门小阶段解释成长触发、唯一写入者、显示与旧聊天兼容；“叙事可用世界书条件文字”只是方案条件，实际条目设计会交 v4 新世界书技能。",
+      "sourceEvidence": [
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Start with the target",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "TW 大白话与用户引导",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/SKILL.md",
+          "heading": "Ownership and handoff",
+          "sha256": "6ed905414811ed2eac48a09f6cde8068ed6038d8aa428e2d1ada56e7ae93b3df"
+        }
+      ]
+    },
+    {
+      "id": "guidance-proficient-stage",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "98a47d0b1230ad239b38f0b1254b300a2b586bc2fb52b4e3e71a99f4ca170a9b",
+      "primarySkill": "sillytavern-embedded-ui",
+      "rationale": "熟练档按一阶段覆盖大图入口、焦点/键盘/重复挂载/清理和验证，缺源不报已加。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-embedded-ui/SKILL.md",
+          "heading": "Popups, drawers, and modals",
+          "sha256": "4708ea07ab4d0a934261e24723fe67c0a4ae3209bf9da205e0367d93bacb1a9a"
+        },
+        {
+          "path": "skills/sillytavern-embedded-ui/SKILL.md",
+          "heading": "Lifecycle and integration",
+          "sha256": "4708ea07ab4d0a934261e24723fe67c0a4ae3209bf9da205e0367d93bacb1a9a"
+        }
+      ]
+    },
+    {
+      "id": "guidance-veteran-routine",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "500e44858801d4576840bf2e684574b7d2696ab8f3276a73528ad39502409a93",
+      "primarySkill": "code-quality-workflow",
+      "rationale": "老手档压缩常规背景仍保静态与宿主边界；无 diff 不编文件名和通过数。",
+      "sourceEvidence": [
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "TW 大白话与用户引导",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        },
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "heading": "Report contract",
+          "sha256": "719a234fbac929bb9475544329652cef85fbce21c4b401f2fd307511c3fac6b7"
+        }
+      ]
+    },
+    {
+      "id": "guidance-bug-all-tiers",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "f08593a649ba9b7fb3f694766ade59ceb22f023d6bb5e6f187ed6dd4ea2ca406",
+      "primarySkill": "sillytavern-runtime-debug",
+      "rationale": "四档均明确实际/预期、仅有报错文字和多种假设，详细度按档组织且都保同环境复验。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-runtime-debug/SKILL.md",
+          "heading": "Reproduce before changing anything",
+          "sha256": "e29c10fc777ed1cd0bed4b010224d474164dca1b1c11d56f701ec79dcb29a79b"
+        },
+        {
+          "path": "skills/sillytavern-runtime-debug/SKILL.md",
+          "heading": "Diagnose by layer",
+          "sha256": "e29c10fc777ed1cd0bed4b010224d474164dca1b1c11d56f701ec79dcb29a79b"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "TW 大白话与用户引导",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        }
+      ]
+    },
+    {
+      "id": "guidance-scoped-explanation-waiver",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "4fcd85ebff709d9e845e144d86bee427108c18fe69cf6b55dfb35ea79f739082",
+      "primarySkill": "sillytavern-runtime-debug",
+      "rationale": "免解释仅限前一故障，新 bug 恢复原因、影响、复验说明；老手档未被改写。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-runtime-debug/SKILL.md",
+          "heading": "Reproduce before changing anything",
+          "sha256": "e29c10fc777ed1cd0bed4b010224d474164dca1b1c11d56f701ec79dcb29a79b"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "TW 大白话与用户引导",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        }
+      ]
+    },
+    {
+      "id": "guidance-explicit-client-preference",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "82e85ac43fb18990a26cc866f7c88004e9ac0339f7cc04be789465fdcb4f2c77",
+      "primarySkill": "consult-tavernweave-library",
+      "rationale": "已获准的具体预览可直接用令牌保存并回读，不重复索授权；本回放缺令牌/路径所以不虚构永久保存。",
+      "sourceEvidence": [
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "挡位的选择和保存",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        }
+      ]
+    },
+    {
+      "id": "guidance-inherited-png-continuation",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "5c64a030f44da17de6e716c23d9756f5a67d11aafa1d1362e6cb9ab22858c2ae",
+      "primarySkill": "tavern-card-builder",
+      "rationale": "PNG 只视发行载体，先解包理解原卡，原作续更和旧聊兼容分门，首改在副本上；符合 v4 沿用既有决策与必要询问。",
+      "sourceEvidence": [
+        {
+          "path": "skills/tavern-card-builder/SKILL.md",
+          "heading": "Start with the target",
+          "sha256": "d4140efc97e3273fe79833d0e2b150ef91b11f069150a1f8facfe480637e8a66"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/retrofit-and-text-cards.md",
+          "heading": "5. Inherited cards: continuation and derivative work",
+          "sha256": "5d7ebccf09084ca254c517d14fa9537cdd9a41ae0680ec06e8f02d4641df977b"
+        }
+      ]
+    },
+    {
+      "id": "guidance-first-success-second-change",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "f3ed7645a9086ffd276585465a5e7c84e8b789ff58e62e594360ce9b0156f8ce",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "承认用户已试用按钮，下一轮只改位置并从同入口复测点击、键盘和窄屏；位置选择会影响结果，因此问目标区域合理。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "heading": "按蓝图执行",
+          "sha256": "c816a68b6c3047107eb5ae0da49b40cd6c1e9deb40b8468d095354fa665f5d68"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "场景与输出组织",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        }
+      ]
+    },
+    {
+      "id": "guidance-upgrade-preserves-choice",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "3c4dcae80c6f09bf1234f7319c8e219702d754b3dded9030a9c21e48ce594800",
+      "primarySkill": "consult-tavernweave-library",
+      "rationale": "已授权隔离升级的保存挡位、自写规则与重复安装校验独立于新任务宿主加载，v4 A0 不要求再次确认已授权操作。",
+      "sourceEvidence": [
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "heading": "挡位的选择和保存",
+          "sha256": "e9eaa6b44868e11fd6ddfe43e9f8373f74a476f7b3d9bb59b1ba31ce4bd7d8a4"
+        }
+      ]
+    },
+    {
+      "id": "work-library-novel",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "a0cb2deba8233a15f13ceaa3dd4c7d8e2ccb37c4a611ec63c04bc5782272d9ce",
+      "primarySkill": "build-work-library",
+      "rationale": "小说先代表样本和来源/Token 实测口径，再逐批 Markdown→JSONL；当前 v4 的世界书作者技能不取代原始材料成库。",
+      "sourceEvidence": [
+        {
+          "path": "skills/build-work-library/SKILL.md",
+          "heading": "从当前用途进入",
+          "sha256": "31658508b738408e15ac3961085c83922fcd9b8b694fda2ae812c4121e35c323"
+        },
+        {
+          "path": "skills/build-work-library/references/batching-and-routing.md",
+          "heading": "先把采样做成真实证据",
+          "sha256": "3d0a21e4cfd7c5ff7d29907a6b4283c3292fe2d9b29f434e2cc6cdec6ad0120d"
+        }
+      ]
+    },
+    {
+      "id": "work-library-fanwork",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "141329e4973fb2a3c2cb4194c9c35324df762f3f0fd0ce233d9fabf478bb5a99",
+      "primarySkill": "build-work-library",
+      "rationale": "canon/fanon、continuity/edition 与证据确定性分别标，冲突并列；没底本时不虚构库。",
+      "sourceEvidence": [
+        {
+          "path": "skills/build-work-library/SKILL.md",
+          "heading": "来源、结论与二创分开",
+          "sha256": "31658508b738408e15ac3961085c83922fcd9b8b694fda2ae812c4121e35c323"
+        }
+      ]
+    },
+    {
+      "id": "work-library-web",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "29ba27e80abaa4d409d4e83dc3307a8899617f951c12b00ffc96dd581eb4476a",
+      "primarySkill": "build-work-library",
+      "rationale": "作品未指定时先索要最小定位，实际开官方页才记短引、时间和哈希；搜索摘要不当原始来源。",
+      "sourceEvidence": [
+        {
+          "path": "skills/build-work-library/SKILL.md",
+          "heading": "来源、结论与二创分开",
+          "sha256": "31658508b738408e15ac3961085c83922fcd9b8b694fda2ae812c4121e35c323"
+        },
+        {
+          "path": "skills/build-work-library/references/research-and-media.md",
+          "heading": "文字来源登记",
+          "sha256": "75e85a2e871f777924a05ecdcbeff03dd4ce1fa8cf5551ce7b0a93b658e3134e"
+        }
+      ]
+    },
+    {
+      "id": "work-library-image",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "27795841945d7be45da42e29c4a39e4a8a1ce59a9f54224893e1d093dd3da7a6",
+      "primarySkill": "build-work-library",
+      "rationale": "视觉结论建立在实际打开原图之后，候选与授权下载/入库分开；许可未知不冒称可发行。",
+      "sourceEvidence": [
+        {
+          "path": "skills/build-work-library/SKILL.md",
+          "heading": "来源、结论与二创分开",
+          "sha256": "31658508b738408e15ac3961085c83922fcd9b8b694fda2ae812c4121e35c323"
+        },
+        {
+          "path": "skills/build-work-library/references/research-and-media.md",
+          "heading": "图片资料",
+          "sha256": "75e85a2e871f777924a05ecdcbeff03dd4ce1fa8cf5551ce7b0a93b658e3134e"
+        }
+      ]
+    },
+    {
+      "id": "work-library-creator-pack",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "8e12cfd52ce46d38b6516723dc91300bf01c730d468f1431c9531bb7d2b58949",
+      "primarySkill": "build-work-library",
+      "rationale": "只用开局阶段可知条目，保 ID/版本/来源，新钩子另标创作；资料库仍是上游 owner。",
+      "sourceEvidence": [
+        {
+          "path": "skills/build-work-library/SKILL.md",
+          "heading": "人工编辑、检索与交付",
+          "sha256": "31658508b738408e15ac3961085c83922fcd9b8b694fda2ae812c4121e35c323"
+        }
+      ]
+    },
+    {
+      "id": "work-library-handoff",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "283577725f9cea8c9fafdc3b6aadca6ec9f77d514da5ced5c499e3b621c42c7d",
+      "primarySkill": "build-work-library",
+      "rationale": "人工改 Markdown 后按当前字节重建日志/索引，旧 base 哈希冲突不覆盖；导出不冒充模型调用。",
+      "sourceEvidence": [
+        {
+          "path": "skills/build-work-library/SKILL.md",
+          "heading": "人工编辑、检索与交付",
+          "sha256": "31658508b738408e15ac3961085c83922fcd9b8b694fda2ae812c4121e35c323"
+        },
+        {
+          "path": "skills/build-work-library/references/batching-and-routing.md",
+          "heading": "批次循环与停止条件",
+          "sha256": "3d0a21e4cfd7c5ff7d29907a6b4283c3292fe2d9b29f434e2cc6cdec6ad0120d"
+        },
+        {
+          "path": "skills/build-work-library/references/data-and-commands.md",
+          "heading": "重建、检索与导出",
+          "sha256": "e1d7fe38b18c40d11ee8f23c7bed3587a27dff056bf18b531cb1c718bec45d17"
+        }
+      ]
+    },
+    {
+      "id": "frontend-sandbox-single",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "055e0c61a00b126e8fed5628418703fba80f6f62712d14b2900bac32c06ed04d",
+      "primarySkill": "sillytavern-embedded-ui",
+      "rationale": "要求真实源码与三层 iframe/变量桥，注入前预览确认、回读并保留 ST 门；与 v4 新开场前端可用载体的原则一致。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-embedded-ui/SKILL.md",
+          "heading": "Optional frontend sandbox before packaging",
+          "sha256": "4708ea07ab4d0a934261e24723fe67c0a4ae3209bf9da205e0367d93bacb1a9a"
+        },
+        {
+          "path": "skills/sillytavern-embedded-ui/references/sandbox-workflow.md",
+          "heading": "一轮打磨",
+          "sha256": "89db7effc64409e8d92abe8c730a79ce8b6dd76bfb7731227583bb8acc1a57c9"
+        }
+      ]
+    },
+    {
+      "id": "frontend-sandbox-joint",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "bbfd9cda5960d6129b3b6f8ff8e0c191991595d60f08ba10a1545289e557421f",
+      "primarySkill": "sillytavern-embedded-ui",
+      "rationale": "HUD/手机/控制中心装真实源，共享状态事件并公开未接入缺口，滑条参数回落维护源后复测；不是截图重画的假沙盒。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-embedded-ui/references/sandbox-workflow.md",
+          "heading": "全量范围与能力缺口",
+          "sha256": "89db7effc64409e8d92abe8c730a79ce8b6dd76bfb7731227583bb8acc1a57c9"
+        },
+        {
+          "path": "skills/sillytavern-embedded-ui/references/sandbox-workflow.md",
+          "heading": "手动调参、基线与结果回落",
+          "sha256": "89db7effc64409e8d92abe8c730a79ce8b6dd76bfb7731227583bb8acc1a57c9"
+        }
+      ]
+    },
+    {
+      "id": "frontend-sandbox-skip",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "066f779f9f47acd353fbe38c90471c61c58b68313848cb33395c07f285bf1d01",
+      "primarySkill": "sillytavern-embedded-ui",
+      "rationale": "复用跳过可选沙盒决定而不判失败，继续源码构建与真实 ST 验证；无续接不报具体版本。",
+      "sourceEvidence": [
+        {
+          "path": "skills/sillytavern-embedded-ui/SKILL.md",
+          "heading": "Optional frontend sandbox before packaging",
+          "sha256": "4708ea07ab4d0a934261e24723fe67c0a4ae3209bf9da205e0367d93bacb1a9a"
+        }
+      ]
+    },
+    {
+      "id": "project-board-evidence-percentages",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "fbe0fc8e05af4a0f1f2ea9133994cc1e2ccd00bcb0d7599b84b411a1ccbf5a4b",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "从设计/NEXT 已确认范围建分母，实现与验收分开、证据变化暂停旧百分比；新世界书路由不影响进度权威。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "heading": "项目进度画板",
+          "sha256": "c816a68b6c3047107eb5ae0da49b40cd6c1e9deb40b8468d095354fa665f5d68"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/progress-board.md",
+          "heading": "`progress.json`：只投影已确认的范围",
+          "sha256": "94fefcaa2b0e63a83272bf3185d0dde3702e73c5d3547425a44fcf420fa48d93"
+        }
+      ]
+    },
+    {
+      "id": "project-board-persisted-feedback",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "1aab24ffb59b981d9a4c1b9193ed24eb79b9bd9fe2775066be1ffa7f50d55174",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "两标签用 revision 与 source hash 控并发，冲突保草稿，回读项目文件；静态草稿不称持久保存。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/references/progress-board.md",
+          "heading": "`feedback.json`：想法、Bug 与审核原话",
+          "sha256": "94fefcaa2b0e63a83272bf3185d0dde3702e73c5d3547425a44fcf420fa48d93"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/progress-board.md",
+          "heading": "写入、冲突与读回",
+          "sha256": "94fefcaa2b0e63a83272bf3185d0dde3702e73c5d3547425a44fcf420fa48d93"
+        }
+      ]
+    },
+    {
+      "id": "project-board-blocking-bug-retest",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "c9c2f397f23a2ae2d1e3776c7d7df216f398109a394e21ee866f284176e36b82",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "已实现证据保留但验收回待复测，修后须 resolution/verification/现存证据才关单，反馈原话不升格驾驶员验收。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/references/progress-board.md",
+          "heading": "`feedback.json`：想法、Bug 与审核原话",
+          "sha256": "94fefcaa2b0e63a83272bf3185d0dde3702e73c5d3547425a44fcf420fa48d93"
+        }
+      ]
+    },
+    {
+      "id": "project-board-design-next-sync",
+      "pass": true,
+      "status": "compatible",
+      "priorResponseFile": "tests/replay/runs/2026-10-13-twx-190-rc2/responses.json",
+      "priorResponseSha256": "3d54cdcd4ff57964ffd254060424331ae27a7c0c301ec238d76102e34934c78c",
+      "primarySkill": "orchestrate-project-blueprint",
+      "rationale": "总设计定范围、NEXT 定现状，source-plan 绑定 revision/文件哈希再同步投影，保自动/宿主/驾驶员不同门；无文件时不编百分比。",
+      "sourceEvidence": [
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "heading": "项目进度画板",
+          "sha256": "c816a68b6c3047107eb5ae0da49b40cd6c1e9deb40b8468d095354fa665f5d68"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/progress-board.md",
+          "heading": "双来源同步：总设计案定范围，NEXT 记现状",
+          "sha256": "94fefcaa2b0e63a83272bf3185d0dde3702e73c5d3547425a44fcf420fa48d93"
+        }
+      ]
+    }
+  ]
+}

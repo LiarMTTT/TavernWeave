@@ -8,6 +8,7 @@
 4. Examples and plot guidance
 5. CoT and narrative boundary
 6. Prompt economy
+7. Accurate titles and release descriptions
 
 ## 1. Identity fields
 
@@ -119,6 +120,11 @@ variable rules.
 
 Choice menus are optional. Choose complete sendable sentences or atmospheric fragments based on the product experience; do not impose one house style on every card.
 
+For non-character mechanics, maps and optional event planning, use
+[world-mechanics-and-scenarios.md](world-mechanics-and-scenarios.md). Its example connects
+world causes to action costs and directed travel without making a planned event happen
+merely because its outline is present.
+
 ## 5. CoT and narrative boundary
 
 Custom CoT is an author-written decision protocol. Card prose supplies identity,
@@ -148,3 +154,28 @@ rule belongs in the preset, card increment, conditional worldbook, or final pros
 - Avoid Markdown decoration that consumes tokens without adding structure for the target parser.
 - Audit repeated rules across card fields, custom CoT, lorebook, preset, variable
   prompts, and scripts.
+
+## 7. Accurate titles and release descriptions
+
+When the user asks for a title, introduction or release copy, start from the current
+artifact and its acceptance evidence. Connect each experience claim to something a
+player can actually use. Identify the playable boundary and any required runtime
+dependency that changes how the player can start. A planned feature stays labelled
+planned; an unverified capability cannot become a tested selling point.
+
+An optional structure is title → actual playable experience → relevant tags and
+important requirements. Reuse a format the destination requires, but do not impose a
+minimum number of titles, tags or characters. Tags describe present content; they are
+not promises of a larger world or additional mechanics. Keep material limitations
+visible without burying the introduction in author-only test history.
+
+For the invented crossing example, suppose source and actual play evidence support
+the crossing choices, while an interactive map has only been proposed. Suitable copy:
+“石渡：岚河涨水，旧桥封了。乘船去北港要用一张船票，沿青岑高地绕行要多花时间；你也可以先停在南岸。
+标签：文字探索、路线选择。” Do not advertise an interactive map, automatic save rollback,
+an open-world campaign or a completed live test from that evidence. If only the design
+exists, describe it as a design preview instead of a playable release.
+
+Review title, introduction and tags against the same delivered version. Drafting
+release copy does not publish, upload or install anything; those actions retain their
+existing authorization and delivery gates.

@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "1.9.1",
-  "description": "TavernWeaveX无限月读 1.9.1: 22 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs across supported hosts.",
+  "version": "2.0.0",
+  "description": "TavernWeaveX无限月读 2.0.0: 23 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs across supported hosts.",
   "author": {
     "name": "LiarMTTT"
   },
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "TavernWeaveX无限月读",
     "shortDescription": "角色卡与软件制作，支持云端任务续接",
-    "longDescription": "TavernWeaveX无限月读 1.9.1 provides 22 skills for rolecards and software projects. The same plugin serves local hosts and cloud task workflows, including dots where supported. It checks available files, tools and permissions before work, records bounded milestones in the existing project handoff, and verifies evidence before resuming. Cloud scheduling, runtimes, storage and plugin availability are supplied by the host. Local global-instruction setup is optional and is not a cloud prerequisite. Rolecard architecture, worldbooks, variables, frontend design, source-backed libraries and natural expression share the existing TavernWeave workflow. Real SillyTavern and device acceptance remain separate from source and package checks.",
+    "longDescription": "TavernWeaveX无限月读 2.0.0 provides 23 skills for rolecards and software projects. The same plugin serves local hosts and cloud task workflows, including dots where supported. It checks available files, tools and permissions before work, records bounded milestones in the existing project handoff, and verifies evidence before resuming. Cloud scheduling, runtimes, storage and plugin availability are supplied by the host. Local global-instruction setup is optional and is not a cloud prerequisite. Rolecard architecture, worldbooks, variables, frontend design, source-backed libraries and natural expression share the existing TavernWeave workflow. Real SillyTavern and device acceptance remain separate from source and package checks.",
     "developerName": "LiarMTTT",
     "category": "Developer Tools",
     "capabilities": [

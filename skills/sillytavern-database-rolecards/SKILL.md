@@ -40,6 +40,11 @@ Read [rolecard-data-model.md](references/rolecard-data-model.md) before defining
 or migrations. Read [floor-and-ui-binding.md](references/floor-and-ui-binding.md)
 before connecting a field to a script, prompt, status bar, or control center.
 
+For worldbook consumers, use [target and state completeness](references/worldbook-target-state-contract.md)
+to trace typed aliases, stable targets and initialization sentinels through the existing
+field ledger, including the scopes used by writers, readers and consumers. It does
+not introduce a second schema.
+
 When exact runtime calls matter, verify `getVariables`, `updateVariablesWith`,
 `Mvu.getMvuData`, MVU events, and message events with
 `$sillytavern-api-reference`. Prefer updater functions and event-driven refresh over

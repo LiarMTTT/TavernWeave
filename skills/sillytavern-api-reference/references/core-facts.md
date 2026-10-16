@@ -53,7 +53,7 @@ them universal guarantees.
 4. Obtain exact parameter shapes, callback payloads, event values, and command syntax from that authority. Do not derive them from this index.
 5. Record a public URL and revision for source-backed facts, or identify the installed file/help output used for runtime-backed facts.
 6. Add a capability check and a clear failure path for optional integrations.
-7. Close behavior in a real runtime; static source or declarations alone cannot establish timing, persistence, or iframe exposure.
+7. Verify behavior in the real runtime; static source or declarations alone cannot establish timing, persistence, or iframe exposure.
 
 ## Compact symbol map
 

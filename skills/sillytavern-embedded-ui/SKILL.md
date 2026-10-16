@@ -23,13 +23,13 @@ Apply the shared [frontend design quality standard](../consult-tavernweave-libra
 
 Build the smallest maintainable interface that fits the rolecard's actual lifecycle. Use semantic HTML, CSS, and JavaScript as the portable baseline. Adopt a framework only when the existing project already uses it or the interaction complexity clearly justifies it.
 
-Develop the proposal rather than requiring the author to fill a technical questionnaire. One coherent design is enough; do not manufacture choices or reopen approved decisions. Continue authorized work, asking only about an unresolved material choice. Optional worksheets record the Agent's work and may be replaced by equivalent project records.
+Develop the proposal yourself instead of requiring the author to fill out a technical questionnaire. One coherent design is enough; do not manufacture choices or reopen approved decisions. Continue authorized work, asking only about an unresolved material choice. Optional worksheets record the Agent's work and may be replaced by equivalent project records.
 
 ## Own the implementation boundary
 
-Own embedded-UI design, source implementation or review, supporting validation, and the acceptance criteria handed to runtime testing. Do not operate a live SillyTavern session or claim runtime acceptance under this skill.
+This skill covers embedded-UI design, source implementation or review, supporting validation, and the acceptance criteria handed to runtime testing. Do not operate a live SillyTavern session or claim runtime acceptance under this skill.
 
-When behavior must be reproduced or accepted in the target runtime, hand the exact built artifact and the relevant checklist to `sillytavern-runtime-debug`. If that runtime pass finds a UI source defect, resume implementation here, rebuild, and return the new artifact revision for runtime closure.
+When behavior must be reproduced or accepted in the target runtime, hand the exact built artifact and the relevant checklist to `sillytavern-runtime-debug`. If that runtime pass finds a UI source defect, resume implementation here, rebuild, and return the new artifact revision to complete runtime acceptance.
 
 ## Identify the surface
 
@@ -38,7 +38,7 @@ Choose the surface before designing components:
 | Surface | Primary job | Lifecycle |
 | --- | --- | --- |
 | Message content page | Present message-derived content such as a letter, journal or forum | Follows the intended message and its rendering lifecycle |
-| Opening page | Configure one opening and submit a real player message | Ends after successful opening commit |
+| Opening page | Present the greeting or support opening selection/setup | Follows the greeting; a setup wizard ends after its successful commit |
 | Status bar / HUD | Show frequently read game state near messages | Recreated or refreshed with message/runtime lifecycle |
 | Control center | Manage settings, packages, world data, and advanced actions | Usually long-lived and singleton |
 | Popup / drawer / modal | Focus one detail or decision without losing surrounding state | Temporary, with explicit open and close behavior |
@@ -155,8 +155,17 @@ Use synthetic mechanism examples in public documentation. Keep private card sour
 
 Treat `first_mes` as a real assistant message that participates in context, swipes, edits, branches, export, macros, regexes, and rendering.
 
-- Prefer native `first_mes` and `alternate_greetings` for a few fixed openings.
-- For a custom wizard, keep the visible mount small and keep large UI markup out of model context.
+A page may itself fulfill the greeting's presentation role under the builder's
+[opening contract](../tavern-card-builder/references/opening-strategies.md#3-custom-opening-pages).
+For a fixed scene or choice page, check its content and entry into play. Rendering
+the page does not by itself authorize a state write or message send. Preserve the
+usable `first_mes` or selected `alternate_greetings` path and verify what reaches
+the model separately from what is rendered for the player.
+
+Prefer native greeting branches for a few fixed openings. Apply the following
+transaction rules when implementing a custom setup wizard:
+
+- Keep the visible mount small and keep large UI markup out of model context.
 - Isolate drafts by stable chat identity; validate and migrate stored drafts.
 - Make preview read-only. Show the final player message and every persistent effect.
 - Freeze the chat/draft context at confirmation and recheck it before writes and send.
@@ -230,7 +239,14 @@ Select the relevant runtime cases and include them in the handoff:
 
 For message content pages, select protocol cases from [message content pages](references/message-content-ui.md), including preserved surrounding prose and incomplete content where applicable. For MVU displays, select field and collection cases from [MVU status-bar design](references/mvu-statusbar-design.md), including read-only refresh. Regex fixtures alone do not establish parser or visual behavior. Keep these checks within the actual change instead of creating an unrelated demo application.
 
-For an opening page, request this end-to-end runtime gate: open page, edit draft, refresh and restore, preview, confirm, create a real user message, receive a real assistant message, and observe the intended variable initialization. For a HUD or control center, request swipe/edit/chat-switch lifecycle checks and actual computed-style inspection.
+For a frontend greeting, verify its actual message/branch carrier, visible content,
+entry into play and model-visible information. Select interaction cases for the
+controls it actually provides. A custom setup wizard additionally needs draft
+editing, refresh/restore, preview, confirmation, a real player message and a real
+assistant reply without duplicate submission. Verify variable initialization when
+the adopted state system requires it.
+For a HUD or control center, request swipe/edit/chat-switch lifecycle checks and
+actual computed-style inspection.
 
 ## Deliverable
 

@@ -1,6 +1,6 @@
 ---
 name: orchestrate-project-blueprint
-description: Turn a vague product, character-card, frontend, or Vibe Coding wish into a bounded total design, first-playable contract, scale-appropriate blueprint, resumable NEXT handoff, and evidence-gated first implementation. Use when the user says 脑暴模式, asks to 梳理构思/总设计案/蓝图/子蓝图/第一版, wants one-command project kickoff, wants a project progress board with evidence-based percentages and feedback, or needs to stop a long task from recursively expanding. It may convene the TavernWeave Soul trio for labeled critique. Do not use it to bypass repository instructions, driver approval, real-host acceptance, or a focused implementation skill.
+description: "Turn a vague product, character-card, frontend, or Vibe Coding wish into a bounded total design, first-playable contract, scale-appropriate blueprint, resumable NEXT handoff, and evidence-gated first implementation. Use when the user says 脑暴模式, asks to 梳理构思/总设计案/蓝图/子蓝图/第一版, wants one-command project kickoff, wants a project progress board with evidence-based percentages and feedback, or needs to stop a long task from recursively expanding. Also use for 提示词规格/从样例归纳提示词: turn requirements or output examples into a scoped prompt contract with unseen-input checks. It may convene the TavernWeave Soul trio for labeled critique. Do not use it to bypass repository instructions, driver approval, real-host acceptance, or a focused implementation skill."
 ---
 
 # 脑暴模式 · 许愿工坊
@@ -17,11 +17,15 @@ Apply [TW plain-language and guidance rules](../consult-tavernweave-library/refe
 When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
-把“我想要一个东西”收束为可恢复、可验收、不会在执行中无限长大的项目权威链。它不是一句话盲跑器；它把一句愿望变成最短的可靠闭环。
+帮用户把想法整理成能实施的设计，定好第一版做什么、怎样验收，以及下次从哪里继续。先理清范围再执行，避免项目边做边扩大；一句愿望也可以从这里开始。
 
 用户可以直接说愿望，不必先说“脑暴模式”。从零创作时先帮其形成可试用的小成果；完全没想法时给一两个贴合兴趣的小例子。接手角色卡二创/续更先交给 `tavern-card-builder` 看懂原卡；熟悉作品的增改先续接原决定；故障按实际现象交给相关能力。普通问答不强制进入完整引导；完整引导需要用户选择挡位，但暂未选择也不能自动归档或阻止有用的帮助。
 
-开始任何写入前，先读取仓库 `AGENTS.md`、`NEXT.md`、现有总设计案、蓝图和 Git 状态。若项目会写文件，再通过 `$consult-tavernweave-library` 路由 A0 与最小资料包；角色卡创作继续交给 `$tavern-card-builder`，本 Skill 只拥有项目级收束和执行编排。
+开始任何写入前，先读取仓库 `AGENTS.md`、`NEXT.md`、现有总设计案、蓝图和 Git 状态。若项目会写文件，再通过 `$consult-tavernweave-library` 查找并阅读 A0 与本任务所需资料。角色卡创作交给 `$tavern-card-builder`；本 Skill 负责确定项目范围、组织设计与执行顺序。
+
+## 局部提示规格与样例归纳
+
+用户要把需求写成提示词、从样例归纳规则或检查输出要求时，读 [prompt-spec-contract.md](references/prompt-spec-contract.md) 中相关部分，直接给出本次规格、正文和适用的验证。无需为此启动 Soul、完整脑暴或新建项目权威文件。已有项目沿原决定更新；资料证据交给 `$build-work-library`，文辞精修交给 `$rewrite-natural-prose`。样例只能支持候选规则，不能证明找回了原作者提示，也不能保证复现。
 
 ## 识别直接触发
 
@@ -44,11 +48,11 @@ node scripts/resolve-brainstorm-command.mjs "脑暴模式，Soul 联席"
 
 先判断这是新项目、续接项目，还是老作品重置。续接时以现有权威文件和已验收事实为准；不得另造一套平行总设计案。老作品只作为候选复用源，先问用户是否有稳定作品或组件可供检查。
 
-读取 [brainstorm-protocol.md](references/brainstorm-protocol.md)，每轮只推进一个相邻方向，优先提出 1–2 个真正会改变产物的必要决策，三席合计最多 4 个。允许用户说“不知道，你推荐”，并解释推荐的结果与取舍。每个方向都有讨论上限，达到上限必须冻结、停车、换方向，或由用户明确追加一轮。
+先用共享[主动厘清需求](../consult-tavernweave-library/references/communication-and-guidance.md#主动厘清需求)识别结果、硬限制和候选手段，再读 [brainstorm-protocol.md](references/brainstorm-protocol.md)，把已确认结果和暂定假设接回原四态决定。每轮只推进一个相邻方向；需要提问时优先 1–2 个真正会改变产物的必要决策，三席合计最多 4 个，这是上限而非配额。允许用户说“不知道，你推荐”，并解释推荐的结果与取舍。每个方向都有讨论上限，达到上限必须冻结、停车、换方向，或由用户明确追加一轮。
 
 ### 2. 选项目类型和承载面
 
-先区分角色卡、独立前端、同层前端、嵌入式界面、通用 Vibe Code 或混合项目。前端形态不是奖励：按 [frontend-fit.md](references/frontend-fit.md) 输出推荐形态、适配等级、理由、降级方案和重新开启条件。
+先区分角色卡、独立前端、同层前端、嵌入式界面、通用 Vibe Code 或混合项目。按项目需要选择前端形态，再用 [frontend-fit.md](references/frontend-fit.md) 写明推荐形态、适配等级、理由、降级方案和重新评估条件。
 
 若同层或独立前端不适合，明确劝用户不要强上。用户坚持时记录 `driverOverride: true`、风险和原型/真机门；这不会把“不推荐”改写成“推荐”，也不会免除验收。
 
@@ -122,6 +126,9 @@ node scripts/validate-project-authority.mjs <project-root>/.tavernweave/project-
 ## 路由实施能力
 
 - 角色卡总创作：`$tavern-card-builder`；
+- 独立世界书规划、正文或原生/模板/局部混合选择：`$worldbook-design-and-writing`；
+- 涉及酒馆运行依赖且当前上下文尚未理清时，按需读[共享运行基础](../consult-tavernweave-library/references/sillytavern-runtime-foundations.md)，先纯文字回合，再接所选扩展；已有完整上下文不重复读，无关项目不加载；
+- 世界因果如何变成玩法、有向通行与可选事件：按需读 [world-mechanics-and-scenarios.md](../tavern-card-builder/references/world-mechanics-and-scenarios.md)，不另建事件调度器；
 - 精确 ST/酒馆助手/MVU API：`$sillytavern-api-reference`；
 - 同层/嵌入式前端：`$sillytavern-embedded-ui`；
 - 通用前端设计与实现：按 Library 设计路由选择 UI Skill 和资料；
@@ -129,7 +136,7 @@ node scripts/validate-project-authority.mjs <project-root>/.tavernweave/project-
 - 拆分、组装、测试、发布：分别交给对应 TavernWeave 专职 Skill；
 - 真机行为：`$sillytavern-runtime-debug` 或目标宿主的真实运行门。
 
-本 Skill 负责让它们沿同一权威链工作，不吞并专业能力。
+各专项能力沿用同一份项目决定；本 Skill 负责组织交接。
 
 ## 交付格式
 

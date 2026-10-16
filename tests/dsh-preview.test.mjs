@@ -31,8 +31,9 @@ test("TW Lite candidates add Skills without broad tool surfaces", () => {
   }
 });
 
-test("Full catalog tracks 22 Skills while Entry remains a degraded four-Skill experiment", () => {
-  assert.equal(contract.twLite.variants.full.skillCatalogCount, 22);
+test("Full catalog tracks the source Skills while Entry remains a degraded four-Skill experiment", () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, "tavernweave-install-manifest.json"), "utf8"));
+  assert.equal(contract.twLite.variants.full.skillCatalogCount, manifest.skillCount);
   assert.match(full, /reflect-on-vibe-code-growth/u);
   assert.doesNotMatch(entry, /reflect-on-vibe-code-growth/u);
   assert.deepEqual(contract.twLite.variants.entry.skillNames, ["activate-tavernweave-soul", "consult-tavernweave-library", "orchestrate-project-blueprint", "tavern-card-builder"]);

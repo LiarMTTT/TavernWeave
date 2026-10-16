@@ -1,6 +1,6 @@
 # Soul 三席联席 mode
 
-联席模式服务于 `$orchestrate-project-blueprint` 的脑暴轮。它把同一上下文切成三个有分工的镜头，不模拟三个独立 Agent。
+联席模式服务于 `$orchestrate-project-blueprint` 的脑暴轮。它从三个分工明确的角度讨论同一上下文，不模拟三个独立 Agent。
 
 ## 席位
 

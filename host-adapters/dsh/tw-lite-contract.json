@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "adapterVersion": "1.9.1",
+  "adapterVersion": "2.0.0",
   "status": "offline-candidate",
   "supportLevel": "developer-preview",
   "runtimeAccepted": false,
@@ -53,7 +53,7 @@
     "variants": {
       "full": {
         "preset": "tw-lite-full/agent.cordis.yml",
-        "skillCatalogCount": 22,
+        "skillCatalogCount": 23,
         "installFromManifest": true
       },
       "entry": {

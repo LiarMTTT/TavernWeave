@@ -4,7 +4,8 @@
   "standingGuide": "ST-A0",
   "routes": [
     {"id":"build-work-library","terms":["作品资料库","小说转资料库","小说转数据库","同人资料","同人内容转","联网收集文图","二创资料库","二创资料包"],"guides":[],"domains":[]},
-    {"id":"tavern-card-builder","terms":["制卡","角色卡","世界书","世界观","世界书配置","知晓程度","纯文字卡","mvu zod","mvuzod","hybrid","开场白","初始变量","更新规则","设定","开局","mvu","变量","提示词","预设","接手","二创","续更","继续更新原卡","人物创作","人物性情","人物生境","人设设计","设计人设","人设构思","人设诊断","人设实测","人设纠偏","人设修改","修改人设","调整人设","多阶段人设","写人设","整理人设","人设写法","检查人设","人设分析","一个人设","一份人设","创建人设","撰写人设","玩家资料","玩家角色","允许代演","代演边界","有限代演","委托代演","代演玩家","代演范围","代演权限","代写玩家","不要代演","人物纠偏","角色纠偏","轻量npc","npc设计","character design","player persona","character stages","portrayal diagnosis","酒馆卡","剧情事件","卡内事件","卡内道具","卡内场景","文风约定","卡内规则","卡内创作限制"],"guides":["ST-A2","ST-A3","ST-A4","ST-A6","ST-B1","ST-C10"],"domains":[]},
+    {"id":"tavern-card-builder","terms":["制卡","角色卡","世界观","知晓程度","纯文字卡","mvu zod","mvuzod","hybrid","开场白","初始变量","更新规则","设定","开局","mvu","变量","提示词","预设","接手","二创","续更","继续更新原卡","人物创作","人物性情","人物生境","人设设计","设计人设","人设构思","人设诊断","人设实测","人设纠偏","人设修改","修改人设","调整人设","多阶段人设","写人设","整理人设","人设写法","检查人设","人设分析","一个人设","一份人设","创建人设","撰写人设","玩家资料","玩家角色","允许代演","代演边界","有限代演","委托代演","代演玩家","代演范围","代演权限","代写玩家","不要代演","人物纠偏","角色纠偏","轻量npc","npc设计","character design","player persona","character stages","portrayal diagnosis","酒馆卡","剧情事件","卡内事件","卡内道具","卡内场景","文风约定","卡内规则","卡内创作限制"],"guides":["ST-A2","ST-A3","ST-A4","ST-A6","ST-B1","ST-C10"],"domains":[]},
+    {"id":"worldbook-design-and-writing","terms":["世界书","worldbook","lorebook","条目触发","条目拆分","条目合并","混合触发","条目正文"],"guides":["ST-A3","ST-A4"],"domains":[]},
     {"id":"sillytavern-card-components","terms":["拆卡","组件","registry","recipe"],"guides":["ST-A2","ST-A6"],"domains":[]},
     {"id":"sillytavern-component-update","terms":["组件更新","正则更新","脚本更新"],"guides":["ST-A2","ST-A6","ST-B2"],"domains":[]},
     {"id":"sillytavern-render-regex-pipeline","terms":["正则","渲染管线","宏"],"guides":["ST-A5","ST-A6"],"domains":[]},
@@ -22,7 +23,7 @@
     {"id":"rolecard-workshop-ops","terms":["工坊","发布链","网关","存储","502"],"guides":["ST-D1","ST-D4","ST-E5"],"domains":[]},
     {"id":"consult-tavernweave-library","terms":["资料库","指南","设计库","动效库","概念库","蒸馏账本","筛选页","挑选","引导档位","引导挡位","新人档","入门档","熟练档","老手档","大白话","术语对照"],"guides":[],"domains":["design","motion","wiki","ledger"]},
     {"id":"activate-tavernweave-soul","terms":["阿瞳","mttt.sir","soul","三席联席"],"guides":[],"domains":[]},
-    {"id":"orchestrate-project-blueprint","terms":["脑暴","总设计案","蓝图","子蓝图","第一版","first playable","first usable","vibe code","许愿","从零开始","第一次体验","不知道从哪开始","项目进度画板","进度画板","项目看板","百分比进度条","审核进度","记录新想法","bug回报记录","画板同步","next同步","总设计案同步"],"guides":[],"domains":[]},
+    {"id":"orchestrate-project-blueprint","terms":["脑暴","总设计案","蓝图","子蓝图","第一版","first playable","first usable","vibe code","许愿","从零开始","第一次体验","不知道从哪开始","项目进度画板","进度画板","项目看板","百分比进度条","审核进度","记录新想法","bug回报记录","画板同步","next同步","总设计案同步","提示规格","提示词规格","提示词反推","样例反推","样例归纳","提示词模板","玩法设计","事件图","有向地图"],"guides":[],"domains":[]},
     {"id":"rewrite-natural-prose","terms":["洗稿","去 AI 味","去AI味","去八股","自然表达","写自然一点","文本精修"],"guides":[],"domains":[]}
   ]
 }

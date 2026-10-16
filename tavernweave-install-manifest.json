@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "1.9.1",
-  "skillCount": 22,
+  "version": "2.0.0",
+  "skillCount": 23,
   "skills": [
     "activate-tavernweave-soul",
     "build-work-library",
@@ -25,7 +25,8 @@
     "sillytavern-rolecard-performance",
     "sillytavern-rolecard-security",
     "sillytavern-runtime-debug",
-    "tavern-card-builder"
+    "tavern-card-builder",
+    "worldbook-design-and-writing"
   ],
   "requiredPaths": [
     "skills/consult-tavernweave-library/references/plugin-runtime.md",
@@ -81,11 +82,14 @@
     "skills/sillytavern-embedded-ui/references/mvu-statusbar-design.md",
     "skills/sillytavern-embedded-ui/assets/templates/message-content-ui.md",
     "skills/sillytavern-embedded-ui/assets/templates/mvu-statusbar-design.md",
-    "skills/rewrite-natural-prose/references/natural-chinese-review.md"
+    "skills/rewrite-natural-prose/references/natural-chinese-review.md",
+    "skills/worldbook-design-and-writing/SKILL.md",
+    "skills/worldbook-design-and-writing/agents/openai.yaml",
+    "skills/consult-tavernweave-library/references/sillytavern-runtime-foundations.md"
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "1.9.1",
+    "version": "2.0.0",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",

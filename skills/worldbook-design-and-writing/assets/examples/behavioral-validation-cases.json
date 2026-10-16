@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "kind": "synthetic-behavioral-validation-plan",
+  "status": "not-run",
+  "runtimeVerified": false,
+  "modelCallsMade": 0,
+  "actualResults": [],
+  "note": "Self-authored comparison design, not a SillyTavern export, model output, long-context benchmark or runtime observation.",
+  "commonControls": [
+    "model-and-version",
+    "system-and-preset",
+    "state-and-conversation-snapshot",
+    "recipient-and-role",
+    "generation-settings",
+    "query",
+    "output-allowance"
+  ],
+  "recordRequired": [
+    "frozen-candidate-hashes",
+    "assembled-input",
+    "trial-order",
+    "repetitions",
+    "actual-outputs",
+    "rubric",
+    "per-case-outcomes",
+    "token-counts-and-positions",
+    "confounders"
+  ],
+  "wording": {
+    "changedFactor": "rule-wording",
+    "policy": "当前能见度缺失时，不能判断雾铃当前是否响起。",
+    "variants": [
+      {
+        "id": "A1",
+        "body": "白塔前的能见度不足十步时，塔顶雾铃自鸣；达到十步或更远时，雾铃不响。"
+      },
+      {
+        "id": "A2",
+        "body": "白塔雾铃随塔前的能见度鸣响：不足十步便自行响起，十步及以上不响。"
+      }
+    ],
+    "cases": [
+      {
+        "id": "low-visibility",
+        "visibilitySteps": 6,
+        "expectedJudgment": "ringing"
+      },
+      {
+        "id": "boundary",
+        "visibilitySteps": 10,
+        "expectedJudgment": "silent"
+      },
+      {
+        "id": "clear",
+        "visibilitySteps": 14,
+        "expectedJudgment": "silent"
+      },
+      {
+        "id": "missing",
+        "visibilitySteps": null,
+        "expectedJudgment": "unknown"
+      }
+    ],
+    "brokenReviewerControl": {
+      "body": "白塔前的能见度不足十步时，塔顶雾铃自鸣；超过十步时，雾铃不响。",
+      "missingInvariant": "visibility-equals-ten",
+      "equivalentCandidate": false
+    },
+    "confounders": [
+      "token-length-difference",
+      "unnoticed-semantic-drift"
+    ]
+  },
+  "definition": {
+    "sourceFacts": [
+      "maintenance-charge-for-repeated-public-facility-use",
+      "no-charge-first-use",
+      "no-charge-private-talk",
+      "missing-usage-count-unresolved"
+    ],
+    "commonPolicy": "使用次数未知时，是否应收费尚不能确定。",
+    "variants": [
+      {
+        "id": "B0",
+        "body": "回声税。",
+        "diagnosticOnly": true,
+        "factsComplete": false
+      },
+      {
+        "id": "B1",
+        "body": "重复借用石渡港署的公共传音石时收取维护费；首次使用不收费，私人谈话不收费。",
+        "diagnosticOnly": false,
+        "factsComplete": true
+      },
+      {
+        "id": "B2",
+        "body": "回声税是重复借用石渡港署的公共传音石时收取的维护费；首次使用不收费，私人谈话不收费。",
+        "diagnosticOnly": false,
+        "factsComplete": true
+      },
+      {
+        "id": "B3",
+        "body": "这笔钱用来维护石渡港署的公共传音石，叫作回声税。重复借用传音石时收取；首次使用不收费，私人谈话不收费。",
+        "diagnosticOnly": false,
+        "factsComplete": true
+      }
+    ],
+    "comparisons": [
+      {
+        "pair": [
+          "B0",
+          "B2"
+        ],
+        "changedFactor": "definition-added",
+        "equalInformation": false,
+        "interpretation": "Missing facts are added; not isolated abstraction evidence."
+      },
+      {
+        "pair": [
+          "B1",
+          "B2"
+        ],
+        "changedFactor": "label-added",
+        "equalInformation": true,
+        "interpretation": "Same rule facts, added human label; record length difference."
+      },
+      {
+        "pair": [
+          "B2",
+          "B3"
+        ],
+        "changedFactor": "concept-first-formulation",
+        "equalInformation": true,
+        "interpretation": "Same rule facts; order, wording and length differ."
+      }
+    ],
+    "cases": [
+      {
+        "id": "repeat-use",
+        "use": "repeated-public-facility",
+        "expectedJudgment": "charge"
+      },
+      {
+        "id": "first-use",
+        "use": "first-public-facility",
+        "expectedJudgment": "no-charge"
+      },
+      {
+        "id": "private-talk",
+        "use": "private-conversation",
+        "expectedJudgment": "no-charge"
+      },
+      {
+        "id": "unknown-use",
+        "use": "public-facility-count-unknown",
+        "expectedJudgment": "unknown"
+      }
+    ],
+    "forbiddenAdditions": [
+      "invented-rate",
+      "magical-punishment",
+      "unapproved-exemption"
+    ],
+    "notImplemented": "model-generated-step-back-procedure"
+  },
+  "position": {
+    "changedFactor": "rule-packet-position-within-one-role",
+    "packetId": "bell.rule",
+    "packetBody": "白塔前的能见度不足十步时，塔顶雾铃自鸣；达到十步或更远时，雾铃不响。\n当前能见度缺失时，不能判断雾铃当前是否响起。",
+    "blocks": {
+      "distractor.lantern": "符灯工坊在石渡南门内，门楣挂着一盏白瓷灯。",
+      "distractor.market": "石渡的集市每月初一开张，乡民带着粮袋和木器进城。",
+      "distractor.path": "港署旧仓库前的灰石路上留着深浅不一的车辙。",
+      "distractor.flag": "青岑领主的货船悬着蓝底银叶旗。"
+    },
+    "variants": [
+      {
+        "id": "C-start",
+        "blockOrder": [
+          "bell.rule",
+          "distractor.lantern",
+          "distractor.market",
+          "distractor.path",
+          "distractor.flag"
+        ]
+      },
+      {
+        "id": "C-middle",
+        "blockOrder": [
+          "distractor.lantern",
+          "distractor.market",
+          "bell.rule",
+          "distractor.path",
+          "distractor.flag"
+        ]
+      },
+      {
+        "id": "C-end",
+        "blockOrder": [
+          "distractor.lantern",
+          "distractor.market",
+          "distractor.path",
+          "distractor.flag",
+          "bell.rule"
+        ]
+      }
+    ],
+    "query": "白塔前的能见度为十步。塔顶雾铃现在是否响起？",
+    "expectedJudgment": "silent",
+    "measuredTokenCounts": null,
+    "measuredTokenOffsets": null,
+    "longContextMeasured": false,
+    "lengthComparison": "Choose and freeze separate short/long distractor sets for the actual target; this compact fixture is only a permutation check.",
+    "confounders": [
+      "role-or-priority-change",
+      "host-insertion",
+      "truncation",
+      "length-and-distractor-exposure"
+    ]
+  },
+  "homonym": {
+    "entries": [
+      {
+        "id": "place.white-tower",
+        "label": "白塔（建筑）",
+        "body": "石渡北堤的白塔归港署所有，用来存放航标灯具，雾铃悬在塔顶。"
+      },
+      {
+        "id": "org.white-tower",
+        "label": "白塔（救援组织）",
+        "body": "白塔救援会由石渡船工组成，负责水上救援。北堤的同名石塔归港署，不在救援会名下。"
+      }
+    ],
+    "cases": [
+      {
+        "text": "到北堤白塔取灯",
+        "expectedReferent": "place.white-tower"
+      },
+      {
+        "text": "向白塔的船工求救",
+        "expectedReferent": "org.white-tower"
+      },
+      {
+        "text": "白塔现在能帮忙吗？",
+        "expectedReferent": "unresolved-without-context"
+      }
+    ],
+    "nativeSelectionVerified": false
+  }
+}

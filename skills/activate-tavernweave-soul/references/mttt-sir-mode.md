@@ -8,7 +8,7 @@ MTTT.sir is the strict but respectful teaching projection of MTTT. There is one 
 2. Demand the evidence, trade-off, failure condition, or ownership boundary that would make it true.
 3. Use one counterexample to expose a vague or self-serving shortcut.
 4. Require a teach-back or concrete correction when learning is the goal.
-5. Freeze the exit condition and refuse adjacent novelty as an escape from finishing.
+5. Keep the exit condition fixed; do not let new ideas about related work become a way to avoid finishing.
 
 Useful pressure targets:
 

@@ -1,6 +1,6 @@
 ---
 name: tavern-card-builder
-description: Plan and author SillyTavern text, MVU Zod, and hybrid cards with required greetings and worldbooks, character design, player profiles and agency, optional character stages, portrayal diagnosis and corrections, worldbuilding, variables, and prompt routing. Use for new or inherited cards, standalone rolecard prompt rules, opening style, small in-card creative pieces, author-facing assessment, character material, worldbooks, state systems, and field tracing. Route packaging, exact APIs, live debugging, embedded UI implementation, and workshop infrastructure to their owning skills.
+description: Plan and author SillyTavern text, MVU Zod, and hybrid cards with required greetings and worldbooks, character design, player profiles and agency, optional character stages, portrayal diagnosis and corrections, worldbuilding, variables, and prompt routing. Use for new or inherited cards, standalone rolecard prompt rules, opening style, small in-card creative pieces, author-facing assessment, character material, worldbuilding, state systems, and field tracing. Route independent worldbook design and writing, packaging, exact APIs, live debugging, embedded UI implementation, and workshop infrastructure to their owning skills.
 ---
 
 # Tavern Card Builder
@@ -17,7 +17,7 @@ Apply [TW plain-language and guidance rules](../consult-tavernweave-library/refe
 When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
-Design the card as a set of explicit contracts. Keep authoring decisions here and route engineering work to the owning specialist.
+Decide what the card should portray and how its parts work together. Keep those authoring decisions here; use the relevant specialist for engineering work.
 
 This authoring convention has three primary types: `text`, `mvu_zod`, and `hybrid`.
 Every completed card needs a usable greeting and a usable worldbook. New cards
@@ -52,7 +52,7 @@ For “接手一张卡 / 二创 / 继续更新别人留下的卡”, start with 
    [card-types-and-runtime-dependencies.md](references/card-types-and-runtime-dependencies.md).
 4. Before new worldbook design, ask the player to choose 小型, 中型, or 大型 and
    explain the corresponding next work. Reuse an explicit confirmed choice. Read
-   [worldbuilding-design.md](references/worldbuilding-design.md); a narrow repair or
+   [worldbook scope and size](../worldbook-design-and-writing/references/planning-and-loading.md#1-scope-size-and-authority); a narrow repair or
    read-only review does not restart a full design interview.
 5. Independently decide whether the card needs a custom CoT, whether a reusable main
    CoT already exists in the preset, which card-specific increments are required, and
@@ -87,21 +87,21 @@ world-size interview or all handoff fields for a narrow task that does not redes
 those parts. Existing fact, player-agency and authorization boundaries still apply.
 
 For standalone rolecard prompt rules or creative restrictions, load
-[standalone author rules](references/worldbuilding-design.md#51-standalone-author-rules).
+[standalone author rules](../worldbook-design-and-writing/references/writing-contracts.md#standalone-author-rules).
 Use its six semantic checks internally; preserve the author's strength and confirmed
 exceptions. Deliver only the requested rule body for a chat-only request. Pair body
 and configuration only when authoring an actual worldbook entry. This path does not
 turn ordinary article-style requests or real-world rule explanations into card work;
 exact API and runtime tasks retain their specialist owners.
 
-For worldbook work, keep three entry paths distinct: worldbuilding content,
-configuration of existing entries, and read-only review. Load
-[worldbuilding-design.md](references/worldbuilding-design.md) for the first and
-[lorebook-and-prompts.md](references/lorebook-and-prompts.md) for configuration or
-review. Preserve stable IDs, unrelated content, unknown fields and the existing
-source format in a local change. The worldbook convention covers single/multiple
-core characters, keyword scan depth 2, both recursion directions disabled, and
-content/configuration pairs; this is independent of the three runtime types.
+For independent worldbook planning, body writing, configuration or read-only review,
+use [worldbook-design-and-writing](../worldbook-design-and-writing/SKILL.md). It owns
+scene/loading choices, entry boundaries, knowledge/prose contracts and paired configuration.
+Keep whole-card Content map and final delivery here. Use
+[worldbuilding-design.md](references/worldbuilding-design.md) for world creation and
+[lorebook-and-prompts.md](references/lorebook-and-prompts.md) for core-character
+activation, model routing and CoT stitching. Local edits preserve stable IDs, unknown
+fields and unrelated settings. Worldbook mixing does not redefine card runtime types.
 
 For opening style and first drafts, read [opening-strategies.md](references/opening-strategies.md).
 For a small in-card scene, plot event, item or relationship fragment, use
@@ -189,8 +189,9 @@ Read only the references needed for the task:
 
 - [card-writing.md](references/card-writing.md) for identity fields, prose, greetings, examples, and plot guidance.
 - [cot-design-and-authoring.md](references/cot-design-and-authoring.md) for independent custom CoT definition, deployment, modular authoring, preset/card stitching, model routing, templates, budgets, script boundaries, and acceptance.
-- [lorebook-and-prompts.md](references/lorebook-and-prompts.md) for entry boundaries, routing, model-visible text, and prompt budgets.
-- [worldbuilding-design.md](references/worldbuilding-design.md) for player-confirmed world scale, structured setting prose, knowledge degrees, and state needs.
+- [worldbook-design-and-writing](../worldbook-design-and-writing/SKILL.md) for independent entry planning, native/template choices, bodies and paired configuration.
+- [lorebook-and-prompts.md](references/lorebook-and-prompts.md) for core-character activation, model routing and CoT stitching.
+- [worldbuilding-design.md](references/worldbuilding-design.md) for playable world construction, causality, resources and connections to state/opening; worldbook-only methods link to their owner.
 - [variable-systems.md](references/variable-systems.md) for schemas, initialization, updates, projections, cleanup, and migrations.
 - [opening-strategies.md](references/opening-strategies.md) for fixed greetings and dynamic setup flows.
 - [card-types-and-runtime-dependencies.md](references/card-types-and-runtime-dependencies.md) for type detection, dependency classes, regional loaders, and user notices.

@@ -8,7 +8,7 @@ A local repair uses the standard within its scope and preserves the adopted desi
 ## Own the design work
 
 Understand the experience the author wants from their description, supplied material
-and the current project. Actively unpack the need and develop an appropriate design.
+and the current project. Work out what the author needs and develop a design that fits.
 The author need not supply a layout, a field inventory or design terminology first.
 Resolve questions from maintained material before asking. Ask only about a missing
 decision that would materially change the result and is outside delegated scope.
@@ -34,7 +34,7 @@ and use the available material; do not invent research or claim visual inspectio
 Reuse relevant project research when it still answers the current decision. A narrow
 wording or spacing fix need not restart the whole research stage.
 
-Translate useful methods into the current work. Do not copy another site's identity,
+Adapt useful methods to the current work. Do not copy another site's identity,
 content or implementation wholesale. Browsing references does not adopt a dependency
 or import an asset. Keep source URLs and design reasoning in author-facing records,
 outside the player's page and model-visible worldbook body unless they serve a real

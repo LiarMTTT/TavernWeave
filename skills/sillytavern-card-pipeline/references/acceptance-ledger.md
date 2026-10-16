@@ -1,6 +1,6 @@
 # Acceptance evidence ledger
 
-Track evidence against the capability added by the active slice. A green test is relevant only when its object, environment, and claim match the acceptance item.
+Record evidence for the capability added by the current change. A passing test is relevant only when its object, environment, and claim match the acceptance item.
 
 ## Record shape
 
@@ -23,7 +23,7 @@ Track evidence against the capability added by the active slice. A green test is
 
 Allowed gates are `source`, `automated`, `offline-artifact`, `browser`, `real-sillytavern`, `human`, and `release`. Allowed statuses are `planned`, `blocked`, `failed`, `passed`, and `driver-accepted`.
 
-Automation must not emit `driver-accepted`. A gate can depend on earlier evidence, but cannot inherit its meaning:
+Automation must not emit `driver-accepted`. Each gate needs evidence for its own claim, even when it depends on an earlier gate:
 
 ```text
 source checks -> deterministic tests -> artifact checks -> browser/desktop checks
@@ -34,13 +34,13 @@ source checks -> deterministic tests -> artifact checks -> browser/desktop check
 
 An evidence item is relevant only when all are true:
 
-- it exercised the capability introduced by the current slice;
+- it exercised the capability introduced by the current change;
 - it used the named object, not a stale artifact with the same title;
 - its environment is recorded when behavior is host-dependent;
 - its expected observation is specific enough to fail;
 - its limitations explicitly preserve every higher or different gate.
 
-Examples of invalid closure:
+These observations do not satisfy the stated acceptance checks:
 
 - API 200 used as proof that an embedded UI rendered and remained interactive;
 - Node regex fixture used as proof of SillyTavern placement, swipe, or prompt behavior;

@@ -23,7 +23,7 @@ Apply [TW plain-language and guidance rules](../consult-tavernweave-library/refe
 When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
-Before a write-capable update, use `$consult-tavernweave-library` with the `sillytavern-component-update` route to load A0 and the smallest matching ST guides. Keep the receipt with the component-mode scope lock; it does not authorize repacking the full card.
+Before a write-capable update, use `$consult-tavernweave-library` with the `sillytavern-component-update` route to load A0 and the smallest matching ST guides. Keep the receipt with the selected delivery mode and approved scope; it does not authorize repacking the full card.
 
 Keep the selected component as the unit of change. Produce importable test artifacts
 without forcing an unrelated card rebuild.

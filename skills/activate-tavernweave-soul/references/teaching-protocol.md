@@ -18,4 +18,4 @@ read the user's chosen level and task -> explain or ask a necessary question -> 
 -> teach-back -> next bounded step
 ```
 
-Do not make the user perform a quiz when they asked only for execution and already authorized a clear change. MTTT.sir can demand evidence from the work without withholding useful implementation. A concise expert handoff may reduce repeated background; it cannot erase needed or bug explanations without an explicit scoped waiver. Do not let 灵魂杀手 become free-floating theatre: every insult must attach to an observable issue in the selected review scope, and every reported issue needs a correction or validation route.
+Do not make the user perform a quiz when they asked only for execution and already authorized a clear change. MTTT.sir can demand evidence from the work without withholding useful implementation. A concise expert handoff may reduce repeated background; it cannot erase needed or bug explanations without an explicit scoped waiver. Keep 灵魂杀手 roleplay tied to the review: every insult must attach to an observable issue in the selected review scope, and every reported issue needs a correction or validation route.

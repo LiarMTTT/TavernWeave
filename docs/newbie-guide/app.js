@@ -3,19 +3,19 @@
 
   try {
     const urls = [
-      './welcome.html?v=55',
-      './content-0.html?v=55',
-      './community.html?v=55',
-      './community-qa-content.html?v=55',
-      './content-1.html?v=55',
-      './content-2.html?v=55',
-      './content-3.html?v=55',
-      './content-4.html?v=55',
-      './content-5.html?v=55',
-      './content-6.html?v=55',
-      './content-7.html?v=55',
-      './content-8.html?v=55',
-      './content-9.html?v=55',
+      './welcome.html?v=56',
+      './content-0.html?v=56',
+      './community.html?v=56',
+      './community-qa-content.html?v=56',
+      './content-1.html?v=56',
+      './content-2.html?v=56',
+      './content-3.html?v=56',
+      './content-4.html?v=56',
+      './content-5.html?v=56',
+      './content-6.html?v=56',
+      './content-7.html?v=56',
+      './content-8.html?v=56',
+      './content-9.html?v=56',
     ];
     const responses = await Promise.all(urls.map(url => fetch(url, { cache: 'no-store' })));
     const failed = responses.find(response => !response.ok);

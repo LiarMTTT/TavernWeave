@@ -17,9 +17,9 @@ Apply [TW plain-language and guidance rules](references/communication-and-guidan
 When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
-For first use after enabling the plugin, check that this Skill and the shared runtime reference are readable, identify the actual host and available tools, then route only the current user goal to the smallest needed Skill and references. Use existing user materials and authorization; do not scan the whole library or write a global instruction file as a setup ritual. Distinguish a readable file from observed loading in a new task.
+On first use after enabling the plugin, check that this Skill and the shared runtime reference are readable, identify the actual host and available tools, then route only the current user goal to the smallest needed Skill and references. Use existing user materials and authorization; do not scan the whole library or write a global instruction file as routine setup. Distinguish a readable file from observed loading in a new task.
 
-Use the bundled knowledge snapshot as a routed reference layer. A single TavernWeave install carries the library, but each task loads only the standing check and the smallest matching domain set.
+The library snapshot ships with TavernWeave. Use its router to load only the standing check and the smallest matching domain set for each task.
 
 For frontend design, visual implementation or review, also read
 [frontend-design-quality.md](references/frontend-design-quality.md). It sets the
@@ -32,10 +32,24 @@ default. An ordinary reference query need not load this design workflow.
 
 For 小说转库、作品/同人资料整理、联网文图与二创资料包, route to `$build-work-library`. Those are user-owned work sources, separate from this bundled development/design catalog; do not return UI design-token entries for model-token budgeting. In-card MVU tables still belong to `$sillytavern-database-rolecards`.
 
+For standalone worldbook planning, entry writing, split/merge review, or native/template/mixed
+selection, route to `$worldbook-design-and-writing`. Whole-card creation stays with
+`$tavern-card-builder`, which hands worldbook work to that entry. A general prompt
+specification or inference from examples belongs to `$orchestrate-project-blueprint`;
+source evidence stays with `$build-work-library`. Exact API behavior and real-runtime
+failures keep their specialist owners.
+
+When a rolecard, worldbook or blueprint task depends on how SillyTavern runs, check
+whether that context is already available. If not, read the necessary parts of
+[the runtime foundations](references/sillytavern-runtime-foundations.md), starting
+with the text-only turn. Do not load the whole tutorial for an unrelated task or
+require template/MVU/UI checks for a prose-only change. Clarification thresholds
+have one owner in [shared communication](references/communication-and-guidance.md).
+
 For guidance-level selection, queries or changes, read [communication-and-guidance.md](references/communication-and-guidance.md) and use its bounded preference manager. Do not search design catalogs for a settings-only request. Query and preview are read-only; a persistent choice uses the user's explicit scope and the existing write gate, without asking twice for the same approved operation. Missing preferences stay unset. For ordinary work, apply the common explanation rules and continue the engineering route below.
 
 1. Identify the primary engineering skill and whether the request is read-only or write-capable.
-2. For a write-capable task, read `references/st-guides/A0_驾驭工程从零搭建检查单.md` or explicitly confirm its three opening gates: goal, red lines, and acceptance.
+2. For a write-capable task, read `references/st-guides/A0_驾驭工程从零搭建检查单.md` and check goal, red lines, and acceptance against available context. Continue when clear; ask only about a material gap or conflict, using the shared communication threshold.
 3. Run the deterministic router:
 
    ```powershell

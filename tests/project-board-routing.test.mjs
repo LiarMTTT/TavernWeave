@@ -14,7 +14,8 @@ test('project-board requests have a route and project-local resources without ad
   assert.deepEqual(queryLibrary({ intent: '把项目进度画板和总设计案、NEXT同步' }).routeIds, ['orchestrate-project-blueprint']);
   assert.deepEqual(JSON.parse(await read('docs/newbie-guide/tavernweave-route-map.json')), routes);
   const manifest = JSON.parse(await read('tavernweave-install-manifest.json'));
-  assert.equal(manifest.skillCount, 22);
+  assert.equal(manifest.skillCount, manifest.skills.length);
+  assert.ok(manifest.skills.includes("worldbook-design-and-writing"));
   assert.ok(manifest.requiredPaths.includes('skills/orchestrate-project-blueprint/scripts/record-progress-feedback.mjs'));
   assert.ok(manifest.requiredPaths.includes('skills/orchestrate-project-blueprint/scripts/project-board-sources.mjs'));
   for (const p of manifest.requiredPaths.filter((p) => p.includes('orchestrate-project-blueprint/'))) await fs.access(path.join(root, p));

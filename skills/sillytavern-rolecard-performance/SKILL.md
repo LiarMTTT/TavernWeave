@@ -37,6 +37,11 @@ Read [static-budget-contract.md](references/static-budget-contract.md) before se
 thresholds. Read [runtime-sampling.md](references/runtime-sampling.md) when browser or
 SillyTavern timings are available.
 
+When native worldbook entries and templates/controllers can contribute to the same
+request, use [the shared output budget](references/worldbook-output-budget.md) for
+content identity, cross-entry deduplication, read-only projections and final-request
+token evidence. Artifact bytes and local character limits are not that evidence.
+
 ## Measure without exposing content
 
 Run:

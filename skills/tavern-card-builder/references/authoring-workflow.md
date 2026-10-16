@@ -55,7 +55,8 @@ change is authorized; a new convention is not permission to clear or migrate it.
 Before new worldbook design, ask the player to choose 小型 / 中型 / 大型, explain the
 next work for each, and optionally give a reasoned recommendation. Reuse an explicit
 confirmed choice; do not infer approval from silence. See
-[worldbuilding-design.md](worldbuilding-design.md). Single/multiple core characters
+[worldbook scope and size](../../worldbook-design-and-writing/references/planning-and-loading.md#1-scope-size-and-authority).
+Single/multiple core characters
 is a separate choice used for character-entry activation, not a runtime type or a
 substitute for world scale.
 
@@ -70,6 +71,8 @@ specified in [player-profile-and-agency.md](player-profile-and-agency.md).
 Build six maps:
 
 1. **Content map** — identity, setting, actors, locations, plot guidance, greetings, examples.
+   Keep this whole-card authority here; [worldbook-design-and-writing](../../worldbook-design-and-writing/SKILL.md)
+   extends it with scene information needed together, actual entry paths and dependencies.
 2. **CoT map** — preset main phases, card increments, conditional modules, recipient models, output boundaries, fallback.
 3. **State map** — fields, types, defaults, ownership, lifecycle, migrations.
 4. **Runtime map** — optional helper scripts, events, regex, UI, external resources.
@@ -141,8 +144,11 @@ merging custom CoT.
    If state-selected portrayal is needed, design [character stages](character-stages.md)
    from that authority. Preserve the foundation when reliable stage state is absent;
    do not create a guessed stage or write back a fallback.
-5. Design worldbook entries and paired configuration, including state references,
-   activation and model recipients. Apply [lorebook-and-prompts.md](lorebook-and-prompts.md).
+5. Design worldbook entry boundaries and loading jointly through
+   [worldbook-design-and-writing](../../worldbook-design-and-writing/SKILL.md), including
+   state references, paired configuration and applicable semantic checks. Keep
+   [core-character activation and recipient routing](lorebook-and-prompts.md) here.
+   Pure prose work uses only its writing path; no full runtime matrix is required.
 6. Decide optional CoT ownership, stitching and fallback; author only necessary
    preset/card increments and conditional modules without duplicating setting text.
 7. Write or reconcile greetings against worldbook facts and each branch's initial

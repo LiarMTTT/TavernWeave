@@ -19,7 +19,12 @@ When this Skill is invoked through the TavernWeave plugin, or the task runs in d
 
 Use `$consult-tavernweave-library` with the `sillytavern-api-reference` route for the smallest relevant ST guide set, then verify exact symbols against the identified target version. A guide route is navigation evidence, not a substitute for the installed runtime or pinned source. Add A0 only if the task becomes write-capable.
 
-Treat this skill as an authority-routing procedure, not as a frozen copy of an evolving API. The public baselines in [references/core-facts.md](references/core-facts.md) are dated navigation snapshots, not claims about the latest release. The target runtime always wins.
+Use this skill to find authoritative API sources for the target runtime. Do not treat it as a fixed specification of an evolving API. The public baselines in [references/core-facts.md](references/core-facts.md) are dated navigation snapshots; they do not claim to describe the latest release. The target runtime remains authoritative.
+
+For worldbook/template entry, explicit read, message-window or state-to-prompt
+contracts, use [E03 version verification](references/worldbook-version-verification.md).
+It records pinned-source findings separately from the still-unverified target host;
+load only the checks needed by the selected mechanism.
 
 ## Resolve the runtime surface
 
@@ -67,7 +72,7 @@ Do not transfer a symbol between surfaces merely because similarly named globals
 
 A moving branch name such as `main`, `release`, or `beta` is not a version identity. If it is useful only for navigation, label it as such. Any example containing an exact event value or callback signature must cite an immutable commit or matching installed source and must not be presented as the answer for a different or unidentified runtime.
 
-Keep declaration truth separate from runtime truth. A declaration can establish spelling and a nominal type while leaving callback timing, lifecycle, side effects, or actual availability unverified.
+Distinguish what declarations establish from what has been observed at runtime. A declaration can establish spelling and a nominal type while leaving callback timing, lifecycle, side effects, or actual availability unverified.
 
 ## Implementation rules
 
