@@ -1,0 +1,4 @@
+interface:
+  display_name: "Worldbook Design and Writing"
+  short_description: "Plan scene-aware worldbooks, loading, and precise entry prose"
+  default_prompt: "Use $worldbook-design-and-writing to plan or refine this worldbook's entry bodies and loading together, preserving canon, configuration, and the boundary between static and runtime evidence."

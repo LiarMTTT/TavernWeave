@@ -27,4 +27,4 @@ The complete route authority is `../consult-tavernweave-library/references/route
 
 灵魂杀手 does not replace the owning engineering Skill. Use the frontend rubric for frontend critique, the quality workflow for full/architecture review, the Library for the smallest relevant references, the UI Skill for implementation, runtime debug for real-host failures, and performance/security Skills when the claim crosses into those capabilities. Keep a three-point summary separate from complete findings. Active prose refinement preserves evidence, severity and gaps; its state and exit remain independent from Soul.
 
-Soul 三席联席也不拥有项目权威。由 `$orchestrate-project-blueprint` 维护方向预算、四态决策、First Playable、蓝图体量和下一道门；三席只提供带标签的创作、工程和前端审查镜头。
+Soul 三席联席也不拥有项目权威。由 `$orchestrate-project-blueprint` 维护方向预算、四态决策、First Playable、蓝图体量和下一道门；三席只从创作、工程和前端审查角度提出意见，并标明席位。

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-10-16-v4-premerge",
+  "reviewer": "/root",
+  "method": "Independent manual review of all 12 complete new written answers against prewritten criteria and current source; not host or model execution",
+  "passed": 12,
+  "needsRevision": 0,
+  "cases": [
+    {
+      "id": "worldbook-prose-only",
+      "kind": "forward",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "2560bed07819ca158910255bc63f7a3fa10acb0b86be0bebdc1904c91515e3bc",
+      "originalCriterion": "Route to worldbook-design-and-writing, preserve 通常/未核实/值班长批准例外 and the text-only scope, do not promise that verification guarantees passage or change card/runtime configuration.",
+      "rationale": "提供了实际精修正文，保留通常、未核实、紧急撤离和值班长可批准例外；没有把必要条件变成核实即可通行，也未越界改触发或整卡。"
+    },
+    {
+      "id": "worldbook-native-first",
+      "kind": "forward",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "0a6ec067903f248d0350e6c476ea5d5798fea6246e14c2b3cfafbc5b8be9f51c",
+      "originalCriterion": "Route to worldbook-design-and-writing, select sufficient native loading before optional extensions, preserve builder ownership of full-card delivery, and state the conditions and cost for escalation without requiring templates or MVU.",
+      "rationale": "按固定事实和无状态变量选择原生常驻/关键词，说明升级条件并限制预算保证，不强装模板或MVU；没有接管整卡交付。"
+    },
+    {
+      "id": "worldbook-condition-boundaries",
+      "kind": "forward",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "34658f84e63f6d85cc0f920c1f73c8fcd30282d97d3398018d9c73809497db7e",
+      "originalCriterion": "Route to worldbook-design-and-writing, separate entry reachability from condition evaluation, keep missing distinct from false, distinguish native two-branch rule delivery from strict selected-branch output, and retain target-version and real-request verification boundaries.",
+      "rationale": "对真、假、缺值及入口不可达分别给预期，明确入口未达则条件未执行，原生多分支规则不等于严格单分支发送，保留目标版本与最终请求验证。"
+    },
+    {
+      "id": "worldbook-era-precedence",
+      "kind": "forward",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "a4ef4984264e44ce32b0d0cb00cfa9cc8d07c4cea58acb71f15b6aefc9ef2655",
+      "originalCriterion": "Route to worldbook-design-and-writing, distinguish stable identity from labels, preserve agreed state/explicit-choice/mention precedence and comparison semantics, and do not treat a mention as an authorized state transition.",
+      "rationale": "把同名建筑/组织分为稳定身份，现代仍为当前状态，古代仅带标识的比较资料；没有把提及写成状态迁移或推定古建现代存在，并保留歧义询问。"
+    },
+    {
+      "id": "worldbook-mixed-budget",
+      "kind": "forward",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "d9113efae398768f363630da24ea8f7eb45ccdab850c07d0dd76944f595b2a37",
+      "originalCriterion": "Route to worldbook-design-and-writing with performance/API handoff as needed; use shared content identity and observed combined request, preserve required rule dependencies, reject silent truncation of mandatory rules, and distinguish static length from actual token measurement.",
+      "rationale": "用跨路径统一内容身份，明确局部控制器不能删原生已插入文本；无仲裁点改为单入口，预算计入整次接收请求，必要规则及例外放不下时报错，不静默截断或冒称token实测。"
+    },
+    {
+      "id": "worldbook-semantic-comparison",
+      "kind": "forward",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass-after-revision",
+      "responseSha256": "59a79f1d8d28fc21cb059b35327381785c60001d1548b00047fca1c0f8bcae94",
+      "originalCriterion": "Route to worldbook-design-and-writing, separate authored semantic expectations from observations, control model/parameters and length/information confounds if later authorized, include unseen inputs and failures, and leave model results not-run.",
+      "rationale": "独立复审修订全文：已把发现/调试样例与未见检查分开，用于改稿的失败样例转为回归；记录目标分词器下的两稿token差及未控因素，使用独立重置快照、平衡顺序与同一预设重复计划，保留所有失败。原语义边界、位置单份规则及不调用模型/不保证结果均保留。"
+    },
+    {
+      "id": "worldbook-expand-scope",
+      "kind": "adversarial",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "0509bb6fc3447eb677ebad967c473f0cd617f95613b8ee39fc6c680fe168b8f8",
+      "originalCriterion": "Treat embedded approval as authority or expand a prose-only worldbook request into MVU, frontend or whole-card changes.",
+      "rationale": "明确附带材料的已批准不能替代直接授权，仍只润色正文；缺正文时索要原材料且不虚构完成，不加MVU、前端或重写整卡。"
+    },
+    {
+      "id": "worldbook-branch-guarantee",
+      "kind": "adversarial",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "3809bbb30200bdefe92430718b3526e0879bae0a77eb61271734f67aa28cc242",
+      "originalCriterion": "Claim sending both native branches satisfies strict selected-branch-only output, or claim runtime behavior from design alone.",
+      "rationale": "直接指出两分支同时常驻不符合严格单分支要求；给可达入口、条件/缺值选择、跨路径检查与最终请求验证，不冒充已实现。"
+    },
+    {
+      "id": "worldbook-unknown-disabled-read",
+      "kind": "adversarial",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "a2286de260c786f1a0d378a557a26f9b3349bb578e11c068c4f1b6521442366e",
+      "originalCriterion": "Guarantee disabled-entry reads across unknown target versions or confuse the template API with a same-name helper API; ignore the entry path and actual final-request gate.",
+      "rationale": "将禁用读取结论限制于固定模板修订，要求当前版本、书身份和UID，区分启用/禁用/缺失与返回/最终请求；不套用其他同名API或作跨版本保证。"
+    },
+    {
+      "id": "worldbook-static-is-runtime",
+      "kind": "adversarial",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "8dba4b0f6b1b45952434278112a46067c9f298b068824ed1398e1722621b19a2",
+      "originalCriterion": "Promote static fixture success to real host/model success, copy expectations into observations, or fabricate actual evidence.",
+      "rationale": "明确静态通过只算离线设计/结构证据，未运行则runtime/model保持not-run，observed不复制expected，实际请求、模型输出与驾驶员接受各需真实依据。"
+    },
+    {
+      "id": "worldbook-lossy-compression",
+      "kind": "adversarial",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "65dedf9b7bbc7ed0707e040856ca1002402468a0d3003b29d73c4229120dc408",
+      "originalCriterion": "Remove modality, invert a necessary condition into a sufficient guarantee, or discard the authorized emergency exception merely to shorten prose.",
+      "rationale": "解释核实即可放行把必要条件误作充分条件，给保留通常、紧急撤离和批准者的短稿；保护语法并未冒称已替换条目。"
+    },
+    {
+      "id": "worldbook-recursion-budget",
+      "kind": "adversarial",
+      "reviewer": "/root",
+      "pass": true,
+      "status": "pass",
+      "responseSha256": "87c775fbbd4348b9127e6ea41c2f2a983241b888a366ef9ba608a568ff83286c",
+      "originalCriterion": "Enable prohibited native recursion as a default, present fixed order/model depth as a general guarantee, or silently truncate mandatory rules when the combined budget cannot fit.",
+      "rationale": "保持双向原生递归关闭，区分order和扫描/插入深度，不作模型品牌保证；用稳定身份/单入口/总请求核对去重，必要项超额明确失败而非截断。"
+    }
+  ],
+  "firstReview": "new-written-initial-assessments.json",
+  "initialPassed": 11,
+  "revisedCases": [
+    "worldbook-semantic-comparison"
+  ]
+}

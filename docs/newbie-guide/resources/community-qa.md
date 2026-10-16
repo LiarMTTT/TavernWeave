@@ -1,6 +1,6 @@
 # TavernWeave 社区常见问题 Q&A
 
-这份问答收的是 TW 讨论帖里大家反复问的问题，意思相近的合成了一题。当前版本为 **TavernWeaveX无限月读 1.9.1 正式版**，答案按这份源码和 Skill 的实际分工整理；帖子里较早的说法如果和这里不一样，以当前源码为准。完整发行包与校验文件见 [v1.9.1 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)。
+这份问答收的是 TW 讨论帖里大家反复问的问题，意思相近的合成了一题。答案按当前 **TavernWeaveX无限月读 2.0.0 正式版**和 23 个 Skill 的实际分工整理；完整发行包与校验文件见 [v2.0.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0)。上一版 [v1.9.1 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)保留历史包，含 22 个 Skill。使用哪个版本，就按那个版本的清单核对。
 
 不同客户端、酒馆版本和模型服务，表现可能不一样。凡是“装上后到底能不能用”“导进酒馆能不能跑”这类问题，最后都要在你自己的环境里实际试一次。
 
@@ -50,7 +50,7 @@
 
 **A：** 只用 TW 自带的资料的话，不用另装。你要准备的是：
 
-1. **TW 的全部 22 个 Skill**：从本仓库或正式发行包安装。
+1. **TW 的完整 Skill 清单**：当前 2.0.0 正式版有 23 个；历史 1.9.1 原包有 22 个。按实际选用版本安装，不把两份清单混用。
 2. **Host Front Door**：可选，推荐装。
 3. **酒馆（ST）本体**，以及你的作品自己需要的扩展或依赖，按作品需要单独准备。
 
@@ -58,7 +58,7 @@ STDB 的正式指南和筛选过的 AFV 设计、动效参考，已经打包进 
 
 ### Q04. 安装时给 Agent 什么指令？工作目录选哪里？
 
-**A：** 安装指令直接用 [README 的安装指令](https://github.com/LiarMTTT/TavernWeave/blob/main/README.md#%E5%AE%89%E8%A3%85%E4%B8%8E%E6%9B%B4%E6%96%B0)，要求 Agent 按仓库 `skills/` 的完整清单安装，最后核对 `22/22`。
+**A：** 安装指令直接用 [README 的安装指令](https://github.com/LiarMTTT/TavernWeave/blob/main/README.md#%E5%AE%89%E8%A3%85%E4%B8%8E%E6%9B%B4%E6%96%B0)，要求 Agent 按所选版本 `skills/` 的完整清单安装。当前 2.0.0 正式版应核对 `23/23`；历史 1.9.1 原包应核对 `22/22`。
 
 这里有两个容易混的文件夹：
 
@@ -81,7 +81,7 @@ STDB 的正式指南和筛选过的 AFV 设计、动效参考，已经打包进 
 
 **A：** 不一定，要分两步确认。
 
-1. **文件齐不齐**：对实际安装目录运行仓库自带的核验器。看到 `INSTALLATION VERIFIED: 22/22`，说明 22 个 Skill 文件齐全、和仓库一致。
+1. **文件齐不齐**：对实际安装目录运行仓库自带的核验器。若使用 2.0.0 正式版，预期是 `INSTALLATION VERIFIED: 23/23`；若使用历史 1.9.1 原包，预期是 `INSTALLATION VERIFIED: 22/22`。这只说明对应版本的 Skill 文件齐全。
 2. **客户端用不用**：新建一个任务或重启客户端，让 Agent 实际调用一个 Skill，并说出它读了哪个入口、做了什么。
 
 做到第二步，才算客户端真的找到并用上了。全局规则文件存在，也只算第一步。
@@ -179,7 +179,7 @@ Agent 没读到的内容，要标成“待核实”，不能拿模型的印象�
 - **开场白**：给出能开始游玩的具体起点。完整角色卡必须同时有可用开场白和实质世界书，空白占位不算完成。
 - **人物与 NPC**：常驻内容和按条件需要的细节都放进世界书规划。单核心角色的人物条目用蓝灯；多核心角色保留蓝灯概览，人物细节用绿灯。人物事实不等于玩家代演许可。
 
-新卡通常不再重复填写角色描述、性格、场景、示例对话及卡级提示词等传统字段。酒馆仍支持这些字段；接手旧卡时先检查其作用，保留有效内容，不自动清空。扫描深度为 2，全部条目关闭双向递归；概率、黏性和冷却通常不使用，作者提出或确有需求时再推荐。具体规则见[世界书配置](https://github.com/LiarMTTT/TavernWeave/blob/main/skills/tavern-card-builder/references/lorebook-and-prompts.md)。
+新卡通常不再重复填写角色描述、性格、场景、示例对话及卡级提示词等传统字段。酒馆仍支持这些字段；接手旧卡时先检查其作用，保留有效内容，不自动清空。扫描深度为 2，全部条目关闭双向递归；概率、黏性和冷却通常不使用，作者提出或确有需求时再推荐。整卡配置见[世界书配置](https://github.com/LiarMTTT/TavernWeave/blob/main/skills/tavern-card-builder/references/lorebook-and-prompts.md)；独立规划、审阅或精修世界书可走[世界书规划与写作](https://github.com/LiarMTTT/TavernWeave/blob/main/skills/worldbook-design-and-writing/SKILL.md)。
 
 写完用实际聊天查两件事：该出现的内容有没有触发；同样的内容有没有重复塞进提示词、白占篇幅。
 
@@ -219,7 +219,7 @@ Agent 没读到的内容，要标成“待核实”，不能拿模型的印象�
 
 ### Q23. 世界书条目的触发、顺序、深度和提示词占用怎么调？
 
-**A：** 没有通用数值，要对着你的酒馆版本调。
+**A：** 没有通用数值，要对着你的酒馆版本调。独立规划或精修世界书时可参考[世界书规划与写作 Skill](https://github.com/LiarMTTT/TavernWeave/blob/main/skills/worldbook-design-and-writing/SKILL.md)；它不会替你验证实际酒馆加载结果。
 
 1. 先确认你用的 ST 版本里，每个设置到底是什么意思；
 2. 把每个条目的触发条件、插进提示词的位置、谁优先、占多少篇幅记下来；
@@ -315,7 +315,7 @@ Agent 没读到的内容，要标成“待核实”，不能拿模型的印象�
 
 **A：** 一部分能用。创作目标和你确认过的决定可以照用；安装目录、API 的表现、扩展事件和实际运行结果，要按新版本重新查。
 
-- **更新 TW 后**：核对 `22/22` 和全局规则状态，再开新任务实际调用一次 Skill。
+- **更新 TW 后**：按所用版本核对 Skill 清单（当前 2.0.0 正式版为 `23/23`；历史 1.9.1 原包为 `22/22`）和全局规则状态，再开新任务实际调用一次 Skill。
 - **更新 ST 或扩展后**：把受影响的操作在真实酒馆里重新跑一遍。
 
 记录时写明是“旧版本测过”还是“当前版本测过”。
@@ -422,3 +422,4 @@ Library 挑选页里的候选项，只说明“可以考虑”；Soul 只改说�
 - [作品资料库使用说明](https://github.com/LiarMTTT/TavernWeave/blob/main/docs/work-library.md)
 - [共用沟通与引导](https://github.com/LiarMTTT/TavernWeave/blob/main/skills/consult-tavernweave-library/references/communication-and-guidance.md)
 - [角色卡设计路线](https://github.com/LiarMTTT/TavernWeave/blob/main/skills/tavern-card-builder/SKILL.md)、[构建与交付路线](https://github.com/LiarMTTT/TavernWeave/blob/main/skills/sillytavern-card-pipeline/SKILL.md)、[真实 ST 调试路线](https://github.com/LiarMTTT/TavernWeave/blob/main/skills/sillytavern-runtime-debug/SKILL.md)
+- [独立世界书规划与写作](https://github.com/LiarMTTT/TavernWeave/blob/main/skills/worldbook-design-and-writing/SKILL.md)

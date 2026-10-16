@@ -4,7 +4,7 @@ import { queryLibrary } from '../skills/consult-tavernweave-library/scripts/quer
 
 for (const [intent, expectedRoutes] of [
   ['先讨论大型世界观的可玩范围', ['tavern-card-builder']],
-  ['调整世界书配置，保持原有正文', ['tavern-card-builder']],
+  ['调整世界书配置，保持原有正文', ['worldbook-design-and-writing']],
   ['设计初始变量并说明知晓程度', ['tavern-card-builder']],
   ['制作纯文字卡的开场白', ['tavern-card-builder']],
   ['规划一张 MVU Zod 卡', ['tavern-card-builder']],

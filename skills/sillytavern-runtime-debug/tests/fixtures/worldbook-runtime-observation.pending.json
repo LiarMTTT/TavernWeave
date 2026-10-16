@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "evidenceLevel": "runtime-observation",
+  "caseId": "condition-true",
+  "artifact": "original-static-design-fixture-v1",
+  "baselineArtifact": null,
+  "environment": { "sillytavern": null, "extensions": {}, "browser": null, "configurationRef": null },
+  "authorization": { "environmentRef": null, "operations": [], "modelCallBudget": null },
+  "input": { "state": { "water": "high" }, "messageWindow": [], "selection": null },
+  "expected": { "entry": "reachable", "condition": true, "contentId": "bridge-east.rule" },
+  "observed": {
+    "entry": null,
+    "condition": null,
+    "target": null,
+    "read": null,
+    "output": null,
+    "finalRequest": null,
+    "stateBefore": null,
+    "stateAfter": null,
+    "selectionBefore": null,
+    "selectionAfter": null,
+    "ui": null,
+    "nextRequest": null
+  },
+  "runtimeStatus": "not-run",
+  "modelStatus": "not-run",
+  "modelEvidenceRef": null,
+  "runtimeBlockers": ["Target runtime versions and environment have not been verified; no host execution performed."],
+  "modelBlockers": ["No model call performed; runtime evidence and any required model-call authorization remain pending."]
+}

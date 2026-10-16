@@ -21,6 +21,11 @@ Use `$consult-tavernweave-library` with the `sillytavern-runtime-debug` route fo
 
 Close runtime bugs with evidence from the real target SillyTavern instance. An offline HTML preview can support development, but it cannot establish import behavior, message rendering, extension injection, iframe access, event timing, persistence, or MVU updates.
 
+For worldbook selection and state-to-next-request behavior, use
+[E07 isolated checks and observation records](references/worldbook-isolated-runtime-checks.md).
+Start with the plain-text turn and add only the selected template/MVU/UI cases;
+the bundled static fixture and receipt validator never establish real-host success.
+
 ## Own the runtime boundary
 
 Own live reproduction, browser execution, direct runtime evidence, and acceptance closure. Do not own embedded-UI design or source implementation.

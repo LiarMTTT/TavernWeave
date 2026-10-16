@@ -28,9 +28,9 @@ When this Skill is invoked through the TavernWeave plugin, or the task runs in d
 
 Before decomposition or registry writes, use `$consult-tavernweave-library` with the `sillytavern-card-components` route, read A0 and the returned card-format/regex guidance, and record the receipt in the roundtrip plan.
 
-Treat reusable component sources and packed card artifacts as different layers. Keep
-the shared library stable, make exploratory work disposable, and move changes across
-that boundary only after evidence supports promotion.
+Keep reusable component sources separate from packed card artifacts. Keep exploratory
+work disposable so the shared library stays stable. Promote changes only when the
+evidence supports them.
 
 ## Establish the boundary
 
@@ -137,9 +137,8 @@ one writer or one screen changed successfully.
 8. Compare canonical card semantics and the component mapping. Use byte equality only
    where the contract requires it; JSON formatting and PNG container bytes may differ.
 9. Run regression checks for every previously working consumer touched by the change.
-10. Leave host-dependent UI, regex, bridge, remote-loader execution, and interaction
-   behavior pending until it
-   passes real SillyTavern acceptance.
+10. Keep host-dependent UI, regex, bridge, remote-loader execution, and interaction
+    checks pending until they pass real SillyTavern acceptance.
 
 ## Promote only mature components
 

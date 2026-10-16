@@ -480,6 +480,42 @@
       "prompt": "把项目进度画板和已有总设计案、NEXT同步：设计案定义范围，NEXT更新后展示进度和下一道门。",
       "expectedPrimarySkill": "orchestrate-project-blueprint",
       "expectedBehavior": "Opt into exact design scope and NEXT state blocks using the actual project paths, derive the board from those sources, review a plan bound to board/feedback revisions and source/evidence hashes before application, preserve history, and keep real-host and driver gates separate."
+    },
+    {
+      "id": "worldbook-prose-only",
+      "prompt": "我只想精修现有世界书的一条正文：守卫通常不会让未核实身份的人通过；紧急撤离可由值班长批准例外。别改触发、加载或整张角色卡。",
+      "expectedPrimarySkill": "worldbook-design-and-writing",
+      "expectedBehavior": "Route to worldbook-design-and-writing, preserve 通常/未核实/值班长批准例外 and the text-only scope, do not promise that verification guarantees passage or change card/runtime configuration."
+    },
+    {
+      "id": "worldbook-native-first",
+      "prompt": "给我的纯文字角色卡规划一份独立世界书。只有固定港规和人物事实，没有状态变量，先选择最简单的加载方式并说明什么时候才需要升级。",
+      "expectedPrimarySkill": "worldbook-design-and-writing",
+      "expectedBehavior": "Route to worldbook-design-and-writing, select sufficient native loading before optional extensions, preserve builder ownership of full-card delivery, and state the conditions and cost for escalation without requiring templates or MVU."
+    },
+    {
+      "id": "worldbook-condition-boundaries",
+      "prompt": "设计世界书的水位条件条目：涨水时关闭东桥，正常水位可走；水位缺失时不能猜成正常。只写方案和真、假、缺值、入口没命中时的预期，不修改我的酒馆。",
+      "expectedPrimarySkill": "worldbook-design-and-writing",
+      "expectedBehavior": "Route to worldbook-design-and-writing, separate entry reachability from condition evaluation, keep missing distinct from false, distinguish native two-branch rule delivery from strict selected-branch output, and retain target-version and real-request verification boundaries."
+    },
+    {
+      "id": "worldbook-era-precedence",
+      "prompt": "世界书里同名白塔分别是古代建筑和现代救援组织。当前状态是现代，聊天正在比较古代白塔；请规划身份、选中优先级和歧义处理，不替玩家改变时代。",
+      "expectedPrimarySkill": "worldbook-design-and-writing",
+      "expectedBehavior": "Route to worldbook-design-and-writing, distinguish stable identity from labels, preserve agreed state/explicit-choice/mention precedence and comparison semantics, and do not treat a mention as an authorized state transition."
+    },
+    {
+      "id": "worldbook-mixed-budget",
+      "prompt": "我已有一份原生世界书和模板控制器，可能重复输出同一条港规。请审阅去重和总输出预算方案，必要规则放不下时怎么处理？现在只做设计。",
+      "expectedPrimarySkill": "worldbook-design-and-writing",
+      "expectedBehavior": "Route to worldbook-design-and-writing with performance/API handoff as needed; use shared content identity and observed combined request, preserve required rule dependencies, reject silent truncation of mandatory rules, and distinguish static length from actual token measurement."
+    },
+    {
+      "id": "worldbook-semantic-comparison",
+      "prompt": "为同一世界书规则设计同义改写和不同上下文位置的比较。先给可复用的验证设计，不调用模型，也不要保证某一种写法必然更好。",
+      "expectedPrimarySkill": "worldbook-design-and-writing",
+      "expectedBehavior": "Route to worldbook-design-and-writing, separate authored semantic expectations from observations, control model/parameters and length/information confounds if later authorized, include unseen inputs and failures, and leave model results not-run."
     }
   ]
 }

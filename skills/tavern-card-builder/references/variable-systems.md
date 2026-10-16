@@ -277,6 +277,13 @@ protocol design, model separation, and model/script workload boundaries.
 
 ## 9. Projection, lorebook consumers, and rendering
 
+Use [the shared turn-to-turn foundations](../../consult-tavernweave-library/references/sillytavern-runtime-foundations.md)
+only when that context is missing. Worldbook target types, aliases, initialization
+sentinels and write/read/consumer scope use the [E05 consumer contract](../../sillytavern-database-rolecards/references/worldbook-target-state-contract.md)
+within this existing field ledger; cross-native/template output deduplication and
+budgets use [E06](../../sillytavern-rolecard-performance/references/worldbook-output-budget.md).
+Neither consumer may repair saved state or become its second writer.
+
 The model projection is not the full database. Send only state required for the
 current turn and verify recipients. Distinguish objective world truth, current
 state, and character knowledge in the content sent. Read-only or code-only intent

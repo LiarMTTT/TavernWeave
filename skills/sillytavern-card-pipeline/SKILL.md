@@ -29,9 +29,9 @@ Apply [TW plain-language and guidance rules](../consult-tavernweave-library/refe
 When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
-Drive the target repository's workflow without pretending this skill ships a build
-engine. Discover and verify the project's own tools, map them to a small adapter
-contract, and keep configuration, source, and artifacts in distinct layers.
+This skill coordinates the target repository's workflow; it does not ship a build
+engine. Find and verify the project's own tools, map them to a small adapter contract,
+and keep configuration, source, and artifacts separate.
 
 Before a write, build, or package action, use `$consult-tavernweave-library` with the `sillytavern-card-pipeline` route. Read A0 and the returned build/deployment guides, then keep the route receipt beside the preflight evidence.
 
@@ -66,7 +66,7 @@ project tools.
    support, side effects, and success criteria.
 5. Run a read-only information or validation capability first.
 
-If a required capability is absent, report the missing adapter boundary. Do not claim
+If a required capability is absent, name it in the report. Do not claim
 that a bundled engine or fallback command exists.
 
 ## Drive a live development loop
@@ -133,7 +133,7 @@ the packed extension surfaces without an explicit compatibility explanation.
    local Zod installation instruction.
 4. Define the exact write scope and new artifact paths. Preserve earlier releases;
    default to a new version or staging directory.
-5. Anchor a regression checklist for every already-working consumer in scope.
+5. Create a regression checklist for every already-working consumer in scope.
 6. Create or review a plan with precise operations, guarded replacements, collision
    policy, and validation attached to each step.
 7. Validate profile, manifest, plan, contract, and runtime dependency structure.

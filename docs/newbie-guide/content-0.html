@@ -3,7 +3,7 @@
 <p class="lead"><strong>v1.7.0：前端沙盒打磨。</strong>提供搭建规范，让 Agent 按你的作品源码建立可选沙盒：单模块或多前端联合模拟，确认注入、状态对照和滑条调 UI。可以跳过，不阻塞原有流程。<a href="#frontend-sandbox">查看用法与提示词</a>。</p>
 <div class="chapter-tier"><span>先看这里</span><strong>TavernWeaveX无限月读 功能地图</strong><span>从你要解决的问题开始</span></div>
 <div class="section-head"><div class="section-no">TW</div><div><h2>TavernWeaveX无限月读 能做什么</h2><p class="section-kicker">从整理想法、制作角色卡，到排查问题、组装发布，TW 帮你把项目一步步做出来。</p></div></div>
-<p class="lead">TavernWeaveX无限月读（沿用 TW 简称）是一套面向角色卡制作与 Vibe Coding 的工作系统。这里介绍 22 个专职 Skill，也就是 Agent 按任务调用的工作方法。当前正式版为 1.9.1，Codex 与 dots 共用插件包。<a href="#release-v1-9-1">查看本版变化与下载入口</a>。</p>
+<p class="lead">TavernWeaveX无限月读（沿用 TW 简称）是一套面向角色卡制作与 Vibe Coding 的工作系统。当前 2.0.0 正式版提供 23 个专职 Skill，也就是 Agent 按任务调用的工作方法。<a href="#release-v2-0-0">查看本版变化与下载入口</a>。</p>
 <p>你可以用 TW 讨论一个还没想清楚的项目，制作或改进角色卡，搭建界面，精修文字，查找故障，也可以在各部分完成后组装作品、准备发布。想回顾自己一路怎么做项目、积累了哪些经验，可以调用“照镜子”，复盘你的 <strong>Vibe Code 经验与成长历程</strong>。</p>
 <p>开始时不用记住这些 Skill 的英文名。直接告诉 Agent 你想做什么，或者卡在了哪里，它会判断需要调用哪些能力。</p>
 <div class="flow"><div class="flow-node">你说需求</div><div class="flow-arrow">→</div><div class="flow-node">Agent 选择所需能力</div><div class="flow-arrow">→</div><div class="flow-node">查阅相关资料</div><div class="flow-arrow">→</div><div class="flow-node">制作与检查</div><div class="flow-arrow">→</div><div class="flow-node">需要你验收的<br/>面和点</div></div>
@@ -59,7 +59,12 @@
 <div class="cards capability-cards"><article class="card"><h4>从零搭角色卡</h4><p class="muted">先聊玩法和故事，再按需要制作设定、开局、世界书、变量与界面。哪些真的要做，取决于这张卡想怎么玩。</p></article><article class="card"><h4>旧卡增量升级</h4><p class="muted">先读懂旧卡用的变量格式和组件关系，再加功能、尽量保留原来的味道。修改部件与重新封装整卡，会分别说明范围。</p></article><article class="card"><h4>拆分与重新组装</h4><p class="muted">把大 JSON 拆成便于修改的源码部件，逐项检查后再组装。组装和发布都按你已经确认的范围执行。</p></article></div>
 <div class="callout"><strong>你可以直接这样说</strong>“帮我从零制作一张 MVU 角色卡，先访谈，不要直接写文件。”或“把这张纯文字卡改成 MVU 卡，尽量保留原来的味道。”</div>
 
-<h3 data-subsection="TW.2.1" id="tw-system-prose">文本精修：去 AI 味与去八股 <span class="new-badge">NEW · V1.4.0</span></h3>
+<h3 data-subsection="TW.2.1" id="tw-worldbook-writing">世界书设计与写作 <span class="new-badge">NEW · V2.0.0</span></h3>
+<p>只做世界书时，可以直接用 <code>worldbook-design-and-writing</code>，不用先启动整卡制作。它有两类入口：已有条目只需改正文，就保留原意、术语和受保护内容；需要拆分、合并或调整触发时，先看哪些场景要用到哪些信息，再把条目边界和加载方式一起设计。</p>
+<div class="cards capability-cards"><article class="card new-panel"><h4>改写单条正文</h4><p class="muted">给出原条目和要改变的表达，明确哪些事实与规则不能动。纯文字修改不会顺带重建整本世界书。</p></article><article class="card new-panel"><h4>设计条目与触发</h4><p class="muted">结合实际场景、原有条目和配置，选择原生触发、简单条件或已有控制方式；同一本书允许按需混用。新增或修改条目时，正文与配置成对核对。</p></article><article class="card"><h4>分开检查结果</h4><p class="muted">源码检查、导入结果、实际发给模型的内容和玩家体验各自记录；需要查 API、变量目标或真实酒馆表现时，再交给对应 Skill。</p></article></div>
+<div class="callout"><strong>可以直接这样说</strong>“只改写这条世界书正文，保留原意与现有配置，先给我看修改稿。”或“检查这本世界书在这三种场景中需要哪些信息，再建议如何拆分、触发和排列；先看现有条目与配置。”</div>
+
+<h3 data-subsection="TW.2.2" id="tw-system-prose">文本精修：去 AI 味与去八股 <span class="new-badge">NEW · V1.4.0</span></h3>
 <p>一段话看着挺工整，读完却不知道它想说什么；几个人物一开口，像共用一个发言稿——这些都可以交给文本精修。改的是表达，事实、设定和技术结构要保住。</p>
 <div class="cards capability-cards"><article class="card new-panel"><h4>按需要改轻或改深</h4><p class="muted">只想读着顺一点，选轻润色；段落顺序不合适，选结构改写；整篇都需要换一种讲法，再选深度重写。力度再大，也不能替你编事实。</p></article><article class="card new-panel"><h4>单次、持续与持久</h4><p class="muted">可只改一段，或在当前任务持续精修；工作区和客户端持久模式分别由你同意后开启。</p></article></div>
 <div class="code-block"><div class="code-label"><span>直接交付精修稿</span><button class="copy-btn" type="button">复制</button></div><pre><code>洗稿下面这段文字：去掉套话和机械句式，保留原意、人物声音、数字、宏与变量。默认轻润色，只给我改写稿。</code></pre></div>
@@ -79,6 +84,6 @@
 
 <h3 data-subsection="TW.5" id="tw-system-library">资料库、安装与发布 <span class="new-badge">NEW · V1.3.0</span></h3>
 <p>适合查 SillyTavern、酒馆助手、MVU、EJS 与 STScript 的真实用法，或者安装、更新、核验和发布 TavernWeave。</p>
-<div class="cards capability-cards"><article class="card new-panel"><h4>Library 按任务取资料</h4><p class="muted">A0、ST 指南与设计资料随 TW 一起分发。Agent 先按问题查资料，只读取用得上的部分；纯文字修改不需要顺手翻一遍动效库。</p></article><article class="card new-panel"><h4>22/22 与全局前门</h4><p class="muted">核对 22 个 Skill 是否齐全。你明确同意后，还可以安装客户端全局入口，让 Soul、脑暴、照镜子和 A0 loop 等口令更容易被识别。</p></article><article class="card"><h4>从部件到发布</h4><p class="muted">先交付可导入的部件。组装整卡、提交 Git、推送、打标签和发布 Release，分别以你明确授权的动作与范围为准。</p></article></div>
+<div class="cards capability-cards"><article class="card new-panel"><h4>Library 按任务取资料</h4><p class="muted">A0、ST 指南与设计资料随 TW 一起分发。Agent 先按问题查资料，只读取用得上的部分；纯文字修改不需要顺手翻一遍动效库。</p></article><article class="card new-panel"><h4>23/23 与全局前门</h4><p class="muted">按 2.0.0 的完整清单核对 23 个 Skill。你明确同意后，还可以安装客户端全局入口，让 Soul、脑暴、照镜子和 A0 loop 等口令更容易被识别。</p></article><article class="card"><h4>从部件到发布</h4><p class="muted">先交付可导入的部件。组装整卡、提交 Git、推送、打标签和发布 Release，分别以你明确授权的动作与范围为准。</p></article></div>
 <div class="callout good"><strong>不知道下一页看什么？</strong>第一次使用 TW，继续读第一章；正在做变量卡，跳到第二章；正在做状态栏和按钮，跳到第三章；只有真实酒馆里会坏，直接看第四章。</div>
 </section>

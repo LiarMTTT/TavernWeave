@@ -125,8 +125,8 @@ def validate_source(contents, selected):
     require(install.get("package") == ROOT.rstrip("/"), "installation package identity mismatch")
     require(install.get("hostFrontDoor", {}).get("version") == version, "host front door version mismatch")
     skills = sorted(name.split("/")[1] for name in selected if re.fullmatch(r"skills/[^/]+/SKILL\.md", name))
-    require(len(skills) == 22 and len(set(skills)) == 22, "package must contain 22 native Skills")
-    require(install.get("skillCount") == 22 and install.get("skills") == skills,
+    require(len(skills) > 0 and len(set(skills)) == len(skills), "package must contain unique native Skills")
+    require(install.get("skillCount") == len(skills) and install.get("skills") == skills,
             "declared Skills do not match committed SKILL.md files")
     declared = list(install.get("requiredPaths", [])) + list(install.get("hostFrontDoor", {}).get("requiredSourcePaths", []))
     require(RUNTIME_PATHS <= selected.keys(), "plugin guide or runtime reference missing from package")
@@ -262,8 +262,8 @@ def build(repo, ref, output_dir):
             "name": "tavernweave-zcode", "description": f"TavernWeaveX {version} skills for ZCode and compatible plugin hosts.",
             "owner": {"name": "LiarMTTT", "url": "https://github.com/LiarMTTT"},
             "plugins": [{"name": ROOT.rstrip("/"), "version": version,
-                         "description": "22 skills for rolecards, software workflows, research and quality checks.",
-                         "description_i18n": {"zh-CN": f"TavernWeaveX无限月读 {version}：完整 22 个 Skills，支持角色卡、软件开发、作品资料库与质量检查。"},
+                         "description": f"{len(skills)} skills for rolecards, software workflows, research and quality checks.",
+                         "description_i18n": {"zh-CN": f"TavernWeaveX无限月读 {version}：完整 {len(skills)} 个 Skills，支持角色卡、软件开发、作品资料库与质量检查。"},
                          "source": {"source": "url", "type": "zip",
                                     "url": f"https://github.com/LiarMTTT/TavernWeave/releases/download/v{version}/{names['Claude-ZCode']}",
                                     "sha256": artifacts["Claude-ZCode"]["sha256"], "path": ROOT.rstrip("/")}}],
@@ -280,7 +280,7 @@ def build(repo, ref, output_dir):
             "marketplace": marketplace_name, "signatureStatus": "unsigned; SHA-256 checksums supplied",
             "dotVerification": "not-run", "officialSchemaCertification": "not-run",
             "checks": ["single plugin root", "manifest identity, version and declared paths",
-                       "22 native Skills", "documented ZIP limits", "CRC and every archive byte equals its Git blob"],
+                       f"{len(skills)} native Skills", "documented ZIP limits", "CRC and every archive byte equals its Git blob"],
             "excludedTrackedFiles": sorted(set(tracked) - set(selected)), "documentation": DOCS,
             "limits": ["Offline schema compatibility checks are not official OpenAI certification",
                        "No client install, dot verification, host rediscovery, or real SillyTavern run"],

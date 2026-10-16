@@ -1,5 +1,11 @@
 # 奶人教程更新日志
 
+## TavernWeaveX无限月读 2.0.0 · 正式版 - 2026-10-16
+
+- 新增第 23 个 Skill `worldbook-design-and-writing` 的教程入口：区分只改条目正文与重新设计条目／加载方式，说明场景信息、正文与配置如何对齐。
+- 功能地图、Skill 分工、导航、版本元信息与页脚同步为 2.0.0；教程缓存更新到 v56，原导航锚点与历史版本条目保留。
+- 安装说明按 2.0.0 正式包核验 23/23，正式下载指向 [v2.0.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0)；历史 1.9.1 的 22 个 Skill 记录保留。
+
 ## TavernWeaveX无限月读 1.9.1 · 统一插件正式版 - 2026-10-13
 
 - 将 Codex 与 dots 收敛为同一个 skills-only 插件包，主要面向有插件权限的 dots 云端长任务；保留 22 个 Skill、原名称和安装身份，不另开 cloud 版。

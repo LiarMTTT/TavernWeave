@@ -65,8 +65,8 @@
       "source": "STDB/A0_驾驭工程从零搭建检查单.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "f934b2884a316f0d1d697f3c9a01dcda5526ecff991926a110a4b5ab869c8973",
-      "targetHash": "f934b2884a316f0d1d697f3c9a01dcda5526ecff991926a110a4b5ab869c8973",
-      "bytes": 9341,
+      "targetHash": "b10e9476c1801c7b3627e085b38ac76c1feeaea87a5ec33836e9b0b39a4f921e",
+      "bytes": 9947,
       "redactions": 0,
       "pathRedactions": 0,
       "credentialRedactions": 0
@@ -80,8 +80,8 @@
       "source": "STDB/A2_角色卡格式规范.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "288410b7dc81211df8164e76dde69bb5c83169bb79f13b71340c9a3cdb85969c",
-      "targetHash": "288410b7dc81211df8164e76dde69bb5c83169bb79f13b71340c9a3cdb85969c",
-      "bytes": 35109,
+      "targetHash": "51454db21dbdfcb686bea80b5e5a957c9d764da87ff089a967c03fa487e4786f",
+      "bytes": 35329,
       "redactions": 0,
       "pathRedactions": 0,
       "credentialRedactions": 0
@@ -95,8 +95,8 @@
       "source": "STDB/A3_世界书优化.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "f5658805d8bfadaa26814cbd39d617b5e4b312f3841fdf26ad51a89e89fcc7d7",
-      "targetHash": "f5658805d8bfadaa26814cbd39d617b5e4b312f3841fdf26ad51a89e89fcc7d7",
-      "bytes": 44139,
+      "targetHash": "e4de0f93332ff77ffb11f1b4bfc07252a72cbe5a88fe160ad1aaaa30cbde5b47",
+      "bytes": 44359,
       "redactions": 0,
       "pathRedactions": 0,
       "credentialRedactions": 0
@@ -110,8 +110,8 @@
       "source": "STDB/A4_提示词与预设.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "1774c948226396f6544395d2b26eb3a3521e20a935e08934959ecfc3643a80ac",
-      "targetHash": "e01ac68bfac43d43a15e0b16bff775e26b816eb3d8fc0e405439ae1eba4ac847",
-      "bytes": 36696,
+      "targetHash": "21faf6d7a7ed2c20598de1c25f17f4fd66e4ec7ddcdbc6882446a3b823206300",
+      "bytes": 36916,
       "redactions": 3,
       "pathRedactions": 3,
       "credentialRedactions": 0
@@ -125,8 +125,8 @@
       "source": "STDB/A5_渲染管线与宏.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "7f456d6c4df8899904b7dcf5662840aee191c29b8b497f4e925016391e3908dd",
-      "targetHash": "3d7f329cfc394b3e8a1884b70cd03d68d1315914ba03271af13bf8f745f74af4",
-      "bytes": 42701,
+      "targetHash": "c319468d7a166c5b7b5e85a4fe56165ccc4709f677243b7a7d5e1a4c7012c053",
+      "bytes": 42921,
       "redactions": 1,
       "pathRedactions": 1,
       "credentialRedactions": 0
@@ -155,8 +155,8 @@
       "source": "STDB/B1_变量更新规则.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "08dc230c36ce9f35b59f4b7c511af9459d7b6c287433eac656811a0aaffadb8e",
-      "targetHash": "b8abd15f16b888208d20fe9d7c0f6a8e61bef471acce7347d7b40b3729fc52a5",
-      "bytes": 45620,
+      "targetHash": "f4ca8a9d01fb6be947aff06c7d689ef1e9f985478928158d37f1d16bf2581338",
+      "bytes": 45840,
       "redactions": 10,
       "pathRedactions": 10,
       "credentialRedactions": 0
@@ -1860,7 +1860,7 @@
     },
     {
       "path": "assets/picker/manifest-data.js",
-      "hash": "ce8928cdf0a017308af9c43022186f8f39a5a69716cee91fe3e0b4a14f6c06fe",
+      "hash": "9e2f6640353f366e5e9656e90006335bc4269d5b7c27bbaa7b50568802efd886",
       "bytes": 54815
     },
     {

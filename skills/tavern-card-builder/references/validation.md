@@ -34,7 +34,10 @@ Assess creative ideas against the author's intended experience when requested. O
 reasoned alternatives, distinguishing an actual contradiction from a taste-based
 suggestion. Preserve effective work; neither praise nor findings need a quota.
 Separate prose quality, entry configuration, model-bound delivery and actual portrayal.
-Use existing specialist checks rather than creating another full-card test regime.
+Use [worldbook-design-and-writing](../../worldbook-design-and-writing/SKILL.md) for
+standalone worldbook assessment and its scoped semantic/loading checks. Pure-text
+rewrites do not require the full card/runtime matrix. Use existing specialist checks
+rather than creating another full-card test regime.
 
 For editable prose, apply [natural Chinese review](../../rewrite-natural-prose/references/natural-chinese-review.md).
 Review nonessential three-part lists by meaning, including conjunctions and adjacent
@@ -45,7 +48,10 @@ runtime templates. Do not infer model behaviour or aesthetic acceptance from tex
 ## 1. Static chain checks
 
 - A completed card has a usable greeting and an available, relevant worldbook;
-  empty placeholders do not close this gate. A planning record may still be incomplete.
+  empty placeholders do not close this gate. Accept the greeting forms defined by the
+  [shared core](card-types-and-runtime-dependencies.md#3-shared-core-and-component-architecture)
+  rather than marking a working frontend greeting as missing. A planning record may
+  still be incomplete.
 - Target type is `text`, `mvu_zod` or `hybrid`; `unknown` remains a discovery state.
   Legacy `mvu` is read only through the explicit compatibility path and is not proof
   of Zod support or migration. A normal MVU Zod card with UI/scripts is not hybrid.
@@ -53,8 +59,10 @@ runtime templates. Do not infer model behaviour or aesthetic acceptance from tex
   content. Existing effective fields are not cleared as a side effect of a narrow edit.
 - New worldbook design has a player-confirmed 小型 / 中型 / 大型 choice and an
   explanation of the corresponding work. A prior explicit choice is reused.
-- World prose prefers structure and preserves conditions, exceptions, knowledge
-  scope and degree, including partial, mistaken or outdated understanding.
+- World prose follows the [semantic invariants](../../worldbook-design-and-writing/references/writing-contracts.md#6-semantic-invariants):
+  conditions, exceptions, negation, degree and knowledge boundaries survive rewriting;
+  free space and undecided core facts are distinct. New core setting, gameplay goals
+  and major plot changes have the corresponding decision.
 - Character-entry activation follows the single/multiple-character convention;
   effective keyword scan depth is 2 and both recursion directions are disabled for
   every entry. Verify actual target fields; scan depth is not insertion depth.
@@ -78,7 +86,9 @@ runtime templates. Do not infer model behaviour or aesthetic acceptance from tex
 - An MVU Zod card distinguishes its embedded schema, every promised domestic/global
   MVU Zod script, their declared enabled states, remote import targets, and required
   host extension.
-- Model-visible text contains no developer-only explanation or secret.
+- Model-visible text contains no developer-only explanation, credentials or secrets
+  outside the intended recipient's scope; intended narrator knowledge is not universal
+  in-story knowledge.
 
 ### Character material, player agency and portrayal review
 
@@ -164,7 +174,9 @@ When artifacts exist, delegate to `$sillytavern-card-pipeline` and verify:
 For runtime-affecting work, verify in real SillyTavern:
 
 - import and new chat;
-- every greeting branch involved;
+- every greeting branch involved, including a frontend greeting's usable display,
+  intended entry into play and actual model-visible content; test sends or state
+  writes only where the page provides them;
 - a no-MVU text card with custom CoT;
 - preset main CoT plus card increment, with the assembled result reaching the intended
   plot context exactly once;
@@ -189,12 +201,14 @@ For runtime-affecting work, verify in real SillyTavern:
 - UI on target devices and reload paths;
 - console errors, network failures, and safe fallback.
 
-For worldbook changes, additionally inspect actual model-bound content for first
-entry into a scene, continued presence without repeated names, departure, ambiguous
-aliases, and state-controlled selection. Do not silently increase scan depth or
-enable recursion to make a case pass. Keep the agreed configuration and diagnose
-keyword, content-boundary or state-loading needs. Separate selection evidence from
-whether a model follows or writes the intended content.
+For worldbook loading changes, use the owning skill's
+[scoped scene checks](../../worldbook-design-and-writing/references/planning-and-loading.md#7-pair-validate-and-deliver-the-changed-scope)
+and [E07 isolated runtime checks](../../sillytavern-runtime-debug/references/worldbook-isolated-runtime-checks.md).
+Check only adopted paths: native first-use/continuation/departure/collision, and
+true/false/missing, precedence, targets, duplicates and budget when templates are used.
+Do not increase scan depth or enable recursion to make a case pass. A native-only
+project does not need a template installation. Selection/request evidence and actual
+model behavior remain separate.
 
 Offline HTML or headless checks do not close this gate.
 

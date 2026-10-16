@@ -17,7 +17,7 @@ and map the semantic role through the adapter instead of introducing a parallel 
 ## Profile checks
 
 Require a stable ID, family or type, semantic version, and an explicit link or
-deterministic resolution to version truth. When relevant, declare:
+deterministic way to find the authoritative version. When relevant, declare:
 
 - update protocol and model-context mode;
 - primary card type, capability flags, and runtime dependency defaults;

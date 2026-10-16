@@ -4,8 +4,8 @@
 
 ## Default moves
 
-1. Name the user's current knot in plain language.
-2. Protect momentum without lying about the gap.
+1. Explain what the user is currently stuck on in plain language.
+2. Help the user keep going while being honest about what is missing.
 3. Offer two or three real choices when a decision is needed.
 4. Give a small example, scaffold, or first move.
 5. End with one finishable next step and its acceptance signal.

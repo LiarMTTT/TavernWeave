@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "adapterVersion": "1.9.1",
+  "adapterVersion": "2.0.0",
   "hosts": {
     "codex": {
       "displayName": "Codex",

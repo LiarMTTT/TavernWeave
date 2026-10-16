@@ -77,7 +77,7 @@
     <b>本指南所有口令请在「新会话」中使用。</b>
   </div>
 </header>
-<div class="callout tip guide-editor-note"><b class="tag">教程收录说明 · 2026-09-24</b><p>Soul 是当前任务的可选教学／审查层。当前宿主能发现并实际调用 <code>activate-tavernweave-soul</code> 时才可用；全局 Front Door 属于可选配置，可帮助路由，不能代替调用证据。若仅在 TW 项目级安装，另一个工作根不保证可用。Soul 不改变所选主干、写入权限和验收要求。</p><p>以下 A 主干流程是从零且需要完整规划时的示例；接手续更、局部修改和排错可按已有项目直接进入对应 Skill。跨套检查按本文的只读示例开始；需要真实 ST 调试、媒体等其他能力时，逐项说清负责人和允许修改的范围。</p></div>
+<div class="callout tip guide-editor-note"><b class="tag">教程收录说明 · 2026-09-24</b><p>Soul 是当前任务的可选教学／审查层。当前宿主能发现并实际调用 <code>activate-tavernweave-soul</code> 时才可用；全局 Front Door 属于可选配置，可帮助路由，不能代替调用证据。若仅在 TW 项目级安装，另一个工作根不保证可用。Soul 不改变所选主干、写入权限和验收要求。</p><p>以下 A 主干流程是从零且需要完整规划时的示例；接手续更、局部修改和排错可按已有项目直接进入对应 Skill。跨套检查按本文的只读示例开始；需要真实 ST 调试、媒体等其他能力时，逐项说清负责人和允许修改的范围。</p><p>2026-10-16 维护：本文 TW 完整安装数量按 2.0.0 正式版更新为 23 个 Skill；2026-09-24 的收录记录仍表示当时情况。v1.9.1 历史发行包为 22 个 Skill。</p></div>
 
 <div class="callout danger"><b class="tag">先读</b>
   这份指南里，TavernWeave 和墨月是<b>平行的两条主干</b>，每张卡二选一。但墨月当主干的条件只有一个：<b>整包用，让它自己的文件夹当根</b>。把它的 9 个 skill 拆出来装进 TavernWeave 的目录，24 条路径会断（§2 有文件证据）。
@@ -104,7 +104,7 @@
 
 <div class="guide-table"><table>
 <tr><th style="width:110px">铁律</th><th>内容</th></tr>
-<tr><td><b>铁律 1</b></td><td><b>开工先报主干。</b>TavernWeave 的 22 个 skill 和墨月的 9 个都监听「角色卡 / 世界书 / MVU / 状态栏」。不共根之后撞车概率低了，但装在用户级的 TW skill 在墨月文件夹里照样看得见。在哪个文件夹开工，第一句话都发「项目主干声明」（模板见 §8）。</td></tr>
+<tr><td><b>铁律 1</b></td><td><b>开工先报主干。</b>TavernWeave 的 23 个 skill 和墨月的 9 个都监听「角色卡 / 世界书 / MVU / 状态栏」。不共根之后撞车概率低了，但装在用户级的 TW skill 在墨月文件夹里照样看得见。在哪个文件夹开工，第一句话都发「项目主干声明」（模板见 §8）。</td></tr>
 <tr><td><b>铁律 2</b></td><td><b>一项目一事实来源。</b>A 主干记「创作权威」文档；B 主干记 <code>src/&lt;卡名&gt;/项目状态.md</code> ＋ <code>index.yaml</code>，<code>创作台.md</code> 是你自己的原文，秋青子只读不改（<code>moyu-project/SKILL.md</code> 第 35 行）。同一张卡绝不双记账。</td></tr>
 <tr><td><b>铁律 3</b></td><td><b>验收只能你亲口说。</b>TW 的 <code>driver-accepted</code>、墨月的酒馆实测，都只能由你说出。墨月自己在 <code>moyu-package/SKILL.md</code> 第 13 行写明：打包成功只说明结构能生成，酒馆运行、模型效果、视觉效果都还没过。</td></tr>
 <tr><td><b>铁律 4</b></td><td><b>墨月整包用，不拆。</b>它的 9 个 skill 是薄路由（每个 19–36 行），全靠 <code>../../../</code> 往上读 <code>知识库/</code>、<code>必读/</code>、<code>@types/</code>、<code>初始模板/</code>，9 个文件共 <b>24 处</b>；调用顺序由根层入口 → <code>必读/02_专项路由.md</code> 决定；4 个脚本写死 <code>src/&lt;卡名&gt;/</code> 与 <code>tavern_sync.yaml</code>。把 <code>moyu-*</code> 拷进别的目录，24 条路径全断，作者本人也提醒过这一点。要用它，让它自己的文件夹当根。</td></tr>
@@ -138,7 +138,7 @@ flowchart TB
 资料路由（必需依赖）"]
   end
   subgraph ROOTA["根 A · TavernWeave 工作区（项目级安装）"]
-    FD["Front Door + A0 + Soul"] --> TWS["22 个 TW skill"] --> CARDS["cards/卡名/
+    FD["Front Door + A0 + Soul"] --> TWS["23 个 TW skill"] --> CARDS["cards/卡名/
 创作权威 · 证据链 · driver-accepted"]
     REF["参考副本 .local/moyue/
 入口已移出停用区
@@ -166,8 +166,8 @@ flowchart TB
 
 <div class="guide-table"><table>
 <tr><th style="width:150px">层</th><th>内容</th><th style="width:210px">混合规则</th></tr>
-<tr><td><span class="badge s">用户级桥</span></td><td>TavernWeave 的 <code>sillytavern-rolecard-security</code>、<code>sillytavern-rolecard-performance</code>、<code>sillytavern-api-reference</code>，<code>consult-tavernweave-library</code>（必需依赖）。这三项均引用同级 <code>consult-tavernweave-library</code> 的沟通规则与资料路由。使用本指南的用户级只读桥时，把四个完整目录放在同一处宿主实际扫描的 skills 根，再开新任务核查调用。这是混搭的局部布置，不等于 README 中正式的 <code>22/22</code> 完整安装。</td><td>只读；两个根都能叫到；<b>不放</b>生产类 skill</td></tr>
-<tr><td><span class="badge a">根 A</span> TavernWeave 工作区</td><td>Front Door、A0、Soul 人格层（阿瞳 / MTTT.sir / 灵魂杀手）、22 个 skill 项目级安装、<code>cards/&lt;卡名&gt;/</code>、创作权威、证据链。另放一份墨月<b>参考副本</b>（<code>.local/moyue/</code>，入口文件移入停用区），供 A 主干的卡按路由表读知识库。</td><td>A 主干的完整主权链</td></tr>
+<tr><td><span class="badge s">用户级桥</span></td><td>TavernWeave 的 <code>sillytavern-rolecard-security</code>、<code>sillytavern-rolecard-performance</code>、<code>sillytavern-api-reference</code>，<code>consult-tavernweave-library</code>（必需依赖）。这三项均引用同级 <code>consult-tavernweave-library</code> 的沟通规则与资料路由。使用本指南的用户级只读桥时，把四个完整目录放在同一处宿主实际扫描的 skills 根，再开新任务核查调用。这是混搭的局部布置，不等于 README 中正式的 <code>23/23</code> 完整安装。</td><td>只读；两个根都能叫到；<b>不放</b>生产类 skill</td></tr>
+<tr><td><span class="badge a">根 A</span> TavernWeave 工作区</td><td>Front Door、A0、Soul 人格层（阿瞳 / MTTT.sir / 灵魂杀手）、23 个 skill 项目级安装、<code>cards/&lt;卡名&gt;/</code>、创作权威、证据链。另放一份墨月<b>参考副本</b>（<code>.local/moyue/</code>，入口文件移入停用区），供 A 主干的卡按路由表读知识库。</td><td>A 主干的完整主权链</td></tr>
 <tr><td><span class="badge m">根 B</span> 墨月工坊</td><td>整个墨月文件夹原样：根层入口（秋青子人格 + 工作总则 + 大白话拆解 + 专项路由）、9 个 <code>moyu-*</code>、<code>知识库/</code>、<code>@types/</code>（32 个 d.ts）、<code>初始模板/</code>、<code>scripts/</code>、<code>tavern_sync</code>、每张卡一个 <code>src/&lt;卡名&gt;/</code>。</td><td>B 主干的完整主权链；<b>一个文件都不改</b>（Claude Code 只加入口壳，§10.6）</td></tr>
 </table></div>
 
@@ -555,7 +555,7 @@ flowchart TD
 </div>
 <div class="card" style="margin-top:14px">
   <h4><span class="badge s">桥</span> 用户级只读 skill</h4>
-  <code>sillytavern-rolecard-security</code>（只读扫描）· <code>sillytavern-rolecard-performance</code>（预算评估）· <code>sillytavern-api-reference</code>（版本敏感查证）· <code>consult-tavernweave-library</code>（必需依赖）（资料路由）。这三项均引用同级 <code>consult-tavernweave-library</code> 的沟通规则与资料路由。使用本指南的用户级只读桥时，把四个完整目录放在同一处宿主实际扫描的 skills 根，再开新任务核查调用。这是混搭的局部布置，不等于 README 中正式的 <code>22/22</code> 完整安装。
+  <code>sillytavern-rolecard-security</code>（只读扫描）· <code>sillytavern-rolecard-performance</code>（预算评估）· <code>sillytavern-api-reference</code>（版本敏感查证）· <code>consult-tavernweave-library</code>（必需依赖）（资料路由）。这三项均引用同级 <code>consult-tavernweave-library</code> 的沟通规则与资料路由。使用本指南的用户级只读桥时，把四个完整目录放在同一处宿主实际扫描的 skills 根，再开新任务核查调用。这是混搭的局部布置，不等于 README 中正式的 <code>23/23</code> 完整安装。
 </div>
 
 <h3>10.3 目录地图</h3>
@@ -567,7 +567,7 @@ flowchart TD
 
 &lt;TW 工作区&gt;/                              根 A
 ├── CLAUDE.md / AGENTS.md                 TW Front Door（+ 你自己的项目规则）
-├── .agents/skills/  .claude/skills/      TW 22 个（项目级）
+├── .agents/skills/  .claude/skills/      TW 23 个（项目级）
 ├── cards/&lt;卡名&gt;/                        每张 A 主干的卡；创作权威
 ├── <local-guide-db>/                          TW 指南源 · 本指南
 └── .local/                               （gitignore）

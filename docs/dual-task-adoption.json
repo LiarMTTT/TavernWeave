@@ -1,0 +1,3029 @@
+{
+  "title": "TavernWeave 双任务升级：源到目标核对记录",
+  "date": "2026-10-15",
+  "status": "本地候选源码与静态合同；未发布、未安装、非模型回放或酒馆运行结果",
+  "baseline": {
+    "repository": "https://github.com/LiarMTTT/TavernWeave",
+    "commit": "9a8274f9b0a714256195845cab4e4f6ad73e2997",
+    "release": "1.9.1",
+    "baselineSkills": 22,
+    "candidateSkills": 23
+  },
+  "input": {
+    "presetSha256": "f7c3a88836bda71f35353d2193d0db0ec0430d1af275d1e9957bdf6930936e4a",
+    "inventoryCount": 151,
+    "indexConvention": "prompts 零基数组索引 P000–P150；不是世界书 UID",
+    "cardSha256": "d2de21bc259711f984a4163a1f71812ea52460ea1e81e95398dc271ae4f8986d",
+    "rawInputsRedistributed": false,
+    "rawInputCodeExecuted": false
+  },
+  "evidenceLimits": [
+    "逐条索引、名称与 identifier 已与原 JSON 核对；长理论按相关方法与结构审阅，不声称逐句完整教材审计。",
+    "长正则、HTML、远程加载器没有逐行完整安全审计，也未执行。",
+    "候选文档/路由/自写离线夹具通过不能推出目标安装、实际最终提示或模型行为通过。",
+    "历史模型 replay 结果和指纹保留原样；源变动后发布门需要重新核验。"
+  ],
+  "counts": {
+    "total": 151,
+    "excluded": 85,
+    "partialMethodOnly": 29,
+    "unresolved": 1,
+    "reuseExisting": 36,
+    "actualDecisionCounts": {
+      "实际缺失，补充": 1,
+      "已有但不足，局部改造": 28,
+      "已有足够好，复用": 36,
+      "待核对": 1,
+      "排除": 85
+    }
+  },
+  "methodGroups": {
+    "expression": {
+      "baselineComparison": [
+        {
+          "path": "skills/rewrite-natural-prose/references/natural-chinese-review.md",
+          "section": "既有自然中文诊断与语义保护"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/card-writing.md",
+          "section": "6. Prompt economy"
+        }
+      ],
+      "decision": "既有能力足够，保留独立去八股权威；仅补非人物压缩语义反例及提示表达交接。P049–051 没有任何提取或替换名称。",
+      "targets": [
+        {
+          "path": "skills/rewrite-natural-prose/references/editing-guide.md",
+          "section": "Compression without changing force"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md",
+          "section": "从效果到最小交付"
+        }
+      ],
+      "verification": [
+        "tests/general-methods-integration.test.mjs"
+      ]
+    },
+    "prompt-spec": {
+      "baselineComparison": [
+        {
+          "path": "skills/orchestrate-project-blueprint/references/first-version-contract.md",
+          "section": "首版合同"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/autonomy-and-gates.md",
+          "section": "决定/执行/验证边界"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/card-writing.md",
+          "section": "6. Prompt economy"
+        }
+      ],
+      "decision": "复用合同与决定机制；补消费者、固定/待填字段、样例归纳与未见输入的最小交接。",
+      "targets": [
+        {
+          "path": "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md",
+          "section": "全文，按局部提示任务加载"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "section": "局部提示规格与样例归纳"
+        }
+      ],
+      "verification": [
+        "tests/general-methods-integration.test.mjs",
+        "tests/dual-task-integration.test.mjs"
+      ]
+    },
+    "clarification": {
+      "baselineComparison": [
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "section": "TW 大白话与用户引导、挡位的选择和保存"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "section": "脑暴流程、设计确认门"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/brainstorm-protocol.md",
+          "section": "防跑偏"
+        }
+      ],
+      "decision": "共享入口新增主动厘清的唯一规则；blueprint 只接既有四态和任务规格。A0 机械逐句确认与用户裁决冲突，按单独批准作最小定向修订。",
+      "targets": [
+        {
+          "path": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
+          "section": "主动厘清需求"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/brainstorm-protocol.md",
+          "section": "防跑偏"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md",
+          "section": "从效果到最小交付"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/references/planning-and-loading.md",
+          "section": "1. Scope, size and authority"
+        }
+      ],
+      "verification": [
+        "tests/general-methods-integration.test.mjs",
+        "tests/worldbook-design-writing.test.mjs",
+        "tests/dual-task-integration.test.mjs"
+      ]
+    },
+    "authority-routing": {
+      "baselineComparison": [
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "section": "恢复权威，不重开宇宙；路由实施能力"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/authoring-workflow.md",
+          "section": "既有创作权威链及 Content map"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/scripts/query-library.mjs",
+          "section": "既有路由"
+        }
+      ],
+      "decision": "复用，不新建模块选择或上下文引擎；只为新世界书独立入口和非世界书提示规格接线。",
+      "targets": [
+        {
+          "path": "skills/orchestrate-project-blueprint/SKILL.md",
+          "section": "路由实施能力"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/authoring-workflow.md",
+          "section": "Content map"
+        },
+        {
+          "path": "skills/consult-tavernweave-library/references/route-map.json",
+          "section": "任务路由"
+        }
+      ],
+      "verification": [
+        "tests/dual-task-integration.test.mjs",
+        "tests/card-authoring-routing.test.mjs"
+      ]
+    },
+    "sources": {
+      "baselineComparison": [
+        {
+          "path": "skills/build-work-library/SKILL.md",
+          "section": "资料来源、用途、证据与增量批次"
+        },
+        {
+          "path": "skills/build-work-library/references/data-and-commands.md",
+          "section": "初始化与来源、样本与计划输入"
+        }
+      ],
+      "decision": "来源与样例输入已有，复用；只补从有证资料到候选规格的双向交接，不复制 BOOK 容器。",
+      "targets": [
+        {
+          "path": "skills/build-work-library/references/data-and-commands.md",
+          "section": "从资料到提示规格"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md",
+          "section": "从目标样例归纳候选规则"
+        }
+      ],
+      "verification": [
+        "tests/general-methods-integration.test.mjs"
+      ]
+    },
+    "worldbook": {
+      "baselineComparison": [
+        {
+          "path": "skills/tavern-card-builder/references/worldbuilding-design.md",
+          "section": "原 §§2/4/5/5.1/6"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/lorebook-and-prompts.md",
+          "section": "原信息分层、激活/处理/接收方与最终请求检查"
+        }
+      ],
+      "decision": "迁移已有专门方法，旧标题保留兼容导航；新增独立任务入口、能力选择与同需求对照，技术实现仍由原 owner 负责。",
+      "targets": [
+        {
+          "path": "skills/worldbook-design-and-writing/SKILL.md",
+          "section": "独立入口"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/references/planning-and-loading.md",
+          "section": "2–4、7"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/references/writing-contracts.md",
+          "section": "1–6"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/references/examples.md",
+          "section": "1–4"
+        }
+      ],
+      "verification": [
+        "tests/worldbook-design-writing.test.mjs",
+        "tests/dual-task-integration.test.mjs"
+      ]
+    },
+    "template-scenarios": {
+      "baselineComparison": [
+        {
+          "path": "skills/sillytavern-api-reference/SKILL.md",
+          "section": "Verification workflow / Confidence"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/lorebook-and-prompts.md",
+          "section": "原入口与执行阶段"
+        }
+      ],
+      "decision": "精确 API 复用；六来源模板只映射成非独占可调整场景，新增 E01/E02/E04 需求例与 E03 来源记录。不交付未核验可运行模板。",
+      "targets": [
+        {
+          "path": "skills/worldbook-design-and-writing/references/planning-and-loading.md",
+          "section": "4. E01: choose the least complex sufficient mechanism（非独占可调整情境）"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/references/examples.md",
+          "section": "1、3、4、5"
+        },
+        {
+          "path": "skills/sillytavern-api-reference/references/worldbook-version-verification.md",
+          "section": "本次来源核验记录"
+        }
+      ],
+      "verification": [
+        "tests/worldbook-design-writing.test.mjs",
+        "tests/worldbook-runtime-contracts.test.mjs"
+      ]
+    },
+    "budget": {
+      "baselineComparison": [
+        {
+          "path": "skills/sillytavern-rolecard-performance/SKILL.md",
+          "section": "既有静态审计与真实运行采样"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/lorebook-and-prompts.md",
+          "section": "原上下文和重复处理"
+        }
+      ],
+      "decision": "预算职责复用；补原生/模板交界、跨入口稳定标识去重、重要依赖和语义保护。",
+      "targets": [
+        {
+          "path": "skills/sillytavern-rolecard-performance/references/worldbook-output-budget.md",
+          "section": "全文"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/references/planning-and-loading.md",
+          "section": "6. State and mixed-path boundaries"
+        }
+      ],
+      "verification": [
+        "tests/worldbook-runtime-contracts.test.mjs",
+        "tests/worldbook-design-writing.test.mjs"
+      ]
+    },
+    "regex": {
+      "baselineComparison": [
+        {
+          "path": "skills/sillytavern-render-regex-pipeline/SKILL.md",
+          "section": "Resolve the dialect and target / Validate before executing / Run deterministic fixtures / Trace the stages"
+        }
+      ],
+      "decision": "已有流程足够，直接复用；不复制长语法教材，不将其他正则引擎当 JavaScript。",
+      "targets": [
+        {
+          "path": "skills/sillytavern-render-regex-pipeline/SKILL.md",
+          "section": "既有完整流程"
+        }
+      ],
+      "verification": [
+        "skills/sillytavern-render-regex-pipeline/tests/scripts.test.mjs"
+      ]
+    },
+    "api-debug": {
+      "baselineComparison": [
+        {
+          "path": "skills/sillytavern-api-reference/SKILL.md",
+          "section": "Verification workflow / Confidence"
+        },
+        {
+          "path": "skills/sillytavern-runtime-debug/SKILL.md",
+          "section": "既有逐层定位与证据交接"
+        }
+      ],
+      "decision": "已有技术权威足够，复用；补 E03 世界书版本核验链与 E07 分级观察记录。",
+      "targets": [
+        {
+          "path": "skills/sillytavern-api-reference/references/worldbook-version-verification.md",
+          "section": "全文"
+        },
+        {
+          "path": "skills/sillytavern-runtime-debug/references/worldbook-isolated-runtime-checks.md",
+          "section": "全文"
+        }
+      ],
+      "verification": [
+        "tests/worldbook-runtime-contracts.test.mjs"
+      ]
+    },
+    "state": {
+      "baselineComparison": [
+        {
+          "path": "skills/tavern-card-builder/references/variable-systems.md",
+          "section": "3/4/5/6/9"
+        },
+        {
+          "path": "skills/sillytavern-database-rolecards/references/rolecard-data-model.md",
+          "section": "Ownership"
+        },
+        {
+          "path": "skills/sillytavern-database-rolecards/references/floor-and-ui-binding.md",
+          "section": "消息/候选与 UI 绑定"
+        }
+      ],
+      "decision": "schema/初值/更新/消费已有完整 owner，继续复用且不混旧协议。增量限世界书类型目标、名称完整性、哨兵与上下文责任。",
+      "targets": [
+        {
+          "path": "skills/tavern-card-builder/references/variable-systems.md",
+          "section": "3/4/5/6/9"
+        },
+        {
+          "path": "skills/sillytavern-database-rolecards/references/worldbook-target-state-contract.md",
+          "section": "E05 类型目标与初始化边界"
+        }
+      ],
+      "verification": [
+        "tests/worldbook-runtime-contracts.test.mjs",
+        "skills/sillytavern-database-rolecards/tests/scripts.test.mjs"
+      ]
+    },
+    "mechanics": {
+      "baselineComparison": [
+        {
+          "path": "skills/tavern-card-builder/references/worldbuilding-design.md",
+          "section": "3. Build the necessary world / 7. Connect world, state, entries, and opening"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/card-writing.md",
+          "section": "4. Examples and plot guidance"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/variable-systems.md",
+          "section": "2/3/9"
+        }
+      ],
+      "decision": "因果、资源、玩家选择和状态权威已有；补一个非世界书原创贯通例，而非另建世界总纲或调度器。",
+      "targets": [
+        {
+          "path": "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md",
+          "section": "由规则产生一次有意义的选择 / 可操作机制合同 / 有向地图与稳定节点 / 事件图表达可能性"
+        },
+        {
+          "path": "skills/worldbook-design-and-writing/references/planning-and-loading.md",
+          "section": "2. Joint planning"
+        }
+      ],
+      "verification": [
+        "tests/general-methods-integration.test.mjs",
+        "tests/worldbook-design-writing.test.mjs"
+      ]
+    },
+    "presentation": {
+      "baselineComparison": [
+        {
+          "path": "skills/tavern-card-builder/references/opening-strategies.md",
+          "section": "Prose direction and drafting"
+        },
+        {
+          "path": "skills/rewrite-natural-prose/references/natural-chinese-review.md",
+          "section": "既有句段/全篇诊断"
+        }
+      ],
+      "decision": "材料、文体和叙述维度已有，保留；只补证据→非人物表达约束→成品核对的交接，不造风格模拟引擎。",
+      "targets": [
+        {
+          "path": "skills/tavern-card-builder/references/opening-strategies.md",
+          "section": "Non-character presentation handoff"
+        },
+        {
+          "path": "skills/rewrite-natural-prose/references/editing-guide.md",
+          "section": "Illustrative decisions, not mandatory substitutions"
+        }
+      ],
+      "verification": [
+        "tests/general-methods-integration.test.mjs"
+      ]
+    },
+    "observable-review": {
+      "baselineComparison": [
+        {
+          "path": "skills/tavern-card-builder/references/validation.md",
+          "section": "1/2/3/4/5"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/card-writing.md",
+          "section": "5. CoT and narrative boundary"
+        },
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "section": "State 5: VERIFY / Report contract"
+        }
+      ],
+      "decision": "可观察检查直接复用；新提示规格只给输入/期望/故意改坏的例，不迁入完整思维链或暗中意图推演。",
+      "targets": [
+        {
+          "path": "skills/tavern-card-builder/references/validation.md",
+          "section": "既有验证责任"
+        },
+        {
+          "path": "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md",
+          "section": "可观察自检与停止条件"
+        },
+        {
+          "path": "skills/code-quality-workflow/SKILL.md",
+          "section": "Report contract"
+        }
+      ],
+      "verification": [
+        "tests/general-methods-integration.test.mjs"
+      ]
+    },
+    "ui": {
+      "baselineComparison": [
+        {
+          "path": "skills/sillytavern-embedded-ui/SKILL.md",
+          "section": "Keep state ownership explicit / Render defensive data / Lifecycle and integration / Status bars and HUDs"
+        },
+        {
+          "path": "skills/sillytavern-runtime-debug/SKILL.md",
+          "section": "既有运行链定位"
+        }
+      ],
+      "decision": "已有覆盖更完整，直接复用；不搬长 HTML、状态栏代码或新增 UI 文案示例。",
+      "targets": [
+        {
+          "path": "skills/sillytavern-embedded-ui/SKILL.md",
+          "section": "状态所有权、缺值和生命周期"
+        },
+        {
+          "path": "skills/sillytavern-runtime-debug/SKILL.md",
+          "section": "分层观测"
+        }
+      ],
+      "verification": [
+        "tests/card-authoring-routing.test.mjs"
+      ]
+    },
+    "opening": {
+      "baselineComparison": [
+        {
+          "path": "skills/tavern-card-builder/references/card-writing.md",
+          "section": "2. Greetings / 4. Examples and plot guidance"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/opening-strategies.md",
+          "section": "1. Fixed greetings / 4. Acceptance checks"
+        }
+      ],
+      "decision": "场景信息、交互起点和玩家响应入口已覆盖，直接复用；不提取源人物外貌、心理或对白。",
+      "targets": [
+        {
+          "path": "skills/tavern-card-builder/references/card-writing.md",
+          "section": "2. Greetings"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/opening-strategies.md",
+          "section": "1/4"
+        }
+      ],
+      "verification": [
+        "tests/card-authoring-routing.test.mjs"
+      ]
+    },
+    "description": {
+      "baselineComparison": [
+        {
+          "path": "skills/tavern-card-builder/references/card-writing.md",
+          "section": "原身份/开场/小型创作/提示经济"
+        },
+        {
+          "path": "skills/tavern-card-builder/references/authoring-workflow.md",
+          "section": "现有交付与已实现内容"
+        }
+      ],
+      "decision": "新增准确标题/体验简介的最小交接，只描述已实现可玩内容；不自动发布，不设候选或标签配额。",
+      "targets": [
+        {
+          "path": "skills/tavern-card-builder/references/card-writing.md",
+          "section": "7. Accurate titles and release descriptions"
+        }
+      ],
+      "verification": [
+        "tests/general-methods-integration.test.mjs"
+      ]
+    },
+    "component-security": {
+      "baselineComparison": [
+        {
+          "path": "skills/sillytavern-component-update/SKILL.md",
+          "section": "Establish the target / Validate the artifact"
+        },
+        {
+          "path": "skills/sillytavern-rolecard-security/SKILL.md",
+          "section": "Establish the boundary / Run the static audit / Triage"
+        },
+        {
+          "path": "skills/sillytavern-render-regex-pipeline/SKILL.md",
+          "section": "Resolve the dialect and target / Trace the stages"
+        }
+      ],
+      "decision": "配置副本/来源/依赖安全已有专职流程，复用；本轮只核对 JSON 副本相等与开关事实，非长脚本完整审计。",
+      "targets": [
+        {
+          "path": "skills/sillytavern-component-update/SKILL.md",
+          "section": "稳定 ID、未知字段与组件模式"
+        },
+        {
+          "path": "skills/sillytavern-rolecard-security/SKILL.md",
+          "section": "静态审计边界"
+        }
+      ],
+      "verification": [
+        "skills/sillytavern-component-update/tests/scripts.test.mjs"
+      ]
+    }
+  },
+  "records": [
+    {
+      "index": 0,
+      "sourceRef": "P000",
+      "identifier": "0a09c911-6d52-4635-a244-b30f9aafa412",
+      "name": "[必看]预设设置⚙",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "预设 setvar 设置槽；不迁入助手名、创作者名、默认字数等执行配置。项目目标、语言和规模由现有交付合同处理。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 1,
+      "sourceRef": "P001",
+      "identifier": "441b4cf7-8514-4234-9ee1-294aa1cd4c14",
+      "name": "gemini重置",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "随机噪声与伪重置/修复包装，不是可靠任务方法。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 2,
+      "sourceRef": "P002",
+      "identifier": "eeb7e41f-240d-4f25-84a5-22722aab0088",
+      "name": "gemini确认重置",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "确认修复的模型控制包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 3,
+      "sourceRef": "P003",
+      "identifier": "c8289d0c-3c83-4c13-938c-891d3cfa963b",
+      "name": "gemini开始新任务",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "新任务起始包装，无独立方法。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 4,
+      "sourceRef": "P004",
+      "identifier": "f2e4ae69-4058-4316-ae62-f321297a1f7c",
+      "name": "珠玑：定义",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "预设专家身份、绝不拒绝及虚假资历保证。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 5,
+      "sourceRef": "P005",
+      "identifier": "main",
+      "name": "珠玑：人设七选一⬇️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "预设人设容器起始。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 6,
+      "sourceRef": "P006",
+      "identifier": "nsfw",
+      "name": "人设：原版珠玑",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "预设原版人格与越权保证；不因夹带任务范围表述而迁入人设。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 7,
+      "sourceRef": "P007",
+      "identifier": "3a430168-7280-44ed-ab33-a0e8e4bbaf35",
+      "name": "人设：成熟女魅魔(色色，XP强化)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "魅魔人格与性癖导向。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 8,
+      "sourceRef": "P008",
+      "identifier": "d491235e-9535-48b0-8b15-6c0e777114fb",
+      "name": "人设：慧识之贤者(强化专业性，去拟合)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "贤者人格、全知资历与助手审美主导。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 9,
+      "sourceRef": "P009",
+      "identifier": "d6d362c4-5556-4bd0-a08c-067afb3424b1",
+      "name": "人设：恋爱脑文学少女(纯爱与悲剧，文学性，扭曲胃痛)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "恋爱脑文学少女人设与人物/情感写作。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 10,
+      "sourceRef": "P010",
+      "identifier": "a9d0c060-e1cf-454b-9303-9166197c3d2a",
+      "name": "人设：吟游诗人(诗意化，艺术性，去拟合)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "吟游诗人人格与个人审美包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 11,
+      "sourceRef": "P011",
+      "identifier": "99f48f10-455b-4f24-ac6d-0bee003522d5",
+      "name": "人设：招笑杂鱼白河豚(搞笑，杂鱼)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "白河豚人格与偏好操控。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 12,
+      "sourceRef": "P012",
+      "identifier": "829abf27-660e-4df4-8925-d7041bfd2868",
+      "name": "人设：性癖助手/欲梦编织者(以纯粹的好奇专注分析性癖)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "性癖助手人格、人物场景写作与服从包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 13,
+      "sourceRef": "P013",
+      "identifier": "37fe071f-bda4-4b89-923e-976db179280a",
+      "name": "珠玑：人设七选一结束⬆️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "预设人设结束标签。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 14,
+      "sourceRef": "P014",
+      "identifier": "a35a6daf-528d-4d81-839d-41bc5e944f8c",
+      "name": "珠玑：任务开始（格式三选一）⬇️",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "直接、具体、简洁的提示表达；区分参考材料与任务。",
+      "scopeLimit": "C01 保留有效否定、程度、条件和示例；不纳入完整推理输出、称呼与标签权限规则。",
+      "methodGroups": [
+        "expression"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/rewrite-natural-prose/references/editing-guide.md#Read the prose as prose",
+        "skills/rewrite-natural-prose/references/natural-chinese-review.md#1 Preserve purpose and creative scope",
+        "skills/rewrite-natural-prose/references/natural-chinese-review.md#7 Semantic counterexamples and evidence"
+      ],
+      "actualGap": "保护否定、程度、条件已有；补一条同时覆盖这些条件的压缩与误改对照，不新增写作禁令。",
+      "incrementLocations": [
+        "skills/rewrite-natural-prose/references/editing-guide.md#Compression without changing force"
+      ],
+      "verificationNote": "general-methods: semantic/release examples；人工语义对照"
+    },
+    {
+      "index": 15,
+      "sourceRef": "P015",
+      "identifier": "2ba6ee28-37bd-49c1-8488-7b9aa848e557",
+      "name": "格式：XML包YAML格式(推荐)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "XML/YAML 可选组织示例及提示正文与说明分离。",
+      "scopeLimit": "不设全局格式；不迁入 thinking 输出。真实解析格式按消费者约束。",
+      "methodGroups": [
+        "prompt-spec"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md#First Playable / First Usable"
+      ],
+      "actualGap": "原合同有交付物和验证，但没有固定文本/动态槽与消费者差别的提示例。",
+      "incrementLocations": [
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#从效果到最小交付",
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#原创贯通例：路线告示"
+      ],
+      "verificationNote": "general-methods: samples/unseen contract + output mutations"
+    },
+    {
+      "index": 16,
+      "sourceRef": "P016",
+      "identifier": "0a75dd18-5127-4f4c-b645-0294faab9323",
+      "name": "格式：Json(极简)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "JSON 作为机器消费者需要时的可选交付格式。",
+      "scopeLimit": "不要求所有文字任务都使用 JSON 或代码块。",
+      "methodGroups": [
+        "prompt-spec"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md#First Playable / First Usable"
+      ],
+      "actualGap": "原合同有交付物和验证，但没有固定文本/动态槽与消费者差别的提示例。",
+      "incrementLocations": [
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#从效果到最小交付",
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#原创贯通例：路线告示"
+      ],
+      "verificationNote": "general-methods: samples/unseen contract + output mutations"
+    },
+    {
+      "index": 17,
+      "sourceRef": "P017",
+      "identifier": "fc8d3787-3935-4415-acc1-0af872338193",
+      "name": "格式：JAVA游戏引擎(情境语料推荐)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "区分配置、模板数据与输出消费者的交付思路。",
+      "scopeLimit": "标题 JAVA 而正文 JavaScript；不照搬深嵌套/随机拼接程序，不当技术权威。",
+      "methodGroups": [
+        "prompt-spec"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md#First Playable / First Usable"
+      ],
+      "actualGap": "原合同有交付物和验证，但没有固定文本/动态槽与消费者差别的提示例。",
+      "incrementLocations": [
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#从效果到最小交付",
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#原创贯通例：路线告示"
+      ],
+      "verificationNote": "general-methods: samples/unseen contract + output mutations"
+    },
+    {
+      "index": 18,
+      "sourceRef": "P018",
+      "identifier": "93be4fa0-3408-41ab-bea6-2c42a07701a9",
+      "name": "珠玑：任务结束⬆️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "规则容器结束标签。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 19,
+      "sourceRef": "P019",
+      "identifier": "1903cd6d-14b4-4220-9309-b652ee5098ca",
+      "name": "珠玑：接受任务",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "预设接受任务的角色化台词。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 20,
+      "sourceRef": "P020",
+      "identifier": "4c30f960-38e6-4f8c-8002-65c6a246bea7",
+      "name": "珠玑：世界信息开始⬇️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "用户资料容器与对话包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 21,
+      "sourceRef": "P021",
+      "identifier": "b2d59475-492a-4bdb-b864-6ab514f5901f",
+      "name": "珠玑：user_role上",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "用户人设资料的起始标签。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 22,
+      "sourceRef": "P022",
+      "identifier": "personaDescription",
+      "name": "Persona Description",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的 Persona Description 宿主占位。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 23,
+      "sourceRef": "P023",
+      "identifier": "4d98a795-9ee6-4ee9-8c48-a2adae31bb4c",
+      "name": "珠玑：user_role下",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "用户人设资料结束标签。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 24,
+      "sourceRef": "P024",
+      "identifier": "26a44e93-6863-4c09-aa1d-abd6650f9f9b",
+      "name": "珠玑：char_info上",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "角色信息起始包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 25,
+      "sourceRef": "P025",
+      "identifier": "charDescription",
+      "name": "Char Description",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的 Char Description 宿主占位。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 26,
+      "sourceRef": "P026",
+      "identifier": "charPersonality",
+      "name": "Char Personality",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的 Char Personality 宿主占位。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 27,
+      "sourceRef": "P027",
+      "identifier": "0fa9e509-f1c1-46cd-a1a2-2738dafd5836",
+      "name": "珠玑：char_info下",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "角色信息结束标签。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 28,
+      "sourceRef": "P028",
+      "identifier": "scenario",
+      "name": "Scenario",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的 Scenario 宿主占位。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 29,
+      "sourceRef": "P029",
+      "identifier": "enhanceDefinitions",
+      "name": "Enhance Definitions",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "扩充人物传说与性格，属于角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 30,
+      "sourceRef": "P030",
+      "identifier": "856ee256-b52b-4034-ad9f-bdbc7337c3a8",
+      "name": "珠玑：story_info上",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "故事背景资料的起始包装，无独立整理方法。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 31,
+      "sourceRef": "P031",
+      "identifier": "worldInfoBefore",
+      "name": "World Info (before)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的 World Info (before) 宿主占位。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 32,
+      "sourceRef": "P032",
+      "identifier": "worldInfoAfter",
+      "name": "World Info (after)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的 World Info (after) 宿主占位。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 33,
+      "sourceRef": "P033",
+      "identifier": "867e3cbc-1afd-4ce9-b079-465c21b1b045",
+      "name": "珠玑：story_info下",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "故事背景资料结束标签。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 34,
+      "sourceRef": "P034",
+      "identifier": "a14f8fe1-78b2-49be-b200-6c8c09251721",
+      "name": "珠玑：世界信息结束⬆️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "资料结束与已理解的角色化台词。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 35,
+      "sourceRef": "P035",
+      "identifier": "b157eb52-23ee-42fa-8ce3-5f2de2758251",
+      "name": "珠玑：聊天记录开始⬇️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "聊天历史容器起始包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 36,
+      "sourceRef": "P036",
+      "identifier": "dialogueExamples",
+      "name": "Chat Examples",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的 Chat Examples 宿主占位。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 37,
+      "sourceRef": "P037",
+      "identifier": "chatHistory",
+      "name": "Chat History",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的 Chat History 宿主占位。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 38,
+      "sourceRef": "P038",
+      "identifier": "jailbreak",
+      "name": "Post-History Instructions",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的 Post-History Instructions 宿主占位；不从 identifier 推断具体破限正文。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 39,
+      "sourceRef": "P039",
+      "identifier": "822454d3-86fb-49e7-9034-8a0b4bbbfc62",
+      "name": "珠玑：聊天记录结束⬆️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "聊天历史结束与角色化鼓励台词。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 40,
+      "sourceRef": "P040",
+      "identifier": "a247f91f-f4ab-4902-b112-cfad4f780bb8",
+      "name": "珠玑：重要提示开始⬇️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "重要提示容器与创作者包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 41,
+      "sourceRef": "P041",
+      "identifier": "ae5d80db-aa65-4986-8032-5af8fc598ed3",
+      "name": "加强自主创造性与合理性小cot(猛猛抢话，慎开)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "正式纳入 LLM 主动厘清需求的方法：识别表达不完整、歧义与关键缺项，围绕用户已给出的目标形成候选理解，在会影响范围或结果的分歧处主动确认；确认后转为可执行规格与验收点。复用既有规划入口，不要求独立 skill。",
+      "scopeLimit": "表达不完整不等于用户能力不足；不纳入贬损用户、替用户设定或替换目标、以助手审美凌驾用户、强制输出 CoT 或逐段 <consider> / HTML 分析。普通低风险缺项可列明假设继续；核心新增先提建议，不逐项强制确认。",
+      "methodGroups": [
+        "clarification"
+      ],
+      "conflictStatus": "approved-A0-adjustment",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/references/brainstorm-protocol.md#四态账本",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#1 Scope and creative authority"
+      ],
+      "actualGap": "本源没有需要独立新增的安全方法；本轮主动厘清来自用户明确要求，不归因于P041。",
+      "incrementLocations": [],
+      "verificationNote": "四态协议与本轮shared clarification静态检查"
+    },
+    {
+      "index": 42,
+      "sourceRef": "P042",
+      "identifier": "e9b91a84-50d3-40db-b642-084797782bc6",
+      "name": "反绝望反痛苦积极向上基调(慎开，真的很强)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "虚构病情与治疗式积极基调，不纳入通用创作方法。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 43,
+      "sourceRef": "P043",
+      "identifier": "0d5daf22-67a8-420e-951c-c96c3c78c0ac",
+      "name": "防绝望小cot再强化(另一个无效一起开)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "强化治疗式正面基调与推演包装，不纳入。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 44,
+      "sourceRef": "P044",
+      "identifier": "10f932fb-8899-4482-a8d3-bf8cfbf16231",
+      "name": "色情题材正面化",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "色情题材正面化与破限用途，不纳入。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 45,
+      "sourceRef": "P045",
+      "identifier": "ac469228-bd1a-444b-a61e-fa91bea00042",
+      "name": "加强简化正文(自己调整字数)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "紧扣目标、保留语义结构的精简改写。",
+      "scopeLimit": "不追求最少 token；不删除有用解释、示例、否定和程度。",
+      "methodGroups": [
+        "expression"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/rewrite-natural-prose/references/editing-guide.md#Read the prose as prose",
+        "skills/rewrite-natural-prose/references/natural-chinese-review.md#1 Preserve purpose and creative scope",
+        "skills/rewrite-natural-prose/references/natural-chinese-review.md#7 Semantic counterexamples and evidence"
+      ],
+      "actualGap": "保护否定、程度、条件已有；补一条同时覆盖这些条件的压缩与误改对照，不新增写作禁令。",
+      "incrementLocations": [
+        "skills/rewrite-natural-prose/references/editing-guide.md#Compression without changing force"
+      ],
+      "verificationNote": "general-methods: semantic/release examples；人工语义对照"
+    },
+    {
+      "index": 46,
+      "sourceRef": "P046",
+      "identifier": "487bb55b-da3f-4ee7-8f6d-0c23b5591bc2",
+      "name": "加强上下文联系",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "同职责内容在原模块修订，保持上下文关联；复用创作权威链与 Content map。",
+      "scopeLimit": "不另造同功能模块，不迁入人设奖励话术。",
+      "methodGroups": [
+        "authority-routing"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/SKILL.md#1 恢复权威，不重开宇宙",
+        "skills/orchestrate-project-blueprint/references/blueprint-scaling.md#权威层级"
+      ],
+      "actualGap": "已有唯一权威链与禁止平行总设计，零新增来源能力。",
+      "incrementLocations": [],
+      "verificationNote": "原blueprint 66项回归中的authority tests"
+    },
+    {
+      "index": 47,
+      "sourceRef": "P047",
+      "identifier": "8e61cf0a-a30c-45ff-89d8-6b371e90c767",
+      "name": "输出字符增加(自己调整字数)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "按任务确定交付规模、完整性与可扩展性。",
+      "scopeLimit": "不沿用默认最低字数或强制长文；规模由用途决定。",
+      "methodGroups": [
+        "prompt-spec"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md",
+        "skills/orchestrate-project-blueprint/references/blueprint-scaling.md"
+      ],
+      "actualGap": "首版边界、交付物、规模与停止门已足够。",
+      "incrementLocations": [],
+      "verificationNote": "原blueprint回归"
+    },
+    {
+      "index": 48,
+      "sourceRef": "P048",
+      "identifier": "94e2bf01-18df-4be8-9377-aa12d53e654a",
+      "name": "祷词化",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "祷词化与把模型人格化为神明的预设包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 49,
+      "sourceRef": "P049",
+      "identifier": "6f0a4550-1875-4993-8a39-b1c437fdca17",
+      "name": "抗神化三连(风格要求)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "按用户裁决，P049–P051 抗神化三连整组排除。本次排除不删除 TW 已有自然表达能力，也不影响其他条目独立获准的表达改进。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 50,
+      "sourceRef": "P050",
+      "identifier": "91be7e14-4169-4e4e-b0b2-c4a32c8809f0",
+      "name": "抗神化三连(案例展示)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "按用户裁决，P049–P051 抗神化三连整组排除。本次排除不删除 TW 已有自然表达能力，也不影响其他条目独立获准的表达改进。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 51,
+      "sourceRef": "P051",
+      "identifier": "cffaac0f-87dd-4b52-bb14-662778bb22b2",
+      "name": "抗神化三连(负面规避)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "按用户裁决，P049–P051 抗神化三连整组排除。本次排除不删除 TW 已有自然表达能力，也不影响其他条目独立获准的表达改进。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 52,
+      "sourceRef": "P052",
+      "identifier": "96cae674-7638-4eb6-844c-4d8635c059b5",
+      "name": "抗机器人",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "正文是角色口语、性格发言与类比风格要求，属于角色写作；不包装成通用去八股或 UI 文案方法。v3.3 族表列到此项，逐条按角色排除边界收窄。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 53,
+      "sourceRef": "P053",
+      "identifier": "1c9d07b0-9b70-4054-8093-27bff01abcb3",
+      "name": "减少符号与注释(鸣谢keil)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "按实际用途减少冗余标记、重复翻译和无用注释。",
+      "scopeLimit": "不禁止所有 #、星号、引号或注释；解析器需要的语法必须保留。",
+      "methodGroups": [
+        "expression"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/rewrite-natural-prose/references/editing-guide.md#Mixed-content edits",
+        "skills/rewrite-natural-prose/references/natural-chinese-review.md#4 Diagnose a concrete obstacle",
+        "skills/tavern-card-builder/references/card-writing.md#6 Prompt economy"
+      ],
+      "actualGap": "现有方法已覆盖无用标记与重复说明；本次无P053独有新增。",
+      "incrementLocations": [],
+      "verificationNote": "原rewrite policy回归；人工检查保护技术语法"
+    },
+    {
+      "index": 54,
+      "sourceRef": "P054",
+      "identifier": "98d87b73-cd57-472b-a299-4f6882742295",
+      "name": "珠玑：重要提示结束⬆️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "重要提示容器结束与人设台词。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 55,
+      "sourceRef": "P055",
+      "identifier": "9381e8b6-00b1-443c-9500-f089a3dcb79f",
+      "name": "珠玑：知识库开始⬇️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "知识库容器起始及强制参考包装；不是资料提炼方法。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 56,
+      "sourceRef": "P056",
+      "identifier": "957d1987-5da2-4c0b-88e9-b64da6798bd6",
+      "name": "基础知识库：A社的提示词教程(配合xml格式，推荐常开)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "任务背景、输入分离、示例、输出合同及提示规格字段。",
+      "scopeLimit": "不搬长教程、厂商接口/模型保证、人格与完整推理；XML 不保证隔离或权限。",
+      "methodGroups": [
+        "prompt-spec"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#5.1 Standalone author rules"
+      ],
+      "actualGap": "项目合同和卡规则已有；缺通用提示规格的消费者、输入槽、失败输出与新输入贯通例。",
+      "incrementLocations": [
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md",
+        "skills/orchestrate-project-blueprint/SKILL.md#局部提示规格与样例归纳"
+      ],
+      "verificationNote": "general-methods: 2样例+2未见输入及8类输出反例；无LLM调用声明"
+    },
+    {
+      "index": 57,
+      "sourceRef": "P057",
+      "identifier": "4e642ee0-3dc2-4e6b-a4c9-02c1cfab468d",
+      "name": "基础知识库：QKL的提示词格式优化",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "固定文本与待填字段区分，补静态模板填写和新输入验证案例。",
+      "scopeLimit": "占位符不是执行语法或更高权限；不用绝对格式规则。",
+      "methodGroups": [
+        "prompt-spec"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#5.1 Standalone author rules"
+      ],
+      "actualGap": "项目合同和卡规则已有；缺通用提示规格的消费者、输入槽、失败输出与新输入贯通例。",
+      "incrementLocations": [
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md",
+        "skills/orchestrate-project-blueprint/SKILL.md#局部提示规格与样例归纳"
+      ],
+      "verificationNote": "general-methods: 2样例+2未见输入及8类输出反例；无LLM调用声明"
+    },
+    {
+      "index": 58,
+      "sourceRef": "P058",
+      "identifier": "3ceb57f1-8fc2-4620-a767-4f5dec313343",
+      "name": "工具知识库：世界书",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "世界书信息分层、正文/配置配对、触发与上下文选择。",
+      "scopeLimit": "不整包搬教程；字段和运行能力交版本核验，按 C04 排除递归及配额。",
+      "methodGroups": [
+        "worldbook",
+        "budget"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造"
+    },
+    {
+      "index": 59,
+      "sourceRef": "P059",
+      "identifier": "d021d3b4-08cc-4f03-9533-652cda89f10b",
+      "name": "工具知识库：正则大全",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "正则需求、方言识别、处理阶段与验证复用现有流程。",
+      "scopeLimit": "长语法教材不全搬；其他引擎语法不可当酒馆 JavaScript 事实。",
+      "methodGroups": [
+        "regex"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 60,
+      "sourceRef": "P060",
+      "identifier": "a0c7da7d-d719-4ab3-973a-36b0b07b2579",
+      "name": "工具知识库：EJS代码资料库",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "EJS 语法和宿主扩展契约交现有 API 核验。",
+      "scopeLimit": "不把 include/locals 等版本相关说明当通用运行保证。",
+      "methodGroups": [
+        "api-debug"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 61,
+      "sourceRef": "P061",
+      "identifier": "64a559d6-1422-4297-9d9b-a17dbe2e8b49",
+      "name": "工具知识库：EJS的6种基础模板",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "六模板仅作非独占、可调整的场景示例；实际实现复用技术能力。",
+      "scopeLimit": "排除依赖原生递归的方案、固定 order 配方和禁改限制；第六项状态栏交 UI。",
+      "methodGroups": [
+        "template-scenarios"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造"
+    },
+    {
+      "index": 62,
+      "sourceRef": "P062",
+      "identifier": "39a6ef9d-f4e4-4c3b-9b8b-87ed2a3209b0",
+      "name": "工具知识库：EJS检查流程",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "分级定位、依赖和实际输出检查复用现有技术工作流。",
+      "scopeLimit": "不把偏离六模板判致命，不采未经证实的函数禁令或 print 冲突规则。",
+      "methodGroups": [
+        "api-debug"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 63,
+      "sourceRef": "P063",
+      "identifier": "81c4a3bf-980d-4517-b4af-06e13f12e5fd",
+      "name": "工具知识库：酒馆世界书格式说明",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "世界书结构、条目职责与正文/配置联合规划。",
+      "scopeLimit": "不纳入递归激活、固定灯色万能论、关键词配额；深度仅可作场景例。",
+      "methodGroups": [
+        "worldbook",
+        "budget"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造"
+    },
+    {
+      "index": 64,
+      "sourceRef": "P064",
+      "identifier": "399f98bd-0bfb-4e72-881c-0086099f4a6b",
+      "name": "工具知识库：根据注意力进行提示词结构优化",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "按任务组织相关信息，作为上下文预算和位置敏感测试线索。",
+      "scopeLimit": "不采普遍 U 形注意力、位置等于权限或固定位置万能的断言。",
+      "methodGroups": [
+        "budget"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造"
+    },
+    {
+      "index": 65,
+      "sourceRef": "P065",
+      "identifier": "4bf7935c-04a5-4439-9c7a-60a32a8fee29",
+      "name": "工具知识库：MVU变量(爆红正常关闭提示词模板)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "旧 MVU 的变量需求、更新与消费者一致性交现有变量流程。",
+      "scopeLimit": "保留旧协议边界，不当现行统一方言。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 66,
+      "sourceRef": "P066",
+      "identifier": "97e54e0b-80f5-4c18-8838-1525faae8e2a",
+      "name": "工具知识库：MVU变量拓展 mvu beta",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "beta 变量拓展需求交现有状态/API 责任方。",
+      "scopeLimit": "beta 名称不是版本证据，不混合 $meta、旧命令与 JSON Patch。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 67,
+      "sourceRef": "P067",
+      "identifier": "baf12b8d-ba7d-4ea3-89e3-8d3a4efeb171",
+      "name": "工具知识库：MVU ZOD变量",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "schema、初值、更新与消费者契约已有覆盖。",
+      "scopeLimit": "导入路径、默认全局、Zod 方法与夹紧策略按版本和项目核验。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 68,
+      "sourceRef": "P068",
+      "identifier": "52cf6da7-01e0-45ac-8b89-e567f46ac34a",
+      "name": "工具知识库：MVU ZOD检查指南(制卡完成后检查时使用)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "schema/初值/规则一致性与运行检查已有覆盖。",
+      "scopeLimit": "不采固定脚本路径和通用 Zod 禁令；静态通过不等于运行成功。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 69,
+      "sourceRef": "P069",
+      "identifier": "643228ad-b97e-47ae-a0fb-2f1c21319aed",
+      "name": "知识库人物用：珠矶的理论体系",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物理论体系，属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 70,
+      "sourceRef": "P070",
+      "identifier": "89dfbf64-838f-41ce-b3b5-a42a961d62dc",
+      "name": "知识库人物用：《人物》——罗伯特-迈恩",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "《人物》人物塑造理论与长文，不迁入。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 71,
+      "sourceRef": "P071",
+      "identifier": "6e249e5e-b591-4d19-979a-741411f35b90",
+      "name": "知识库语料用：《对白》——罗伯特-迈恩",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "只取按当前需要披露信息、避免重复已知背景的非人物方法。",
+      "scopeLimit": "排除角色声音、心理与对白创作；不搬书籍长文。",
+      "methodGroups": [
+        "mechanics"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/opening-strategies.md#1 Fixed greetings",
+        "skills/tavern-card-builder/references/card-writing.md#2 Greetings",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#4 Facts, knowledge, and degrees of awareness"
+      ],
+      "actualGap": "原方法足够；补选择前必须看到成本、可选观察不强制推进的具体例。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#事件图表达可能性"
+      ],
+      "verificationNote": "原创事件可选性与不写状态检查；人工前置成本可见性审查"
+    },
+    {
+      "index": 72,
+      "sourceRef": "P072",
+      "identifier": "c6bd13df-7510-47f5-a1a3-da325be1e83d",
+      "name": "知识库故事理论：《故事》——罗伯特-迈恩",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "世界范围、因果变化与可选事件结构的少量原创摘要/例子。",
+      "scopeLimit": "不搬原书、人物写作或强制高潮/价值逆转，不作为所有作品门槛。",
+      "methodGroups": [
+        "mechanics"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/worldbuilding-design.md#3 Build the necessary world",
+        "skills/tavern-card-builder/references/card-writing.md#4 Examples and plot guidance"
+      ],
+      "actualGap": "已有范围/因果检查；缺与地图、成本、稳定事件ID的同一场景贯通。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#由规则产生一次有意义的选择",
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#事件图表达可能性"
+      ],
+      "verificationNote": "world fixture条件、成本、事件不强制发生检查"
+    },
+    {
+      "index": 73,
+      "sourceRef": "P073",
+      "identifier": "0b166044-370f-428d-ba4c-35531287b921",
+      "name": "《故事》标注(感觉没啥用)",
+      "plannedClassification": "待核对",
+      "disposition": "unresolved",
+      "adoptedMethod": null,
+      "scopeLimit": "v3.3 将 P071–074 合列；逐条尚不足以确定此译注该补何方法。不搬译注与人物传记。",
+      "methodGroups": [],
+      "conflictStatus": "unresolved-no-change",
+      "actualDecision": "待核对",
+      "baselineEvidence": [],
+      "actualGap": "只做范围检视，独有可迁移方法仍未确定。",
+      "incrementLocations": [],
+      "verificationNote": "维持源清单待核状态"
+    },
+    {
+      "index": 74,
+      "sourceRef": "P074",
+      "identifier": "f2c59293-e305-4789-8d99-26803a6e0127",
+      "name": "知识库故事理论：丹·哈蒙的故事圈",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "故事圈可作按需选择的任务/冒险节奏检查视角。",
+      "scopeLimit": "排除人物心理弧光；不强制代价、成长、返乡或结局。",
+      "methodGroups": [
+        "mechanics"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/card-writing.md#4 Examples and plot guidance",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#3 Build the necessary world"
+      ],
+      "actualGap": "既有因果优先；补看清处境→尝试→已知代价→确认结果的可选检查例。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#事件图表达可能性"
+      ],
+      "verificationNote": "人工检查故事圈只是作者工具，不是运行分支必经步骤"
+    },
+    {
+      "index": 75,
+      "sourceRef": "P075",
+      "identifier": "985b7eec-328f-48f8-b8e7-413a7918e42c",
+      "name": "珠玑：知识库结束⬆️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "知识库结束与人设台词。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 76,
+      "sourceRef": "P076",
+      "identifier": "35a058fe-c7b8-41a7-94b7-1bff0bb3a84e",
+      "name": "珠玑：功能模块开始(选一个和思维链一起开)⬇️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的功能模块分隔项；不迁移“必配思维链”的开关规则。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 77,
+      "sourceRef": "P077",
+      "identifier": "53cfc7f6-b030-4553-9bd5-781c102c1e39",
+      "name": "0.知识库制作：资料库BOOK(一起打开，把你的资料放进去)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "参考资料输入槽并入已有来源输入与用途记录。",
+      "scopeLimit": "不复制 BOOK 标签包装或新增同功能模板。",
+      "methodGroups": [
+        "sources"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/build-work-library/SKILL.md#来源、结论与二创分开"
+      ],
+      "actualGap": "已有来源输入；占位槽本身无方法增量。",
+      "incrementLocations": [],
+      "verificationNote": "源索引定位核对"
+    },
+    {
+      "index": 78,
+      "sourceRef": "P078",
+      "identifier": "268aa2ec-491c-4232-827d-8dbe291d4917",
+      "name": "0.知识库制作：从各种书籍中提取专业的知识与设定",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "保留跨小说/论文/教程的提取、整理、总结和归纳，复用来源库并保留证据。",
+      "scopeLimit": "仅排除人物写作部分；不把整个知识库制作排掉，不继承禁止来源归因。",
+      "methodGroups": [
+        "sources"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/build-work-library/SKILL.md#来源、结论与二创分开",
+        "skills/build-work-library/references/data-and-commands.md#批次、资料条目与接续"
+      ],
+      "actualGap": "采证系统已完整；补到候选提示规格的责任交接。",
+      "incrementLocations": [
+        "skills/build-work-library/references/data-and-commands.md#从资料到提示规格",
+        "skills/build-work-library/SKILL.md#人工编辑、检索与交付"
+      ],
+      "verificationNote": "链接检查；人工传闻/事实反例"
+    },
+    {
+      "index": 79,
+      "sourceRef": "P079",
+      "identifier": "06d05ed6-0695-4cff-b2ac-1d7fa46ba031",
+      "name": "1.思路梳理",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "需求效果→任务拆解、依赖与最小交付；现有路由复用，只补断点案例。",
+      "scopeLimit": "不把隐含动机当已确认事实，不迁入人物示例或固定总分总。",
+      "methodGroups": [
+        "clarification"
+      ],
+      "conflictStatus": "approved-A0-adjustment",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md",
+        "skills/orchestrate-project-blueprint/references/brainstorm-protocol.md"
+      ],
+      "actualGap": "既有首版合同没展示提示消费者与规格之间的断点。",
+      "incrementLocations": [
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#从效果到最小交付",
+        "skills/orchestrate-project-blueprint/SKILL.md#局部提示规格与样例归纳"
+      ],
+      "verificationNote": "samples/unseen contract；shared clarification引用与四态检查"
+    },
+    {
+      "index": 80,
+      "sourceRef": "P080",
+      "identifier": "89afd1c7-a37f-4bf5-b73f-abbe60026218",
+      "name": "2.设定制作(万能步骤)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "帮助把未完整表达的体验目标转为可用的候选提示规格。",
+      "scopeLimit": "不替用户断言心理动机，不自动扩展核心目标；去人物、祷词与人格包装。",
+      "methodGroups": [
+        "clarification"
+      ],
+      "conflictStatus": "approved-A0-adjustment",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md",
+        "skills/orchestrate-project-blueprint/references/brainstorm-protocol.md"
+      ],
+      "actualGap": "既有首版合同没展示提示消费者与规格之间的断点。",
+      "incrementLocations": [
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#从效果到最小交付",
+        "skills/orchestrate-project-blueprint/SKILL.md#局部提示规格与样例归纳"
+      ],
+      "verificationNote": "samples/unseen contract；shared clarification引用与四态检查"
+    },
+    {
+      "index": 81,
+      "sourceRef": "P081",
+      "identifier": "2eeba189-911a-4d15-bf46-7caba49581b7",
+      "name": "3.人物模版制作(也可以直接制作人物)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物模板与人物制作，明确排除。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 82,
+      "sourceRef": "P082",
+      "identifier": "07688972-a290-4b22-a210-3f9df7ef0781",
+      "name": "4.世界观制作",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "世界规则→资源/生态/制度/地区差异，补基础规则影响选择的贯通例。",
+      "scopeLimit": "复用已有因果/资源检查；不强制七板块，不另造总纲。",
+      "methodGroups": [
+        "mechanics"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/worldbuilding-design.md#3 Build the necessary world",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#7 Connect world, state, entries, and opening"
+      ],
+      "actualGap": "已有全部诊断维度；缺基础条件怎样改变一次可玩选择的贯通例。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#由规则产生一次有意义的选择"
+      ],
+      "verificationNote": "high water/no ticket/temporary block tests"
+    },
+    {
+      "index": 83,
+      "sourceRef": "P083",
+      "identifier": "5472b214-c260-4ce8-97c2-7e9831cce93d",
+      "name": " 5.文风学习材料放置",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "参考材料、来源及用途并入单一表达分析输入契约。",
+      "scopeLimit": "不采原文复原最高优先级，不重复建立材料槽。",
+      "methodGroups": [
+        "presentation"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/opening-strategies.md#Prose direction and drafting",
+        "skills/build-work-library/SKILL.md#来源、结论与二创分开"
+      ],
+      "actualGap": "已有样例与出处处理；两个输入槽无独有能力。",
+      "incrementLocations": [],
+      "verificationNote": "人工确认无新槽或复制来源正文"
+    },
+    {
+      "index": 84,
+      "sourceRef": "P084",
+      "identifier": "243617c8-bae7-4e27-871a-4607eb7067ac",
+      "name": "5.轻型文风制作",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "目标读感、词句、视角、节奏和信息密度优先复用现有表达参考。",
+      "scopeLimit": "人物语言/心理与作者人格不纳入；明确缺失的交接才补，不先造新风格引擎。",
+      "methodGroups": [
+        "presentation"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/opening-strategies.md#Prose direction and drafting",
+        "skills/rewrite-natural-prose/references/editing-guide.md#Read the prose as prose"
+      ],
+      "actualGap": "维度已有且足够；新交接例记在P133/P135，不把整项宣称新迁入。",
+      "incrementLocations": [],
+      "verificationNote": "原prose能力保留；非人物示例人工审查"
+    },
+    {
+      "index": 85,
+      "sourceRef": "P085",
+      "identifier": "6ba124e7-1b24-4452-bea3-3aed1877a0ff",
+      "name": "6.思维链COT",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "任务、场景事实、数值和格式的可观察检查复用现有验证。",
+      "scopeLimit": "不建 CoT 生成器，不纳完整推理、概率伪量化、隐藏意图与人物推演。",
+      "methodGroups": [
+        "observable-review"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/validation.md#0 Review scope and author-facing assessment",
+        "skills/tavern-card-builder/references/validation.md#1 Static chain checks",
+        "skills/tavern-card-builder/references/validation.md#2 CoT-specific checks",
+        "skills/orchestrate-project-blueprint/references/autonomy-and-gates.md#证据账本",
+        "skills/rewrite-natural-prose/references/natural-chinese-review.md#5 Review the whole draft"
+      ],
+      "actualGap": "已有验证规则足够；新prompt-spec的局部检查例不表示这些源模块整组迁入。",
+      "incrementLocations": [],
+      "verificationNote": "原blueprint/rewrite/builder 66/66；新自检只验证原创提示合同例"
+    },
+    {
+      "index": 86,
+      "sourceRef": "P086",
+      "identifier": "359546a6-bf41-4588-b0a2-f81b7e5249fa",
+      "name": "6.正文小cot(类kemini的小玩具)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "按已约定表达要求检查成品，合并现有验收。",
+      "scopeLimit": "不纳逐段 HTML 隐藏分析、候选对白/情绪推演。",
+      "methodGroups": [
+        "observable-review"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/validation.md#0 Review scope and author-facing assessment",
+        "skills/tavern-card-builder/references/validation.md#1 Static chain checks",
+        "skills/tavern-card-builder/references/validation.md#2 CoT-specific checks",
+        "skills/orchestrate-project-blueprint/references/autonomy-and-gates.md#证据账本",
+        "skills/rewrite-natural-prose/references/natural-chinese-review.md#5 Review the whole draft"
+      ],
+      "actualGap": "已有验证规则足够；新prompt-spec的局部检查例不表示这些源模块整组迁入。",
+      "incrementLocations": [],
+      "verificationNote": "原blueprint/rewrite/builder 66/66；新自检只验证原创提示合同例"
+    },
+    {
+      "index": 87,
+      "sourceRef": "P087",
+      "identifier": "bf13836a-fc96-4871-9cf8-3777fa78f137",
+      "name": "7. 状态栏＋HTML美化（太大了，使用前一定要把知识库关了）",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "输出—解析—展示契约及真实渲染验收已有更完整覆盖。",
+      "scopeLimit": "长 HTML 未逐行审计，不直接收入资产；不因关闭知识库而保证可靠。",
+      "methodGroups": [
+        "ui"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 88,
+      "sourceRef": "P088",
+      "identifier": "bb9bb9b7-3b3d-4b1a-8eb9-0a23ed3d799d",
+      "name": "8.MVU变量书写(必须打开MVU知识库)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "变量需求拆解交现有变量设计。",
+      "scopeLimit": "不迁移预设知识库开关包装。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 89,
+      "sourceRef": "P089",
+      "identifier": "54bb0739-c20b-4937-908c-13a58a02fda2",
+      "name": "8.1MVU变量始化(必须打开MVU知识库)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "初值来源与初始化交现有变量流程。",
+      "scopeLimit": "旧结构/命令不混入新协议。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 90,
+      "sourceRef": "P090",
+      "identifier": "4c520657-a4b7-460f-95cf-96c1931c4cdc",
+      "name": "8.2MVU变量 正文(必须打开MVU知识库)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "旧 MVU 正文需求与 P065 去重。",
+      "scopeLimit": "不重复搬教程、不混合方言。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 91,
+      "sourceRef": "P091",
+      "identifier": "ab3873d5-addb-4c35-bfc7-2930c328e4a4",
+      "name": "8.3MVU变量更新规则(必须打开MVU知识库)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "更新条件和规则交现有变量流程。",
+      "scopeLimit": "排除人物写作与固定输出包装。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 92,
+      "sourceRef": "P092",
+      "identifier": "91aaf23e-caa0-4fbc-88c8-79d081dc6a09",
+      "name": "MVU ZOD制卡说明(必看！不是模块，只是制卡前提示)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "制卡依赖、schema 到消费者的分阶段一致性已有覆盖。",
+      "scopeLimit": "深度可作场景例；删除固定顺序数字与模型品牌绑定深度，不改宿主 order 字段。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 93,
+      "sourceRef": "P093",
+      "identifier": "781cb01d-bc3b-49e5-9a49-3f23414b85f2",
+      "name": "8X.MVU ZOD变量设计(必须打开MVU ZOD知识库)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "变量设计入口复用已有 schema/状态契约。",
+      "scopeLimit": "预设开关与任务包装不迁入。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 94,
+      "sourceRef": "P094",
+      "identifier": "fb0a625b-afa6-4d27-abd3-f45a48cec61f",
+      "name": "8X.1 MVU ZOD变量脚本(可不打开MVU ZOD知识库)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "变量脚本需求与 P067 去重，交现有技术实现。",
+      "scopeLimit": "不搬未核验导入路径、固定容错配方或模板禁令。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 95,
+      "sourceRef": "P095",
+      "identifier": "8c14b5b6-e2b2-4d99-b31a-058a0df17fd8",
+      "name": "8X.2 MVU ZOD初始化变量(可不打开MVU ZOD知识库)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "初始化依据、缺值与消费者同步已有覆盖。",
+      "scopeLimit": "不照搬强制初值和旧包装。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 96,
+      "sourceRef": "P096",
+      "identifier": "4c52e88d-7749-46c7-ad04-004068618beb",
+      "name": "8X.3 MVU ZOD变量更新规则(可不打开MVU ZOD知识库)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "仅必要的更新规则、真正同类规则合并已有覆盖。",
+      "scopeLimit": "下划线名称不等于权限；不凑数值/阶段、不混方言。",
+      "methodGroups": [
+        "state"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 97,
+      "sourceRef": "P097",
+      "identifier": "e0c8996d-3dd1-45e6-ba9d-58775dde8c93",
+      "name": "8X.4 MVU ZOD变量状态栏(可不打开MVU ZOD知识库)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "状态字段到显示映射、生命周期及缺值处理已有更完整覆盖。",
+      "scopeLimit": "不搬固定变量前缀或未经清洗的 HTML；保留合法 0/false。",
+      "methodGroups": [
+        "ui"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 98,
+      "sourceRef": "P098",
+      "identifier": "4358feca-4ffd-4e16-9d08-3d0f06f49ac9",
+      "name": "8X.4.1 MVU ZOD变量状态栏检查(状态栏制作完成后若运行出问题可以使用)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "状态栏静态与实际宿主验收复用现有调试。",
+      "scopeLimit": "不以固定 padding/API 清单替代项目契约，不宣称静态即能用。",
+      "methodGroups": [
+        "ui"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    },
+    {
+      "index": 99,
+      "sourceRef": "P099",
+      "identifier": "4b26ee27-58af-458d-a698-7f88f2a40e5e",
+      "name": "8X.5 EJS代码制作(进阶内容，需要开启EJS基础模板知识库)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "EJS 场景、条件和输出/加载的案例线索；与 P061 去重整合。",
+      "scopeLimit": "不纳六模板独占、通用禁改、固定顺序与角色写作；函数按版本核验。",
+      "methodGroups": [
+        "template-scenarios"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造"
+    },
+    {
+      "index": 100,
+      "sourceRef": "P100",
+      "identifier": "a9e0fff6-65c6-44cb-926a-945b7741775f",
+      "name": "9.成品自检(塞了个字数要求)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "语义、结构、冲突、冗余与格式检查复用 validation 和质量流程。",
+      "scopeLimit": "去最低3000字、任意免检区域与完整推理；有效否定和解释不机械删。",
+      "methodGroups": [
+        "observable-review"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/validation.md#0 Review scope and author-facing assessment",
+        "skills/tavern-card-builder/references/validation.md#1 Static chain checks",
+        "skills/tavern-card-builder/references/validation.md#2 CoT-specific checks",
+        "skills/orchestrate-project-blueprint/references/autonomy-and-gates.md#证据账本",
+        "skills/rewrite-natural-prose/references/natural-chinese-review.md#5 Review the whole draft"
+      ],
+      "actualGap": "已有验证规则足够；新prompt-spec的局部检查例不表示这些源模块整组迁入。",
+      "incrementLocations": [],
+      "verificationNote": "原blueprint/rewrite/builder 66/66；新自检只验证原创提示合同例"
+    },
+    {
+      "index": 101,
+      "sourceRef": "P101",
+      "identifier": "4c789119-ca1f-4413-b3c2-8edfd2cdc056",
+      "name": "10.开场白",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "只复用场景必要信息、可交互开端及玩家回应入口。",
+      "scopeLimit": "人物外貌/魅力/心理/对白不迁入，不强制五案或长开场。",
+      "methodGroups": [
+        "opening"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/card-writing.md#2 Greetings",
+        "skills/tavern-card-builder/references/opening-strategies.md#1 Fixed greetings"
+      ],
+      "actualGap": "已有可行动位置、约束、知识范围与玩家交接完整。",
+      "incrementLocations": [],
+      "verificationNote": "原builder回归；保留原权限规则"
+    },
+    {
+      "index": 102,
+      "sourceRef": "P102",
+      "identifier": "f14db6e5-6d60-45e4-802a-6dac0076394c",
+      "name": "11.标题与简介（芙芙的语料）",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "以已实现可玩内容形成准确标题、体验简介与适用标签案例。",
+      "scopeLimit": "不纳人物/性癖营销语料，不强制候选或标签配额，不自动发布。",
+      "methodGroups": [
+        "description"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "实际缺失，补充",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/card-writing.md#1 Identity fields",
+        "skills/tavern-card-builder/references/validation.md#5 Handoff report",
+        "skills/orchestrate-project-blueprint/references/autonomy-and-gates.md"
+      ],
+      "actualGap": "基线有元数据和交付证据，但缺标题/简介的逐能力核对方法及反例。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/card-writing.md#7 Accurate titles and release descriptions"
+      ],
+      "verificationNote": "general-methods semantic/release例存在检查；人工对照已实现/仅提议"
+    },
+    {
+      "index": 103,
+      "sourceRef": "P103",
+      "identifier": "dace3da4-0f0d-4c81-8e7c-02db7e716acf",
+      "name": "12.提示词反推：资料库BOOK(一起打开,加入你希望实现的内容)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "目标样例输入槽并入已有来源与候选规格输入。",
+      "scopeLimit": "不复制空 BOOK 容器。",
+      "methodGroups": [
+        "sources"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/build-work-library/SKILL.md#来源、结论与二创分开",
+        "skills/tavern-card-builder/references/opening-strategies.md#Prose direction and drafting"
+      ],
+      "actualGap": "占位槽无独立方法；并入现有材料入口。",
+      "incrementLocations": [],
+      "verificationNote": "索引核对"
+    },
+    {
+      "index": 104,
+      "sourceRef": "P104",
+      "identifier": "60b1db7c-30d4-4a86-bd41-67e13c5084e0",
+      "name": "12.提示词与模版反推",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "从目标样例归纳候选规则、固定/可变部分，并用新输入验证。",
+      "scopeLimit": "不能声称恢复作者真实提示或保证复现，不搬完整推理要求。",
+      "methodGroups": [
+        "prompt-spec"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/opening-strategies.md#Prose direction and drafting",
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md"
+      ],
+      "actualGap": "样例提炼已有；缺通用候选规格与独立未见输入验证，以及原作者提示不可恢复的边界。",
+      "incrementLocations": [
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#从目标样例归纳候选规则",
+        "skills/orchestrate-project-blueprint/references/prompt-spec-contract.md#原创贯通例：路线告示"
+      ],
+      "verificationNote": "2样例/2未见输入，unknown/null/0/empty反例；明确非模型测评"
+    },
+    {
+      "index": 105,
+      "sourceRef": "P105",
+      "identifier": "9376366e-bf35-446f-babe-438959ccc452",
+      "name": " 13.霸凌捧杀模拟器",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "核心是夸张赞美/捧杀模拟，不是有证据的对抗质量评审；不包装为已验证红队方法。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 106,
+      "sourceRef": "P106",
+      "identifier": "430d57cf-d2ea-46ce-b83d-624ca2300f2b",
+      "name": "功能模块思维链(使用功能模块必开)🧠",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "输入、依赖、适用规则与输出检查复用可观察协议。",
+      "scopeLimit": "不强制完整思考格式，不把隐藏动机或人物设计引入通用流程。",
+      "methodGroups": [
+        "observable-review"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/validation.md#0 Review scope and author-facing assessment",
+        "skills/tavern-card-builder/references/validation.md#1 Static chain checks",
+        "skills/tavern-card-builder/references/validation.md#2 CoT-specific checks",
+        "skills/orchestrate-project-blueprint/references/autonomy-and-gates.md#证据账本",
+        "skills/rewrite-natural-prose/references/natural-chinese-review.md#5 Review the whole draft"
+      ],
+      "actualGap": "已有验证规则足够；新prompt-spec的局部检查例不表示这些源模块整组迁入。",
+      "incrementLocations": [],
+      "verificationNote": "原blueprint/rewrite/builder 66/66；新自检只验证原创提示合同例"
+    },
+    {
+      "index": 107,
+      "sourceRef": "P107",
+      "identifier": "b3bb7133-7161-4b76-b7be-dabd38f76f19",
+      "name": "珠玑：功能模块结束⬆️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的功能模块结束分隔项。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 108,
+      "sourceRef": "P108",
+      "identifier": "835fe974-b281-4077-9ef1-10ad92ce65ba",
+      "name": "珠玑：共同目标（在顶部预设设置里填写）",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "共同目标包装混入突破伦理/道德限制；不迁移执行指令。目标管理已有独立合同。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 109,
+      "sourceRef": "P109",
+      "identifier": "2877a3d3-6746-4f87-9ef8-cd17862d6b73",
+      "name": "珠玑：独立模块(使用时关闭所有功能模块及思维链)⬇️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的独立模块起始分隔项及开关说明。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 110,
+      "sourceRef": "P110",
+      "identifier": "6ab76630-4988-4dcb-a1b7-2e2635ec7a00",
+      "name": "独立模块初始判断(让ai帮你选择使用哪些独立模块)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "按需求、依赖与已有框架选择模块，复用 blueprint 和 consult 路由。",
+      "scopeLimit": "不迁人物支路、强制思考、自动画师串或手动预设开关协议；不增加逐步确认门禁。",
+      "methodGroups": [
+        "authority-routing"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/orchestrate-project-blueprint/SKILL.md#路由实施能力",
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md",
+        "skills/tavern-card-builder/references/validation.md#0 Review scope and author-facing assessment"
+      ],
+      "actualGap": "已有范围判断与专项路由，不新增模块启动器。",
+      "incrementLocations": [],
+      "verificationNote": "原blueprint回归与共享引用测试"
+    },
+    {
+      "index": 111,
+      "sourceRef": "P111",
+      "identifier": "ca6d2266-d37f-4596-bd2b-b61ac0f7ba49",
+      "name": "char0宝宝一键出模块要求和思维链",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物模块需求与思维链生成。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 112,
+      "sourceRef": "P112",
+      "identifier": "35ea2ccc-99c5-4731-a25a-0693614b07fa",
+      "name": "char0模板三选一:风空精神分析模版",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "精神分析人物模板。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 113,
+      "sourceRef": "P113",
+      "identifier": "d8f77e8f-ab6c-486f-a422-c136d7d5cb95",
+      "name": "char0模板三选一:大丨模板(标准化模板)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "标准化人物模板。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 114,
+      "sourceRef": "P114",
+      "identifier": "f59e5798-006c-4d9b-a731-79a76604047b",
+      "name": "char0模板三选一:心理动力学网络构架(特质化,ooc避免强化)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "心理动力学人物模板与防 OOC。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 115,
+      "sourceRef": "P115",
+      "identifier": "d9dbc92d-19c3-49ab-aeb8-3eff3adf6c6e",
+      "name": "char0.5一键出模块: 人物塑造模板",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "一键人物塑造模板。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 116,
+      "sourceRef": "P116",
+      "identifier": "bdc8f3a0-37a3-415a-b01d-b91359b79104",
+      "name": "char1:外显模块(正常)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物外显特征写作。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 117,
+      "sourceRef": "P117",
+      "identifier": "48f3e186-cbb3-44f7-8d07-e9b04e462207",
+      "name": "char1:外显模块(色情)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物色情外显特征写作。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 118,
+      "sourceRef": "P118",
+      "identifier": "e7a220dd-4614-4550-8c27-0f07f032a9fb",
+      "name": "char2:内质模块",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物内在特质写作。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 119,
+      "sourceRef": "P119",
+      "identifier": "f1c6179e-6676-4ada-a06c-4b6637558a3d",
+      "name": "char2:内质模块——超级重力生成器",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物内质与心理重力设计。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 120,
+      "sourceRef": "P120",
+      "identifier": "92cb3004-7460-4289-a6c8-51df0ef82786",
+      "name": "char3:外延模块",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物外延设定。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 121,
+      "sourceRef": "P121",
+      "identifier": "5255b750-60b7-4f53-ad3b-3a950452d0f1",
+      "name": "char3外延模块: 补充拓展内容",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物外延补充。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 122,
+      "sourceRef": "P122",
+      "identifier": "deb04bef-e652-442f-aa21-4fd3eb99edf5",
+      "name": "char4:特质细化模块——桐谷申元化(诗意)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物特质诗意细化。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 123,
+      "sourceRef": "P123",
+      "identifier": "d2b15fa4-3c4d-4786-846d-ab5dbbfeed7a",
+      "name": "char4:特质细化模块——心理动力学网络构架(ooc避免强化)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物特质与心理动力学。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 124,
+      "sourceRef": "P124",
+      "identifier": "6659b4ce-b305-460f-8167-0e867e9acff1",
+      "name": "char5:模块化语料——自我介绍模式",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物自我介绍语料。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 125,
+      "sourceRef": "P125",
+      "identifier": "e218f6f8-6b1b-4592-9ec7-b853cb40e51a",
+      "name": "char5:模块化语料——场景描述",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "用于人物塑造的场景语料。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 126,
+      "sourceRef": "P126",
+      "identifier": "324e85a9-0fc1-4e8b-85cf-1ff9851f5b03",
+      "name": "char5:特质化语料",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物特质语料。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 127,
+      "sourceRef": "P127",
+      "identifier": "3962f6ca-e78e-41b1-8824-43079b18cb6c",
+      "name": "char6人物关系模块: 一对一人物关系",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "一对一人物关系创作。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 128,
+      "sourceRef": "P128",
+      "identifier": "ca92b582-0c56-493d-907a-cafd9b0617f5",
+      "name": "char6人物关系模块:人物关系网络梳理",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物关系网络创作。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 129,
+      "sourceRef": "P129",
+      "identifier": "c6a34ba6-393f-48c7-993d-86c47de6a35c",
+      "name": "char7角色概念设计(文生图)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物概念设计与文生图提示。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 130,
+      "sourceRef": "P130",
+      "identifier": "b1e849a3-5778-40c7-8f27-f84688097ace",
+      "name": "角色审查模块(需要开启知识库里的《人物》)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物塑造质量审查。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 131,
+      "sourceRef": "P131",
+      "identifier": "85a56a93-4587-4e64-9ee6-c5520d12624d",
+      "name": "人物塑造模块",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "人物塑造模块。属于本轮角色写作排除范围。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 132,
+      "sourceRef": "P132",
+      "identifier": "db7539c5-8920-4899-bbdc-9c0d910beb43",
+      "name": "文风材料(开启文风模块放原文的地方)",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "与 P083 合并为带来源和用途的材料输入。",
+      "scopeLimit": "不保留重复文风材料槽。",
+      "methodGroups": [
+        "presentation"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/opening-strategies.md#Prose direction and drafting",
+        "skills/build-work-library/SKILL.md#来源、结论与二创分开"
+      ],
+      "actualGap": "已有样例与出处处理；两个输入槽无独有能力。",
+      "incrementLocations": [],
+      "verificationNote": "人工确认无新槽或复制来源正文"
+    },
+    {
+      "index": 133,
+      "sourceRef": "P133",
+      "identifier": "3916922d-95ff-4b66-b773-10e7c770b9ec",
+      "name": "文风模块——风格复现宪章",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "基调/结构/语言特征及证据到表达约束，优先复用已有表达参考。",
+      "scopeLimit": "不纳人格模拟、精确复刻、摘录配额及语言积木搬运；明确缺口才补交接。",
+      "methodGroups": [
+        "presentation"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/opening-strategies.md#Prose direction and drafting",
+        "skills/rewrite-natural-prose/references/editing-guide.md#Read the prose as prose"
+      ],
+      "actualGap": "基线说从样例提炼方法但没有具体跨题材交接对照。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/opening-strategies.md#Non-character presentation handoff"
+      ],
+      "verificationNote": "原创环境样例与目标新事实对照；人工确认未搬雨/渡口事实"
+    },
+    {
+      "index": 134,
+      "sourceRef": "P134",
+      "identifier": "f5c0fecc-1beb-4ee9-ba1a-d6830f416399",
+      "name": "文风模块——文体学构建",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "词汇、句式、视角、节奏等维度与 P084/133 去重。",
+      "scopeLimit": "不扮演作者、不推断私生活，不凑作家作品数量；文体不改情节事实。",
+      "methodGroups": [
+        "presentation"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/opening-strategies.md#Prose direction and drafting",
+        "skills/rewrite-natural-prose/references/editing-guide.md#Read the prose as prose"
+      ],
+      "actualGap": "维度已有且足够；新交接例记在P133/P135，不把整项宣称新迁入。",
+      "incrementLocations": [],
+      "verificationNote": "原prose能力保留；非人物示例人工审查"
+    },
+    {
+      "index": 135,
+      "sourceRef": "P135",
+      "identifier": "d4796572-b3b7-42b4-b854-ca5ed55b8ade",
+      "name": "文风模块——叙事学构建",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "叙述时间、场景/概要/省略与可靠性优先复用现有叙事参考。",
+      "scopeLimit": "不纳人物弧光、作者模拟或强制伦理/结局；缺口才补表达交接。",
+      "methodGroups": [
+        "presentation"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/rewrite-natural-prose/references/editing-guide.md#Read the prose as prose",
+        "skills/tavern-card-builder/references/opening-strategies.md#Prose direction and drafting",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#4 Facts, knowledge, and degrees of awareness"
+      ],
+      "actualGap": "原规则分散覆盖时序/知识；补风格交接里可观察的时间与可靠性边界。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/opening-strategies.md#Non-character presentation handoff"
+      ],
+      "verificationNote": "人工对照叙述时间不改事件实际先后；传闻不变客观事实"
+    },
+    {
+      "index": 136,
+      "sourceRef": "P136",
+      "identifier": "12a8c619-6cfa-4831-b3b0-5e121671df4d",
+      "name": "玩法生成模块",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "动作、条件、效果、代价、失败/退出与反馈，补可操作玩法贯通例。",
+      "scopeLimit": "复用机制/状态所有权，不凑玩法数量或理论，不限于世界书用途。",
+      "methodGroups": [
+        "mechanics"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/worldbuilding-design.md#3 Build the necessary world",
+        "skills/tavern-card-builder/references/variable-systems.md",
+        "skills/orchestrate-project-blueprint/references/first-version-contract.md"
+      ],
+      "actualGap": "已有状态与核心闭环，缺一个实际可算的非人物玩法合同。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#可操作机制合同"
+      ],
+      "verificationNote": "ferry/bridge/no ticket/temporary block状态前后测试"
+    },
+    {
+      "index": 137,
+      "sourceRef": "P137",
+      "identifier": "4db29d4f-5573-4635-ba6d-f63a698c6722",
+      "name": "nai4画师串随机生成模块(hyh个人筛选)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "随机画师标签对本轮通用方法无必要增量；不搬名单，具体媒体任务另评估。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 138,
+      "sourceRef": "P138",
+      "identifier": "64f71032-304f-4452-a79f-88c748343924",
+      "name": "叙事模块1: 叙事网络梳理",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "稳定节点 ID、显式边与可选分支的事件图案例。",
+      "scopeLimit": "坐标仅布局，不作业务主键；排除人物关系与强制玩家路线。",
+      "methodGroups": [
+        "mechanics"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/card-writing.md#4 Examples and plot guidance",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#7 Connect world, state, entries, and opening",
+        "skills/orchestrate-project-blueprint/references/blueprint-scaling.md#渐进提取"
+      ],
+      "actualGap": "已有规划和状态权威；缺稳定事件ID、位置ID分离且规划不等于发生的完整例。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#有向地图与稳定节点",
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#事件图表达可能性"
+      ],
+      "verificationNote": "unique/dangling refs、rename/reorder、event read no mutation；无卡脚本执行"
+    },
+    {
+      "index": 139,
+      "sourceRef": "P139",
+      "identifier": "2ab117ff-ad1a-4245-a572-c202de011983",
+      "name": "叙事模块2: 章节细化",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "节点时间/地点、条件、可转移边、退出与未满足处理的契约。",
+      "scopeLimit": "规划不等于已发生；不强制 CG、阶段和人物情感结果。",
+      "methodGroups": [
+        "mechanics"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/card-writing.md#4 Examples and plot guidance",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#7 Connect world, state, entries, and opening",
+        "skills/orchestrate-project-blueprint/references/blueprint-scaling.md#渐进提取"
+      ],
+      "actualGap": "已有规划和状态权威；缺稳定事件ID、位置ID分离且规划不等于发生的完整例。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#有向地图与稳定节点",
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#事件图表达可能性"
+      ],
+      "verificationNote": "unique/dangling refs、rename/reorder、event read no mutation；无卡脚本执行"
+    },
+    {
+      "index": 140,
+      "sourceRef": "P140",
+      "identifier": "5fc02947-f31f-4d0b-90e9-6fa2f0a55170",
+      "name": "叙事模块3: 套入提示词模版(纯手动无工具,往里面加第二步的剧情后复制)",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "当前相关节点的选择性加载、条件迁移与回退思路。",
+      "scopeLimit": "不搬旧 EJS/setvar/正则协议、固定深度或远程脚本；纲要不覆盖玩家有效选择。",
+      "methodGroups": [
+        "mechanics"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/card-writing.md#4 Examples and plot guidance",
+        "skills/tavern-card-builder/references/worldbuilding-design.md#7 Connect world, state, entries, and opening",
+        "skills/orchestrate-project-blueprint/references/blueprint-scaling.md#渐进提取"
+      ],
+      "actualGap": "已有规划和状态权威；缺稳定事件ID、位置ID分离且规划不等于发生的完整例。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#有向地图与稳定节点",
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#事件图表达可能性"
+      ],
+      "verificationNote": "unique/dangling refs、rename/reorder、event read no mutation；无卡脚本执行"
+    },
+    {
+      "index": 141,
+      "sourceRef": "P141",
+      "identifier": "075e510d-c567-48dd-bd25-0201fb8f980e",
+      "name": "地图模块",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "地点层级、尺度、用途与有向/条件连接的边界例。",
+      "scopeLimit": "不要求双向/两两互通；emoji 仅可选视图，NPC 只引用已有实体。",
+      "methodGroups": [
+        "mechanics"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造",
+      "baselineEvidence": [
+        "skills/tavern-card-builder/references/worldbuilding-design.md#3 Build the necessary world"
+      ],
+      "actualGap": "空间诊断已有；缺单向航线/独立反向边/第二段封闭不回滚第一段的边界例。",
+      "incrementLocations": [
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#有向地图与稳定节点",
+        "skills/tavern-card-builder/references/world-mechanics-and-scenarios.md#交接与反例"
+      ],
+      "verificationNote": "directed ferry/blocked second leg/coordinate rename tests"
+    },
+    {
+      "index": 142,
+      "sourceRef": "P142",
+      "identifier": "c77a045b-9446-4670-8a84-25a8ccf3048f",
+      "name": "珠玑：独立模块结束⬆️",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "空的独立模块结束分隔项。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 143,
+      "sourceRef": "P143",
+      "identifier": "9f0c7363-3af8-4da6-9b12-693157b5a0e8",
+      "name": "珠玑：世界书专用输出格式（配合世界书助手用，可以不开）✅",
+      "plannedClassification": "计划吸收（部分）",
+      "disposition": "partial-method-only",
+      "adoptedMethod": "正文/配置成对交付用于世界书示例，已有导出和 ID 保护复用。",
+      "scopeLimit": "删除每条10–20关键词及重编号要求；格式按真实导入消费者校验。",
+      "methodGroups": [
+        "worldbook",
+        "budget"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有但不足，局部改造"
+    },
+    {
+      "index": 144,
+      "sourceRef": "P144",
+      "identifier": "59a26a76-3373-41ce-b8dd-cd698e658bd2",
+      "name": "珠玑：抗截断空回(战书)",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "抗截断“战书”实为破限/审查对抗包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 145,
+      "sourceRef": "P145",
+      "identifier": "cd8a2432-8027-46ce-96d6-7ee4797501d9",
+      "name": "gemini结束",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "Gemini 准备结束包装，无独立方法。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 146,
+      "sourceRef": "P146",
+      "identifier": "04666a5c-81da-4788-9481-6b21eaf41dc5",
+      "name": "珠玑：gemini重申输入📌",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "重复最后输入的预设拼接宏；不作为需求理解方法迁入。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 147,
+      "sourceRef": "P147",
+      "identifier": "967905ac-6fe9-4267-ace7-b58ac867799a",
+      "name": "珠玑：Gemini强制结束思考📌",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "强制结束思考、伪 think 与 thinking 起始包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 148,
+      "sourceRef": "P148",
+      "identifier": "2dcad6ef-063d-4237-a571-a6e4cabd2cd2",
+      "name": "珠玑：gemini开始输出",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "模型输出前缀及 thinking 起始包装。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 149,
+      "sourceRef": "P149",
+      "identifier": "e8ae5f91-0b58-4970-83e4-65336ff232dc",
+      "name": "claude code头部",
+      "plannedClassification": "明确不纳入",
+      "disposition": "excluded",
+      "adoptedMethod": null,
+      "scopeLimit": "伪系统重置、上下文替换、厂商/身份替换指令。",
+      "methodGroups": [],
+      "conflictStatus": "not-adopted",
+      "actualDecision": "排除"
+    },
+    {
+      "index": 150,
+      "sourceRef": "P150",
+      "identifier": "SPresetSettings",
+      "name": "SPreset配置",
+      "plannedClassification": "复用 TW，无需重复",
+      "disposition": "reuse-existing",
+      "adoptedMethod": "配置副本、regex 来源映射及远程依赖清单复用组件与安全流程。",
+      "scopeLimit": "不导入/执行配置；长脚本未完整审计，开关关闭不代表安全或其他副本不执行。",
+      "methodGroups": [
+        "component-security"
+      ],
+      "conflictStatus": "no-new-unresolved-conflict",
+      "actualDecision": "已有足够好，复用"
+    }
+  ],
+  "externalConfiguration": {
+    "SPresetDuplicate": "P150 content 解析结果与 extensions.SPreset 深相等",
+    "regexDuplicate": "SPreset.RegexBinding.regexes 与 extensions.regex_scripts 四项深相等",
+    "enabledFlags": "前三项 disabled=false；世界书助手 disabled=true。只记录静态值，不把关闭当安全证明。",
+    "ownerGroups": [
+      "component-security"
+    ]
+  },
+  "attributionLocation": "交付docs保留真实来源；skills日常正文、参考和夹具使用通用方法/中性自写例，不加载素材来源报告。",
+  "attributionReports": [
+    "docs/worldbook-source-migration-notes.md",
+    "docs/worldbook-runtime-source-notes.md"
+  ]
+}

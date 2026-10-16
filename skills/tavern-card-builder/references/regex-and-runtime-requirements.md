@@ -40,7 +40,7 @@ For every requested script, specify:
 - dependency and capability detection;
 - evidence required in a real runtime.
 
-Use `$sillytavern-api-reference` before writing exact calls. Use `$sillytavern-runtime-debug` to close behavior.
+Use `$sillytavern-api-reference` before writing exact calls. Use `$sillytavern-runtime-debug` to verify behavior in the target runtime.
 
 ## 3. Delivery and dependency requirements
 

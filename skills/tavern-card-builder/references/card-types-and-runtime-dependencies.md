@@ -1,5 +1,11 @@
 # Card types and runtime dependencies
 
+If the turn-to-turn runtime chain is not already in context, first read the needed
+part of [the shared runtime foundations](../../consult-tavernweave-library/references/sillytavern-runtime-foundations.md):
+plain-text request and next turn, then only the chosen template/MVU/UI additions.
+Do not reload an already understood chain or require the full extension matrix for
+text cards. Native/template/mixed worldbooks are a separate axis from card type.
+
 ## Contents
 
 1. Detection evidence
@@ -74,9 +80,16 @@ workflows or artifact state.
 
 Every completed card, including `hybrid`, requires both a usable greeting and a
 worldbook. Apart from format and identification requirements, these are the common
-core. An empty greeting field, an empty attached book, or placeholder entries do not
-meet the requirement. The worldbook must contain substantive material and resolve to
-an embedded attachment or the project's explicit, verified companion-book binding.
+core. The greeting may be text, an opening frontend, or a combination of both. A
+usable opening frontend satisfies the greeting requirement without an additional
+plain-text version. This presentation choice neither changes the primary card type
+nor determines whether later play uses a frontend.
+
+An empty greeting field, a decorative shell with no usable opening, an empty attached
+book, or placeholder entries do not meet the requirement. The worldbook must contain
+substantive material and resolve to an embedded attachment or the project's explicit,
+verified companion-book binding. See [opening strategies](opening-strategies.md#3-custom-opening-pages)
+for the frontend's message carrier, player entry and model-visible content.
 
 | Component | `text` | `mvu_zod` | `hybrid` |
 | --- | --- | --- | --- |
@@ -84,7 +97,7 @@ an embedded attachment or the project's explicit, verified companion-book bindin
 | Worldbook | Required main carrier of character, world, and portrayal material. | Required; also carries the chosen variable initialization, state exposure, update rules, and output requirements. | Required; identify which systems and models consume each part. |
 | State | Narrative or text status; do not add MVU merely to display it. | Persistent MVU state constrained by a card-specific Zod schema. | Declare one authoritative owner for each fact and any cross-system writes. |
 | Regexes and helper scripts | Include only those needed by the selected features. | Include the selected protocol's required loaders, registration, updates, and display adapters. | Identify each component's system, execution stage, and cleanup owner. |
-| UI and media | Usually absent or a simple text/regex status display. | Common, but not universally required. | Include only selected consumers; define permissions for cross-system interaction. |
+| UI and media | Optional; an opening frontend or text/regex status display does not require MVU. | Common, but not universally required. | Include only selected consumers; define permissions for cross-system interaction. |
 
 New cards normally leave traditional prompt fields empty and carry their material in
 the worldbook; see [card-writing.md](card-writing.md) for field names and inherited-card

@@ -58,7 +58,8 @@ Separate three artifacts:
 | Runtime output rule | Tell the receiving model when to produce which content in the agreed format | Design rationale, parser code, CSS, installation notes and review instructions |
 | UI and mounting source | Read the declared source, parse it and render the page | New story facts, hidden state authority or unrelated write operations |
 
-An authoring format skeleton may use clearly marked semantic slots. Compile the
+An authoring format skeleton may use clearly marked placeholders that explain what
+belongs in each slot. Compile the
 actual runtime rule so required structure and replacement semantics are explicit;
 do not send unresolved worksheet blanks or mock story values as finished content.
 If the card already provides the needed output rule, reuse it rather than adding a

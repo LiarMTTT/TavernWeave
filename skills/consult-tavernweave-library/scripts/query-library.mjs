@@ -71,6 +71,16 @@ export function queryLibrary({ skill = "", intent = "", write = false, includeEx
   // Work-source research owns these specific wishes; generic database/catalog terms
   // must not pull in MVU or the bundled UI design catalog for a novel/fanwork task.
   if (!skill && routes.some((route) => route.id === "build-work-library")) routes = routes.filter((route) => route.id === "build-work-library");
+  // A worldbook-only request can mention its containing card without asking for
+  // a whole-card workflow. Keep the builder for an explicit whole-card outcome.
+  const nonWorldbookTask = /非世界书(?:用途|任务|项目)|(?:不要|不做|不用|无需|不需要)(?:做成|制作|生成)?世界书(?:[，。、；\s]|$)/u.test(intent);
+  if (!skill && nonWorldbookTask) routes = routes.filter((route) => route.id !== "worldbook-design-and-writing");
+  const hasWorldbook = routes.some((route) => route.id === "worldbook-design-and-writing");
+  const wholeCardOutcome = /整卡|制卡|(?:制作|新建|设计|规划|打包|导出).{0,12}(?:一张|整张)?(?:角色卡|酒馆卡|纯文字卡|MVU(?:\s*Zod)?\s*卡|hybrid\s*卡|rolecard|text\s*card)|(?:角色卡|酒馆卡|纯文字卡|MVU(?:\s*Zod)?\s*卡|hybrid\s*卡|rolecard|text\s*card).{0,8}(?:整体|完整交付|打包|导出)/iu.test(intent);
+  if (!skill && hasWorldbook && !wholeCardOutcome) routes = routes.filter((route) => route.id !== "tavern-card-builder");
+  const generalPromptSpec = /提示(?:词)?规格|提示词反推|样例反推|样例归纳|提示词模板/u.test(intent);
+  const cardContext = /角色卡|酒馆卡|纯文字卡|hybrid\s*卡|rolecard|text\s*card|世界书|worldbook|lorebook|MVU|开场白|卡内|制卡/iu.test(intent);
+  if (!skill && generalPromptSpec && !cardContext) routes = routes.filter((route) => route.id !== "tavern-card-builder");
   const sandboxWish = /前端沙盒|联合模拟|状态对照|滑条调试|封装前打磨/u.test(intent);
   const realHostFailure = /(?:真实酒馆|真实宿主|实机|sillytavern).*(?:故障|报错|不更新|白屏|验收)/iu.test(intent);
   if (!skill && sandboxWish && !realHostFailure && !routes.some((route) => route.id === "build-work-library")) routes = routes.filter((route) => route.id === "sillytavern-embedded-ui");
@@ -95,7 +105,7 @@ export function queryLibrary({ skill = "", intent = "", write = false, includeEx
     documents: documents.map(({ id, path: documentPath, status }) => ({ id, path: documentPath, status })),
     domains: catalogDomains,
     catalogSummary: Object.fromEntries(Object.entries(catalog.catalogs).map(([domain, value]) => [domain, value.items.length])),
-    candidates: routes.some((route) => route.id === "build-work-library") ? [] : searchCatalog({ query: intent, domains: catalogDomains, limit: catalogLimit }),
+    candidates: routes.some((route) => route.id === "build-work-library") || (routes.length > 0 && !catalogDomains.length) ? [] : searchCatalog({ query: intent, domains: catalogDomains, limit: catalogLimit }),
     experimentalIncluded: includeExperimental,
     selectionState: "proposed",
     unresolved: routes.length || requestedDomains.length ? [] : ["no matching route; choose a primary TavernWeave skill"],

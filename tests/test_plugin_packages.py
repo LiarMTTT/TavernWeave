@@ -102,6 +102,24 @@ class PackageTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "already exists"):
             packager.build(self.repo, commit, self.output)
 
+    def test_skill_inventory_scales_and_rejects_manifest_drift(self):
+        added = "worldbook-design-and-writing"
+        target = self.repo / "skills" / added / "SKILL.md"
+        target.parent.mkdir(parents=True)
+        target.write_text("# Worldbook design and writing\n", encoding="utf-8")
+        self.install["skills"] = sorted(self.install["skills"] + [added])
+        self.install["skillCount"] = len(self.install["skills"])
+        self.save_manifests()
+        commit = self.commit()
+        receipt = packager.build(self.repo, commit, self.output)
+        self.assertEqual(receipt["skillCount"], 23)
+        self.assertIn("23 native Skills", receipt["checks"])
+        self.install["skillCount"] = 22
+        self.save_manifests()
+        commit = self.commit()
+        with self.assertRaisesRegex(ValueError, "declared Skills do not match"):
+            packager.build(self.repo, commit, self.base / "drift-result")
+
     def test_rejects_unsafe_and_colliding_paths(self):
         for name in ("/absolute", "C:/absolute", "a//b", "a/../b", "a\\b", "a/./b", "/".join(["p"] * 21)):
             with self.subTest(name=name), self.assertRaises(ValueError):

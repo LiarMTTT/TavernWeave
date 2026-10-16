@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "purpose": "original-static-design-fixture",
+  "runtimeStatus": "not-run",
+  "modelStatus": "not-run",
+  "nativeRecursion": false,
+  "bookId": "fixture-world",
+  "entries": [
+    { "uid": 101, "name": "东桥位置", "kind": "location", "contentId": "bridge-east.location", "enabled": true, "text": "东桥连接两岸。" },
+    { "uid": 102, "name": "渡桥规程", "kind": "rule", "contentId": "bridge-east.rule", "enabled": true, "text": "桥正常开放；涨水时关闭。" },
+    { "uid": 103, "name": "备用渡口", "kind": "location", "contentId": "ferry-west.location", "enabled": false, "text": "西岸有备用渡口。" },
+    { "uid": 104, "name": "桥面材料", "kind": "detail", "contentId": "bridge-east.material", "enabled": true, "text": "桥面由石板铺成。" }
+  ],
+  "targets": [
+    { "entityId": "bridge-east", "kind": "location", "aliases": ["旧桥", "石桥"], "bookId": "fixture-world", "uid": 101, "contentId": "bridge-east.location", "status": "local" },
+    { "entityId": "bridge-east-rule", "kind": "rule", "aliases": ["渡桥规程"], "bookId": "fixture-world", "uid": 102, "contentId": "bridge-east.rule", "status": "local" },
+    { "entityId": "ferry-west", "kind": "location", "aliases": ["西渡口"], "bookId": "fixture-world", "uid": 103, "contentId": "ferry-west.location", "status": "local" },
+    { "entityId": "outside-harbor", "kind": "location", "aliases": ["外港"], "bookId": "external-book-not-supplied", "uid": 201, "contentId": "outside-harbor.location", "status": "external-unverified" }
+  ],
+  "state": { "ready": true, "era": "current", "period": "early", "chapter": "crossing", "water": "high", "toll": 0, "permitRequired": false },
+  "chapters": [
+    { "id": "crossing", "era": "current", "period": "early" },
+    { "id": "return", "era": "current", "period": "late" }
+  ],
+  "conditionCases": [
+    { "id": "condition-true", "entryReachable": true, "state": { "water": "high" }, "expected": "include" },
+    { "id": "condition-false", "entryReachable": true, "state": { "water": "normal" }, "expected": "omit" },
+    { "id": "condition-missing", "entryReachable": true, "state": {}, "expected": "missing" },
+    { "id": "entry-unreachable", "entryReachable": false, "state": { "water": "high" }, "expected": "not-evaluated" }
+  ],
+  "runtimeOnlyCases": [
+    { "id": "native-hit", "expected": "Inspect the actual final request with the selected native rule.", "runtimeStatus": "not-run" },
+    { "id": "native-miss", "expected": "Inspect the actual final request without the unmatched native rule.", "runtimeStatus": "not-run" },
+    { "id": "read-existing", "expected": "Record resolved book/UID, returned content and final request.", "runtimeStatus": "not-run" },
+    { "id": "read-disabled", "expected": "Observe the version-specific result; do not assume supported.", "runtimeStatus": "not-run" },
+    { "id": "read-missing", "expected": "Distinguish missing target, empty body and read failure.", "runtimeStatus": "not-run" },
+    { "id": "write-failed", "expected": "Observe unchanged state and block dependent generation.", "runtimeStatus": "not-run" },
+    { "id": "valid-patch", "expected": "Observe parse, validation, write-back and next-turn consumption separately.", "runtimeStatus": "not-run" },
+    { "id": "invalid-patch", "expected": "Observe validation failure without reporting a successful state write.", "runtimeStatus": "not-run" },
+    { "id": "regenerate", "expected": "Verify the selected candidate, patch application and next request.", "runtimeStatus": "not-run" },
+    { "id": "swipe", "expected": "Verify selected message/candidate, persisted state, UI and next request.", "runtimeStatus": "not-run" },
+    { "id": "edit", "expected": "Verify declared recomputation or unsupported-operation handling.", "runtimeStatus": "not-run" },
+    { "id": "rollback", "expected": "Verify declared restore owner, state and next request; no automatic rollback claim.", "runtimeStatus": "not-run" }
+  ],
+  "candidates": [
+    { "contentId": "bridge-east.rule", "owner": "bridge-rules", "revision": "fixture-v1", "route": "native", "required": true, "priority": 10, "uid": 102 },
+    { "contentId": "bridge-east.rule", "owner": "bridge-rules", "revision": "fixture-v1", "route": "template-a", "required": true, "priority": 10, "uid": 102 },
+    { "contentId": "bridge-east.rule", "owner": "bridge-rules", "revision": "fixture-v1", "route": "template-b", "required": true, "priority": 10, "uid": 102 },
+    { "contentId": "bridge-east.location", "owner": "bridge-location", "revision": "fixture-v1", "route": "template-a", "required": false, "priority": 5, "uid": 101 },
+    { "contentId": "bridge-east.material", "owner": "bridge-material", "revision": "fixture-v1", "route": "template-b", "required": false, "priority": 1, "uid": 104 }
+  ],
+  "budget": { "maxEntries": 2, "maxCodePoints": 22, "unit": "unicode-code-points", "tokenCount": null, "tokenizer": null, "scope": "fixture-worldbook-fragment-only" }
+}

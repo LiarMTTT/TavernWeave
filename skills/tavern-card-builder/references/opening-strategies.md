@@ -63,6 +63,39 @@ Apply the [natural Chinese review](../../rewrite-natural-prose/references/natura
 when writing Chinese prose. Refining a finished passage remains the remit of
 `$rewrite-natural-prose` when that task is requested.
 
+### Non-character presentation handoff
+
+The existing style choices above cover viewpoint, rhythm and information density.
+For a sample-based brief, add only the missing link between observed expression and
+its intended use: source evidence → candidate constraint → new passage → counterexample.
+Keep this in the existing style/creative record; do not open a second style ledger or
+infer the real author's personality, biography or motives from their prose.
+
+Invented source sample from Shidu: “雨把港署的木阶打得发亮。门边的告示只剩半行：渡口停航。”
+The observable method is a concrete environmental cue followed by information useful
+to the next action. A candidate direction is to lead with an established visible
+detail, then state the relevant constraint without explaining an imagined reaction.
+The rain, stairs and closed ferry are sample facts, not requirements for a new scene.
+
+For a different passage, assume the supplied facts are a water-level board at the
+high mark, a lowered bridge barrier, and a detour notice stating thirty minutes.
+A compatible original draft is: “水位牌停在高水格。岚河旧桥的横杆落着，旁边钉着一块路牌：青岑高地，绕行三十分钟。”
+It uses the method without importing the source's rain or ferry. An account claiming
+the bridge will reopen tomorrow would introduce an unsupported fact; a sentence
+declaring that the player chose the detour would exceed the presentation task.
+
+| Feature worth using | Constraint and boundary |
+| --- | --- |
+| Information order | Give facts needed for the current choice when needed; do not hide a known cost merely for suspense. |
+| Narrative time | A flashback or delayed description can change presentation order, but not when the underlying event happened or when state changed. |
+| Narrator reliability | Attribute an uncertain notice or report to its source; an atmospheric voice cannot turn a rumour into objective fact. |
+
+Use only features supported by the sample and useful to this passage. No sentence
+ratio, mandatory technique count or universal imitation persona follows. A new core
+setting, gameplay objective or major event remains a proposal before adoption. Refine
+the expression with the existing prose review, then compare facts, conditions and
+player permission separately; attractive wording cannot stand in for that check.
+
 ### Initialization by card type
 
 For a `text` card, write the greeting and any agreed textual status format without
@@ -96,15 +129,29 @@ Do not call a low-level state replacement function to simulate initialization.
 
 ## 3. Custom opening pages
 
-Treat an opening page as a small transaction system:
+An opening frontend can present a fixed situation, offer opening choices, or guide
+custom setup. Keep its actual carrier in `first_mes` or the applicable
+`alternate_greetings` branch. A working mount may supply the visible page; an empty
+field or a marker whose page never loads does not establish a usable greeting.
+The page must give the player a meaningful way into play, whether through the normal
+chat input or its declared controls.
+
+Check player-visible content separately from model-visible content. The model does
+not see a page merely because the player sees it. Keep presentation code out of the
+model context and retain the concise opening information needed for continuation
+through the adopted prompt path; this is not a second required prose greeting.
+Check the actual request when verifying runtime delivery rather than assuming a
+visual preview proves the separation.
+
+A custom setup wizard remains a small transaction system:
 
 - draft state is not MVU state;
 - preview is no-write;
 - persisted draft settings need per-chat keys and migrations;
-- submission needs validation, confirmation, snapshot, rollback, and safe retry;
-- a remote page should remain declarative while a local binder owns privileged APIs;
-- pin or verify remotely loaded resources and fail safely.
+- submission needs validation, confirmation, snapshot, rollback, and safe retry.
 
+A remote page should remain declarative while a trusted local binder owns privileged
+APIs. Pin or verify loaded resources and fail safely. Apply these checks to the capabilities in use.
 Delegate implementation and interaction review to `$sillytavern-embedded-ui` and runtime closure to `$sillytavern-runtime-debug`.
 
 ## 4. Acceptance checks
@@ -121,5 +168,7 @@ For the applicable runtime behavior, test:
 - first load and reload;
 - new chat and existing chat;
 - failed validation and retry;
-- duplicate mount/submission prevention;
-- actual persisted state and model-visible content.
+- duplicate mount/submission prevention where applicable;
+- actual persisted state when used, and model-visible opening content;
+- a frontend greeting without a duplicate prose version: useful content and entry,
+  working controls when present, and the intended continuation path.

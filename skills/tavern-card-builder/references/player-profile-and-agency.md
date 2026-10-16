@@ -84,9 +84,9 @@ character's feelings or consent to an action.
    setting update. If it conflicts with a confirmed lasting fact, identify the
    conflict and resolve it under the existing creative authority.
 
-For example, a player may say that taking another character's hand is intended to
-warn them about traffic. This establishes the stated intention. Whether the other
-character sees the traffic, understands the warning, welcomes the contact, or
+At Shidu's city gate, a player may say that taking another character's hand is intended
+to warn them about an approaching wagon. This establishes the stated intention. Whether the other
+character sees the wagon, understands the warning, welcomes the contact, or
 responds differently still depends on the scene and their own characterization.
 
 Apply the [world knowledge boundaries](worldbuilding-design.md) and their degrees

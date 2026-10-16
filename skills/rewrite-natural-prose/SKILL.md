@@ -34,7 +34,7 @@ For Chinese prose, apply [natural-chinese-review.md](references/natural-chinese-
 
 Keep facts, numbers, negation, uncertainty, obligations, relationships and event order intact. In cards and mixed files, identify editable prose separately from macros, variable paths, EJS, regex, code, IDs and structural fields. Preserve protected content literally and use the existing parser or structure checks after a file edit. Do not add an action, motive or fact merely to make a sentence vivid. Deep rewriting is not permission to alter canon or technical behavior.
 
-This preservation rule governs revision of established material. During authorized co-creation or delegated drafting, the owning workflow may propose or write new content within the agreed brief; do not turn prose protection into a demand that the user supply every detail. New proposals must not be reported as pre-existing facts. An owning authoring workflow may call the diagnostic reference for its current draft without activating continuous or persistent rewriting.
+This preservation rule governs revision of established material. During authorized co-creation or delegated drafting, the owning workflow may propose or write new content within the agreed brief; do not turn prose protection into a demand that the user supply every detail. New proposals must not be reported as pre-existing facts. The owning authoring workflow may use the diagnostic reference to review its current draft without activating continuous or persistent rewriting.
 
 ## Modes and state
 
