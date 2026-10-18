@@ -87,7 +87,7 @@ The picker stores only item IDs in local storage. Never place card text, secrets
 Maintainers may refresh only from the explicit allowlist:
 
 ```powershell
-node <skill-root>/scripts/snapshot-library.mjs --stdb-root <<local-guide-db>> --afv-root <Agent Foundry Vault智能体工坊>
+node <skill-root>/scripts/snapshot-library.mjs --stdb-root <local-guide-db> --afv-root <Agent Foundry Vault智能体工坊>
 node <skill-root>/scripts/validate-library.mjs
 ```
 

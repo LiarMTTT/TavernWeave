@@ -61,6 +61,10 @@ if (/A1[_ ·]驾驶员同步检查|A1_驾驶员同步检查/.test(publicText)) e
 if (allRecords.some((record) => /(?:^|\/)B1_变量更新规则_命令式时代_归档\.md$/u.test(record.path))) errors.push("archived B1 file leaked into snapshot");
 if (/[A-Za-z]:[\\/]Users[\\/][^\\/\s]+[\\/]/i.test(publicText)) errors.push("private absolute path leaked into snapshot");
 if (allRecords.some((record) => /(?:^|\/)10-收件箱\/|(?:^|\/)写回候选\/|(?:^|\/)实装-[^/]+\.json$/u.test(record.path))) errors.push("AFV candidate inbox path leaked into public snapshot");
+// Private card/workspace names are denylisted. The pattern uses ASCII \uXXXX escapes so
+// this validator never flags its own source text; the release validator enforces the same list.
+const privateNamePattern = /\u661f\u6708\u79c1\u7acb\u9ad8\u7b49\u5b66\u9662|\u661f\u6708\u5b66\u9662|\u661f\u6708\u5de5\u574a|\u661f\u6708|\u4ea4\u9519\u5b99\u57df|\u672b\u65e5\u4e4b\u540e|\u7ec8\u672b\u6d6e\u57ce|\u89d2\u8272\u5361\u5de5\u4f5c\u533a|ST\u5f00\u53d1\u6307\u5357DB/u;
+if (privateNamePattern.test(publicText)) errors.push("private card or workspace name leaked into snapshot");
 
 if (errors.length) {
   for (const error of errors) console.error(`ERROR: ${error}`);

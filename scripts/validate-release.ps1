@@ -30,6 +30,10 @@ function Add-ValidationError([string]$Message) {
     $errors.Add($Message)
 }
 
+# Private card/workspace names are denylisted. ASCII \uXXXX escapes keep this gate from
+# flagging its own source text; validate-library.mjs enforces the same list on the snapshot.
+$privateNamePattern = '\u661f\u6708\u79c1\u7acb\u9ad8\u7b49\u5b66\u9662|\u661f\u6708\u5b66\u9662|\u661f\u6708\u5de5\u574a|\u661f\u6708|\u4ea4\u9519\u5b99\u57df|\u672b\u65e5\u4e4b\u540e|\u7ec8\u672b\u6d6e\u57ce|\u89d2\u8272\u5361\u5de5\u4f5c\u533a|ST\u5f00\u53d1\u6307\u5357DB'
+
 # Windows PowerShell 5.1 turns redirected native stderr into a terminating
 # NativeCommandError while the caller keeps $ErrorActionPreference = 'Stop'.
 # Capture both streams under a local Continue preference, then expose the exit
@@ -318,6 +322,9 @@ foreach ($file in $textFiles) {
     }
     if ($text -match '\b\d{5,12}@qq\.com\b') {
         Add-ValidationError "Personal email address detected: $($file.FullName)"
+    }
+    if ($text -match $privateNamePattern) {
+        Add-ValidationError "Private card or workspace name detected: $($file.FullName)"
     }
     if ($file.Extension -ieq '.md') {
         $markdownForLinks = [regex]::Replace($text, '(?ms)^```.*?^```\s*$', '')

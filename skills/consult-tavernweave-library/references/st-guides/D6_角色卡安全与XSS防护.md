@@ -337,7 +337,7 @@ body.textContent = String(content || '').trim(); // 永远安全，无 XSS 面
 
 CSS 注入通过 `style.textContent = css;` 而非 `style.innerHTML`，同样安全。
 
-来源：`<local-user-path>/<local-drive>/<local-workspace>\卡B\v1.9.3_20260526_002904\components\omni_safe_block_renderer.js` 第 76 行（运行时源码）
+来源：`<local-user-path>/<local-drive>\<local-workspace>\卡B\v1.9.3_20260526_002904\components\omni_safe_block_renderer.js` 第 76 行（运行时源码）
 适用版本：卡B 1.9.3+
 **置信度：high · [运行时源码]**
 
@@ -701,7 +701,7 @@ await eventSource.emit(event_types.MESSAGE_RECEIVED, this.messageId, this.type);
 
 **已确认**：ST 1.14.0 的 `node_modules/dompurify/package.json` 版本字段为 **3.2.6**，高于修复 CVE-2024-47875 的 3.1.3 和修复 CVE-2025-26791 的 3.2.4，两个 CVE 均已修复。
 
-来源：`<local-user-path>/<local-drive>/SillyTavern-1.14.0\node_modules\dompurify\package.json` 第 144 行 [运行时源码]
+来源：`<local-user-path>/<local-drive>\SillyTavern-1.14.0\node_modules\dompurify\package.json` 第 144 行 [运行时源码]
 
 ### ~~悬案 C：DOMPurify 的 `SAFE_FOR_TEMPLATES` 是否启用~~（已解除）
 
@@ -764,4 +764,4 @@ await eventSource.emit(event_types.MESSAGE_RECEIVED, this.messageId, this.type);
 | 角色卡检查工具 | GitHub | https://github.com/Barafu/tavern_card_tools |
 | 本地生产卡源码（control_center.js） | 运行时源码 | `<local-guide-db>\本地证据\卡A历史\2.9.1\components\control_center.js` |
 | 本地生产卡源码（status_bar_regex.html） | 运行时源码 | `<local-guide-db>\本地证据\卡A历史\2.9.1\components\status_bar_regex.html` |
-| 本地生产卡源码（omni_safe_block_renderer.js） | 运行时源码 | `<local-user-path>/<local-drive>/<local-workspace>\卡B\v1.9.3_20260526_002904\components\omni_safe_block_renderer.js` |
+| 本地生产卡源码（omni_safe_block_renderer.js） | 运行时源码 | `<local-user-path>/<local-drive>\<local-workspace>\卡B\v1.9.3_20260526_002904\components\omni_safe_block_renderer.js` |

@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "evaluatedAt": "2026-10-18T06:52:58Z",
+  "evaluatedAt": "2026-10-18T07:25:47Z",
   "method": "Incremental source-contract review of 80 forward and 90 adversarial preserved effective written answers against the frozen v4 skills, by two independent reviewers; 12 new worldbook written scenario answers were authored separately from the expected criteria and independently assessed. The first review passed 11; one focused revision was independently re-reviewed, yielding 12 final passes. Initial answers, finding and revision are retained. Historical runs are unchanged. 2026-10-18 review-fixes re-review: all prior cases were rechecked for source compatibility after the privacy, STScript/API and Skill-publishing fixes, and two routing-ownership cases were added from that review. Not 182 new model trials, installed host discovery, actual SillyTavern, dots execution, or driver acceptance.",
   "skillFingerprints": {
     "activate-tavernweave-soul": "08e68089a6f16e12988db72b7b3fbd94565492e38a44b8e84fe8830d90cdb9b8",
     "build-work-library": "bf77076cd3fb6af79cf5a050dc06e2eabc67628e8f59d90f053c7ea22f81c64a",
     "code-quality-workflow": "0c325b87cabb28482bbd80265c55343562f9d198744ed3e693f664595bf529f6",
-    "consult-tavernweave-library": "f6a9288e3763b8e5771a7313b29a3aa66e44be2a41b4cb959f4ca735cba67c75",
+    "consult-tavernweave-library": "97126e9a6a1c9ee27a6d9cac9642d03f58d9978a12c5101cc137cd98a6c8657f",
     "orchestrate-project-blueprint": "bdb75ecf50b01a00c4ca71e9f4e65dd65cff94774fc45a7deaf476c2542f9cca",
     "reflect-on-vibe-code-growth": "c1502f14c9e3527aad0b399e3684113896f61b5f7de598003f6dfe4b84a9566b",
     "rewrite-natural-prose": "5d1bf1a671247b54cd1e063f47aa67b21efef1e61c83cd4ba89feb5dea9b7ef7",

@@ -12,6 +12,49 @@ const skillRoot = path.resolve(here, "..");
 const referencesRoot = path.join(skillRoot, "references");
 const assetsRoot = path.join(skillRoot, "assets", "picker");
 const snapshotVersion = "2026-08-18";
+// Upstream maintenance sources still carry private card and workspace names. They are
+// neutralized before any public snapshot artifact is written. Every literal here stays
+// ASCII-escaped so the published tree never contains the names this map removes; the
+// release validators enforce the same denylist independently.
+const privateNameMap = [
+  ["\u661f\u6708\u79c1\u7acb\u9ad8\u7b49\u5b66\u9662", "\u793a\u4f8b\u5b66\u56ed"], // longest private school name -> neutral example campus
+  ["\u661f\u6708\u5b66\u9662", "\u793a\u4f8b\u5de5\u7a0bA"], // private school name -> neutral project A
+  ["\u661f\u6708\u5de5\u574a", "\u793a\u4f8b\u5de5\u574a"], // private workshop name -> neutral example workshop
+  ["\u661f\u6708", "\u5361A"], // short private card name -> neutral card A
+  ["\u4ea4\u9519\u5b99\u57df", "\u5361B"], // private sci-fi card name -> neutral card B
+  ["\u672b\u65e5\u4e4b\u540e", "\u5361C"], // private doomsday card name -> neutral card C
+  ["\u7ec8\u672b\u6d6e\u57ce", "\u5361D"], // private floating-city card name -> neutral card D
+  ["\u5b64\u5c9b\u6c42\u751f", "\u5361E"], // history-only private card name -> neutral card E
+  ["\u4fee\u4ed9\u519b\u5de5", "\u793a\u4f8b\u9879\u76eeF"], // history-only private project name -> neutral project F
+  ["\u89d2\u8272\u5361\u5de5\u4f5c\u533a", "<local-workspace>"], // private role-card workspace directory -> local workspace placeholder
+  ["ST\u5f00\u53d1\u6307\u5357DB", "<local-guide-db>"], // private guide database directory -> local guide-db placeholder
+  ["OneDrive\u002fST-\u002f", "<local-drive>\u002f"], // slash-form private drive tail -> local drive placeholder
+  ["OneDrive\u005cST-\u005c", "<local-drive>\u005c"], // backslash-form private drive tail -> local drive placeholder
+];
+// Standalone card shorthands are neutralized after the unambiguous long forms above.
+// Two generic "interleave(d)" prose uses are protected first so the map does not
+// over-redact ordinary wording; like the rest of the map they are ASCII-escaped.
+const privateShorthandMap = [
+  ["\u4ea4\u9519", "\u5361B"], // card shorthand -> neutral card B
+  ["\u672b\u65e5", "\u5361C"], // card shorthand -> neutral card C
+  ["\u7ec8\u672b", "\u5361D"], // card shorthand -> neutral card D
+];
+const genericShorthandKeep = ["\u6253\u65ad\u548c\u4ea4\u9519\u8981\u81ea\u5df1\u5199", "\u5f97\u5230\u4ea4\u9519\u72b6\u6001"]; // generic interleaving prose, kept verbatim
+const privateNamePattern = /\u661f\u6708\u79c1\u7acb\u9ad8\u7b49\u5b66\u9662|\u661f\u6708\u5b66\u9662|\u661f\u6708\u5de5\u574a|\u661f\u6708|\u4ea4\u9519\u5b99\u57df|\u672b\u65e5\u4e4b\u540e|\u7ec8\u672b\u6d6e\u57ce|\u5b64\u5c9b\u6c42\u751f|\u4fee\u4ed9\u519b\u5de5|\u89d2\u8272\u5361\u5de5\u4f5c\u533a|ST\u5f00\u53d1\u6307\u5357DB/u;
+function neutralizePrivateNames(text) {
+  const protectedProse = [];
+  let result = text;
+  genericShorthandKeep.forEach((phrase, index) => {
+    if (!result.includes(phrase)) return;
+    const token = `@@TW-GENERIC-${index}@@`;
+    protectedProse.push([token, phrase]);
+    result = result.split(phrase).join(token);
+  });
+  for (const [privateName, neutralName] of privateNameMap) result = result.split(privateName).join(neutralName);
+  for (const [privateShorthand, neutralName] of privateShorthandMap) result = result.split(privateShorthand).join(neutralName);
+  for (const [token, phrase] of protectedProse) result = result.split(token).join(phrase);
+  return result;
+}
 const expectedCounts = {
   standingGuides: 1,
   formalGuides: 31,
@@ -63,10 +106,11 @@ function safeCopy(source, target) {
   const credentialPattern = /((?:api[_-]?key|access[_-]?token|client[_-]?secret|password)\s*[:=]\s*)["'][^"']{8,}["']/gi;
   const pathMatches = sourceText.match(privatePathPattern) || [];
   const credentialMatches = sourceText.match(credentialPattern) || [];
-  const targetText = correctGuide(path.basename(target), sourceText
+  const sanitizedText = neutralizePrivateNames(sourceText
     .replace(/\r\n?/g, "\n")
     .replace(privatePathPattern, "<local-user-path>/")
     .replace(credentialPattern, "$1<redacted-at-snapshot>"));
+  const targetText = correctGuide(path.basename(target), sanitizedText);
   const targetBytes = Buffer.from(targetText, "utf8");
   fs.writeFileSync(target, targetBytes);
   return {
@@ -131,7 +175,7 @@ function loadScreeningSummary(afvRoot, design, motion) {
 const stdbRoot = path.resolve(arg("--stdb-root") || "");
 const afvRoot = path.resolve(arg("--afv-root") || "");
 if (!arg("--stdb-root") || !arg("--afv-root")) {
-  console.error("Usage: node snapshot-library.mjs --stdb-root <<local-guide-db>> --afv-root <AFV root>");
+  console.error("Usage: node snapshot-library.mjs --stdb-root <local-guide-db> --afv-root <AFV root>");
   process.exit(2);
 }
 if (!fs.existsSync(path.join(stdbRoot, "A1_驾驶员同步检查.md"))) throw new Error("A1 exclusion sentinel is missing at source; refusing ambiguous source root");
@@ -211,8 +255,9 @@ const sourceFiles = Object.fromEntries(Object.entries(catalogSources).map(([key,
 const catalogTarget = path.join(assetsRoot, "catalog.json");
 fs.mkdirSync(path.dirname(catalogTarget), { recursive: true });
 const catalogPayload = { schemaVersion: 2, snapshotVersion, screening, catalogs };
-fs.writeFileSync(catalogTarget, `${JSON.stringify(catalogPayload, null, 2)}\n`, "utf8");
-fs.writeFileSync(path.join(assetsRoot, "catalog-data.js"), `window.TW_LIBRARY_CATALOG = ${JSON.stringify(catalogPayload)};\n`, "utf8");
+const catalogJson = neutralizePrivateNames(JSON.stringify(catalogPayload, null, 2));
+fs.writeFileSync(catalogTarget, `${catalogJson}\n`, "utf8");
+fs.writeFileSync(path.join(assetsRoot, "catalog-data.js"), `window.TW_LIBRARY_CATALOG = ${JSON.stringify(JSON.parse(catalogJson))};\n`, "utf8");
 
 const pickerManifest = { schemaVersion: 2, snapshotVersion, expectedCounts, screening, sourceFiles, documents };
 fs.writeFileSync(path.join(assetsRoot, "manifest-data.js"), `window.TW_LIBRARY_MANIFEST = ${JSON.stringify(pickerManifest)};\n`, "utf8");
@@ -224,6 +269,7 @@ for (const file of files) {
   const text = fs.readFileSync(file, "utf8");
   if (allowedA1Tokens.some((token) => text.includes(token)) || path.basename(file).startsWith("A1_")) throw new Error(`A1 exclusion failed: ${path.relative(skillRoot, file)}`);
   if (/[A-Za-z]:[\\/]Users[\\/][^\\/\s]+[\\/]/i.test(text)) throw new Error(`private path in snapshot: ${path.relative(skillRoot, file)}`);
+  if (privateNamePattern.test(text)) throw new Error(`private card or workspace name in snapshot: ${path.relative(skillRoot, file)}`);
 }
 const assets = files.filter((file) => !file.startsWith(stOut) && !file.startsWith(wikiOut)).map((file) => ({
   path: path.relative(skillRoot, file).replaceAll(path.sep, "/"),

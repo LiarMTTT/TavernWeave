@@ -110,7 +110,7 @@
         └── joy.png
 ```
 
-本地真机验证路径：`<local-user-path>/<local-drive>/SillyTavern-1.14.0\data\default-user\characters\Seraphina\`（28 个文件已全部验证存在）
+本地真机验证路径：`<local-user-path>/<local-drive>\SillyTavern-1.14.0\data\default-user\characters\Seraphina\`（28 个文件已全部验证存在）
 
 来源：真机验证 + `src/endpoints/sprites.js` | 适用版本：ST 1.12.x–1.15.x | **high** `[真机]` + `[运行时源码]`
 
@@ -866,4 +866,4 @@ README 提到「Folder Profiles」可通过此文件随 sprite 包分发，但�
 | `SillyTavern/Extension-Live2d:main/index.js` + `live2d.js` | `[运行时源码]` | 第12章 |
 | `https://github.com/Tyranomaster/expressions-plus` | `[文档·多源]` | 第16章 |
 | `https://deepwiki.com/zhaiiker/SillyTavernMOD/8.6-character-expressions` | `[文档·单源]`（MOD 版） | 第20章 U1 悬案 |
-| `<local-user-path>/<local-drive>/SillyTavern-1.14.0\data\default-user\characters\Seraphina\` | `[真机]` | 第2章，第3章 |
+| `<local-user-path>/<local-drive>\SillyTavern-1.14.0\data\default-user\characters\Seraphina\` | `[真机]` | 第2章，第3章 |

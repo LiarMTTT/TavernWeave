@@ -755,8 +755,8 @@ ST 对角色卡注入内容的**所有** class 名加 `custom-` 前缀，在 Cus
 - GitHub issue #4688（自定义标签 / body 样式不生效）：<https://github.com/SillyTavern/SillyTavern/issues/4688>
 - DeepWiki SillyTavern 用户界面分析：<https://deepwiki.com/SillyTavern/SillyTavern/4-user-interface>
 - DOMPurify 默认白名单文档：<https://github.com/cure53/DOMPurify/wiki/Default-TAGs-ATTRIBUTEs-allow-list-&-blocklist>
-- **本地实战最高可信**：`<local-user-path>/<local-drive>/<local-workspace>\卡A\卡A 2.5.0\components\status_bar_regex_beauty_r5.html`（262 KB，v2.5.0 生产状态栏）
-- 本地实战：`<local-user-path>/<local-drive>/<local-workspace>\卡A\卡A 2.5.0\components\status_bar_regex.html`（269 KB，status_bar_regex 组件）
+- **本地实战最高可信**：`<local-user-path>/<local-drive>\<local-workspace>\卡A\卡A 2.5.0\components\status_bar_regex_beauty_r5.html`（262 KB，v2.5.0 生产状态栏）
+- 本地实战：`<local-user-path>/<local-drive>\<local-workspace>\卡A\卡A 2.5.0\components\status_bar_regex.html`（269 KB，status_bar_regex 组件）
 - **本次回源关键源码**（v1.14.0 直读）：
   - `public/scripts/chats.js`（`encodeStyleTags`/`decodeStyleTags`/`addDOMPurifyHooks` 实现，第532–1939行）
   - `public/script.js`（`messageFormatting` + DOMPurify 配置，第1763–1776行）

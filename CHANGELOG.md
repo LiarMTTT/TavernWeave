@@ -2,6 +2,8 @@
 
 ## Unreleased · 2026-10-18 评审修复
 
+- 隐私：把 tree 内残留的个人角色卡与工作区名称统一替换为中性代号（示例学园 / 示例工程A / 卡 A–D 等），并清除云盘同步目录尾巴；快照生成器在复制前执行同一映射，并以硬错误拒绝私名回流。
+- 校验：`validate-release.ps1` 与 `validate-library.mjs` 增加私名 denylist（ASCII `\uXXXX` 转义，避免自命中）；快照清单 hash、picker 资产与 replay 指纹随内容修正刷新。
 - 隐私：移除内部执行计划与设计记录，脱敏 5 册指南中的 15 处本机路径与 2 处 replay 证据路径；历史清除脚本与演练报告已备好，待发布维护时执行。
 - 校验：私密路径与邮箱检测支持正反斜杠及 JSON 转义形态；`validate-release.ps1` 兼容 Windows PowerShell 5.1，CI 增加 5.1 验证步骤。
 - 指南勘误：修正 B2 的 15 处 STScript 命令签名、E5 的 `WorldbookEntry` 字段、B1 的 MVU 公开事件表、A5 的控制流宏状态；全部写入 `guide-corrections.json` 可重放修订。
