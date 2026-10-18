@@ -541,7 +541,7 @@
       "assessmentSha256": "24c6798f11ad412768dd931a05bea824f010abcbc055ad95340d4e70206c04bc"
     }
   ],
-  "externalEvidenceRoot": "<local-test-path>/TavernWeave\\1.9.0\\local-fix-rc2",
+  "externalEvidenceRoot": "<local-test-path>/TavernWeave/1.9.0/local-fix-rc2",
   "externalEvidence": {
     "replay/assessments-a.json": "867d24600475f78d311c22d5d898fcd6bc6b7194f0f78e6233573e66d6fb8292",
     "replay/assessments-b.json": "87369e3be76a54efbfffff3742cea6f58af9ce96de301c39935c8196d6ed00b0",

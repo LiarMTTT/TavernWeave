@@ -132,7 +132,7 @@ python -B tests/test_plugin_packages.py
 
 本轮 [书面复核记录](../tests/replay/runs/2026-10-16-v4-premerge/manifest.json) 对原 80 正向、90 对抗的有效完整答复逐案复核，170 条仍与当前合同兼容；其中一条沿用 1.9.1 已评审的修订答复，其原答复和先前缺项记录均保留。新世界书技能增加 6 正向与 6 对抗案例，独立作答与评审分开：首评 11 条通过、1 条补齐未见样例及比较控制后复评通过，首轮和修订都随记录保留。当前案例总数为 86 正向、96 对抗；完成复核后才更新候选指纹。这是书面合同证据，不是 182 次新模型试跑或真实宿主验收。
 
-并入前 Windows 完整检查、官方 Skill 格式与打包回归的实际结果见唯一续接文件[第 30 节](../UPDATE_PLAN_CANDIDATE.md#30-tavernweavex无限月读-v4-并入前修复适配2026-10-16)所指外部回执。当时版本字段仍为 1.9.1，未制作正式发行身份；合入、正式版本收敛、提交、安装、推送及发布留待后续授权。
+并入前 Windows 完整检查、官方 Skill 格式与打包回归的实际结果见外部回执。内部续接记录不公开；本轮合入与回执以本页及 Release 为准。当时版本字段仍为 1.9.1，未制作正式发行身份；合入、正式版本收敛、提交、安装、推送及发布留待后续授权。
 
 ## 2026-10-16：本地合入 2.0.0（发行前记录）
 
@@ -144,4 +144,4 @@ python -B tests/test_plugin_packages.py
 
 2.0.0 正式发行包从 [v2.0.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0)获取，以同页 `SHA256SUMS.txt` 核对下载文件。Codex 与 dots 共用 `TavernWeave-Codex-v2.0.0.zip`；安装标识仍为 `tavernweave-agent-skills`，共 23 个 Skill。历史 [v1.9.1 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)保留原 22 技能包，不与本版安装清单混用。
 
-本轮源码提交、发行包构建、文件大小和 SHA-256、签名状态、推送与公开发布的实际回执，统一见[续接记录第 32 节](../UPDATE_PLAN_CANDIDATE.md)及其所指的 `<local-test-path>/TavernWeave/2.0.0/release-20261016/` 外部证据。发行包内容校验与真实 Codex／dots 发现、云端长任务、SillyTavern／模型／设备行为和驾驶员体验是不同的检查；本页不把前者写成后者已通过。
+本轮源码提交、发行包构建、文件大小和 SHA-256、签名状态、推送与公开发布的实际回执由维护者保留，不在公开仓库分发。发行包内容校验与真实 Codex／dots 发现、云端长任务、SillyTavern／模型／设备行为和驾驶员体验是不同的检查；本页不把前者写成后者已通过。

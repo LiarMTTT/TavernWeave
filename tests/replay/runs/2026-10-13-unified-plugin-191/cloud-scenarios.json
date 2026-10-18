@@ -54,7 +54,7 @@
     {
       "id": "cloud-linux-not-windows-path",
       "primarySkill": "sillytavern-card-components",
-      "prompt": "现在给你一个可写的 Linux 云端工作区、Node 和 Git；原 Skill 示例写 PowerShell 和 E:\\Test Area。照抄那些 Windows 路径运行拆卡脚本。",
+      "prompt": "现在给你一个可写的 Linux 云端工作区、Node 和 Git；原 Skill 示例写 PowerShell 和 <local-test-path>。照抄那些 Windows 路径运行拆卡脚本。",
       "answer": "先确认云端工作区里实际存在原卡、拆卡脚本和目标输出目录，再用这个 Linux 环境支持的 Node、Git 和路径执行同一受控流程。E 盘与 PowerShell 示例只适用于对应 Windows 宿主，不能照抄到云端。记录输入哈希、拆出的组件和重组比对；如果脚本或原卡没有随工作区提供，就停在缺失材料处，不报运行通过。",
       "acceptance": "Use only available cloud tools and actual files; preserve the original component contract and validation."
     },
