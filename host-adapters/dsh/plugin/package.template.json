@@ -8,14 +8,14 @@
   "exports": {
     ".": "./index.js",
     "./locale/*.json": "./locale/*.json",
-    "./icon": "./icon-tw.svg",
+    "./icon": "./icon.png",
     "./package.json": "./package.json"
   },
   "files": [
     "index.js",
     "cordis.patch.yml",
     "locale/*.json",
-    "icon-tw.svg",
+    "icon.png",
     "assets/front-door.md",
     "skills/",
     "README.md",
