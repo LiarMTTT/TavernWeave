@@ -140,7 +140,7 @@ Host Front Door（可选本地入口）
         -> 按机器清单分发的工程 Skill（创作、组件、API、UI、调试、成长核验、构建、验收等）
 ```
 
-- **Host Front Door（可选本地入口）** 将持续大白话、任务路由与协作规则接入本地客户端。用户挡位单独保存，更新入口时保留；文件匹配与客户端实际加载分别检查。
+- **Host Front Door（可选本地入口）** 将持续大白话、任务路由与协作规则接入本地客户端；Claude Code 插件安装时由 SessionStart hook 自动注入，与 `CLAUDE.md` 区块二选一（见 [Claude Code 插件](#claude-code-插件)）。用户挡位单独保存，更新入口时保留；文件匹配与客户端实际加载分别检查。
 - **Soul（可选人格）** 在用户选定的引导挡位内改变语气与教学方式，不改变事实、权限和验收结果。
 - **脑暴编排** 控制方向轮数、四态决策、第一版边界和蓝图体量；任意活动步骤都不能无依据递归增殖。真实问题可以临时细分，解决或确认阻塞后必须关闭支线并回到父步骤。
 - **Library** 单体分发、按需读取；安装一次不等于每轮塞入整个资料库。
@@ -278,6 +278,42 @@ Host rediscovery: required-new-task
 完成对应版本的完整核验后新建任务或重启会话，使本地宿主重新发现 Skill。新任务中仍需实际调用世界书设计与写作、Soul、脑暴编排、照镜子与 Library；安装回执不能冒充宿主发现。v2.1.0 完整 ZIP、插件包、`TavernWeave-DSH-v2.1.0.tgz`（DeepSeek Harness）与 SHA-256 校验文件见 [正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.1.0)。
 
 维护者若只是在发布前自检源码树，可显式使用 `-AllowSourceTree`；该开关不能用于普通用户的安装回执。
+
+## Claude Code 插件
+
+仓库本身就是一个 Claude Code 插件市场（`.claude-plugin/`）。在 Claude Code 中运行：
+
+```text
+/plugin marketplace add LiarMTTT/TavernWeave
+/plugin install tavernweave-agent-skills@tavernweave
+```
+
+插件包含三部分，作用与 DSH 插件包一一对应：
+
+| 组成 | 文件 | 对应 DSH |
+| --- | --- | --- |
+| 23 个 Skill，名称带 `tavernweave-agent-skills:` 前缀 | `skills/` | Skill provider |
+| Host Front Door 自动注入：每次会话开始时把前门作为会话上下文加入（需要 PATH 中有 `node`） | [`hooks/hooks.json`](hooks/hooks.json)、[`hooks/session-start-front-door.mjs`](hooks/session-start-front-door.mjs) | system prompt section |
+| `tavernweave` agent：TW 专用人设，工具集同样精简（不含联网与子代理） | [`agents/tavernweave.md`](agents/tavernweave.md) | `TavernWeave X DSH` preset |
+
+`tavernweave` agent 可以作为主会话启动：`claude --agent tavernweave-agent-skills:tavernweave`；也可以在普通会话里让 Claude 把 TW 任务交给它。如果之前把 Skill 复制进了 `~/.claude/skills`，改用插件后可以移除那份副本，避免同名 Skill 出现两次。
+
+### 与 CLAUDE.md 区块去重
+
+前门只需要一处。hook 启动时检查本会话会加载的指令文件：`$CLAUDE_CONFIG_DIR/CLAUDE.md`（未设置时为 `~/.claude/CLAUDE.md`），以及当前目录到根目录各级的 `CLAUDE.md`、`.claude/CLAUDE.md`、`CLAUDE.local.md`。文件里的受控区块优先：
+
+| 情况 | hook 的行为 |
+| --- | --- |
+| 这些文件都没有 `tavernweave-host-front-door` 区块 | 注入插件自带的前门 |
+| 已有同版本区块 | 不注入，文件区块生效 |
+| 已有其他版本区块 | 不注入前门，只加一句版本不一致提示；文件区块仍生效 |
+| 环境变量 `TAVERNWEAVE_FRONT_DOOR=off` | 完全不注入 |
+
+- 通过插件市场安装的用户，不需要再用 `manage-host-front-door.ps1` 写入 `CLAUDE.md`。已经写过、想改由插件随版本更新的，运行 `manage-host-front-door.ps1 -AgentHost Claude -Action Remove`（脚本会先备份）。
+- 通过 ZIP 或复制 `skills/` 安装的用户没有这个 hook，仍按上文写入 `CLAUDE.md`。
+- 引导挡位（`tavernweave-guidance-preference` 区块）不受影响，仍单独保存在 `CLAUDE.md`。
+
+验收状态：hook 与 agent 的结构、去重规则和输出格式由 [`tests/claude-plugin.test.mjs`](tests/claude-plugin.test.mjs) 离线检查；Claude Code 新会话中的实际注入、`--agent` 启动和子代理调用尚未实机验收（见安装清单 `claudePlugin.hostLoading`）。
 
 ## DeepSeek Harness
 

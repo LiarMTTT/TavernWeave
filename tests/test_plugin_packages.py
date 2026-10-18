@@ -102,6 +102,29 @@ class PackageTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "already exists"):
             packager.build(self.repo, commit, self.output)
 
+    def test_claude_plugin_components_ship_only_in_claude_zip(self):
+        for name in ("hooks/hooks.json", "hooks/session-start-front-door.mjs", "agents/tavernweave.md"):
+            path = self.repo / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(f"fixture {name}\n", encoding="utf-8")
+        self.install["claudePlugin"] = {
+            "hooks": "hooks/hooks.json", "frontDoorHook": "hooks/session-start-front-door.mjs",
+            "presetAgent": "agents/tavernweave.md", "presetAgentId": "tavernweave-agent-skills:tavernweave",
+        }
+        self.save_manifests()
+        commit = self.commit()
+        packager.build(self.repo, commit, self.output)
+        with zipfile.ZipFile(self.output / "TavernWeave-Codex-v1.9.1.zip") as codex, \
+                zipfile.ZipFile(self.output / "TavernWeave-Claude-ZCode-v1.9.1.zip") as claude:
+            for name in ("hooks/hooks.json", "agents/tavernweave.md"):
+                self.assertIn(packager.ROOT + name, claude.namelist())
+                self.assertNotIn(packager.ROOT + name, codex.namelist())
+        self.install["claudePlugin"]["presetAgentId"] = "tavernweave-agent-skills:other"
+        self.save_manifests()
+        commit = self.commit()
+        with self.assertRaisesRegex(ValueError, "preset agent id"):
+            packager.build(self.repo, commit, self.base / "agent-id-drift")
+
     def test_skill_inventory_scales_and_rejects_manifest_drift(self):
         added = "worldbook-design-and-writing"
         target = self.repo / "skills" / added / "SKILL.md"

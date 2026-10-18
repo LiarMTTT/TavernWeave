@@ -220,6 +220,10 @@ $finalFileState = if ($Action -in @('Install', 'Remove') -and (Test-Path -Litera
     $fileState
 }
 $finalState = Get-FrontDoorState $finalFileState
+$recommendation = '全局入口负责持续大白话与任务路由；挡位由你选择并单独保存。文件检查后仍需用新任务确认客户端实际加载。'
+if ($hostConfig.pluginFrontDoorMechanism -eq 'plugin-session-start-hook') {
+    $recommendation += ' 若已通过 Claude Code 插件市场安装 tavernweave-agent-skills，插件的 SessionStart hook 会注入同一前门；文件区块存在时插件自动停止注入，二者只需保留一处。'
+}
 $receipt = [pscustomobject][ordered]@{
     schemaVersion = 1
     host = [string]$hostConfig.displayName
@@ -236,7 +240,7 @@ $receipt = [pscustomobject][ordered]@{
     guidancePreferenceStatus = [string]$guidanceState.statusAfter
     guidanceLevel = $guidanceState.level
     hostLoading = 'not-verified'
-    recommendation = '全局入口负责持续大白话与任务路由；挡位由你选择并单独保存。文件检查后仍需用新任务确认客户端实际加载。'
+    recommendation = $recommendation
 }
 
 if ($Json) {

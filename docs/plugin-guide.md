@@ -21,6 +21,8 @@ TW 插件是 **skills-only 资源包**，提供说明、参考资料和随包脚
 
 上一版 [v2.0.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0)与更早的 [v1.9.1 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)保留历史发行包和校验文件；分别按 23／22 个 Skill 的清单核对，不能与 2.1.0 混用。
 
+Claude Code 可直接从本仓库的插件市场安装 `tavernweave-agent-skills`，插件自带 Host Front Door 注入 hook 与 `tavernweave` agent，与 `CLAUDE.md` 区块的去重规则见 [README 的 Claude Code 插件](../README.md#claude-code-插件)。
+
 DeepSeek Harness 不走技能目录安装，而是使用 `TavernWeave-DSH-v2.1.0.tgz`：在 DSH 插件页安装并启用 bundle，再在新任务中选择 `TavernWeave X DSH` preset。详见 [host-adapters/dsh/README.md](../host-adapters/dsh/README.md)。
 
 若账户提供插件导入或启用入口，按该入口当前显示的步骤选择 Codex／dots 共用包，启用后在新任务中让 dot 查找 TavernWeave。具体入口和权限以账户界面为准；这份指南不指定未经证实的个人导入按钮，也不推断某个订阅套餐一定可用。**下载或解压 ZIP 不会自动把插件同步到 dots 账户。**本地文件齐全、账户已导入、插件已启用、dot 在任务里确实调用到 Skill，是不同的状态。

@@ -26,6 +26,8 @@ COMMON_FILES = {
 }
 MANIFESTS = {"Codex": ".codex-plugin/plugin.json", "Claude-ZCode": ".claude-plugin/plugin.json"}
 CODEX_ONLY = "scripts/register-local.ps1"
+# Claude Code plugin components discovered at the plugin root; Codex never receives them.
+CLAUDE_ONLY_PREFIXES = ("hooks/", "agents/")
 RUNTIME_PATHS = {
     "docs/plugin-guide.md",
     "skills/consult-tavernweave-library/references/plugin-runtime.md",
@@ -74,7 +76,7 @@ def committed_files(repo, ref):
     selected = {
         name: value for name, value in tracked.items()
         if name in COMMON_FILES or name in MANIFESTS.values() or name == CODEX_ONLY
-        or name.startswith(("skills/", "docs/", "host-adapters/"))
+        or name.startswith(("skills/", "docs/", "host-adapters/") + CLAUDE_ONLY_PREFIXES)
     }
     require(COMMON_FILES | set(MANIFESTS.values()) | {CODEX_ONLY} <= selected.keys(),
             "missing required package file in committed source")
@@ -153,6 +155,15 @@ def validate_source(contents, selected, tracked=None):
         build_script = dsh_plugin.get("buildScript")
         require(isinstance(build_script, str) and tracked is not None and build_script in tracked,
                 f"declared DSH build script missing from committed source: {build_script}")
+    claude_plugin = install.get("claudePlugin", {})
+    if claude_plugin:
+        for field in ("hooks", "frontDoorHook", "presetAgent"):
+            path = claude_plugin.get(field)
+            require(isinstance(path, str) and path.startswith(CLAUDE_ONLY_PREFIXES) and path in selected,
+                    f"declared Claude plugin path missing from package: {path}")
+        require(claude_plugin.get("presetAgentId") == f"{install['package']}:"
+                + claude_plugin["presetAgent"].rsplit("/", 1)[-1].removesuffix(".md"),
+                "Claude preset agent id must be <plugin>:<agent file name>")
     for host, manifest in manifests.items():
         require(manifest.get("name") == install["package"] and manifest.get("version") == version,
                 f"{host} manifest identity or version mismatch")
@@ -262,7 +273,9 @@ def build(repo, ref, output_dir):
         artifacts = {}
         for host, manifest_path in MANIFESTS.items():
             chosen = set(selected) - (set(MANIFESTS.values()) - {manifest_path})
-            if host != "Codex":
+            if host == "Codex":
+                chosen -= {name for name in chosen if name.startswith(CLAUDE_ONLY_PREFIXES)}
+            else:
                 chosen.remove(CODEX_ONLY)
             target = temp / names[host]
             write_zip(target, chosen, contents, selected, stamp)

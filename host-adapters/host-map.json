@@ -16,7 +16,10 @@
       "defaultDirectory": ".claude",
       "homeOverrideEnvironment": "CLAUDE_CONFIG_DIR",
       "rediscovery": "new-task-or-restart",
-      "support": "formal"
+      "support": "formal",
+      "pluginFrontDoorMechanism": "plugin-session-start-hook",
+      "pluginFrontDoorDedup": "instruction-file-block-wins",
+      "presetAgent": "tavernweave-agent-skills:tavernweave"
     },
     "dsh": {
       "displayName": "DeepSeek Harness",

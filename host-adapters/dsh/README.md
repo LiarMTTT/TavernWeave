@@ -34,9 +34,9 @@ dsh plugin --profile <profile> add <本地路径|tarball|git 地址|包名>
 
 ## 与现有 TW 包的关系
 
-- Codex / Claude Code 的 ZIP 与技能包安装方式**保持不变**；
+- Codex / Claude Code 的 ZIP 与技能包安装方式**保持不变**；Claude Code 通过插件市场安装时，前门由插件的 SessionStart hook 注入、`tavernweave` agent 对应本包的 preset（见仓库 README 的“Claude Code 插件”）；
 - DSH 使用本插件包，不再需要把 `skills/` 复制到 `.agents/skills`；
-- 如果之前把 TW 的 Host Front Door 写进了 `AGENTS.md`，DSH 里应移除该区块，避免与插件注入重复（Codex/Claude 仍保留）。
+- 如果之前把 TW 的 Host Front Door 写进了 `AGENTS.md`，DSH 里应移除该区块，避免与插件注入重复（Codex 仍保留；Claude Code 插件的 hook 遇到该区块会自动停止注入）。
 
 ## 当前状态
 

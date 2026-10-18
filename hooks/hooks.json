@@ -1,0 +1,16 @@
+{
+  "description": "TavernWeave Host Front Door: inject the managed routing block at session start unless a loaded CLAUDE.md already carries it.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/session-start-front-door.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

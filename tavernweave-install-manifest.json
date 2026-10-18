@@ -120,6 +120,16 @@
     "buildScript": "scripts/build-dsh-plugin.mjs",
     "releaseAssetPattern": "TavernWeave-DSH-v{version}.tgz"
   },
+  "claudePlugin": {
+    "status": "hook-and-agent-not-host-verified",
+    "hooks": "hooks/hooks.json",
+    "frontDoorHook": "hooks/session-start-front-door.mjs",
+    "frontDoorDedup": "instruction-file-block-wins",
+    "optOutEnvironment": "TAVERNWEAVE_FRONT_DOOR=off",
+    "presetAgent": "agents/tavernweave.md",
+    "presetAgentId": "tavernweave-agent-skills:tavernweave",
+    "hostLoading": "requires-observed-new-session"
+  },
   "communication": {
     "reference": "skills/consult-tavernweave-library/references/communication-and-guidance.md",
     "preferenceManager": "skills/consult-tavernweave-library/scripts/manage-guidance-preference.mjs",
