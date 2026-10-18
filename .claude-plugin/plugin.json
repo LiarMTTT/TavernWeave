@@ -8,6 +8,7 @@
   "homepage": "https://github.com/LiarMTTT/TavernWeave",
   "repository": "https://github.com/LiarMTTT/TavernWeave",
   "license": "PolyForm-Noncommercial-1.0.0",
+  "types": "./hooks/soul-switch-types.d.ts",
   "keywords": [
     "agent-skills",
     "sillytavern",

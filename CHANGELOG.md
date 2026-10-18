@@ -5,6 +5,7 @@
 - Claude Code 插件补齐与 DSH 插件包对应的两项能力：`hooks/hooks.json` + `hooks/session-start-front-door.mjs` 在会话开始时注入 Host Front Door；`agents/tavernweave.md` 提供与 `TavernWeave X DSH` preset 对应的 `tavernweave` agent（精简工具集）。
 - 去重：本会话会加载的 `CLAUDE.md`（配置目录、当前目录各级的 `CLAUDE.md` / `.claude/CLAUDE.md` / `CLAUDE.local.md`）已有受控区块时，文件区块优先，hook 不注入；版本不同只加一句提示。`TAVERNWEAVE_FRONT_DOOR=off` 可关闭注入。`manage-host-front-door.ps1` 的 Claude 回执同步说明二者只需保留一处。
 - 安装清单新增 `claudePlugin`，宿主映射为 Claude 记录 hook 机制、去重规则与 agent 名；打包脚本只把 `hooks/`、`agents/` 放进 Claude／ZCode 包，Codex 包不含。新增 `tests/claude-plugin.test.mjs` 与打包测试用例。Claude Code 新会话中的实际注入与 agent 启动尚未实机验收。
+- Claude Code 插件新增 Soul 模式切换（`hooks/soul-switch.tsx`，经 `hooks/hooks.json` 的 `modules` 加载）：输入框上方一行显示当前 Soul，展开后选模式只把 Host Front Door 指令填进输入框，由用户发送；显示依据是用户实际发出的指令。Claude Code 侧只保留这一项界面，神之手侧栏、Skill 列表与世界书面板不做适配。已在 Claude Code 2.1.299 确认命令 hook 与函数 hook 模块可同在一个 `hooks.json`；更早版本未验证。
 
 ## TavernWeaveX无限月读 2.1.0 · DSH 插件正式适配 - 2026-10-18
 

@@ -19,3 +19,6 @@ debug-artifacts/
 run-logs/
 .DS_Store
 Thumbs.db
+
+# Written by Claude Code when the plugin is loaded from this folder
+.claude-plugin/types/

@@ -157,8 +157,10 @@ def validate_source(contents, selected, tracked=None):
                 f"declared DSH build script missing from committed source: {build_script}")
     claude_plugin = install.get("claudePlugin", {})
     if claude_plugin:
-        for field in ("hooks", "frontDoorHook", "presetAgent"):
+        for field in ("hooks", "frontDoorHook", "presetAgent", "soulSwitch", "soulSwitchTypes"):
             path = claude_plugin.get(field)
+            if field.startswith("soulSwitch") and path is None:
+                continue
             require(isinstance(path, str) and path.startswith(CLAUDE_ONLY_PREFIXES) and path in selected,
                     f"declared Claude plugin path missing from package: {path}")
         require(claude_plugin.get("presetAgentId") == f"{install['package']}:"

@@ -126,6 +126,9 @@
     "frontDoorHook": "hooks/session-start-front-door.mjs",
     "frontDoorDedup": "instruction-file-block-wins",
     "optOutEnvironment": "TAVERNWEAVE_FRONT_DOOR=off",
+    "soulSwitch": "hooks/soul-switch.tsx",
+    "soulSwitchTypes": "hooks/soul-switch-types.d.ts",
+    "soulSwitchVerifiedRuntime": "Claude Code 2.1.299 (function hooks, early access)",
     "presetAgent": "agents/tavernweave.md",
     "presetAgentId": "tavernweave-agent-skills:tavernweave",
     "hostLoading": "requires-observed-new-session"

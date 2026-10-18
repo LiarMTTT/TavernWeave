@@ -1,5 +1,5 @@
 {
-  "description": "TavernWeave Host Front Door: inject the managed routing block at session start unless a loaded CLAUDE.md already carries it.",
+  "description": "TavernWeave Host Front Door: inject the managed routing block at session start unless a loaded CLAUDE.md already carries it. The Soul mode switch above the prompt is a function-hooks module.",
   "hooks": {
     "SessionStart": [
       {
@@ -12,5 +12,6 @@
         ]
       }
     ]
-  }
+  },
+  "modules": ["./soul-switch.tsx"]
 }

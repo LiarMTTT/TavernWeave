@@ -288,15 +288,18 @@ Host rediscovery: required-new-task
 /plugin install tavernweave-agent-skills@tavernweave
 ```
 
-插件包含三部分，作用与 DSH 插件包一一对应：
+插件包含四部分，前三项与 DSH 插件包一一对应：
 
 | 组成 | 文件 | 对应 DSH |
 | --- | --- | --- |
 | 23 个 Skill，名称带 `tavernweave-agent-skills:` 前缀 | `skills/` | Skill provider |
 | Host Front Door 自动注入：每次会话开始时把前门作为会话上下文加入（需要 PATH 中有 `node`） | [`hooks/hooks.json`](hooks/hooks.json)、[`hooks/session-start-front-door.mjs`](hooks/session-start-front-door.mjs) | system prompt section |
 | `tavernweave` agent：TW 专用人设，工具集同样精简（不含联网与子代理） | [`agents/tavernweave.md`](agents/tavernweave.md) | `TavernWeave X DSH` preset |
+| Soul 模式切换：输入框上方一行 `Soul 阿瞳 ▸`，展开后选模式只把对应指令填进输入框，由你发送 | [`hooks/soul-switch.tsx`](hooks/soul-switch.tsx)（`hooks/hooks.json` 的 `modules`） | 神之手 Soul 小浮窗（CC 只保留这一项界面） |
 
 `tavernweave` agent 可以作为主会话启动：`claude --agent tavernweave-agent-skills:tavernweave`；也可以在普通会话里让 Claude 把 TW 任务交给它。如果之前把 Skill 复制进了 `~/.claude/skills`，改用插件后可以移除那份副本，避免同名 Skill 出现两次。
+
+Soul 模式切换用的是 Claude Code 插件的函数 hook 接口（官方标注为 early access）。它和前门 hook 写在同一个 `hooks/hooks.json` 里，已在 Claude Code 2.1.299 上确认两者都会加载；更早的版本是否忽略 `modules` 字段尚未验证。切换只记录你实际发出的 Soul 指令，不代表 Soul 已被确认激活；它从不替你发送消息。界面测试用 `claude plugin test .` 运行。
 
 ### 与 CLAUDE.md 区块去重
 
@@ -313,7 +316,7 @@ Host rediscovery: required-new-task
 - 通过 ZIP 或复制 `skills/` 安装的用户没有这个 hook，仍按上文写入 `CLAUDE.md`。
 - 引导挡位（`tavernweave-guidance-preference` 区块）不受影响，仍单独保存在 `CLAUDE.md`。
 
-验收状态：hook 与 agent 的结构、去重规则和输出格式由 [`tests/claude-plugin.test.mjs`](tests/claude-plugin.test.mjs) 离线检查；Claude Code 新会话中的实际注入、`--agent` 启动和子代理调用尚未实机验收（见安装清单 `claudePlugin.hostLoading`）。
+验收状态：hook、agent 与 Soul 切换的结构、去重规则、输出格式和指令一致性由 [`tests/claude-plugin.test.mjs`](tests/claude-plugin.test.mjs) 离线检查，Soul 切换的界面行为由 [`hooks/soul-switch.test.tsx`](hooks/soul-switch.test.tsx) 在终端与桌面两种表面检查；Claude Code 新会话中的实际注入、`--agent` 启动和子代理调用尚未实机验收（见安装清单 `claudePlugin.hostLoading`）。
 
 ## DeepSeek Harness
 
