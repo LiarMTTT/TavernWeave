@@ -24,7 +24,7 @@
       "defaultDirectory": null,
       "homeOverrideEnvironment": null,
       "rediscovery": "new-session",
-      "support": "preview-plugin-bundle",
+      "support": "plugin-bundle",
       "frontDoorMechanism": "plugin-system-prompt",
       "pluginPackage": "liarmttt-tavernweave-dsh",
       "presetId": "tavernweave"

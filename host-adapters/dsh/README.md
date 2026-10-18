@@ -40,8 +40,8 @@ dsh plugin --profile <profile> add <本地路径|tarball|git 地址|包名>
 
 ## 当前状态
 
-- `dsh-plugin-contract.json` 的 `runtimeAccepted` 记录真实 DSH 安装验收是否完成；在翻转为 `true` 前，一切能力声明只到"包结构/静态检查 + 部分运行证据"层级。
-- 已完成部分：打包 tgz 安装进隔离 SDK profile，真实模型轮次中 `skill` 工具成功加载 `consult-tavernweave-library`，目录含全部 23 个 TW Skill，模型逐字引用 Host Front Door 规则（详见 [runtime-acceptance.md](runtime-acceptance.md)）。
+- `dsh-plugin-contract.json` 的 `runtimeAccepted` 已在 **DSH Desktop 0.2.1-rc.2** 上翻转为 `true`：插件页、preset 选择、23 Skill 目录、Front Door、Soul 与完全权限下的终端均完成实机验收。
+- 已完成：DSH Desktop 插件页（TW 图标、无元信息错误）、新任务选择 `TavernWeave X DSH` preset、23 个 Skill 目录、Front Door、`开启soul模式` 进入阿瞳 Soul、完全权限下的终端命令；另有 SDK 运行层的加载与引用证据（详见 [runtime-acceptance.md](runtime-acceptance.md)）。
 - 已完成：DSH Desktop 插件页出现 bundle、新任务选择 `TavernWeave X DSH` preset、23 个 Skill 目录、`开启soul模式` 激活 Soul（见 `runtime-acceptance.md`）。
 - 尚未完成：pwsh 依赖任务（当前 OneDrive reparse-point 工作区被 DSH workspace-write 沙箱挡住，见合同 knownEnvironmentIssues；可切完全权限或换普通目录后重测）、禁用/卸载清理、Linux/WSL、真实 SillyTavern 与模型效果。
 - 不支持（v1）：偏好持久化、专用 UI、客户端扩展。

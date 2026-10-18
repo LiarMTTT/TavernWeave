@@ -1,8 +1,8 @@
 # TavernWeave 2.1.0 统一插件使用指南
 
-> 当前正式版为 2.1.0，共 23 个 Skill。从 [v2.1.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.1.0)获取发行资产；[升级说明](dual-task-upgrade.md)保留原补丁与修复证据。上一版 1.9.1 含 22 个 Skill。
+> 当前正式版为 2.1.0，共 23 个 Skill。从 [v2.1.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.1.0)获取发行资产；[升级说明](dual-task-upgrade.md)保留原补丁与修复证据。上一版 2.0.0 也是 23 个 Skill；1.9.1 为 22 个。
 
-TavernWeaveX无限月读 2.1.0 沿用安装标识 `tavernweave-agent-skills` 和原有兼容流程，新增独立的[世界书规划与写作 Skill](../skills/worldbook-design-and-writing/SKILL.md)与 [TavernWeave X DSH 插件包](../host-adapters/dsh/README.md)。Codex 与 dots 共用 `TavernWeave-Codex-v2.1.0.zip`，没有单独的“cloud 版”。这个插件帮助用户在 dots 云端长任务中调用 TW 的工作方法：把目标分阶段完成，保存可续接的工作记录，再从实际文件和证据接着做。
+TavernWeaveX无限月读 2.1.0 沿用安装标识 `tavernweave-agent-skills` 和原有兼容流程，新增独立的 [TavernWeave X DSH 插件包](../host-adapters/dsh/README.md)；2.0.0 引入的[世界书规划与写作 Skill](../skills/worldbook-design-and-writing/SKILL.md)继续保留。Codex 与 dots 共用 `TavernWeave-Codex-v2.1.0.zip`，没有单独的“cloud 版”。这个插件帮助用户在 dots 云端长任务中调用 TW 的工作方法：把目标分阶段完成，保存可续接的工作记录，再从实际文件和证据接着做。
 
 TW 插件是 **skills-only 资源包**，提供说明、参考资料和随包脚本，不附带 MCP 服务器、后台常驻服务或密钥。云端任务能使用的终端、应用、文件和持久状态由实际宿主及账户权限决定。dots 的云电脑有自己的文件、软件和浏览器，可在用户本机关闭后继续工作；如果任务改在已连接的本机执行，就需要本机在线并保持应用可用。[dots 云电脑与应用说明](https://learn.chatgpt.com/docs/dots/computers-and-apps)
 
@@ -19,7 +19,7 @@ TW 插件是 **skills-only 资源包**，提供说明、参考资料和随包脚
 | `TavernWeave-DSH-v2.1.0.tgz` | DeepSeek Harness 插件包（TavernWeave X DSH） |
 | `SHA256SUMS.txt` | 已发布文件的 SHA-256 校验值 |
 
-上一版 [v1.9.1 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)保留历史发行包和校验文件；其 22 个 Skill 不能当作 2.1.0 的 23 个 Skill 安装清单。
+上一版 [v2.0.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0)与更早的 [v1.9.1 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)保留历史发行包和校验文件；分别按 23／22 个 Skill 的清单核对，不能与 2.1.0 混用。
 
 DeepSeek Harness 不走技能目录安装，而是使用 `TavernWeave-DSH-v2.1.0.tgz`：在 DSH 插件页安装并启用 bundle，再在新任务中选择 `TavernWeave X DSH` preset。详见 [host-adapters/dsh/README.md](../host-adapters/dsh/README.md)。
 

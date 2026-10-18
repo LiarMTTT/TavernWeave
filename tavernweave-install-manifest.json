@@ -106,10 +106,10 @@
       "Codex",
       "Claude"
     ],
-    "dshSupport": "preview-plugin-bundle"
+    "dshSupport": "plugin-bundle"
   },
   "dshPlugin": {
-    "status": "preview-plugin-bundle",
+    "status": "plugin-bundle",
     "package": "liarmttt-tavernweave-dsh",
     "presetId": "tavernweave",
     "contract": "host-adapters/dsh/dsh-plugin-contract.json",

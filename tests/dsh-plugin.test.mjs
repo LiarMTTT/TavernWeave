@@ -33,8 +33,8 @@ test("manifest, host map and contract agree on the DSH plugin bundle", () => {
   assert.equal(contract.package.version, manifest.version);
   assert.match(contract.package.name, /liarmttt/u);
   assert.equal(contract.package.presetId, "tavernweave");
-  assert.equal(contract.status, "preview-plugin-bundle");
-  assert.equal(contract.runtimeAccepted, false);
+  assert.equal(contract.status, "plugin-bundle");
+  assert.equal(contract.runtimeAccepted, true);
   assert.equal(manifest.hostFrontDoor.dshSupport, contract.status);
   assert.equal(hostMap.hosts.dsh.support, contract.status);
   assert.equal(hostMap.hosts.dsh.instructionFileName, null);

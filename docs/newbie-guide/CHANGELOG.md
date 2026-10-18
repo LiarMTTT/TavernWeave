@@ -3,7 +3,7 @@
 ## TavernWeaveX无限月读 2.1.0 · DSH 插件适配 - 2026-10-18
 
 - 新增 DeepSeek Harness 独立插件包 **TavernWeave X DSH**（23 个 Skill + Host Front Door + `tavernweave` preset）；Codex/Claude 继续使用原技能包安装，DSH 改用插件页安装 + preset 选择。
-- 当前 Skill 数量仍为 23；DSH 的插件页/preset/Linux/真实酒馆验收边界以 [插件合同](../../host-adapters/dsh/dsh-plugin-contract.json) 为准，安装成功不等于全部验收通过。
+- 当前 Skill 数量仍为 23；功能地图、安装说明与版本页脚同步为 2.1.0，教程缓存更新到 v57，2.0.0 历史记录保留。DSH 的插件页/preset/Linux/真实酒馆验收边界以 [插件合同](../../host-adapters/dsh/dsh-plugin-contract.json) 为准，安装成功不等于全部验收通过。
 
 ## TavernWeaveX无限月读 2.0.0 · 正式版 - 2026-10-16
 

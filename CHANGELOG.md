@@ -12,7 +12,8 @@
 - 指南勘误：修正 B2 的 15 处 STScript 命令签名、E5 的 `WorldbookEntry` 字段、B1 的 MVU 公开事件表、A5 的控制流宏状态；全部写入 `guide-corrections.json` 可重放修订。
 - Skill：两段共享注入块改为生成+校验（24 文件 / 47 块），压缩约 29% 并移除宿主品牌词；命令示例统一 `<skill-root>/scripts/` 契约；4 条 description 去宿主词；明确 Soul / 蓝图 / 代码审查的路由归属。
 - replay：以书面源合同复核确认 182 条既有案例在修改后仍相容，并新增 2 条路由归属案例（86→88 正向）；未进行模型试跑或真实宿主验收。
-- 版本号、安装清单与宿主入口已统一为 2.1.0；教程缓存与 Release 资产在正式发布步骤中同步。
+- DSH Desktop `0.2.1-rc.2` 实机验收通过：插件页（TW 图标、无元信息错误）、新任务选择 `TavernWeave X DSH` preset、23 个 Skill 目录、Host Front Door、`开启soul模式` 进入阿瞳 Soul，以及完全权限下的终端命令；SDK 运行层另行验证 Skill 加载与 Front Door 引用。已知 OneDrive reparse-point 工作区在 workspace-write 下需切完全权限或换普通目录。
+- 版本号、安装清单、宿主入口、教程页（缓存 v57）与 2.1.0 Release 资产同步；Codex／Claude 包保持原样，旧 TW Lite 预设不提供兼容层。
 
 ## TavernWeaveX无限月读 2.0.0 · 世界书与双任务正式版 - 2026-10-16
 

@@ -59,7 +59,7 @@ https://github.com/LiarMTTT/TavernWeave</code></pre></div>
 <section class="section" id="tw-v1">
 <div class="section-head"><div class="section-no">05.1</div><div><h2>TW 工作流程：从接到需求到交付结果</h2><p class="section-kicker">全局入口识别需求，按需要整理方案、查资料，再调用制作或检查能力。大白话和你选择的挡位贯穿全程；Soul 人格可以按需启用。</p></div></div>
 <div aria-label="TavernWeave 五层入口" class="flow"><div class="flow-node">Host Front Door · 可选本地入口</div><div class="flow-arrow">→</div><div class="flow-node">Soul · 可选教学/审查模式</div><div class="flow-arrow">→</div><div class="flow-node">脑暴编排 · 总设计案与首版</div><div class="flow-arrow">→</div><div class="flow-node">Library · A0 与最小资料集</div><div class="flow-arrow">→</div><div class="flow-node">23 个 Skill · 真正施工和验收</div></div>
-<div class="cards"><article class="card"><div class="card-icon">魂</div><h3>Soul</h3><p class="muted">调整解释、提问与审查口吻。三席联席是同一个 Agent 分别采用三种视角，不是凭空多出三个独立执行者。</p></article><article class="card"><div class="card-icon">愿</div><h3>许愿工坊</h3><p class="muted">把想法整理成明确决定：作品核心、第一版、后续路线和暂存想法。方案确认后，执行范围不能自行越长越大。</p></article><article class="card"><div class="card-icon">库</div><h3>Library</h3><p class="muted">写入型任务先过 A0，再按意图加载少量 ST 指南、设计、动效或来源 Wiki。</p></article><article class="card"><div class="card-icon">工</div><h3>工程阵列</h3><p class="muted">2.0.0 的 23 个 Skill 按任务分工，覆盖规划、创作、精修、技术实现、检查与交付。相关动作仍按项目约定和你的授权执行。</p></article></div>
+<div class="cards"><article class="card"><div class="card-icon">魂</div><h3>Soul</h3><p class="muted">调整解释、提问与审查口吻。三席联席是同一个 Agent 分别采用三种视角，不是凭空多出三个独立执行者。</p></article><article class="card"><div class="card-icon">愿</div><h3>许愿工坊</h3><p class="muted">把想法整理成明确决定：作品核心、第一版、后续路线和暂存想法。方案确认后，执行范围不能自行越长越大。</p></article><article class="card"><div class="card-icon">库</div><h3>Library</h3><p class="muted">写入型任务先过 A0，再按意图加载少量 ST 指南、设计、动效或来源 Wiki。</p></article><article class="card"><div class="card-icon">工</div><h3>工程阵列</h3><p class="muted">2.1.0 的 23 个 Skill 按任务分工，覆盖规划、创作、精修、技术实现、检查与交付。相关动作仍按项目约定和你的授权执行。</p></article></div>
 <div class="callout"><strong>最重要的边界</strong>安装了资料库，不等于 Agent 每轮都读完整个资料库；开了人格，也不等于人格获得文件、Git、联网、发布或生产权限。</div>
 </section>
 <section class="section" id="soul-mode">
@@ -87,16 +87,16 @@ Soul 归位</code></pre></div>
 <section class="section" id="install-gate">
 <div class="section-head"><div class="section-no">05.4</div><div><h2>安装后，检查文件是否齐全、入口是否可用</h2><p class="section-kicker">文件装齐只是第一步，还要确认客户端能发现并实际调用它。</p></div></div>
 <p class="lead">例如旧安装有 16 个 Skill，只覆盖这 16 个目录，会漏掉后来新增的能力。新版文件即使已经引用 Library，调用时也可能找不到它。因此升级要对照新版本的完整清单。</p>
-<div class="steps"><div class="step"><strong>先看所选版本的完整清单</strong>2.0.0 正式版列出 23 个 Skill，旧版仍按各自的清单核验。不能拿本机旧目录反推来源内容。</div><div class="step"><strong>再比较实际安装位置</strong>安装必须计算“所选来源应有目录 − 本机已有目录”，创建缺失项，而不是只覆盖旧文件。</div><div class="step"><strong>核验 Soul、Library、脑暴与 picker</strong>目录存在还不够，内容必须与所选来源逐文件匹配；使用 2.0.0 时还要核对 <code>worldbook-design-and-writing</code>。</div><div class="step"><strong>明文处理 Host Front Door</strong>先展示 Codex 或 Claude 的目标规则文件和差异，让你选择安装全局入口、先看 diff 或仅安装 Skills；写入只涉及 TW 自己的带版本区块。</div><div class="step"><strong>最后新建任务</strong>目录完整和前门 current 都不证明宿主已调用 Skill；要在新任务或重启后用直接口令另验。</div></div>
-<p>下面的模板适用于本地 Codex／Claude Code。使用 v2.0.0 正式包时，应按 23 项完整清单核验；历史版本按对应清单检查。Codex 与 dots 共用统一插件包，本地安装不会自动同步 dots 账户。云端使用方法请看 <a href="https://github.com/LiarMTTT/TavernWeave/blob/v2.0.0/docs/plugin-guide.md" target="_blank" rel="noopener noreferrer">统一插件指南</a>。共用大白话和用户挡位继续保留。</p>
-<div class="code-block"><div class="code-label"><span>完整安装 · 可直接复制</span><button class="copy-btn" type="button">复制</button></div><pre><code>请把 TavernWeave 完整安装或更新到 v2.0.0 正式版：
-https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0
+<div class="steps"><div class="step"><strong>先看所选版本的完整清单</strong>2.1.0 正式版列出 23 个 Skill，旧版仍按各自的清单核验。不能拿本机旧目录反推来源内容。</div><div class="step"><strong>再比较实际安装位置</strong>安装必须计算“所选来源应有目录 − 本机已有目录”，创建缺失项，而不是只覆盖旧文件。</div><div class="step"><strong>核验 Soul、Library、脑暴与 picker</strong>目录存在还不够，内容必须与所选来源逐文件匹配；使用 2.1.0 时还要核对 <code>worldbook-design-and-writing</code>。</div><div class="step"><strong>明文处理 Host Front Door</strong>先展示 Codex 或 Claude 的目标规则文件和差异，让你选择安装全局入口、先看 diff 或仅安装 Skills；写入只涉及 TW 自己的带版本区块。</div><div class="step"><strong>最后新建任务</strong>目录完整和前门 current 都不证明宿主已调用 Skill；要在新任务或重启后用直接口令另验。</div></div>
+<p>下面的模板适用于本地 Codex／Claude Code。使用 v2.1.0 正式包时，应按 23 项完整清单核验；历史版本按对应清单检查。Codex 与 dots 共用统一插件包，本地安装不会自动同步 dots 账户。云端使用方法请看 <a href="https://github.com/LiarMTTT/TavernWeave/blob/v2.1.0/docs/plugin-guide.md" target="_blank" rel="noopener noreferrer">统一插件指南</a>。共用大白话和用户挡位继续保留。</p>
+<div class="code-block"><div class="code-label"><span>完整安装 · 可直接复制</span><button class="copy-btn" type="button">复制</button></div><pre><code>请把 TavernWeave 完整安装或更新到 v2.1.0 正式版：
+https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.1.0
 
 不要只覆盖本机已经存在的 Skill。
 请以所选来源 skills/ 的完整目录为准，比较来源应有目录与实际安装目录，创建新增 Skill。
 
 安装后必须核对：
-- 23/23 个 TavernWeave Skill 与 v2.0.0 完整匹配；
+- 23/23 个 TavernWeave Skill 与 v2.1.0 完整匹配；
 - worldbook-design-and-writing 存在；
 - activate-tavernweave-soul 存在；
 - consult-tavernweave-library 存在；
@@ -105,7 +105,7 @@ https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0
 
 请说明 Host Front Door 是可选本地入口；若我要安装到 Codex 或 Claude Code 的全局规则，先显示目标路径与 diff，确认后只更新 TavernWeave 受控区块。
 请返回 Skill 与前门两份回执。通过后提醒我新建任务，再验证宿主是否真正发现 Soul、脑暴编排与 Library。</code></pre></div>
-<div class="callout warn"><strong>两份回执分别说明什么</strong><code>INSTALLATION VERIFIED: 23/23</code> 只证明实际目录与 v2.0.0 来源完整匹配；<code>Host Front Door: current</code> 只证明全局区块匹配。两者都不能冒充 Codex / Claude 已重新扫描、Soul/Library 已调用或真实 SillyTavern 已运行。</div>
+<div class="callout warn"><strong>两份回执分别说明什么</strong><code>INSTALLATION VERIFIED: 23/23</code> 只证明实际目录与 v2.1.0 来源完整匹配；<code>Host Front Door: current</code> 只证明全局区块匹配。两者都不能冒充 Codex / Claude 已重新扫描、Soul/Library 已调用或真实 SillyTavern 已运行。</div>
 <div class="callout"><strong>DSH 从 2.1.0 起改用插件包</strong>DeepSeek Harness 仍是 Developer Preview。2.1.0 提供独立的 TavernWeave X DSH 插件包（bundle + preset + 23 个 Skill + Host Front Door）；在插件页安装并在新任务选择 <code>TavernWeave X DSH</code> preset 后才会生效。SDK 运行层的技能加载与 Front Door 注入已做部分实测，DSH Desktop 插件页/preset 选择、Linux 与真实酒馆验收仍以合同记录为准，不能把安装或离线检查当成全部已支持。</div>
 </section>
 <section class="section" id="brainstorm-blueprint">

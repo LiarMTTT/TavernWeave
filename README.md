@@ -289,4 +289,4 @@ Host rediscovery: required-new-task
 
 CLI/Web profile 使用 `dsh plugin --profile <profile> add <本地路径|tarball|git 地址|包名>`；`desktop` profile 由 Desktop shell 管理，不要直接调用 CLI。
 
-插件包内直接携带 23 个 Skill 与 Host Front Door（作为 system prompt section 注入），安装/升级/卸载都走 DSH 插件机制。详细组成、机器合同与运行时门禁见 [host-adapters/dsh/README.md](host-adapters/dsh/README.md)。DSH 仍处于 Developer Preview，2.1.0 的适配状态与实测证据以 `dsh-plugin-contract.json` 的 `runtimeAccepted` 为准；在翻转为已验收前，不宣传正式兼容或模型效果。
+插件包内直接携带 23 个 Skill 与 Host Front Door（作为 system prompt section 注入），安装/升级/卸载都走 DSH 插件机制。详细组成、机器合同与运行时门禁见 [host-adapters/dsh/README.md](host-adapters/dsh/README.md)。DSH 仍处于 Developer Preview。2.1.0 已在 DSH Desktop `0.2.1-rc.2` 上完成插件页、preset 选择、23 Skill 目录、Front Door、Soul 与完全权限终端的实机验收；模型效果、Linux/WSL 与真实酒馆仍是分开的验收项。OneDrive reparse-point 工作区在 workspace-write 下需切完全权限或换普通目录（见合同 `knownEnvironmentIssues`）。

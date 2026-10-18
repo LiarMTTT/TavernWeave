@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "adapterVersion": "2.1.0",
-  "status": "preview-plugin-bundle",
+  "status": "plugin-bundle",
   "supportLevel": "plugin-bundle",
-  "runtimeAccepted": false,
+  "runtimeAccepted": true,
   "modelQualityClaim": "not-evaluated",
   "package": {
     "name": "liarmttt-tavernweave-dsh",
@@ -82,8 +82,8 @@
     "front-door-file-equals-host-loading"
   ],
   "evidence": {
-    "runtimeAcceptedAt": null,
-    "acceptedDshVersion": null,
+    "runtimeAcceptedAt": "2026-10-18",
+    "acceptedDshVersion": "0.2.1-rc.2",
     "partialChecks": [
       {
         "kind": "sdk-jsonrpc-runtime",
@@ -137,16 +137,32 @@
           "Linux/WSL and real SillyTavern acceptance",
           "Disable/uninstall cleanup in DSH Desktop"
         ]
+      },
+      {
+        "kind": "dsh-desktop-final",
+        "date": "2026-10-18",
+        "dshVersion": "0.2.1-rc.2",
+        "observed": [
+          "Plugin page shows the bundle with the TW PNG icon and no metadata error after a full restart.",
+          "The TavernWeave X DSH preset is selectable in a new task; the 23-skill catalog and Host Front Door are present.",
+          "Soul activation (`开启soul模式`) works in the desktop session.",
+          "After switching the OneDrive workspace session to full access, terminal commands work normally."
+        ],
+        "notYetVerified": [
+          "Disable/uninstall cleanup",
+          "Linux/WSL",
+          "real SillyTavern and model-quality acceptance"
+        ]
       }
     ],
-    "notes": "Set runtimeAccepted to true only after a real DSH Desktop install from the packaged artifact plus a new TavernWeave X DSH session passes the gates above. The SDK partial check proves plugin/provider/front-door mechanics but not the preset UI path."
+    "notes": "Accepted on DSH Desktop 0.2.1-rc.2 (2026-10-18): plugin page metadata clean, TavernWeave X DSH preset selectable, 23 skills + Host Front Door loaded, Soul activation and a full-access terminal command verified. Known environment issue: workspace-write cannot provision a workspace inside a OneDrive reparse point; use full access or a normal local directory there."
   },
   "knownEnvironmentIssues": [
     {
       "id": "onedrive-reparse-workspace-sandbox",
-      "scope": "Windows DSH workspace located under a OneDrive reparse point (the tested workspace was E:\\OneDrive\\ST-\\TavernWeave)",
+      "scope": "Windows DSH workspace located under a OneDrive reparse point (the tested workspace was a OneDrive-redirected directory)",
       "symptom": "SetNamedSecurityInfoW failed (Win32 5): grantWrite(<workspace>) for every pwsh call in workspace-write mode",
-      "diagnosis": "diagnose-windows-sandbox-acl reports PRECONDITION/nextAction=stop: a reparse-point ancestor (E:\\OneDrive) cannot be repaired through and the script refuses by design. Normal directories can be repaired: a verified grant on the SDK acceptance directory made pwsh Get-Location succeed afterwards.",
+      "diagnosis": "diagnose-windows-sandbox-acl reports PRECONDITION/nextAction=stop: a reparse-point ancestor cannot be repaired through and the script refuses by design. Normal directories can be repaired: a verified grant on the SDK acceptance directory made pwsh Get-Location succeed afterwards.",
       "workaround": "Switch the preset session to full access (完全权限), or use a workspace on a normal local directory without a reparse-point ancestor; for normal directories run the bundled diagnostic once, then repeat the original confined operation."
     }
   ]

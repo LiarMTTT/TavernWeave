@@ -29,12 +29,12 @@ Mermaid 流程图库来自指南原有的 CDN，并保留备用域；网络不�
 
 ## 当前版本与缓存
 
-本地教程对应 TavernWeaveX无限月读 2.0.0 正式版，缓存为 v56。同步 `index.html` 中的版本元信息与资源查询参数、`app.js` 的正文分片参数、当前页脚和 `tests/newbie-guide-navigation.test.mjs` 的缓存断言。当前版本条目为 `release-v2-0-0`；`release-v1-9-1`、`release-v1-9-0`、rc.2、rc.1 及更早正式版条目保留；旧名称、徽标和深链接属于历史记录，保持原样。README、安装说明和 Q&A 的正式下载入口指向 v2.0.0 正式发布页。统一插件使用说明见 `docs/plugin-guide.md`。
+本地教程对应 TavernWeaveX无限月读 2.1.0 正式版，缓存为 v57。同步 `index.html` 中的版本元信息与资源查询参数、`app.js` 的正文分片参数、当前页脚和 `tests/newbie-guide-navigation.test.mjs` 的缓存断言。当前版本条目为 `release-v2-1-0`；`release-v2-0-0`、`release-v1-9-1`、`release-v1-9-0`、rc.2、rc.1 及更早正式版条目保留；旧名称、徽标和深链接属于历史记录，保持原样。README、安装说明和 Q&A 的正式下载入口指向 v2.1.0 正式发布页。统一插件使用说明见 `docs/plugin-guide.md`。
 
 当前 Q&A 版本说明以 `docs/community-qa.md` 为源，生成网页与下载副本；不要直接改生成物。本地教程改动不代表网页已部署，也不代表客户端已更新。
 
 ## v1.7.0 可选沙盒章节及 v1.8.0 画板
 
-画板同步按总设计案范围块与 NEXT 状态块生成，先核对版本绑定的差异。第四章 `content-8.html` 的 `frontend-sandbox` 位于章节导语后、`runtime-evidence` 前；保留原 37–45 编号。功能地图、当前版本与历史日志分别维护，当前正式下载入口指向 v2.0.0 发布页，历史小节保留自身版本链接。候选锚点 release-v1-7-0-rc-1 与 release-v1-8-0-rc-1 保留为对应正式小节的兼容入口。Q＆A与skill联动仍位于 TW 导航下方，95 问来源不变。
+画板同步按总设计案范围块与 NEXT 状态块生成，先核对版本绑定的差异。第四章 `content-8.html` 的 `frontend-sandbox` 位于章节导语后、`runtime-evidence` 前；保留原 37–45 编号。功能地图、当前版本与历史日志分别维护，当前正式下载入口指向 v2.1.0 发布页，历史小节保留自身版本链接。候选锚点 release-v1-7-0-rc-1 与 release-v1-8-0-rc-1 保留为对应正式小节的兼容入口。Q＆A与skill联动仍位于 TW 导航下方，95 问来源不变。
 
 沙盒方法见 `docs/frontend-sandbox.md` 与 `skills/sillytavern-embedded-ui/references/`。TW 只提供搭建规范与场景参考，由 Agent 在项目测试目录按真实源码搭建，沿用项目的技术栈、预览入口和视觉风格。公开场景只用合成数据；私有作品与浏览器原始记录保留在外部测试目录。维护时检查采用／跳过、确认注入、旧确认失效、字段对照和参数复位；Mock Receiver 的真实记录职责保持原义。
