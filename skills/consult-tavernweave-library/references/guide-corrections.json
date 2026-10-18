@@ -76,12 +76,136 @@
       {
         "before": "# 渲染管线与宏系统参考手册",
         "after": "# 渲染管线与宏系统参考手册\n\n> TW 导航补充（2026-10-15）：需要先看完整回合时，按需读[酒馆运行基础](../sillytavern-runtime-foundations.md)。已有上下文不重复加载；本册保留原专项内容及其版本边界。"
+      },
+      {
+        "before": "回源基准：SillyTavern v1.14.0 + 本地成熟卡（卡A 2.5.0 / 卡B 2.6.0）",
+        "after": "证据基线：SillyTavern v1.14.0 + 本地成熟卡（卡A 2.5.0 / 卡B 2.6.0）；控制流以当前官方 macros 文档核对"
+      },
+      {
+        "before": "> 来源：官方文档 [文档·多源] | 适用版本：**官方文档记录，v1.14.0 本地 macros.js 直读未见实现** | ~~high~~ → **medium·推导未验证 [文档·多源]**",
+        "after": "> 来源：官方文档 [文档·多源] | 状态：**当前宏引擎已实现（以官方 macros 文档为基线）** | 置信度：**high [文档·多源]**"
+      },
+      {
+        "before": "> **降级原因**：v1.14.0 `macros.js` `evaluateMacros()` 的 `preEnvMacros` / `postEnvMacros` 中无任何 `{{if}}`/`{{//}}` 的正则处理；`{{//comment}}` 单行注释正则 `/\\{\\{\\/\\/([\\s\\S]*?)\\}\\}/gm` 在 postEnvMacros 中存在，但 `{{if}}` 块不存在。控制流宏可能属于新引擎或更高版本引入。`{{//comment}}` 单行注释可单独提升为 high（v1.14.0 直读）。\n>\n> 真机验证路径：在 v1.14.0 中发送 `{{if true}}SHOW{{/if}}`，观察是否渲染为 \"SHOW\"。",
+        "after": "> **官方依据**：[Conditional Macros](https://docs.sillytavern.app/usage/core-concepts/macros/#conditional-macros)、[Comments](https://docs.sillytavern.app/usage/core-concepts/macros/#comments)、[Scoped Macros](https://docs.sillytavern.app/usage/core-concepts/macros/#scoped-macros)、[Macro Flags](https://docs.sillytavern.app/usage/core-concepts/macros/#macro-flags)。当前宏引擎已实现 `{{if}}`/`{{else}}`/`{{//}}` 多行注释，以该官方文档为基线。\n>\n> **边界**：官方文档对应当前宏引擎（Experimental Macro Engine，新安装默认启用）；v1.14.0 本地 `macros.js` 未见 `{{if}}` 实现，旧版本行为仍以该版本实测为准。"
+      },
+      {
+        "before": "| `{{if cond}}...{{/if}}` | 条件渲染 | **medium·推导未验证 [文档·多源]**（v1.14.0 无此实现） |\n| `{{if cond}}...{{else}}...{{/if}}` | if/else 分支 | **medium·推导未验证 [文档·多源]** |\n| `{{if !cond}}` | 取反条件 | **medium·推导未验证 [文档·多源]** |",
+        "after": "| `{{if cond}}...{{/if}}` | 条件渲染 | **high [文档·多源]**（当前宏引擎已实现） |\n| `{{if cond}}...{{else}}...{{/if}}` | if/else 分支 | **high [文档·多源]**（当前宏引擎已实现） |\n| `{{if !cond}}` | 取反条件 | **high [文档·多源]**（当前宏引擎已实现） |"
+      },
+      {
+        "before": "| `{{//}}...{{///}}` | 多行注释块 | **medium·推导未验证 [文档·多源]**（v1.14.0 无此实现） |",
+        "after": "| `{{//}}...{{///}}` | 多行注释块 | **high [文档·多源]**（当前宏引擎已实现，官方 Comments 的 scoped 形式） |"
       }
     ],
     "B1_变量更新规则.md": [
       {
         "before": "# 变量更新规则参考手册",
         "after": "# 变量更新规则参考手册\n\n> TW 导航补充（2026-10-15）：需要先看完整回合时，按需读[酒馆运行基础](../sillytavern-runtime-foundations.md)。已有上下文不重复加载；本册保留原专项内容及其版本边界。"
+      },
+      {
+        "before": "**核心结论**：bundle.js（master版）中 v 对象定义了 6 个公开事件，另有 2 个 mvu_zod.js 内部事件；另外 bundle.js 还有 2 个底层调度常量（`mag_invoke_mvu`、`mag_update_variable`）不属于公开生命周期 API。",
+        "after": "**核心结论**：bundle.js（master版）中 v 对象定义了 5 个公开事件，另有 2 个 mvu_zod.js 内部事件；另外 bundle.js 还有 2 个底层调度常量（`mag_invoke_mvu`、`mag_update_variable`）不属于公开生命周期 API。"
+      },
+      {
+        "before": "| `mag_variable_initialized` | 变量初始化完成后 | ✅ | 第一次从WI加载InitialVariables完成时 |",
+        "after": "| `mag_variable_initiailized` | 变量初始化完成后 | ✅ | 第一次从WI加载InitialVariables完成时（上游 typo 字符串） |"
+      },
+      {
+        "before": "| `mag_variable_updated` | 单个变量发生变化时 | ✅ | 细粒度监听单变量变化 |",
+        "after": "| `mag_variable_updated` | 单个变量发生变化时 | ⚠️ 未在导出声明面 | 细粒度监听单变量变化；medium·单源，需真机验证 |"
+      },
+      {
+        "before": "来源：`[运行时源码]`（bundle.js + mvu_zod.js CDN 实测）+ `[本地实战]`（卡A2.5.0 mvu_zod_cn.js） | 置信度：公开6事件 **high**；mvu_zod.js 内部事件名 `mag_command_parsed_ended_for_zod` **medium·单源孤证**（仅 WebFetch 摘要）",
+        "after": "来源：`[运行时源码]`（bundle.js + mvu_zod.js CDN 实测）+ `[类型声明]`（@types.txt `Mvu.events` 5 项）+ `[本地实战]`（卡A2.5.0 mvu_zod_cn.js） | 置信度：公开5事件 **high**；`mag_variable_updated` 未在导出声明面、**medium·单源**；mvu_zod.js 内部事件名 `mag_command_parsed_ended_for_zod` **medium·单源孤证**（仅 WebFetch 摘要）"
+      },
+      {
+        "before": "| `mag_variable_initialized` | 运行时源码（bundle.js v对象） | 变量初始化完成 | high |",
+        "after": "| `mag_variable_initiailized` | 运行时源码（bundle.js v对象）+ 类型声明 | 变量初始化完成（上游 typo 字符串） | high |"
+      },
+      {
+        "before": "| `mag_variable_updated` | 运行时源码（bundle.js v对象） | 单个变量变化时 | high |",
+        "after": "| `mag_variable_updated` | bundle.js v 对象摘要（未在导出声明面） | 单个变量变化时 | medium·单源 |"
+      }
+    ],
+    "B2_STScript与QuickReplies.md": [
+      {
+        "before": "| `/gen` | `/gen [lock=on/off] [stop=[]] prompt` | 用当前角色 + 聊天历史生成，注入完整上下文 |",
+        "after": "| `/gen` | `/gen [lock=on/off] prompt` | 用当前角色 + 聊天历史生成，注入完整上下文 |"
+      },
+      {
+        "before": "**`stop=` 参数**：接受 JSON 数组格式，如 `stop=[\"END\",\"<stop>\"]`。",
+        "after": "**`stop=` 参数（仅 `/genraw`）**：接受 JSON 数组格式，如 `stop=[\"END\",\"<stop>\"]`；`/gen` 不支持 `stop=`。"
+      },
+      {
+        "before": "| `/cut` | `/cut index` | 删除指定消息 |\n| `/del` | `/del index` | 删除指定消息 |",
+        "after": "| `/cut` | `/cut (number\\|range)` | 删除消息或连续区间（区间含端点，如 `/cut 0-10`） |\n| `/del` | `/del (number)?` | 进入消息删除模式；带数字参数时自动删除最后 N 条消息（按楼层删除用 `/cut`） |"
+      },
+      {
+        "before": "| `/inject` | `/inject id=ID [position=after/before/chat] [depth=N] text` | 注入提示内容到上下文 |",
+        "after": "| `/inject` | `/inject id=ID [position=before\\|after\\|chat\\|none] [depth=N] [scan=true\\|false] [role=system\\|assistant\\|user] [ephemeral=true\\|false] [filter=closure] text` | 注入提示内容到上下文（详见下方参数详解） |"
+      },
+      {
+        "before": "| `position=` | `before`（系统提示前）/ `after`（角色卡后）/ `chat`（聊天历史内） | 注入位置 |\n| `depth=` | 整数 | `position=chat` 时有效；`0` = 最后一条消息后，`N` = 倒数第 N 条消息处 |",
+        "after": "| `position=` | `before`（主提示词前）/ `after`（主提示词后，默认）/ `chat`（聊天历史内）/ `none`（不插入提示词，但可触发世界书） | 注入位置 |\n| `depth=` | 整数 | 注入深度，默认 `4`；`position=chat` 时有效（`0` = 最后一条消息后，`N` = 倒数第 N 条消息处） |\n| `scan=` | `true`/`false`（默认 `false`） | 注入内容是否参与世界书扫描 |\n| `role=` | `system`（默认）/ `assistant` / `user` | in-chat 注入的消息角色 |\n| `ephemeral=` | `true`/`false`（默认 `false`） | 是否临时注入 |\n| `filter=` | closure | 注入过滤闭包 |"
+      },
+      {
+        "before": "| `/rand` | `/rand [min=N] [max=M]` 随机数 |",
+        "after": "| `/rand` | `/rand [from=N] [to=M] [round=round\\|ceil\\|floor]` 随机数（默认 `from=0`、`to=1`，含端点） |"
+      },
+      {
+        "before": "| `/addvar` | `/addvar key=name [index=i] increment` | 数值累加；对数组则 push |",
+        "after": "| `/addvar` | `/addvar key=name increment` | 数值累加；对数组则 push |"
+      },
+      {
+        "before": "- 变量不存在时自动创建空 `[]`（数字 index）或 `{}`（字符串 index）",
+        "after": "- 变量不存在时自动创建空 `[]`（数字 index）或 `{}`（字符串 index）\n- `index=` 仅由 `/setvar`、`/getvar`、`/var` 及其全局同构命令（`/setglobalvar`、`/getglobalvar`）接受；`/addvar` 不支持 `index=`。"
+      },
+      {
+        "before": "| `/foreach` | `/foreach list=[...] {: ... :}` | 遍历列表，元素通过管道传入闭包 |",
+        "after": "| `/foreach`（LALib 扩展） | `/foreach (list) (closure)` | LALib 扩展命令（非 ST 原生）：遍历 list/dictionary，闭包内用 `{{var::item}}` / `{{var::index}}` 取当前元素与索引 |"
+      },
+      {
+        "before": "  \"keys\": [\"进入市场\", \"来到市集\", \"走进集市\"],",
+        "after": "  \"key\": [\"进入市场\", \"来到市集\", \"走进集市\"],\n  \"keysecondary\": [],\n  \"content\": \"进入市场场景检测条目。\","
+      },
+      {
+        "before": "  \"position\": \"before_char\",\n  \"enabled\": true,",
+        "after": "  \"position\": 0,\n  \"disable\": false,"
+      },
+      {
+        "before": "// script: /rand min=1 max=100",
+        "after": "// script: /rand from=1 to=100"
+      },
+      {
+        "before": "### 悬案 6：`/foreach` 的 `list=` 参数接受格式",
+        "after": "### 悬案 6：`/foreach` 是否支持变量引用"
+      },
+      {
+        "before": "文档示例用 JSON 数组字面量（`list=[\"a\",\"b\",\"c\"]`），但未说明是否支持变量引用（`list={{getvar::myArray}}`）。",
+        "after": "`/foreach` 由 LALib 扩展提供，采用 `(list) (closure)` 位置参数语法（https://github.com/LenAnderson/SillyTavern-LALib）；文档示例用 JSON 数组字面量（`/foreach [\"a\",\"b\",\"c\"] {: ... :}`），但未说明第一个位置参数是否支持变量引用（`/foreach {{getvar::myArray}} {: ... :}`）。"
+      },
+      {
+        "before": "/foreach list={{getvar::items}} {:\n    /echo 物品：{{pipe}}\n:}",
+        "after": "/foreach {{getvar::items}} {:\n    /echo 物品：{{var::item}}\n:}"
+      }
+    ],
+    "E5_创意工坊与扩展生态.md": [
+      {
+        "before": "- `installedEntryHash`：当前生产代码中的 `entry.meta.contentHash`，是安装后世界书正文的 hash，不等于 Gateway 整包 hash；",
+        "after": "- `installedEntryHash`：当前生产代码中的 `entry.extra.contentHash`，是安装后世界书正文的 hash，不等于 Gateway 整包 hash；"
+      },
+      {
+        "before": "卡A 3.4.9 直接把安装清单写进单条世界书 entry 的 `meta/extra`：",
+        "after": "卡A 3.4.9 由示例工坊私有适配层把安装清单写进单条世界书 entry 的 `extra` 字段（TH `WorldbookEntry` 只有 `extra`、没有 `meta`，`@types.txt:2906`；后文 `meta.*` 即指这份安装清单对象，与 C2 的 `extra` 用法一致）："
+      },
+      {
+        "before": "entry.meta = {",
+        "after": "entry.extra = {"
+      },
+      {
+        "before": "Gateway `packageContentHash` 可另存于来源/草稿记录，但不能冒充 `entry.meta.contentHash`。",
+        "after": "Gateway `packageContentHash` 可另存于来源/草稿记录，但不能冒充 `entry.extra.contentHash`。"
       }
     ]
   }

@@ -149,7 +149,7 @@ WI 条目 keyword 命中（或 constant=true）
 |---|---|---|
 | `/setvar` | `/setvar key=name [index=i] value` | 设置本地变量 |
 | `/getvar` | `/getvar [index=i] name` | 获取本地变量，写入管道 |
-| `/addvar` | `/addvar key=name [index=i] increment` | 数值累加；对数组则 push |
+| `/addvar` | `/addvar key=name increment` | 数值累加；对数组则 push |
 | `/incvar` | `/incvar name` | 整数 +1 |
 | `/decvar` | `/decvar name` | 整数 -1 |
 | `/flushvar` | `/flushvar name` | 删除本地变量 |
@@ -177,6 +177,7 @@ WI 条目 keyword 命中（或 constant=true）
 - `index=数字` → 访问/设置数组的第 N 个元素（0-based）
 - `index=字符串` → 访问/设置对象的指定键
 - 变量不存在时自动创建空 `[]`（数字 index）或 `{}`（字符串 index）
+- `index=` 仅由 `/setvar`、`/getvar`、`/var` 及其全局同构命令（`/setglobalvar`、`/getglobalvar`）接受；`/addvar` 不支持 `index=`。
 
 来源：STScript 官方文档 | 适用版本：v1.14.0+ | **[high][文档·多源]**
 
@@ -186,7 +187,7 @@ WI 条目 keyword 命中（或 constant=true）
 
 | 命令 | 语法 | 说明 |
 |---|---|---|
-| `/gen` | `/gen [lock=on/off] [stop=[]] prompt` | 用当前角色 + 聊天历史生成，注入完整上下文 |
+| `/gen` | `/gen [lock=on/off] prompt` | 用当前角色 + 聊天历史生成，注入完整上下文 |
 | `/genraw` | `/genraw [lock=on/off] [stop=[]] [instruct=on/off] [as=system/char] prompt` | 仅用提示词生成，忽略角色卡和聊天历史 |
 | `/trigger` | `/trigger` | 触发正常对话生成（相当于用户按下发送） |
 | `/swipe` | `/swipe` | 触发滑动生成 |
@@ -202,7 +203,7 @@ WI 条目 keyword 命中（或 constant=true）
 | 聊天历史 | 包含 | 忽略 |
 | 典型用途 | 角色扮演内容生成 | 旁白、系统操作、第三方视角生成 |
 
-**`stop=` 参数**：接受 JSON 数组格式，如 `stop=["END","<stop>"]`。
+**`stop=` 参数（仅 `/genraw`）**：接受 JSON 数组格式，如 `stop=["END","<stop>"]`；`/gen` 不支持 `stop=`。
 
 来源：STScript 官方文档 | 适用版本：v1.14.0+ | **[high][文档·多源]**
 
@@ -232,7 +233,7 @@ WI 条目 keyword 命中（或 constant=true）
 | `/if` | `/if left=A right=B rule=op [else={: ... :}] {: ... :}` | 条件分支 |
 | `/while` | `/while left=A right=B rule=op [guard=on] {: ... :}` | 循环（MAX_LOOPS=100 硬限制） |
 | `/times` | `/times N {: ... :}` | 重复 N 次 |
-| `/foreach` | `/foreach list=[...] {: ... :}` | 遍历列表，元素通过管道传入闭包 |
+| `/foreach`（LALib 扩展） | `/foreach (list) (closure)` | LALib 扩展命令（非 ST 原生）：遍历 list/dictionary，闭包内用 `{{var::item}}` / `{{var::index}}` 取当前元素与索引 |
 | `/run` | `/run label` 或 `/run PresetName.Label` | 调用 QR 过程或执行闭包变量 |
 | `/:varName` | `/:myVar` | 执行存储在 `myVar` 变量里的闭包 |
 
@@ -285,8 +286,8 @@ WI 条目 keyword 命中（或 constant=true）
 | `/comment` | `/comment text` | 隐藏评论（AI 看不到，仅在 UI 可见） |
 | `/hide` | `/hide start-finish` | 隐藏指定范围消息（AI 不读取） |
 | `/unhide` | `/unhide start-finish` | 显示被隐藏的消息 |
-| `/cut` | `/cut index` | 删除指定消息 |
-| `/del` | `/del index` | 删除指定消息 |
+| `/cut` | `/cut (number\|range)` | 删除消息或连续区间（区间含端点，如 `/cut 0-10`） |
+| `/del` | `/del (number)?` | 进入消息删除模式；带数字参数时自动删除最后 N 条消息（按楼层删除用 `/cut`） |
 | `/delswipe` | `/delswipe index` | 删除消息的指定滑动选项 |
 | `/addswipe` | `/addswipe text` | 为最后一条消息添加滑动选项 |
 
@@ -298,7 +299,7 @@ WI 条目 keyword 命中（或 constant=true）
 
 | 命令 | 语法 | 说明 |
 |---|---|---|
-| `/inject` | `/inject id=ID [position=after/before/chat] [depth=N] text` | 注入提示内容到上下文 |
+| `/inject` | `/inject id=ID [position=before\|after\|chat\|none] [depth=N] [scan=true\|false] [role=system\|assistant\|user] [ephemeral=true\|false] [filter=closure] text` | 注入提示内容到上下文（详见下方参数详解） |
 | `/note` | `/note text` | 设置 Author's Note |
 | `/listinjects` | `/listinjects` | 列出所有当前注入 |
 | `/flushinjects` | `/flushinjects` | 清除所有注入 |
@@ -308,8 +309,12 @@ WI 条目 keyword 命中（或 constant=true）
 | 参数 | 值 | 说明 |
 |---|---|---|
 | `id=` | 字符串 | 注入 ID；相同 ID 重复调用会**覆盖**而非追加 |
-| `position=` | `before`（系统提示前）/ `after`（角色卡后）/ `chat`（聊天历史内） | 注入位置 |
-| `depth=` | 整数 | `position=chat` 时有效；`0` = 最后一条消息后，`N` = 倒数第 N 条消息处 |
+| `position=` | `before`（主提示词前）/ `after`（主提示词后，默认）/ `chat`（聊天历史内）/ `none`（不插入提示词，但可触发世界书） | 注入位置 |
+| `depth=` | 整数 | 注入深度，默认 `4`；`position=chat` 时有效（`0` = 最后一条消息后，`N` = 倒数第 N 条消息处） |
+| `scan=` | `true`/`false`（默认 `false`） | 注入内容是否参与世界书扫描 |
+| `role=` | `system`（默认）/ `assistant` / `user` | in-chat 注入的消息角色 |
+| `ephemeral=` | `true`/`false`（默认 `false`） | 是否临时注入 |
+| `filter=` | closure | 注入过滤闭包 |
 
 来源：STScript 官方文档 | 适用版本：v1.14.0+ | **[high][文档·多源]**
 
@@ -346,7 +351,7 @@ WI 条目 keyword 命中（或 constant=true）
 | `/abs` | 绝对值 |
 | `/sqrt` | 平方根 |
 | `/round` | 四舍五入 |
-| `/rand` | `/rand [min=N] [max=M]` 随机数 |
+| `/rand` | `/rand [from=N] [to=M] [round=round\|ceil\|floor]` 随机数（默认 `from=0`、`to=1`，含端点） |
 | `/len` | 获取字符串或数组长度 |
 
 来源：STScript 官方文档 | 适用版本：v1.14.0+ | **[high][文档·多源]**
@@ -629,10 +634,12 @@ WI 条目 keyword 命中（或 constant=true）
 ```json
 {
   "comment": "场景切换检测 - 进入市场",
-  "keys": ["进入市场", "来到市集", "走进集市"],
+  "key": ["进入市场", "来到市集", "走进集市"],
+  "keysecondary": [],
+  "content": "进入市场场景检测条目。",
   "automationId": "enter_market",
-  "position": "before_char",
-  "enabled": true,
+  "position": 0,
+  "disable": false,
   "probability": 100
 }
 ```
@@ -709,7 +716,7 @@ WI 条目 keyword 命中（或 constant=true）
 ```stscript
 // 在 QR 套组 "Utils" 中定义过程 "RollDice"
 // label: RollDice
-// script: /rand min=1 max=100
+// script: /rand from=1 to=100
 
 // 在任意其他脚本中调用：
 /run Utils.RollDice |
@@ -976,18 +983,18 @@ v1.14.0 `AutoExecuteHandler.js` `handleWIActivation` 逻辑（第 91–106 行�
 
 ---
 
-### 悬案 6：`/foreach` 的 `list=` 参数接受格式
+### 悬案 6：`/foreach` 是否支持变量引用
 
 **[medium][推断]**
 
-文档示例用 JSON 数组字面量（`list=["a","b","c"]`），但未说明是否支持变量引用（`list={{getvar::myArray}}`）。
+`/foreach` 由 LALib 扩展提供，采用 `(list) (closure)` 位置参数语法（https://github.com/LenAnderson/SillyTavern-LALib）；文档示例用 JSON 数组字面量（`/foreach ["a","b","c"] {: ... :}`），但未说明第一个位置参数是否支持变量引用（`/foreach {{getvar::myArray}} {: ... :}`）。
 
 **真机验证路径**：
 
 ```stscript
 /setvar key=items ["剑","盾","药水"] |
-/foreach list={{getvar::items}} {:
-    /echo 物品：{{pipe}}
+/foreach {{getvar::items}} {:
+    /echo 物品：{{var::item}}
 :}
 // 若每个元素分别输出 → 支持变量引用；若报错或无输出 → 只支持字面量
 ```
