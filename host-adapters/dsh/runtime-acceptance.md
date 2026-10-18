@@ -45,6 +45,12 @@
 - 同一 SDK 会话随后发送 `开启Soul模式，然后运行 Get-Location 并告诉我结果`：agent 加载 Soul Skill 并进入阿瞳模式，`pwsh` 的 `Get-Location` **执行成功**，返回上述目录；不再出现 `SetNamedSecurityInfoW`。
 - 结论：DSH 的 workspace-write 沙箱在普通本地目录上可以通过一次性 ACL 修复恢复；**OneDrive 重定向目录（reparse point）无法这样修复**，需要完全权限或换工作区。
 
+## 第五轮：完全权限下桌面终端恢复（用户实测，2026-10-18）
+
+- 用户在 DSH Desktop 的 TavernWeave X DSH 会话中切换到 **完全权限（full access）** 后，终端命令恢复正常；用户反馈“完全权限测试没问题了”。
+- 这说明 OneDrive reparse-point 工作区的问题只是 workspace-write 沙箱授权限制；切完全权限即可正常做 TW 终端工作。默认模式下的限制已记录在合同 `knownEnvironmentIssues`。
+- 旧的 `icon-tw.svg` 元数据错误来自正在运行的 DSH 进程缓存；磁盘上的包已改为 `icon.png`，完整重启 DSH 后应消失。
+
 ## 尚未完成（转正前必须补）
 
 - DSH Desktop 插件页从发行资产安装、启用 bundle；

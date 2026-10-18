@@ -130,10 +130,10 @@
           "The session log records agent-preset/selected -> tavernweave; the preset appears in the DSH Desktop UI.",
           "The new session's available_skills catalog contains all 23 TavernWeave skills and the Host Front Door section is model-visible.",
           "The agent called the skill tool with {\"name\":\"activate-tavernweave-soul\"} and entered 阿瞳 Soul Mode (task-level portable).",
-          "Plugin page showed the bundle; the first icon draft rendered as TV and was replaced with a TW path icon (icon-tw.svg)."
+          "Plugin page showed the bundle; the first icon draft rendered as TV and was replaced with a TW path icon (icon-tw.svg).",
+          "User switched the DSH Desktop session to full access and reported that terminal/pwsh work returned to normal."
         ],
         "notYetVerified": [
-          "pwsh-backed TW tasks in this workspace (blocked by the OneDrive reparse-point sandbox issue below)",
           "Linux/WSL and real SillyTavern acceptance",
           "Disable/uninstall cleanup in DSH Desktop"
         ]
