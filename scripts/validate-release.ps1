@@ -30,6 +30,43 @@ function Add-ValidationError([string]$Message) {
     $errors.Add($Message)
 }
 
+# Windows PowerShell 5.1 turns redirected native stderr into a terminating
+# NativeCommandError while the caller keeps $ErrorActionPreference = 'Stop'.
+# Capture both streams under a local Continue preference, then expose the exit
+# code explicitly so callers do not depend on the shared $LASTEXITCODE state.
+function Invoke-NativeCapture {
+    param(
+        [Parameter(Mandatory = $true)][string]$FilePath,
+        [string[]]$Arguments = @(),
+        [hashtable]$NamedArguments = @{}
+    )
+    $previousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    $captured = @()
+    try {
+        if ($NamedArguments.Count -gt 0) {
+            # Splatting an array always binds positionally, so PowerShell script
+            # invocations keep their named parameters through a hashtable.
+            $captured = @(& $FilePath @NamedArguments 2>&1)
+        } else {
+            $captured = @(& $FilePath @Arguments 2>&1)
+        }
+    } finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+    $lines = @(foreach ($item in $captured) {
+        if ($item -is [System.Management.Automation.ErrorRecord]) {
+            [string]$item.Exception.Message
+        } elseif ($null -ne $item) {
+            [string]$item
+        }
+    })
+    return [pscustomobject]@{
+        Output   = $lines
+        ExitCode = $LASTEXITCODE
+    }
+}
+
 function Get-PortableFileHash([string]$Path) {
     $bytes = [System.IO.File]::ReadAllBytes($Path)
     $hashBytes = $bytes
@@ -273,8 +310,14 @@ foreach ($file in $textFiles) {
     if ($text -match '(?i)(?:api[_-]?key|access[_-]?token|client[_-]?secret|password)\s*[:=]\s*["''][^"'']{8,}["'']') {
         Add-ValidationError "Credential-shaped literal detected: $($file.FullName)"
     }
-    if ($text -match '(?i)[A-Z]:\\Users\\[^\\\s]+\\') {
+    if ($text -match '(?i)[A-Za-z]:[\\/]Users[\\/][^\\/\s]+[\\/]' -or
+        $text -match '(?i)[A-Za-z]:[\\/](?:Test Area|OneDrive|LocalGit)[\\/]' -or
+        $text -match '(?i)[A-Za-z]:[\\/]{2}Users[\\/]{2}Administrator[\\/]' -or
+        $text -match '(?i)[A-Za-z]:[\\/]{2}(?:Test Area|OneDrive|LocalGit)[\\/]{2}') {
         Add-ValidationError "Private absolute Windows path detected: $($file.FullName)"
+    }
+    if ($text -match '\b\d{5,12}@qq\.com\b') {
+        Add-ValidationError "Personal email address detected: $($file.FullName)"
     }
     if ($file.Extension -ieq '.md') {
         $markdownForLinks = [regex]::Replace($text, '(?ms)^```.*?^```\s*$', '')
@@ -314,7 +357,7 @@ if (-not (Test-Path -LiteralPath $installGateTest -PathType Leaf)) {
     Add-ValidationError 'Installation gate test is missing.'
 } else {
     try {
-        $installGateOutput = @(& $installGateTest -PluginRoot $PluginRoot 2>&1)
+        $installGateOutput = (Invoke-NativeCapture -FilePath $installGateTest -NamedArguments @{ PluginRoot = $PluginRoot }).Output
     } catch {
         Add-ValidationError "Installation gate test failed: $($_.Exception.Message)"
     }
@@ -325,7 +368,7 @@ if (-not (Test-Path -LiteralPath $hostFrontDoorTest -PathType Leaf)) {
     Add-ValidationError 'Host Front Door test is missing.'
 } else {
     try {
-        $hostFrontDoorOutput = @(& $hostFrontDoorTest -PluginRoot $PluginRoot 2>&1)
+        $hostFrontDoorOutput = (Invoke-NativeCapture -FilePath $hostFrontDoorTest -NamedArguments @{ PluginRoot = $PluginRoot }).Output
     } catch {
         Add-ValidationError "Host Front Door test failed: $($_.Exception.Message)"
     }
@@ -338,8 +381,8 @@ if (Test-Path -LiteralPath $workLibraryTests -PathType Leaf) {
     if (-not $workLibraryPython) {
         Add-ValidationError 'Python is required to validate the work-library tools.'
     } else {
-        $workLibraryOutput = @(& $workLibraryPython.Source -B $workLibraryTests 2>&1)
-        if ($LASTEXITCODE -ne 0) { Add-ValidationError "Work library tests failed: $($workLibraryOutput -join ' ')" }
+        $workLibraryRun = Invoke-NativeCapture -FilePath $workLibraryPython.Source -Arguments @('-B', $workLibraryTests)
+        if ($workLibraryRun.ExitCode -ne 0) { Add-ValidationError "Work library tests failed: $($workLibraryRun.Output -join ' ')" }
     }
 }
 $nodeTests = @($nodeFiles | Where-Object { $_.FullName -match '[\\/]tests[\\/].*\.test\.mjs$' })
@@ -352,22 +395,22 @@ if ($nodeFiles.Count -gt 0) {
         if (-not (Test-Path -LiteralPath $guidanceSync -PathType Leaf)) {
             Add-ValidationError 'Shared guidance synchronization check is missing.'
         } else {
-            $guidanceOutput = @(& $nodeCommand.Source $guidanceSync --check 2>&1)
-            if ($LASTEXITCODE -ne 0) { Add-ValidationError "Shared guidance copies are stale: $($guidanceOutput -join ' ')" }
+            $guidanceRun = Invoke-NativeCapture -FilePath $nodeCommand.Source -Arguments @($guidanceSync, '--check')
+            if ($guidanceRun.ExitCode -ne 0) { Add-ValidationError "Shared guidance copies are stale: $($guidanceRun.Output -join ' ')" }
         }
         foreach ($nodeFile in $nodeFiles) {
-            $nodeCheckOutput = @(& $nodeCommand.Source --check $nodeFile.FullName 2>&1)
-            if ($LASTEXITCODE -ne 0) {
-                Add-ValidationError "Node syntax error in $($nodeFile.FullName): $($nodeCheckOutput -join ' ')"
+            $nodeCheckRun = Invoke-NativeCapture -FilePath $nodeCommand.Source -Arguments @('--check', $nodeFile.FullName)
+            if ($nodeCheckRun.ExitCode -ne 0) {
+                Add-ValidationError "Node syntax error in $($nodeFile.FullName): $($nodeCheckRun.Output -join ' ')"
             }
         }
         foreach ($nodeTest in $nodeTests) {
             # Execute each test file directly. `node --test` spawns workers and is not
             # available in every Windows sandbox, while direct execution retains the
             # built-in node:test assertions and exit status.
-            $nodeTestOutput = @(& $nodeCommand.Source $nodeTest.FullName 2>&1)
-            if ($LASTEXITCODE -ne 0) {
-                Add-ValidationError "Node test failed in $($nodeTest.FullName): $($nodeTestOutput -join ' ')"
+            $nodeTestRun = Invoke-NativeCapture -FilePath $nodeCommand.Source -Arguments @($nodeTest.FullName)
+            if ($nodeTestRun.ExitCode -ne 0) {
+                Add-ValidationError "Node test failed in $($nodeTest.FullName): $($nodeTestRun.Output -join ' ')"
             }
         }
 
@@ -375,9 +418,9 @@ if ($nodeFiles.Count -gt 0) {
         if (-not (Test-Path -LiteralPath $libraryValidator -PathType Leaf)) {
             Add-ValidationError 'TavernWeave Library validator is missing.'
         } else {
-            $libraryOutput = @(& $nodeCommand.Source $libraryValidator 2>&1)
-            if ($LASTEXITCODE -ne 0) {
-                Add-ValidationError "TavernWeave Library validation failed: $($libraryOutput -join ' ')"
+            $libraryRun = Invoke-NativeCapture -FilePath $nodeCommand.Source -Arguments @($libraryValidator)
+            if ($libraryRun.ExitCode -ne 0) {
+                Add-ValidationError "TavernWeave Library validation failed: $($libraryRun.Output -join ' ')"
             }
         }
 

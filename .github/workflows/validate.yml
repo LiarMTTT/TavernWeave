@@ -14,6 +14,11 @@ jobs:
         run: |
           $env:TW_BOARD_TEST_ROOT = Join-Path $env:RUNNER_TEMP "tw-board-tests"
           ./scripts/validate-release.ps1 -TestRoot (Join-Path $env:RUNNER_TEMP "tw-release-tests")
+      - name: Validate public boundary and skill structure (Windows PowerShell 5.1)
+        shell: powershell
+        run: |
+          $env:TW_BOARD_TEST_ROOT = Join-Path $env:RUNNER_TEMP "tw-board-tests-ps51"
+          ./scripts/validate-release.ps1 -TestRoot (Join-Path $env:RUNNER_TEMP "tw-release-tests-ps51")
       - name: Compile Python helpers
         shell: pwsh
         run: |

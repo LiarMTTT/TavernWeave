@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { initializeBoardFromSources, readProjectBoard, planSourceSync, applySourceSync, syncBoard, recordFeedback } from '../scripts/project-board-core.mjs';
 import { parseSourceBlock, projectFromSources, SCOPE_SCHEMA, STATE_SCHEMA } from '../scripts/project-board-sources.mjs';
 
-const base = path.resolve(process.env.TW_BOARD_TEST_ROOT || '<local-test-path>/TavernWeave/1.8.0/board-source-tests');
+const base = path.resolve(process.env.TW_BOARD_TEST_ROOT || process.env.TEMP || path.join(os.tmpdir(), 'tavernweave-board-sources-tests'));
 const block = (name, value) => '<!-- ' + name + ':begin -->\n```json\n' + JSON.stringify(value, null, 2) + '\n```\n<!-- ' + name + ':end -->\n';
 function data() {
   return {

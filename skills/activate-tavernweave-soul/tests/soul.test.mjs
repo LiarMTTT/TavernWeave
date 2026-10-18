@@ -59,7 +59,7 @@ test("profile validation enforces every preference type and source record contra
 
 test("private Windows paths are checked in decoded strings including nested preferences and sources", () => {
   const valid = { schemaVersion: 1, profileId: "creator.test", version: "1.0.0", scope: "user", confirmedAt: "2026-10-13", privacy: "private-adapter", preferences: {}, sources: [] };
-  for (const location of ["C:\\Users\\Sample\\notes", "C:/Users/Sample/notes", "\\\\server\\Users\\Sample\\notes"]) {
+  for (const location of ["C:\\Users\\Sample\\notes", "C:\/Users/Sample/notes", "\\\\server\\Users\\Sample\\notes"]) {
     const fromJson = JSON.parse(JSON.stringify({ ...valid, sources: [{ type: "approved-summary", label: location, confirmedAt: "2026-10-13" }] }));
     assert.ok(validateSoulProfile(fromJson).some((error) => error.includes("private absolute path")), location);
   }

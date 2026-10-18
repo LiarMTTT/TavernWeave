@@ -185,10 +185,10 @@
       "source": "STDB/C1_前端基础-TavernHelper与iframe.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "4a146b7aac28162aedf9a7995dc8e6a5053b653f43d2e1709c3c64cba472e1cd",
-      "targetHash": "4a146b7aac28162aedf9a7995dc8e6a5053b653f43d2e1709c3c64cba472e1cd",
-      "bytes": 45268,
-      "redactions": 0,
-      "pathRedactions": 0,
+      "targetHash": "dd7b72d52d59293693355092093fa9a12b971456450dcedebd773eb529b1a8a3",
+      "bytes": 45248,
+      "redactions": 4,
+      "pathRedactions": 4,
       "credentialRedactions": 0
     },
     {
@@ -200,10 +200,10 @@
       "source": "STDB/C2_前端应用-状态栏与控制中心.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "121c424a223a5f8dd2a3421fff0cefd1fb36492841ff27b2c360ee9778ab9fcd",
-      "targetHash": "121c424a223a5f8dd2a3421fff0cefd1fb36492841ff27b2c360ee9778ab9fcd",
-      "bytes": 53536,
-      "redactions": 0,
-      "pathRedactions": 0,
+      "targetHash": "1545e0eba88ab7027df35b9aaffbcd0676e9221f37681c022902a6935b9f8daa",
+      "bytes": 53511,
+      "redactions": 5,
+      "pathRedactions": 5,
       "credentialRedactions": 0
     },
     {
@@ -470,10 +470,10 @@
       "source": "STDB/D7_移动端与响应式适配.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "8beda503ad1a1e20a1e83cbdd8550bacb50de0f3d8f10e9280056d476e2770a2",
-      "targetHash": "8beda503ad1a1e20a1e83cbdd8550bacb50de0f3d8f10e9280056d476e2770a2",
-      "bytes": 26774,
-      "redactions": 0,
-      "pathRedactions": 0,
+      "targetHash": "4bf5e77db8c98c2647f4c14a3a837e808f3044c0f7ab3badd14293eee86ad6e7",
+      "bytes": 26759,
+      "redactions": 3,
+      "pathRedactions": 3,
       "credentialRedactions": 0
     },
     {
@@ -500,10 +500,10 @@
       "source": "STDB/E2_消息操作与分支检查点.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "36cc59951375c97ea48ed929421076d70cf3b0d99c15626c4321e55127e4b29e",
-      "targetHash": "36cc59951375c97ea48ed929421076d70cf3b0d99c15626c4321e55127e4b29e",
-      "bytes": 35245,
-      "redactions": 0,
-      "pathRedactions": 0,
+      "targetHash": "deddf1c020796dc28349c0a0861ff37421e3e789fb5d072eb50a563387b15dfe",
+      "bytes": 35240,
+      "redactions": 1,
+      "pathRedactions": 1,
       "credentialRedactions": 0
     },
     {
@@ -515,10 +515,10 @@
       "source": "STDB/E3_音频媒体与多模态.md",
       "license": "TavernWeave-PolyForm-NC-1.0.0",
       "sourceHash": "1730e012ee5eaf5e87ca04dc58791f4751476ccf11ceca3c47b89c0a7f77f334",
-      "targetHash": "1730e012ee5eaf5e87ca04dc58791f4751476ccf11ceca3c47b89c0a7f77f334",
-      "bytes": 41937,
-      "redactions": 0,
-      "pathRedactions": 0,
+      "targetHash": "b3c4ded6fd41288cc1658993d71af9cd6da87555824f4e54199b45f071470e3e",
+      "bytes": 41927,
+      "redactions": 2,
+      "pathRedactions": 2,
       "credentialRedactions": 0
     },
     {

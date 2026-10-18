@@ -1,14 +1,15 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { calculateProgress, formatPercent, validateBoard, validateFeedback, relativePath, BOARD_SCHEMA } from '../assets/templates/progress/progress-math.mjs';
 import { initializeBoard, readProjectBoard, syncBoard, recordFeedback, projectPath, exportMarkdown } from '../scripts/project-board-core.mjs';
 import { createBoardServer } from '../scripts/project-board.mjs';
 
-const testBase = path.resolve(process.env.TW_BOARD_TEST_ROOT || process.env.TEMP || '<local-test-path>/TavernWeave/project-board-tests');
-// The release validator sets TEMP to its external TestRoot. Standalone runs default to E:/Test Area.
-const safeBase = process.env.TW_BOARD_TEST_ROOT ? testBase : process.env.TEMP?.replaceAll('\\', '/').toLowerCase().startsWith('<local-test-path>/') ? testBase : path.resolve('<local-test-path>/TavernWeave/project-board-tests');
+const testBase = path.resolve(process.env.TW_BOARD_TEST_ROOT || process.env.TEMP || path.join(os.tmpdir(), 'tavernweave-board-tests'));
+// The release validator sets TEMP to its external TestRoot. Standalone runs fall back to the OS temp directory.
+const safeBase = testBase;
 function point(id, implemented, browserPassed) {
   return { id, title: id, weight: 1, implemented, evidence: implemented ? ['checks/implementation.md'] : [], gates: [
     { kind: 'automated', status: implemented ? 'passed' : 'pending', evidence: implemented ? ['checks/automated.md'] : [] },

@@ -59,7 +59,7 @@ function safeCopy(source, target) {
   fs.mkdirSync(path.dirname(target), { recursive: true });
   const sourceBytes = fs.readFileSync(source);
   const sourceText = sourceBytes.toString("utf8");
-  const privatePathPattern = /[A-Z]:\\Users\\[^\\\s]+\\/gi;
+  const privatePathPattern = /[A-Za-z]:[\\/]Users[\\/][^\\/\s]+[\\/]/gi;
   const credentialPattern = /((?:api[_-]?key|access[_-]?token|client[_-]?secret|password)\s*[:=]\s*)["'][^"']{8,}["']/gi;
   const pathMatches = sourceText.match(privatePathPattern) || [];
   const credentialMatches = sourceText.match(credentialPattern) || [];
@@ -223,7 +223,7 @@ const allowedA1Tokens = ["A1_驾驶员同步检查", "A1 驾驶员同步检查"]
 for (const file of files) {
   const text = fs.readFileSync(file, "utf8");
   if (allowedA1Tokens.some((token) => text.includes(token)) || path.basename(file).startsWith("A1_")) throw new Error(`A1 exclusion failed: ${path.relative(skillRoot, file)}`);
-  if (/[A-Z]:\\Users\\[^\\\s]+\\/i.test(text)) throw new Error(`private path in snapshot: ${path.relative(skillRoot, file)}`);
+  if (/[A-Za-z]:[\\/]Users[\\/][^\\/\s]+[\\/]/i.test(text)) throw new Error(`private path in snapshot: ${path.relative(skillRoot, file)}`);
 }
 const assets = files.filter((file) => !file.startsWith(stOut) && !file.startsWith(wikiOut)).map((file) => ({
   path: path.relative(skillRoot, file).replaceAll(path.sep, "/"),

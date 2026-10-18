@@ -59,7 +59,7 @@ for (const [domain, domainCatalog] of Object.entries(catalog.catalogs)) {
 const publicText = allRecords.map((record) => fs.readFileSync(path.resolve(root, record.path), "utf8")).join("\n");
 if (/A1[_ ·]驾驶员同步检查|A1_驾驶员同步检查/.test(publicText)) errors.push("A1 content or path leaked into snapshot");
 if (allRecords.some((record) => /(?:^|\/)B1_变量更新规则_命令式时代_归档\.md$/u.test(record.path))) errors.push("archived B1 file leaked into snapshot");
-if (/[A-Z]:\\Users\\[^\\\s]+\\/i.test(publicText)) errors.push("private absolute path leaked into snapshot");
+if (/[A-Za-z]:[\\/]Users[\\/][^\\/\s]+[\\/]/i.test(publicText)) errors.push("private absolute path leaked into snapshot");
 if (allRecords.some((record) => /(?:^|\/)10-收件箱\/|(?:^|\/)写回候选\/|(?:^|\/)实装-[^/]+\.json$/u.test(record.path))) errors.push("AFV candidate inbox path leaked into public snapshot");
 
 if (errors.length) {
