@@ -46,7 +46,7 @@ option below. Do not emit that value in a new authority, rewrite history to hide
 gap, or perform an unrequested card/save migration.
 
 ```sh
-node scripts/validate-creative-authority.mjs <authority.md> --allow-legacy-mvu
+node <skill-root>/scripts/validate-creative-authority.mjs <authority.md> --allow-legacy-mvu
 ```
 
 By default the validator rejects legacy `mvu` and any other unrecognized type. The

@@ -1,6 +1,6 @@
 ---
 name: orchestrate-project-blueprint
-description: "Turn a vague product, character-card, frontend, or Vibe Coding wish into a bounded total design, first-playable contract, scale-appropriate blueprint, resumable NEXT handoff, and evidence-gated first implementation. Use when the user says 脑暴模式, asks to 梳理构思/总设计案/蓝图/子蓝图/第一版, wants one-command project kickoff, wants a project progress board with evidence-based percentages and feedback, or needs to stop a long task from recursively expanding. Also use for 提示词规格/从样例归纳提示词: turn requirements or output examples into a scoped prompt contract with unseen-input checks. It may convene the TavernWeave Soul trio for labeled critique. Do not use it to bypass repository instructions, driver approval, real-host acceptance, or a focused implementation skill."
+description: "Turn a vague product, character-card, frontend, or Vibe Coding wish into a bounded total design, first-playable contract, scale-appropriate blueprint, resumable NEXT handoff, and evidence-gated first implementation. Use when the user says 脑暴模式 (including 脑暴模式，Soul 联席), asks to 梳理构思/总设计案/蓝图/子蓝图/第一版, wants one-command project kickoff, wants a project progress board with evidence-based percentages and feedback, or needs to stop a long task from recursively expanding. Also use for 提示词规格/从样例归纳提示词: turn requirements or output examples into a scoped prompt contract with unseen-input checks. It may convene the TavernWeave Soul trio for labeled critique; the 联席 voice itself is loaded by `$activate-tavernweave-soul`. Do not use it to bypass repository instructions, driver approval, real-host acceptance, or a focused implementation skill."
 ---
 
 # 脑暴模式 · 许愿工坊
@@ -8,20 +8,20 @@ description: "Turn a vague product, character-card, frontend, or Vibe Coding wis
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 帮用户把想法整理成能实施的设计，定好第一版做什么、怎样验收，以及下次从哪里继续。先理清范围再执行，避免项目边做边扩大；一句愿望也可以从这里开始。
 
 用户可以直接说愿望，不必先说“脑暴模式”。从零创作时先帮其形成可试用的小成果；完全没想法时给一两个贴合兴趣的小例子。接手角色卡二创/续更先交给 `tavern-card-builder` 看懂原卡；熟悉作品的增改先续接原决定；故障按实际现象交给相关能力。普通问答不强制进入完整引导；完整引导需要用户选择挡位，但暂未选择也不能自动归档或阻止有用的帮助。
 
-开始任何写入前，先读取仓库 `AGENTS.md`、`NEXT.md`、现有总设计案、蓝图和 Git 状态。若项目会写文件，再通过 `$consult-tavernweave-library` 查找并阅读 A0 与本任务所需资料。角色卡创作交给 `$tavern-card-builder`；本 Skill 负责确定项目范围、组织设计与执行顺序。
+开始任何写入前，先按宿主读取项目续接文件（Codex 为 `AGENTS.md`，Claude Code 为 `CLAUDE.md`，其他宿主按项目自述的等效唯一续接文件；以 [host-map.json](../../host-adapters/host-map.json) 为权威），再核对 `NEXT.md`、现有总设计案、蓝图和 Git 状态。若项目会写文件，再通过 `$consult-tavernweave-library` 查找并阅读 A0 与本任务所需资料。角色卡创作交给 `$tavern-card-builder`；本 Skill 负责确定项目范围、组织设计与执行顺序。
 
 ## 局部提示规格与样例归纳
 
@@ -33,13 +33,13 @@ When this Skill is invoked through the TavernWeave plugin, or the task runs in d
 
 - `脑暴模式`、`开始脑暴`：进入中性脑暴。
 - `脑暴模式，Soul 联席`、`三人一起脑暴`、`Soul 三席就位`：进入三席联席。
-- `按蓝图开跑第一版`：只在设计已由驾驶员确认、首版合同已冻结时进入实施。
+- `按蓝图开跑第一版`：只在设计已由[驾驶员](../consult-tavernweave-library/references/communication-and-guidance.md#共享术语)确认、首版合同已冻结时进入实施。
 - `暂停脑暴`、`结束脑暴模式`：停止扩展，保留当前四态账本和下一道门。
 
 需要确定性识别时运行：
 
 ```bash
-node scripts/resolve-brainstorm-command.mjs "脑暴模式，Soul 联席"
+node <skill-root>/scripts/resolve-brainstorm-command.mjs "脑暴模式，Soul 联席"
 ```
 
 ## 脑暴流程
@@ -89,8 +89,8 @@ node scripts/resolve-brainstorm-command.mjs "脑暴模式，Soul 联席"
 可用脚本初始化缺失的权威文件；脚本拒绝覆盖现有文件：
 
 ```bash
-node scripts/init-project-authority.mjs --root <project-root> --profile single-blueprint --project-id <id> --title <title>
-node scripts/validate-project-authority.mjs <project-root>/.tavernweave/project-orchestration.json --automation
+node <skill-root>/scripts/init-project-authority.mjs --root <project-root> --profile single-blueprint --project-id <id> --title <title>
+node <skill-root>/scripts/validate-project-authority.mjs <project-root>/.tavernweave/project-orchestration.json --automation
 ```
 
 ## 设计确认门

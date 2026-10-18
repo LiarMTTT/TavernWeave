@@ -3,7 +3,7 @@ name: sillytavern-rolecard-performance
 description: >-
   Measure, compare, and gate large SillyTavern rolecards using deterministic size,
   prompt, worldbook, regex, helper-script, embedded-media, and captured runtime
-  budgets. Use when Codex needs a performance audit, regression baseline, release
+  budgets. Use when the task requires a performance audit, regression baseline, release
   budget, or smallest optimization plan without silently deleting card behavior.
 ---
 
@@ -12,13 +12,13 @@ description: >-
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 Use `$consult-tavernweave-library` with the `sillytavern-rolecard-performance` route for A0, the large-card guide, and motion/performance references when writing. Keep library advice, static metrics, browser samples, and real SillyTavern evidence as distinct gates.
@@ -47,7 +47,7 @@ token evidence. Artifact bytes and local character limits are not that evidence.
 Run:
 
 ```powershell
-node scripts/measure-rolecard-performance.mjs --card candidate.json --out candidate-report.json
+node <skill-root>/scripts/measure-rolecard-performance.mjs --card candidate.json --out candidate-report.json
 ```
 
 The report contains counts, byte totals, and metric paths only. It must not echo
@@ -62,7 +62,7 @@ defines that cross-surface comparison.
 Run:
 
 ```powershell
-node scripts/check-performance-budget.mjs --report candidate-report.json --budget budget.json --baseline baseline-report.json
+node <skill-root>/scripts/check-performance-budget.mjs --report candidate-report.json --budget budget.json --baseline baseline-report.json
 ```
 
 Block hard-limit violations and growth beyond declared deltas. A baseline is not a

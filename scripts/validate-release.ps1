@@ -340,6 +340,16 @@ foreach ($file in $textFiles) {
                 Add-ValidationError "Broken Markdown link: $($file.FullName) -> $target"
             }
         }
+        $markdownRelative = $file.FullName.Substring($PluginRoot.Length).TrimStart([char]92, [char]47).Replace([char]92, [char]47)
+        if ($markdownRelative -match '^skills/[^/]+/.+\.md$') {
+            $bareScriptMatches = @()
+            foreach ($codeBlock in [regex]::Matches($text, '(?ms)^```[^\r\n]*\r?\n(?<code>.*?)^```')) {
+                $bareScriptMatches += [regex]::Matches($codeBlock.Groups['code'].Value, '(?im)(?:^|[^\w-])(?:node|python3?|py)[ \t]+(?:\./)?scripts/')
+            }
+            if ($bareScriptMatches.Count -gt 0) {
+                Add-ValidationError "Skill command examples must use <skill-root>/scripts/ (found $($bareScriptMatches.Count) bare scripts/ invocation(s)): $markdownRelative"
+            }
+        }
     }
 }
 

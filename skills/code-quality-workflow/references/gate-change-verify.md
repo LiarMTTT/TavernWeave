@@ -127,9 +127,9 @@ During `CHANGE`:
 Use a preset or explicit limits:
 
 ```powershell
-python scripts/check_patch_scope.py --preset local-fix --fail-on-warning
-python scripts/check_patch_scope.py --preset staged-refactor --forbid "dist/**"
-python scripts/check_patch_scope.py --preset custom --max-files 3 --max-lines 120
+python <skill-root>/scripts/check_patch_scope.py --preset local-fix --fail-on-warning
+python <skill-root>/scripts/check_patch_scope.py --preset staged-refactor --forbid "dist/**"
+python <skill-root>/scripts/check_patch_scope.py --preset custom --max-files 3 --max-lines 120
 ```
 
 The checker distinguishes known text churn from files whose line churn is unknown. In default live mode it compares tracked files against `HEAD`, combining staged and unstaged changes in one view, and includes untracked files. In an unborn repository it safely combines staged and unstaged tracked churn as a conservative fallback. It counts untracked text files as added lines and identifies likely binary, symbolic-link, or unreadable files as unknown. Git-reported binary changes are never counted as zero-line changes. Any unknown-line file produces a warning because the line budget cannot be proven. `--fail-on-warning` returns status 2 when warnings exist; without it, warnings remain advisory and status is 0.

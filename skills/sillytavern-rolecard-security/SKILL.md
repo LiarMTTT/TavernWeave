@@ -14,13 +14,13 @@ description: >-
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 Use `$consult-tavernweave-library` with the `sillytavern-rolecard-security` route for the public XSS/security guide. Add A0 before any authorized remediation; a static guide or scan does not authorize executing suspicious content.
@@ -42,7 +42,7 @@ then separate suspicious patterns from verified vulnerabilities.
 ## Run the static audit
 
 ```text
-node scripts/audit-rolecard-security.mjs target --report security-report.json
+node <skill-root>/scripts/audit-rolecard-security.mjs target --report security-report.json
 ```
 
 The scanner checks UTF-8 text and JSON for dangerous DOM sinks, dynamic execution,
@@ -56,7 +56,7 @@ gate. The default is `high`.
 ## Compare an approved baseline
 
 ```text
-node scripts/check-security-baseline.mjs --current security-report.json --baseline approved-report.json
+node <skill-root>/scripts/check-security-baseline.mjs --current security-report.json --baseline approved-report.json
 ```
 
 Fail when a rule count increases. Do not suppress a new finding by moving code,

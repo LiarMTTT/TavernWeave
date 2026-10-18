@@ -8,13 +8,13 @@ description: Build source-backed work reference libraries for fan creation from 
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 把一个作品整理成创作者能查、能改、能回原文核对的资料库。小说精读、按人物/专题定向采证、联网补资料、图片参考和同人设定整理都走同一条来源链；不要求先完成全书均匀精读。默认交付 Markdown 资料正文、JSONL 镜像索引，按需导出 SQLite。作品资料不是 TW 随包设计库，也不是酒馆聊天楼层中的数据库。
@@ -41,7 +41,7 @@ When this Skill is invoked through the TavernWeave plugin, or the task runs in d
 
 ## 可运行的本地工具
 
-使用 `python scripts/work_library.py <command> --project <授权项目目录>`。命令负责来源登记/分段、任务账本、精确引文校验、旧版本回写检查、可恢复落库、重建索引、查询和 SQLite 导出。它不调用模型、不浏览网络、不下载图片，也不在对话关闭后自行运行。
+使用 `python <skill-root>/scripts/work_library.py <command> --project <授权项目目录>`。命令负责来源登记/分段、任务账本、精确引文校验、旧版本回写检查、可恢复落库、重建索引、查询和 SQLite 导出。它不调用模型、不浏览网络、不下载图片，也不在对话关闭后自行运行。
 
 首次小样本可以人工建立少量合规 Markdown 条目并 `reindex`；记录语义质量和宿主实际 token 用量后，`benchmark → plan → next → usage → commit` 才用于长任务。每次模型尝试包括失败/重试都登记用量，不能只计算最后一次成功。`next` 返回既有批次时要接续它，不能重做已落库部分。各命令输入见格式参考。
 

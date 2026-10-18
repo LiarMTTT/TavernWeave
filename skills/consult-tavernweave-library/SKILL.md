@@ -8,13 +8,13 @@ description: Route TavernWeave work to bundled development guides, the standing 
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 On first use after enabling the plugin, check that this Skill and the shared runtime reference are readable, identify the actual host and available tools, then route only the current user goal to the smallest needed Skill and references. Use existing user materials and authorization; do not scan the whole library or write a global instruction file as routine setup. Distinguish a readable file from observed loading in a new task.
@@ -53,7 +53,7 @@ For guidance-level selection, queries or changes, read [communication-and-guidan
 3. Run the deterministic router:
 
    ```powershell
-   node scripts/query-library.mjs --skill tavern-card-builder --intent "设计一张 MVU 卡" --write
+   node <skill-root>/scripts/query-library.mjs --skill tavern-card-builder --intent "设计一张 MVU 卡" --write
    ```
 
 4. Read only the returned guide and Wiki paths. Inspect only the bounded `candidates` receipt; rerun with a narrower `--intent`, `--domain`, or `--limit` instead of loading the full catalog. Use `--include-experimental` only when the user is explicitly evaluating an experimental route such as C8.
@@ -87,8 +87,8 @@ The picker stores only item IDs in local storage. Never place card text, secrets
 Maintainers may refresh only from the explicit allowlist:
 
 ```powershell
-node scripts/snapshot-library.mjs --stdb-root <<local-guide-db>> --afv-root <Agent Foundry Vault智能体工坊>
-node scripts/validate-library.mjs
+node <skill-root>/scripts/snapshot-library.mjs --stdb-root <<local-guide-db>> --afv-root <Agent Foundry Vault智能体工坊>
+node <skill-root>/scripts/validate-library.mjs
 ```
 
 The snapshot command copies A0, 31 formal guides, the explicitly experimental C8 guide, 462 design records, 194 motion records, 86 concept records and their Wiki pages, 1,609 distilled ledger records, and 89 owned preview sandboxes. It cross-checks the 243 completed source screening receipts but never distributes those inbox JSON files. It produces portable hashes and refuses excluded filenames, private absolute paths, missing dependencies, count drift, duplicate IDs, and broken preview/Wiki references. AFV Git or Release state is provenance metadata, not a prerequisite for this content snapshot.

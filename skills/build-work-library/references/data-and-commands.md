@@ -13,8 +13,8 @@ Python 3.10+，使用标准库及该 Python 发行版提供的 `sqlite3`；不�
 下面命令从本 Skill 目录执行；命令中的文件位置替换为当前已授权的实际路径。
 
 ```text
-python scripts/work_library.py init --project <新项目目录> --title <作品名称>
-python scripts/work_library.py add-source --project <项目目录> --input <source.json> --text <授权正文或网页短摘录.txt> --chunk-chars 6000
+python <skill-root>/scripts/work_library.py init --project <新项目目录> --title <作品名称>
+python <skill-root>/scripts/work_library.py add-source --project <项目目录> --input <source.json> --text <授权正文或网页短摘录.txt> --chunk-chars 6000
 ```
 
 文本来源 JSON 示例：
@@ -42,8 +42,8 @@ python scripts/work_library.py add-source --project <项目目录> --input <sour
 ## 样本与计划输入
 
 ```text
-python scripts/work_library.py benchmark --project <项目目录> --input <sample-report.json>
-python scripts/work_library.py plan --project <项目目录> --input <batch-plan.json>
+python <skill-root>/scripts/work_library.py benchmark --project <项目目录> --input <sample-report.json>
+python <skill-root>/scripts/work_library.py plan --project <项目目录> --input <batch-plan.json>
 ```
 
 样本报告包含 `samples`、`selected` 和 `reason`。每个 sample 包含 `id`、`strategy: sequential|native-subagents`、`source_ids`、`usage`、`unsupported_assertions` 和 `questions`。每个问题有 `question / answer / evidence / pass`；这些是执行者实际采样/核验的记录，工具不自动判定语义真假。
@@ -72,13 +72,13 @@ python scripts/work_library.py plan --project <项目目录> --input <batch-plan
 ## 批次、资料条目与接续
 
 ```text
-python scripts/work_library.py next --project <项目目录>
-python scripts/work_library.py usage --project <项目目录> --input <attempt-usage.json>
-python scripts/work_library.py commit --project <项目目录> --input <candidate.json>
-python scripts/work_library.py status --project <项目目录>
-python scripts/work_library.py pause --project <项目目录>
-python scripts/work_library.py resume --project <项目目录>
-python scripts/work_library.py recover --project <项目目录>
+python <skill-root>/scripts/work_library.py next --project <项目目录>
+python <skill-root>/scripts/work_library.py usage --project <项目目录> --input <attempt-usage.json>
+python <skill-root>/scripts/work_library.py commit --project <项目目录> --input <candidate.json>
+python <skill-root>/scripts/work_library.py status --project <项目目录>
+python <skill-root>/scripts/work_library.py pause --project <项目目录>
+python <skill-root>/scripts/work_library.py resume --project <项目目录>
+python <skill-root>/scripts/work_library.py recover --project <项目目录>
 ```
 
 `next` 返回 batch_id、确切单元、原文片段/图片来源卡、来源哈希、项目角色和已登记尝试；不会发起模型调用。`usage` 在 usage 格式上增加 `batch_id` 与唯一 `attempt_id`。相同 attempt 原样重复提交不加总；不同回执不能复用同一个 attempt ID。已知花费即使超过预算也照记，后续不继续开新批次。
@@ -106,9 +106,9 @@ Markdown 记录由工具生成，顶部是 `tw-work-record:v1` 标记与 JSON �
 ## 重建、检索与导出
 
 ```text
-python scripts/work_library.py reindex --project <项目目录>
-python scripts/work_library.py query --project <项目目录> --query <人物或问题关键词> --realm canon --continuity novel-main --as-of 3 --limit 20
-python scripts/work_library.py export-sqlite --project <项目目录> --out <新导出文件.sqlite>
+python <skill-root>/scripts/work_library.py reindex --project <项目目录>
+python <skill-root>/scripts/work_library.py query --project <项目目录> --query <人物或问题关键词> --realm canon --continuity novel-main --as-of 3 --limit 20
+python <skill-root>/scripts/work_library.py export-sqlite --project <项目目录> --out <新导出文件.sqlite>
 ```
 
 查询读取当前 Markdown，默认保留来源标签；可用 realm、continuity、阶段上限筛选。阶段未知的记录不会进入指定上限的结果。支持关键词/别名匹配，不宣称语义向量检索；Agent 需要组合问题时多次有界查询并回查证据。结果含条目 ID、来源与当前文档哈希，便于二创资料包引用。

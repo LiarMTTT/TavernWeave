@@ -52,9 +52,9 @@
 以下命令中的路径必须换成已核实的绝对路径；脚本不会默认写入真实用户目录：
 
 ```sh
-node scripts/manage-guidance-preference.mjs --host codex --scope-root "<客户端全局目录>" --target "<有效指令文件>"
-node scripts/manage-guidance-preference.mjs --action preview --level 入门 --host codex --scope-root "<客户端全局目录>" --target "<有效指令文件>"
-node scripts/manage-guidance-preference.mjs --action set --level 入门 --host codex --scope-root "<客户端全局目录>" --target "<有效指令文件>" --approved --expected-token "<本次预览令牌>" --backup-dir "<已批准的备份目录>"
+node <skill-root>/scripts/manage-guidance-preference.mjs --host codex --scope-root "<客户端全局目录>" --target "<有效指令文件>"
+node <skill-root>/scripts/manage-guidance-preference.mjs --action preview --level 入门 --host codex --scope-root "<客户端全局目录>" --target "<有效指令文件>"
+node <skill-root>/scripts/manage-guidance-preference.mjs --action set --level 入门 --host codex --scope-root "<客户端全局目录>" --target "<有效指令文件>" --approved --expected-token "<本次预览令牌>" --backup-dir "<已批准的备份目录>"
 ```
 
 预览令牌绑定操作、挡位、目标、有效文件选择和修改前后内容；它是防止预览后覆盖新修改的校验值，不是用户授权的证明。`--approved` 仅记录调用者已取得对应授权。只读查询和预览不建文件；修改前备份、写入后回读，失败保留恢复依据。重复设置同一挡位不改文件。
@@ -62,6 +62,14 @@ node scripts/manage-guidance-preference.mjs --action set --level 入门 --host c
 结构版本与产品版本分开：升级 TW 保留已选挡位，不能用发行模板重新生成用户选择。损坏、重复、嵌套在其他受控区块内或不受支持的记录应报告并展示修复范围，不猜测有效挡位。卸载前门也不自行清除用户选择。
 
 规则文件位置依据 [OpenAI 的 AGENTS.md 说明](https://learn.chatgpt.com/docs/agent-configuration/agents-md)、[Claude 的记忆与规则说明](https://code.claude.com/docs/en/memory)及[配置目录环境变量](https://code.claude.com/docs/en/env-vars)核对（2026-09-07）。这些规则在客户端加载后才进入任务上下文；其他项目规则、客户端设置和文件大小限制仍可能影响实际行为，需要新任务观察。
+
+## 共享术语
+
+- 驾驶员（Driver）：最终验收并承担发布、付费、权限决定的人。自动化检查、审查结论和 Soul 的意见都不能代替驾驶员验收。
+
+## 随包脚本路径
+
+命令示例中的 `<skill-root>` 指当前 SKILL.md 所在目录；`<skill-root>/scripts/...` 是随包脚本。执行时按宿主实际提供的技能目录解析该占位符，不得假设当前工作目录（cwd）就是技能目录。项目输入与输出仍使用用户项目的真实路径。
 
 ## 场景与输出组织
 

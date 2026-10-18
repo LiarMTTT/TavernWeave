@@ -3,7 +3,7 @@ name: sillytavern-media-live2d-runtime
 description: >-
   Validate and plan SillyTavern rolecard audio, image, video, multimodal, and Live2D
   assets with explicit provenance, preload, binding, capability, fallback, and
-  lifecycle contracts. Use when Codex needs media manifests, Tavern Helper audio
+  lifecycle contracts. Use when the task requires media manifests, Tavern Helper audio
   wiring, Live2D adapter boundaries, deterministic preload budgets, or real-host
   acceptance plans without downloading or executing remote media.
 ---
@@ -13,13 +13,13 @@ description: >-
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 Before changing media or lifecycle behavior, use `$consult-tavernweave-library` with the `sillytavern-media-live2d-runtime` route to load A0, media/Live2D guides, and only the relevant motion references. Do not let a library catalog imply a provider API or redistribution license.
@@ -42,7 +42,7 @@ before writing bindings.
 Run:
 
 ```powershell
-node scripts/validate-media-manifest.mjs --manifest media-manifest.json --root maintained-media-root
+node <skill-root>/scripts/validate-media-manifest.mjs --manifest media-manifest.json --root maintained-media-root
 ```
 
 The validator checks local containment, file existence, declared bytes and SHA-256,
@@ -54,7 +54,7 @@ assets remain unverified until fetched by an authorized live workflow.
 Run:
 
 ```powershell
-node scripts/check-media-bindings.mjs --manifest media-manifest.json --bindings media-bindings.json
+node <skill-root>/scripts/check-media-bindings.mjs --manifest media-manifest.json --bindings media-bindings.json
 ```
 
 Use documented SillyTavern event names and `PAGEHIDE` for iframe teardown. Pair every
@@ -70,7 +70,7 @@ explicitly requested.
 Run:
 
 ```powershell
-node scripts/plan-media-preload.mjs --manifest media-manifest.json --budget preload-budget.json
+node <skill-root>/scripts/plan-media-preload.mjs --manifest media-manifest.json --budget preload-budget.json
 ```
 
 Keep eager assets minimal, lazy-load optional media, and leave remote entries with

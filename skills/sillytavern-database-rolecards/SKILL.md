@@ -16,13 +16,13 @@ For source-backed novel/work/fan-creation libraries, web/image references and Ma
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 Before schema or migration writes, use `$consult-tavernweave-library` with the `sillytavern-database-rolecards` route and load A0, C4, and C7. C8 is returned only with explicit experimental opt-in and remains blocked from mature claims until real-host acceptance.
@@ -53,7 +53,7 @@ replacing an entire variable object.
 ## Validate the model
 
 ```text
-node scripts/validate-rolecard-schema.mjs model.json
+node <skill-root>/scripts/validate-rolecard-schema.mjs model.json
 ```
 
 Require a stable model ID and version, a `stat_data` storage root, `multi-floor`
@@ -65,7 +65,7 @@ Legacy shallow models remain readable with `--allow-shallow` for inventory only.
 ## Run migration fixtures
 
 ```text
-node scripts/run-database-migrations.mjs --migration migration.json --input before.json --expected after.json
+node <skill-root>/scripts/run-database-migrations.mjs --migration migration.json --input before.json --expected after.json
 ```
 
 Require deterministic output and idempotence. Preserve unknown records and fields.
@@ -75,7 +75,7 @@ passes `--allow-data-loss`. Do not write migrated data without `--write` and `--
 ## Check every consumer
 
 ```text
-node scripts/check-field-bindings.mjs --schema model.json --bindings bindings.json
+node <skill-root>/scripts/check-field-bindings.mjs --schema model.json --bindings bindings.json
 ```
 
 Every binding must reference a declared table and field, name its reader or writer,

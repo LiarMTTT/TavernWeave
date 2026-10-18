@@ -1,7 +1,7 @@
 ---
 name: code-quality-workflow
 description: >-
-  End-to-end code quality workflow for evidence-backed code review, full repository reviews, architecture reviews of software and character-card systems, refactor decisions, authorized minimal changes, and verification. Use for 全量审查、架构审查、全量架构审查, code or diff audits, cleanup triage, or a scoped quality fix. Preserve coverage gaps and keep audit-only requests read-only.
+  End-to-end code quality workflow for evidence-backed code review, full repository reviews, architecture reviews of software and character-card systems, refactor decisions, authorized minimal changes, and verification. Use for 全量审查、架构审查、全量架构审查, code or diff audits, cleanup triage, or a scoped quality fix. Preserve coverage gaps and keep audit-only requests read-only. Soul/persona voice does not change review ownership.
 ---
 
 # Code Quality Workflow
@@ -9,13 +9,13 @@ description: >-
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 Before an authorized write, use `$consult-tavernweave-library` with the `code-quality-workflow` route and record the A0 receipt. When the last acceptance gap keeps expanding, read [references/finish-mode.md](references/finish-mode.md) and freeze one visible problem plus one exit condition.
@@ -97,7 +97,7 @@ Use this state for broad, batch, or multi-surface audits. It is read-only.
 5. Merge structured reports deterministically:
 
    ```powershell
-   python scripts/merge_audit_reports.py reports --format markdown
+   python <skill-root>/scripts/merge_audit_reports.py reports --format markdown
    ```
 
 6. Send at most one selected candidate to `GATE` unless the user explicitly asks for a batch plan. Never send a batch directly to `CHANGE`.
@@ -154,8 +154,8 @@ Enter only after `GATE` permits the change and the user has authorized that exac
    Use the preset selected by `GATE`:
 
    ```powershell
-   python scripts/check_patch_scope.py --preset local-fix --fail-on-warning
-   python scripts/check_patch_scope.py --preset staged-refactor --fail-on-warning
+   python <skill-root>/scripts/check_patch_scope.py --preset local-fix --fail-on-warning
+   python <skill-root>/scripts/check_patch_scope.py --preset staged-refactor --fail-on-warning
    ```
 
    Run only the command that matches the approved execution decision.

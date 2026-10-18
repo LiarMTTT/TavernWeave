@@ -2,6 +2,12 @@
 
 本合同在 TavernWeave 作为插件被调用，或任务运行于 dots 云端、连接的本机时生效。它只决定怎样识别宿主、选用工具、续接长任务和报告证据；具体工作仍由当前 Skill、用户授权、项目规则及原有验收门决定。普通本地独立 Skill 使用不必额外进入云端流程。
 
+<!-- tw-plugin-runtime-core:begin -->
+## Plugin runtime
+
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
+<!-- tw-plugin-runtime-core:end -->
+
 ## 先认清任务实际运行位置
 
 1. 在任务入口确认当前是 dots 云端电脑、Codex 云端环境、已连接的用户电脑，还是其他本地宿主；再确认眼前实际提供的终端、Node/Python、Git、浏览器、应用连接和可写工作区。云端电脑有自己的文件与浏览器，本机连接是另一条访问路径；仅在本机可见的 Skill 需要实际连接并被当前任务加载。只按当前可见能力行动，不凭插件已安装推断某个工具、账号或目录可用。

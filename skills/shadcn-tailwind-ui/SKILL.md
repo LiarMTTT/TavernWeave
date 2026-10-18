@@ -8,13 +8,13 @@ description: Build, restyle, or review accessible React interfaces that use shad
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 Before UI writes, use `$consult-tavernweave-library` with the `shadcn-tailwind-ui` route to load A0, responsive/CSS guides, and candidate design/motion references. Selecting a library or visual direction does not authorize dependency installation or overwrite existing configuration.
@@ -78,13 +78,13 @@ For projects that intentionally use a config file, `scripts/generate_tailwind_co
 
 ```powershell
 # Default TypeScript format; dry run prints the proposed file and writes nothing.
-python scripts/generate_tailwind_config.py --framework react --format typescript --colors brand:#2563eb
+python <skill-root>/scripts/generate_tailwind_config.py --framework react --format typescript --colors brand:#2563eb
 
 # ESM JavaScript: tailwind.config.js with export default.
-python scripts/generate_tailwind_config.py --framework nextjs --format esm --write
+python <skill-root>/scripts/generate_tailwind_config.py --framework nextjs --format esm --write
 
 # CommonJS: tailwind.config.cjs with module.exports; explicitly replace an existing file.
-python scripts/generate_tailwind_config.py --framework nextjs --format commonjs --force
+python <skill-root>/scripts/generate_tailwind_config.py --framework nextjs --format commonjs --force
 ```
 
 Choose `typescript` for `tailwind.config.ts`, `esm` for `tailwind.config.js`, or `commonjs` for `tailwind.config.cjs`. Match the project's existing module mode; do not change `package.json` just to fit the generator. The selected format controls both the default extension and export syntax. `--force` is the only overwrite path. Review the printed proposal and preserve project-specific content paths, plugins, and tokens before using it.

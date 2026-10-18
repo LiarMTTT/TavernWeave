@@ -18,14 +18,14 @@ Claude discovery source: [How Claude remembers your project](https://code.claude
 Run from this skill directory, replacing placeholders with the resolved absolute paths:
 
 ```sh
-node scripts/manage-rewrite-policy.mjs --host codex --scope workspace --scope-root "<project-root>" --target "<effective-instruction-file>" --fallback-names '[]'
-node scripts/manage-rewrite-policy.mjs --action preview --operation enable --host codex --scope workspace --scope-root "<project-root>" --target "<effective-instruction-file>" --fallback-names '[]'
+node <skill-root>/scripts/manage-rewrite-policy.mjs --host codex --scope workspace --scope-root "<project-root>" --target "<effective-instruction-file>" --fallback-names '[]'
+node <skill-root>/scripts/manage-rewrite-policy.mjs --action preview --operation enable --host codex --scope workspace --scope-root "<project-root>" --target "<effective-instruction-file>" --fallback-names '[]'
 ```
 
 `check` is the default. `preview` returns only the owned block diff, a review token, and objective target/discovery information. Present scope, target and this diff to the driver. After the driver approves that exact operation, reuse the token:
 
 ```sh
-node scripts/manage-rewrite-policy.mjs --action enable --host codex --scope workspace --scope-root "<project-root>" --target "<effective-instruction-file>" --fallback-names '[]' --approved --expected-token "<preview-token>" --backup-dir "<approved-backup-directory>"
+node <skill-root>/scripts/manage-rewrite-policy.mjs --action enable --host codex --scope workspace --scope-root "<project-root>" --target "<effective-instruction-file>" --fallback-names '[]' --approved --expected-token "<preview-token>" --backup-dir "<approved-backup-directory>"
 ```
 
 Use `--operation disable` for removal previews and `--action disable` for approved removal. For client scope use `--scope client` and the resolved host configuration home. `--approved` records the caller's authorization assertion; it is not cryptographic proof of human approval. Pass it only when driver authorization covers the displayed operation. Do not ask twice for an already reviewed and approved operation.

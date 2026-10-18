@@ -2,7 +2,7 @@
 name: sillytavern-extension-dev
 description: >-
   Scaffold, validate, review, and prepare browser-side SillyTavern UI extensions.
-  Use when Codex needs to create or inspect an extension manifest, entry module,
+  Use when the task requires creating or inspecting an extension manifest, entry module,
   lifecycle hooks, settings namespace, capability contract, version preflight,
   or installation smoke plan without installing into a live SillyTavern instance.
 ---
@@ -12,13 +12,13 @@ description: >-
 <!-- tw-guidance-entry:begin -->
 ## Shared communication
 
-Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md) to user-facing work. Explain terms in context; preserve the user's chosen 新人/入门/熟练/老手 level without inferred changes. 新人 and 入门 receive detailed explanations; every level receives needed and bug explanations unless the user explicitly waives that scope. Soul and prose modes never disable this baseline. Load the shared reference for task entry, level management, or explanation decisions.
+Apply [TW plain-language and guidance rules](../consult-tavernweave-library/references/communication-and-guidance.md): explain terms on first use, keep the user-selected 新人/入门/熟练/老手 level, and still explain needed changes and bugs at every level. Soul and prose modes never disable this baseline.
 <!-- tw-guidance-entry:end -->
 
 <!-- tw-plugin-runtime-entry:begin -->
 ## Plugin runtime
 
-When this Skill is invoked through the TavernWeave plugin, or the task runs in dots cloud or on a connected computer, read [the shared plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at task entry. Apply its host, tool and persistence checks before host-specific commands; keep this Skill's scope, authorization and acceptance gates.
+When this Skill runs through a plugin, cloud host, or remote machine, read [the plugin execution contract](../consult-tavernweave-library/references/plugin-runtime.md) at entry and apply its host, tool, and persistence checks before host-specific commands. Keep this Skill's scope, authorization, and acceptance gates.
 <!-- tw-plugin-runtime-entry:end -->
 
 Before generating or editing an extension, use `$consult-tavernweave-library` with the `sillytavern-extension-dev` route to load A0 and the extension/workshop guides. The receipt does not replace exact installed-version capability checks or installation authorization.
@@ -55,7 +55,7 @@ when the extension depends on version-sensitive host or Tavern Helper symbols.
 Create a dry-run plan first:
 
 ```powershell
-node scripts/scaffold-extension.mjs --spec extension-spec.json --out staging
+node <skill-root>/scripts/scaffold-extension.mjs --spec extension-spec.json --out staging
 ```
 
 Add `--write` only after checking the resolved output root and planned files. The
@@ -68,8 +68,8 @@ unrelated files.
 Run:
 
 ```powershell
-node scripts/validate-extension-manifest.mjs --root extension-directory
-node scripts/check-extension-capabilities.mjs --contract capability-contract.json --snapshot installed-snapshot.json
+node <skill-root>/scripts/validate-extension-manifest.mjs --root extension-directory
+node <skill-root>/scripts/check-extension-capabilities.mjs --contract capability-contract.json --snapshot installed-snapshot.json
 ```
 
 Treat deprecated Extras fields as warnings, path escapes and missing entry files as

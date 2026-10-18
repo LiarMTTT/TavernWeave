@@ -51,7 +51,7 @@ An implementation authority must separately promote a candidate. Selection canno
 The full catalog is an asset, not a prompt payload. Query it deterministically with a narrow intent and bounded result count:
 
 ```powershell
-node scripts/query-library.mjs --skill consult-tavernweave-library --intent "玻璃 HUD 移动端" --domain design,ledger --limit 6
+node <skill-root>/scripts/query-library.mjs --skill consult-tavernweave-library --intent "玻璃 HUD 移动端" --domain design,ledger --limit 6
 ```
 
 The 243 AFV screening receipts are source-side audit inputs. TavernWeave stores only their aggregate counts and the resulting public catalogs; it does not distribute the inbox JSON files.

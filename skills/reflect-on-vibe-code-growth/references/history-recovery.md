@@ -15,7 +15,7 @@
 读取报错后，在同一目录运行：
 
 ```bash
-node scripts/save-mirror-record.mjs --root <履历根目录> --recover
+node <skill-root>/scripts/save-mirror-record.mjs --root <履历根目录> --recover
 ```
 
 - 尚未形成完整事务记录：确认原历史仍有效后，只清理不完整暂存；随后可重新保存原草稿。
@@ -30,7 +30,7 @@ node scripts/save-mirror-record.mjs --root <履历根目录> --recover
 检查 `.mirror-save.lock/owner.json` 中的主机名、进程 ID 和 `token`。只在同一主机确认原进程已退出后，将该锁标识传入：
 
 ```bash
-node scripts/save-mirror-record.mjs --root <履历根目录> --recover --stale-lock-token <owner.json中的token>
+node <skill-root>/scripts/save-mirror-record.mjs --root <履历根目录> --recover --stale-lock-token <owner.json中的token>
 ```
 
 保存器再次核对标识及进程是否存活，活动进程或标识不符时拒绝释放。恢复期间另有 `.mirror-recovery.lock` 阻止并发抢占。PID 被新进程复用时会保守拒绝，不能据此终止无关进程。
