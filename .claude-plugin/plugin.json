@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "2.0.0",
-  "description": "TavernWeaveX无限月读 2.0.0: 23 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs. Actual execution depends on host tools and permissions.",
+  "version": "2.1.0",
+  "description": "TavernWeaveX无限月读 2.1.0: 23 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs, plus the TavernWeave X DSH plugin bundle. Actual execution depends on host tools and permissions.",
   "author": {
     "name": "LiarMTTT"
   },

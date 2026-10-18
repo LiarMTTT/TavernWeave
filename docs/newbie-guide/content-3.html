@@ -106,7 +106,7 @@ https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0
 请说明 Host Front Door 是可选本地入口；若我要安装到 Codex 或 Claude Code 的全局规则，先显示目标路径与 diff，确认后只更新 TavernWeave 受控区块。
 请返回 Skill 与前门两份回执。通过后提醒我新建任务，再验证宿主是否真正发现 Soul、脑暴编排与 Library。</code></pre></div>
 <div class="callout warn"><strong>两份回执分别说明什么</strong><code>INSTALLATION VERIFIED: 23/23</code> 只证明实际目录与 v2.0.0 来源完整匹配；<code>Host Front Door: current</code> 只证明全局区块匹配。两者都不能冒充 Codex / Claude 已重新扫描、Soul/Library 已调用或真实 SillyTavern 已运行。</div>
-<div class="callout"><strong>DSH 目前仍是实验入口</strong>在 TW 已核对的 Developer Preview 版本中，<code>minimal</code> 没有 Skill loader。TW Lite Full/Entry 提供离线自定义预设候选；真实安装、API 调用与同题比较尚需另行验证，不能把离线检查当成宿主已支持。</div>
+<div class="callout"><strong>DSH 从 2.1.0 起改用插件包</strong>DeepSeek Harness 仍是 Developer Preview。2.1.0 提供独立的 TavernWeave X DSH 插件包（bundle + preset + 23 个 Skill + Host Front Door）；在插件页安装并在新任务选择 <code>TavernWeave X DSH</code> preset 后才会生效。SDK 运行层的技能加载与 Front Door 注入已做部分实测，DSH Desktop 插件页/preset 选择、Linux 与真实酒馆验收仍以合同记录为准，不能把安装或离线检查当成全部已支持。</div>
 </section>
 <section class="section" id="brainstorm-blueprint">
 <div class="section-head"><div class="section-no">05.5</div><div><h2>脑暴模式：先想清第一版要做什么</h2><p class="section-kicker">把值得做的核心留下来，其余想法排进后续路线。第一版先让人完整体验一次。</p></div></div>

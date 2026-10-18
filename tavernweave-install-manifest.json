@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "skillCount": 23,
   "skills": [
     "activate-tavernweave-soul",
@@ -89,7 +89,7 @@
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "2.0.0",
+    "version": "2.1.0",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",
@@ -106,13 +106,19 @@
       "Codex",
       "Claude"
     ],
-    "dshSupport": "preview-preset-only"
+    "dshSupport": "preview-plugin-bundle"
   },
-  "dshPreview": {
-    "status": "offline-candidate",
-    "contract": "host-adapters/dsh/tw-lite-contract.json",
-    "fullPreset": "host-adapters/dsh/tw-lite-full/agent.cordis.yml",
-    "entryPreset": "host-adapters/dsh/tw-lite-entry/agent.cordis.yml"
+  "dshPlugin": {
+    "status": "preview-plugin-bundle",
+    "package": "liarmttt-tavernweave-dsh",
+    "presetId": "tavernweave",
+    "contract": "host-adapters/dsh/dsh-plugin-contract.json",
+    "sourceDir": "host-adapters/dsh/plugin",
+    "entry": "host-adapters/dsh/plugin/index.js",
+    "patch": "host-adapters/dsh/plugin/cordis.patch.yml",
+    "packageManifest": "host-adapters/dsh/plugin/package.template.json",
+    "buildScript": "scripts/build-dsh-plugin.mjs",
+    "releaseAssetPattern": "TavernWeave-DSH-v{version}.tgz"
   },
   "communication": {
     "reference": "skills/consult-tavernweave-library/references/communication-and-guidance.md",

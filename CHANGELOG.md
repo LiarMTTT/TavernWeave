@@ -1,15 +1,18 @@
 # Changelog
 
-## Unreleased · 2026-10-18 评审修复
+## TavernWeaveX无限月读 2.1.0 · DSH 插件正式适配 - 2026-10-18
 
+- 新增 **TavernWeave X DSH** 插件包（`liarmttt-tavernweave-dsh`）：bundle patch 安装 `tavernweave` preset；包内携带 23 个 Skill 与 Host Front Door，Skill 以带资源目录的 provider 注册，前门以 system prompt section 注入；安装、升级、卸载均走 DSH 插件机制。
+- 新增 `scripts/build-dsh-plugin.mjs` 生成 `TavernWeave-DSH-v2.1.0.tgz/.zip`；新增 `host-adapters/dsh/dsh-plugin-contract.json` 与 `tests/dsh-plugin.test.mjs`，覆盖包结构、23 Skill 目录、Front Door、preset、契约一致性与构建校验。
+- 移除旧 TW Lite 离线预设、`tw-lite-contract.json` 与 `dsh-preview` 测试；宿主映射与安装清单改为 DSH 插件包声明（`dshPlugin`），`validate-release` / 打包校验同步改为检查插件包来源。
 - 隐私：把 tree 内残留的个人角色卡与工作区名称统一替换为中性代号（示例学园 / 示例工程A / 卡 A–D 等），并清除云盘同步目录尾巴；快照生成器在复制前执行同一映射，并以硬错误拒绝私名回流。
 - 校验：`validate-release.ps1` 与 `validate-library.mjs` 增加私名 denylist（ASCII `\uXXXX` 转义，避免自命中）；快照清单 hash、picker 资产与 replay 指纹随内容修正刷新。
-- 隐私：移除内部执行计划与设计记录，脱敏 5 册指南中的 15 处本机路径与 2 处 replay 证据路径；历史清除脚本与演练报告已备好，待发布维护时执行。
+- 隐私：移除内部执行计划与设计记录，脱敏 5 册指南中的 15 处本机路径与 2 处 replay 证据路径；维护者已于 2026-10-18 完成历史重写、tag 重建与远端 force-push（含旧分支清理）。
 - 校验：私密路径与邮箱检测支持正反斜杠及 JSON 转义形态；`validate-release.ps1` 兼容 Windows PowerShell 5.1，CI 增加 5.1 验证步骤。
 - 指南勘误：修正 B2 的 15 处 STScript 命令签名、E5 的 `WorldbookEntry` 字段、B1 的 MVU 公开事件表、A5 的控制流宏状态；全部写入 `guide-corrections.json` 可重放修订。
 - Skill：两段共享注入块改为生成+校验（24 文件 / 47 块），压缩约 29% 并移除宿主品牌词；命令示例统一 `<skill-root>/scripts/` 契约；4 条 description 去宿主词；明确 Soul / 蓝图 / 代码审查的路由归属。
 - replay：以书面源合同复核确认 182 条既有案例在修改后仍相容，并新增 2 条路由归属案例（86→88 正向）；未进行模型试跑或真实宿主验收。
-- 未发版：版本号、安装清单与 Release 资产待后续 2.0.1 统一更新；真实宿主加载与教程验收仍待新任务执行。
+- 版本号、安装清单与宿主入口已统一为 2.1.0；教程缓存与 Release 资产在正式发布步骤中同步。
 
 ## TavernWeaveX无限月读 2.0.0 · 世界书与双任务正式版 - 2026-10-16
 

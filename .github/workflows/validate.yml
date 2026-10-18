@@ -59,6 +59,8 @@ jobs:
           mkdir -p "$TW_TEST_ROOT"
           python -B tests/test_plugin_packages.py
           python -B scripts/build-plugin-packages.py --repo "$GITHUB_WORKSPACE" --ref HEAD --output-dir "$RUNNER_TEMP/plugin-packages"
+      - name: Validate the DeepSeek Harness plugin bundle
+        run: node scripts/build-dsh-plugin.mjs --check
       - name: Exercise bundled helpers on Linux
         env:
           PYTHONUTF8: '1'

@@ -202,7 +202,41 @@ if (-not (Test-Path -LiteralPath $installManifestPath -PathType Leaf)) {
         if ($installManifest.hostRediscovery -ne 'required-new-task') { Add-ValidationError 'Installation manifest must keep host rediscovery as a separate new-task gate.' }
         if (-not $installManifest.hostFrontDoor -or $installManifest.hostFrontDoor.version -ne $installManifest.version) { Add-ValidationError 'Host Front Door version must match the installation manifest.' }
         if ($installManifest.hostFrontDoor.recommended -ne $true) { Add-ValidationError 'Host Front Door must remain an explicit recommended install choice.' }
-        if ($installManifest.hostFrontDoor.dshSupport -ne 'preview-preset-only') { Add-ValidationError 'DSH Host Front Door support must remain preview-preset-only.' }
+        $dshPlugin = $installManifest.dshPlugin
+        if (-not $dshPlugin) {
+            Add-ValidationError 'Installation manifest must declare the DSH plugin bundle.'
+        } else {
+            $dshPluginStatus = [string]$dshPlugin.status
+            if ($dshPluginStatus -notin @('preview-plugin-bundle', 'plugin-bundle')) { Add-ValidationError "Unknown DSH plugin status: $dshPluginStatus" }
+            if ($dshPlugin.package -ne 'liarmttt-tavernweave-dsh') { Add-ValidationError 'DSH plugin package name is invalid.' }
+            if ($dshPlugin.presetId -ne 'tavernweave') { Add-ValidationError 'DSH plugin preset id is invalid.' }
+            if ($installManifest.hostFrontDoor.dshSupport -ne $dshPluginStatus) { Add-ValidationError 'DSH host-front-door support must match dshPlugin.status.' }
+            $dshContractFullPath = [System.IO.Path]::GetFullPath((Join-Path $PluginRoot (([string]$dshPlugin.contract).Replace([char]47, [System.IO.Path]::DirectorySeparatorChar))))
+            if (Test-Path -LiteralPath $dshContractFullPath -PathType Leaf) {
+                try {
+                    $dshContract = Get-Content -LiteralPath $dshContractFullPath -Raw -Encoding UTF8 | ConvertFrom-Json
+                    if ($dshContract.adapterVersion -ne $installManifest.version) { Add-ValidationError 'DSH contract adapterVersion must match the installation manifest version.' }
+                    if ($dshContract.package.name -ne $dshPlugin.package) { Add-ValidationError 'DSH contract package name does not match the installation manifest.' }
+                    if ($dshContract.package.version -ne $installManifest.version) { Add-ValidationError 'DSH contract package version must match the installation manifest version.' }
+                    if ($dshContract.package.presetId -ne $dshPlugin.presetId) { Add-ValidationError 'DSH contract preset id does not match the installation manifest.' }
+                    $expectedDshStatus = if ($dshContract.runtimeAccepted -eq $true) { 'plugin-bundle' } else { 'preview-plugin-bundle' }
+                    if ($dshPluginStatus -ne $expectedDshStatus) { Add-ValidationError "DSH plugin status must be $expectedDshStatus until runtime acceptance is recorded." }
+                } catch { Add-ValidationError "Invalid DSH plugin contract: $($_.Exception.Message)" }
+            }
+            $hostMapPathForDsh = Join-Path $PluginRoot 'host-adapters\host-map.json'
+            if (Test-Path -LiteralPath $hostMapPathForDsh -PathType Leaf) {
+                $hostMapForDsh = Get-Content -LiteralPath $hostMapPathForDsh -Raw -Encoding UTF8 | ConvertFrom-Json
+                $dshHost = $hostMapForDsh.hosts.dsh
+                if (-not $dshHost) {
+                    Add-ValidationError 'Host map is missing the dsh entry.'
+                } else {
+                    if ($dshHost.support -ne $dshPluginStatus) { Add-ValidationError 'Host map dsh support must match dshPlugin.status.' }
+                    if ($dshHost.pluginPackage -ne $dshPlugin.package) { Add-ValidationError 'Host map dsh pluginPackage does not match the installation manifest.' }
+                    if ($dshHost.presetId -ne $dshPlugin.presetId) { Add-ValidationError 'Host map dsh presetId does not match the installation manifest.' }
+                    if ($null -ne $dshHost.instructionFileName) { Add-ValidationError 'Host map dsh must not declare a global instruction file.' }
+                }
+            }
+        }
 
         $requiredInstallPaths = @(
             'skills/activate-tavernweave-soul/SKILL.md',
@@ -232,11 +266,13 @@ if (-not (Test-Path -LiteralPath $installManifestPath -PathType Leaf)) {
                 Add-ValidationError "Host Front Door source path is missing: $requiredSourcePath"
             }
         }
-        foreach ($dshPathValue in @($installManifest.dshPreview.contract, $installManifest.dshPreview.fullPreset, $installManifest.dshPreview.entryPreset)) {
-            $dshPath = [string]$dshPathValue
-            $resolvedDshPath = [System.IO.Path]::GetFullPath((Join-Path $PluginRoot ($dshPath.Replace([char]47, [System.IO.Path]::DirectorySeparatorChar))))
-            if (-not $resolvedDshPath.StartsWith($pluginRootPrefix, [System.StringComparison]::OrdinalIgnoreCase) -or -not (Test-Path -LiteralPath $resolvedDshPath -PathType Leaf)) {
-                Add-ValidationError "DSH Preview source path is missing or unsafe: $dshPath"
+        if ($installManifest.dshPlugin) {
+            foreach ($dshPathValue in @($installManifest.dshPlugin.contract, $installManifest.dshPlugin.entry, $installManifest.dshPlugin.patch, $installManifest.dshPlugin.packageManifest, $installManifest.dshPlugin.buildScript)) {
+                $dshPath = [string]$dshPathValue
+                $resolvedDshPath = [System.IO.Path]::GetFullPath((Join-Path $PluginRoot ($dshPath.Replace([char]47, [System.IO.Path]::DirectorySeparatorChar))))
+                if (-not $resolvedDshPath.StartsWith($pluginRootPrefix, [System.StringComparison]::OrdinalIgnoreCase) -or -not (Test-Path -LiteralPath $resolvedDshPath -PathType Leaf)) {
+                    Add-ValidationError "DSH plugin source path is missing or unsafe: $dshPath"
+                }
             }
         }
     } catch {

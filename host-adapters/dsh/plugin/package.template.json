@@ -1,0 +1,55 @@
+{
+  "name": "liarmttt-tavernweave-dsh",
+  "version": "${TW_VERSION}",
+  "private": false,
+  "description": "TavernWeave X DSH: TavernWeave's 23 rolecard-engineering Skills and Host Front Door as a DeepSeek Harness plugin with a selectable agent preset.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "assets/front-door.md",
+    "skills/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.1-rc.2 <0.3.0"
+  },
+  "keywords": [
+    "tavernweave",
+    "sillytavern",
+    "rolecard",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "agent-skills"
+  ],
+  "author": {
+    "name": "LiarMTTT",
+    "url": "https://github.com/LiarMTTT"
+  },
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "homepage": "https://github.com/LiarMTTT/TavernWeave",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiarMTTT/TavernWeave.git",
+    "directory": "host-adapters/dsh/plugin"
+  },
+  "bugs": {
+    "url": "https://github.com/LiarMTTT/TavernWeave/issues"
+  }
+}

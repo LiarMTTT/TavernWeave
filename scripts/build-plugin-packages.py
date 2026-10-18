@@ -133,13 +133,19 @@ def validate_source(contents, selected):
     require("skills/consult-tavernweave-library/references/plugin-runtime.md" in install.get("requiredPaths", []),
             "runtime reference must be declared in requiredPaths for standalone Skill installation")
     for group, fields in (("hostFrontDoor", ("managedBlock", "hostMap", "manager")),
-                          ("dshPreview", ("contract", "fullPreset", "entryPreset")),
+                          ("dshPlugin", ("contract", "entry", "patch", "packageManifest", "buildScript")),
                           ("communication", ("reference", "preferenceManager"))):
         object_value = install.get(group, {})
         require(isinstance(object_value, dict), f"invalid {group}")
         declared.extend(object_value.get(field) for field in fields if field in object_value)
     for path in declared:
         require(isinstance(path, str) and path in selected, f"declared path missing from package: {path}")
+    dsh_plugin = install.get("dshPlugin", {})
+    if dsh_plugin:
+        require(dsh_plugin.get("status") in ("preview-plugin-bundle", "plugin-bundle"),
+                "invalid DSH plugin status")
+        require(dsh_plugin.get("package") == "liarmttt-tavernweave-dsh", "invalid DSH plugin package")
+        require(dsh_plugin.get("presetId") == "tavernweave", "invalid DSH plugin preset id")
     for host, manifest in manifests.items():
         require(manifest.get("name") == install["package"] and manifest.get("version") == version,
                 f"{host} manifest identity or version mismatch")

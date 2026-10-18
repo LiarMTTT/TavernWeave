@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "adapterVersion": "2.1.0",
+  "status": "preview-plugin-bundle",
+  "supportLevel": "plugin-bundle",
+  "runtimeAccepted": false,
+  "modelQualityClaim": "not-evaluated",
+  "package": {
+    "name": "liarmttt-tavernweave-dsh",
+    "version": "2.1.0",
+    "presetId": "tavernweave",
+    "presetName": "TavernWeave X DSH",
+    "pluginRowId": "tavernweave-dsh"
+  },
+  "upstream": {
+    "repository": "https://github.com/deepseek-ai/deepseek-harness",
+    "branch": "master",
+    "auditedRuntimeVersion": "0.2.1-rc.2",
+    "auditedAt": "2026-10-18",
+    "warning": "Upstream declares Developer Preview and compatibility-breaking changes. Re-audit, reinstall and rerun the gates below before claiming compatibility with another DSH build."
+  },
+  "composition": {
+    "skills": 23,
+    "skillRegistration": "plugin-provider",
+    "frontDoor": "system-prompt-section",
+    "resources": "skill-directory",
+    "presetMounts": [
+      "@deepseek-ai/dsh-persona",
+      "@deepseek-ai/dsh-agent-instructions",
+      "@deepseek-ai/dsh-time-context",
+      "@deepseek-ai/dsh-tool-pwsh|@deepseek-ai/dsh-tool-bash",
+      "@deepseek-ai/dsh-tool-fs",
+      "@deepseek-ai/dsh-tool-fs-search",
+      "@deepseek-ai/dsh-tool-skill",
+      "@deepseek-ai/dsh-tool-ask-user",
+      "@deepseek-ai/dsh-tool-present",
+      "@deepseek-ai/dsh-compaction-basic",
+      "@deepseek-ai/dsh-command-compact"
+    ],
+    "omittedByDefault": [
+      "web",
+      "subagents",
+      "workflow",
+      "goal",
+      "todo",
+      "background-jobs",
+      "client-ui"
+    ]
+  },
+  "install": {
+    "desktop": "Plugins -> Add plugin -> install third-party plugin from local path or tarball, enable the bundle, then choose the TavernWeave X DSH preset in a new session.",
+    "cli": "dsh plugin --profile <profile> add <local path|tarball|git URL|package>",
+    "desktopProfileNote": "The desktop profile is managed by the Desktop shell; do not use dsh plugin --profile desktop.",
+    "uninstall": "Disable and remove the bundle from the Plugins page, or dsh plugin --profile <profile> remove liarmttt-tavernweave-dsh."
+  },
+  "requiredRuntimeGates": [
+    "plugin-install-from-local-artifact",
+    "bundle-appears-in-plugin-page",
+    "preset-appears-in-new-session-selector",
+    "skill-catalog-reports-23-tavernweave-skills",
+    "skill-load-returns-current-skill-body",
+    "skill-relative-resources-resolve-from-skill-directory",
+    "front-door-section-is-present-in-system-prompt",
+    "persona-does-not-duplicate-front-door",
+    "soul-direct-trigger-and-exit",
+    "brainstorm-direct-trigger-ensemble-and-pause",
+    "blueprint-anti-fractal-and-driver-gates",
+    "library-picker-and-a0-read",
+    "write-approval-loop",
+    "windows-pwsh",
+    "linux-or-wsl-bash",
+    "plain-language-user-selected-guidance-and-bug-explanation",
+    "plugin-disable-and-uninstall-remove-all-registrations",
+    "no-persistence-or-ui-claim-before-implementation"
+  ],
+  "forbiddenClaimsBeforeRuntimeAcceptance": [
+    "official-minimal-supports-skills",
+    "tw-dsh-maximizes-model-intelligence",
+    "codex-or-claude-parity",
+    "cross-platform-support",
+    "real-sillytavern-accepted",
+    "front-door-file-equals-host-loading"
+  ],
+  "evidence": {
+    "runtimeAcceptedAt": null,
+    "acceptedDshVersion": null,
+    "partialChecks": [
+      {
+        "kind": "sdk-jsonrpc-runtime",
+        "date": "2026-10-18",
+        "dshVersion": "0.2.1-rc.2",
+        "howRun": "Installed the packaged tgz into an isolated DSH profile via the bundled dsh CLI (pnpm link), mounted the host plugin in an SDK profile, and drove it through the SDK JSON-RPC stdio protocol.",
+        "observed": [
+          "Initialize returned deepseek-harness-sdk-runtime.",
+          "The agent called the skill tool and loaded consult-tavernweave-library with its bundled resources guidance.",
+          "The session catalog contained all 23 TavernWeave skills (plus 2 ambient skills from the profile's own filesystem skill provider).",
+          "The model quoted a TavernWeave Host Front Door rule verbatim, showing the injected system-prompt section is model-visible.",
+          "One normal model turn completed (input 2004, output 1048, cache-read 11264 tokens)."
+        ],
+        "notYetVerified": [
+          "Plugins-page installation from the packaged artifact in DSH Desktop",
+          "TavernWeave X DSH preset visible/selectable in the new-session selector",
+          "Disable/uninstall removes all registrations",
+          "Linux/WSL run and real SillyTavern acceptance"
+        ]
+      }
+    ],
+    "notes": "Set runtimeAccepted to true only after a real DSH Desktop install from the packaged artifact plus a new TavernWeave X DSH session passes the gates above. The SDK partial check proves plugin/provider/front-door mechanics but not the preset UI path."
+  }
+}

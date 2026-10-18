@@ -1,5 +1,10 @@
 # 奶人教程更新日志
 
+## TavernWeaveX无限月读 2.1.0 · DSH 插件适配 - 2026-10-18
+
+- 新增 DeepSeek Harness 独立插件包 **TavernWeave X DSH**（23 个 Skill + Host Front Door + `tavernweave` preset）；Codex/Claude 继续使用原技能包安装，DSH 改用插件页安装 + preset 选择。
+- 当前 Skill 数量仍为 23；DSH 的插件页/preset/Linux/真实酒馆验收边界以 [插件合同](../../host-adapters/dsh/dsh-plugin-contract.json) 为准，安装成功不等于全部验收通过。
+
 ## TavernWeaveX无限月读 2.0.0 · 正式版 - 2026-10-16
 
 - 新增第 23 个 Skill `worldbook-design-and-writing` 的教程入口：区分只改条目正文与重新设计条目／加载方式，说明场景信息、正文与配置如何对齐。

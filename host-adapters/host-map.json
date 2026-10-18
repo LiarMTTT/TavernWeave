@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "adapterVersion": "2.0.0",
+  "adapterVersion": "2.1.0",
   "hosts": {
     "codex": {
       "displayName": "Codex",
@@ -24,7 +24,10 @@
       "defaultDirectory": null,
       "homeOverrideEnvironment": null,
       "rediscovery": "new-session",
-      "support": "preview-preset-only"
+      "support": "preview-plugin-bundle",
+      "frontDoorMechanism": "plugin-system-prompt",
+      "pluginPackage": "liarmttt-tavernweave-dsh",
+      "presetId": "tavernweave"
     }
   }
 }

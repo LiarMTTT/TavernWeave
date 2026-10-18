@@ -10,9 +10,9 @@ The seven 0.5.0 skills (`sillytavern-component-update`, `sillytavern-render-rege
 
 “Cyberpunk 2077” and “Johnny Silverhand” identify third-party fictional material associated with CD PROJEKT and its licensors. TavernWeave is not affiliated with, endorsed by, or sponsored by CD PROJEKT, the game's publishers, or any actor. The `soul-killer-portable` mode contains newly authored TavernWeave frontend-review instructions and an explicitly disclosed fan-roleplay Easter egg. It does not redistribute game dialogue, scripts, lyrics, images, character likeness assets, voices, logos, fonts, music, UI captures, or other game assets, and it must not claim to impersonate a real actor.
 
-## DeepSeek Harness Preview interoperability
+## DeepSeek Harness interoperability
 
-The `host-adapters/dsh` files are newly authored TavernWeave configuration candidates derived from public composition and Skill-discovery interfaces in [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), which is distributed under the MIT License and was marked Developer Preview at the audited `master` snapshot on 2026-08-17. TavernWeave does not vendor the DSH application, package source, official preset files, models, API credentials, or responses. Package names and configuration keys are used only for interoperability. The local contract pins the audited root version and must be refreshed before any runtime compatibility claim.
+The `host-adapters/dsh` plugin bundle is newly authored TavernWeave code derived from public composition, package-bundle, Skill-provider and system-prompt interfaces in [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), which is distributed under the MIT License and was marked Developer Preview at the audited runtime version `0.2.1-rc.2` on 2026-10-18. TavernWeave does not vendor the DSH application, package source, official preset files, models, API credentials, or responses. Package names and configuration keys are used only for interoperability. The local [contract](host-adapters/dsh/dsh-plugin-contract.json) pins the audited runtime version and must be refreshed before any compatibility claim for another DSH build.
 
 ## SillyTavern interoperability sources
 
