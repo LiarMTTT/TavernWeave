@@ -1,6 +1,9 @@
 # Changelog
 
-## 未发布
+## TavernWeaveX无限月读 2.2.0 · Claude Code 插件适配 - 2026-10-18
+
+> 版本已提交，尚未打 tag 或发布 Release；下载资产、教程站与 DSH 运行时验收仍以 2.1.0 为准。
+
 
 - Claude Code 插件补齐与 DSH 插件包对应的两项能力：`hooks/hooks.json` + `hooks/session-start-front-door.mjs` 在会话开始时注入 Host Front Door；`agents/tavernweave.md` 提供与 `TavernWeave X DSH` preset 对应的 `tavernweave` agent（精简工具集）。
 - 去重：本会话会加载的 `CLAUDE.md`（配置目录、当前目录各级的 `CLAUDE.md` / `.claude/CLAUDE.md` / `CLAUDE.local.md`）已有受控区块时，文件区块优先，hook 不注入；版本不同只加一句提示。`TAVERNWEAVE_FRONT_DOOR=off` 可关闭注入。`manage-host-front-door.ps1` 的 Claude 回执同步说明二者只需保留一处。

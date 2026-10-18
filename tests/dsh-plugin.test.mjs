@@ -24,7 +24,7 @@ function frontDoorVersion() {
 }
 
 test("manifest, host map and contract agree on the DSH plugin bundle", () => {
-  assert.equal(manifest.version, "2.1.0");
+  assert.equal(manifest.version, "2.2.0");
   assert.equal(contract.adapterVersion, manifest.version);
   assert.equal(hostMap.adapterVersion, manifest.version);
   assert.equal(frontDoorVersion(), manifest.version);

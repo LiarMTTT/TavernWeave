@@ -281,7 +281,7 @@ Host rediscovery: required-new-task
 
 ## Claude Code 插件
 
-仓库本身就是一个 Claude Code 插件市场（`.claude-plugin/`）。在 Claude Code 中运行：
+2.2.0 起，仓库本身就是一个 Claude Code 插件市场（`.claude-plugin/`）。在 Claude Code 中运行：
 
 ```text
 /plugin marketplace add LiarMTTT/TavernWeave
