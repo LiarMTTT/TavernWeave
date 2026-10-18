@@ -39,6 +39,12 @@
   - 工作区在 OneDrive 重定向目录内时，DSH 的 workspace-write 沙箱无法完成 ACL 授权。解决办法：把该会话切到 **完全权限（full access）**，或把工作区放到非 reparse point 的普通目录（如 `E:\TavernWeave`）。
   - 这不是 TavernWeave 插件/Skill 的问题：preset、Skill 目录、Front Door、Soul 激活均已在同一会话生效。
 
+## 第四轮：普通路径的 ACL 修复后，沙箱终端恢复（SDK 复核，2026-10-18）
+
+- 对 `E:\Documents\deepseek-harness\default-workspace\reviews\dsh-acceptance` 运行随包诊断脚本：verdict `PRECONDITION` → 选中 grant 目标 → 备份 DACL → 添加当前用户 FullControl ACE → 复读验证 `writeOwner=true`（`GRANTED`，`nextAction=verify_original_confined_operation`）。
+- 同一 SDK 会话随后发送 `开启Soul模式，然后运行 Get-Location 并告诉我结果`：agent 加载 Soul Skill 并进入阿瞳模式，`pwsh` 的 `Get-Location` **执行成功**，返回上述目录；不再出现 `SetNamedSecurityInfoW`。
+- 结论：DSH 的 workspace-write 沙箱在普通本地目录上可以通过一次性 ACL 修复恢复；**OneDrive 重定向目录（reparse point）无法这样修复**，需要完全权限或换工作区。
+
 ## 尚未完成（转正前必须补）
 
 - DSH Desktop 插件页从发行资产安装、启用 bundle；

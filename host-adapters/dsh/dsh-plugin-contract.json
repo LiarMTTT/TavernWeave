@@ -144,10 +144,10 @@
   "knownEnvironmentIssues": [
     {
       "id": "onedrive-reparse-workspace-sandbox",
-      "scope": "Windows DSH workspace located under a OneDrive reparse point (e.g. E:\\OneDrive\\ST-\\TavernWeave)",
+      "scope": "Windows DSH workspace located under a OneDrive reparse point (the tested workspace was E:\\OneDrive\\ST-\\TavernWeave)",
       "symptom": "SetNamedSecurityInfoW failed (Win32 5): grantWrite(<workspace>) for every pwsh call in workspace-write mode",
-      "diagnosis": "The bundled diagnose-windows-sandbox-acl script reports PRECONDITION/nextAction=stop: E:\\OneDrive is a reparse point and the script refuses to change ACLs through it. Report: reviews/dsh-acceptance/acl-recovery/ (local evidence, not distributed).",
-      "workaround": "Switch the preset session to full access (完全权限), or use a workspace on a normal local directory without a reparse-point ancestor."
+      "diagnosis": "diagnose-windows-sandbox-acl reports PRECONDITION/nextAction=stop: a reparse-point ancestor (E:\\OneDrive) cannot be repaired through and the script refuses by design. Normal directories can be repaired: a verified grant on the SDK acceptance directory made pwsh Get-Location succeed afterwards.",
+      "workaround": "Switch the preset session to full access (完全权限), or use a workspace on a normal local directory without a reparse-point ancestor; for normal directories run the bundled diagnostic once, then repeat the original confined operation."
     }
   ]
 }
