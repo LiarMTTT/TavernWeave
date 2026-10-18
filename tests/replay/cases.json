@@ -516,6 +516,18 @@
       "prompt": "为同一世界书规则设计同义改写和不同上下文位置的比较。先给可复用的验证设计，不调用模型，也不要保证某一种写法必然更好。",
       "expectedPrimarySkill": "worldbook-design-and-writing",
       "expectedBehavior": "Route to worldbook-design-and-writing, separate authored semantic expectations from observations, control model/parameters and length/information confounds if later authorized, include unseen inputs and failures, and leave model results not-run."
+    },
+    {
+      "id": "soul-ensemble-brainstorm-ownership",
+      "prompt": "脑暴模式，Soul 联席",
+      "expectedPrimarySkill": "orchestrate-project-blueprint",
+      "expectedBehavior": "Load the blueprint orchestration skill for the brainstorm and route the Soul ensemble voice to activate-tavernweave-soul; keep one shared decision budget and do not let either skill claim the other's ownership. (2026-10-18 routing-ownership case.)"
+    },
+    {
+      "id": "bare-architecture-review-no-soul",
+      "prompt": "架构审查",
+      "expectedPrimarySkill": "code-quality-workflow",
+      "expectedBehavior": "Route the bare architecture review to the code-quality workflow and stay read-only; do not load the Soul overlay unless the user explicitly invokes a Soul seat or persona. (2026-10-18 routing-ownership case.)"
     }
   ]
 }
