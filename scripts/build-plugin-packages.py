@@ -117,7 +117,7 @@ def text_field(value, limit, label, single_line=False):
         require("\n" not in value and "\r" not in value, f"{label} must be one line")
 
 
-def validate_source(contents, selected):
+def validate_source(contents, selected, tracked=None):
     install = json_object(contents["tavernweave-install-manifest.json"], "install manifest")
     manifests = {host: json_object(contents[path], path) for host, path in MANIFESTS.items()}
     version = install.get("version")
@@ -133,7 +133,6 @@ def validate_source(contents, selected):
     require("skills/consult-tavernweave-library/references/plugin-runtime.md" in install.get("requiredPaths", []),
             "runtime reference must be declared in requiredPaths for standalone Skill installation")
     for group, fields in (("hostFrontDoor", ("managedBlock", "hostMap", "manager")),
-                          ("dshPlugin", ("contract", "entry", "patch", "packageManifest", "buildScript")),
                           ("communication", ("reference", "preferenceManager"))):
         object_value = install.get(group, {})
         require(isinstance(object_value, dict), f"invalid {group}")
@@ -146,6 +145,14 @@ def validate_source(contents, selected):
                 "invalid DSH plugin status")
         require(dsh_plugin.get("package") == "liarmttt-tavernweave-dsh", "invalid DSH plugin package")
         require(dsh_plugin.get("presetId") == "tavernweave", "invalid DSH plugin preset id")
+        # The contract/plugin files ship in the host packages; the build script is repository tooling
+        # and is validated against the committed tree instead of the ZIP payload.
+        for field in ("contract", "entry", "patch", "packageManifest"):
+            path = dsh_plugin.get(field)
+            require(isinstance(path, str) and path in selected, f"declared DSH plugin path missing from package: {path}")
+        build_script = dsh_plugin.get("buildScript")
+        require(isinstance(build_script, str) and tracked is not None and build_script in tracked,
+                f"declared DSH build script missing from committed source: {build_script}")
     for host, manifest in manifests.items():
         require(manifest.get("name") == install["package"] and manifest.get("version") == version,
                 f"{host} manifest identity or version mismatch")
@@ -244,7 +251,7 @@ def build(repo, ref, output_dir):
     require(not output_dir.exists(), "output directory already exists; refusing to overwrite results")
     commit, tracked, selected = committed_files(repo, ref)
     contents = read_blobs(repo, selected)
-    version, skills = validate_source(contents, selected)
+    version, skills = validate_source(contents, selected, tracked)
     timestamp = int(git(repo, "show", "-s", "--format=%ct", commit))
     stamp = datetime.fromtimestamp(max(timestamp, 315532800), timezone.utc).timetuple()[:6]
     names = package_names(version)
