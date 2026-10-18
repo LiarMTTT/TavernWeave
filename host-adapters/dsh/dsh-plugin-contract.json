@@ -103,8 +103,51 @@
           "Disable/uninstall removes all registrations",
           "Linux/WSL run and real SillyTavern acceptance"
         ]
+      },
+      {
+        "kind": "sdk-jsonrpc-runtime-soul",
+        "date": "2026-10-18",
+        "dshVersion": "0.2.1-rc.2",
+        "howRun": "Same packaged plugin and SDK profile; one prompt `开启Soul模式`.",
+        "observed": [
+          "The agent called the skill tool with {\"name\":\"activate-tavernweave-soul\"} and read the bundled persona/contract references.",
+          "The agent entered Soul Mode (阿瞳, task-level portable) and followed the plugin runtime evidence contract.",
+          "The agent honestly reported that the local terminal sandbox failed to initialize (SetNamedSecurityInfoW Win32 5) instead of fabricating a successful command receipt."
+        ],
+        "notYetVerified": [
+          "DSH Desktop preset session Soul activation",
+          "Windows pwsh success inside the different desktop sandbox",
+          "Linux/WSL Soul path"
+        ]
+      },
+      {
+        "kind": "dsh-desktop-preset-soul",
+        "date": "2026-10-18",
+        "dshVersion": "0.2.1-rc.2",
+        "session": "session-18841be2-eb38-43cc-b6fd-b4c7f4fc537e",
+        "howRun": "Installed the packaged plugin into the DSH Desktop profile via the bundled desktop runtime CLI; the user selected the TavernWeave X DSH preset in a new task and sent `开启soul模式`.",
+        "observed": [
+          "The session log records agent-preset/selected -> tavernweave; the preset appears in the DSH Desktop UI.",
+          "The new session's available_skills catalog contains all 23 TavernWeave skills and the Host Front Door section is model-visible.",
+          "The agent called the skill tool with {\"name\":\"activate-tavernweave-soul\"} and entered 阿瞳 Soul Mode (task-level portable).",
+          "Plugin page showed the bundle; the first icon draft rendered as TV and was replaced with a TW path icon (icon-tw.svg)."
+        ],
+        "notYetVerified": [
+          "pwsh-backed TW tasks in this workspace (blocked by the OneDrive reparse-point sandbox issue below)",
+          "Linux/WSL and real SillyTavern acceptance",
+          "Disable/uninstall cleanup in DSH Desktop"
+        ]
       }
     ],
     "notes": "Set runtimeAccepted to true only after a real DSH Desktop install from the packaged artifact plus a new TavernWeave X DSH session passes the gates above. The SDK partial check proves plugin/provider/front-door mechanics but not the preset UI path."
-  }
+  },
+  "knownEnvironmentIssues": [
+    {
+      "id": "onedrive-reparse-workspace-sandbox",
+      "scope": "Windows DSH workspace located under a OneDrive reparse point (e.g. E:\\OneDrive\\ST-\\TavernWeave)",
+      "symptom": "SetNamedSecurityInfoW failed (Win32 5): grantWrite(<workspace>) for every pwsh call in workspace-write mode",
+      "diagnosis": "The bundled diagnose-windows-sandbox-acl script reports PRECONDITION/nextAction=stop: E:\\OneDrive is a reparse point and the script refuses to change ACLs through it. Report: reviews/dsh-acceptance/acl-recovery/ (local evidence, not distributed).",
+      "workaround": "Switch the preset session to full access (完全权限), or use a workspace on a normal local directory without a reparse-point ancestor."
+    }
+  ]
 }

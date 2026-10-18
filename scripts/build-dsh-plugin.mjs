@@ -141,7 +141,7 @@ function validateStagedPackage(stage, version, contract) {
     "cordis.patch.yml",
     "locale/en.json",
     "locale/zh.json",
-    "icon.svg",
+    "icon-tw.svg",
     "assets/front-door.md",
     "README.md",
     "LICENSE",
@@ -261,7 +261,7 @@ function main() {
   mkdirSync(stage, { recursive: true });
   let summary;
   try {
-    for (const relative of ["index.js", "cordis.patch.yml", "icon.svg", "README.md"]) {
+    for (const relative of ["index.js", "cordis.patch.yml", "icon-tw.svg", "README.md"]) {
       cpSync(path.join(pluginDir, relative), path.join(stage, relative));
     }
     cpSync(path.join(pluginDir, "locale"), path.join(stage, "locale"), { recursive: true });
