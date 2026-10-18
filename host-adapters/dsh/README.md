@@ -19,7 +19,7 @@
 
 ### 桌面版（DSH Desktop）
 
-1. 取得发行资产 `TavernWeave-DSH-v2.1.0.tgz`（或解压后的目录）；
+1. 取得发行资产 `TavernWeave-DSH-v2.2.0.tgz`（或解压后的目录）；
 2. 侧栏 **插件 → 添加插件 → 安装第三方插件**；
 3. 填入本地路径或 `.tgz`，完成安装并启用 bundle；
 4. 新建任务 → Agent preset 选择 **TavernWeave X DSH**。

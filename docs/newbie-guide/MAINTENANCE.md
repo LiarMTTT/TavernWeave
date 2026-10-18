@@ -29,7 +29,7 @@ Mermaid 流程图库来自指南原有的 CDN，并保留备用域；网络不�
 
 ## 当前版本与缓存
 
-本地教程对应 TavernWeaveX无限月读 2.1.0 正式版，缓存为 v57。同步 `index.html` 中的版本元信息与资源查询参数、`app.js` 的正文分片参数、当前页脚和 `tests/newbie-guide-navigation.test.mjs` 的缓存断言。当前版本条目为 `release-v2-1-0`；`release-v2-0-0`、`release-v1-9-1`、`release-v1-9-0`、rc.2、rc.1 及更早正式版条目保留；旧名称、徽标和深链接属于历史记录，保持原样。README、安装说明和 Q&A 的正式下载入口指向 v2.1.0 正式发布页。统一插件使用说明见 `docs/plugin-guide.md`。
+本地教程对应 TavernWeaveX无限月读 2.2.0 正式版，缓存为 v58。同步 `index.html` 中的版本元信息与资源查询参数、`app.js` 的正文分片参数、当前页脚和 `tests/newbie-guide-navigation.test.mjs` 的缓存断言。当前版本条目为 `release-v2-1-0`；`release-v2-0-0`、`release-v1-9-1`、`release-v1-9-0`、rc.2、rc.1 及更早正式版条目保留；旧名称、徽标和深链接属于历史记录，保持原样。README、安装说明和 Q&A 的正式下载入口指向 v2.1.0 正式发布页。统一插件使用说明见 `docs/plugin-guide.md`。
 
 当前 Q&A 版本说明以 `docs/community-qa.md` 为源，生成网页与下载副本；不要直接改生成物。本地教程改动不代表网页已部署，也不代表客户端已更新。
 

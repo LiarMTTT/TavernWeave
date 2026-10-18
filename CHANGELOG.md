@@ -2,7 +2,7 @@
 
 ## TavernWeaveX无限月读 2.2.0 · Claude Code 插件适配 - 2026-10-18
 
-> 版本已提交，尚未打 tag 或发布 Release；下载资产、教程站与 DSH 运行时验收仍以 2.1.0 为准。
+> 发行资产见 [v2.2.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.2.0)；教程站同步到 2.2.0（缓存 v58）。DSH 运行时验收仍以 2.1.0 包为准，本版 DSH 包只改了前门版本标记。
 
 
 - Claude Code 插件补齐与 DSH 插件包对应的两项能力：`hooks/hooks.json` + `hooks/session-start-front-door.mjs` 在会话开始时注入 Host Front Door；`agents/tavernweave.md` 提供与 `TavernWeave X DSH` preset 对应的 `tavernweave` agent（精简工具集）。

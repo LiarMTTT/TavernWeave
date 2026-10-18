@@ -1,5 +1,10 @@
 # 奶人教程更新日志
 
+## TavernWeaveX无限月读 2.2.0 · Claude Code 插件适配 - 2026-10-18
+
+- 新增 2.2.0 版本条目：Claude Code 插件自动接入 Host Front Door、输入框上方的 Soul 模式切换与 `tavernweave` agent；与 `CLAUDE.md` 区块去重的规则写在仓库 README。
+- 当前 Skill 数量仍为 23；首页说明、安装模板与版本页脚同步为 2.2.0，教程缓存更新到 v58，2.1.0 及更早的历史记录保留。
+
 ## TavernWeaveX无限月读 2.1.0 · DSH 插件适配 - 2026-10-18
 
 - 新增 DeepSeek Harness 独立插件包 **TavernWeave X DSH**（23 个 Skill + Host Front Door + `tavernweave` preset）；Codex/Claude 继续使用原技能包安装，DSH 改用插件页安装 + preset 选择。
