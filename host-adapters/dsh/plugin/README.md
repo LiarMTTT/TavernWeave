@@ -5,6 +5,7 @@ TavernWeave 的 DeepSeek Harness（DSH）插件包。
 - 一个可选 Agent 预设 **TavernWeave X DSH**（preset id: `tavernweave`）；
 - 包内直接携带 TavernWeave 的 **23 个 Skill**（不依赖用户先装技能包）；
 - 自动注入 **TavernWeave Host Front Door**（不再要求写 `AGENTS.md`）；
+- 包内同时携带 **神之手 DSH 客户端面板**：Skill 轮盘、完整浮窗、世界书、前端设计＆动效数据库、项目/卡管理；一次安装，不再单独装第二个 UI 包；
 - 安装/升级/卸载走 DSH 自己的插件机制（bundle patch），不复制文件到用户技能目录。
 
 ## 要求
@@ -35,7 +36,8 @@ dsh plugin --profile <profile> add <包名|git 地址|tarball|本地路径>
 
 ## 行为边界
 
-- 只提供 Skill、前门口径与可选 preset；不改变 DSH 的模型、账号、网络或权限设置。
+- 提供 Skill、前门口径、可选 preset 和 DSH 客户端面板；不改变 DSH 的模型、账号、网络或权限设置。
 - 不实现偏好持久化；四档大白话引导仍是当前任务内选择。
-- 不附带 Library picker 的专用 UI；HTML 文件作为普通交付物由宿主呈现/打开。
+- 世界书/项目/卡管理只读写用户选定路径；卡内脚本不执行，卡内容不写回。
+- 若之前单独装过旧 `godhand-dsh` UI 包，升级到本包前先移除旧包，避免同一套界面重复加载。
 - 真实 SillyTavern、模型效果与跨平台验收与安装是不同证据，安装成功不等于这些已通过。

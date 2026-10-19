@@ -6,6 +6,10 @@
 # Tools omitted on purpose: web, subagents, workflow, goals, todo, background
 # jobs and delivered-file presentation are outside the TW v1 contract.
 - insert:
+    # One package, one host/client row: skills, front door, /godhand/* routes
+    # and the browser panel all come from this same tarball.
+    - id: tavernweave-dsh
+      name: 'liarmttt-tavernweave-dsh'
     - id: preset-tavernweave
       name: '@deepseek-ai/dsh-agent-preset'
       config:
@@ -57,5 +61,3 @@
                 name: '@deepseek-ai/dsh-compaction-basic'
               - id: command-compact
                 name: '@deepseek-ai/dsh-command-compact'
-          - id: tavernweave-dsh
-            name: 'liarmttt-tavernweave-dsh'

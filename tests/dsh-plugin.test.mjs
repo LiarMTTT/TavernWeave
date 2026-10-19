@@ -94,7 +94,7 @@ test("plugin registers the 23 skills and the host front door on a mock context",
   };
   apply(ctx);
   assert.equal(pluginName, "tavernweave-dsh");
-  assert.deepEqual(inject, ["skills"]);
+  assert.deepEqual(inject, ["skills", "webServer"]);
   assert.ok(provider, "plugin must register a skill provider");
 
   const candidates = await provider.list();

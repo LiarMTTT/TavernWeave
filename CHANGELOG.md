@@ -1,12 +1,13 @@
 # Changelog
 
-## TavernWeaveX无限月读 2.3.0 · 版本与发布包对齐 - 2026-10-19
+## TavernWeaveX无限月读 2.3.0 · DSH 客户端面板内置 - 2026-10-19
 
-> 发行资产见 [v2.3.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)；教程站同步到 2.3.0（缓存 v59）。本版只做版本与打包对齐，23 个 Skill 的名称、正文和数量均未改。DSH 运行时验收仍以 2.1.0 包为准。
+> 发行资产见 [v2.3.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)；教程站同步到 2.3.0（缓存 v59）。23 个 Skill 的名称、正文和数量均未改。DSH 运行时验收仍以 2.1.0 包为准。
 
+- **DSH 插件包现在自带神之手客户端面板**：Skill 轮盘、完整浮窗、世界书、前端设计＆动效数据库、项目/卡管理；一次安装，不再单独装第二个 UI 包。
 - 统一 `.claude-plugin`、`.codex-plugin`、安装清单、Host Front Door 标记、宿主映射、DSH 插件合同、README、统一插件指南、社区问答与教程的当前版本为 2.3.0；`skillCount` 仍为 23。
 - 按 2.3.0 统一发布包命名，并生成可安装的本地 DSH 插件包 `dist/dsh/TavernWeave-DSH-v2.3.0.tgz`（另附 `.zip`）；Codex 与 Claude／ZCode 插件 ZIP、ZCode 市场清单和 `SHA256SUMS.txt` 在正式发布构建时从提交后的源码生成。历史 2.2.0 及更早的更新记录和发布链接保留。
-- 自动检查覆盖 `validate-release.ps1`、`build-dsh-plugin.mjs --check`、DSH 插件包本地构建与插件打包离线测试；未进行新的 DSH Desktop 实机验收、客户端加载、Linux／WSL、真实 SillyTavern 或驾驶员验收，也未发布、推送或打 tag。
+- 自动检查覆盖 `validate-release.ps1`、`build-dsh-plugin.mjs --check`、DSH 插件包本地构建与插件打包离线测试；已做隔离 DSH 客户端加载检查，未进行新的 DSH Desktop 实机验收、Linux／WSL、真实 SillyTavern 或驾驶员验收。
 
 ## TavernWeaveX无限月读 2.2.0 · Claude Code 插件适配 - 2026-10-18
 

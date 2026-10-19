@@ -138,6 +138,8 @@ function validateStagedPackage(stage, version, contract) {
   const pkg = JSON.parse(readText(path.join(stage, "package.json")));
   const required = [
     "index.js",
+    "client.js",
+    "godhand-host.js",
     "cordis.patch.yml",
     "locale/en.json",
     "locale/zh.json",
@@ -261,7 +263,7 @@ function main() {
   mkdirSync(stage, { recursive: true });
   let summary;
   try {
-    for (const relative of ["index.js", "cordis.patch.yml", "icon.png", "README.md"]) {
+    for (const relative of ["index.js", "client.js", "godhand-host.js", "cordis.patch.yml", "icon.png", "README.md"]) {
       cpSync(path.join(pluginDir, relative), path.join(stage, relative));
     }
     cpSync(path.join(pluginDir, "locale"), path.join(stage, "locale"), { recursive: true });

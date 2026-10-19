@@ -17,9 +17,10 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { apply as applyGodhand } from "./godhand-host.js";
 
 export const name = "tavernweave-dsh";
-export const inject = ["skills"];
+export const inject = ["skills", "webServer"];
 
 const PLUGIN_ROOT = path.dirname(fileURLToPath(import.meta.url));
 // `host-adapters/dsh/plugin` lives three levels below the repository root; this
@@ -261,4 +262,15 @@ export function apply(ctx, config = {}) {
     }
   }
   ctx.logger?.info?.(`TavernWeave X DSH: registered ${catalog.length} skills from ${skillsRoot}`);
+
+  // The DSH client panel is part of the same plugin/package. The packaged skills
+  // root is also the bundled TW Library root used by the panel's design tab.
+  // Source-level tests may supply a minimal context without webServer.
+  if (ctx.webServer) {
+    const bundledLibrary = path.join(PLUGIN_ROOT, "skills", "consult-tavernweave-library");
+    applyGodhand(ctx, {
+      ...config,
+      libraryRoot: existsSync(bundledLibrary) ? bundledLibrary : config.libraryRoot,
+    });
+  }
 }

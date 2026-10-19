@@ -2,17 +2,20 @@
   "name": "liarmttt-tavernweave-dsh",
   "version": "${TW_VERSION}",
   "private": false,
-  "description": "TavernWeave X DSH: TavernWeave's 23 rolecard-engineering Skills and Host Front Door as a DeepSeek Harness plugin with a selectable agent preset.",
+  "description": "TavernWeave X DSH: 23 rolecard-engineering Skills, Host Front Door, selectable agent preset, and the bundled TavernWeave DSH client panel in one DeepSeek Harness plugin.",
   "type": "module",
   "main": "./index.js",
   "exports": {
     ".": "./index.js",
+    "./client": "./client.js",
     "./locale/*.json": "./locale/*.json",
     "./icon": "./icon.png",
     "./package.json": "./package.json"
   },
   "files": [
     "index.js",
+    "client.js",
+    "godhand-host.js",
     "cordis.patch.yml",
     "locale/*.json",
     "icon.png",
@@ -24,6 +27,9 @@
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
     }
   },
   "engines": {

@@ -1,6 +1,6 @@
 # TavernWeaveX无限月读
 
-> **2.3.0 正式版**包含 23 个 Skill。2.2.0 引入的 Claude Code 插件继续提供 Host Front Door 自动注入、`tavernweave` agent 与输入框上方的 Soul 模式切换；**TavernWeave X DSH** 插件包与世界书设计与写作入口继续提供。完整包、插件包与校验文件见 [v2.3.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)；来源与合入记录见[升级说明](docs/dual-task-upgrade.md)。
+> **2.3.0 正式版**包含 23 个 Skill。2.2.0 引入的 Claude Code 插件继续提供 Host Front Door 自动注入、`tavernweave` agent 与输入框上方的 Soul 模式切换；**TavernWeave X DSH** 插件包现在内置神之手客户端面板（轮盘、完整浮窗、世界书、前端设计＆动效数据库、项目/卡管理），一次安装；世界书设计与写作入口继续提供。完整包、插件包与校验文件见 [v2.3.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)；来源与合入记录见[升级说明](docs/dual-task-upgrade.md)。
 
 <p align="center">
   <img src="docs/assets/tavernweave-v1-cover.png" alt="一台位于幻想酒馆中的数字织机，将角色卡、世界书、设计资料与工程模块编织成统一工作流" width="100%">
@@ -8,9 +8,9 @@
 
 <p align="center"><strong>把灵感、资料、代码与验收，织成一张真正可维护的角色卡。</strong></p>
 
-TavernWeaveX无限月读（沿用 TW 简称）帮助你把想法做成能使用、能继续修改的角色卡、网页或小工具。你可以直接说想做什么，或哪里出了问题；TW 会整理需求、提出方案、制作和检查，并说明接下来怎样试用。它通过按任务加载的 Skill（按任务调用的工作能力）组织这些工作，支持 Codex、Claude Code，并通过独立的 **TavernWeave X DSH** 插件包支持 DeepSeek Harness。
+TavernWeaveX无限月读（沿用 TW 简称）帮助你把想法做成能使用、能继续修改的角色卡、网页或小工具。你可以直接说想做什么，或哪里出了问题；TW 会整理需求、提出方案、制作和检查，并说明接下来怎样试用。它通过按任务加载的 Skill（按任务调用的工作能力）组织这些工作，支持 Codex、Claude Code，并通过 **TavernWeave X DSH** 插件包支持 DeepSeek Harness；DSH 包内同时带有神之手客户端面板。
 
-当前版本为 **TavernWeaveX无限月读 2.3.0 正式版**，共 23 个原生 Skill。2.2.0 引入的 Claude Code 插件继续提供 Host Front Door 自动注入、`tavernweave` agent 与 Soul 模式切换（见 [Claude Code 插件](#claude-code-插件)）；**TavernWeave X DSH** 插件包与世界书设计与写作入口继续提供。机器安装标识 `tavernweave-agent-skills`、已有技能名称和仓库地址沿用原版，便于核对升级。完整包和校验文件见 [v2.3.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)；[v2.2.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.2.0)、[v2.1.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.1.0)、[v1.9.1](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)与 [v1.9.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.0)历史发布页保留。
+当前版本为 **TavernWeaveX无限月读 2.3.0 正式版**，共 23 个原生 Skill。2.2.0 引入的 Claude Code 插件继续提供 Host Front Door 自动注入、`tavernweave` agent 与 Soul 模式切换（见 [Claude Code 插件](#claude-code-插件)）；**TavernWeave X DSH** 插件包内置神之手客户端面板，世界书设计与写作入口继续提供。机器安装标识 `tavernweave-agent-skills`、已有技能名称和仓库地址沿用原版，便于核对升级。完整包和校验文件见 [v2.3.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)；[v2.2.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.2.0)、[v2.1.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.1.0)、[v1.9.1](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)与 [v1.9.0](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.0)历史发布页保留。
 
 **统一插件的主要用途是让有权限的用户在 dots 云端长任务中调用 TW。** Codex 与 dots 共用 `TavernWeave-Codex-v2.3.0.zip`，不另开 cloud 版。TW 提供 Skill 和参考资料；云端执行、续接、持久存储与工具来自实际宿主。本机安装不会自动同步到 dots 账户。使用方法和账户入口说明见 **[统一插件指南](docs/plugin-guide.md)**。
 
