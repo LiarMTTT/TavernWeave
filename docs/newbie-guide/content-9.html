@@ -1,12 +1,20 @@
 <section class="section chapter-opening release-opening" id="release-history">
 <div class="chapter-tier"><span>版本档案</span><strong>更新日志</strong><span>当前版本与历史发布</span></div>
 <div class="section-head"><div class="section-no">日志</div><div><h2>TavernWeaveX无限月读 更新日志</h2><p class="section-kicker">先看当前版本增加了什么，再回看历次更新。</p></div></div>
-<p class="lead">这里介绍功能与使用方式的变化。当前正式版为 2.2.0；下方保留 2.1.0、2.0.0、1.9.1、1.9.0 与更早版本的记录。更新本机安装时，按实际取得版本的完整清单核验。</p>
+<p class="lead">这里介绍功能与使用方式的变化。当前正式版为 2.3.0；下方保留 2.2.0、2.1.0、2.0.0、1.9.1、1.9.0 与更早版本的记录。更新本机安装时，按实际取得版本的完整清单核验。</p>
 </section>
+
+<section class="section release-version new-panel" id="release-v2-3-0">
+<div class="section-head"><div class="section-no">2.3</div><div><h2>TavernWeaveX无限月读 2.3.0</h2><p class="section-kicker">正式版 · 版本与发布包对齐。</p></div></div>
+<details class="release-entry" open><summary><span>展开 / 收起本版变化</span><span class="release-chevron" aria-hidden="true">⌄</span></summary><div class="release-body">
+<p>2.3.0 不改变 Skill 的行为：23 个 Skill 的名称、正文和数量与 2.2.0 相同。本版只统一包版本号、安装清单、Host Front Door 标记、宿主映射、DSH 插件合同与文档中的当前版本引用，并重新按 2.3.0 准备发布包。</p>
+<p>Codex／dots 共用包、Claude Code／ZCode 包、ZCode 市场清单与 <code>TavernWeave-DSH-v2.3.0.tgz</code> 采用同一版本号；历史 2.2.0 的包和记录保留。DSH 运行时验收仍以 2.1.0 包为准，本版没有新的 DSH Desktop、Linux／WSL 或真实 SillyTavern 验收。</p>
+<p>v2.3.0 提供 23 个 Skill。完整发行包与校验文件见 <a href="https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0" target="_blank" rel="noopener noreferrer">v2.3.0 正式发布页</a>。</p>
+</div></details></section>
 
 <section class="section release-version new-panel" id="release-v2-2-0">
 <div class="section-head"><div class="section-no">2.2</div><div><h2>TavernWeaveX无限月读 2.2.0</h2><p class="section-kicker">正式版 · Claude Code 插件适配。</p></div></div>
-<details class="release-entry" open><summary><span>展开 / 收起本版变化</span><span class="release-chevron" aria-hidden="true">⌄</span></summary><div class="release-body">
+<details class="release-entry"><summary><span>展开 / 收起本版变化</span><span class="release-chevron" aria-hidden="true">⌄</span></summary><div class="release-body">
 <p>从 Claude Code 插件市场安装 <code>tavernweave-agent-skills</code> 后，每次开会话会自动接入 Host Front Door，不必再把它写进 <code>CLAUDE.md</code>。已经写过的话，文件里的区块优先，插件不会重复注入；版本不一致时只提示一句。</p>
 <p>输入框上方多了一行 Soul 模式切换：显示当前 Soul，展开后选一个模式只会把对应口令填进输入框，由你决定是否发送。显示的是你实际发出的口令，不代表 Soul 已被确认激活。另附与 DSH 预设对应的 <code>tavernweave</code> agent。</p>
 <p>Soul 切换用的是 Claude Code 插件的函数 hook 接口（官方标注为 early access），已在 Claude Code 2.1.299 上确认加载；更早的版本未验证。Codex 与 DSH 的安装方式不变，23 个 Skill 不变。</p>
@@ -171,4 +179,4 @@
 </details>
 </section>
 
-<footer class="footer"><strong>TavernWeaveX无限月读 奶人教程 · v2.2.0</strong><br/><span class="small">从一个小任务开始，把需求、制作、检查和反馈走完。完整发行包与校验文件见 <a href="https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.2.0" rel="noreferrer" target="_blank">v2.2.0 正式发布页</a>。</span></footer>
+<footer class="footer"><strong>TavernWeaveX无限月读 奶人教程 · v2.3.0</strong><br/><span class="small">从一个小任务开始，把需求、制作、检查和反馈走完。完整发行包与校验文件见 <a href="https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0" rel="noreferrer" target="_blank">v2.3.0 正式发布页</a>。</span></footer>

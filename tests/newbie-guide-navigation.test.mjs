@@ -81,12 +81,12 @@ test("navigation state is derived from the live document", async () => {
   assert.match(app, /target\.scrollIntoView\(\{ block: 'start', behavior:/);
   assert.match(app, /if \(body\.classList\.contains\('nav-open'\)\)/);
   assert.doesNotMatch(app, /\/ 49/);
-  assert.match(index, /style\.css\?v=58/);
-  assert.match(index, /layout-v6\.css\?v=58/);
-  assert.match(index, /app\.js\?v=58/);
-  assert.match(app, /content-0\.html\?v=58/);
-  assert.match(app, /content-8\.html\?v=58/);
-  assert.match(app, /content-9\.html\?v=58/);
+  assert.match(index, /style\.css\?v=59/);
+  assert.match(index, /layout-v6\.css\?v=59/);
+  assert.match(index, /app\.js\?v=59/);
+  assert.match(app, /content-0\.html\?v=59/);
+  assert.match(app, /content-8\.html\?v=59/);
+  assert.match(app, /content-9\.html\?v=59/);
   assert.match(app, /target\.querySelector\('\.release-entry'\)/);
 });
 
@@ -115,7 +115,7 @@ test("opening capability map explains TavernWeave by system and marks v1.2 and v
   assert.match(content0, /NEW · V1\.2\.0/);
   assert.match(content0, /NEW · V1\.3\.0/);
   assert.match(index, /class="nav-new">NEW<\/strong>/);
-  assert.match(index, /content="2\.2\.0" name="tw-guide-version"/);
+  assert.match(index, /content="2\.3\.0" name="tw-guide-version"/);
   assert.match(content0, /23 个专职 Skill/);
   assert.match(content0, /worldbook-design-and-writing/);
   assert.match(content0, /只做世界书时/);
@@ -131,7 +131,7 @@ test("opening capability map explains TavernWeave by system and marks v1.2 and v
   assert.doesNotMatch(content1, /id="hero-title"/);
 });
 
-test("worldbook entry and installation counts match the v2.2.0 release", async () => {
+test("worldbook entry and installation counts match the v2.3.0 release", async () => {
   const content0 = await readGuideFile("content-0.html");
   const content3 = await readGuideFile("content-3.html");
   const content9 = await readGuideFile("content-9.html");
@@ -140,7 +140,7 @@ test("worldbook entry and installation counts match the v2.2.0 release", async (
   assert.match(content0, /已有条目只需改正文/);
   assert.match(content0, /条目边界和加载方式一起设计/);
   assert.match(content3, /<code>worldbook-design-and-writing<\/code><\/td>/);
-  assert.match(content3, /23\/23 个 TavernWeave Skill 与 v2\.2\.0 完整匹配/);
+  assert.match(content3, /23\/23 个 TavernWeave Skill 与 v2\.3\.0 完整匹配/);
   assert.match(content9, /id="release-v2-0-0"/);
   assert.match(content9, /id="release-v1-9-1"/);
   assert.match(content9, /releases\/tag\/v2\.2\.0/);
@@ -152,7 +152,7 @@ test("ending release chapter contains user-facing major-version logs only", asyn
   const index = await readGuideFile("index.html");
   const content8 = await readGuideFile("content-8.html");
   const content9 = await readGuideFile("content-9.html");
-  const ids = ["release-history", "release-v2-2-0", "release-v2-1-0", "release-v2-0-0", "release-v1-9-1", "release-v1-9-0", "release-v1-9-0-rc-2", "release-v1-9-0-rc-1", "release-v1-8-0", "release-v1-7-0", "release-v1-6-0", "release-v1-5-0", "release-v1-4-0", "release-v1-3-0", "release-v1-2-0", "release-v1-1-0", "release-v1-0-0"];
+  const ids = ["release-history", "release-v2-3-0", "release-v2-2-0", "release-v2-1-0", "release-v2-0-0", "release-v1-9-1", "release-v1-9-0", "release-v1-9-0-rc-2", "release-v1-9-0-rc-1", "release-v1-8-0", "release-v1-7-0", "release-v1-6-0", "release-v1-5-0", "release-v1-4-0", "release-v1-3-0", "release-v1-2-0", "release-v1-1-0", "release-v1-0-0"];
 
   ids.forEach(id => {
     assert.match(index, new RegExp(`href="#${id}"`));
@@ -166,10 +166,11 @@ test("ending release chapter contains user-facing major-version logs only", asyn
   assert.match(content9, /id="release-v1-0-0"[\s\S]*?<details class="release-entry">/);
   assert.doesNotMatch(content9, /兼容性说明|验证结果|待验证/);
   assert.doesNotMatch(content8, /<footer class="footer">/);
-  assert.match(content9, /TavernWeaveX无限月读 奶人教程 · v2\.2\.0<\/strong>/);
+  assert.match(content9, /TavernWeaveX无限月读 奶人教程 · v2\.3\.0<\/strong>/);
+  assert.match(content9, /v2\.3\.0 提供 23 个 Skill/);
   assert.match(content9, /v2\.2\.0 提供 23 个 Skill/);
-  assert.match(content9, /v2\.1\.0 提供 23 个 Skill/);
-  assert.match(content9, /v2\.2\.0 正式发布页/);
+  assert.match(content9, /v2\.3\.0 正式发布页/);
+  assert.match(content9, /releases\/tag\/v2\.3\.0/);
   assert.match(content9, /462 个设计、194 个动效、86 个概念、1,609 条蒸馏账本/);
   assert.match(index, /<span class="nav-chapter-no">更<\/span><span>更新日志<\/span>/);
   assert.match(index, /href="#release-history"><span>日志<\/span>/);

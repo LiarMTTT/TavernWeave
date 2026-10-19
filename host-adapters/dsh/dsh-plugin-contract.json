@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "adapterVersion": "2.2.0",
+  "adapterVersion": "2.3.0",
   "status": "plugin-bundle",
   "supportLevel": "plugin-bundle",
   "runtimeAccepted": true,
   "modelQualityClaim": "not-evaluated",
   "package": {
     "name": "liarmttt-tavernweave-dsh",
-    "version": "2.2.0",
+    "version": "2.3.0",
     "presetId": "tavernweave",
     "presetName": "TavernWeave X DSH",
     "pluginRowId": "tavernweave-dsh"
@@ -85,7 +85,7 @@
     "runtimeAcceptedAt": "2026-10-18",
     "acceptedDshVersion": "0.2.1-rc.2",
     "acceptedPackageVersion": "2.1.0",
-    "acceptanceNote": "2.2.0 changes only the Front Door version marker inside the DSH package; the DSH runtime gates were last run on the 2.1.0 package.",
+    "acceptanceNote": "2.3.0 is a version and packaging alignment release: the 23 Skill bodies are unchanged, and the DSH runtime gates were last run on the 2.1.0 package.",
     "partialChecks": [
       {
         "kind": "sdk-jsonrpc-runtime",

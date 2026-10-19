@@ -1,6 +1,6 @@
 # 双任务升级与 2.0.0 发行说明
 
-> 当前正式版为 2.0.0，含 23 个 Skill，发行资产见 [v2.0.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0)。上一版 1.9.1 含 22 个 Skill。下文保留 v1／v2／v3／v4 候选补丁的原始来源、应用方法及其当时的验证边界；历史命令只用于核对原补丁，不能当作当前 2.0.0 的安装或发布步骤。
+> 当前正式版为 2.3.0，含 23 个 Skill，发行资产见 [v2.3.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)。上一版 1.9.1 含 22 个 Skill。下文保留 v1／v2／v3／v4 候选补丁的原始来源、应用方法及其当时的验证边界；历史命令只用于核对原补丁，不能当作当前 2.3.0 的安装或发布步骤。
 
 2026-10-15。适用固定基线：[`LiarMTTT/TavernWeave@9a8274f9b0a714256195845cab4e4f6ad73e2997`](https://github.com/LiarMTTT/TavernWeave/tree/9a8274f9b0a714256195845cab4e4f6ad73e2997)。
 
