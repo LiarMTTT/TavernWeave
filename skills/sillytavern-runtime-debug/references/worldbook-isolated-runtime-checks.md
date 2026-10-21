@@ -53,11 +53,16 @@
 
 ## 静态检查与真实结果分开
 
-仓库根目录可运行：
+只有完整 TavernWeave 源码检出才包含下面的仓库级测试；在仓库根目录运行：
 
 ```sh
 node --test tests/worldbook-runtime-contracts.test.mjs
-node skills/sillytavern-runtime-debug/scripts/validate-worldbook-observation.mjs skills/sillytavern-runtime-debug/tests/fixtures/worldbook-runtime-observation.pending.json
+```
+
+独立 Skill 安装也可以运行随包记录校验，将 `<skill-root>` 换成当前 `sillytavern-runtime-debug/SKILL.md` 所在的真实绝对目录：
+
+```sh
+node "<skill-root>/scripts/validate-worldbook-observation.mjs" "<skill-root>/tests/fixtures/worldbook-runtime-observation.pending.json"
 ```
 
 第一条只测试新写的目标映射、条件/冲突、去重预算、只读投影及记录边界；内部示意函数不实现或模拟 SillyTavern/EJS/MVU，不导入外部整卡。第二条只检查记录结构与证据等级是否自相矛盾；通过表示记录合格，**不是 runtime pass**，也不能验证证据引用内容是否真实。它不采集日志、不连接酒馆、不触发模型。

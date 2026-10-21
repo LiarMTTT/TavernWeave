@@ -15,7 +15,7 @@
       config:
         id: tavernweave
         name: TavernWeave X DSH
-        description: TavernWeave's 23 rolecard-engineering Skills and Host Front Door, with a Lean agent composition for DeepSeek Harness.
+        description: 23 个角色卡工程 Skill、Host Front Door 与精简工具组合；含文件、终端、Skill 加载、提问和交付，适合角色卡、世界书、前端与 TW 项目维护。
         order: 2
         plugins:
           - id: persona

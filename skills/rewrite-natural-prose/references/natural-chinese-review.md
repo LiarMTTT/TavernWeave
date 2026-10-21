@@ -1,153 +1,37 @@
-# Natural Chinese: diagnosis and whole-text review
+# 去八股与自然表达
 
-Use this reference for Chinese prose revision and for the current draft's self-review
-inside an authorized authoring workflow. It is the detailed diagnostic authority;
-entrypoints and genre references link here rather than maintaining competing lists.
-Calling it does not enable continuous rewriting or change a saved preference.
+## 文体和篇幅
 
-## 1. Preserve purpose and creative scope
+按用户要求的文体改写。中文遵循自然的语序和惯用搭配，沿着事情本身往下说。正式文字保持严谨，对话贴合说话人的身份。保留有用的细节、原有语气和行文节奏，不把文章压成流水账。
 
-Start with the passage's actual purpose and the user's agreed voice. Natural Chinese
-can be formal or literary. Long sentences, adjectives and abstract concepts remain
-valid when they carry the intended meaning. Do not force a casual register or a
-uniformly terse style. Fix an identifiable problem; an already clear sentence may stay.
+轻润色保留原有结构；全文改写可合并段落、调整信息位置。信息多时，给它足够的篇幅。段落长短随内容变化，不给每节套固定句数。
 
-For revision, preserve established facts and causal relationships. Keep the degree of
-certainty and the force of requirements. Do not invent an action or motive merely to
-make the passage vivid. Quotes and protected technical spans remain literal.
+自然表达不要求换成口语，也不要求句句短、删掉所有形容词和抽象概念；不同人物的说话方式本来就不同，不套同一套腔调。这份文档用来判断具体问题，不是替换词表，也不当统一黑名单用。
 
-For co-creation or delegated drafting, actively propose or write the content authorized
-by the brief. The owning creative authority distinguishes a proposal from established
-material. Preservation during polishing does not prohibit authorized invention or
-require the author to provide every detail before a useful draft can be written.
+## 动作和指代
 
-## 2. Strict restraint on three-part parallel phrasing
+写清谁做了什么。能用具体动词说清的动作直接写出来，不用“解决”“实现”“完成”包办。删去只起包装作用的“进行”“加以”“予以”等形式动词。把压成名词的过程展开，例如将“探病所得”写成“在医院问到的情况”。长定语挡住主要动作时，拆成前后两句。
 
-Do not use consecutive three-part parallel words or clauses unless the separate
-information is necessary. Remove a decorative third item, consolidate overlapping
-items, or express the actual relationship in ordinary connected prose. Rhythm or
-rhetorical effect alone do not justify an unnecessary triad.
+生硬的被动句可改成谁做了什么；自然的“被”字句照常使用。同一个人连续行动，主语明确时可以省略。换了人物，或代词可能指向两个人时，直接点名。名字和普通词容易混读时用全名。多人场景按事情的进展写，别为了句式整齐，把每个人都塞进一个分号长句。
 
-Judge the semantic pattern, not punctuation. Using “和”, “或” or “以及”, placing the
-items in bullets, or splitting them across sentences does not exempt the same
-unnecessary three-part repetition. Scan adjacent sentences and paragraph endings as
-well as the current sentence. Do not add a third item to make a pair sound complete.
+## 衔接和收尾
 
-A functional enumeration may remain when its independently needed information would
-otherwise be lost or become harder to use: actual steps, required fields or separately
-applicable conditions can justify a list. Each item being vaguely relevant is not
-enough. Prefer connected prose when the relationship is clearer that way. Preserve a
-literal quotation or explicitly protected passage rather than rewriting it to satisfy
-this style rule; identify a real conflict only when it affects the requested result.
+动作顺序已经说明先后，就顺着写下去。需要交代同时发生、转折或因果时，再用连接词。连续出现“由此”“却”“因而”时，关系清楚的删去多余衔接，关系含糊的重写句子。
 
-| Passage | Decision |
-|---|---|
-| “让人物真实、立体、鲜活。” | These overlapping labels supply no concrete guidance. Replace them with the needed character information, if available; otherwise remove the empty claim. |
-| “让人物真实和立体以及鲜活。” | The changed separators do not fix the same problem. |
-| “人物要真实。人物要立体。人物要鲜活。” | Splitting the triad into sentences does not fix it either. |
-| “先填写姓名，再选择开局身份，最后确认开局。” | Keep the steps if this is the actual required interaction. Do not invent or delete a step for stylistic symmetry. |
+一句话已经说清的意思，不在后面重新解释。“计划”“据说”“通常”已经交代了状态或范围，不再附上同义的否定句。删去无关的自辩。段落说完具体事情就收住，不例行补上感悟、意义或决心。
 
-## 3. Remove repeated defence and unnecessary qualifications
+原文的动作已经传达了情绪，就不再追加标签。需要直接写心理时，贴合人物和叙述口吻，不套用固定的神态或情绪短语，也不凭空增添动作。
 
-State the useful content directly. Remove repeated self-justification, defensive
-introductions to objections nobody raised, and qualifications that add no scope or
-meaning. If a sentence already expresses its limitation, do not append a small clause
-explaining the same limitation again. Do not move the same disclaimer into every
-section or field after removing it from one paragraph.
+非必要不使用连续三个词语或短句的排比。只有各项确有独立的信息作用时才保留；换标点、换连接词或拆成几句，仍按同一要求处理。避免连续几段都用同一种开头和结尾。
 
-A genuine condition, exception or uncertain source is substantive. Preserve it near
-the claim it qualifies, with its original force. “据传”, “可能” and “仅在……” are not
-filler merely because a shorter sentence remains grammatical without them. Explain
-an actual delivery limitation where the user needs it; retain evidence and unresolved
-acceptance in reports rather than hiding them to make the prose sound confident.
+## 信息位置
 
-An explicit contrast is useful when it distinguishes different concepts or corrects
-a real misunderstanding. Do not ban “并非……而是……” or “不等于” by pattern alone.
-Remove formulaic contrast that contributes no distinction. Preserve protected wording
-and an author's deliberate substantive distinction.
+把临时补在段尾的说明放回相关事件中。密集数值可集中列在相邻条目，正文保留与当前行动直接有关的数值。剧情里的考据批注放进备注，人物自己的猜测和误会留在故事里。后文用到的物品和决定须有原文支持的交代，漏掉的必要衔接只从原文补回。
 
-## 4. Diagnose a concrete obstacle
+## 事实和格式
 
-The following are review prompts, not a substitution table or an exhaustive blacklist.
-Name the obstacle and check the context before changing the passage.
+保留事实及其成立条件，准确表达人物的判断和不确定性。不能把计划写成结果，把猜测写成定论，也不能自行添入动作或动机。数值、因果、实质性的否定和约束强度保持准确。
 
-| Candidate problem | Review and repair |
-|---|---|
-| Empty praise or a concluding evaluation | Ask what information would disappear if it were removed. Preserve a real result or rule; do not replace unsupported praise with invented evidence. |
-| Repeated opening and closing summaries | Remove duplicated information at the appropriate editing level. Keep an overview when the document needs navigation or a required report summary. |
-| False contrast or stacked transitions | Check the actual relation between clauses. Replace “却” with “又” only if addition, rather than contrast, is the established meaning. |
-| Repeated transition words | Check whether “随后” or “与此同时” establishes necessary timing. Remove only empty scaffolding; preserve chronology and simultaneous events. |
-| Management language or nominalization | Use a direct verb when it preserves register and meaning. “进行” and similar words are not forbidden when the usage is natural or precise. |
-| Awkward collocation or translated phrasing | Repair the intended meaning. A physical sensation in the chest must not silently become an emotional reaction. |
-| Missing subject, object or unclear pronoun | Use information the context actually establishes. If two referents remain possible, retain the ambiguity or ask when it materially affects the task; do not pick one for fluency. |
-| Heavy modifying clauses | Restructure when the reader loses the referent. Counting “的” can locate a difficult sentence, but two occurrences are not an automatic failure. |
-| Forced headings or equal-sized paragraphs | Let content determine the grouping. Keep retrieval fields and required sections; do not randomize paragraph lengths to appear human. |
-| Stacked imagery or degree words | Retain meaningful atmosphere and the work's voice. Use an existing concrete fact where it does the intended work better; never fabricate one to remove an adjective. |
+规定的字段和格式照常使用。引文与技术内容保持原样，包括代码、宏、变量路径、EJS、正则、ID和结构字段；用户明确要求修改的部分除外。混合文件的处理见[编辑范围](editing-guide.md)。
 
-An abstract rule may be the whole point of a passage. Explain its actual scope when
-needed, but do not require every rule to acquire a scene or example. When an example
-is used, its particular outcome must not silently become a universal rule. Useful
-personality words can remain if their meaning in this character is sufficiently clear.
-
-## 5. Review the whole draft
-
-After sentence-level edits, read the draft continuously. A pattern that is harmless
-once can make an entire text repetitive. Check repeated clause shapes, transitions
-and paragraph endings across adjacent sections, including semantically identical
-three-part phrasing split across lines. Consolidate repeated claims and stop each
-paragraph when its useful content is complete.
-
-Counts can help locate repeated wording; they are not acceptance thresholds. There
-is no required maximum count of a conjunction, no quota of aphorisms, no minimum
-number of unique details and no target distribution of paragraph lengths. Preserve
-useful repetition and necessary timing. Change only what the context shows is
-unnecessary; do not rotate synonyms or shuffle sentences just to lower a count.
-
-Then compare the revision with the source for who acts and who is affected. Check
-event order and causality, then knowledge attribution and degree of certainty. Verify
-that conditions and the force of obligations survived. Keep protected values exact.
-An unsupported embellishment fails even if it sounds fluent; an unmodified good
-sentence is a valid result.
-
-## 6. Worldbook body and processing boundaries
-
-Worldbook model-facing prose contains what the receiving model needs for the intended
-understanding, portrayal or execution. Author-facing design rationale and maintenance
-history belong in author material. Do not add explanatory code blocks merely to show
-how the authoring process works. An instruction the model actually must follow can
-remain; the author's explanation of why they designed it is usually external.
-
-Distinguish maintained source from the final assembled model input. Necessary EJS,
-macros and existing conditional templates may generate or select that input. Preserve
-their working semantics and protected syntax. Do not strip a condition because it
-looks like a script, expose hidden material in its place, or rewrite an established
-macro as ordinary prose. Code with no role for either processing or the recipient
-must not be sent merely because it appeared in the source notes.
-
-Use the owning [worldbook reference](../../tavern-card-builder/references/lorebook-and-prompts.md#model-facing-body-and-processed-source)
-for the actual processing boundary. If that role is unknown during a narrow edit,
-preserve the technical span and resolve its role before proposing removal. This is
-not permission to introduce a new runtime, change activation settings or refactor an
-existing script. No particular XML/YAML layout or punctuation ban is imposed here.
-
-## 7. Semantic counterexamples and evidence
-
-These examples are invented review cases, not character canon or host API examples.
-
-| Case | Required result |
-|---|---|
-| “据居民传言，旧桥逢满月便会消失，尚无人证实。” | Retain the uncertain source. Deleting it would turn a rumour into a fact. Remove an additional paragraph repeating that it is only a rumour if it adds nothing. |
-| A subject is already limited by “通常” | Do not append “但并非每次如此” merely to restate that same limit. Retain a distinct exception if the source actually gives one. |
-| “感到胸口温暖” | Determine whether this means a bodily sensation before considering an emotional paraphrase such as “心里一暖”. |
-| A supplied profile says the person is gentle | Do not invent donations or care for an animal as evidence while polishing. Use an existing example if it helps; otherwise retain the meaningful trait. |
-| A supplied scene names a complicated feeling | Do not add a frown or a bitten lip merely to replace the abstraction. Preserve the viewpoint and established action. |
-| A simple, purposeful smile | Do not force it into anatomical muscle description to avoid a supposedly forbidden word. Review excessive correction as well as excessive abstraction. |
-| A necessary established EJS condition surrounds secret material | Preserve the processing condition and its knowledge boundary. Remove unrelated author rationale, not the mechanism. |
-| “必须在三日内提出申请” | Keep the obligation and deadline. Formality does not justify changing “必须” to “可以”. |
-| An authorized original scene needs a concrete event | Write within the creative brief; do not refuse because revision rules forbid inventing facts during polishing. Record a proposal honestly when confirmation is still required. |
-
-A wording scan or a static review establishes only that the rules were checked.
-Neither proves prose quality across arbitrary models or correct real-host processing.
-Use focused structure checks when editing mixed files, and report actual runtime
-evidence separately when the change affects processing. Do not require a model call
-merely to revise an ordinary passage.
+直接交付改好的正文。用户要求对照时，再列修改说明；确实影响改写的歧义或缺失信息，简短指出。

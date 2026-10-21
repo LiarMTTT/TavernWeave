@@ -1,5 +1,5 @@
 /**
- * 神之手 · 浏览器半侧（1.0.0）
+ * 神之手 · 浏览器半侧（1.1.0）
  *
  * 部件全部挂在 DSH 已声明的席位上：
  *   - shell.overlay                         ：Skill 轮盘（缩略态）+ 完整浮窗
@@ -8,6 +8,7 @@
  *       空白不够宽时整个轮盘不显示，不压对话。几何沿用沙盒 v22.1 定稿。
  *       完整浮窗可拖动、可缩放、不全屏，记住位置、尺寸和上次页签；收起后回到轮盘。
  *   - conversation.session.header.utilities ：会话头的神之手按钮（宿主原生 Button + Tooltip），开合完整浮窗
+ *       旁边还有一个轮盘开关：显示/隐藏左侧的 Skill 轮盘，状态存本机；旧存储没有这个字段时按显示处理
  *   - conversation.input.dock               ：输入栏上方的 Soul 小浮窗，右对齐，不占布局
  *
  * 数据都来自真实宿主：
@@ -250,7 +251,7 @@
     '结束soul模式': 'off', '强尼,下线': 'off', 'relic断开': 'off', '/soul off': 'off',
   }));
 
-  const G = (window.__GODHAND__ = { version: '1.0.0', loaded: false, applied: false, errors: [], wheel: { reason: 'init' } });
+  const G = (window.__GODHAND__ = { version: '1.1.0', loaded: false, applied: false, errors: [], wheel: { reason: 'init' } });
   const fail = (where, error) => {
     const msg = where + ': ' + (error && error.message ? error.message : String(error));
     G.errors.push(msg);
@@ -497,6 +498,8 @@
         tab: TABS.some((t) => t.id === migratedTab) ? migratedTab : 'skills',
         full: f && ['x', 'y', 'w', 'h'].every((k) => Number.isFinite(f[k])) ? f : null,
         wheel: Number.isFinite(raw.wheel) && raw.wheel >= 0 ? Math.floor(raw.wheel) : 0,
+        // 轮盘显示/隐藏：只有明确存了 false 才算隐藏，旧存储没有这个字段时照旧显示。
+        wheelOn: raw.wheelOn !== false,
       };
     } catch {
       return null;
@@ -504,7 +507,7 @@
   }
   function writeUi(ui) {
     try {
-      localStorage.setItem(UI_KEY, JSON.stringify({ version: 2, mode: ui.mode, tab: ui.tab, full: ui.full, wheel: ui.wheel }));
+      localStorage.setItem(UI_KEY, JSON.stringify({ version: 2, mode: ui.mode, tab: ui.tab, full: ui.full, wheel: ui.wheel, wheelOn: ui.wheelOn !== false }));
     } catch {}
   }
 
@@ -632,7 +635,7 @@
   function freshLib() { return { ...EMPTY_LIB }; }
 
   const store = createStore({
-    ui: readUi() || { mode: 'compact', tab: 'skills', full: null, wheel: 0 },
+    ui: readUi() || { mode: 'compact', tab: 'skills', full: null, wheel: 0, wheelOn: true },
     sessionId: undefined,
     catalog: { sessionId: undefined, state: 'none', skills: [], error: '' },
     activity: EMPTY_ACTIVITY,
@@ -2396,6 +2399,8 @@
 .gh2-hbtn{position:relative}
 .gh2-hbtn[aria-pressed="true"]{background:var(--dsw-alias-interactive-bg-active,rgba(255,255,255,.1));color:var(--dsw-alias-label-primary,#e9e9ec)}
 .gh2-hbtn.is-live{color:${LIVE}}
+.gh2-wheelbtn[aria-pressed="false"]{color:var(--dsw-alias-label-caption,rgba(255,255,255,.35))}
+.gh2-wheelbtn.is-off .gh2-wheelico{opacity:.7}
 .gh2-ping{position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:${LIVE};box-shadow:0 0 0 2px var(--dsw-alias-bg-base,#151517)}
 @media (prefers-reduced-motion:no-preference){.gh2-ping{animation:gh2-ping 1.6s ease-in-out infinite}}
 @keyframes gh2-ping{50%{opacity:.35}}
@@ -2786,17 +2791,23 @@
       const IconGrip = () => h('svg', { width: 12, height: 12, viewBox: '0 0 12 12', ...stroke }, h('path', { d: 'M10.5 4.5l-6 6M10.5 8l-2.5 2.5' }));
       const IconChevron = () => h('svg', { width: 12, height: 12, viewBox: '0 0 12 12', ...stroke }, h('path', { d: 'M3.5 7.5L6 5l2.5 2.5' }));
       const IconSearch = () => (has('IconSearchOutlineRegular') ? h(P.IconSearchOutlineRegular, { size: 16 }) : null);
+      // 轮盘开关图标：圆盘 + 轮辐（不复用品牌 Logo）；隐藏时多一道斜线。
+      const IconWheel = ({ off }) => h('svg', { width: 16, height: 16, viewBox: '0 0 16 16', ...stroke, className: 'gh2-wheelico' },
+        h('circle', { cx: 8, cy: 8, r: 5.4 }),
+        h('circle', { cx: 8, cy: 8, r: 1.6 }),
+        h('path', { d: 'M8 2.6v2.1M8 11.3v2.1M2.6 8h2.1M11.3 8h2.1' }),
+        off ? h('path', { d: 'M3.8 12.2 12.2 3.8' }) : null);
 
       /* 宿主原生部件（缺失时退回同样外观的普通元素） */
-      function IconButton({ label, onClick, pressed, className, children }) {
+      function IconButton({ label, onClick, pressed, className, children, ...rest }) {
         const cls = 'gh2-iconbtn' + (className ? ' ' + className : '');
         if (has('Button') && has('Tooltip')) {
           return h(P.Tooltip, {
             label, side: 'bottom', delayMs: 400,
-            children: h(P.Button, { size: 'sm', className: cls, 'aria-label': label, 'aria-pressed': pressed, onClick, children }),
+            children: h(P.Button, { size: 'sm', className: cls, 'aria-label': label, 'aria-pressed': pressed, onClick, ...rest, children }),
           });
         }
-        return h('button', { type: 'button', className: 'gh2-fbtn ' + cls, title: label, 'aria-label': label, 'aria-pressed': pressed, onClick, children });
+        return h('button', { type: 'button', className: 'gh2-fbtn ' + cls, title: label, 'aria-label': label, 'aria-pressed': pressed, onClick, ...rest, children });
       }
       function TextButton({ onClick, children, variant, disabled, title, ...rest }) {
         if (has('Button')) return h(P.Button, { size: 'sm', variant: variant || 'outline', onClick, disabled, title, ...rest }, children);
@@ -2838,8 +2849,22 @@
           label: '神之手',
           pressed: full,
           className: 'gh2-hbtn' + (live ? ' is-live' : ''),
-          onClick: () => setUi({ mode: full ? 'compact' : 'full' }),
+          // 从完整浮窗收起时顺手把轮盘打开，保证真的回到轮盘；打开浮窗不改轮盘开关。
+          onClick: () => setUi(full ? { mode: 'compact', wheelOn: true } : { mode: 'full' }),
         }, h(Logo, { size: 16 }), live ? h('span', { className: 'gh2-ping', 'aria-hidden': 'true' }) : null);
+      }
+
+      /* 会话头轮盘开关：显示/隐藏轮盘，状态存本机 */
+      function WheelToggleButton() {
+        const s = useStoreState();
+        const on = s.ui.wheelOn !== false;
+        return h(IconButton, {
+          label: on ? '隐藏轮盘' : '显示轮盘',
+          pressed: on,
+          className: 'gh2-wheelbtn' + (on ? '' : ' is-off'),
+          'data-gh': 'wheel-toggle',
+          onClick: () => setUi({ wheelOn: !on }),
+        }, h(IconWheel, { off: !on }));
       }
 
       /* Soul 小浮窗 */
@@ -4837,7 +4862,7 @@
         return h('section', {
           ref, className: 'gh2-root gh2-win', role: 'region', 'aria-label': '神之手', tabIndex: -1, 'data-gh': 'window',
           style: { left: rect.x, top: rect.y, width: rect.w, height: rect.h },
-          onKeyDown: (e) => { if (e.key === 'Escape') { e.stopPropagation(); setUi({ mode: 'compact' }); } },
+          onKeyDown: (e) => { if (e.key === 'Escape') { e.stopPropagation(); setUi({ mode: 'compact', wheelOn: true }); } },
         },
           h('header', { className: 'gh2-bar', onPointerDown: onMove, 'data-gh': 'window-bar' },
             h('span', { className: 'gh2-brand' }, h(Logo, { size: 18 })),
@@ -4849,7 +4874,7 @@
               title: activeWsProject ? activeWsProject.root : '项目与角色卡',
             }, '项目' + (activeWsProject ? ' · ' + activeWsProject.label : '')),
             h('span', { className: 'gh2-spacer' }),
-            h(IconButton, { label: '收起到轮盘', onClick: () => setUi({ mode: 'compact' }) }, h(IconMinimize))),
+            h(IconButton, { label: '收起到轮盘', onClick: () => setUi({ mode: 'compact', wheelOn: true }) }, h(IconMinimize))),
           h('div', { className: 'gh2-tabs' }, h(Tabs, { value: tab, onChange: (next) => setUi({ tab: next }) })),
           h('div', { className: 'gh2-body' + (isLibraryTab ? ' gh2-body-lib' : ''), id: 'gh2-panel-' + tab, role: 'tabpanel', 'aria-labelledby': 'gh2-tab-' + tab, 'data-gh': 'panel-' + tab },
             tab === 'skills' ? h(SkillsPane, { s })
@@ -4887,7 +4912,8 @@
         }, [s.ui.mode, s.ws.loaded, s.ws.activeProjectId, s.ws.autoLatest]);
         const d = s.drop;
         return h(Fragment, null,
-          h(Wheel, { s }),
+          // 轮盘开关只决定挂不挂载轮盘，其余部件（完整浮窗、项目浮层、资料库、提示）照旧。
+          s.ui.wheelOn !== false ? h(Wheel, { s }) : null,
           s.ui.mode === 'full' ? h(FullWindow, { s }) : null,
           s.ws.managerOpen ? h(ProjectOverlay, { s }) : null,
           s.lib.open ? h(LibraryOverlay, { lib: s.lib }) : null,
@@ -4918,9 +4944,13 @@
         ctx.effect(() => installDropTarget(), 'godhand: drop skill into composer');
         ctx.effect(() => { loadWorkspace(); return () => {}; }, 'godhand: restore workspace');
         ctx.slots.inject('shell.overlay', () => ctx.slots.register({ name: 'shell.overlay', id: PLUGIN_ID, order: 850 }, Overlay));
-        ctx.slots.inject('conversation.session.header.utilities', () => ctx.slots.register({
-          name: 'conversation.session.header.utilities', id: PLUGIN_ID, order: -30,
-        }, HeaderButton));
+        ctx.slots.inject('conversation.session.header.utilities', () => {
+          const brands = [
+            ctx.slots.register({ name: 'conversation.session.header.utilities', id: PLUGIN_ID, order: -30 }, HeaderButton),
+            ctx.slots.register({ name: 'conversation.session.header.utilities', id: PLUGIN_ID + '-wheel', order: -29 }, WheelToggleButton),
+          ].filter((off) => typeof off === 'function');
+          return brands.length ? () => { for (const off of brands) { try { off(); } catch {} } } : undefined;
+        });
         ctx.slots.inject('conversation.input.dock', () => ctx.slots.register({
           name: 'conversation.input.dock', id: PLUGIN_ID + '-soul', order: -10,
         }, SoulDock));

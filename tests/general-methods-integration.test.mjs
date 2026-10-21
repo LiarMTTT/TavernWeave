@@ -208,7 +208,7 @@ test('shared clarification stays authoritative and blueprint uses its original d
   for (const distinction of ['目标', '限制', '手段', '低风险', '重大不确定', '沉默不构成许可']) assert.ok(shared.includes(distinction));
 });
 
-test('method links resolve locally and semantic/release examples remain present', () => {
+test('method links resolve locally and semantic/release safeguards remain present', () => {
   const files = [
     promptPath, mechanicsPath, communicationPath,
     'skills/orchestrate-project-blueprint/SKILL.md',
@@ -227,8 +227,12 @@ test('method links resolve locally and semantic/release examples remain present'
     }
   }
   const prose = read('skills/rewrite-natural-prose/references/editing-guide.md');
-  assert.ok(prose.includes('青岑吊桥通常在低水位开放；未核实水位前不得通行。'));
-  assert.ok(prose.includes('Unsafe: “低水位即可过桥。”'));
+  assert.ok(prose.includes('保留必须、可以、禁止之间的区别，以及条件、例外和责任范围'));
+  const chinese = read('skills/rewrite-natural-prose/references/natural-chinese-review.md');
+  assert.ok(chinese.includes('保留事实及其成立条件'));
+  assert.ok(chinese.includes('数值、因果、实质性的否定和约束强度保持准确'));
+  const examples = read('skills/rewrite-natural-prose/references/paragraph-examples.md');
+  assert.equal((examples.match(/^改写：/gm) || []).length, 6);
   const release = read('skills/tavern-card-builder/references/card-writing.md');
   assert.ok(release.includes('Accurate titles and release descriptions'));
   assert.ok(release.includes('design preview instead of a playable release'));

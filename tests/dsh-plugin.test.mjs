@@ -24,7 +24,7 @@ function frontDoorVersion() {
 }
 
 test("manifest, host map and contract agree on the DSH plugin bundle", () => {
-  assert.equal(manifest.version, "2.3.0");
+  assert.equal(manifest.version, "2.3.5");
   assert.equal(contract.adapterVersion, manifest.version);
   assert.equal(hostMap.adapterVersion, manifest.version);
   assert.equal(frontDoorVersion(), manifest.version);
@@ -58,6 +58,10 @@ test("bundle patch declares the selectable TavernWeave preset and plugin row", (
   assert.match(patch, /id: tool-skill/u);
   assert.match(patch, /catalogDescriptionMaxLength: 1200/u);
   assert.match(patch, /id: tool-present/u);
+  const presetSummary = /^\s*description: (.+)$/mu.exec(patch)?.[1] ?? "";
+  assert.match(presetSummary, /23 个角色卡工程 Skill/u, "preset summary must name the 23 skills");
+  assert.match(presetSummary, /Host Front Door/u, "preset summary must name the Host Front Door");
+  assert.match(presetSummary, /精简工具组合/u, "preset summary must describe the trimmed tool set");
   assert.doesNotMatch(patch, /tool-result-pruner/u, "compaction must not prune TavernWeave skill bodies");
   assert.match(packageTemplate.dsh.bundle.patch, /cordis\.patch\.yml/u);
   assert.ok(packageTemplate.files.some((entry) => entry.startsWith("skills")));

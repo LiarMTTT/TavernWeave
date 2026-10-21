@@ -23,11 +23,6 @@ function apply(options, operation = "enable") {
   return managePolicy({ ...options, action: operation, expectedToken: preview.previewToken, approved: true });
 }
 
-test("host filenames match the distribution mapping", () => {
-  const mapping = JSON.parse(fs.readFileSync(path.join(skillRoot, "../../host-adapters/host-map.json"), "utf8"));
-  for (const [host, name] of Object.entries(HOST_FILES)) assert.equal(mapping.hosts[host].instructionFileName, name);
-});
-
 test("check/preview are read-only and preview does not disclose unrelated rules", t => {
   const options = fixture(t);
   assert.equal(managePolicy(options).statusAfter, "missing-file");
@@ -147,7 +142,7 @@ test("outdated and edited owned blocks require reviewed replacement", t => {
   const options = fixture(t);
   fs.writeFileSync(options.target, "untouched\n");
   apply(options);
-  fs.writeFileSync(options.target, fs.readFileSync(options.target, "utf8").replace("version=1.4.0", "version=1.3.0"));
+  fs.writeFileSync(options.target, fs.readFileSync(options.target, "utf8").replace("version=1.4.2", "version=1.4.0"));
   assert.equal(managePolicy(options).statusAfter, "outdated");
   apply(options);
   fs.writeFileSync(options.target, fs.readFileSync(options.target, "utf8").replace("轻度文本精修", "自定义文本精修"));

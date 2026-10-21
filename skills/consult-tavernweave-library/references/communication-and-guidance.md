@@ -71,6 +71,10 @@ node <skill-root>/scripts/manage-guidance-preference.mjs --action set --level �
 
 命令示例中的 `<skill-root>` 指当前 SKILL.md 所在目录；`<skill-root>/scripts/...` 是随包脚本。执行时按宿主实际提供的技能目录解析该占位符，不得假设当前工作目录（cwd）就是技能目录。项目输入与输出仍使用用户项目的真实路径。
 
+`$skill-name` 表示按名称选择或读取对应 Skill，不是终端命令，也不假定存在 Claude 专用的 Skill 工具。使用宿主实际提供的技能选择、资源读取或文件读取能力；名称带插件前缀时以当前目录返回的完整标识为准。
+
+`skill://...` 等资源定位符不是文件系统路径。只有宿主返回了当前执行环境内可访问的真实目录，才能把它代入 `<skill-root>` 并执行脚本；路径含空格时要引用整个参数。独立安装应保留完整的兄弟 Skill 目录和各自的 `references/`、`scripts/`、`assets/`，不能只复制 `SKILL.md`。
+
 ## 场景与输出组织
 
 - 从零创作：帮助把愿望整理成一个可试用的小成果，保留最在意的体验；不要把“简单”理解成砍掉用户目标。

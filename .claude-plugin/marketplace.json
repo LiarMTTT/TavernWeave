@@ -3,7 +3,7 @@
   "owner": {
     "name": "LiarMTTT"
   },
-  "description": "TavernWeaveX无限月读 2.3.0: 23 shared skills with host capability checks and resumable project handoffs; Claude Code gets the Host Front Door hook, the tavernweave agent and a Soul mode switch.",
+  "description": "TavernWeaveX无限月读 2.3.5: 23 shared skills with host capability checks and resumable project handoffs; Claude Code gets the Host Front Door hook, the tavernweave agent and a Soul mode switch.",
   "plugins": [
     {
       "name": "tavernweave-agent-skills",
@@ -11,7 +11,7 @@
         "source": "github",
         "repo": "LiarMTTT/TavernWeave"
       },
-      "description": "TavernWeaveX无限月读 2.3.0. Describe the card or software task; TW checks host capabilities, works within the agreed scope and records evidence for continuation."
+      "description": "TavernWeaveX无限月读 2.3.5. Describe the card or software task; TW checks host capabilities, works within the agreed scope and records evidence for continuation."
     }
   ]
 }

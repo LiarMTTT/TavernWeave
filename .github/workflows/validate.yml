@@ -40,6 +40,7 @@ jobs:
           $env:TW_TEST_ROOT = Join-Path $env:RUNNER_TEMP "tw-plugin-tests"
           New-Item -ItemType Directory -Path $env:TW_TEST_ROOT -Force | Out-Null
           python -B tests/test_plugin_packages.py
+          python -B tests/test_codex_skill_install.py
 
   portable-plugin:
     runs-on: ubuntu-latest
@@ -59,6 +60,15 @@ jobs:
           mkdir -p "$TW_TEST_ROOT"
           python -B tests/test_plugin_packages.py
           python -B scripts/build-plugin-packages.py --repo "$GITHUB_WORKSPACE" --ref HEAD --output-dir "$RUNNER_TEMP/plugin-packages"
+      - name: Check Codex skills-only installation
+        env:
+          PYTHONUTF8: '1'
+          PYTHONDONTWRITEBYTECODE: '1'
+          TW_TEST_ROOT: ${{ runner.temp }}/tw-codex-install-tests
+        run: |
+          mkdir -p "$TW_TEST_ROOT"
+          python -B tests/test_codex_skill_install.py
+          node --test tests/codex-skill-distribution.test.mjs
       - name: Validate the DeepSeek Harness plugin bundle
         run: node scripts/build-dsh-plugin.mjs --check
       - name: Exercise bundled helpers on Linux

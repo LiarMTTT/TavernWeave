@@ -4,7 +4,7 @@ import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-export const VERSION = "1.4.0";
+export const VERSION = "1.4.2";
 export const HOST_FILES = Object.freeze({ codex: "AGENTS.md", claude: "CLAUDE.md" });
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const body = fs.readFileSync(path.join(directory, "../assets/rewrite-policy.md"), "utf8").trimEnd();

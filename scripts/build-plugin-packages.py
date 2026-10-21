@@ -25,7 +25,7 @@ COMMON_FILES = {
     "scripts/manage-host-front-door.ps1", "scripts/sync-guidance.mjs",
 }
 MANIFESTS = {"Codex": ".codex-plugin/plugin.json", "Claude-ZCode": ".claude-plugin/plugin.json"}
-CODEX_ONLY = "scripts/register-local.ps1"
+CODEX_ONLY = {"scripts/register-local.ps1", "scripts/install-codex-skills.py"}
 # Claude Code plugin components discovered at the plugin root; Codex never receives them.
 CLAUDE_ONLY_PREFIXES = ("hooks/", "agents/")
 RUNTIME_PATHS = {
@@ -75,10 +75,10 @@ def committed_files(repo, ref):
         tracked[path.decode("utf-8")] = (mode, kind, oid)
     selected = {
         name: value for name, value in tracked.items()
-        if name in COMMON_FILES or name in MANIFESTS.values() or name == CODEX_ONLY
+        if name in COMMON_FILES or name in MANIFESTS.values() or name in CODEX_ONLY
         or name.startswith(("skills/", "docs/", "host-adapters/") + CLAUDE_ONLY_PREFIXES)
     }
-    require(COMMON_FILES | set(MANIFESTS.values()) | {CODEX_ONLY} <= selected.keys(),
+    require(COMMON_FILES | set(MANIFESTS.values()) | CODEX_ONLY <= selected.keys(),
             "missing required package file in committed source")
     require(any(name.startswith("docs/") for name in selected), "docs/ is missing")
     require(any(name.startswith("host-adapters/") for name in selected), "host-adapters/ is missing")
@@ -278,7 +278,7 @@ def build(repo, ref, output_dir):
             if host == "Codex":
                 chosen -= {name for name in chosen if name.startswith(CLAUDE_ONLY_PREFIXES)}
             else:
-                chosen.remove(CODEX_ONLY)
+                chosen -= CODEX_ONLY
             target = temp / names[host]
             write_zip(target, chosen, contents, selected, stamp)
             inventories[host] = verify_zip(target, chosen, contents, selected)

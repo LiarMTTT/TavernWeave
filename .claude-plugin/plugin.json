@@ -1,7 +1,7 @@
 {
   "name": "tavernweave-agent-skills",
-  "version": "2.3.0",
-  "description": "TavernWeaveX无限月读 2.3.0: 23 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs; in Claude Code it injects the Host Front Door, adds the tavernweave agent and a Soul mode switch above the prompt. Actual execution depends on host tools and permissions.",
+  "version": "2.3.5",
+  "description": "TavernWeaveX无限月读 2.3.5: 23 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs; in Claude Code it injects the Host Front Door, adds the tavernweave agent and a Soul mode switch above the prompt. Actual execution depends on host tools and permissions.",
   "author": {
     "name": "LiarMTTT"
   },

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "package": "tavernweave-agent-skills",
-  "version": "2.3.0",
+  "version": "2.3.5",
   "skillCount": 23,
   "skills": [
     "activate-tavernweave-soul",
@@ -89,7 +89,7 @@
   ],
   "hostRediscovery": "required-new-task",
   "hostFrontDoor": {
-    "version": "2.3.0",
+    "version": "2.3.5",
     "recommended": true,
     "managedBlock": "host-adapters/tavernweave-front-door.md",
     "hostMap": "host-adapters/host-map.json",

@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "evaluatedAt": "2026-10-18T07:25:47Z",
+  "evaluatedAt": "2026-10-21T01:37:29Z",
   "method": "Incremental source-contract review of 80 forward and 90 adversarial preserved effective written answers against the frozen v4 skills, by two independent reviewers; 12 new worldbook written scenario answers were authored separately from the expected criteria and independently assessed. The first review passed 11; one focused revision was independently re-reviewed, yielding 12 final passes. Initial answers, finding and revision are retained. Historical runs are unchanged. 2026-10-18 review-fixes re-review: all prior cases were rechecked for source compatibility after the privacy, STScript/API and Skill-publishing fixes, and two routing-ownership cases were added from that review. Not 182 new model trials, installed host discovery, actual SillyTavern, dots execution, or driver acceptance.",
   "skillFingerprints": {
     "activate-tavernweave-soul": "08e68089a6f16e12988db72b7b3fbd94565492e38a44b8e84fe8830d90cdb9b8",
     "build-work-library": "bf77076cd3fb6af79cf5a050dc06e2eabc67628e8f59d90f053c7ea22f81c64a",
     "code-quality-workflow": "0c325b87cabb28482bbd80265c55343562f9d198744ed3e693f664595bf529f6",
-    "consult-tavernweave-library": "97126e9a6a1c9ee27a6d9cac9642d03f58d9978a12c5101cc137cd98a6c8657f",
-    "orchestrate-project-blueprint": "bdb75ecf50b01a00c4ca71e9f4e65dd65cff94774fc45a7deaf476c2542f9cca",
-    "reflect-on-vibe-code-growth": "c1502f14c9e3527aad0b399e3684113896f61b5f7de598003f6dfe4b84a9566b",
-    "rewrite-natural-prose": "5d1bf1a671247b54cd1e063f47aa67b21efef1e61c83cd4ba89feb5dea9b7ef7",
+    "consult-tavernweave-library": "353b88718f322078af37d0b6aab701a5b9c3f8ca1ed3f3b2193a3e10efecc55b",
+    "orchestrate-project-blueprint": "455f52801189e40c80d40f3fb8e4928b3c5b39dec33a4f5f4aa1c6e406c684c2",
+    "reflect-on-vibe-code-growth": "b9128816b1c315663183062d030050c449e2cc82bfbe7cdcb583f04661a6f483",
+    "rewrite-natural-prose": "8b8f4fe3fd7e2e3632e961232edb1821aff32cb2df57ffc219cd2ec38961d074",
     "rolecard-workshop-ops": "2e3b97db7b9c2215a2b3e06c4cc201d8a02350842122194e3b1981557437f3d8",
     "shadcn-tailwind-ui": "18af0f851fa506442f0e45590ba803cf629351b4dbc79b8d3594ba5c8ff54537",
     "sillytavern-api-reference": "7449b7915b3d7f1983d64d1ef0dce7fcace3f1800819a652efb3a12b209d412c",
@@ -17,14 +17,14 @@
     "sillytavern-card-pipeline": "f0ab13326bf45922c3a7d9c22490c616da9348fcaa0ba4488879e3bf0e658d39",
     "sillytavern-component-update": "c1cd48fdf4242ebcde35c7ed0a463e2e5210a355b40a78ff392b3dd871045fe1",
     "sillytavern-database-rolecards": "f410a86ba64a04fe397744891250748cd2a62a236a3b5b14736e631e642edd75",
-    "sillytavern-embedded-ui": "d002f163f6f129399a9133580a27f181d381bdb3fcddbbf2b7025002943d01f1",
+    "sillytavern-embedded-ui": "0a5edf1578ff8f29b3da3654f3806040648fffaf603beadeb70eceb8ba7b2362",
     "sillytavern-extension-dev": "c4aa4c190cbe270628dfb153fe1264b477e3d3e4a61b4e697383dbb6244cfa65",
     "sillytavern-media-live2d-runtime": "63fac127cfceeb65a572aa5bb90b12594c1b3e625d6f7acc973ab88b9c4039bd",
     "sillytavern-render-regex-pipeline": "3254f7997194a45ec8338a89143ad757aad30dfdcba658542a2a35f286e47d1c",
     "sillytavern-rolecard-performance": "857f9a4dd177f657fafe92025a1a83a8468c666c5a0466673183fef6bfd0b30a",
     "sillytavern-rolecard-security": "5c20acecff8a2e484dfc5d28632d9aa8deb83fd6ca6e49f316840f36b112fab8",
-    "sillytavern-runtime-debug": "95b973ddefb4974c89b7b33f567b5afc2965d17f5f3bc47c009dbfd7cd7d8b46",
-    "tavern-card-builder": "cae8fd12a3002e8dc65004eff8eeef2449d5a0b3ed6baec64169c784bdfdff81",
+    "sillytavern-runtime-debug": "9581a334a7a5665cf750a78eb2ef81f552460b66effdd70b2d8e91424000b0da",
+    "tavern-card-builder": "fde7021a40924af7c63971faf61dca0fd15f0585a1a1632af843cead56de187f",
     "worldbook-design-and-writing": "fedc22df5b406b5d3d9380aaa3f5da17624b28573968dedd311d9609e4ff7146"
   },
   "caseResults": [
@@ -7983,6 +7983,51 @@
       "realModelTrials": "not-run",
       "realHostLoading": "not-run",
       "driverAcceptance": "pending"
+    },
+    {
+      "reviewedAt": "2026-10-21T01:37:29Z",
+      "version": "2.3.5",
+      "method": "2026-10-21 bounded source delta review for 2.3.5 (upstream 2.3.1 merge). All 43 forward cases whose expectedPrimarySkill is one of the seven changed Skills were re-read against the current text and judged case by case; no adversarial case names those Skills and the adversarial definitions are unchanged. One case, rewrite-character-voices, initially failed because the rewritten reference had dropped the 'review prompt, not a substitution table or exhaustive blacklist' and 'no forced colloquial register' clauses; those clauses were restored in SKILL.md and natural-chinese-review.md and the case passed on re-check. Specificity losses noted during the review (frontend design justification test, recipient verification wording, retained-field record, tier trigger link, parsed-structure diff in the editing guide) stay open follow-ups. Fingerprints were refreshed only after this written review; no model trials, host loading, real SillyTavern execution or driver acceptance are claimed, and sentences newly added by the merge have no replay case of their own.",
+      "changedSkills": [
+        "consult-tavernweave-library",
+        "orchestrate-project-blueprint",
+        "reflect-on-vibe-code-growth",
+        "rewrite-natural-prose",
+        "sillytavern-embedded-ui",
+        "sillytavern-runtime-debug",
+        "tavern-card-builder"
+      ],
+      "previousFingerprints": {
+        "consult-tavernweave-library": "97126e9a6a1c9ee27a6d9cac9642d03f58d9978a12c5101cc137cd98a6c8657f",
+        "orchestrate-project-blueprint": "bdb75ecf50b01a00c4ca71e9f4e65dd65cff94774fc45a7deaf476c2542f9cca",
+        "reflect-on-vibe-code-growth": "c1502f14c9e3527aad0b399e3684113896f61b5f7de598003f6dfe4b84a9566b",
+        "rewrite-natural-prose": "5d1bf1a671247b54cd1e063f47aa67b21efef1e61c83cd4ba89feb5dea9b7ef7",
+        "sillytavern-embedded-ui": "d002f163f6f129399a9133580a27f181d381bdb3fcddbbf2b7025002943d01f1",
+        "sillytavern-runtime-debug": "95b973ddefb4974c89b7b33f567b5afc2965d17f5f3bc47c009dbfd7cd7d8b46",
+        "tavern-card-builder": "cae8fd12a3002e8dc65004eff8eeef2449d5a0b3ed6baec64169c784bdfdff81"
+      },
+      "updatedFingerprints": {
+        "consult-tavernweave-library": "353b88718f322078af37d0b6aab701a5b9c3f8ca1ed3f3b2193a3e10efecc55b",
+        "orchestrate-project-blueprint": "455f52801189e40c80d40f3fb8e4928b3c5b39dec33a4f5f4aa1c6e406c684c2",
+        "reflect-on-vibe-code-growth": "b9128816b1c315663183062d030050c449e2cc82bfbe7cdcb583f04661a6f483",
+        "rewrite-natural-prose": "8b8f4fe3fd7e2e3632e961232edb1821aff32cb2df57ffc219cd2ec38961d074",
+        "sillytavern-embedded-ui": "0a5edf1578ff8f29b3da3654f3806040648fffaf603beadeb70eceb8ba7b2362",
+        "sillytavern-runtime-debug": "9581a334a7a5665cf750a78eb2ef81f552460b66effdd70b2d8e91424000b0da",
+        "tavern-card-builder": "fde7021a40924af7c63971faf61dca0fd15f0585a1a1632af843cead56de187f"
+      },
+      "newForward": 0,
+      "newAdversarial": 0,
+      "localEvidence": [
+        "build-dsh-plugin.mjs --check: status ok, version 2.3.5, skills 23, scannedFiles 481",
+        "node --test tests/dsh-plugin.test.mjs tests/dsh-client-controls.test.mjs: 13/13 pass",
+        "node --test tests/general-methods-integration.test.mjs tests/claude-plugin.test.mjs tests/codex-skill-distribution.test.mjs: 28/28 pass",
+        "node --test skills/rewrite-natural-prose/tests/policy.test.mjs: 18/18 pass",
+        "node --test tests/worldbook-runtime-contracts.test.mjs: 24/24 pass",
+        "python -m unittest discover -s tests -p 'test_*.py': 20 passed, 1 skipped"
+      ],
+      "realModelTrials": "not-run",
+      "realHostLoading": "not-run",
+      "driverAcceptance": "pending"
     }
   ],
   "methodHistory": [
@@ -8017,6 +8062,10 @@
     {
       "evaluatedAt": "2026-10-18T06:47:08Z",
       "method": "2026-10-18 source-contract re-review for review-fixes: checked all 182 prior cases plus 2 new routing-ownership cases for compatibility with the revised skills; no new model trials, host loading, real SillyTavern execution or driver acceptance are claimed."
+    },
+    {
+      "evaluatedAt": "2026-10-21T01:37:29Z",
+      "method": "2026-10-21 source-contract re-review for 2.3.5: 43 forward cases re-read across the seven changed Skills, one restored-clause fix, fingerprints refreshed after review; no new model trials, host loading or driver acceptance."
     }
   ],
   "previousReviewScope": {

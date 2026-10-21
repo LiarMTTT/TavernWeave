@@ -44,7 +44,7 @@ class PackageTests(unittest.TestCase):
         runtime = self.repo / "skills/consult-tavernweave-library/references/plugin-runtime.md"
         runtime.parent.mkdir(parents=True, exist_ok=True)
         runtime.write_text("Plugin runtime reference\n", encoding="utf-8")
-        for name in packager.COMMON_FILES | {packager.CODEX_ONLY, "docs/plugin-guide.md", "host-adapters/map.json"}:
+        for name in packager.COMMON_FILES | packager.CODEX_ONLY | {"docs/plugin-guide.md", "host-adapters/map.json"}:
             path = self.repo / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(f"fixture {name}\n", encoding="utf-8")
@@ -89,8 +89,9 @@ class PackageTests(unittest.TestCase):
             common = packager.ROOT + "README.md"
             self.assertEqual(codex.read(common), b"fixture README.md\n")
             self.assertEqual(claude.read(common), codex.read(common))
-            self.assertIn(packager.ROOT + packager.CODEX_ONLY, codex.namelist())
-            self.assertNotIn(packager.ROOT + packager.CODEX_ONLY, claude.namelist())
+            for name in packager.CODEX_ONLY:
+                self.assertIn(packager.ROOT + name, codex.namelist())
+                self.assertNotIn(packager.ROOT + name, claude.namelist())
             self.assertIn(packager.ROOT + packager.MANIFESTS["Codex"], codex.namelist())
             self.assertNotIn(packager.ROOT + packager.MANIFESTS["Claude-ZCode"], codex.namelist())
             self.assertIn(packager.ROOT + packager.MANIFESTS["Claude-ZCode"], claude.namelist())

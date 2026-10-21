@@ -101,10 +101,10 @@ node <skill-root>/scripts/validate-mirror-record.mjs --root <照镜子履历根�
 报告中的“导出 HTML”“导出 JSON”和“导出文字评估”只产生便携副本。权威本地保存必须由脚本完成：
 
 ```bash
-node <skill-root>/scripts/save-mirror-record.mjs \
-  --root <照镜子履历根目录> \
-  --record <当前评估草稿.json> \
-  --template assets/vibe-code-growth-report.html
+node "<skill-root>/scripts/save-mirror-record.mjs" \
+  --root "<照镜子履历根目录>" \
+  --record "<当前评估草稿.json>" \
+  --template "<skill-root>/assets/vibe-code-growth-report.html"
 ```
 
 脚本在独占锁内验证现有链，确定性生成单份 `assessment.md`，计算 record/report/assessment SHA-256。完整新节点先写入事务暂存区，持久记录前后指针，再发布节点并分别原子替换 `index.json` 与 `latest.json`；两个指针之间的中断由同一事务恢复。它拒绝覆盖既有节点、拒绝敏感字段、拒绝断链，并在量表变化时验证映射。旧版节点没有 `assessment.md` 时仍按原哈希规则只读验证，不得回写补档。

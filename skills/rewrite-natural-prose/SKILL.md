@@ -20,21 +20,15 @@ When this Skill runs through a plugin, cloud host, or remote machine, read [the 
 
 Write in the language and voice requested by the user. For a supplied passage, return one finished revision directly. Explain only material tradeoffs; provide comparisons or variants when requested. A chat revision is not a filesystem write: do not require an engineering questionnaire before editing a passage in chat. Before authorized file changes, use `$consult-tavernweave-library` with this skill's route, `--write --limit 0`, and the project's existing write gate. Do not ask again for an already approved scope.
 
-## Choose the amount of change
+## 改写范围
 
-| Level | Change allowed |
-| --- | --- |
-| 轻润色 / light (default) | Remove filler, repetition and awkward phrasing; preserve information order and the writer's voice. |
-| 结构改写 / structural | Reorder sentences and paragraphs, consolidate duplication and improve emphasis; preserve claims, events and constraints. |
-| 深度重写 / deep | Rebuild the expression and rhythm within the agreed perspective and genre; preserve established facts and canon. New events or changed viewpoints require the user's creative brief. |
+按用户要求的语言和文体改写。中文使用[去八股与自然表达](references/natural-chinese-review.md)，参照[六个改写示例](references/paragraph-examples.md)。不同文体和混合文件的处理见[编辑范围](references/editing-guide.md)。
 
-User directions and project voice outrank generic preferences. Formal prose, useful lists, deliberate repetition and literary devices are not defects by themselves. Natural expression does not require casual speech, uniformly short sentences, or the removal of adjectives and abstract concepts. Change a passage only to resolve an identifiable problem; do not substitute a universal word blacklist or a fixed “human” voice for judgment. Read [editing-guide.md](references/editing-guide.md) for genre-specific decisions and mixed-content protection.
+- 轻润色：删重复和套话，修改别扭的句子，保留信息顺序和原有声音。局部修改默认采用这一档。
+- 结构改写：理顺句段、合并重复信息，保留事实、事件和约束。全文去八股可在允许的格式内调整段落。
+- 深度重写：按约定视角和文体重写表达与节奏，保留既定事实和设定。新增事件或改变视角须在创作授权范围内。
 
-For Chinese prose, apply [natural-chinese-review.md](references/natural-chinese-review.md), the detailed diagnostic and whole-text review reference. Do not use consecutive three-part parallel words or clauses unless their separate information is necessary. Judge the semantic pattern: replacing punctuation with “和”, “或” or “以及”, or splitting it into sentences, does not exempt it. Rhythm or rhetorical effect alone cannot justify an unnecessary triad. Remove repeated self-defence and unnecessary qualifications; if the sentence already expresses a boundary, do not append another clause explaining that same boundary. Preserve real conditions and uncertainty.
-
-Keep facts, numbers, negation, uncertainty, obligations, relationships and event order intact. In cards and mixed files, identify editable prose separately from macros, variable paths, EJS, regex, code, IDs and structural fields. Preserve protected content literally and use the existing parser or structure checks after a file edit. Do not add an action, motive or fact merely to make a sentence vivid. Deep rewriting is not permission to alter canon or technical behavior.
-
-This preservation rule governs revision of established material. During authorized co-creation or delegated drafting, the owning workflow may propose or write new content within the agreed brief; do not turn prose protection into a demand that the user supply every detail. New proposals must not be reported as pre-existing facts. The owning authoring workflow may use the diagnostic reference to review its current draft without activating continuous or persistent rewriting.
+按用户要求选择改动幅度。只在改动会超出授权范围或改变指定形式时询问。用户的文风要求和项目约定优先；正式文体、必要的列举、有意的重复和修辞本身不是毛病，自然表达也不等于全用口语、全用短句或删掉形容词与抽象概念。改动只针对能说清的问题，不用统一词表或固定“人味儿”代替判断。获授权的创作可以新增内容，已有正文的润色不自行补写情节。
 
 ## Modes and state
 
@@ -62,6 +56,6 @@ Persistence changes only a marked prose-policy block. Installation/update of Tav
 
 Global plain language and the user's guidance level are independent of rewriting. One-shot editing, task off and persistent disable must leave both intact. A short mode receipt still explains conflicts, failures and necessary decisions in detail unless the user explicitly waives that scope; it never treats “退出洗稿” as “关闭大白话” or as permission to clear a guidance preference.
 
-## Verification and handoff
+## 文件检查和模式回执
 
-For prose, check retained meaning and protected spans against the source, then review the whole draft for repeated patterns before returning it. Word counts and pattern scans can locate candidates; they cannot prove that wording is redundant or that meaning survived. For file changes, also report the focused structural check and any real-runtime gate. For mode changes, acknowledge the affected scope briefly; show detailed state only when asked or when scopes differ. Test the deterministic manager with `node tests/policy.test.mjs`; its passing tests do not prove the writing quality of an arbitrary model or host.
+文件改动后执行已有的结构检查，并说明尚未完成的运行时验证。模式操作简短说明生效范围；用户询问或范围冲突时，再列详细状态。管理器测试命令：`node tests/policy.test.mjs`。

@@ -1,5 +1,18 @@
 # Changelog
 
+## TavernWeaveX无限月读 2.3.5 · 合并 2.3.1 源码升级 - 2026-10-21
+
+> 发行资产见 [v2.3.5 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.5)。23 个 Skill 的名称与数量均未变；DSH 运行时门禁仍以 2.1.0 包为准。
+
+- 合并 2.3.1 的源码升级补丁：中文自然表达规则重写并补六个通用改写示例（去八股），精简变量与模型输入，突出前端特色；修正独立安装的资源路径、宿主指令识别和无终端回退，新增 Codex 技能安装器与分发测试。
+- DSH 客户端面板新增 Skill 轮盘显示/隐藏开关，开关状态保存在本机；隐藏或恢复轮盘不改变 Skill 内容与聊天记录。
+- DSH 预设摘要改为“23 个角色卡工程 Skill、Host Front Door 与精简工具组合”，让安装后选择 preset 时更容易看清包内能力和工具边界。
+- 23 个 Skill 的名称和数量不变；2.3.1 合并涉及的 7 个 Skill 内容有更新。Claude Code 插件、DSH 插件、云端续接与神之手客户端面板继续保留，面板新增轮盘开关。
+- 安装清单、两套插件清单、marketplace 描述、Host Front Door 标记、宿主映射和 DSH 合同同步为 2.3.5；正式构建生成 `TavernWeave-DSH-v2.3.5.tgz` 与 `.zip`、Codex／Claude-ZCode 插件 ZIP、ZCode 市场清单和 `SHA256SUMS.txt`。
+- 本版未进行新的真实运行时验收（Windows、真实模型、DSH Desktop）；DSH 运行时门禁仍以 2.1.0 包为准。
+- 本轮改写涉及的 7 个 Skill（consult-tavernweave-library、orchestrate-project-blueprint、reflect-on-vibe-code-growth、rewrite-natural-prose、sillytavern-embedded-ui、sillytavern-runtime-debug、tavern-card-builder）未做模型 replay 重放：按项目既有做法改为逐案书面源合同复核（43 条正向案例），复核范围、前后指纹与“未做模型试跑”边界写入 `tests/replay/results.json` 的 `releaseDeltaReviews`；指纹只在复核后刷新，不冒充重测。
+
+
 ## TavernWeaveX无限月读 2.3.0 · DSH 客户端面板内置 - 2026-10-19
 
 > 发行资产见 [v2.3.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)；教程站同步到 2.3.0（缓存 v59）。23 个 Skill 的名称、正文和数量均未改。DSH 运行时验收仍以 2.1.0 包为准。

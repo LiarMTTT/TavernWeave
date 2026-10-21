@@ -49,6 +49,11 @@ keep the current authoring convention and the old guide's provenance distinct.
 
 ## 2. Select necessary state
 
+Start with necessity: do not add an entity, table, field, or state layer unless the
+current task needs it or the user explicitly requests it. Reuse existing state;
+derive a value when it can be calculated reliably instead of storing a second copy.
+Keep only the state needed for the agreed behavior.
+
 Before choosing a data type, test each candidate field:
 
 1. What state must persist across turns or change during play?
@@ -67,9 +72,9 @@ variables just because they can be stored. Model current state, not an event log
 unless a bounded history is itself a confirmed consumer requirement.
 
 If a field has no consumer, maintenance owner, or deletion loss, omit it by
-default. Preserve a user's explicit decision to keep it, record the reason and
-maintenance/prompt cost, and do not turn this review into permission to delete
-existing saved data. Stop adding fields when the confirmed play loop is covered.
+default. Honor explicitly requested fields and define their upkeep. Review of a
+new design does not authorize deleting existing saved data. Stop adding fields
+when the confirmed play loop is covered.
 
 ## 3. Semantic design and complete structure
 
@@ -284,9 +289,13 @@ within this existing field ledger; cross-native/template output deduplication an
 budgets use [E06](../../sillytavern-rolecard-performance/references/worldbook-output-budget.md).
 Neither consumer may repair saved state or become its second writer.
 
-The model projection is not the full database. Send only state required for the
-current turn and verify recipients. Distinguish objective world truth, current
-state, and character knowledge in the content sent. Read-only or code-only intent
+Keep the model projection small. Send only the state each receiving model needs
+for the current turn, not the full database. Omit duplicate facts, UI-only values,
+unused fields, and repeated schema explanations. Use concise, clear names and
+rules; do not replace them with opaque abbreviations merely to save tokens.
+Preserve the values, distinctions, and update paths required for correct behavior.
+
+Distinguish objective world truth, current state, and character knowledge in the content sent. Read-only or code-only intent
 must be enforced by the verified projection/write mechanism, not asserted by a
 field name.
 

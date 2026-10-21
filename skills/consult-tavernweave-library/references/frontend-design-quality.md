@@ -42,11 +42,13 @@ product purpose.
 
 ## Judge the idea and make it understandable
 
-A proposed design must answer why it fits this work and what it improves over a
-generic template. Assess the content organization, main action and visual identity
-against the audience and actual use. A new palette or decorative title alone does
-not establish a distinctive design. Do not force novelty where a familiar control
-already serves the user well.
+Give the interface a recognizable identity drawn from this work and the user's
+preferences. Let its subject, atmosphere, and actual content shape the composition,
+typography, imagery, and interaction details instead of applying a generic template
+with a new palette. Carry the distinctive choices through the interface rather
+than confining them to a decorative title. Reuse familiar controls where they work;
+keep content readable, actions clear, and the interface accessible and responsive
+within the runtime budget. Preserve an adopted direction when making local changes.
 
 Prefer a visual explanation of the proposal. Use a wireframe or annotated mockup to
 show hierarchy; use a small clickable prototype when the question concerns interaction.

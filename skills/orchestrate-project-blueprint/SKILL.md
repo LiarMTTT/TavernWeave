@@ -21,7 +21,7 @@ When this Skill runs through a plugin, cloud host, or remote machine, read [the 
 
 用户可以直接说愿望，不必先说“脑暴模式”。从零创作时先帮其形成可试用的小成果；完全没想法时给一两个贴合兴趣的小例子。接手角色卡二创/续更先交给 `tavern-card-builder` 看懂原卡；熟悉作品的增改先续接原决定；故障按实际现象交给相关能力。普通问答不强制进入完整引导；完整引导需要用户选择挡位，但暂未选择也不能自动归档或阻止有用的帮助。
 
-开始任何写入前，先按宿主读取项目续接文件（Codex 为 `AGENTS.md`，Claude Code 为 `CLAUDE.md`，其他宿主按项目自述的等效唯一续接文件；以 [host-map.json](../../host-adapters/host-map.json) 为权威），再核对 `NEXT.md`、现有总设计案、蓝图和 Git 状态。若项目会写文件，再通过 `$consult-tavernweave-library` 查找并阅读 A0 与本任务所需资料。角色卡创作交给 `$tavern-card-builder`；本 Skill 负责确定项目范围、组织设计与执行顺序。
+开始任何写入前，先读取宿主实际加载的项目指令与续接文件。Codex 要尊重从项目根到当前目录的指令链、有效的 `AGENTS.override.md`／`AGENTS.md` 和已配置的备用文件名；Claude Code 读取其实际生效的项目规则，其他宿主按项目自述的等效续接文件。不要用插件安装映射覆盖项目指令，也不要为适配新建更高优先级文件。再核对 `NEXT.md`、现有总设计案、蓝图和 Git 状态。若项目会写文件，再通过 `$consult-tavernweave-library` 查找并阅读 A0 与本任务所需资料。角色卡创作交给 `$tavern-card-builder`；本 Skill 负责确定项目范围、组织设计与执行顺序。
 
 ## 局部提示规格与样例归纳
 

@@ -1,35 +1,39 @@
-# TavernWeave 2.3.0 统一插件使用指南
+# TavernWeave 统一插件使用指南
 
-> 当前正式版为 2.3.0，共 23 个 Skill。从 [v2.3.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)获取发行资产；[升级说明](dual-task-upgrade.md)保留原补丁与修复证据。上一版 2.2.0、2.1.0 与 2.0.0 也是 23 个 Skill；1.9.1 为 22 个。
+> **2.3.5 正式发行**：合并 2.3.1 的去八股、变量与前端调整和 Codex 适配，新增 DSH 轮盘显示/隐藏开关（本机记忆），并更新 DSH 预设摘要（23 个角色卡工程 Skill、Host Front Door、精简工具组合）。发行资产与校验值见 [v2.3.5 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.5)。源码安装按本地清单核对 23 个 Skill；完整验证范围见 CHANGELOG 与 DSH 合同。
 
-TavernWeaveX无限月读 2.3.0 沿用安装标识 `tavernweave-agent-skills` 和原有兼容流程；2.2.0 引入的 Claude Code 插件继续提供 Host Front Door 自动注入、`tavernweave` agent 与 Soul 模式切换；2.1.0 引入的 [TavernWeave X DSH 插件包](../host-adapters/dsh/README.md)继续提供，2.0.0 引入的[世界书规划与写作 Skill](../skills/worldbook-design-and-writing/SKILL.md)继续保留。Codex 与 dots 共用 `TavernWeave-Codex-v2.3.0.zip`，没有单独的“cloud 版”。这个插件帮助用户在 dots 云端长任务中调用 TW 的工作方法：把目标分阶段完成，保存可续接的工作记录，再从实际文件和证据接着做。
+> 已发布正式版为 2.3.5，共 23 个 Skill。从 [v2.3.5 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.5)获取发行资产；[升级说明](dual-task-upgrade.md)保留原补丁与修复证据。上一版 2.3.0、2.2.0、2.1.0 与 2.0.0 也是 23 个 Skill；1.9.1 为 22 个。
+
+TavernWeaveX无限月读 2.3.5 沿用安装标识 `tavernweave-agent-skills` 和原有兼容流程；2.2.0 引入的 Claude Code 插件继续提供 Host Front Door 自动注入、`tavernweave` agent 与 Soul 模式切换；2.1.0 引入的 [TavernWeave X DSH 插件包](../host-adapters/dsh/README.md)继续提供，2.0.0 引入的[世界书规划与写作 Skill](../skills/worldbook-design-and-writing/SKILL.md)继续保留。Codex 与 dots 共用 `TavernWeave-Codex-v2.3.5.zip`，没有单独的“cloud 版”。这个插件帮助用户在 dots 云端长任务中调用 TW 的工作方法：把目标分阶段完成，保存可续接的工作记录，再从实际文件和证据接着做。
 
 TW 插件是 **skills-only 资源包**，提供说明、参考资料和随包脚本，不附带 MCP 服务器、后台常驻服务或密钥。云端任务能使用的终端、应用、文件和持久状态由实际宿主及账户权限决定。dots 的云电脑有自己的文件、软件和浏览器，可在用户本机关闭后继续工作；如果任务改在已连接的本机执行，就需要本机在线并保持应用可用。[dots 云电脑与应用说明](https://learn.chatgpt.com/docs/dots/computers-and-apps)
 
 ## 获取与启用
 
-从 [v2.3.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)取得需要的资产，并用同页的 `SHA256SUMS.txt` 核对下载文件：
+只在 Codex 本地使用时，也可按[Codex 专项指南](codex-skills.md)选择独立 Skill 安装；不要把用户级／项目级技能目录与插件包内部的 `skills/` 混为一谈，也不要重复安装同名副本。
+
+从 [v2.3.5 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.5)取得需要的资产，并用同页的 `SHA256SUMS.txt` 核对下载文件：
 
 | 文件 | 用途 |
 | --- | --- |
-| `TavernWeave-v2.3.0.zip` | 完整源码和文档发行包 |
-| `TavernWeave-Codex-v2.3.0.zip` | Codex／dots 共用插件包 |
-| `TavernWeave-Claude-ZCode-v2.3.0.zip` | Claude Code／ZCode 分发包 |
-| `TavernWeave-ZCode-marketplace-v2.3.0.json` | ZCode 市场清单 |
-| `TavernWeave-DSH-v2.3.0.tgz` | DeepSeek Harness 插件包（TavernWeave X DSH） |
+| `TavernWeave-Codex-v2.3.5.zip` | Codex／dots 共用插件包 |
+| `TavernWeave-Claude-ZCode-v2.3.5.zip` | Claude Code／ZCode 分发包 |
+| `TavernWeave-ZCode-marketplace-v2.3.5.json` | ZCode 市场清单 |
+| `TavernWeave-DSH-v2.3.5.tgz` | DeepSeek Harness 插件包（TavernWeave X DSH） |
+| `TavernWeave-DSH-v2.3.5.zip` | DeepSeek Harness 插件包 ZIP |
 | `SHA256SUMS.txt` | 已发布文件的 SHA-256 校验值 |
 
-上一版 [v2.2.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.2.0)、[v2.1.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.1.0)、[v2.0.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0)与更早的 [v1.9.1 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)保留历史发行包和校验文件；分别按 23／23／23／22 个 Skill 的清单核对，不能与 2.3.0 混用。
+上一版 [v2.3.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.0)、[v2.2.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.2.0)、[v2.1.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.1.0)、[v2.0.0 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.0.0)与更早的 [v1.9.1 发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v1.9.1)保留历史发行包和校验文件；分别按 23／23／23／23／22 个 Skill 的清单核对，不能与 2.3.5 混用。
 
 Claude Code 可直接从本仓库的插件市场安装 `tavernweave-agent-skills`，插件自带 Host Front Door 注入 hook、`tavernweave` agent 与输入框上方的 Soul 模式切换，与 `CLAUDE.md` 区块的去重规则见 [README 的 Claude Code 插件](../README.md#claude-code-插件)。
 
-DeepSeek Harness 不走技能目录安装，而是使用 `TavernWeave-DSH-v2.3.0.tgz`：在 DSH 插件页安装并启用 bundle，再在新任务中选择 `TavernWeave X DSH` preset。详见 [host-adapters/dsh/README.md](../host-adapters/dsh/README.md)。
+DeepSeek Harness 不走技能目录安装，而是使用 `TavernWeave-DSH-v2.3.5.tgz`（已发布的正式包）；在 DSH 插件页安装并启用 bundle，再在新任务中选择 `TavernWeave X DSH` preset。也可在源码树运行 `node scripts/build-dsh-plugin.mjs` 重新生成本地包。详见 [host-adapters/dsh/README.md](../host-adapters/dsh/README.md)。
 
 若账户提供插件导入或启用入口，按该入口当前显示的步骤选择 Codex／dots 共用包，启用后在新任务中让 dot 查找 TavernWeave。具体入口和权限以账户界面为准；这份指南不指定未经证实的个人导入按钮，也不推断某个订阅套餐一定可用。**下载或解压 ZIP 不会自动把插件同步到 dots 账户。**本地文件齐全、账户已导入、插件已启用、dot 在任务里确实调用到 Skill，是不同的状态。
 
 OpenAI 的[插件打包规范](https://developers.openai.com/plugins/build/plugins)允许插件以 `skills/` 提供工作方法，MCP 服务器按实际需要添加。需要公开分发时，拥有相应开发者组织权限的发布者可按[官方上传与提交流程](https://developers.openai.com/plugins/deploy/submission)上传 ZIP、查看自动检查结果、提交审核，并在审核通过后发布。Release ZIP 与公开插件目录上架也是不同的分发入口；使用者只需选择自己账户实际可用的入口。
 
-如果账户暂时没有插件导入入口，可以保存 2.3.0 发行包，向账户管理员或平台确认可用权限。不要把本机解压当作云端启用。若只在本地 Codex 或 Claude Code 使用，按 [README 的安装与更新](../README.md#安装与更新)以所选版本的清单核对：2.3.0 为 23/23，历史 1.9.1 为 22/22。本地全局规则中的 TavernWeave Host Front Door 是可选增强，不是 dots 云端使用插件的前置条件。
+如果账户暂时没有插件导入入口，可以保存 2.3.5 发行包，向账户管理员或平台确认可用权限。不要把本机解压当作云端启用。若只在本地 Codex 或 Claude Code 使用，按 [README 的安装与更新](../README.md#安装与更新)以所选版本的清单核对：2.3.5 为 23/23，历史 1.9.1 为 22/22。本地全局规则中的 TavernWeave Host Front Door 是可选增强，不是 dots 云端使用插件的前置条件。
 
 ## 开始一件事
 

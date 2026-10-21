@@ -50,13 +50,15 @@ For guidance-level selection, queries or changes, read [communication-and-guidan
 
 1. Identify the primary engineering skill and whether the request is read-only or write-capable.
 2. For a write-capable task, read `references/st-guides/A0_驾驭工程从零搭建检查单.md` and check goal, red lines, and acceptance against available context. Continue when clear; ask only about a material gap or conflict, using the shared communication threshold.
-3. Run the deterministic router:
+3. When the bundled script and a Node.js terminal are actually available, run the deterministic router:
 
-   ```powershell
-   node <skill-root>/scripts/query-library.mjs --skill tavern-card-builder --intent "设计一张 MVU 卡" --write
+   ```sh
+   node "<skill-root>/scripts/query-library.mjs" --skill tavern-card-builder --intent "设计一张 MVU 卡" --write
    ```
 
-4. Read only the returned guide and Wiki paths. Inspect only the bounded `candidates` receipt; rerun with a narrower `--intent`, `--domain`, or `--limit` instead of loading the full catalog. Use `--include-experimental` only when the user is explicitly evaluating an experimental route such as C8.
+   Without a terminal or a materialized script, read the relevant route in [route-map.json](references/route-map.json) and resolve only its document IDs in [library-manifest.json](references/library-manifest.json), plus A0 for writes. Mark this as manual routing and the deterministic router as not run; do not fabricate ranked candidates or load the entire catalog. If the host cannot read these resources either, report that gap and continue only from the supplied task material.
+
+4. Read only the returned guide and Wiki paths (or the bounded paths resolved during manual routing). Inspect only the bounded `candidates` receipt; rerun with a narrower `--intent`, `--domain`, or `--limit` instead of loading the full catalog. Use `--include-experimental` only when the user is explicitly evaluating an experimental route such as C8.
 5. Return a short receipt containing route ID, loaded document IDs, snapshot version, proposed candidate IDs, and unresolved source/runtime checks.
 
 Read [library-usage.md](references/library-usage.md) for route semantics and receipt shape. The machine authority is [route-map.json](references/route-map.json); do not maintain a second hand-written route table.
