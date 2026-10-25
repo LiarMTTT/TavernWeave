@@ -1,0 +1,61 @@
+name: publish-npm
+
+# Publishes the DSH plugin bundle to npm with trusted publishing (OIDC).
+#
+# No token and no one-time password is stored or typed anywhere: npm trusts
+# this workflow's identity instead. That trust is configured once, per package,
+# at https://www.npmjs.com/package/liarmttt-tavernweave-dsh/access
+#   Provider: GitHub Actions
+#   Repository: LiarMTTT/TavernWeave
+#   Workflow filename: publish-npm.yml
+#   Environment: (leave empty)
+#
+# The package is BUILT here instead of published from source: the source
+# directory is unpackaged — skills/, assets/front-door.md and LICENSE only
+# exist after scripts/build-dsh-plugin.mjs stages them, and the committed
+# package.json is intentionally `private` to stop an accidental source publish.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # required for trusted publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name || github.ref }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Use an npm CLI that supports trusted publishing
+        run: npm install -g npm@latest && npm --version
+
+      - name: Check the release tag matches the manifest version
+        id: version
+        run: |
+          tag="${{ github.event.release.tag_name }}"
+          version=$(node -p "require('./tavernweave-install-manifest.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "manifest version: $version, release tag: ${tag:-<manual run>}"
+          if [ -n "$tag" ] && [ "v$version" != "$tag" ]; then
+            echo "::error::release tag $tag does not match the manifest version v$version — bump tavernweave-install-manifest.json before releasing"
+            exit 1
+          fi
+
+      - name: Build the DSH plugin bundle
+        run: node scripts/build-dsh-plugin.mjs
+
+      - name: Publish the built tarball with provenance
+        run: |
+          npm publish "./dist/dsh/TavernWeave-DSH-v${{ steps.version.outputs.version }}.tgz" \
+            --access public --provenance
