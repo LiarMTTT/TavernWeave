@@ -249,11 +249,36 @@ function verifyTarball(tarball, version) {
   return { verified: true, entries: entries.length, version };
 }
 
+ /**
+ * Keep the committed manifest in sync with the release version.
+ *
+ * Plugin-market submission gates read `host-adapters/dsh/plugin/package.json`
+ * over the GitHub contents API, so that file has to be committed — unlike the
+ * staged one, which is generated from package.template.json on every build.
+ * Two version sources would drift (the committed file lags the manifest after
+ * the first bump and nobody notices), so the build rewrites the committed one
+ * rather than merely checking it.
+ */
+function syncSourceManifest(version) {
+  const sourcePath = path.join(pluginDir, "package.json");
+  assert(existsSync(sourcePath), "the committed plugin package.json is missing — market submission gates read it");
+  const pkg = JSON.parse(readText(sourcePath));
+  assert(pkg.name === EXPECTED_PACKAGE, `committed plugin package.json must be named ${EXPECTED_PACKAGE}`);
+  assert(pkg.dsh?.bundle?.patch === "./cordis.patch.yml", "committed plugin package.json must declare dsh.bundle.patch");
+  assert(pkg.private === true, "committed plugin package.json must stay private — it is unpackaged source, not a release");
+  if (pkg.version !== version) {
+    pkg.version = version;
+    writeFileSync(sourcePath, `${JSON.stringify(pkg, null, 2)}\n`, "utf8");
+    console.error(`build-dsh-plugin: synced committed package.json to ${version}`);
+  }
+}
+
 function main() {
   const options = parseArgs(process.argv.slice(2));
   const manifest = JSON.parse(readText(manifestPath));
   const contract = JSON.parse(readText(contractPath));
   const version = manifest.version;
+  syncSourceManifest(version);
   assert(/^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/.test(version), `invalid manifest version: ${version}`);
   assert(frontDoorVersion() === manifest.hostFrontDoor.version, "Host Front Door marker version must match hostFrontDoor.version");
   assert(manifest.hostFrontDoor.version === version, "Host Front Door version must match the package version");
