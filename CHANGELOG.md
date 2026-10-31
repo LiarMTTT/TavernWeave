@@ -1,5 +1,14 @@
 # Changelog
 
+## TavernWeaveX无限月读 2.3.6 · npm 渠道发布修复 - 2026-10-31
+
+> 内容与 2.3.5 相同，23 个 Skill 的名称与数量均未变。本版仅重编版本号以便通过 npm 渠道发布：npm 上 2.3.5 的暂存记录已无法批准或撤销，会永久占用该版本号。
+
+- DSH 插件清单 `host-adapters/dsh/plugin/package.json` 进入版本控制，含 `dsh.bundle` 声明，供插件市场校验读取。
+- 构建脚本在打包前同步清单版本，并断言清单私有标记、包名与 `dsh.bundle.patch`。
+- `npm pack --json` 的输出解析改为容错，兼容 CI 上较新的 npm 会在 JSON 前后附加提示行。
+- 新增 `.github/workflows/publish-npm.yml`：以 OIDC 信任发布（trusted publishing），不再依赖 token 或动态码。
+
 ## TavernWeaveX无限月读 2.3.5 · 合并 2.3.1 源码升级 - 2026-10-21
 
 > 发行资产见 [v2.3.5 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.3.5)。23 个 Skill 的名称与数量均未变；DSH 运行时门禁仍以 2.1.0 包为准。

@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "adapterVersion": "2.3.5",
+  "adapterVersion": "2.3.6",
   "status": "plugin-bundle",
   "supportLevel": "plugin-bundle",
   "runtimeAccepted": true,
   "modelQualityClaim": "not-evaluated",
   "package": {
     "name": "liarmttt-tavernweave-dsh",
-    "version": "2.3.5",
+    "version": "2.3.6",
     "presetId": "tavernweave",
     "presetName": "TavernWeave X DSH",
     "pluginRowId": "tavernweave-dsh"
