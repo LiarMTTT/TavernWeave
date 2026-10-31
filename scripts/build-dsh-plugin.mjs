@@ -230,7 +230,29 @@ function runNpmPack(stage, outDir) {
     : spawnSync(process.platform === "win32" ? "npm.cmd" : "npm", args, { ...spawnOptions, shell: true });
   if (result.error) throw result.error;
   if (result.status !== 0) throw new Error(`npm pack failed: ${result.stderr || result.stdout}`);
-  const info = JSON.parse(result.stdout.trim())[0];
+  // npm prints notices alongside --json output on the versions CI installs
+  // (`npm install -g npm@latest`), so a bare JSON.parse of stdout throws there
+  // while it succeeds on the npm this repository is developed against. Accept
+  // the JSON wherever it starts, and fall back to the packed file itself.
+  const stdout = String(result.stdout ?? "").trim();
+  let info;
+  try {
+    info = JSON.parse(stdout)[0];
+  } catch {
+    const start = stdout.indexOf("[");
+    const end = stdout.lastIndexOf("]");
+    if (start !== -1 && end > start) {
+      try {
+        info = JSON.parse(stdout.slice(start, end + 1))[0];
+      } catch {
+        info = undefined;
+      }
+    }
+  }
+  if (!info?.filename) {
+    const packed = readdirSync(outDir).filter((name) => name.endsWith(".tgz")).sort().pop();
+    if (packed) info = { filename: packed };
+  }
   assert(info?.filename, "npm pack did not report a filename");
   const packed = path.join(outDir, info.filename);
   assert(existsSync(packed), `npm pack output is missing: ${packed}`);
