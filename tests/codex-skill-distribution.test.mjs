@@ -11,6 +11,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 test("host filenames match the distribution mapping", () => {
   const mapping = JSON.parse(fs.readFileSync(path.join(root, "host-adapters/host-map.json"), "utf8"));
   for (const [host, name] of Object.entries(HOST_FILES)) {
-    assert.equal(mapping.hosts[host].instructionFileName, name);
+    const adapter = mapping.hosts[host];
+    // A plugin's always-on entry can differ from its user-owned settings file.
+    assert.equal(adapter.clientInstructionFileName ?? adapter.instructionFileName, name);
   }
 });

@@ -283,6 +283,10 @@ Host rediscovery: required-new-task
 
 维护者若只是在发布前自检源码树，可显式使用 `-AllowSourceTree`；该开关不能用于普通用户的安装回执。
 
+## Antigravity / AGY 插件
+
+Antigravity / AGY 用户请先看[原生插件构建、安装与验证](host-adapters/antigravity/README.md)。该包复用 23 个 Skill，通过常驻规则加载前门，并提供 AGY Agent 与设置保存适配；严格校验和客户端实测分别记录。仓库根的 Claude 插件导入转换不是 AGY 原生包的安装路径。
+
 ## Claude Code 插件
 
 2.2.0 起，仓库本身就是一个 Claude Code 插件市场（`.claude-plugin/`）。在 Claude Code 中运行：

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "tavernweave-agent-skills",
+  "displayName": "TavernWeaveX无限月读",
+  "description": "Shared rolecard and software engineering skills, always-on TavernWeave routing, and a native Antigravity agent. Runtime acceptance is tracked separately.",
+  "author": { "name": "LiarMTTT" },
+  "homepage": "https://github.com/LiarMTTT/TavernWeave",
+  "repository": "https://github.com/LiarMTTT/TavernWeave",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "keywords": ["agent-skills", "sillytavern", "rolecard"],
+  "suggestedPrompts": [
+    "用 TavernWeave 帮我检查当前项目，先读取对应 Skill。",
+    "阿瞳助我！",
+    "查询我的引导挡位；没有保存时保持未设置。"
+  ]
+}
