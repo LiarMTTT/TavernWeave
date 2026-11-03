@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-11-04-agy-validation",
+  "evaluatedAt": "2026-11-03T17:50:04.228122+00:00",
+  "sourceCommit": "48c1ba69a8d8ac0b847c2e320f5a501034f41a1a",
+  "baseCommit": "4ddfedeacc9402e7316763dc3de0c5ab8030b7b6",
+  "method": "2026-11-04: two independent read-only reviewers reassessed all 88 forward and 96 adversarial cases against current source. 182 preserved complete written answers were reviewed: 178 remained compatible and 4 received minimal separately written revisions with independent re-review. Two cases lacked complete historical answers and received new written supplements; initial supplementary findings and revised evidence were independently re-reviewed. All original answers, missing-evidence findings and failed initial reviews remain available. This is manual written source-contract replay, not 184 fresh model trials, installed-host acceptance or driver acceptance. Actual AGY UI validation is recorded separately.",
+  "reviewers": {
+    "forward": "/root/forward_replay_review",
+    "adversarial": "/root/adversarial_replay_review"
+  },
+  "supplementAndRevisionWriter": "/root",
+  "initialReviewCounts": {
+    "forward": {
+      "compatible": 83,
+      "needs-revision": 3,
+      "unresolved": 2
+    },
+    "adversarial": {
+      "compatible": 95,
+      "needs-revision": 1
+    }
+  },
+  "finalEffectiveAnswers": {
+    "unchangedHistorical": 178,
+    "revisedHistorical": 4,
+    "newMissingAnswerSupplements": 2,
+    "forward": 88,
+    "adversarial": 96,
+    "passed": 184
+  },
+  "previousResultsSha256": "9ec18aa2c528f48eab54ca324908e20ee40840ec29c9cdc014e41e69b1523e74",
+  "definitionSha256": {
+    "cases.json": "4e684172b1c3c325c5a571e78b5eb0bb1809aa050b054bf0c312f93836a6c759",
+    "adversarial-cases.json": "e43f31272b856ff79150fa2a9a457e910842c0561eceefc606f51370bdcfb0d7"
+  },
+  "artifacts": {
+    "forward-review.json": "cf6d8570bb65741638127fee660492e6bfc98e906cbb94ae4ead8f07c2b395e8",
+    "adversarial-review.json": "fa06c36710d2d4f77103cf64f98c02f9dd5dd3da66445b5a4cec81194fcd2828",
+    "supplemental-responses.json": "505cee6121fe52b6b7e031682455918372065aa568ceb71817d1390da8ff8d7b",
+    "supplemental-responses-v2.json": "69799fae089c787fc51e09aaf5d9c3f33b3e8ae3145c11259f5e5693ac210ca5",
+    "revised-responses.json": "5b0a715f98392844d1428d35c3914fe08a83822255e1c20e03dcc700488136e8",
+    "revised-soul-full-response.json": "4f2bfbf20ad9a4efab952618c470811d3cd85b5fac5ce8f43d7af211318e1a41",
+    "supplemental-assessments.json": "562f32b03fd53028ead342e125b3c256d41410c2157371738edb0f7da85a01dc",
+    "supplemental-v2-assessments.json": "b09c2f549ad32e3a46b153a8ae9cb7992c8013d9ff11e12501e0996de5fb74b8",
+    "revised-adversarial-assessment.json": "e741ba50b75ccc39256d1965c8587acc780538967b13115dcdccbf7f025dc696"
+  },
+  "verification": [
+    "exact case ID coverage",
+    "complete answer UTF-8 SHA-256",
+    "independent review references",
+    "all final effective source evidence paths and line bounds; initial invalid citations retained as failed evidence",
+    "all final verdicts compatible",
+    "historical files retained unchanged"
+  ],
+  "historicalModelTrialsExecuted": false,
+  "hostRuntimeEvidenceIncluded": false,
+  "driverAccepted": false,
+  "limits": [
+    "Written receipt claims are judged as scenario text, not live tool evidence",
+    "This run does not resolve unrelated release version inconsistencies",
+    "AGY runtime evidence is separate from these 184 cases"
+  ],
+  "skillFingerprints": {
+    "activate-tavernweave-soul": "08e68089a6f16e12988db72b7b3fbd94565492e38a44b8e84fe8830d90cdb9b8",
+    "build-work-library": "bf77076cd3fb6af79cf5a050dc06e2eabc67628e8f59d90f053c7ea22f81c64a",
+    "code-quality-workflow": "0c325b87cabb28482bbd80265c55343562f9d198744ed3e693f664595bf529f6",
+    "consult-tavernweave-library": "2f9bd1fae83c7fbe175612edf0163f5a2b2dc3d5a1ef154fcab3147689f745f3",
+    "orchestrate-project-blueprint": "455f52801189e40c80d40f3fb8e4928b3c5b39dec33a4f5f4aa1c6e406c684c2",
+    "reflect-on-vibe-code-growth": "b9128816b1c315663183062d030050c449e2cc82bfbe7cdcb583f04661a6f483",
+    "rewrite-natural-prose": "a647ed6b16709adffd86790407b67d59fd80037b40f223428f2e49a12f586024",
+    "rolecard-workshop-ops": "2e3b97db7b9c2215a2b3e06c4cc201d8a02350842122194e3b1981557437f3d8",
+    "shadcn-tailwind-ui": "18af0f851fa506442f0e45590ba803cf629351b4dbc79b8d3594ba5c8ff54537",
+    "sillytavern-api-reference": "7449b7915b3d7f1983d64d1ef0dce7fcace3f1800819a652efb3a12b209d412c",
+    "sillytavern-card-components": "c22acd8fbdb1163a7763db1d5acb4752c1f904b0548f3ee26cf5a43dbb1a9d49",
+    "sillytavern-card-pipeline": "f0ab13326bf45922c3a7d9c22490c616da9348fcaa0ba4488879e3bf0e658d39",
+    "sillytavern-component-update": "c1cd48fdf4242ebcde35c7ed0a463e2e5210a355b40a78ff392b3dd871045fe1",
+    "sillytavern-database-rolecards": "f410a86ba64a04fe397744891250748cd2a62a236a3b5b14736e631e642edd75",
+    "sillytavern-embedded-ui": "0a5edf1578ff8f29b3da3654f3806040648fffaf603beadeb70eceb8ba7b2362",
+    "sillytavern-extension-dev": "c4aa4c190cbe270628dfb153fe1264b477e3d3e4a61b4e697383dbb6244cfa65",
+    "sillytavern-media-live2d-runtime": "63fac127cfceeb65a572aa5bb90b12594c1b3e625d6f7acc973ab88b9c4039bd",
+    "sillytavern-render-regex-pipeline": "3254f7997194a45ec8338a89143ad757aad30dfdcba658542a2a35f286e47d1c",
+    "sillytavern-rolecard-performance": "857f9a4dd177f657fafe92025a1a83a8468c666c5a0466673183fef6bfd0b30a",
+    "sillytavern-rolecard-security": "5c20acecff8a2e484dfc5d28632d9aa8deb83fd6ca6e49f316840f36b112fab8",
+    "sillytavern-runtime-debug": "9581a334a7a5665cf750a78eb2ef81f552460b66effdd70b2d8e91424000b0da",
+    "tavern-card-builder": "fde7021a40924af7c63971faf61dca0fd15f0585a1a1632af843cead56de187f",
+    "worldbook-design-and-writing": "fedc22df5b406b5d3d9380aaa3f5da17624b28573968dedd311d9609e4ff7146"
+  },
+  "fingerprintRefresh": {
+    "tool": "scripts/refresh-replay-fingerprints.ps1 -ConfirmedManualReplay",
+    "precondition": "all 184 cases have final compatible written reviews; historical initial findings retained"
+  },
+  "initialEvidenceGapsRetained": {
+    "historicalMissingFullAnswers": [
+      "soul-ensemble-brainstorm-ownership",
+      "bare-architecture-review-no-soul"
+    ],
+    "historicalResponsesRevised": [
+      "soul-mttt-sir-teachback",
+      "soul-killer-frontend-review",
+      "soul-killer-full-findings",
+      "guidance-shadowed-global-target"
+    ],
+    "supplementaryFirstAttemptIssues": [
+      "ensemble activation receipt omitted required fields",
+      "architecture evidence citation exceeded current file length"
+    ]
+  }
+}
