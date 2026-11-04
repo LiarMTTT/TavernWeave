@@ -49,6 +49,8 @@
 
 使用随包的 [manage-guidance-preference.mjs](../scripts/manage-guidance-preference.mjs)。它只管理客户端的一份偏好区块，不自动修改项目文件、Soul 状态或文本精修规则。实际指令位置按客户端配置解析；Codex 检查全局目录内非空 `AGENTS.override.md` 对 `AGENTS.md` 的优先级，Claude 检查有效配置目录的 `CLAUDE.md` 及宿主实际加载；DSH 当前无持久文件适配。
 
+Antigravity 使用 `--host antigravity`，客户端 `--scope-root` 为实际 `.gemini` 目录。其 `AGENTS.md`、`GEMINI.md`、`config/AGENTS.md`、`config/GEMINI.md` 是累计来源；选择已有偏好所在文件作为目标，无偏好时可提议 `.gemini/AGENTS.md`。随包的 `antigravity-instructions.cjs` 还检查默认 `config/rules/` 的直接 Markdown 文件：其他来源已有偏好区块时拒绝新增。遇到自定义 `rules.json` 或文件引用会停止，不能把未解析的来源当成无冲突；其他插件和实际加载结果仍需宿主核对。[官方发现规则](https://antigravity.google/docs/customization-discovery)。
+
 以下命令中的路径必须换成已核实的绝对路径；脚本不会默认写入真实用户目录：
 
 ```sh

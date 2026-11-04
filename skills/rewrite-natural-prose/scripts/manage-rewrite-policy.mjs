@@ -3,9 +3,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
 export const VERSION = "1.4.2";
-export const HOST_FILES = Object.freeze({ codex: "AGENTS.md", claude: "CLAUDE.md" });
+export const HOST_FILES = Object.freeze({ codex: "AGENTS.md", claude: "CLAUDE.md", antigravity: "AGENTS.md" });
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const body = fs.readFileSync(path.join(directory, "../assets/rewrite-policy.md"), "utf8").trimEnd();
 const begin = "<!-- tavernweave-rewrite-policy:begin";
@@ -47,13 +48,17 @@ function encode(text, bom) {
 }
 
 export function resolveTarget(options) {
-  if (!Object.hasOwn(HOST_FILES, options.host)) throw new Error("Supported hosts are codex and claude; DSH persistence is unavailable");
+  if (!Object.hasOwn(HOST_FILES, options.host)) throw new Error("Supported hosts are codex, claude and antigravity; DSH persistence is unavailable");
   if (!["workspace", "client"].includes(options.scope)) throw new Error("scope must be workspace or client");
   const root = absolute(options.scopeRoot, "scope root");
   const target = absolute(options.target, "target");
   noLinks(root);
   if (!fs.statSync(root).isDirectory()) throw new Error("scope root must be an existing directory");
   noLinks(target);
+  if (options.host === "antigravity") {
+    const { resolveInstructions } = createRequire(import.meta.url)("../../consult-tavernweave-library/scripts/antigravity-instructions.cjs");
+    return resolveInstructions({ root, target, scope: options.scope, read, marker: begin });
+  }
   let candidates;
   if (options.host === "codex") {
     const fallbacks = options.scope === "workspace" ? options.fallbackNames : [];

@@ -71,6 +71,11 @@ jobs:
           node --test tests/codex-skill-distribution.test.mjs
       - name: Validate the DeepSeek Harness plugin bundle
         run: node scripts/build-dsh-plugin.mjs --check
+      - name: Check Antigravity packaging and persistence on Linux
+        run: |
+          node scripts/build-antigravity-plugin.mjs --check
+          node --test tests/antigravity-plugin.test.mjs tests/antigravity-persistence.test.mjs
+          node --test skills/consult-tavernweave-library/tests/guidance-preference.test.mjs skills/rewrite-natural-prose/tests/policy.test.mjs
       - name: Exercise bundled helpers on Linux
         env:
           PYTHONUTF8: '1'

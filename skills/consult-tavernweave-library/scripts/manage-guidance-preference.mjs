@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
 export const LEVELS = Object.freeze(["新人", "入门", "熟练", "老手"]);
 const begin = "<!-- tavernweave-guidance-preference:begin";
@@ -39,11 +40,15 @@ function read(target) {
 }
 
 export function resolveClientTarget(options) {
-  if (!["codex", "claude"].includes(options.host)) throw new Error("仅支持 codex / claude 客户端；DSH 尚无持久文件适配");
+  if (!["codex", "claude", "antigravity"].includes(options.host)) throw new Error("仅支持 codex / claude / antigravity 客户端；DSH 尚无持久文件适配");
   const root = absolute(options.scopeRoot, "客户端全局目录");
   const target = absolute(options.target, "指令文件");
   noLinks(root);
   if (fs.existsSync(root) && !fs.statSync(root).isDirectory()) throw new Error("客户端全局目录不是文件夹");
+  if (options.host === "antigravity") {
+    const { resolveInstructions } = createRequire(import.meta.url)("./antigravity-instructions.cjs");
+    return resolveInstructions({ root, target, scope: "client", read, marker: begin });
+  }
   const candidates = (options.host === "codex" ? ["AGENTS.override.md", "AGENTS.md"] : ["CLAUDE.md"]).map(name => path.join(root, name));
   const states = candidates.map(file => ({ file, state: read(file) }));
   const effective = states.find(item => item.state.text.trim().length)?.file || candidates.at(-1);

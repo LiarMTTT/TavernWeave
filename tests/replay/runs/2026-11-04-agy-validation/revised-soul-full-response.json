@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-11-04-agy-validation",
+  "method": "Minimal written revision after independent review; not a host/model trial.",
+  "sourceCommit": "48c1ba69a8d8ac0b847c2e320f5a501034f41a1a",
+  "cases": [
+    {
+      "id": "soul-killer-full-findings",
+      "prompt": "灵魂杀手，全量架构审查。已有五条有证据的问题，请给完整报告。",
+      "primarySkill": "activate-tavernweave-soul",
+      "kind": "forward",
+      "previousResponseFile": "runs/2026-10-13-twx-190-rc2/responses.json",
+      "previousResponseSha256": "17e51f50ccfcaa9ecc5b2fc7710be85fddb686e11e60fdd9b356028acb3aa224",
+      "observedResponse": "灵魂杀手已开启（当前任务级 / Portable）；已读公开内核与模式合同，私人画像未使用，无写回，权限不变。强尼·银手只是模式内披露的同人彩蛋人格，不是官方身份；具体审查交给 code-quality-workflow；这次是 `full-scan / architecture`，语气可以尖锐，证据不能打折。开头 Relic 摘要最多挑三条，完整报告会保留已有五条各自的严重程度、文件位置、触发路径、后果、修复方向和复验方法，并列清已审、部分、未审范围。请提供五条原始证据及目标仓库快照；当前未见到它们，不能把“已有五条”改写成我已核实的五个缺陷。只读审查不会借人格模式扩大写入权限。",
+      "revisionReason": "补齐激活回执；保留 full-scan/architecture 归属、五条完整发现、只读和覆盖证据边界。",
+      "writer": "/root"
+    }
+  ]
+}

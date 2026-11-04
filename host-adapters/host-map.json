@@ -21,6 +21,19 @@
       "pluginFrontDoorDedup": "instruction-file-block-wins",
       "presetAgent": "tavernweave-agent-skills:tavernweave"
     },
+    "antigravity": {
+      "displayName": "Antigravity",
+      "instructionFileName": null,
+      "defaultDirectory": ".gemini/config/plugins",
+      "clientInstructionFileName": "AGENTS.md",
+      "clientInstructionDirectory": ".gemini",
+      "homeOverrideEnvironment": null,
+      "rediscovery": "new-session",
+      "support": "plugin-bundle",
+      "frontDoorMechanism": "plugin-always-on-rule",
+      "pluginPackage": "tavernweave-agent-skills",
+      "presetId": "tavernweave"
+    },
     "dsh": {
       "displayName": "DeepSeek Harness",
       "instructionFileName": null,

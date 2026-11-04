@@ -59,6 +59,7 @@
     "skills/consult-tavernweave-library/references/communication-and-guidance.md",
     "skills/consult-tavernweave-library/references/guidance-examples.md",
     "skills/consult-tavernweave-library/scripts/manage-guidance-preference.mjs",
+    "skills/consult-tavernweave-library/scripts/antigravity-instructions.cjs",
     "skills/build-work-library/SKILL.md",
     "skills/build-work-library/agents/openai.yaml",
     "skills/build-work-library/scripts/work_library.py",
@@ -119,6 +120,15 @@
     "packageManifest": "host-adapters/dsh/plugin/package.template.json",
     "buildScript": "scripts/build-dsh-plugin.mjs",
     "releaseAssetPattern": "TavernWeave-DSH-v{version}.tgz"
+  },
+  "antigravityPlugin": {
+    "status": "plugin-bundle",
+    "packageManifest": "host-adapters/antigravity/plugin.template.json",
+    "presetAgent": "host-adapters/antigravity/tavernweave.md",
+    "guide": "host-adapters/antigravity/README.md",
+    "buildScript": "scripts/build-antigravity-plugin.mjs",
+    "frontDoor": "rules/AGENTS.md",
+    "hostLoading": "requires-observed-new-session"
   },
   "claudePlugin": {
     "status": "hook-and-agent-not-host-verified",

@@ -13,6 +13,7 @@ const manifest = JSON.parse(read("tavernweave-install-manifest.json"));
 const contract = JSON.parse(read("host-adapters/dsh/dsh-plugin-contract.json"));
 const hostMap = JSON.parse(read("host-adapters/host-map.json"));
 const packageTemplate = JSON.parse(read("host-adapters/dsh/plugin/package.template.json"));
+const sourcePackage = JSON.parse(read("host-adapters/dsh/plugin/package.json"));
 const patch = read("host-adapters/dsh/plugin/cordis.patch.yml");
 const frontDoor = read("host-adapters/tavernweave-front-door.md");
 
@@ -24,7 +25,7 @@ function frontDoorVersion() {
 }
 
 test("manifest, host map and contract agree on the DSH plugin bundle", () => {
-  assert.equal(manifest.version, "2.3.5");
+  assert.equal(sourcePackage.version, manifest.version, "committed DSH package.json must match the install manifest");
   assert.equal(contract.adapterVersion, manifest.version);
   assert.equal(hostMap.adapterVersion, manifest.version);
   assert.equal(frontDoorVersion(), manifest.version);
