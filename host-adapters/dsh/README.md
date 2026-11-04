@@ -21,7 +21,7 @@
 
 ### 桌面版（DSH Desktop）
 
-1. 取得已发布的 `TavernWeave-DSH-v2.3.5.tgz`（也可在源码树运行 `node scripts/build-dsh-plugin.mjs` 重新生成同名本地包）；
+1. 取得已发布的 `TavernWeave-DSH-v2.4.0.tgz`（也可在源码树运行 `node scripts/build-dsh-plugin.mjs` 重新生成同名本地包）；
 2. 侧栏 **插件 → 添加插件 → 安装第三方插件**；
 3. 填入本地路径或 `.tgz`，完成安装并启用 bundle；
 4. 新建任务 → Agent preset 选择 **TavernWeave X DSH**。
@@ -47,4 +47,4 @@ dsh plugin --profile <profile> add <本地路径|tarball|git 地址|包名>
 - 已完成：DSH Desktop 插件页出现 bundle、新任务选择 `TavernWeave X DSH` preset、23 个 Skill 目录、`开启soul模式` 激活 Soul（见 `runtime-acceptance.md`）。
 - 尚未完成：pwsh 依赖任务（当前 OneDrive reparse-point 工作区被 DSH workspace-write 沙箱挡住，见合同 knownEnvironmentIssues；可切完全权限或换普通目录后重测）、禁用/卸载清理、Linux/WSL、真实 SillyTavern 与模型效果。
 - 不支持（v1）：跨任务偏好持久化（面板轮盘开关只保存在本机）、专用 UI 与客户端扩展。
-- 2.3.5 没有重跑上述 DSH Desktop 实机验收；历史验收证据对应 2.1.0 包，仍需按新包重测后才能更新结论。
+- 2.4.0 没有重跑上述 DSH Desktop 实机验收；历史验收证据对应 2.1.0 包，仍需按新包重测后才能更新结论。

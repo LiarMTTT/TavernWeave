@@ -78,7 +78,7 @@ node --test tests/antigravity-plugin.test.mjs tests/antigravity-persistence.test
 | 全量发行检查 | PowerShell 7.6.5 与 Windows PowerShell 5.1 均通过：23 个 Skill、615 个文本文件；四项版本一致性错误已修复，回放指纹检查通过 |
 | 版本修复专项与 Python 回归 | DSH/Claude 13 项及安装流程检查通过；Python 辅助脚本、打包与安装回归 54 项通过，1 项因本机无法创建测试符号链接而跳过 |
 
-后续版本修复将 Codex/Claude 当前清单及 marketplace 描述对齐到安装主清单的 2.3.6，并让 DSH 测试比较源包与主清单的实际版本。原始交互和书面回放快照保留修复前的检查状态，本表记录修复后的复测结果；2.3.6 的 npm-only 发行历史不变，本修复尚未发布或更新用户安装。
+后续版本修复将 Codex/Claude 当前清单及 marketplace 描述对齐到安装主清单的 2.3.6，并让 DSH 测试比较源包与主清单的实际版本。原始交互和书面回放快照保留修复前的检查状态，本表记录修复后的复测结果；2.3.6 的 npm-only 发行历史不变；本修复随后续 2.4.0 正式发行，安装是否更新以该版发行说明为准。
 
 源仓库中的 `validation-20261104.json` 保留 11 项交互检查、18 条脱敏工具回执和夹具字节核对；`tests/replay/runs/2026-11-04-agy-validation/` 保留 184 条案例的书面复核链。书面回放不是 184 次新的模型试跑。App 两次新会话的测试沿用原有 Turbo 设置，没有改权限设置或使用绕过参数，也没有出现需新增人工授权的提示。
 

@@ -1,10 +1,18 @@
 # Changelog
 
-## 未发布 · 多宿主版本一致性修复
+## TavernWeaveX无限月读 2.4.0 · Antigravity 原生适配 - 2026-11-04
 
-- 将 Codex、Claude 插件清单和 marketplace 当前描述对齐到已有的 2.3.6 安装主清单，恢复版本一致性、安装核验和源码打包检查。
-- DSH 测试改为核对已提交 `package.json` 与安装主清单的实际版本，移除写死的 2.3.5；保留合同、前门和宿主映射之间的一致性断言。
-- 本项是候选源码修复，不改写下方 npm-only 发行历史，也不表示已发布新的 Codex/Claude 资产或更新用户安装。Skill 正文与运行组件不变。
+> 23 个 Skill 的名称和数量均未变。新增宿主适配属功能新增，版本号由 2.3.6 升至 2.4.0。发行资产见 [v2.4.0 正式发布页](https://github.com/LiarMTTT/TavernWeave/releases/tag/v2.4.0)。
+
+- 新增 **Antigravity（AGY）原生适配**：`host-adapters/antigravity/` 提供宿主插件模板、指令文件与安装说明；`scripts/build-antigravity-plugin.mjs` 从源码生成独立 AGY 插件清单，运行期只装载平台生成的 `rules/GEMINI.md` 与 AGY 宿主指令文件。
+- AGY 打包隔离：复用 23 个共享 Skill 的源字节，Codex／Claude 专属组件（hooks、agents、marketplace）不进入 AGY 包；构建不覆盖已存在的包，也不跟随链接输出。
+- 新增 AGY 持久化适配：`skills/consult-tavernweave-library/scripts/antigravity-instructions.cjs` 将四档引导偏好写入 AGY 的累计型全局指令文件（`AGENTS.md`、`GEMINI.md`、`config/AGENTS.md`、`config/GEMINI.md`），保留原有字节、备份与授权校验；AGY 不做 Codex 式阴影覆盖，发现第二个受管来源时拒绝写入。
+- 修复多宿主版本一致性：Codex、Claude 插件清单和 marketplace 当前描述对齐安装主清单；DSH 测试改为核对已提交 `package.json` 与安装主清单的实际版本，移除写死的 2.3.5；保留合同、前门和宿主映射之间的一致性断言。
+- CI 新增 Linux 侧检查：`build-antigravity-plugin.mjs --check`、AGY 插件与持久化测试，以及引导偏好与精修策略测试。
+- 发布前本机校验（Windows，2026-11-04 实跑）：`validate-release.ps1` 通过（23 个 Skill、615 个文本文件）；`build-dsh-plugin.mjs --check` 与 `build-antigravity-plugin.mjs --check` 通过（version 2.4.0、23 个 Skill、扫描 482 个文件）；AGY 插件 2 项、AGY 持久化 9 项、DSH 插件 5 项、Codex 分发 1 项、引导偏好 17 项、精修策略 18 项，共 52 项 node 测试全部通过。
+- 验收边界：AGY 侧证据来自本机隔离夹具的插件构建、安装与新会话读回（AGY CLI 1.4.5／App 2.28.2），不等于真实个人设置下的全局规则自动注入；真实个人设置、全局安装、独立 IDE 表面、非 Windows 环境、真实 SillyTavern 与人类验收仍未测试，`hostLoading` 仍为 `not-verified`。DSH 运行时验收证据仍以 2.1.0 包为准。详见 `host-adapters/antigravity/README.md` 与 `validation-20261104.json`。
+- 教程站 `docs/newbie-guide/` 仍停留在 2.3.0（缓存 v59），本次未同步。
+- 发布路径：npm 2.3.6 此前通过手动触发的发布流程上线，仓库未打对应 tag；自本版起恢复 tag 与 Release 对齐的发布路径。
 
 ## TavernWeaveX无限月读 2.3.6 · npm 渠道发布修复 - 2026-10-31
 

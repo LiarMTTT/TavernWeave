@@ -17,7 +17,7 @@ TavernWeave 的 DeepSeek Harness（DSH）插件包。
 
 ## 安装（DSH 桌面版）
 
-1. 解压发行资产或保留 `.tgz`；用已发布的 `TavernWeave-DSH-v2.3.5.tgz`（也可在源码树运行 `node scripts/build-dsh-plugin.mjs` 重新生成）；
+1. 解压发行资产或保留 `.tgz`；用已发布的 `TavernWeave-DSH-v2.4.0.tgz`（也可在源码树运行 `node scripts/build-dsh-plugin.mjs` 重新生成）；
 2. 侧栏 **插件 → 添加插件 → 安装第三方插件**；
 3. 选择本包（本地目录 / `.tgz`）；
 4. 安装完成后启用该 bundle；

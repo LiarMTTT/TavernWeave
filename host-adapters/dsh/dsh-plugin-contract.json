@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "adapterVersion": "2.3.6",
+  "adapterVersion": "2.4.0",
   "status": "plugin-bundle",
   "supportLevel": "plugin-bundle",
   "runtimeAccepted": true,
   "modelQualityClaim": "not-evaluated",
   "package": {
     "name": "liarmttt-tavernweave-dsh",
-    "version": "2.3.6",
+    "version": "2.4.0",
     "presetId": "tavernweave",
     "presetName": "TavernWeave X DSH",
     "pluginRowId": "tavernweave-dsh"
@@ -85,7 +85,7 @@
     "runtimeAcceptedAt": "2026-10-18",
     "acceptedDshVersion": "0.2.1-rc.2",
     "acceptedPackageVersion": "2.1.0",
-    "acceptanceNote": "2.3.5 folds the unpublished 2.3.1 source patch (prose guidance, variable and model-input trimming, front-end emphasis and Codex compatibility) and adds the DSH panel wheel show/hide toggle plus a clearer preset summary. No new DSH runtime acceptance was run; the historical acceptedPackageVersion remains 2.1.0.",
+    "acceptanceNote": "2.4.0 adds native Antigravity host support (plugin template, instruction file and persistence adapter for cumulative AGY instruction files) on top of the 2.3.6 host-manifest alignment, and folds the 2.3.5 panel wheel toggle plus clearer preset summary. No new DSH runtime acceptance was run; the historical acceptedPackageVersion remains 2.1.0.",
     "partialChecks": [
       {
         "kind": "sdk-jsonrpc-runtime",
