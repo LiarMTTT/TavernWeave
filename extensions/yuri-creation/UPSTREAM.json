@@ -1,0 +1,27 @@
+{
+  "tavernweave": {
+    "repository": "https://github.com/LiarMTTT/TavernWeave",
+    "commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+    "relationship": "optional_external_authoring_dependency",
+    "license": "PolyForm-Noncommercial-1.0.0",
+    "required_notice": "Copyright 2026 LiarMTTT",
+    "bundled_code_or_skill_prose": false,
+    "modules": [
+      {
+        "path": "skills/tavern-card-builder/SKILL.md",
+        "blob": "f7934771885bf4f326f8fa3a29795f2e84e13a14"
+      },
+      {
+        "path": "skills/tavern-card-builder/references/authoring-workflow.md",
+        "blob": "cdb1c852b13e54b2218d6cd68f46080910b76d8a"
+      }
+    ]
+  },
+  "foreverse": {
+    "repository": "https://github.com/foreverse-app/character-card-skills",
+    "path": "tools/card_md_to_st.py",
+    "git_blob": "6cfd4efb3d0645627a21202520547fda1a4249ad",
+    "license": "MIT",
+    "relationship": "unmodified_vendored_exporter"
+  }
+}

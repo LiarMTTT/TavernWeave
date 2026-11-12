@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "automated_checks": [
+    {
+      "check": "导出卡为chara_card_v2 / 2.0",
+      "result": "pass"
+    },
+    {
+      "check": "角色名为沈照汐且开场非空并含{{user}}",
+      "result": "pass"
+    },
+    {
+      "check": "独立worldbook.json与卡内character_book完全一致",
+      "result": "pass"
+    },
+    {
+      "check": "7条世界书条目均有内容、启用且ID唯一",
+      "result": "pass"
+    },
+    {
+      "check": "每条世界书均设为常开或含触发词",
+      "result": "pass"
+    },
+    {
+      "check": "世界书承担正文，传统角色字段为空",
+      "result": "pass"
+    },
+    {
+      "check": "只有声明的user/char占位符",
+      "result": "pass"
+    },
+    {
+      "check": "原创模式、无外部创意来源、代理复核已完成",
+      "result": "pass"
+    },
+    {
+      "check": "两位主要角色均记录为成年女性",
+      "result": "pass"
+    },
+    {
+      "check": "草稿哈希与导出记录一致",
+      "result": "pass"
+    },
+    {
+      "check": "偏好哈希与导出记录一致",
+      "result": "pass"
+    },
+    {
+      "check": "创作记录源哈希与导出记录一致",
+      "result": "pass"
+    },
+    {
+      "check": "角色卡哈希与导出记录一致",
+      "result": "pass"
+    },
+    {
+      "check": "依赖标明仅固定版文档且未运行宿主导入",
+      "result": "pass"
+    },
+    {
+      "check": "基线后包文件列表和全部内容哈希保持不变",
+      "result": "pass"
+    }
+  ],
+  "manual_review": "creation.json.agent_review.notes记录已完成的逐段正文、因果、玩家自主、知识边界、开场和中文表达检查；该记录不是人类验收或运行证明。",
+  "not_run": [
+    "完整插件/A0路由",
+    "SillyTavern导入",
+    "实机角色扮演",
+    "图片或PNG封装"
+  ],
+  "blockers": []
+}

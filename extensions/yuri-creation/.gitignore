@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+runs/
+private-casework/
+config/*.local.json
+.env
+.env.*
