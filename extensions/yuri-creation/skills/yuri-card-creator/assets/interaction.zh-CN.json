@@ -1,0 +1,23 @@
+{
+  "locale": "zh-CN",
+  "setup_policy": "reuse ready preferences; do not block delegated original creation with a questionnaire",
+  "choices": [
+    {
+      "key": "definition.womanhood_policy",
+      "value": "author_defined_inclusive",
+      "label": "由作者定义为女性的角色，包括虚拟及非人角色"
+    },
+    {
+      "key": "transformation.scope",
+      "value": "main_cast",
+      "label": "主要角色；保留背景角色身份"
+    },
+    {
+      "key": "relationships.outcome_policy",
+      "value": "rederive_if_causal",
+      "label": "允许由情境变化及明确因果支持的关系调整"
+    }
+  ],
+  "ready": "我会沿用已保存的偏好，先完成一张原创百合卡；未指定的细节由我决定，你可以直接在对话中修改。",
+  "delivery": "已生成角色卡和世界书。请在对话中告诉我想调整的地方。尚未进行 SillyTavern 实机导入或扮演测试。"
+}

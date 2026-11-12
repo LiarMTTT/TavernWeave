@@ -1,0 +1,7 @@
+# Third-party notices
+
+Foreverse exporter: https://github.com/foreverse-app/character-card-skills, tools/card_md_to_st.py, Git blob 6cfd4efb3d0645627a21202520547fda1a4249ad. The file is included unchanged under MIT; its complete license and scope note are in skills/yuri-card-creator/scripts/vendor/FOREVERSE_LICENSE.txt. No character cards, art or separately licensed skill prose are copied. Serialization code authorship is separate from authorship of a generated card.
+
+TavernWeave: https://github.com/LiarMTTT/TavernWeave, declared authoring pin f9863d2b05305457fe9ed8b0c5688d52aca400a5. Required Notice: Copyright 2026 LiarMTTT. Its existing PolyForm Noncommercial 1.0.0 terms remain applicable; a verbatim copy is in licenses/TAVERNWEAVE-LICENSE.md. The entry/authoring-workflow document blob IDs and module paths are in UPSTREAM.json and the skill's assets/upstream.json. No TavernWeave code or skill prose is copied inside this extension or relicensed under its MIT license. The surrounding fork contains the upstream base under its original repository-root terms.
+
+Original files in this new extension are under this extension directory's MIT license. The existing Workbench's original-code licensing decision is not changed. See LICENSE_BOUNDARY.md before composing a combined distribution.
