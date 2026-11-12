@@ -1,28 +1,30 @@
-# Review of three submitted user trials
+# Current user-trial review
 
-This is a bounded review of submitted artifacts, not three end-to-end extension passes. Private Drive cards, source PNGs and research notes are not copied into this repository.
+## Active scope
 
-| Trial | Available evidence | Review result |
-| --- | --- | --- |
-| Terra original conversational creation | The user-reviewed `examples/yuri-trials/wuren-shuming/` source, card, worldbook and creation record added in commit `2401ad9f8dcfe73472eb87a469eecb45d8d1440d` | Rebuilt with the extension on that commit; all three output files match byte for byte. Ten worldbook entries and four dialogue examples are present. This supports the original-creation/export path; no real SillyTavern import is recorded. |
-| Argon named-fictional-character research | A JSON card with eight embedded worldbook entries and source/authority notes | The notes explicitly report using upstream archive `f9863d2b05305457fe9ed8b0c5688d52aca400a5`, without the extension. They describe host search/page tools and a separately authored candidate export. This is useful upstream/host-assisted evidence, not an extension export pass. |
-| Argon inherited PNG adaptation | Adapted JSON, agent report and the linked original PNG | The report also declares the older upstream archive and private sandbox tools. Independent comparison confirms the source hash, preserved worldbook IDs, unchanged regex configuration and consistent root/data mirrors. The revised PNG is absent from the submitted folder and was not found by its reported filename, so its payload/image round trip remains unverified here. |
+The user withdrew the two earlier Argon cases after the initial review. Both are excluded from current acceptance evidence and future validation. Do not recover them from Drive trash, reopen old links, or reuse cached contents. This agent discarded its disposable local snapshots. Historical Git commits are not rewritten; this document supersedes the previous active review.
 
-## Findings
+The retained trial is the user-reviewed original story under examples/yuri-trials/wuren-shuming/. Its card, worldbook and creation record reproduce byte for byte with the extension. There are ten worldbook entries and four dialogue examples. User-supplied thematic inspiration is recorded separately from verified historical facts; the supplied essay body is not bundled.
 
-- The original trial's exact agent checkout is not separately recorded, but its artifacts are reproducible on the reviewed PR head. User-supplied thematic inspiration is explicitly recorded as inspiration rather than verified history; no supplied essay body is bundled.
-- Both Argon trials report that the pinned extension commit was inaccessible. Their transparent fallback reports must remain labeled as upstream/host-assisted runs. These are environment/access gaps, not evidence that the extension exporter failed.
-- The researched card's runtime strings use `{{user}}` correctly. Single-brace `{user}` wording occurs in its author notes, so there is no supported reason to rewrite the runtime card for that issue.
-- The official character page was opened during this review and supports the basic character/age information used in the research notes. The complete research chain, host tool invocations and all detailed claims were not independently replayed. This fictional-character trial does not establish real-person-specific handling.
-- The inherited JSON changes nine alternate greetings, six worldbook content fields and two regex replacement bodies. Source worldbook IDs remain `0–11,13`; gaps are not renumbered. Regex IDs, matching expressions, switches and other configuration compare equal. Editing a replacement body's visible text does not by itself establish unchanged live rendering or script behavior.
-- No submitted trial establishes live SillyTavern import, frontend interaction, slash-command behavior or roleplay quality. The researched standalone worldbook is mentioned in notes but not present in its submitted folder; the card does contain an embedded worldbook.
+## Retained PNG verification
 
-## Work resulting from this review
+The active Drive folder contains wuren-shuming-shen-yanqiu.card.png. The PNG itself is not copied into public source.
 
-Added a compact testing reference that requires the actual revision/capability check before attributing a result to this extension and asks the agent to retain the actual output artifacts. No exporter, source card, artwork or narrative content was changed on the basis of an unverified report. The existing 16 focused tests remain the runtime baseline; no upstream suite or full model trial was repeated.
+- Size: 2,493,668 bytes; dimensions: 1086 × 1448.
+- SHA-256: 79a93f23cf001ff4a2ea2f1d1949403d31f38a1cdfbe342f6041347c4df96da1.
+- Signature, chunk boundaries, CRCs and terminal IEND: verified.
+- Image decoding: verified.
+- Embedded chara payload: exactly equals the retained trial's v2 JSON.
+- Embedded ccv3 payload: exactly equals the current project wrapper's expected v3 conversion, including source attribution handling.
+- Both payloads contain the retained ten-entry worldbook.
+- Visual review: the worn medical building, archive materials and subdued portrait are consistent with the story's grounded archival setting. This is an agent observation, not a new user approval.
 
-The next useful evidence is the actual revised PNG, followed by one small import/persona-selector check in the user's SillyTavern environment. A future extension-specific rerun needs a host that can access the pinned extension files, or an exact supplied snapshot. Research/source-mode support and inherited-card adapters remain separate work; do not erase provenance or treat those tasks as original creation to pass its validator.
+The original unembedded avatar was not submitted in this folder. Therefore this review does not claim a before/after image-chunk comparison or prove which command the other agent executed. Structural correctness and embedded-payload equality were independently checked from the current PNG.
 
-The custom-profile and legacy-license decisions, and real-use validation of frozen Workbench v1.2.0, remain deferred. Frontend redesign is not a prerequisite for the text-first original trial.
+## Status and next step
 
-Official page spot-check: https://pripri-anime.jp/character/
+One active original-creation trial is supported by reproducible JSON outputs and a verified PNG artifact. Two earlier cases are withdrawn, not failed/passed acceptance fixtures. No live SillyTavern import, frontend interaction or roleplay outcome is claimed.
+
+The next useful human check is to import the retained PNG into SillyTavern, confirm the avatar and opening, and confirm the embedded worldbook is present. No separate worldbook import should be needed for this artifact. Feedback can stay in conversation; the agent records findings.
+
+No conversion code or narrative content was changed. The existing 16 focused runtime tests remain the code baseline. Custom-profile compatibility, legacy-file licensing and real-use validation of frozen Workbench v1.2.0 remain deferred. Frontend redesign is not a prerequisite for this text-first trial.
