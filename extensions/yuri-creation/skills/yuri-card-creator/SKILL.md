@@ -40,7 +40,7 @@ Read `references/optional-tools.md` only when research, image alignment, avatar 
 
 ## Keep this checkpoint small
 
-Deliver a finished text card first. Image generation/editing, custom front ends, inherited-card conversion and native host installers require separate capabilities. Optional research guidance and PNG packaging are described above. Offer them later if requested; none blocks this original card. Preserve confirmed choices across revision. For reference-based adaptation or inherited styling, use the corresponding Workbench/TavernWeave route and its original source records rather than relabeling that material as original.
+Deliver a finished text card first. Image generation/editing, custom front ends and native host installers require separate capabilities. Optional research guidance and PNG packaging are described above. Offer them later if requested; none blocks this original card. Preserve confirmed choices across revision. For inherited JSON/PNG use adapt-yuri-card; for supplied posts or novel TXT/EPUB use their separate source entries and original records rather than relabeling that material as original.
 
 ## Review a trial
 

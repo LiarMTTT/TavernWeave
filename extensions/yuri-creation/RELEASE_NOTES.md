@@ -1,4 +1,12 @@
-# Yuri Card Workbench 0.3.1 development checkpoint
+# Yuri Card Workbench 0.4.0 development checkpoint
+
+Adds adapt-yuri-card with JSON/PNG decoding, original-byte/document bindings, protected before/after edits and fresh repacking. Unknown fields, scripts, worldbook settings/IDs/order and unrelated image chunks are preserved; schemas are retained instead of flattened through Markdown. Folder inventory distinguishes candidate cards, components, versions and reference art before agent-assisted grouping. Standalone JSON worldbooks use the same protected editor.
+
+Adds novel-excerpt-to-yuri-card and a TXT/Markdown/EPUB chapter-selection front end. It registers chosen chapters or explicit ranges, records original hash/member/offset mappings, and shares the existing extraction/v2 and adaptation/build pipeline. Third-person fiction can introduce a player as an explicit invention, without fabricated source evidence. No fixed narrative character cap or silent truncation is introduced.
+
+Two GPT-6 Luna checks covered one supplied PNG and one EPUB excerpt of 1,500 characters. No primary-model tests or old-suite reruns were performed. Container preservation and novel ingestion/promotion passed within that scope; no full adaptation-quality, host-import or roleplay claim is made. See docs/FILE_SUPPORT_REVIEW_2026-11-12.md. Native host registration remains the next integration scope; arbitrary schema migration and advanced compatibility remain separate.
+
+## 0.3.1
 
 Adds individually cited claims for new source extractions, retains compatibility with previously promoted v1 projects, clarifies pre-authoring routing and guards against blending different people's incidents. Shared name review offers contextual alternatives and preserves the current name until the user chooses or delegates. Dedicated name-review testing is deferred by request.
 

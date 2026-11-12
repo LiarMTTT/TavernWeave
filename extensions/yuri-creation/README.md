@@ -1,48 +1,41 @@
-# Yuri Card Workbench 0.3.1
+# Yuri Card Workbench 0.4.0
 
-Create an original yuri character card through conversation, or adapt a supplied post while keeping its facts separate from your new story. Your agent chooses unspecified details, writes a playable opening and worldbook, and prepares a JSON card for SillyTavern.
+Create yuri roleplay cards through conversation, adapt an existing card, or turn a post or novel excerpt into a new story. Your agent handles the files; you review and revise in the conversation.
 
 [中文说明](README.zh-CN.md)
 
-## Start
+## Choose your starting point
 
-Open this folder with an agent that can read and write files, then say:
+Open this folder with an agent that can read and write files. Give it your material, then use one of these requests:
 
-```text
-Use yuri-card-creator to create an original yuri character card for me.
-Decide the unspecified details yourself and give me a complete first draft.
-Use my saved preferences and handle the files; I will give feedback here.
-```
+| Starting point | What to say |
+| --- | --- |
+| An idea, or no idea yet | “Create an original yuri card for me. Decide the unspecified details and give me a complete first draft.” |
+| An existing JSON or PNG card | “Adapt this card into a yuri story. Preserve its artwork, scripts and unrelated worldbook settings.” |
+| A post | “Adapt this post into a yuri card. Keep the poster as {{user}} and distinguish source facts from new story choices.” |
+| A TXT, Markdown or EPUB novel | “Use this chapter or scene to create a yuri card. If I have not chosen a scope, start with one short chapter.” |
 
-No reference text or image is needed. The starting main cast consists of adult women, including author-defined virtual and nonhuman women. You retain control of your player character's current actions and replies.
+Ask the agent to read the matching workflow in this folder. No manual Markdown or JSON worksheet is required. For a folder containing several cards, versions or supporting components, the agent identifies what belongs together before editing.
 
-The agent creates a final card, a worldbook and an original-creation record. Import the final JSON—or a PNG packaged with your chosen avatar—into SillyTavern and discuss revisions in the conversation. The worldbook is embedded in the card.
+## Review and import
 
-## Adapt a post
+The agent presents a playable opening, characters and a worldbook. Tell it what you want changed directly in the conversation. The default main cast consists of adult women, including author-defined virtual and nonhuman women; background identities are preserved. Your player character's current actions, thoughts and replies remain yours.
 
-Give your agent the post text or a readable page and say:
+If a retained name seems out of place, the agent explains why and suggests alternatives. You may keep the original or choose a new name; masculine-sounding names are not automatically replaced.
 
-```text
-Use post-to-yuri-card to adapt this post into a yuri roleplay card.
-Keep the poster as {{user}}, preserve the source facts, and make creative changes explicit.
-Handle the files and let me review the result here.
-```
+Import the final JSON or character-card PNG into SillyTavern. Its worldbook is already embedded. The agent identifies the final file and keeps source records and adaptation notes separately. When editing an existing card, the original file stays untouched and unrelated fields, code and worldbook loading settings are preserved.
 
-The agent saves source-linked facts, writes the adapted card and worldbook, and records why the characters and relationships changed. An unstated source gender stays unknown in the evidence. This route uses the pinned TavernWeave base in the same checkout. It currently handles one supplied TXT/Markdown post; whole novels and inherited-card repair are separate work.
+Large novels do not need to fit into one conversation message. The agent can select chapters or an explicit excerpt, keep track of the source, and continue in stages. It does not silently trim your input or claim to have read unselected chapters.
 
-If a supplied name seems out of place for the adapted character, the agent will explain why and suggest alternatives. Keep the original or choose a new name directly in the conversation; a name is never changed merely because it sounds masculine.
+## Inside the folder
 
-## What this checkpoint provides
+| Workflow | Purpose |
+| --- | --- |
+| yuri-card-creator | Original creation without references |
+| adapt-yuri-card | Protected editing of inherited JSON/PNG cards and worldbooks |
+| post-to-yuri-card | Adaptation from a supplied post |
+| novel-excerpt-to-yuri-card | Adaptation from selected TXT/Markdown/EPUB prose |
 
-- Separate original-creation and post-to-yuri entry points, sharing genre defaults.
-- Frozen source records, exact quote links and explicit yuri adaptation decisions.
-- English core instructions and English/Chinese interaction catalogs.
-- The three saved genre preferences, reused without a required interview.
-- A thin build helper and the unchanged, attributed Foreverse exporter.
-- An optional pinned TavernWeave authoring-file bridge. The card can also be created in reported standalone mode.
+Research, image inspection and optional artwork creation use tools available in your agent's workspace. A text-only card is complete on its own. This folder is not automatically installed as a native host plugin. The protected editor keeps the original schema; structural migration or script changes require a separately scoped operation. Text-only/DOCS components use available host reading/export tools and upstream authoring rather than JSON round-tripping.
 
-This is a portable project checkpoint, not a native host plugin installation. Ask your agent to research a factual setting, review an image, or package the card with a chosen PNG avatar. Research and image creation use tools available in your current workspace; they are optional. Native host installation is not included.
-
-Custom preference modes beyond this checkpoint’s adult main-cast defaults are deferred; loading a saved profile does not establish full compatibility.
-
-[Licensing boundary](LICENSE_BOUNDARY.md) · [Integration notes](INTEGRATION.md) · [MIT license for new files](LICENSE)
+[Licensing](LICENSE_BOUNDARY.md) · [Integration and supported scope](INTEGRATION.md)

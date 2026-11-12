@@ -66,9 +66,10 @@ def dependencies(tavern_root=None):
     return repo, load_module("tw_source_bridge", path), creator
 
 
-def register(input_path, project, title="Supplied post", url=None, tavern_root=None):
+def register(input_path, project, title="Supplied post", url=None, tavern_root=None, *, source_kind="post", origin=None):
     repo, tw, creator = dependencies(tavern_root)
     project, input_path = Path(project).resolve(), Path(input_path)
+    require(source_kind in ("post", "novel"), "Unsupported source kind")
     require(not project.exists(), "Project target exists; use a fresh directory")
     require(not project.is_relative_to(repo), "Private source projects must be outside the repository")
     require(input_path.suffix.lower() in (".txt", ".md"), "This route accepts a supplied UTF-8 TXT/Markdown post")
@@ -81,21 +82,25 @@ def register(input_path, project, title="Supplied post", url=None, tavern_root=N
         stage.mkdir()
         library = stage / "library"
         tw.init(library, title)
-        descriptor = {"id": "post-001", "kind": "local-text",
-                      "title": title, "realm": "reference", "continuity": "supplied-post",
+        sid = "post-001" if source_kind == "post" else "novel-001"
+        descriptor = {"id": sid, "kind": "local-text",
+                      "title": title, "realm": "reference", "continuity": "supplied-" + source_kind,
                       "edition": "submitted", "provenance": "User-supplied text snapshot; not independently verified",
                       "rights": "User-supplied for this task; redistribution not inferred", "phase": None}
+        if source_kind == "novel":
+            require(isinstance(origin, dict) and origin.get("selected_chapters") and origin.get("source_sha256"), "Novel registration requires an explicit source selection")
+            descriptor["origin"] = origin
         if url:
             parsed = urlparse(url)
             require(parsed.scheme in ("http", "https") and parsed.hostname and not parsed.username and not parsed.password, "Origin URL must be public HTTP(S) without credentials")
             descriptor.update(origin_url=url, retrieval_status="Supplied snapshot; this command did not retrieve the page")
         tw.add_source(library, descriptor, input_path)
-        src = tw.source(library, "post-001")
+        src = tw.source(library, sid)
         require(src["_text"] == text, "Source changed during registration")
-        write_new(stage / "source.json", {"schema": "yuri/source-project/v1", "kind": "post",
-                  "source_id": "post-001", "original_sha256": sha(raw),
+        write_new(stage / "source.json", {"schema": "yuri/source-project/v1", "kind": source_kind,
+                  "source_id": sid, "original_sha256": origin["source_sha256"] if origin else sha(raw),
                   "text_sha256": src["text_sha256"], "descriptor_sha256": src["_descriptor_sha256"],
-                  "coverage": "entire supplied post; no claim about omitted comments or original webpage",
+                  "coverage": "entire supplied post; no claim about omitted comments or original webpage" if source_kind == "post" else "only explicitly selected novel chapters; no claim about unread chapters",
                   "library_blob": read(ROOT / "UPSTREAM.json")["source_library"]["git_blob"]})
         write_new(stage / "preferences.json", creator.profile())
         os.rename(stage, project)
@@ -107,7 +112,7 @@ def context(project, tavern_root=None):
     require(not Path(project).is_symlink(), "Linked project roots are unsupported")
     project = Path(project).resolve()
     meta = read(project / "source.json")
-    require(meta.get("schema") == "yuri/source-project/v1" and meta.get("kind") == "post", "Unsupported source project")
+    require(meta.get("schema") == "yuri/source-project/v1" and meta.get("kind") in ("post", "novel"), "Unsupported source project")
     library = project / "library"
     require(not project.is_symlink() and not library.is_symlink(), "Linked project roots are unsupported")
     sources = tw.catalog(library)
@@ -191,7 +196,7 @@ def promote(project, candidate_path, tavern_root=None):
     review = candidate.get("review", {})
     require(review.get("completed") is True and review.get("notes"), "Agent extraction review required")
     selected = candidate.get("reviewed_unit_ids", [])
-    require(len(selected) == len(set(selected)) and set(selected) == {u["id"] for u in src["units"]}, "Review all supplied-post units using local IDs such as u000001, not post-001/u000001")
+    require(len(selected) == len(set(selected)) and set(selected) == {u["id"] for u in src["units"]}, "Review all registered units using local IDs such as u000001, not source-qualified IDs")
     rows = candidate.get("records", [])
     require(isinstance(rows, list) and rows, "Nonempty source records required")
     rows = [claim_record(library, tw, row) for row in rows]
@@ -203,7 +208,9 @@ def promote(project, candidate_path, tavern_root=None):
             require(role.get("role") in ("main", "player", "background"), "Record character scope")
             require(role.get("source_gender") in ("woman", "man", "unknown"), "Record source gender without inference")
             require(role.get("age_status") in ("adult", "minor", "unknown"), "Record source age status")
-    require(sum(r["kind"] == "character" and r["yuri"]["role"] == "player" for r in rows) == 1, "Bind exactly one source poster as player")
+    player_count = sum(r["kind"] == "character" and r["yuri"]["role"] == "player" for r in rows)
+    is_novel = read(project / "source.json")["kind"] == "novel"
+    require(player_count <= 1 if is_novel else player_count == 1, "Bind at most one source player; a post requires exactly one poster")
     with tw.locked(library):
         require(not tw.records(library) and not (library / ".state/yuri-extraction.json").exists(), "Extraction already promoted; preserve existing records")
         overlay = {"records/" + r["id"] + ".md": tw.render(r) for r in rows}
@@ -217,7 +224,7 @@ def promote(project, candidate_path, tavern_root=None):
                    "claim_count": sum(len(r["claims"]) for r in rows),
                    "limitation": "Individual claim quotes and review acknowledgments do not prove entailment, atomicity or semantic extraction completeness"}
         writes[".state/yuri-extraction.json"] = (tw.dump(receipt), None)
-        tw.transaction(library, writes, "yuri-small-post-extraction")
+        tw.transaction(library, writes, "yuri-selected-source-extraction")
     return {"records": len(promoted), "records_sha256": receipt["records_sha256"]}
 
 
@@ -272,11 +279,18 @@ def build(project, draft, plan_path, output, tavern_root=None):
     for target in targets:
         record = records.get(target["record_id"], {})
         require(record.get("kind") == "character" and record["yuri"]["role"] in ("main", "player"), "Preserve background identities")
-        require(record["yuri"]["age_status"] != "minor", "This bounded post route does not silently re-age minor targets")
+        require(record["yuri"]["age_status"] != "minor", "This source route does not silently re-age minor targets")
         require(target.get("result_woman") is True and target.get("result_adult") is True and target.get("reason", "").strip(), "Document adult author-defined-women results and their adaptation basis")
     player = plan.get("player_binding", {})
     player_record = records.get(player.get("record_id"), {})
-    require(player_record.get("yuri", {}).get("role") == "player" and player["record_id"] in {t["record_id"] for t in targets}, "Poster must be a selected player target")
+    invented_player = player.get("mode") == "invented"
+    if invented_player:
+        require(read(Path(project) / "source.json")["kind"] == "novel" and not player.get("record_id")
+                and not any(r.get("yuri", {}).get("role") == "player" for r in rows)
+                and player.get("result_woman") is True and player.get("result_adult") is True
+                and player.get("reason", "").strip(), "An invented adult female player is a novel-only creative choice, not a source fact")
+    else:
+        require(player_record.get("yuri", {}).get("role") == "player" and player["record_id"] in {t["record_id"] for t in targets}, "Source player must be a selected player target")
     decisions = plan.get("decisions", [])
     require(decisions and len({d["id"] for d in decisions}) == len(decisions), "Unique adaptation decisions required")
     decision_ids = {d["id"] for d in decisions}
@@ -286,6 +300,8 @@ def build(project, draft, plan_path, output, tavern_root=None):
         if d["kind"] == "relationship":
             causes = d.get("causal_record_ids", [])
             require(causes and set(causes) <= records.keys() and d.get("changed_circumstance", "").strip(), "Relationship changes need source anchors and a specific changed circumstance")
+    if invented_player:
+        require(any(d["id"] == player.get("decision_id") and d["kind"] == "invention" for d in decisions), "Link the invented player to an explicit invention decision")
     card, _ = creator.serializer().build_v2(Path(draft))
     front, _ = creator.serializer().parse_front(Path(draft).read_text(encoding="utf-8"))
     if not front.get("creator"):
