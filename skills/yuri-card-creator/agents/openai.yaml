@@ -1,0 +1,4 @@
+interface:
+  display_name: "Yuri Card Creator"
+  short_description: "Create original yuri cards through conversation"
+  default_prompt: "Use $yuri-card-creator to create a complete original yuri card; decide unspecified details and handle the files."

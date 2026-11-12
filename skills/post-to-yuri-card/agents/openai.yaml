@@ -1,0 +1,4 @@
+interface:
+  display_name: "Post to Yuri Card"
+  short_description: "Turn a supplied post into a source-linked yuri card"
+  default_prompt: "Use $post-to-yuri-card to adapt this post, keeping the poster as {{user}} and new story choices separate from source facts."
