@@ -1,6 +1,6 @@
 {
-  "version": "0.4.0",
-  "scope": "four creation/adaptation entry points; protected inherited containers and selected novel inputs",
+  "version": "0.5.0",
+  "scope": "native plugin packaging for four yuri entries plus pinned base dependencies",
   "license_boundary_commit_before_dependency_copy": "f16de770ea0bb4d832f395d3eb026495006bf329",
   "original_additions_license": "MIT",
   "tavernweave_code_or_skill_prose_bundled": false,
@@ -23,20 +23,21 @@
   "v1_2_0_validation": "on_hold",
   "publication": "direct_github_feature_branch_and_pr",
   "remaining_scope": [
-    "native host registration/packaging",
+    "user/admin account plugin import and new-task discovery",
+    "live native-host acceptance",
+    "DSH/Antigravity-specific yuri registration",
     "advanced schema and cross-dialect worldbook migration",
     "full custom-profile compatibility (deferred)",
-    "legacy original-file licensing (deferred)",
-    "exhaustive file-variant/host compatibility (not claimed)"
+    "legacy original-file licensing (deferred)"
   ],
   "legacy_v1_2_0": "unchanged; original licensing not changed",
   "current_revision_scope": [
-    "protected JSON/PNG/worldbook replacement edits",
-    "PNG metadata decoding and repacking with unchanged artwork/chunks",
-    "folder component/version inventory guidance",
-    "TXT/Markdown/EPUB novel selection",
-    "shared extraction/build reuse; explicit invented novel player",
-    "localized user-facing documentation"
+    "committed-blob native folder exporter reusing pinned TavernWeave helpers",
+    "four generated native discovery wrappers with UI metadata",
+    "portable/Codex/Claude skills-only manifests and marketplaces",
+    "co-located source/authoring dependencies and host capability probe",
+    "generated distribution branch with source-commit receipt",
+    "ChatGPT Work browser import guide"
   ],
   "deferred": [
     "full custom-profile compatibility",
@@ -79,7 +80,7 @@
       "raw_transcript_published": false
     }
   },
-  "release_readiness": "0.4.0 development checkpoint; main remains accepted 0.2.0",
+  "release_readiness": "0.5.0 native package checkpoint; account installation/discovery pending; main unchanged",
   "source_workflow_validation": {
     "synthetic_unit_tests": 19,
     "fresh_agent_completed": true,
@@ -135,5 +136,26 @@
     "novel_card_generation": "not_run",
     "report": "docs/FILE_SUPPORT_REVIEW_2026-11-12.md",
     "semantic_limit": "small PNG patch leaves other inherited masculine pronouns; not a full semantic adaptation"
+  },
+  "native_host_validation": {
+    "model": "GPT-6 Luna",
+    "primary_model_executed_tests": false,
+    "status": "isolated package and packaged-helper checks passed",
+    "expected_upstream_skills": 23,
+    "expected_yuri_entries": 4,
+    "expected_total_skills": 27,
+    "account_installation": "not_performed",
+    "host_discovery": "not_observed",
+    "report": "docs/NATIVE_HOST_REVIEW_2026-11-12.md",
+    "packaged_files": 615,
+    "extension_manifest_files": 58,
+    "upstream_skill_files_compared": 471,
+    "root_manifests_checked": 5,
+    "git_tree_matches_package": true,
+    "unrelated_cwd_probe": "passed",
+    "inherited_cli_help": "passed",
+    "codex_offline_validator": "not_exposed",
+    "claude_executable": "not_found",
+    "previous_suites_rerun": false
   }
 }

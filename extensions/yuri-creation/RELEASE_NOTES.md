@@ -1,4 +1,10 @@
-# Yuri Card Workbench 0.4.0 development checkpoint
+# Yuri Card Workbench 0.5.0 native integration checkpoint
+
+Adds a committed-blob native plugin exporter, four generated discovery wrappers and UI metadata, portable/Codex/Claude skills-only manifests, and GitHub marketplace catalogs. The native folder retains all 23 pinned upstream skill dependencies and the maintained yuri extension layout. Original source inventories/installers and dependency licenses remain unchanged. Generated output is a folder/channel, not a compressed archive or an account installation.
+
+The browser ChatGPT Work installation guide now gives the workspace-admin GitHub import fields and a fresh-task discovery prompt. A packaged-file/runtime probe separates dependency presence from host loading. Native package validation is delegated to GPT-6 Luna; earlier conversion tests and old suites are not repeated. See docs/NATIVE_HOST_REVIEW_2026-11-12.md. Actual account import/enablement and fresh-session host discovery remain user/admin steps.
+
+## 0.4.0
 
 Adds adapt-yuri-card with JSON/PNG decoding, original-byte/document bindings, protected before/after edits and fresh repacking. Unknown fields, scripts, worldbook settings/IDs/order and unrelated image chunks are preserved; schemas are retained instead of flattened through Markdown. Folder inventory distinguishes candidate cards, components, versions and reference art before agent-assisted grouping. Standalone JSON worldbooks use the same protected editor.
 

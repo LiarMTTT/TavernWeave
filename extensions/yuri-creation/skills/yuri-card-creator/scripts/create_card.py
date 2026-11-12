@@ -16,7 +16,7 @@ import tempfile
 
 HERE = Path(__file__).resolve().parent
 VERSION = "0.1.0"
-PACKAGE_VERSION = "0.4.0"
+PACKAGE_VERSION = "0.5.0"
 
 
 def read(path):

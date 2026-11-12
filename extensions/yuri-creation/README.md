@@ -1,8 +1,12 @@
-# Yuri Card Workbench 0.4.0
+# Yuri Card Workbench 0.5.0
 
 Create yuri roleplay cards through conversation, adapt an existing card, or turn a post or novel excerpt into a new story. Your agent handles the files; you review and revise in the conversation.
 
 [中文说明](README.zh-CN.md)
+
+## Install in ChatGPT Work
+
+Use the native `tavernweave-yuri` plugin from this repository's `yuri-plugin` distribution branch. A workspace admin imports it from GitHub, then you install/enable it in Plugins and open a new task. No local Codex setup is required. See the short [installation guide](docs/NATIVE_HOSTS.md) for the exact repository fields and first-use prompt.
 
 ## Choose your starting point
 
@@ -36,6 +40,6 @@ Large novels do not need to fit into one conversation message. The agent can sel
 | post-to-yuri-card | Adaptation from a supplied post |
 | novel-excerpt-to-yuri-card | Adaptation from selected TXT/Markdown/EPUB prose |
 
-Research, image inspection and optional artwork creation use tools available in your agent's workspace. A text-only card is complete on its own. This folder is not automatically installed as a native host plugin. The protected editor keeps the original schema; structural migration or script changes require a separately scoped operation. Text-only/DOCS components use available host reading/export tools and upstream authoring rather than JSON round-tripping.
+Research, image inspection and optional artwork creation use tools available in your agent's workspace. A text-only card is complete on its own. The native package exposes these workflows; account installation and available tools still depend on your host. The protected editor keeps the original schema; structural migration or script changes require a separately scoped operation. Text-only/DOCS components use available host reading/export tools and upstream authoring rather than JSON round-tripping.
 
 [Licensing](LICENSE_BOUNDARY.md) · [Integration and supported scope](INTEGRATION.md)
