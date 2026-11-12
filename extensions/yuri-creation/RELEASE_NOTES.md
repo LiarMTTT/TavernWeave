@@ -1,4 +1,10 @@
-# Yuri Card Workbench 0.3.0 development checkpoint
+# Yuri Card Workbench 0.3.1 development checkpoint
+
+Adds individually cited claims for new source extractions, retains compatibility with previously promoted v1 projects, clarifies pre-authoring routing and guards against blending different people's incidents. Shared name review offers contextual alternatives and preserves the current name until the user chooses or delegates. Dedicated name-review testing is deferred by request.
+
+The Terra 0.3.0 post trial now has user-reported successful SillyTavern import and satisfactory roleplay. Its private card was not rewritten. See docs/SOURCE_TRIAL_REVIEW_2026-11-12.md for the scoped review and 40 automated checks. Inherited-card decoding/editing and broader file support remain unfinished; native host registration follows those stabilized entry points.
+
+## 0.3.0 foundation
 
 Adds a small post-to-yuri workflow alongside the existing original creator. The agent reads a supplied TXT/Markdown post, preserves source-linked facts and uncertainty, authors a yuri adaptation, and exports a card with a worldbook and adaptation record. An anonymous poster becomes {{user}} in runtime prose while the source gender remains unchanged in the evidence.
 

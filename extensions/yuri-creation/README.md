@@ -1,4 +1,4 @@
-# Yuri Card Workbench 0.3.0
+# Yuri Card Workbench 0.3.1
 
 Create an original yuri character card through conversation, or adapt a supplied post while keeping its facts separate from your new story. Your agent chooses unspecified details, writes a playable opening and worldbook, and prepares a JSON card for SillyTavern.
 
@@ -29,6 +29,8 @@ Handle the files and let me review the result here.
 ```
 
 The agent saves source-linked facts, writes the adapted card and worldbook, and records why the characters and relationships changed. An unstated source gender stays unknown in the evidence. This route uses the pinned TavernWeave base in the same checkout. It currently handles one supplied TXT/Markdown post; whole novels and inherited-card repair are separate work.
+
+If a supplied name seems out of place for the adapted character, the agent will explain why and suggest alternatives. Keep the original or choose a new name directly in the conversation; a name is never changed merely because it sounds masculine.
 
 ## What this checkpoint provides
 

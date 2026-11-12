@@ -155,17 +155,47 @@ def fact_hash(records):
                           for r in sorted(records, key=lambda r: r["id"])]))
 
 
+def claim_record(library, tw, row):
+    """Keep claim links in upstream records; derive the dossier's searchable view.
+
+    Quote validity is delegated to upstream. Entailment and atomicity still need
+    prose review; this check cannot decide whether a quotation supports a claim.
+    """
+    require(isinstance(row, dict), "Source record must be an object")
+    claims = row.get("claims")
+    require(isinstance(claims, list) and claims, "Every source record needs individually cited claims")
+    identifiers, texts, citations = set(), [], []
+    for claim in claims:
+        require(isinstance(claim, dict), "Claim must be an object")
+        cid, text = claim.get("id"), claim.get("text")
+        require(isinstance(cid, str) and re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,95}", cid)
+                and cid not in identifiers, "Unique local claim IDs required")
+        require(isinstance(text, str) and text.strip() == text and text, "Nonempty trimmed claim text required")
+        identifiers.add(cid); texts.append(text)
+        # Validate each claim's own evidence, never just a pooled dossier quote.
+        tw.validate_record(library, dict(row, body=text, evidence=claim.get("evidence")))
+        for ev in claim["evidence"]:
+            if ev not in citations:
+                citations.append(ev)
+    body = "\n".join(texts)
+    require("body" not in row or row["body"] == body, "Record body must be derived from cited claims; move invented details to adaptation decisions")
+    require("evidence" not in row or row["evidence"] == citations, "Record evidence must be derived from claim citations")
+    return dict(row, body=body, evidence=citations)
+
+
 def promote(project, candidate_path, tavern_root=None):
     project, library, tw, _, src = context(project, tavern_root)
     candidate = read(candidate_path)
-    require(candidate.get("schema") == "yuri/extraction/v1", "Unsupported extraction")
+    require(candidate.get("schema") == "yuri/extraction/v2", "New extractions require yuri/extraction/v2 with individually cited claims; existing promoted v1 projects remain readable")
     require(candidate.get("source_sha256") == src["_descriptor_sha256"], "Extraction source binding differs")
     review = candidate.get("review", {})
     require(review.get("completed") is True and review.get("notes"), "Agent extraction review required")
     selected = candidate.get("reviewed_unit_ids", [])
     require(len(selected) == len(set(selected)) and set(selected) == {u["id"] for u in src["units"]}, "Review all supplied-post units using local IDs such as u000001, not post-001/u000001")
     rows = candidate.get("records", [])
-    require(isinstance(rows, list) and rows and len({r["id"] for r in rows}) == len(rows), "Unique nonempty source records required")
+    require(isinstance(rows, list) and rows, "Nonempty source records required")
+    rows = [claim_record(library, tw, row) for row in rows]
+    require(len({r["id"] for r in rows}) == len(rows), "Unique source records required")
     for row in rows:
         tw.validate_record(library, row)
         if row["kind"] == "character":
@@ -180,10 +210,12 @@ def promote(project, candidate_path, tavern_root=None):
         promoted, writes = tw.reindex_writes(library, overlay)
         for path, text in overlay.items():
             writes[path] = (text, None)
-        receipt = {"schema": "yuri/extraction-receipt/v1", "source_sha256": src["_descriptor_sha256"],
+        receipt = {"schema": "yuri/extraction-receipt/v2", "extraction_schema": candidate["schema"],
+                   "source_sha256": src["_descriptor_sha256"],
                    "candidate_sha256": sha(Path(candidate_path).read_bytes()), "records_sha256": fact_hash(promoted),
                    "reviewed_unit_ids": selected, "review": review,
-                   "limitation": "Exact quotes and review acknowledgments do not prove semantic extraction completeness"}
+                   "claim_count": sum(len(r["claims"]) for r in rows),
+                   "limitation": "Individual claim quotes and review acknowledgments do not prove entailment, atomicity or semantic extraction completeness"}
         writes[".state/yuri-extraction.json"] = (tw.dump(receipt), None)
         tw.transaction(library, writes, "yuri-small-post-extraction")
     return {"records": len(promoted), "records_sha256": receipt["records_sha256"]}

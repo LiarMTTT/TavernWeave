@@ -20,18 +20,28 @@ def setup(parent):
     p.register(HERE / "post.txt", project, "Synthetic bookshop post")
     info = p.units(project)
     definitions = [
-        ("player", "character", "原帖作者", "30岁，负责书店排班；原文没有明确性别。", "我今年30岁，在旧书店做排班。", {"role": "player", "source_gender": "unknown", "age_status": "adult"}),
-        ("lin", "character", "林澈", "32岁的女性修复师，希望修完社区借阅登记册。", "林澈32岁，是来修书的女师傅。", {"role": "main", "source_gender": "woman", "age_status": "adult"}),
-        ("closing", "event", "提前关门", "店主要求提前关门，修复尚未结束。", "店主要提前关门，她却想先修完那本社区借阅登记册。", None),
-        ("lamp", "relationship", "留灯约定", "原帖作者答应留灯，是否等候尚未决定；不据此断言恋爱。", "我答应留一盏灯，但还没决定下班后是否等她。", None),
-        ("owner", "character", "店主", "店主要求提前关门，年龄和性别未说明。", "店主要提前关门", {"role": "background", "source_gender": "unknown", "age_status": "unknown"})]
+        ("player", "character", "原帖作者", [
+            ("age", "第一人称讲述者30岁。", "我今年30岁"),
+            ("work", "第一人称讲述者负责旧书店排班。", "在旧书店做排班。")],
+         {"role": "player", "source_gender": "unknown", "age_status": "adult"}),
+        ("lin", "character", "林澈", [
+            ("profile", "林澈是32岁的女性修书师傅。", "林澈32岁，是来修书的女师傅。"),
+            ("goal", "林澈希望先修完社区借阅登记册。", "她却想先修完那本社区借阅登记册。")],
+         {"role": "main", "source_gender": "woman", "age_status": "adult"}),
+        ("closing", "event", "提前关门", [("request", "店主要求提前关门。", "店主要提前关门")], None),
+        ("lamp", "relationship", "留灯约定", [
+            ("promise", "第一人称讲述者答应留一盏灯。", "我答应留一盏灯"),
+            ("waiting", "第一人称讲述者尚未决定下班后是否等林澈。", "但还没决定下班后是否等她。")], None),
+        ("owner", "character", "店主", [("request", "店主要求提前关门。", "店主要提前关门")],
+         {"role": "background", "source_gender": "unknown", "age_status": "unknown"})]
     records = []
-    for rid, kind, name, body, quote, role in definitions:
-        row = {"id": rid, "kind": kind, "name": name, "body": body, "status": "confirmed", "realm": "reference",
-               "continuity": "supplied-post", "known_from": None, "evidence": p.evidence(project, quote)}
+    for rid, kind, name, claims, role in definitions:
+        row = {"id": rid, "kind": kind, "name": name, "status": "confirmed", "realm": "reference",
+               "continuity": "supplied-post", "known_from": None,
+               "claims": [{"id": cid, "text": text, "evidence": p.evidence(project, quote)} for cid, text, quote in claims]}
         if role: row["yuri"] = role
         records.append(row)
-    p.write_new(candidate, {"schema": "yuri/extraction/v1", "source_sha256": info["source_sha256"],
+    p.write_new(candidate, {"schema": "yuri/extraction/v2", "source_sha256": info["source_sha256"],
                            "reviewed_unit_ids": [u["id"] for u in info["units"]],
                            "review": {"completed": True, "notes": ["Read entire synthetic post; poster gender remains unknown."]}, "records": records})
     p.promote(project, candidate)

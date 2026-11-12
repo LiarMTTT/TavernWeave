@@ -43,7 +43,7 @@ class SourceWorkflowTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'Source text changed'):self.build()
 
     def test_changed_facts_do_not_silently_override_review(self):
-        path=self.project/'library/records/player.md';path.write_text(path.read_text().replace('原文没有明确性别','原文明确男性'))
+        path=self.project/'library/records/player.md';path.write_text(path.read_text().replace('第一人称讲述者30岁','第一人称讲述者40岁'))
         with self.assertRaisesRegex(ValueError,'facts changed'):self.build()
 
     def test_stale_draft_is_rejected(self):
@@ -116,11 +116,67 @@ class SourceWorkflowTests(unittest.TestCase):
         p.register(ROOT/'examples/post-to-yuri/post.txt',project)
         candidate=p.read(self.root/'extraction.json');candidate['source_sha256']=p.units(project)['source_sha256']
         for row in candidate['records']:
-            for ev in row['evidence']:ev['source_sha256']=candidate['source_sha256']
+            for claim in row['claims']:
+                for ev in claim['evidence']:ev['source_sha256']=candidate['source_sha256']
         candidate['reviewed_unit_ids']=[];path=root/'bad.json';p.write_new(path,candidate)
         with self.assertRaisesRegex(ValueError,'Review all'):p.promote(project,path)
-        candidate['reviewed_unit_ids']=['u000001'];candidate['records'][0]['evidence'][0]['quote']='wrong';path.write_text(json.dumps(candidate))
+        candidate['reviewed_unit_ids']=['u000001'];candidate['records'][0]['claims'][0]['evidence'][0]['quote']='wrong';path.write_text(json.dumps(candidate))
         with self.assertRaisesRegex(ValueError,'Quote or character'):p.promote(project,path)
+
+    def candidate_project(self):
+        project=self.root/'claim-project'
+        p.register(ROOT/'examples/post-to-yuri/post.txt',project)
+        candidate=p.read(self.root/'extraction.json')
+        candidate['source_sha256']=p.units(project)['source_sha256']
+        for row in candidate['records']:
+            for claim in row['claims']:
+                for ev in claim['evidence']:ev['source_sha256']=candidate['source_sha256']
+        path=self.root/'claim-candidate.json'
+        return project,candidate,path
+
+    def test_claims_survive_promotion_and_derive_searchable_record(self):
+        _,library,tw,_,_=p.context(self.project)
+        row=next(r for r in tw.records(library) if r['id']=='lin')
+        self.assertEqual(row['body'],'\n'.join(c['text'] for c in row['claims']))
+        self.assertEqual(row['evidence'],[ev for c in row['claims'] for ev in c['evidence']])
+        self.assertEqual(len(row['claims']),2)
+
+    def test_a_second_claim_cannot_borrow_the_first_claims_quote_validation(self):
+        project,candidate,path=self.candidate_project()
+        candidate['records'][0]['claims'][1]['evidence'][0]['quote']='fabricated'
+        p.write_new(path,candidate)
+        with self.assertRaisesRegex(ValueError,'Quote or character'):p.promote(project,path)
+        self.assertFalse((project/'library/.state/yuri-extraction.json').exists())
+
+    def test_missing_claim_evidence_and_duplicate_claim_ids_are_rejected(self):
+        project,candidate,path=self.candidate_project()
+        claim=candidate['records'][0]['claims'][1];saved=claim.pop('evidence')
+        p.write_new(path,candidate)
+        with self.assertRaisesRegex(ValueError,'Every record needs evidence'):p.promote(project,path)
+        claim['evidence']=saved;claim['id']=candidate['records'][0]['claims'][0]['id']
+        path.write_text(json.dumps(candidate))
+        with self.assertRaisesRegex(ValueError,'Unique local claim'):p.promote(project,path)
+
+    def test_uncited_summary_and_legacy_new_candidate_are_rejected(self):
+        project,candidate,path=self.candidate_project()
+        candidate['records'][0]['body']='Extra, uncited biography.';p.write_new(path,candidate)
+        with self.assertRaisesRegex(ValueError,'body must be derived'):p.promote(project,path)
+        candidate['schema']='yuri/extraction/v1';path.write_text(json.dumps(candidate))
+        with self.assertRaisesRegex(ValueError,'extraction/v2'):p.promote(project,path)
+
+    def test_previously_promoted_v1_records_remain_buildable(self):
+        # Recreate the prior persisted format, without requiring a v1 promotion API.
+        _,library,tw,_,_=p.context(self.project)
+        for row in tw.records(library):
+            row.pop('claims')
+            (library/row['source_path']).write_text(tw.render(row))
+        receipt=p.read(library/'.state/yuri-extraction.json')
+        receipt.update(schema='yuri/extraction-receipt/v1',records_sha256=p.fact_hash(tw.records(library)))
+        receipt.pop('extraction_schema');receipt.pop('claim_count')
+        (library/'.state/yuri-extraction.json').write_text(json.dumps(receipt))
+        self.change_plan(lambda v:v.update(bindings=p.bindings(self.project,self.draft)))
+        self.build()
+        self.assertEqual(p.read(self.output/'adaptation-record.json')['extraction_review']['schema'],'yuri/extraction-receipt/v1')
 
 
 if __name__ == '__main__':unittest.main()

@@ -1,12 +1,12 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "scope": "original creation plus bounded post-to-yuri development checkpoint",
   "license_boundary_commit_before_dependency_copy": "f16de770ea0bb4d832f395d3eb026495006bf329",
   "original_additions_license": "MIT",
   "tavernweave_code_or_skill_prose_bundled": false,
   "tavernweave_license_copy_retained": true,
   "foreverse_exporter_unmodified_blob": "6cfd4efb3d0645627a21202520547fda1a4249ad",
-  "unit_tests_passed": 35,
+  "unit_tests_passed": 40,
   "fresh_agent_trial": {
     "completed": true,
     "additional_user_answers": 0,
@@ -23,8 +23,9 @@
   "v1_2_0_validation": "on_hold",
   "publication": "direct_github_feature_branch_and_pr",
   "remaining_scope": [
-    "novel/EPUB entry point reusing shared provenance",
-    "inherited PNG editing/decoding",
+    "inherited JSON/PNG decode-edit-repack adapter",
+    "metadata-preserving worldbook migration",
+    "novel/EPUB and broader source-file entry points",
     "native host registration",
     "custom-profile compatibility (deferred)",
     "legacy original-file licensing (deferred)"
@@ -34,7 +35,10 @@
     "pinned upstream source library reuse",
     "shared provenance records and bindings",
     "one supplied-post-to-yuri workflow",
-    "original creator regression coverage"
+    "original creator regression coverage",
+    "claim-level evidence and derived record summaries",
+    "pre-authoring routing and distinct-event guidance",
+    "contextual name review with conversational rename choices"
   ],
   "deferred": [
     "full custom-profile compatibility",
@@ -77,7 +81,7 @@
       "raw_transcript_published": false
     }
   },
-  "release_readiness": "0.3.0 development checkpoint; main remains accepted 0.2.0",
+  "release_readiness": "0.3.1 development checkpoint; main remains accepted 0.2.0",
   "source_workflow_validation": {
     "synthetic_unit_tests": 19,
     "fresh_agent_completed": true,
@@ -91,6 +95,27 @@
     "parent_prose_review": true,
     "host_import": "not_run",
     "live_roleplay": "not_run",
-    "recoverable_usage_finding": "reviewed_unit_ids uses local unit IDs; documentation/error clarified"
+    "recoverable_usage_finding": "reviewed_unit_ids uses local unit IDs; documentation/error clarified",
+    "tested_version": "0.3.0"
+  },
+  "source_fidelity_revision": {
+    "new_extraction_schema": "yuri/extraction/v2",
+    "promoted_v1_projects": "readable and buildable without retroactive claim-review assertions",
+    "synthetic_source_tests": 24,
+    "route_order": "guidance corrected; execution not automatically proven",
+    "name_review": "implemented in shared agent guidance; dedicated testing deferred by user request"
+  },
+  "user_post_trial": {
+    "tested_commit": "585ee9ea7ce982ddfe4b114187e0f5ffad03bd2b",
+    "model": "GPT-6.1 Terra",
+    "source_records": 7,
+    "worldbook_entries": 5,
+    "structural_checks": "passed",
+    "host_import": "user_reported_success",
+    "live_roleplay": "user_reported_satisfaction",
+    "host_operation_observed_by_agent": false,
+    "original_artifacts_rewritten": false,
+    "raw_artifacts_published": false,
+    "review": "docs/SOURCE_TRIAL_REVIEW_2026-11-12.md"
   }
 }
