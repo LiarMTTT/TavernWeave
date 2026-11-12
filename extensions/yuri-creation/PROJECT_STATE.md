@@ -8,6 +8,8 @@ Verified frozen archive: Erxi-Yu-1209/transfer-to-Yuri-agent-Skill at 5a8cff76da
 
 Deferred: full custom-profile compatibility, legacy-file licensing and v1.2.0 real-use validation. No legacy implementation was ported. Publication now uses the GitHub plugin directly: checked feature branches and PRs into yuri-dev, with main reserved for user-authorized merges/releases. Drive delivery and a separate upload agent are no longer required.
 
-Next: review this integration PR into yuri-dev, then use this ChatGPT workspace as the first practical agent-use environment; load the extension and actual pinned authoring files explicitly. Native Codex/Claude/DSH adapters are separate future work, with no local Codex prerequisite.
+Next: use the reviewed yuri-dev integration in this ChatGPT workspace as the first practical agent-use environment; load the extension and actual pinned authoring files explicitly. Native Codex/Claude/DSH adapters are separate future work, with no local Codex prerequisite.
 
 Publication status is given by the actual GitHub feature branch and PR, not by the earlier Drive snapshot. Follow PROJECT_WORKFLOW.md for direct publication, expected-head checks and readback.
+
+Three newly submitted user trials were reviewed: the Terra original trial added in commit 2401ad9 is byte-reproducible with this extension; the two Argon runs explicitly used the older upstream-only archive, so they are not extension passes. Private cards remain outside the public source tree. The revised PNG is missing from the submitted artifacts. See docs/TRIAL_REVIEW_2026-11-12.md. The next useful user check is that actual PNG and one host import/persona-selector interaction; agent reruns must first confirm the extension revision.

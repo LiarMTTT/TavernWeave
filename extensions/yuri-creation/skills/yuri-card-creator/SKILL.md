@@ -39,3 +39,7 @@ Read `references/optional-tools.md` only when research, image alignment, avatar 
 ## Keep this checkpoint small
 
 Deliver a finished text card first. Image generation/editing, custom front ends, inherited-card conversion and native host installers require separate capabilities. Optional research guidance and PNG packaging are described above. Offer them later if requested; none blocks this original card. Preserve confirmed choices across revision. For reference-based adaptation or inherited styling, use the corresponding Workbench/TavernWeave route and its original source records rather than relabeling that material as original.
+
+## Review a trial
+
+For user trials or feedback from another agent, read `references/testing.md`. Establish the actual available revision before crediting an extension result, inspect the submitted artifacts, and keep host-assisted fallback evidence separate. Handle review records yourself and ask the user for feedback in conversation.

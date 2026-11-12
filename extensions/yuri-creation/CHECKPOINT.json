@@ -36,5 +36,15 @@
     "full custom-profile compatibility",
     "legacy original-file licensing"
   ],
-  "host_registration": "not_verified"
+  "host_registration": "not_verified",
+  "user_trial_review": {
+    "submitted_trials": 3,
+    "original_export_reproduced": 1,
+    "upstream_host_fallback_runs": 2,
+    "all_three_end_to_end_extension_passes": false,
+    "updated_pr_head_reviewed": "2401ad9f8dcfe73472eb87a469eecb45d8d1440d",
+    "revised_png_submitted": false,
+    "live_host_tests_observed": 0,
+    "report": "docs/TRIAL_REVIEW_2026-11-12.md"
+  }
 }

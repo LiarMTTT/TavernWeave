@@ -11,8 +11,8 @@
     },
     {
       "path": "CHECKPOINT.json",
-      "bytes": 1505,
-      "sha256": "4110a145573e8d6b18dcfd54024a9b290924cf555b1f4cb22d86a3f5f2faef34"
+      "bytes": 1884,
+      "sha256": "5056e332ad9d289a58fd9b0e7d3ea56c6806182655b98ddfe338fb37c9c2eb13"
     },
     {
       "path": "CREATION_CHECKPOINT_HANDOFF.md",
@@ -41,8 +41,8 @@
     },
     {
       "path": "PROJECT_STATE.md",
-      "bytes": 1870,
-      "sha256": "2bc2105c2882d2d931bf660b8b80bee1fb228013720fcd7858deb242ac95ca19"
+      "bytes": 2402,
+      "sha256": "dad6d08cbd71aaafb4680b013024c46c5eb3a41ff59c153eef574660b00d3f67"
     },
     {
       "path": "PROJECT_WORKFLOW.md",
@@ -73,6 +73,11 @@
       "path": "VERSION",
       "bytes": 6,
       "sha256": "1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9"
+    },
+    {
+      "path": "docs/TRIAL_REVIEW_2026-11-12.md",
+      "bytes": 4437,
+      "sha256": "99bac509e3601917f8017131076843a94bb9d4fa3b507efa138a309e0e50dc93"
     },
     {
       "path": "examples/one-conversation/CHECKS.json",
@@ -106,8 +111,8 @@
     },
     {
       "path": "skills/yuri-card-creator/SKILL.md",
-      "bytes": 7012,
-      "sha256": "3341ed1380463732e585e6fa55c444c168254b0d1adb6b3231a3e958709ec945"
+      "bytes": 7350,
+      "sha256": "5f887e0b6d781839e51b0ef8c076ef73f0aee3996ce0a11ed2c16d948743958d"
     },
     {
       "path": "skills/yuri-card-creator/assets/interaction.en.json",
@@ -135,6 +140,11 @@
       "sha256": "1b4c80de1abfcc7e478c13996970328d036c9b0f427325035e3ff9f9e67400f1"
     },
     {
+      "path": "skills/yuri-card-creator/references/testing.md",
+      "bytes": 3299,
+      "sha256": "25eeef5fcf6c302193027f89d563bf28df16d975dbdefb7be62f4376381759aa"
+    },
+    {
       "path": "skills/yuri-card-creator/scripts/create_card.py",
       "bytes": 11607,
       "sha256": "33e43da20d3ea6250f23643ceea24129f4a8d5ee5184469c540e81cc7ce3df09"
@@ -160,7 +170,7 @@
       "sha256": "60076530721470811893bc663c3102e6947b77957f0491c74119a79e3f2976c8"
     }
   ],
-  "delivery_id": "direct-github-integration-20261112",
+  "delivery_id": "three-trial-review-20261112",
   "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
   "target_branch": "yuri-dev",
   "target_path": "extensions/yuri-creation/",
