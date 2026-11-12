@@ -1,0 +1,23 @@
+{
+  "locale": "en",
+  "setup_policy": "reuse ready preferences; do not block delegated original creation with a questionnaire",
+  "choices": [
+    {
+      "key": "definition.womanhood_policy",
+      "value": "author_defined_inclusive",
+      "label": "Author-defined women, including virtual and nonhuman characters"
+    },
+    {
+      "key": "transformation.scope",
+      "value": "main_cast",
+      "label": "Main cast; preserve background identities"
+    },
+    {
+      "key": "relationships.outcome_policy",
+      "value": "rederive_if_causal",
+      "label": "Changes supported by specific altered circumstances"
+    }
+  ],
+  "ready": "I will reuse the saved preferences and create a complete original yuri card, choosing unspecified details. You can revise it in the conversation.",
+  "delivery": "The card and worldbook are ready. Tell me what to adjust here. SillyTavern import and live roleplay have not been tested."
+}

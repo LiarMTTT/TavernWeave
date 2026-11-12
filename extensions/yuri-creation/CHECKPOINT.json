@@ -1,0 +1,78 @@
+{
+  "version": "0.2.0",
+  "scope": "small original-yuri creation extension",
+  "license_boundary_commit_before_dependency_copy": "f16de770ea0bb4d832f395d3eb026495006bf329",
+  "original_additions_license": "MIT",
+  "tavernweave_code_or_skill_prose_bundled": false,
+  "tavernweave_license_copy_retained": true,
+  "foreverse_exporter_unmodified_blob": "6cfd4efb3d0645627a21202520547fda1a4249ad",
+  "unit_tests_passed": 16,
+  "fresh_agent_trial": {
+    "completed": true,
+    "additional_user_answers": 0,
+    "output_language": "zh-CN",
+    "worldbook_entries": 7,
+    "structural_checks_passed": 15,
+    "actual_tavernweave_documents_read": 2,
+    "complete_plugin_installation": "not_run",
+    "scope": "historical_internal_original_trial"
+  },
+  "parent_review": "actual draft read; goals, causal tension, player agency and knowledge boundaries inspected",
+  "sillytavern_import": "user_reported_success",
+  "live_roleplay": "user_accepted_short_trial",
+  "v1_2_0_validation": "on_hold",
+  "publication": "direct_github_feature_branch_and_pr",
+  "remaining_scope": [
+    "native host installation",
+    "inherited PNG compressed metadata decoding",
+    "source-adaptation bridge after license scope decision"
+  ],
+  "legacy_v1_2_0": "unchanged; original licensing not changed",
+  "current_revision_scope": [
+    "read-only capability report",
+    "optional native research/image workflow",
+    "PNG avatar packaging via unchanged MIT exporter"
+  ],
+  "deferred": [
+    "full custom-profile compatibility",
+    "legacy original-file licensing"
+  ],
+  "host_registration": "not_verified",
+  "user_trial_review": {
+    "historically_submitted_trials": 3,
+    "active_trials": 1,
+    "withdrawn_trials": 2,
+    "withdrawn_artifacts_must_not_be_recovered_or_reused": true,
+    "original_export_reproduced": 1,
+    "retained_png": {
+      "sha256": "79a93f23cf001ff4a2ea2f1d1949403d31f38a1cdfbe342f6041347c4df96da1",
+      "bytes": 2493668,
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "png_structure_and_decode": "passed",
+      "chara_matches_retained_json": true,
+      "ccv3_matches_project_wrapper": true,
+      "embedded_worldbook_entries": 10,
+      "unembedded_avatar_comparison": "not_available"
+    },
+    "live_host_tests_observed": 0,
+    "report": "docs/TRIAL_REVIEW_2026-11-12.md",
+    "user_reported_import_success": true,
+    "short_chat": {
+      "status": "user_accepted",
+      "private_transcript_reviewed": true,
+      "opening_messages": 1,
+      "user_messages": 3,
+      "generated_replies": 3,
+      "non_blocking_observations": [
+        "minor player-action assumptions",
+        "prop continuity drift"
+      ],
+      "assembled_model_prompts_available": false,
+      "raw_transcript_published": false
+    }
+  },
+  "release_readiness": "original_creation_png_checkpoint_ready_for_main_pr_review"
+}
