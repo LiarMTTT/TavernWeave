@@ -1,12 +1,12 @@
 {
-  "version": "0.3.1",
-  "scope": "original creation plus bounded post-to-yuri development checkpoint",
+  "version": "0.4.0",
+  "scope": "four creation/adaptation entry points; protected inherited containers and selected novel inputs",
   "license_boundary_commit_before_dependency_copy": "f16de770ea0bb4d832f395d3eb026495006bf329",
   "original_additions_license": "MIT",
   "tavernweave_code_or_skill_prose_bundled": false,
   "tavernweave_license_copy_retained": true,
   "foreverse_exporter_unmodified_blob": "6cfd4efb3d0645627a21202520547fda1a4249ad",
-  "unit_tests_passed": 40,
+  "unit_tests_passed": null,
   "fresh_agent_trial": {
     "completed": true,
     "additional_user_answers": 0,
@@ -23,22 +23,20 @@
   "v1_2_0_validation": "on_hold",
   "publication": "direct_github_feature_branch_and_pr",
   "remaining_scope": [
-    "inherited JSON/PNG decode-edit-repack adapter",
-    "metadata-preserving worldbook migration",
-    "novel/EPUB and broader source-file entry points",
-    "native host registration",
-    "custom-profile compatibility (deferred)",
-    "legacy original-file licensing (deferred)"
+    "native host registration/packaging",
+    "advanced schema and cross-dialect worldbook migration",
+    "full custom-profile compatibility (deferred)",
+    "legacy original-file licensing (deferred)",
+    "exhaustive file-variant/host compatibility (not claimed)"
   ],
   "legacy_v1_2_0": "unchanged; original licensing not changed",
   "current_revision_scope": [
-    "pinned upstream source library reuse",
-    "shared provenance records and bindings",
-    "one supplied-post-to-yuri workflow",
-    "original creator regression coverage",
-    "claim-level evidence and derived record summaries",
-    "pre-authoring routing and distinct-event guidance",
-    "contextual name review with conversational rename choices"
+    "protected JSON/PNG/worldbook replacement edits",
+    "PNG metadata decoding and repacking with unchanged artwork/chunks",
+    "folder component/version inventory guidance",
+    "TXT/Markdown/EPUB novel selection",
+    "shared extraction/build reuse; explicit invented novel player",
+    "localized user-facing documentation"
   ],
   "deferred": [
     "full custom-profile compatibility",
@@ -81,7 +79,7 @@
       "raw_transcript_published": false
     }
   },
-  "release_readiness": "0.3.1 development checkpoint; main remains accepted 0.2.0",
+  "release_readiness": "0.4.0 development checkpoint; main remains accepted 0.2.0",
   "source_workflow_validation": {
     "synthetic_unit_tests": 19,
     "fresh_agent_completed": true,
@@ -117,5 +115,25 @@
     "original_artifacts_rewritten": false,
     "raw_artifacts_published": false,
     "review": "docs/SOURCE_TRIAL_REVIEW_2026-11-12.md"
+  },
+  "historical_regression_baseline": {
+    "version": "0.3.1",
+    "passed": 40,
+    "rerun_for_0_4_0": false,
+    "reason": "user requested minimal testing through cheaper GPT models only"
+  },
+  "file_support_validation": {
+    "model": "GPT-6 Luna",
+    "primary_model_executed_tests": false,
+    "old_suites_rerun": false,
+    "png_samples": 1,
+    "epub_samples": 1,
+    "epub_excerpt_characters": 1500,
+    "epub_ingestion_and_promotion": "passed",
+    "png_check": "passed protected replacement, invariant comparison and stale/protected-field refusal",
+    "new_host_import": "not_run",
+    "novel_card_generation": "not_run",
+    "report": "docs/FILE_SUPPORT_REVIEW_2026-11-12.md",
+    "semantic_limit": "small PNG patch leaves other inherited masculine pronouns; not a full semantic adaptation"
   }
 }
