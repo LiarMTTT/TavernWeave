@@ -1,11 +1,9 @@
-# Yuri Card Creator 0.2.0
+# Yuri Card Workbench 0.3.0 development checkpoint
 
-Create an original yuri character card through conversation, review it with the agent, and export a SillyTavern JSON card with an embedded worldbook. A chosen PNG avatar can be packaged into a card PNG. English core instructions share Chinese and English user interaction catalogs.
+Adds a small post-to-yuri workflow alongside the existing original creator. The agent reads a supplied TXT/Markdown post, preserves source-linked facts and uncertainty, authors a yuri adaptation, and exports a card with a worldbook and adaptation record. An anonymous poster becomes {{user}} in runtime prose while the source gender remains unchanged in the evidence.
 
-Research, image viewing, generation and editing use tools already available in the agent's host. The extension adds no search service or mandatory image-provider key. PNG packaging uses the unchanged, attributed Foreverse serializer. Original additions use this extension's MIT license; TavernWeave and other dependencies keep their existing terms and notices.
+Shared provenance calls the pinned TavernWeave work-library implementation for frozen text, units, exact quote validation, editable Markdown records, indexing and transactional writes. Original bridge code adds source/draft/fact bindings, full supplied-post unit coverage, per-field/entry provenance and causal adaptation decisions. The existing unchanged Foreverse MIT serializer still produces the card. No legacy Workbench code is ported or relicensed.
 
-This is the small original-creation extension, located at extensions/yuri-creation/. It is not automatically registered by the upstream plugin installers. Source-based character conversion, inherited-card repair, custom profile modes beyond the supported defaults and native host adapters remain separate work. PNG-avatar packing is not an inherited-PNG decoder.
+This checkpoint supports one supplied post and the default adult-women main-cast result. It is not a whole-novel ingestion route, inherited-card decoder, autonomous web scraper, batch card system or native plugin registration. Large text is segmented rather than silently cut off; agent coverage notes and exact quote checks do not prove complete semantic understanding.
 
-The original-creation/PNG path has one retained user-accepted import and short chat, supported by reproducible JSON and independently checked PNG payloads. That evidence does not establish all hosts, all models or long-session behavior. Detailed validation belongs in docs/TRIAL_REVIEW_2026-11-12.md; private chat logs and private PNG artwork are not bundled.
-
-This checkpoint does not change the frozen Workbench v1.2.0 project or select a license for its legacy original files. Upstream TavernWeave metadata and the existing 23-skill inventory are unchanged.
+The 0.2.0 original-creation/PNG checkpoint remains available, with its earlier accepted import and short chat. New source-route checks use fresh synthetic material; withdrawn user cases stay excluded. Runtime semantic quality and causal faithfulness are reviewed by the agent, with human feedback in conversation.

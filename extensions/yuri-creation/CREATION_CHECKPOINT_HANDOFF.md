@@ -1,13 +1,11 @@
-# Fork integration handoff
+# Development handoff — 0.3.0
 
-Extension: 0.2.0. Repository: https://github.com/imbdsssity/TavernWeave-Yuri. Initial yuri-dev base: f9863d2b05305457fe9ed8b0c5688d52aca400a5. Target path: extensions/yuri-creation/. Feature branch: feature/yuri-creation-integration.
+The extension now has two entry points: yuri-card-creator for original conversation and post-to-yuri-card for one supplied post. Do not relabel a source-based task as original. Source records and adaptation decisions have separate ownership; see references/source-records.md.
 
-Publish directly through the connected GitHub tools and open a PR into yuri-dev. Keep main and the frozen Workbench unchanged. The user adopted this direct process; a separate uploading agent and Drive/local synchronization are no longer prerequisites. See PROJECT_WORKFLOW.md.
+Source CLI: python extensions/yuri-creation/scripts/source_card.py --help. It requires the pinned base work-library file, defaulting to the current checkout. For another base, pass --tavern-root before the subcommand. Private project directories must be outside the repository. Output directories are fresh and existing files are not overwritten.
 
-The integration preserves all upstream tracked paths and adds this isolated extension. Root LICENSE, manifests, hooks, installers and the 23-skill inventory are unchanged. Original extension additions retain their nested MIT LICENSE; upstream remains under its root terms and notices. No legacy Workbench implementation was imported.
+New bridge code is original MIT material. The work-library implementation is called from the base, not copied or relicensed. The Foreverse serializer remains unmodified and separately attributed. Legacy-file licensing is still deferred and no legacy implementation is imported.
 
-Sixteen focused tests passed in the fork layout before the workflow-document update. Runtime and test files are unchanged by that update. The two pinned authoring-file hashes also passed; neither result proves native installation or host image generation. Custom-profile compatibility and legacy licensing remain deferred.
+The 0.2.0 original path has a previously accepted PNG import/short chat. Source-route structural tests and a fresh synthetic task are separate evidence. No new real SillyTavern source-route import is claimed. Withdrawn cases must remain excluded.
 
-Regenerate and verify PACKAGE_MANIFEST.json before publication, then compare the published Git tree with the checked workspace. Use actual GitHub PR/commit state to continue. The earlier Drive delivery and integration.patch are historical snapshots; do not apply them over this updated branch or expect their tree hash to match the revised workflow documents.
-
-The retained PNG has now been imported successfully according to user feedback. The user accepted the short chat, and its private exported transcript was reviewed. This closes the bounded original-creation/PNG acceptance step; do not request another import or multi-turn trial merely to repeat it. See the current trial review for evidence limits. Prepare the 0.2.0 main PR; do not merge main without the user’s instruction.
+Use direct GitHub publication into a feature branch/PR targeting yuri-dev, with verified tree readback. Main remains the accepted 0.2.0 release until the user authorizes another release.

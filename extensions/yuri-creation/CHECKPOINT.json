@@ -1,12 +1,12 @@
 {
-  "version": "0.2.0",
-  "scope": "small original-yuri creation extension",
+  "version": "0.3.0",
+  "scope": "original creation plus bounded post-to-yuri development checkpoint",
   "license_boundary_commit_before_dependency_copy": "f16de770ea0bb4d832f395d3eb026495006bf329",
   "original_additions_license": "MIT",
   "tavernweave_code_or_skill_prose_bundled": false,
   "tavernweave_license_copy_retained": true,
   "foreverse_exporter_unmodified_blob": "6cfd4efb3d0645627a21202520547fda1a4249ad",
-  "unit_tests_passed": 16,
+  "unit_tests_passed": 35,
   "fresh_agent_trial": {
     "completed": true,
     "additional_user_answers": 0,
@@ -23,15 +23,18 @@
   "v1_2_0_validation": "on_hold",
   "publication": "direct_github_feature_branch_and_pr",
   "remaining_scope": [
-    "native host installation",
-    "inherited PNG compressed metadata decoding",
-    "source-adaptation bridge after license scope decision"
+    "novel/EPUB entry point reusing shared provenance",
+    "inherited PNG editing/decoding",
+    "native host registration",
+    "custom-profile compatibility (deferred)",
+    "legacy original-file licensing (deferred)"
   ],
   "legacy_v1_2_0": "unchanged; original licensing not changed",
   "current_revision_scope": [
-    "read-only capability report",
-    "optional native research/image workflow",
-    "PNG avatar packaging via unchanged MIT exporter"
+    "pinned upstream source library reuse",
+    "shared provenance records and bindings",
+    "one supplied-post-to-yuri workflow",
+    "original creator regression coverage"
   ],
   "deferred": [
     "full custom-profile compatibility",
@@ -74,5 +77,20 @@
       "raw_transcript_published": false
     }
   },
-  "release_readiness": "original_creation_png_checkpoint_ready_for_main_pr_review"
+  "release_readiness": "0.3.0 development checkpoint; main remains accepted 0.2.0",
+  "source_workflow_validation": {
+    "synthetic_unit_tests": 19,
+    "fresh_agent_completed": true,
+    "additional_user_answers": 0,
+    "input": "new synthetic short post, not withdrawn casework",
+    "source_records": 8,
+    "worldbook_entries": 5,
+    "source_gender_preserved": "unknown",
+    "output_mode": "source_yuri",
+    "card_hash_and_worldbook_equality": "passed",
+    "parent_prose_review": true,
+    "host_import": "not_run",
+    "live_roleplay": "not_run",
+    "recoverable_usage_finding": "reviewed_unit_ids uses local unit IDs; documentation/error clarified"
+  }
 }

@@ -23,5 +23,13 @@
     "git_blob": "6cfd4efb3d0645627a21202520547fda1a4249ad",
     "license": "MIT",
     "relationship": "unmodified_vendored_exporter"
+  },
+  "source_library": {
+    "repository": "https://github.com/LiarMTTT/TavernWeave",
+    "commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+    "path": "skills/build-work-library/scripts/work_library.py",
+    "git_blob": "336ac535cf709ee565b368da77aba6dc3de2e410",
+    "license": "PolyForm-Noncommercial-1.0.0",
+    "relationship": "pinned implementation executed from the surrounding base; no source copied into extension"
   }
 }

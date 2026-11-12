@@ -1,6 +1,6 @@
 # Integration and reuse map
 
-| Responsibility | Choice in 0.2.0 |
+| Responsibility | Choice in 0.3.0 |
 | --- | --- |
 | Original yuri policy, delegated choices, localized entry | New small MIT extension |
 | General character/worldbook/opening methods | Pinned external TavernWeave authoring documents; optional file-verified bridge |
@@ -18,7 +18,7 @@ Minimum end-to-end path: `init` → agent writes `card.md` and `creation.json` �
 
 The first release uses a text-first adult main cast. Large systems, a mandatory design interview and graphics are unnecessary for this delegated first draft. Upstream does not automatically confer tested compatibility across hosts. Keep the verified v1.2.0 archive frozen.
 
-`capabilities` reports supported package commands separately from unprobed host tools. `pack-image --card PATH --avatar PATH --output NEW.png` packages a wrapped v2 card with a PNG avatar; it is not an inherited-card decoder. Read the optional-tools reference for limits. Package version is 0.2.0; the compatible original creation-record contract remains 0.1.0. Custom profile enforcement is deferred, as is the legacy-file licensing decision.
+`capabilities` reports supported package commands separately from unprobed host tools. `pack-image --card PATH --avatar PATH --output NEW.png` packages a wrapped v2 card with a PNG avatar; it is not an inherited-card decoder. Read the optional-tools reference for limits. Package version is 0.3.0; the compatible original creation-record contract remains 0.1.0. Custom profile enforcement is deferred, as is the legacy-file licensing decision.
 
 ## Verified fork integration
 
@@ -27,3 +27,11 @@ Repository: https://github.com/imbdsssity/TavernWeave-Yuri. Remote development b
 Run focused tests from the fork root with python -m unittest discover -s extensions/yuri-creation/tests -q. Run the file probe with `python extensions/yuri-creation/skills/yuri-card-creator/scripts/create_card.py probe-base --tavern-root .`. Keep custom-profile and legacy-license work deferred.
 
 Development and publication now run directly from this workspace through GitHub: feature branch → PR into yuri-dev → user-authorized main release. See PROJECT_WORKFLOW.md; old Drive publisher instructions are superseded.
+
+## Shared source provenance and first post route
+
+Use scripts/source_card.py and shared/provenance.py for source_yuri mode. The post-to-yuri-card entry consumes supplied text, promotes source-linked extraction records into the pinned base’s work-library store via the small-record/reindex path, and exports with the existing MIT serializer. No long-task benchmark, token meter, model call, web fetch or fake original-mode record is introduced. The project keeps one authoritative fact store.
+
+The base work-library code stays outside the extension under its PolyForm Noncommercial terms. UPSTREAM.json pins its actual implementation blob. New bridge code and the synthetic example are MIT original additions. The original creator stays original-only; do not empty real source references to bypass that validator. references/source-records.md defines the extraction/adaptation input format for the agent.
+
+The current post route supports defaults only and requires all supplied units reviewed. A later novel entry point can reuse the same records, quote basis and adaptation bindings; novel/EPUB ingestion is not implemented here.
