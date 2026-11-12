@@ -11,8 +11,8 @@
     },
     {
       "path": "CHECKPOINT.json",
-      "bytes": 1884,
-      "sha256": "5056e332ad9d289a58fd9b0e7d3ea56c6806182655b98ddfe338fb37c9c2eb13"
+      "bytes": 2231,
+      "sha256": "210238caa63221af443f5f1134b3f27c6aa07656ca7fdb5b4d820809ef27dff8"
     },
     {
       "path": "CREATION_CHECKPOINT_HANDOFF.md",
@@ -41,8 +41,8 @@
     },
     {
       "path": "PROJECT_STATE.md",
-      "bytes": 2402,
-      "sha256": "dad6d08cbd71aaafb4680b013024c46c5eb3a41ff59c153eef574660b00d3f67"
+      "bytes": 2302,
+      "sha256": "a831337c1f8ce0cc41bd35bad32755516447ff1254c6d3275d83d360034bb5c7"
     },
     {
       "path": "PROJECT_WORKFLOW.md",
@@ -76,8 +76,8 @@
     },
     {
       "path": "docs/TRIAL_REVIEW_2026-11-12.md",
-      "bytes": 4437,
-      "sha256": "99bac509e3601917f8017131076843a94bb9d4fa3b507efa138a309e0e50dc93"
+      "bytes": 2791,
+      "sha256": "83cd7f8d61c66f2f8d5b909bee189996d3bd39611d4a645af80b891f142cac55"
     },
     {
       "path": "examples/one-conversation/CHECKS.json",
@@ -141,8 +141,8 @@
     },
     {
       "path": "skills/yuri-card-creator/references/testing.md",
-      "bytes": 3299,
-      "sha256": "25eeef5fcf6c302193027f89d563bf28df16d975dbdefb7be62f4376381759aa"
+      "bytes": 3705,
+      "sha256": "9ed2c15e0e37054bc3e008e1781d4bcc131f9c542afa4338ecd6fb596b8d8861"
     },
     {
       "path": "skills/yuri-card-creator/scripts/create_card.py",
@@ -170,7 +170,7 @@
       "sha256": "60076530721470811893bc663c3102e6947b77957f0491c74119a79e3f2976c8"
     }
   ],
-  "delivery_id": "three-trial-review-20261112",
+  "delivery_id": "retained-png-review-20261112",
   "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
   "target_branch": "yuri-dev",
   "target_path": "extensions/yuri-creation/",

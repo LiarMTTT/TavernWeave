@@ -25,3 +25,7 @@ For PNG output, deliver the actual revised PNG and decoded JSON. A report contai
 Use exact `{{user}}` macros in runtime fields. A spelling difference in source notes alone is not a runtime failure. Keep missing numeric entry IDs and unknown metadata unless a specific change is authorized.
 
 Distinguish agent-reported checks, checks independently reproduced from submitted files, observed host import and observed live roleplay. Ask only for the one manual host interaction that matters next. Do not mark all paths passed because an agent produced plausible JSON.
+
+## Withdrawn cases
+
+Honor the current user-selected test scope. When a case is withdrawn, exclude it from current acceptance evidence and future checks. Do not retrieve it from trash, reopen old links or reuse cached content. Update active review records without rewriting unrelated Git history. Inspect only currently authorized artifacts; a new retained PNG does not reactivate an earlier removed case.
