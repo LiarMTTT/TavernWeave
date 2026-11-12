@@ -21,10 +21,18 @@ The active Drive folder contains wuren-shuming-shen-yanqiu.card.png. The PNG its
 
 The original unembedded avatar was not submitted in this folder. Therefore this review does not claim a before/after image-chunk comparison or prove which command the other agent executed. Structural correctness and embedded-payload equality were independently checked from the current PNG.
 
+## Import and short chat acceptance
+
+The user reports that PNG import appeared normal and that the multi-turn conversation was satisfactory. The supplied private JSONL was parsed and all selected message texts were reviewed: one opening, three user messages and three subsequent character replies. It supports this specific short roleplay session; it is not a model comparison or broad host-compatibility result.
+
+The transcript remains private and is not bundled into public source. The reviewer did not operate the user's SillyTavern UI. Import success is user-reported; the exported conversation is supporting evidence. Embedded worldbook content was already verified from the PNG, but the transcript alone does not prove which entries were injected into every model request.
+
+Non-blocking observations: some continuation text assumes small player actions, and one prop's location drifts between replies. The card already specifies player control. The exact assembled model prompts and other host settings are not supplied, so these observations are not attributed to an exporter defect. The user's acceptance is preserved; no narrative rewrite or repeated trial is required for this checkpoint.
+
 ## Status and next step
 
-One active original-creation trial is supported by reproducible JSON outputs and a verified PNG artifact. Two earlier cases are withdrawn, not failed/passed acceptance fixtures. No live SillyTavern import, frontend interaction or roleplay outcome is claimed.
+One retained original-creation trial now has reproducible JSON outputs, a verified PNG, user-reported successful import and an accepted short chat. The two withdrawn cases remain excluded. Native plugin installation, frontend redesign, long-session behavior and other source/adaptation routes are not established by this trial.
 
-The next useful human check is to import the retained PNG into SillyTavern, confirm the avatar and opening, and confirm the embedded worldbook is present. No separate worldbook import should be needed for this artifact. Feedback can stay in conversation; the agent records findings.
+The original-creation/PNG checkpoint is ready for a bounded release review. Prepare the main-targeting release PR without merging it until the user authorizes release/merge. No conversion code or approved narrative content changed. The existing 16 focused runtime tests remain the code baseline; no generic upstream suite or additional model trial was repeated.
 
-No conversion code or narrative content was changed. The existing 16 focused runtime tests remain the code baseline. Custom-profile compatibility, legacy-file licensing and real-use validation of frozen Workbench v1.2.0 remain deferred. Frontend redesign is not a prerequisite for this text-first trial.
+Custom-profile compatibility, legacy-file licensing and real-use validation of frozen Workbench v1.2.0 remain deferred.

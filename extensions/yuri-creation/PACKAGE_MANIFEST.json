@@ -11,13 +11,13 @@
     },
     {
       "path": "CHECKPOINT.json",
-      "bytes": 2231,
-      "sha256": "210238caa63221af443f5f1134b3f27c6aa07656ca7fdb5b4d820809ef27dff8"
+      "bytes": 2839,
+      "sha256": "07090330f97b071b2a3ad5a9d29702ac7409a70927e39040dc6c5c206744d007"
     },
     {
       "path": "CREATION_CHECKPOINT_HANDOFF.md",
-      "bytes": 1571,
-      "sha256": "46ec952e2737fec43e06e16f5ffc886b0be432793c76cfcd976d41e75022ef25"
+      "bytes": 1989,
+      "sha256": "68e2ed453ed2adb3d5b550b308aff4da07beb492ed604a1fabe82659f2ff76fb"
     },
     {
       "path": "FORK_BASE.json",
@@ -41,8 +41,8 @@
     },
     {
       "path": "PROJECT_STATE.md",
-      "bytes": 2302,
-      "sha256": "a831337c1f8ce0cc41bd35bad32755516447ff1254c6d3275d83d360034bb5c7"
+      "bytes": 2071,
+      "sha256": "541c0f2e553c8a802059acd2dffd24dd8d59907033f93cc111371529155edfd3"
     },
     {
       "path": "PROJECT_WORKFLOW.md",
@@ -51,13 +51,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 1970,
-      "sha256": "9521af8dd995939c74d42738a1323dd72a734d9623f4f21fe19f4b8d5ccb6cb2"
+      "bytes": 2021,
+      "sha256": "059172dfbb854c63419f0b5b497ef075e8c015fe41766156332e54fad4b9fc77"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 2143,
-      "sha256": "eb2a17e5f129a8853a97b3e7228a8d44496e19c2fc4367d70b9571f36d3477ef"
+      "bytes": 2279,
+      "sha256": "3a73111ab5a7d7784e9b9b27ac351bbf58822305fc71aa520eaec9eb590992d6"
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "bytes": 1597,
+      "sha256": "48c7aaeff277ab9c2d82659eb8d32d4b06621451bc7740867df253c0b3ddd14a"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -76,8 +81,8 @@
     },
     {
       "path": "docs/TRIAL_REVIEW_2026-11-12.md",
-      "bytes": 2791,
-      "sha256": "83cd7f8d61c66f2f8d5b909bee189996d3bd39611d4a645af80b891f142cac55"
+      "bytes": 3955,
+      "sha256": "4851678e89be9d698c092782684e877b47b73e0a9a95f1f52c22d70ba08b973e"
     },
     {
       "path": "examples/one-conversation/CHECKS.json",
@@ -170,7 +175,7 @@
       "sha256": "60076530721470811893bc663c3102e6947b77957f0491c74119a79e3f2976c8"
     }
   ],
-  "delivery_id": "retained-png-review-20261112",
+  "delivery_id": "import-chat-acceptance-20261112",
   "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
   "target_branch": "yuri-dev",
   "target_path": "extensions/yuri-creation/",

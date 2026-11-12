@@ -14,11 +14,12 @@
     "worldbook_entries": 7,
     "structural_checks_passed": 15,
     "actual_tavernweave_documents_read": 2,
-    "complete_plugin_installation": "not_run"
+    "complete_plugin_installation": "not_run",
+    "scope": "historical_internal_original_trial"
   },
   "parent_review": "actual draft read; goals, causal tension, player agency and knowledge boundaries inspected",
-  "sillytavern_import": "not_run",
-  "live_roleplay": "not_run",
+  "sillytavern_import": "user_reported_success",
+  "live_roleplay": "user_accepted_short_trial",
   "v1_2_0_validation": "on_hold",
   "publication": "direct_github_feature_branch_and_pr",
   "remaining_scope": [
@@ -57,6 +58,21 @@
       "unembedded_avatar_comparison": "not_available"
     },
     "live_host_tests_observed": 0,
-    "report": "docs/TRIAL_REVIEW_2026-11-12.md"
-  }
+    "report": "docs/TRIAL_REVIEW_2026-11-12.md",
+    "user_reported_import_success": true,
+    "short_chat": {
+      "status": "user_accepted",
+      "private_transcript_reviewed": true,
+      "opening_messages": 1,
+      "user_messages": 3,
+      "generated_replies": 3,
+      "non_blocking_observations": [
+        "minor player-action assumptions",
+        "prop continuity drift"
+      ],
+      "assembled_model_prompts_available": false,
+      "raw_transcript_published": false
+    }
+  },
+  "release_readiness": "original_creation_png_checkpoint_ready_for_main_pr_review"
 }

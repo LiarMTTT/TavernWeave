@@ -16,7 +16,7 @@ Use my saved preferences and handle the files; I will give feedback here.
 
 No reference text or image is needed. The starting main cast consists of adult women, including author-defined virtual and nonhuman women. You retain control of your player character's current actions and replies.
 
-The agent creates a final card, a worldbook and an original-creation record. Import the final JSON into SillyTavern and discuss revisions in the conversation.
+The agent creates a final card, a worldbook and an original-creation record. Import the final JSON—or a PNG packaged with your chosen avatar—into SillyTavern and discuss revisions in the conversation. The worldbook is embedded in the card.
 
 ## What this checkpoint provides
 
@@ -25,7 +25,7 @@ The agent creates a final card, a worldbook and an original-creation record. Imp
 - A thin build helper and the unchanged, attributed Foreverse exporter.
 - An optional pinned TavernWeave authoring-file bridge. The card can also be created in reported standalone mode.
 
-This is a portable project checkpoint, not a native host plugin installation. Ask your agent to research a factual setting, review an image, or package the card with a chosen PNG avatar. Research and image creation use tools available in your current workspace; they are optional. Native host installation and live SillyTavern validation remain unverified.
+This is a portable project checkpoint, not a native host plugin installation. Ask your agent to research a factual setting, review an image, or package the card with a chosen PNG avatar. Research and image creation use tools available in your current workspace; they are optional. Native host installation is not included.
 
 Custom preference modes beyond this checkpoint’s adult main-cast defaults are deferred; loading a saved profile does not establish full compatibility.
 
