@@ -1,11 +1,7 @@
-# Yuri Card Workbench 0.5.0
+# Yuri Card Workbench 0.5.0 for Gemini
 
-Native skills-only plugin: original conversation, inherited JSON/PNG, supplied posts and novel TXT/EPUB excerpts. The four yuri entries share the packaged TavernWeave dependencies.
+Import each of the four yuri skills under skills/ individually in Gemini CLI or Task mode. Keep this complete folder available: wrappers require extensions/yuri-creation and the 23 base skills. If your host copies only the selected skill folder, its sibling resources must also be made accessible. Automatic plugin-wide transitions are unavailable; explicitly load the required dependencies.
 
-[English guide](extensions/yuri-creation/README.md) · [中文说明](extensions/yuri-creation/README.zh-CN.md) · [Install / 安装](extensions/yuri-creation/docs/NATIVE_HOSTS.md)
+[English guide](extensions/yuri-creation/README.md) · [中文说明](extensions/yuri-creation/README.zh-CN.md) · [Installation and limits](extensions/yuri-creation/docs/NATIVE_HOSTS.md)
 
-Install/enable through your host, then start a new task and ask it to list the four yuri skills. This generated branch is a complete plugin folder, not the editable development source. Do not copy individual wrappers into a standalone skills folder. No hooks, MCP server, keys or global rule changes are installed.
-
-Source revision: `3ebc2a536dabb37328d8cc9ad05b5ad6182d8e8b`. See NATIVE_PLUGIN.json for package evidence. Account installation, actual skill discovery and live host execution remain separate checks.
-
-Licensing: original additions are MIT; the unchanged TavernWeave base retains its root LICENSE, Required Notice and third-party terms. See NATIVE_LICENSE_BOUNDARY.md and THIRD_PARTY_NOTICES.md.
+Built from `4c71449dee3555732c75b912dbee9bcb3186f389`. See NATIVE_PLUGIN.json and NATIVE_LICENSE_BOUNDARY.md. Optional context, extension and agent descriptors are retained from the submitted adapter; their presence does not establish plugin import support or that the host loaded them.

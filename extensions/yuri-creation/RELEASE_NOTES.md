@@ -1,4 +1,12 @@
-# Yuri Card Workbench 0.5.0 native integration checkpoint
+# Yuri Card Workbench 0.5.0 — official release
+
+Integrates the accepted Codex/ChatGPT Work, DeepSeek Harness and Gemini CLI/Task adapters into maintained source. Four workflows cover original conversation, inherited JSON/PNG cards/worldbooks, supplied posts and bounded TXT/Markdown/EPUB excerpts. Canonical authoring and conversion code is unchanged from the accepted 0.5.0 checkpoint.
+
+`yuri-plugin` remains the portable plugin distribution. `DSH-plugin` provides the DSH adapter and its .tgz build. `Gemini-plugin` is generated from maintained templates and uses individually imported skills. Gemini plugin import and automatic plugin-wide handoffs are unavailable in the accepted environment; dependencies must be loaded explicitly from the complete package. Source and host acceptance are recorded in docs/HOST_ACCEPTANCE_2026-11-13.md.
+
+GitHub tag: `yuri-v0.5.0`. Retains TavernWeave license/notices and separately licensed original additions. This is a GitHub release, not an OpenAI/Google plugin-directory approval. Dedicated name-choice testing, custom profiles, legacy-code licensing and advanced migrations remain separate scope.
+
+# 0.5.0 native integration checkpoint
 
 Adds a committed-blob native plugin exporter, four generated discovery wrappers and UI metadata, portable/Codex/Claude skills-only manifests, and GitHub marketplace catalogs. The native folder retains all 23 pinned upstream skill dependencies and the maintained yuri extension layout. Original source inventories/installers and dependency licenses remain unchanged. Generated output is a folder/channel, not a compressed archive or an account installation.
 

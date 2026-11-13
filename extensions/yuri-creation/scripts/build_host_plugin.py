@@ -100,6 +100,7 @@ def native_files(config, version, source_commit, base_names, source_count, licen
         "Generated native entry wrappers, agents/openai.yaml, plugin/marketplace metadata, README.md, this boundary, "
         f".gitignore and NATIVE_PLUGIN.json are original additions under [{EXT}/LICENSE]({EXT}/LICENSE). "
         "Each wrapper also carries that MIT license. UPSTREAM_README.md is unchanged upstream material. "
+        "Gemini-derived context/rule/agent templates retain TavernWeave terms as listed in the extension LICENSE_BOUNDARY.md; their original Yuri additions are MIT. "
         "The Foreverse vendor file/notice and AFV MIT notice remain independently applicable. "
         "No combined-package MIT grant is implied.\n").encode()
     files["NATIVE_PLUGIN.json"] = dump({"schema": "yuri/native-plugin/v1", "name": config["name"], "version": version,
@@ -111,7 +112,7 @@ def native_files(config, version, source_commit, base_names, source_count, licen
     return files
 
 
-def build(repo, ref, output, emit_git_tree=False):
+def build(repo, ref, output, emit_git_tree=False, host="portable"):
     repo, requested = Path(repo).resolve(), Path(output).absolute()
     require(not any(p.is_symlink() for p in (requested, *requested.parents)), "Linked build output is unsupported")
     output = requested.resolve()
@@ -146,13 +147,34 @@ def build(repo, ref, output, emit_git_tree=False):
     require(all(n.startswith(EXT + "/") for n in tracked if n.startswith("extensions/")), "Review other extension trees before exporting them")
     contents = upstream.read_blobs(repo, chosen)
     generated = native_files(config, version, commit, base_names, len(chosen), ext_bytes[EXT + "/LICENSE"])
+    if host == "gemini":
+        prefix = EXT + "/hosts/gemini/"
+        generated.update({name[len(prefix):]: raw for name, raw in ext_bytes.items()
+                          if name.startswith(prefix) and name != prefix + "README.md"})
+        receipt = json.loads(generated["NATIVE_PLUGIN.json"])
+        receipt["distribution_branch"] = "Gemini-plugin"
+        receipt["host_scope"] = ["Gemini CLI individually imported skills", "Gemini Task mode individually imported skills"]
+        receipt["host_loading"] = "not_observed_for_this_build"
+        receipt["not_claimed"] = ["Gemini plugin import", "automatic cross-skill transitions", "public-directory publication", "new card conversion or roleplay"]
+        receipt["skill_import"] = "Import the four skills individually; retain the complete package and explicitly load dependencies."
+        generated["NATIVE_PLUGIN.json"] = dump(receipt)
+        generated["README.md"] = ("# Yuri Card Workbench " + version + " for Gemini\n\n"
+            "Import each of the four yuri skills under skills/ individually in Gemini CLI or Task mode. "
+            "Keep this complete folder available: wrappers require extensions/yuri-creation and the 23 base skills. "
+            "If your host copies only the selected skill folder, its sibling resources must also be made accessible. "
+            "Automatic plugin-wide transitions are unavailable; explicitly load the required dependencies.\n\n"
+            f"[English guide]({EXT}/README.md) · [中文说明]({EXT}/README.zh-CN.md) · "
+            f"[Installation and limits]({EXT}/docs/NATIVE_HOSTS.md)\n\n"
+            f"Built from `{commit}`. See NATIVE_PLUGIN.json and NATIVE_LICENSE_BOUNDARY.md. "
+            "Optional context, extension and agent descriptors are retained from the submitted adapter; "
+            "their presence does not establish plugin import support or that the host loaded them.\n").encode()
     for name in config["entry_points"]:
         raw = ext_bytes[f"{EXT}/skills/{name}/SKILL.md"]
         match = re.match(br"---\r?\n([\s\S]*?)\r?\n---\r?\n", raw)
         require(match is not None and re.search(br"(?m)^name: " + name.encode() + br"\r?$", match[1]), "Canonical entry name differs")
         path = f"skills/{name}/SKILL.md"
         generated[path] = b"---\n" + match[1].replace(b"\r\n", b"\n") + b"\n---\n\n" + generated[path]
-    generated["UPSTREAM_README.md"] = base_bytes["README.md"]
+    generated["UPSTREAM_README.md"] = git(repo, "show", f"{base_commit}:README.md")
     contents.update(generated)
     seen = set()
     for name in contents:
@@ -186,7 +208,7 @@ def build(repo, ref, output, emit_git_tree=False):
                 native_tree = indexed("write-tree").decode().strip()
         plan = {"schema": "yuri/native-export/v1", "source_commit": commit,
                 "base_tree": git(repo, "rev-parse", commit + "^{tree}").decode().strip(),
-                "expected_tree": native_tree, "branch": config["distribution_branch"], "tree_elements": elements}
+                "expected_tree": native_tree, "branch": "Gemini-plugin" if host == "gemini" else config["distribution_branch"], "tree_elements": elements}
         (stage / "native-tree-plan.json").write_bytes(dump(plan))
         result = {"output": str(output / config["name"]), "version": version, "source_commit": commit,
                   "skill_count": len(base_names) + 4, "files": len(contents), "tree": native_tree,
@@ -201,8 +223,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=HERE.parents[1]); parser.add_argument("--ref", default="HEAD")
     parser.add_argument("--output", type=Path, required=True); parser.add_argument("--emit-git-tree", action="store_true")
+    parser.add_argument("--host", choices=("portable", "gemini"), default="portable")
     args = parser.parse_args()
-    try: print(json.dumps(build(args.repo, args.ref, args.output, args.emit_git_tree), ensure_ascii=False, indent=2))
+    try: print(json.dumps(build(args.repo, args.ref, args.output, args.emit_git_tree, args.host), ensure_ascii=False, indent=2))
     except (OSError, ValueError, KeyError, TypeError) as error: parser.exit(1, str(error) + "\n")
 
 

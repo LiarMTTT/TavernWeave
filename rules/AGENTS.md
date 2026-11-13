@@ -47,12 +47,12 @@
 
 ## Antigravity and Gemini CLI Adapter
 
-Read skills through their actual installed catalog paths (`<plugin-root>/SKILL.md` and `<plugin-root>/skills/<name>/SKILL.md`). A dollar-prefixed skill name is a readable skill reference, not a shell command.
+Read skills through their actual installed catalog paths (`<plugin-root>/skills/<name>/SKILL.md`). A dollar-prefixed skill name is a readable skill reference, not a shell command.
 For saved guidance and rewriting, use the bundled managers with `--host antigravity`. Client `--scope-root` is the resolved `.gemini` directory; inspect its `AGENTS.md`, `GEMINI.md` and `config/` equivalents cumulatively. Keep existing user settings outside this generated plugin rule.
 
 ## Yuri Card Workbench Entry Workflows (`tavernweave-yuri`)
 
-This package (`tavernweave-yuri` v0.5.0, branch `Gemini-plugin`) provides a main-folder `SKILL.md` (`name: tavernweave-yuri`) and four primary yuri card workflows in `skills/` backed by 23 unchanged TavernWeave dependency skills:
+This package (`tavernweave-yuri` v0.5.0, branch `Gemini-plugin`) provides four primary yuri workflows in `skills/`, backed by 23 unchanged TavernWeave dependency skills. Import each primary skill individually and keep the complete shared package available:
 
 - `yuri-card-creator`: Wrapper at `<plugin-root>/skills/yuri-card-creator/SKILL.md` -> Canonical source at `<plugin-root>/extensions/yuri-creation/skills/yuri-card-creator/SKILL.md`.
 - `adapt-yuri-card`: Wrapper at `<plugin-root>/skills/adapt-yuri-card/SKILL.md` -> Canonical source at `<plugin-root>/extensions/yuri-creation/skills/adapt-yuri-card/SKILL.md`.
@@ -60,3 +60,5 @@ This package (`tavernweave-yuri` v0.5.0, branch `Gemini-plugin`) provides a main
 - `novel-excerpt-to-yuri-card`: Wrapper at `<plugin-root>/skills/novel-excerpt-to-yuri-card/SKILL.md` -> Canonical source at `<plugin-root>/extensions/yuri-creation/skills/novel-excerpt-to-yuri-card/SKILL.md`.
 
 Resolve `<extension-root>` as `<plugin-root>/extensions/yuri-creation` and `<skill>` as `<extension-root>/skills/<name>`. Run `python3 <extension-root>/scripts/host_probe.py` when shell execution is available to verify packaged files and Python/Node availability.
+
+Gemini CLI and Task mode use individually imported skills in the accepted setup. Native plugin-wide skill handoffs are unavailable; explicitly load each required dependency from this complete package and continue from the saved casework. Do not claim automatic transitions or guaranteed cross-host parity. These context/agent files are optional compatibility resources, not proof that the host loaded them.

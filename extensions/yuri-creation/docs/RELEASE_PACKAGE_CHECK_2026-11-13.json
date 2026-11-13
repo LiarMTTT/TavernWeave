@@ -1,0 +1,56 @@
+{
+  "schema": "yuri/release-package-check/v1",
+  "source_commit": "2fb5a16346c6f256f9a9826164502264f43e7aae",
+  "builds": {
+    "portable": {
+      "output": "portable/tavernweave-yuri",
+      "version": "0.5.0",
+      "source_commit": "2fb5a16346c6f256f9a9826164502264f43e7aae",
+      "skill_count": 27,
+      "files": 632,
+      "tree": "4735bc1ac91432d5f65c605ffbf9eced09a111d6",
+      "host_loading": "not_observed",
+      "account_installation": "not_performed"
+    },
+    "gemini": {
+      "output": "gemini/tavernweave-yuri",
+      "version": "0.5.0",
+      "source_commit": "2fb5a16346c6f256f9a9826164502264f43e7aae",
+      "skill_count": 27,
+      "files": 638,
+      "tree": "e3b3f841bee4bd40741902023410ab061fe21739",
+      "host_loading": "not_observed",
+      "account_installation": "not_performed"
+    }
+  },
+  "dsh": {
+    "version": "0.5.0",
+    "source_identity": true,
+    "notices_retained": true,
+    "entries": 545
+  },
+  "checks": {
+    "extension_manifest_hashes_valid": true,
+    "upstream_skill_byte_identity": true,
+    "source_sha_receipts_exact": true,
+    "retained_licenses_notices": true,
+    "packaged_probe": "portable passed",
+    "packages_exclude_tests_and_private_paths": "No source-root tests/replay/private-casework or private case content identified. Nested tests/fixtures are preserved unchanged within upstream base skills; extensions/yuri-creation/tests/test_creator.py is also packaged. These are nonblocking package-size contents, not a privacy/distribution defect."
+  },
+  "defects": [],
+  "workflow_review": {
+    "path": ".github/workflows/yuri-release.yml",
+    "status": "static review passed; minor guard limitation",
+    "findings": [
+      "Triggers only on main for VERSION, RELEASE_NOTES, or workflow edits; manual dispatch only passes when ref is main.",
+      "contents:write and concurrency group fit tag push/release creation; existing release is checked before build, and existing local tag must resolve to GITHUB_SHA.",
+      "Builds use the event SHA and stage outside checkout; release assets include portable ZIP, Gemini ZIP, DSH TGZ, SOURCE.json and SHA256SUMS.txt.",
+      "Current version and release-notes anchor are consistent for 0.5.0."
+    ],
+    "limitation": "Release existence lookup uses releases?per_page=100 without pagination. If the repository has more than 100 releases and the target is older than the first page, the guard may miss it; gh release create would then fail on the duplicate rather than overwrite. Also package-source/build-script-only pushes do not trigger; manual dispatch on main is needed."
+  },
+  "date": "2026-11-13",
+  "model": "GPT-6 Luna",
+  "scope": "one package-only check; no repeated host imports, card conversion, roleplay or old suites",
+  "source_note": "Checked source precedes addition of this receipt, its manifest update and the reviewed release workflow. Canonical runtime and skill sources remain identical."
+}
