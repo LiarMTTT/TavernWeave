@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "target_branch": "yuri-dev",
+  "base_commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+  "local_feature_branch": "feature/yuri-creation-integration",
+  "target_path": "extensions/yuri-creation",
+  "upstream_repository": "https://github.com/LiarMTTT/TavernWeave",
+  "upstream_commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+  "host_registration": "not_verified",
+  "publication": "direct_github_feature_branch_and_pr"
+}

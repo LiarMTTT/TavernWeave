@@ -1,0 +1,38 @@
+{
+  "schema": "yuri/native-hosts/v1",
+  "name": "tavernweave-yuri",
+  "marketplace": "tavernweave-yuri-native",
+  "distribution_branch": "yuri-plugin",
+  "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "license": "PolyForm-Noncommercial-1.0.0 AND MIT",
+  "entry_points": {
+    "yuri-card-creator": {
+      "display_name": "Yuri Card Creator",
+      "short_description": "Create original yuri cards through conversation",
+      "default_prompt": "Use $yuri-card-creator to create a complete original yuri card; decide unspecified details and handle the files."
+    },
+    "adapt-yuri-card": {
+      "display_name": "Adapt Yuri Card",
+      "short_description": "Adapt JSON or PNG cards while preserving settings",
+      "default_prompt": "Use $adapt-yuri-card to adapt this card into a yuri story, preserving artwork, scripts and unrelated worldbook settings."
+    },
+    "post-to-yuri-card": {
+      "display_name": "Post to Yuri Card",
+      "short_description": "Turn a supplied post into a source-linked yuri card",
+      "default_prompt": "Use $post-to-yuri-card to adapt this post, keeping the poster as {{user}} and new story choices separate from source facts."
+    },
+    "novel-excerpt-to-yuri-card": {
+      "display_name": "Novel Excerpt to Yuri Card",
+      "short_description": "Adapt selected TXT or EPUB prose into a yuri card",
+      "default_prompt": "Use $novel-excerpt-to-yuri-card on one short chapter or scene; retain provenance and let me review the result here."
+    }
+  },
+  "components": {
+    "skills": true,
+    "mcp": false,
+    "hooks": false,
+    "global_instructions": false,
+    "personal_skill_installation": false
+  },
+  "host_loading": "requires user installation and observed skill discovery in a new task"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "tavernweave-yuri",
+  "version": "1.2.0",
+  "description": "Create original yuri roleplay cards or adapt existing cards, posts and novel excerpts while preserving source records and unrelated settings.",
+  "author": {
+    "name": "Yuri Card Workbench contributors"
+  },
+  "homepage": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "license": "PolyForm-Noncommercial-1.0.0 AND MIT",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Yuri Card Workbench",
+        "shortDescription": "Create and adapt yuri cards",
+        "longDescription": "Four yuri creation/adaptation workflows with the pinned TavernWeave authoring and source-library dependencies. The host supplies file tools, Python, Node, search and images when available.",
+        "developerName": "Yuri Card Workbench contributors",
+        "category": "Creativity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "帮我通过对话创作一张百合角色卡，未指定的细节由你决定。",
+          "把这张 JSON 或 PNG 卡改编成百合故事，保留无关设置。",
+          "从这段帖子或小说片段制作百合角色卡，保留来源记录。"
+        ]
+      }
+    }
+  }
+}

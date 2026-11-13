@@ -1,0 +1,15 @@
+{
+  "name": "tavernweave-yuri-native",
+  "interface": {
+    "displayName": "Yuri Card Workbench"
+  },
+  "plugins": [
+    {
+      "name": "tavernweave-yuri",
+      "source": {
+        "source": "local",
+        "path": "./"
+      }
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+{
+  "version": "1.2.0",
+  "scope": "complete extension source; excludes itself; installed at extensions/yuri-creation/ in this fork",
+  "base_commit": "5ab97e2dd36cda9cf97e9e131fa5d719be48cf80",
+  "delete_paths": [],
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 82,
+      "sha256": "cedb43888acc74e20135e260a26a8fa3155510f3b3d990c2fff13bd5dbf9c7f0"
+    },
+    {
+      "path": "CHECKPOINT.json",
+      "bytes": 8431,
+      "sha256": "b778e31a8cca7fcf3b895161909a8112840a36a1acd33bc694b6565c7d241e46"
+    },
+    {
+      "path": "CREATION_CHECKPOINT_HANDOFF.md",
+      "bytes": 2346,
+      "sha256": "d633e494fb304a55337254b5d8b3a226ec4da3455d46b6363e114c2f0f9d9ff0"
+    },
+    {
+      "path": "FORK_BASE.json",
+      "bytes": 497,
+      "sha256": "9d7ec5d63f1b9ed755eeb1439a43770467d2336e1ef3828fc0b0af653e5356dd"
+    },
+    {
+      "path": "INTEGRATION.md",
+      "bytes": 9819,
+      "sha256": "24f1366254bb46fe25976b86296e9f7ef0f885f70ba3c444a00eb4c5c6bcbd30"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1089,
+      "sha256": "a03cfd83bfc7f45fa952d8b2d18c3071b97daec8121497cfffab5d7a84f537b7"
+    },
+    {
+      "path": "LICENSE_BOUNDARY.md",
+      "bytes": 4534,
+      "sha256": "884f2387b496f3fa7e09fbce75ec2787fc10454c84258bf68f6f31bcf07813ed"
+    },
+    {
+      "path": "PROJECT_STATE.md",
+      "bytes": 4546,
+      "sha256": "e454c54cc4baf8e601645c0d9fd13513e0f137d0bd9b3950fab4db1b0013578b"
+    },
+    {
+      "path": "PROJECT_WORKFLOW.md",
+      "bytes": 3218,
+      "sha256": "d580719ce59ba3e346a1c52d6c9d4f363d1fece25f00a001f5b67a813d38663a"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5760,
+      "sha256": "13d7e3a6fd89190286f1418185b692eb9724a5b5fc9eb65dc056abbdb4393e0a"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "bytes": 4909,
+      "sha256": "365acb3fe8e4b87378c84790ef9d60bb579c244de03c9fa8ce3d4bd3e5161dbb"
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "bytes": 10045,
+      "sha256": "5ee5f01ae921a5273544094f9dc53591e467b89e8a0b28af7ece78d16f24e836"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 3246,
+      "sha256": "587738eeebfec6a4bd0df70d34c585bd118781f8059e5e923a527ff671f3ca86"
+    },
+    {
+      "path": "UPSTREAM.json",
+      "bytes": 2328,
+      "sha256": "42d2681d3bc5259274ad5c0eb7593fd9384b49ddbaa86664851ec33d55897076"
+    },
+    {
+      "path": "VERSION",
+      "bytes": 6,
+      "sha256": "1e5b51cde515396a9fa762909cf8ca6584ccc564b325d2eebeea76175fe95c4d"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "bytes": 3943,
+      "sha256": "cc7486944d8a1c8a65d16c85db0d5cf6034ab96cffd9aadfbdb483c528fc6b31"
+    },
+    {
+      "path": "docs/CUSTOM_PROFILE_TRIAL_REVIEW_2026-11-13.md",
+      "bytes": 2716,
+      "sha256": "db43c57bee675e44bad7d3596fd126be2e1d77e2a1d49134e7406989896d895f"
+    },
+    {
+      "path": "docs/FILE_SUPPORT_REVIEW_2026-11-12.md",
+      "bytes": 3394,
+      "sha256": "6cc9b7b0a3f7fcd479ea7246442c488b8d51c6f6cd5ccfed4dc5def6bc4a3fc4"
+    },
+    {
+      "path": "docs/HOST_ACCEPTANCE_2026-11-13.md",
+      "bytes": 3764,
+      "sha256": "0ba3d775645fc3f266bd3f888aabccc260ca7a06f7630daecd7038700b48e434"
+    },
+    {
+      "path": "docs/NATIVE_HOSTS.md",
+      "bytes": 12508,
+      "sha256": "4f4f254662ee40eed7d893b45f8a544dbd460c713c36bd4df97fba075f27cfc8"
+    },
+    {
+      "path": "docs/NATIVE_HOST_REVIEW_2026-11-12.md",
+      "bytes": 2546,
+      "sha256": "b13a6e4803ac79472989a55f4d77c0cfc346a9293f2486d6b1e2483ee956ac83"
+    },
+    {
+      "path": "docs/RELEASE_PACKAGE_CHECK_2026-11-13.json",
+      "bytes": 2929,
+      "sha256": "52c8621f40c942159e83a9819a3ca2673e088465b5e57c3ef573228171d1c332"
+    },
+    {
+      "path": "docs/SOURCE_TRIAL_REVIEW_2026-11-12.md",
+      "bytes": 2689,
+      "sha256": "4ba5adabae1daadc72ca3e596a22d6d1bba5eb9957da0d2c22d77add735a2bcb"
+    },
+    {
+      "path": "docs/TRIAL_REVIEW_2026-11-12.md",
+      "bytes": 3955,
+      "sha256": "4851678e89be9d698c092782684e877b47b73e0a9a95f1f52c22d70ba08b973e"
+    },
+    {
+      "path": "docs/UPSTREAM_SYNC.md",
+      "bytes": 7841,
+      "sha256": "4b35f39d03e7584979b7339c2411245464c9c1a2008de517dfa0a362c6c48d56"
+    },
+    {
+      "path": "docs/upstream-sync/2026-11-13.json",
+      "bytes": 1600,
+      "sha256": "a0e5996c3bc84ec3aa3686904f2db437ab54a8d6bed46c5d75e9c12f830cca05"
+    },
+    {
+      "path": "examples/one-conversation/CHECKS.json",
+      "bytes": 1893,
+      "sha256": "a055f0830c642bf14d246974b0306d020be9e6c464af8990a06fe338fde1a817"
+    },
+    {
+      "path": "examples/one-conversation/card.md",
+      "bytes": 10208,
+      "sha256": "815387e2ae136c5de05597f560e070c5aa5d76e56e91db3c83a639efa540b738"
+    },
+    {
+      "path": "examples/one-conversation/creation-record.json",
+      "bytes": 5217,
+      "sha256": "7d9addfd981ffb09c0b4cf89fbf9c144ae22d623514bef05c49790142bff77ce"
+    },
+    {
+      "path": "examples/one-conversation/worldbook.json",
+      "bytes": 10567,
+      "sha256": "9ec455bc2dcb25e397a2badbf22db07810c5ca8bb009def5c867d55857889919"
+    },
+    {
+      "path": "examples/one-conversation/yuri-card.v2.json",
+      "bytes": 13357,
+      "sha256": "ae1dbc9620f1989d312b1568fe6121ed536ae2e739ca2ba92a0bfcf2d9c8e351"
+    },
+    {
+      "path": "examples/post-to-yuri/card.md",
+      "bytes": 1088,
+      "sha256": "70ffe7f732fb33c0979877e715cf3a20250355e78ada9f26e46faf2af9eff026"
+    },
+    {
+      "path": "examples/post-to-yuri/post.txt",
+      "bytes": 218,
+      "sha256": "7df9018bedf12453114d8f263d3944cf0c9f0973689f88783e60709eec8296d8"
+    },
+    {
+      "path": "examples/post-to-yuri/run_example.py",
+      "bytes": 4987,
+      "sha256": "c204af54d1596eb5e08e7494f402dcb8479406851020b43e130638da7757994b"
+    },
+    {
+      "path": "hosts/gemini/.antigravity-plugin/plugin.json",
+      "bytes": 1156,
+      "sha256": "212355109869f5d21109ccb00e6499e16d166dda7bb2eec6ddd8121089737a07"
+    },
+    {
+      "path": "hosts/gemini/GEMINI.md",
+      "bytes": 14111,
+      "sha256": "89ab5c5e1d95981b973943076b72834fac1d51a79cb5eb453578f405eaf78732"
+    },
+    {
+      "path": "hosts/gemini/README.md",
+      "bytes": 1441,
+      "sha256": "c493c9671cddb98b5fca4217397b1564d842c157ff63adfb5f3c0ab86a85f2b8"
+    },
+    {
+      "path": "hosts/gemini/agents/tavernweave-yuri.md",
+      "bytes": 2242,
+      "sha256": "6e0b1862b5f29ce2f45917722fd6a671949e59f88b1df27da3c21d2306cc278c"
+    },
+    {
+      "path": "hosts/gemini/agents/tavernweave.md",
+      "bytes": 1481,
+      "sha256": "fef4235a417dcab2fae66592b892457d930d04934a69906d08b6832c4a57cc22"
+    },
+    {
+      "path": "hosts/gemini/gemini-extension.json",
+      "bytes": 419,
+      "sha256": "35cbec591c7f450d86e396f510b2f9443bbf8b6b7bbc8261078661694c479a69"
+    },
+    {
+      "path": "hosts/gemini/rules/AGENTS.md",
+      "bytes": 14111,
+      "sha256": "89ab5c5e1d95981b973943076b72834fac1d51a79cb5eb453578f405eaf78732"
+    },
+    {
+      "path": "hosts/native.json",
+      "bytes": 1763,
+      "sha256": "fbfa7c1b962f3fce6a7c78c7fc9c7daab9d7d6892624ac15055c0d88973de391"
+    },
+    {
+      "path": "licenses/TAVERNWEAVE-LICENSE.md",
+      "bytes": 4574,
+      "sha256": "306f6b88b74ebee4afb142f77ce3164ee585cb18f49dc1637da44eb3384dfa42"
+    },
+    {
+      "path": "references/custom-profiles.md",
+      "bytes": 7074,
+      "sha256": "c972fb67f27cb92609671ced3cd00b3e8a2e4a29bb038c9994afe737b64a475b"
+    },
+    {
+      "path": "references/image-adaptation.md",
+      "bytes": 6049,
+      "sha256": "059506d198c2de379c8d193c94dc2f200f827072dba98382030b9319e81fba7e"
+    },
+    {
+      "path": "references/inherited-cards.md",
+      "bytes": 4835,
+      "sha256": "9dd2bda1959f353b4e4017a0b1d5bd460d134deab9a0e769f6698b425180be8b"
+    },
+    {
+      "path": "references/name-review.md",
+      "bytes": 3805,
+      "sha256": "04b0ff914631c9327abcd211139e4f4f99899908a86dc5f12611916b2b6116cd"
+    },
+    {
+      "path": "references/novel-inputs.md",
+      "bytes": 3881,
+      "sha256": "4c6e9896aef74a77a6480a508b914648300d08e2df54650ad1c9b1f727e65432"
+    },
+    {
+      "path": "references/source-records.md",
+      "bytes": 7224,
+      "sha256": "a998e96523e589274b73edd22bd77af6ca2a25739ffda2de11c58a6804272bc3"
+    },
+    {
+      "path": "scripts/build_host_plugin.py",
+      "bytes": 20274,
+      "sha256": "cc5dcc45b3cc774214312d7254ed7b18d06cf52a3e3a46a4f57f44dd1276e584"
+    },
+    {
+      "path": "scripts/card_file.py",
+      "bytes": 1595,
+      "sha256": "6ace0da63c8cd7cb4821e929bbbc93f9967c6f54647806e573e78368b1987773"
+    },
+    {
+      "path": "scripts/host_probe.py",
+      "bytes": 2337,
+      "sha256": "f785f0b769a8b096448890871cf83213a8bab44a5d80aa0bb5d7d24fc03ce733"
+    },
+    {
+      "path": "scripts/novel_source.py",
+      "bytes": 2427,
+      "sha256": "71d0db442c3b73daf40fc2f2b32c813bfa80d6d4aa1f56aa538701af250dc83a"
+    },
+    {
+      "path": "scripts/source_card.py",
+      "bytes": 2540,
+      "sha256": "98b890daba6b0d96347dafb010093f57b4a74636deae8bfb264ab0f4e9bae848"
+    },
+    {
+      "path": "scripts/upstream_sync.py",
+      "bytes": 9000,
+      "sha256": "d116dafa032afaeb5b0dd27c4212137e6c06c95c760e6e816688ccc274537d4a"
+    },
+    {
+      "path": "shared/card_files.py",
+      "bytes": 17178,
+      "sha256": "b7e55a5fa9362c60a3cf500f9c8ae4c9e02f56ccc4c901c61bf511c954dd96d4"
+    },
+    {
+      "path": "shared/novels.py",
+      "bytes": 9813,
+      "sha256": "ce1e808fcca6dfcec65e59c7c583750b44888d0c6dfecf76f1f7979d753cb4cd"
+    },
+    {
+      "path": "shared/profiles.py",
+      "bytes": 12692,
+      "sha256": "aba810a4c90c5c7f2ce7a6628bb2728da0427bcd5c4123731d1aca9dc0ec05b4"
+    },
+    {
+      "path": "shared/provenance.py",
+      "bytes": 21633,
+      "sha256": "de09d6b9e14c2995e914b123b93a2023ee671758edd7ea69d3cd58b25d52e998"
+    },
+    {
+      "path": "skills/adapt-yuri-card/SKILL.md",
+      "bytes": 6191,
+      "sha256": "2c396f13eabf98baf1f49ff34b8d91942608bf2ea8b1eec50dadfdb4e79938d4"
+    },
+    {
+      "path": "skills/novel-excerpt-to-yuri-card/SKILL.md",
+      "bytes": 4908,
+      "sha256": "9b5632b4cbbf6fbff5d6ec811516d0fc3833197bb4d566104b7c9da355b05904"
+    },
+    {
+      "path": "skills/post-to-yuri-card/SKILL.md",
+      "bytes": 7401,
+      "sha256": "ccb132cd52361bf3aba67df731123b4e79b6db60e024829079474cccc00a54b0"
+    },
+    {
+      "path": "skills/yuri-card-creator/SKILL.md",
+      "bytes": 8440,
+      "sha256": "523e01e5063a674820d58493f925a3b0752d5b6213758185cbbb8752e9a0bcab"
+    },
+    {
+      "path": "skills/yuri-card-creator/assets/interaction.en.json",
+      "bytes": 929,
+      "sha256": "7db9535d65737e6d63d1251ab05a821c19b74187e69ee0fdc94d3feb5455e81d"
+    },
+    {
+      "path": "skills/yuri-card-creator/assets/interaction.zh-CN.json",
+      "bytes": 938,
+      "sha256": "82a64a29a55adb5bf92576039ef696e8e5f8f8913665736cdb5e51537389f2ad"
+    },
+    {
+      "path": "skills/yuri-card-creator/assets/preferences.default.json",
+      "bytes": 463,
+      "sha256": "9e39d6988f3bbbf561746685bdca3d5a8772c4cce4d1f25ce844fb2588901d4a"
+    },
+    {
+      "path": "skills/yuri-card-creator/assets/upstream.json",
+      "bytes": 2328,
+      "sha256": "42d2681d3bc5259274ad5c0eb7593fd9384b49ddbaa86664851ec33d55897076"
+    },
+    {
+      "path": "skills/yuri-card-creator/references/optional-tools.md",
+      "bytes": 3254,
+      "sha256": "95bf2f2def0203d2989219aa263acae494a96b99e32ca2447d3e73eb0851cb44"
+    },
+    {
+      "path": "skills/yuri-card-creator/references/testing.md",
+      "bytes": 3705,
+      "sha256": "9ed2c15e0e37054bc3e008e1781d4bcc131f9c542afa4338ecd6fb596b8d8861"
+    },
+    {
+      "path": "skills/yuri-card-creator/scripts/create_card.py",
+      "bytes": 12121,
+      "sha256": "5239bc06f2303fc80db2f8f58c5e454e56e30246762b842b50b6b413c30e08d0"
+    },
+    {
+      "path": "skills/yuri-card-creator/scripts/vendor/FOREVERSE_LICENSE.txt",
+      "bytes": 1342,
+      "sha256": "3b959712acc512d8b0d38ccf0149c4b5ac0853fcdfbfb21483e460989f37cf54"
+    },
+    {
+      "path": "skills/yuri-card-creator/scripts/vendor/card_md_to_st.py",
+      "bytes": 10755,
+      "sha256": "155d3b3fcc26e6a6dfb54f45779d0370ef7f715c9aa97562750c915fe7997303"
+    },
+    {
+      "path": "tests/test_creator.py",
+      "bytes": 5577,
+      "sha256": "77834b67d5618acb38ed0955d0eb28a1d566f6806f22e8772b2f2b7e4bf5614b"
+    },
+    {
+      "path": "tests/test_optional_tools.py",
+      "bytes": 2730,
+      "sha256": "60076530721470811893bc663c3102e6947b77957f0491c74119a79e3f2976c8"
+    },
+    {
+      "path": "tests/test_profiles.py",
+      "bytes": 17015,
+      "sha256": "213070c4aa7bdb1d1420bde31723a396b19ac7c5553663e5b4f06597616b4f56"
+    },
+    {
+      "path": "tests/test_source_workflow.py",
+      "bytes": 10499,
+      "sha256": "f6aff38261d4c4bdad1e0ef0d8dbee3b7f2cb652eb86a570d523d16fffd8059c"
+    },
+    {
+      "path": "tests/test_upstream_sync.py",
+      "bytes": 10876,
+      "sha256": "6e2e5684b93dd53798f6210a41dff3b67afd57f2d8e73e87c2f67a7d4470ac0e"
+    }
+  ],
+  "delivery_id": "post-provenance-development-20261112",
+  "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "target_branch": "yuri-dev",
+  "target_path": "extensions/yuri-creation/",
+  "publication_method": "github_plugin"
+}

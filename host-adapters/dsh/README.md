@@ -40,6 +40,10 @@ dsh plugin --profile <profile> add <本地路径|tarball|git 地址|包名>
 - DSH 使用本插件包，不再需要把 `skills/` 复制到 `.agents/skills`；
 - 如果之前把 TW 的 Host Front Door 写进了 `AGENTS.md`，DSH 里应移除该区块，避免与插件注入重复（Codex 仍保留；Claude Code 插件的 hook 遇到该区块会自动停止注入）。
 
+## Yuri Workbench（yuri-dev 分支）
+
+`yuri-dev` 分支另带一个独立的 DSH 插件包 **TavernWeave Yuri Workbench**（`tavernweave-yuri-dsh`）：四个百合卡工作流（`yuri-card-creator`、`adapt-yuri-card`、`post-to-yuri-card`、`novel-excerpt-to-yuri-card`）加 23 个未改动的依赖技能，见 [`plugin-yuri/README.md`](plugin-yuri/README.md) 与 [`yuri-plugin-contract.json`](yuri-plugin-contract.json)。它与本页的 TavernWeave X DSH 插件互相独立，可单独安装；两者同时安装时依赖技能按同层注册顺序去重，功能不受影响。
+
 ## 当前状态
 
 - `dsh-plugin-contract.json` 的 `runtimeAccepted` 已在 **DSH Desktop 0.2.1-rc.2** 上翻转为 `true`：插件页、preset 选择、23 Skill 目录、Front Door、Soul 与完全权限下的终端均完成实机验收。

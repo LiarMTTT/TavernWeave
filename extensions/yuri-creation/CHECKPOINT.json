@@ -1,0 +1,210 @@
+{
+  "version": "1.2.0",
+  "scope": "specialized Yuri distribution: explicit upstream synchronization and accurate layer/entry counting",
+  "license_boundary_commit_before_dependency_copy": "f16de770ea0bb4d832f395d3eb026495006bf329",
+  "original_additions_license": "MIT",
+  "tavernweave_code_or_skill_prose_bundled": false,
+  "tavernweave_license_copy_retained": true,
+  "foreverse_exporter_unmodified_blob": "6cfd4efb3d0645627a21202520547fda1a4249ad",
+  "unit_tests_passed": null,
+  "fresh_agent_trial": {
+    "completed": true,
+    "additional_user_answers": 0,
+    "output_language": "zh-CN",
+    "worldbook_entries": 7,
+    "structural_checks_passed": 15,
+    "actual_tavernweave_documents_read": 2,
+    "complete_plugin_installation": "not_run",
+    "scope": "historical_internal_original_trial"
+  },
+  "parent_review": "actual draft read; goals, causal tension, player agency and knowledge boundaries inspected",
+  "sillytavern_import": "user_reported_success",
+  "live_roleplay": "user_accepted_short_trial",
+  "v1_2_0_validation": "on_hold",
+  "publication": "direct_github_feature_branch_and_pr",
+  "remaining_scope": [
+    "dedicated name-choice behavior during a later comprehensive phase",
+    "advanced schema and cross-dialect worldbook migration",
+    "legacy original-file licensing before any legacy-code reuse",
+    "new 1.0.0 host/visual/roleplay acceptance not performed"
+  ],
+  "legacy_v1_2_0": "unchanged; original licensing not changed",
+  "current_revision_scope": [
+    "committed-blob native folder exporter reusing pinned TavernWeave helpers",
+    "four generated native discovery wrappers with UI metadata",
+    "portable/Codex/Claude skills-only manifests and marketplaces",
+    "co-located source/authoring dependencies and host capability probe",
+    "generated distribution branch with source-commit receipt",
+    "ChatGPT Work browser import guide"
+  ],
+  "deferred": [
+    "legacy original-file licensing"
+  ],
+  "host_registration": "not_verified",
+  "user_trial_review": {
+    "historically_submitted_trials": 3,
+    "active_trials": 1,
+    "withdrawn_trials": 2,
+    "withdrawn_artifacts_must_not_be_recovered_or_reused": true,
+    "original_export_reproduced": 1,
+    "retained_png": {
+      "sha256": "79a93f23cf001ff4a2ea2f1d1949403d31f38a1cdfbe342f6041347c4df96da1",
+      "bytes": 2493668,
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "png_structure_and_decode": "passed",
+      "chara_matches_retained_json": true,
+      "ccv3_matches_project_wrapper": true,
+      "embedded_worldbook_entries": 10,
+      "unembedded_avatar_comparison": "not_available"
+    },
+    "live_host_tests_observed": 0,
+    "report": "docs/TRIAL_REVIEW_2026-11-12.md",
+    "user_reported_import_success": true,
+    "short_chat": {
+      "status": "user_accepted",
+      "private_transcript_reviewed": true,
+      "opening_messages": 1,
+      "user_messages": 3,
+      "generated_replies": 3,
+      "non_blocking_observations": [
+        "minor player-action assumptions",
+        "prop continuity drift"
+      ],
+      "assembled_model_prompts_available": false,
+      "raw_transcript_published": false
+    }
+  },
+  "release_readiness": "user-authorized 1.2.0 release after targeted upstream and package regressions",
+  "source_workflow_validation": {
+    "synthetic_unit_tests": 19,
+    "fresh_agent_completed": true,
+    "additional_user_answers": 0,
+    "input": "new synthetic short post, not withdrawn casework",
+    "source_records": 8,
+    "worldbook_entries": 5,
+    "source_gender_preserved": "unknown",
+    "output_mode": "source_yuri",
+    "card_hash_and_worldbook_equality": "passed",
+    "parent_prose_review": true,
+    "host_import": "not_run",
+    "live_roleplay": "not_run",
+    "recoverable_usage_finding": "reviewed_unit_ids uses local unit IDs; documentation/error clarified",
+    "tested_version": "0.3.0"
+  },
+  "source_fidelity_revision": {
+    "new_extraction_schema": "yuri/extraction/v2",
+    "promoted_v1_projects": "readable and buildable without retroactive claim-review assertions",
+    "synthetic_source_tests": 24,
+    "route_order": "guidance corrected; execution not automatically proven",
+    "name_review": "implemented in shared agent guidance; dedicated testing deferred by user request"
+  },
+  "user_post_trial": {
+    "tested_commit": "585ee9ea7ce982ddfe4b114187e0f5ffad03bd2b",
+    "model": "GPT-6.1 Terra",
+    "source_records": 7,
+    "worldbook_entries": 5,
+    "structural_checks": "passed",
+    "host_import": "user_reported_success",
+    "live_roleplay": "user_reported_satisfaction",
+    "host_operation_observed_by_agent": false,
+    "original_artifacts_rewritten": false,
+    "raw_artifacts_published": false,
+    "review": "docs/SOURCE_TRIAL_REVIEW_2026-11-12.md"
+  },
+  "historical_regression_baseline": {
+    "version": "0.3.1",
+    "passed": 40,
+    "rerun_for_0_4_0": false,
+    "reason": "user requested minimal testing through cheaper GPT models only"
+  },
+  "file_support_validation": {
+    "model": "GPT-6 Luna",
+    "primary_model_executed_tests": false,
+    "old_suites_rerun": false,
+    "png_samples": 1,
+    "epub_samples": 1,
+    "epub_excerpt_characters": 1500,
+    "epub_ingestion_and_promotion": "passed",
+    "png_check": "passed protected replacement, invariant comparison and stale/protected-field refusal",
+    "new_host_import": "not_run",
+    "novel_card_generation": "not_run",
+    "report": "docs/FILE_SUPPORT_REVIEW_2026-11-12.md",
+    "semantic_limit": "small PNG patch leaves other inherited masculine pronouns; not a full semantic adaptation"
+  },
+  "native_host_validation": {
+    "model": "GPT-6 Luna",
+    "primary_model_executed_tests": false,
+    "status": "isolated package and packaged-helper checks passed",
+    "expected_upstream_skills": 23,
+    "expected_yuri_entries": 4,
+    "expected_total_skills": 27,
+    "account_installation": "not_performed",
+    "host_discovery": "not_observed",
+    "report": "docs/NATIVE_HOST_REVIEW_2026-11-12.md",
+    "packaged_files": 615,
+    "extension_manifest_files": 58,
+    "upstream_skill_files_compared": 471,
+    "root_manifests_checked": 5,
+    "git_tree_matches_package": true,
+    "unrelated_cwd_probe": "passed",
+    "inherited_cli_help": "passed",
+    "codex_offline_validator": "not_exposed",
+    "claude_executable": "not_found",
+    "previous_suites_rerun": false
+  },
+  "official_host_release": {
+    "version": "0.5.0",
+    "tag": "yuri-v0.5.0",
+    "date": "2026-11-13",
+    "authorization": "user_requested_integration_and_official_github_release",
+    "host_acceptance": "docs/HOST_ACCEPTANCE_2026-11-13.md",
+    "reports": "user_supplied_not_rerun",
+    "canonical_runtime_changes": false,
+    "gemini": "individual_skill_imports_no_automatic_plugin_wide_handoff"
+  },
+  "custom_profile_compatibility": {
+    "status": "included_in_1.0.0",
+    "date": "2026-11-13",
+    "runtime": "shared/profiles.py",
+    "contract": "references/custom-profiles.md",
+    "workflows": [
+      "original",
+      "inherited",
+      "post",
+      "novel"
+    ],
+    "default_projects": "backward_compatible",
+    "legacy_engine_imported": false,
+    "semantic_compliance": "agent_review_not_automatically_proven",
+    "validation": "9 focused tests passed via GPT-6 Luna; no old suites or material trials repeated",
+    "released": true,
+    "test_module": "tests/test_profiles.py",
+    "primary_model_executed_tests": false
+  },
+  "official_1_0_0": {
+    "authorization": "user_requested_official_v1.0.0_release",
+    "date": "2026-11-13",
+    "tag": "yuri-v1.0.0",
+    "submitted_trial_model": "DeepSeek V4.1-Flash Max",
+    "submitted_trial_revision": "8676561cd03c52c60c64a0d40a5ca08e61f90d37",
+    "review": "docs/CUSTOM_PROFILE_TRIAL_REVIEW_2026-11-13.md",
+    "image_workflow": "references/image-adaptation.md",
+    "additional_model_tests": false,
+    "image_quality_newly_validated": false
+  },
+  "official_1_2_0": {
+    "authorization": "user_requested_implementation_and_official_v1.2.0_release",
+    "date": "2026-11-13",
+    "tag": "yuri-v1.2.0",
+    "upstream_commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+    "upstream_version": "2.4.0",
+    "upstream_decision": "retain_current_pin_no_changes",
+    "architecture": "docs/ARCHITECTURE.md",
+    "procedure": "docs/UPSTREAM_SYNC.md",
+    "review": "docs/upstream-sync/2026-11-13.json",
+    "targeted_validation": "GPT-6 Luna: 6 focused unittest cases passed; actual results in review record"
+  }
+}

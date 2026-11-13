@@ -1,0 +1,57 @@
+{
+  "name": "tavernweave-yuri-dsh",
+  "version": "1.2.0",
+  "private": true,
+  "description": "TavernWeave Yuri Workbench for DeepSeek Harness: the four yuri card workflows (yuri-card-creator, adapt-yuri-card, post-to-yuri-card, novel-excerpt-to-yuri-card) plus 23 unchanged TavernWeave dependency skills in one installable bundle.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "skills/",
+    "extensions/yuri-creation/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0"
+  },
+  "keywords": [
+    "tavernweave",
+    "tavernweave-yuri",
+    "yuri",
+    "sillytavern",
+    "rolecard",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "agent-skills"
+  ],
+  "author": {
+    "name": "TavernWeave-Yuri contributors",
+    "url": "https://github.com/imbdsssity/TavernWeave-Yuri"
+  },
+  "license": "PolyForm-Noncommercial-1.0.0 AND MIT",
+  "homepage": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imbdsssity/TavernWeave-Yuri.git",
+    "directory": "host-adapters/dsh/plugin-yuri"
+  },
+  "bugs": {
+    "url": "https://github.com/imbdsssity/TavernWeave-Yuri/issues"
+  }
+}

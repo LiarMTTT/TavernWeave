@@ -1,19 +1,11 @@
 {
-  "name": "tavernweave-agent-skills",
-  "version": "2.4.0",
-  "description": "TavernWeaveX无限月读 2.4.0: 23 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs; in Claude Code it injects the Host Front Door, adds the tavernweave agent and a Soul mode switch above the prompt. Actual execution depends on host tools and permissions.",
+  "name": "tavernweave-yuri",
+  "version": "1.2.0",
+  "description": "Create original yuri roleplay cards or adapt existing cards, posts and novel excerpts while preserving source records and unrelated settings.",
   "author": {
-    "name": "LiarMTTT"
+    "name": "Yuri Card Workbench contributors"
   },
-  "homepage": "https://github.com/LiarMTTT/TavernWeave",
-  "repository": "https://github.com/LiarMTTT/TavernWeave",
-  "license": "PolyForm-Noncommercial-1.0.0",
-  "types": "./hooks/soul-switch-types.d.ts",
-  "keywords": [
-    "agent-skills",
-    "sillytavern",
-    "rolecard",
-    "mvu",
-    "code-quality"
-  ]
+  "homepage": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "license": "PolyForm-Noncommercial-1.0.0 AND MIT"
 }
