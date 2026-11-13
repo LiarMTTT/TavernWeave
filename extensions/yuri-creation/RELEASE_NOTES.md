@@ -1,3 +1,18 @@
+# Yuri Card Workbench 1.2.0
+
+Official release authorized on 2026-11-13. TavernWeave-Yuri is a specialized Yuri product distribution built on the TavernWeave ecosystem, with four canonical domain workflows, shared execution contracts and native-host composition.
+
+- Establishes an explicit seven-stage upstream sync process: baseline, frozen candidate review, relevant skill/script/host changes, compatibility, complete lock updates, targeted regressions and integration/release records. The read-only upstream_sync.py helper detects drift and produces categorized review reports without importing or executing candidate code.
+- Verifies that current upstream main and v2.4.0 both resolve to the already integrated f9863d2b05305457fe9ed8b0c5688d52aca400a5. There is no newer upstream code to adopt and no artificial pin advance. Both lock locations now record the reviewed version and decision accurately.
+- Clarifies counting: 4 canonical Yuri workflows, exposed through 4 portable/Gemini discovery wrappers, plus 23 upstream dependencies = 27 discoverable entries. DSH exposes canonical workflows directly and has no wrapper layer. Internal modules and file counts are separate units. Receipts retain the legacy skill_count while adding explicit counts.
+- Updates English/Chinese product documentation and architecture ownership. Release provenance records the reviewed upstream baseline, and source-channel advancement preserves prior release-sync ancestry while refusing unique development changes.
+
+The two changes are bounded maintenance/product-architecture work. Only targeted checks of pin drift, review behavior, source-channel guards and package metadata/resource paths are needed; no card-material, model comparison, image generation, host-installation or roleplay campaign is repeated. Historical host acceptance remains version-bound. See docs/UPSTREAM_SYNC.md, docs/ARCHITECTURE.md and docs/upstream-sync/2026-11-13.json for actual evidence and limits.
+
+Upstream notices and license boundaries are retained. Existing v1.0.0 and earlier releases remain available. Yuri product version 1.2.0 is separate from upstream TavernWeave 2.4.0 and from the frozen earlier Workbench repository.
+
+<!-- historical-release-notes -->
+
 # Yuri Card Workbench 1.0.0
 
 Official release authorized on 2026-11-13. Four workflows support original conversation, protected inherited JSON/PNG/worldbooks, supplied posts and bounded TXT/Markdown/EPUB excerpts, with 23 unchanged TavernWeave dependencies and retained licensing.
@@ -11,7 +26,6 @@ Host distributions: Codex/ChatGPT Work portable plugin, DeepSeek Harness bundle,
 
 The original 0.5.0 release and frozen Workbench v1.2.0 remain available. Dedicated name-choice testing, legacy-code licensing, advanced migrations and broader model testing remain deferred. See docs/CUSTOM_PROFILE_TRIAL_REVIEW_2026-11-13.md and references/image-adaptation.md.
 
-<!-- historical-release-notes -->
 
 # Yuri Card Workbench 0.5.0 — official release
 

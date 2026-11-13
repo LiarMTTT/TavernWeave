@@ -1,8 +1,10 @@
-# Yuri Card Workbench 1.0.0
+# Yuri Card Workbench 1.2.0
+
+这是基于 TavernWeave 的百合专用产品分发层：保留通用技能生态，加入领域工作流、执行约定与原生宿主整合，重点服务不同来源材料的百合改编。
 
 通过对话创作百合角色卡，或将已有角色卡、帖子、小说片段改编为适合 SillyTavern 使用的故事。Agent 处理文件，你在对话中审阅和修改。
 
-[中文使用说明](extensions/yuri-creation/README.zh-CN.md) · [English guide](extensions/yuri-creation/README.md) · [正式版本](https://github.com/imbdsssity/TavernWeave-Yuri/releases/tag/yuri-v1.0.0)
+[中文使用说明](extensions/yuri-creation/README.zh-CN.md) · [English guide](extensions/yuri-creation/README.md) · [正式版本](https://github.com/imbdsssity/TavernWeave-Yuri/releases/tag/yuri-v1.2.0)
 
 ## 安装
 
@@ -48,3 +50,5 @@ gemini extensions list
 `main` 保存正式源码，`yuri-dev` 用于后续开发；生成的插件分支用于安装。基于 [TavernWeave](https://github.com/LiarMTTT/TavernWeave)，保留其 23 个依赖技能及原有许可。原始说明见 [UPSTREAM_README.md](UPSTREAM_README.md)。原创增补按 MIT 授权，依赖项保留各自条款；参见[许可边界](extensions/yuri-creation/LICENSE_BOUNDARY.md)及根目录 LICENSE。
 
 [版本说明](extensions/yuri-creation/RELEASE_NOTES.md) · [宿主验收范围](extensions/yuri-creation/docs/HOST_ACCEPTANCE_2026-11-13.md)
+
+4 个规范百合工作流通过 4 个发现包装入口向 Portable／Gemini 暴露；DSH 直接注册规范工作流。加上 23 个上游依赖，各宿主共提供 27 个可发现入口。内部实现模块与包装背后的规范文件不另算技能。详见[产品架构与计数](extensions/yuri-creation/docs/ARCHITECTURE.md)。上游采用固定提交，并通过[明确的同步流程](extensions/yuri-creation/docs/UPSTREAM_SYNC.md)更新。

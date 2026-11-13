@@ -28,6 +28,7 @@ def probe():
     return {"schema": "yuri/host-probe/v1", "layout": "native_plugin" if packaged else "development_source",
             "version": (EXT / "VERSION").read_text().strip(), "entry_points": entries,
             "packaged_skill_count": receipt["skill_count"] if receipt else None,
+            "entry_counts": receipt.get("counts") if receipt else None,
             "package_source_commit": receipt.get("source_commit") if receipt else None,
             "revision_note": "Package source revision and pinned authoring dependency are separate; neither proves host discovery",
             "python": sys.version.split()[0], "node_available": shutil.which("node") is not None,
