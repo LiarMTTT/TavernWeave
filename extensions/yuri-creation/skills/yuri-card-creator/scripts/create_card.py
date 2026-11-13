@@ -16,7 +16,7 @@ import tempfile
 
 HERE = Path(__file__).resolve().parent
 VERSION = "0.1.0"
-PACKAGE_VERSION = "0.2.0"
+PACKAGE_VERSION = "0.5.0"
 
 
 def read(path):
@@ -114,7 +114,10 @@ def capabilities(tavern_root=None):
                          "pack-image": "existing v2 JSON + PNG avatar to new card PNG"},
             "research": "optional_host_search_and_page_tools_not_probed",
             "image_inspection_editing_generation": "optional_host_tools_not_probed",
-            "source_adaptation": "separate_workflow", "sillytavern_import": "not_run"}
+            "source_adaptation": "post and novel entry points share scripts/source_card.py; pinned work library required",
+            "entry_points": {"original": "yuri-card-creator", "inherited": "adapt-yuri-card via scripts/card_file.py",
+                             "post": "post-to-yuri-card", "novel": "novel-excerpt-to-yuri-card via scripts/novel_source.py"},
+            "sillytavern_import": "not_run"}
 
 
 def pack_image(card_path, avatar_path, output):

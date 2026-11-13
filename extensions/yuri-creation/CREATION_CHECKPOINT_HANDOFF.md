@@ -1,13 +1,9 @@
-# Fork integration handoff
+# Development handoff — 0.5.0
 
-Extension: 0.2.0. Repository: https://github.com/imbdsssity/TavernWeave-Yuri. Initial yuri-dev base: f9863d2b05305457fe9ed8b0c5688d52aca400a5. Target path: extensions/yuri-creation/. Feature branch: feature/yuri-creation-integration.
+Maintain four canonical entries in extensions/yuri-creation/skills. build_host_plugin.py generates a complete tavernweave-yuri plugin folder containing 23 unchanged upstream dependencies plus four native wrappers. Do not duplicate canonical skill policies or change the root upstream inventory to install them. The generated yuri-plugin channel contains the actual native layout; yuri-dev remains source.
 
-Publish directly through the connected GitHub tools and open a PR into yuri-dev. Keep main and the frozen Workbench unchanged. The user adopted this direct process; a separate uploading agent and Drive/local synchronization are no longer prerequisites. See PROJECT_WORKFLOW.md.
+Build only committed blobs; verify extension manifest and upstream pins first. The native export plan removes source-only root folders and writes new manifests, marketplaces, wrapper metadata/licenses and source-revision receipt. Preserve root upstream LICENSE/notices and MIT boundaries. Publish the exact generated tree to yuri-plugin with an expected head and normal fast-forward; never merge it back into yuri-dev/main or force-push it.
 
-The integration preserves all upstream tracked paths and adds this isolated extension. Root LICENSE, manifests, hooks, installers and the 23-skill inventory are unchanged. Original extension additions retain their nested MIT LICENSE; upstream remains under its root terms and notices. No legacy Workbench implementation was imported.
+Run host_probe.py from a materialized complete plugin to check file layout and Python/Node/dependency availability. A readable wrapper or successful helper does not prove account installation. The user/admin must import the generated GitHub marketplace, enable the plugin and open a new task to observe actual discovery. docs/NATIVE_HOSTS.md supplies the browser workflow, without requiring local Codex.
 
-Sixteen focused tests passed in the fork layout before the workflow-document update. Runtime and test files are unchanged by that update. The two pinned authoring-file hashes also passed; neither result proves native installation or host image generation. Custom-profile compatibility and legacy licensing remain deferred.
-
-Regenerate and verify PACKAGE_MANIFEST.json before publication, then compare the published Git tree with the checked workspace. Use actual GitHub PR/commit state to continue. The earlier Drive delivery and integration.patch are historical snapshots; do not apply them over this updated branch or expect their tree hash to match the revised workflow documents.
-
-The retained PNG has now been imported successfully according to user feedback. The user accepted the short chat, and its private exported transcript was reviewed. This closes the bounded original-creation/PNG acceptance step; do not request another import or multi-turn trial merely to repeat it. See the current trial review for evidence limits. Prepare the 0.2.0 main PR; do not merge main without the user’s instruction.
+Testing belongs to cheaper GPT agents only. Use one isolated native folder; do not repeat the previous PNG/EPUB trials or old suites. No primary-model behavioral tests, new roleplay, account installation or global config changes. Record actual evidence/limits in docs/NATIVE_HOST_REVIEW_2026-11-12.md. Dedicated name interaction, custom profiles, legacy licensing and advanced migrations remain deferred. Main and frozen Workbench remain untouched.

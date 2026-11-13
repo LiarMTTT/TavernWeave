@@ -121,6 +121,27 @@
     "buildScript": "scripts/build-dsh-plugin.mjs",
     "releaseAssetPattern": "TavernWeave-DSH-v{version}.tgz"
   },
+  "yuriDshPlugin": {
+    "status": "plugin-bundle",
+    "package": "tavernweave-yuri-dsh",
+    "version": "0.5.0",
+    "presetId": "tavernweave-yuri",
+    "presetName": "TavernWeave Yuri Workbench",
+    "contract": "host-adapters/dsh/yuri-plugin-contract.json",
+    "sourceDir": "host-adapters/dsh/plugin-yuri",
+    "entry": "host-adapters/dsh/plugin-yuri/index.js",
+    "patch": "host-adapters/dsh/plugin-yuri/cordis.patch.yml",
+    "packageManifest": "host-adapters/dsh/plugin-yuri/package.json",
+    "buildScript": "scripts/build-yuri-dsh-plugin.mjs",
+    "releaseAssetPattern": "TavernWeave-Yuri-DSH-v{version}.tgz",
+    "workflows": [
+      "yuri-card-creator",
+      "adapt-yuri-card",
+      "post-to-yuri-card",
+      "novel-excerpt-to-yuri-card"
+    ],
+    "hostLoading": "requires user installation and observed skill discovery in a new task"
+  },
   "antigravityPlugin": {
     "status": "plugin-bundle",
     "packageManifest": "host-adapters/antigravity/plugin.template.json",

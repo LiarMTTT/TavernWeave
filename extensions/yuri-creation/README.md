@@ -1,32 +1,53 @@
-# Yuri Card Creator 0.2.0
+# Yuri Card Workbench 0.5.0
 
-Create an original yuri character card through conversation. Your agent chooses unspecified details, writes a playable opening and worldbook, and prepares a JSON card for SillyTavern.
+Create yuri roleplay cards through conversation, adapt an existing card, or turn a post or novel excerpt into a new story. Your agent handles the files; you review and revise in the conversation.
 
 [中文说明](README.zh-CN.md)
 
-## Start
+## Install
 
-Open this folder with an agent that can read and write files, then say:
+Use the distribution for your host:
 
-```text
-Use yuri-card-creator to create an original yuri character card for me.
-Decide the unspecified details yourself and give me a complete first draft.
-Use my saved preferences and handle the files; I will give feedback here.
-```
+| Host | Distribution | Installation |
+| --- | --- | --- |
+| Codex / ChatGPT Work | `yuri-plugin` | Import and enable `tavernweave-yuri` as a plugin |
+| DeepSeek Harness | `DSH-plugin` / release `.tgz` | Install the DSH bundle, then select its Yuri Workbench preset |
+| Gemini CLI / Task mode | `Gemini-plugin` | Import the four skills individually and retain the complete shared folder |
 
-No reference text or image is needed. The starting main cast consists of adult women, including author-defined virtual and nonhuman women. You retain control of your player character's current actions and replies.
+See [installation and host limits](docs/NATIVE_HOSTS.md). Gemini does not preserve automatic plugin-wide transitions; explicitly load the required dependencies. Your agent's file tools, Python and Node must be available for export.
 
-The agent creates a final card, a worldbook and an original-creation record. Import the final JSON—or a PNG packaged with your chosen avatar—into SillyTavern and discuss revisions in the conversation. The worldbook is embedded in the card.
+## Choose your starting point
 
-## What this checkpoint provides
+Open this folder with an agent that can read and write files. Give it your material, then use one of these requests:
 
-- One original-creation skill, with English core instructions and English/Chinese interaction catalogs.
-- The three saved genre preferences, reused without a required interview.
-- A thin build helper and the unchanged, attributed Foreverse exporter.
-- An optional pinned TavernWeave authoring-file bridge. The card can also be created in reported standalone mode.
+| Starting point | What to say |
+| --- | --- |
+| An idea, or no idea yet | “Create an original yuri card for me. Decide the unspecified details and give me a complete first draft.” |
+| An existing JSON or PNG card | “Adapt this card into a yuri story. Preserve its artwork, scripts and unrelated worldbook settings.” |
+| A post | “Adapt this post into a yuri card. Keep the poster as {{user}} and distinguish source facts from new story choices.” |
+| A TXT, Markdown or EPUB novel | “Use this chapter or scene to create a yuri card. If I have not chosen a scope, start with one short chapter.” |
 
-This is a portable project checkpoint, not a native host plugin installation. Ask your agent to research a factual setting, review an image, or package the card with a chosen PNG avatar. Research and image creation use tools available in your current workspace; they are optional. Native host installation is not included.
+Ask the agent to read the matching workflow in this folder. No manual Markdown or JSON worksheet is required. For a folder containing several cards, versions or supporting components, the agent identifies what belongs together before editing.
 
-Custom preference modes beyond this checkpoint’s adult main-cast defaults are deferred; loading a saved profile does not establish full compatibility.
+## Review and import
 
-[Licensing boundary](LICENSE_BOUNDARY.md) · [Integration notes](INTEGRATION.md) · [MIT license for new files](LICENSE)
+The agent presents a playable opening, characters and a worldbook. Tell it what you want changed directly in the conversation. The default main cast consists of adult women, including author-defined virtual and nonhuman women; background identities are preserved. Your player character's current actions, thoughts and replies remain yours.
+
+If a retained name seems out of place, the agent explains why and suggests alternatives. You may keep the original or choose a new name; masculine-sounding names are not automatically replaced.
+
+Import the final JSON or character-card PNG into SillyTavern. Its worldbook is already embedded. The agent identifies the final file and keeps source records and adaptation notes separately. When editing an existing card, the original file stays untouched and unrelated fields, code and worldbook loading settings are preserved.
+
+Large novels do not need to fit into one conversation message. The agent can select chapters or an explicit excerpt, keep track of the source, and continue in stages. It does not silently trim your input or claim to have read unselected chapters.
+
+## Inside the folder
+
+| Workflow | Purpose |
+| --- | --- |
+| yuri-card-creator | Original creation without references |
+| adapt-yuri-card | Protected editing of inherited JSON/PNG cards and worldbooks |
+| post-to-yuri-card | Adaptation from a supplied post |
+| novel-excerpt-to-yuri-card | Adaptation from selected TXT/Markdown/EPUB prose |
+
+Research, image inspection and optional artwork creation use tools available in your agent's workspace. A text-only card is complete on its own. The native package exposes these workflows; account installation and available tools still depend on your host. The protected editor keeps the original schema; structural migration or script changes require a separately scoped operation. Text-only/DOCS components use available host reading/export tools and upstream authoring rather than JSON round-tripping.
+
+[Licensing](LICENSE_BOUNDARY.md) · [Integration and supported scope](INTEGRATION.md)
