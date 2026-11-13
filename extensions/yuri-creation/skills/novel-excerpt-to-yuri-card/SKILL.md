@@ -17,3 +17,5 @@ Keep reasoning in English and user interaction in the user's language. Reuse a s
 8. Deliver the card and its embedded worldbook, with a short introduction and precise scope in the user's language. Keep original novel/artwork, extraction and adaptation records private. Take feedback in conversation. Successful extraction/export is not live host or roleplay validation.
 
 TXT/EPUB ingestion and the novel entry point share the existing extraction/build layer; they do not create a second fact store. Image-only/DRM-encrypted chapters need separately available source/OCR capabilities and are not silently substituted with invented prose.
+
+For existing artwork, inspect it and offer preservation or replacement when relevant. A user-chosen replacement follows [reference-led image adaptation](../../references/image-adaptation.md): combine the original image's observed style with the updated card's narrative direction, provide the real reference image to generation/editing, inspect the candidate and show it for user review before embedding.

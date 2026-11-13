@@ -14,6 +14,8 @@ Technical documentation is not fictional canon. If supplied fiction, researched 
 
 Default to preserving existing art. If alignment matters, inspect the actual image using available vision tools; a URL, filename or description is not proof of its pixels. Discuss specific mismatches in the conversation. User-supplied images or host-native generation/editing are optional choices; do not assume a provider, API key or installed image tool. Preserve transparency unless the requested edit changes it. Keep artist/source and permitted-use notes separate from software licensing.
 
+When the user chooses to change existing art, follow [reference-led image adaptation](../../../references/image-adaptation.md): inspect the original style, author a prompt that combines its observed visual language with the revised card's narrative direction, supply the actual reference to the host image tool, inspect the candidate and show it for user review before embedding. Reuse the packaged source-library, character-design and prompt-spec skills; do not create a parallel image architecture. A generation success is not a visual-quality pass.
+
 After the user chooses an avatar, the agent can run:
 
 `python <skill>/scripts/create_card.py pack-image --card <result/yuri-card.v2.json> --avatar <chosen.png> --output <new-card.png>`

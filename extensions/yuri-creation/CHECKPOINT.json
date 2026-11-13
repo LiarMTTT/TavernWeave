@@ -1,6 +1,6 @@
 {
-  "version": "0.5.0",
-  "scope": "native plugin packaging for four yuri entries plus pinned base dependencies",
+  "version": "1.0.0",
+  "scope": "official release: four workflows, supported custom profiles and reference-led image adaptation",
   "license_boundary_commit_before_dependency_copy": "f16de770ea0bb4d832f395d3eb026495006bf329",
   "original_additions_license": "MIT",
   "tavernweave_code_or_skill_prose_bundled": false,
@@ -23,11 +23,10 @@
   "v1_2_0_validation": "on_hold",
   "publication": "direct_github_feature_branch_and_pr",
   "remaining_scope": [
-    "user/admin account plugin import and new-task discovery",
-    "live native-host acceptance",
-    "DSH/Antigravity-specific yuri registration",
+    "dedicated name-choice behavior during a later comprehensive phase",
     "advanced schema and cross-dialect worldbook migration",
-    "legacy original-file licensing (deferred)"
+    "legacy original-file licensing before any legacy-code reuse",
+    "new 1.0.0 host/visual/roleplay acceptance not performed"
   ],
   "legacy_v1_2_0": "unchanged; original licensing not changed",
   "current_revision_scope": [
@@ -78,7 +77,7 @@
       "raw_transcript_published": false
     }
   },
-  "release_readiness": "0.5.0 native package checkpoint; account installation/discovery pending; main unchanged",
+  "release_readiness": "user-authorized 1.0.0 source and host distributions; no new model trials",
   "source_workflow_validation": {
     "synthetic_unit_tests": 19,
     "fresh_agent_completed": true,
@@ -167,7 +166,7 @@
     "gemini": "individual_skill_imports_no_automatic_plugin_wide_handoff"
   },
   "custom_profile_compatibility": {
-    "status": "implemented_in_development",
+    "status": "included_in_1.0.0",
     "date": "2026-11-13",
     "runtime": "shared/profiles.py",
     "contract": "references/custom-profiles.md",
@@ -181,8 +180,19 @@
     "legacy_engine_imported": false,
     "semantic_compliance": "agent_review_not_automatically_proven",
     "validation": "9 focused tests passed via GPT-6 Luna; no old suites or material trials repeated",
-    "released": false,
+    "released": true,
     "test_module": "tests/test_profiles.py",
     "primary_model_executed_tests": false
+  },
+  "official_1_0_0": {
+    "authorization": "user_requested_official_v1.0.0_release",
+    "date": "2026-11-13",
+    "tag": "yuri-v1.0.0",
+    "submitted_trial_model": "DeepSeek V4.1-Flash Max",
+    "submitted_trial_revision": "8676561cd03c52c60c64a0d40a5ca08e61f90d37",
+    "review": "docs/CUSTOM_PROFILE_TRIAL_REVIEW_2026-11-13.md",
+    "image_workflow": "references/image-adaptation.md",
+    "additional_model_tests": false,
+    "image_quality_newly_validated": false
   }
 }

@@ -1,8 +1,8 @@
-# Yuri Card Workbench 0.5.0
+# Yuri Card Workbench 1.0.0
 
 通过对话创作百合角色卡，或将已有角色卡、帖子、小说片段改编为适合 SillyTavern 使用的故事。Agent 处理文件，你在对话中审阅和修改。
 
-[中文使用说明](extensions/yuri-creation/README.zh-CN.md) · [English guide](extensions/yuri-creation/README.md) · [正式版本](https://github.com/imbdsssity/TavernWeave-Yuri/releases/tag/yuri-v0.5.0)
+[中文使用说明](extensions/yuri-creation/README.zh-CN.md) · [English guide](extensions/yuri-creation/README.md) · [正式版本](https://github.com/imbdsssity/TavernWeave-Yuri/releases/tag/yuri-v1.0.0)
 
 ## 安装
 
@@ -39,7 +39,9 @@ gemini extensions list
 
 四个入口为 `yuri-card-creator`、`adapt-yuri-card`、`post-to-yuri-card`、`novel-excerpt-to-yuri-card`。你可以直接用自然语言提出修改，无须填写表单。已有卡会保留原件并另存结果；与改编无关的字段、脚本、世界书加载设置和未编辑图像受到保护。名字不合适时，Agent 会提供备选，等你选择或授权后再修改。
 
-默认主要角色为成年女性，保留背景人物身份。 你也可以在对话中指定人物范围、排除对象、关系结果或女性判定标准；Agent 会保存并检查这些偏好，不支持的选项会明确说明。开发分支的具体范围见[自定义偏好](extensions/yuri-creation/references/custom-profiles.md)。最终 JSON 或带角色卡数据的 PNG 可导入 SillyTavern。小说可以分章节或片段处理，不会静默截断并冒称读完全文。
+选择换图时，Agent 会结合原图的实际画风与改编卡的叙事气质生成候选，先展示给你审阅再决定采用；原图保留。
+
+默认主要角色为成年女性，保留背景人物身份。 你也可以在对话中指定人物范围、排除对象、关系结果或女性判定标准；Agent 会保存并检查这些偏好，不支持的选项会明确说明。具体范围见[自定义偏好](extensions/yuri-creation/references/custom-profiles.md)。最终 JSON 或带角色卡数据的 PNG 可导入 SillyTavern。小说可以分章节或片段处理，不会静默截断并冒称读完全文。
 
 ## 项目与许可
 

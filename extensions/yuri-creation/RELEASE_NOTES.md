@@ -1,6 +1,17 @@
-# Unreleased — supported custom profiles
+# Yuri Card Workbench 1.0.0
 
-Adds one shared saved-profile validator to original, inherited, post and novel workflows. Validates character scope/exclusions, womanhood criteria, allowed dynamics and relationship outcomes; rejects unsupported or contradictory settings. Non-default exports require a profile-bound review of the actual prose, anchors and player authorization. Default historical projects remain usable; new inherited sessions bind preferences with source/documents. Frozen legacy code and official 0.5.0 assets are unchanged. Nine focused GPT-6 Luna profile checks passed; no material or roleplay trial was repeated.
+Official release authorized on 2026-11-13. Four workflows support original conversation, protected inherited JSON/PNG/worldbooks, supplied posts and bounded TXT/Markdown/EPUB excerpts, with 23 unchanged TavernWeave dependencies and retained licensing.
+
+- Supported saved custom profiles are now included in all host distributions: explicit scope/exclusions, identity criteria, relationship policies and profile-bound agent review.
+- User-chosen image replacement now requires actual original-image inspection, a prompt combining observed visual style with the updated card’s narrative direction, actual reference input to image tools, candidate inspection and user review before embedding. This reuses existing source-library, character-design, prompt-spec and packaging skills; it adds no new image engine.
+- Review instructions distinguish preserved inherited player-agency problems from compliance. The submitted DeepSeek trial supports protected JSON/custom-profile work within its stated scope; its retained alternate-greeting agency issue is documented without rewriting private artifacts.
+- Package probes report source revisions separately from dependency pins. Official portable/Gemini builds emit generated trees, recorded in SOURCE.json with immutable source and artifact checksums.
+
+Host distributions: Codex/ChatGPT Work portable plugin, DeepSeek Harness bundle, and Gemini CLI extension / Task mode individual skills. Keep each complete package. Historical host acceptance remains version-bound; this release does not claim a new host-import, image-quality or roleplay pass. No new model/card/image trials were requested or performed. Standard repository CI and release packaging remain separate from narrative validation.
+
+The original 0.5.0 release and frozen Workbench v1.2.0 remain available. Dedicated name-choice testing, legacy-code licensing, advanced migrations and broader model testing remain deferred. See docs/CUSTOM_PROFILE_TRIAL_REVIEW_2026-11-13.md and references/image-adaptation.md.
+
+<!-- historical-release-notes -->
 
 # Yuri Card Workbench 0.5.0 — official release
 

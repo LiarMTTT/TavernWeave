@@ -56,8 +56,8 @@ jobs:
           fi
       - name: Build complete host packages from this source
         run: |
-          python extensions/yuri-creation/scripts/build_host_plugin.py --repo . --ref "$GITHUB_SHA" --output "$RUNNER_TEMP/yuri-portable"
-          python extensions/yuri-creation/scripts/build_host_plugin.py --repo . --ref "$GITHUB_SHA" --host gemini --output "$RUNNER_TEMP/yuri-gemini"
+          python extensions/yuri-creation/scripts/build_host_plugin.py --repo . --ref "$GITHUB_SHA" --emit-git-tree --output "$RUNNER_TEMP/yuri-portable"
+          python extensions/yuri-creation/scripts/build_host_plugin.py --repo . --ref "$GITHUB_SHA" --emit-git-tree --host gemini --output "$RUNNER_TEMP/yuri-gemini"
           node scripts/build-yuri-dsh-plugin.mjs --out "$RUNNER_TEMP/yuri-assets"
           git diff --exit-code
       - name: Archive packages and record checksums
@@ -71,6 +71,7 @@ jobs:
           assets = tmp / 'yuri-assets'
           version = os.environ['YURI_VERSION']
           receipts = {}
+          builds = {}
           for channel in ('portable', 'gemini'):
               root = tmp / ('yuri-' + channel) / 'tavernweave-yuri'
               with zipfile.ZipFile(assets / f'TavernWeave-Yuri-{channel}-v{version}.zip', 'w', zipfile.ZIP_DEFLATED) as z:
@@ -78,16 +79,49 @@ jobs:
                       if path.is_file():
                           z.write(path, path.relative_to(root.parent))
               receipts[channel] = json.loads((root / 'NATIVE_PLUGIN.json').read_text())
-          (assets / 'SOURCE.json').write_text(json.dumps({'version': version, 'source_commit': os.environ['GITHUB_SHA'], 'repository': os.environ['GITHUB_REPOSITORY'], 'packages': receipts}, ensure_ascii=False, indent=2) + '\n')
+              builds[channel] = json.loads((root.parent / 'build-result.json').read_text())
+          (assets / 'SOURCE.json').write_text(json.dumps({'version': version, 'source_commit': os.environ['GITHUB_SHA'], 'repository': os.environ['GITHUB_REPOSITORY'], 'packages': receipts, 'builds': builds}, ensure_ascii=False, indent=2) + '\n')
           lines = [hashlib.sha256(p.read_bytes()).hexdigest() + '  ' + p.name for p in sorted(assets.iterdir()) if p.is_file()]
           (assets / 'SHA256SUMS.txt').write_text('\n'.join(lines) + '\n')
-          notes = Path('extensions/yuri-creation/RELEASE_NOTES.md').read_text().split('\n# 0.5.0 native integration checkpoint')[0]
-          (tmp / 'yuri-release-notes.md').write_text(notes + '\n\nPackages: portable ZIP for Codex/ChatGPT Work; DSH TGZ for DeepSeek Harness; Gemini ZIP for individual skill imports. Preserve each complete package. SOURCE.json records the immutable source; SHA256SUMS.txt verifies the attached artifacts.\n')
+          notes = Path('extensions/yuri-creation/RELEASE_NOTES.md').read_text().split('\n<!-- historical-release-notes -->')[0]
+          (tmp / 'yuri-release-notes.md').write_text(notes + '\n\nPackages: portable ZIP for Codex/ChatGPT Work; DSH TGZ for DeepSeek Harness; Gemini ZIP for a complete CLI extension or Task mode individual skills. Preserve each complete package. SOURCE.json records immutable source and generated trees; SHA256SUMS.txt verifies the attached artifacts.\n')
           PY
       - uses: actions/upload-artifact@v4
         with:
           name: yuri-${{ steps.release.outputs.version }}
           path: ${{ runner.temp }}/yuri-assets/*
+      - name: Advance host channels without replacing their history
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          def git(*args, data=None):
+              return subprocess.check_output(['git', *args], input=data).decode().strip()
+          source = os.environ['GITHUB_SHA']
+          source_tree = git('rev-parse', source + '^{tree}')
+          tmp = Path(os.environ['RUNNER_TEMP'])
+          for branch, channel in [('yuri-plugin', 'portable'), ('Gemini-plugin', 'gemini'), ('DSH-plugin', None), ('yuri-dev', None)]:
+              git('fetch', 'origin', 'refs/heads/' + branch)
+              old = git('rev-parse', 'FETCH_HEAD')
+              if channel:
+                  tree = json.loads((tmp / ('yuri-' + channel) / 'build-result.json').read_text())['tree']
+                  if not tree:
+                      raise SystemExit('Missing generated tree for ' + branch)
+              else:
+                  git('merge-base', '--is-ancestor', old, source)
+                  tree = source_tree
+              if git('rev-parse', old + '^{tree}') == tree:
+                  continue
+              # Both the old channel and exact source remain in normal ancestry.
+              commit = git('commit-tree', tree, '-p', old, '-p', source,
+                           data=('Publish Yuri ' + Path('extensions/yuri-creation/VERSION').read_text().strip() + ' to ' + branch + ' [skip ci]\n').encode())
+              git('push', 'origin', commit + ':refs/heads/' + branch)
+          PY
       - name: Publish namespaced tag and official GitHub release
         env:
           GH_TOKEN: ${{ github.token }}

@@ -1,7 +1,7 @@
 {
-  "version": "0.5.0",
+  "version": "1.0.0",
   "scope": "complete extension source; excludes itself; installed at extensions/yuri-creation/ in this fork",
-  "base_commit": "cd575c968c5f23a2c39c1c2c0d06945e906220f4",
+  "base_commit": "8676561cd03c52c60c64a0d40a5ca08e61f90d37",
   "delete_paths": [],
   "files": [
     {
@@ -11,13 +11,13 @@
     },
     {
       "path": "CHECKPOINT.json",
-      "bytes": 7385,
-      "sha256": "a4a5a26ec975ff258f75e9208473285692d1f5be12d766594db34d1b887d2a59"
+      "bytes": 7859,
+      "sha256": "da33979ee2c8794f528911bbd5b6fd653e2f3b2be445d02487054bb4f2ce673a"
     },
     {
       "path": "CREATION_CHECKPOINT_HANDOFF.md",
-      "bytes": 1838,
-      "sha256": "5c4eb87c49e0d0d722bbea8ce32d617137857a211fd093b5bab6b83e5a949cbf"
+      "bytes": 2036,
+      "sha256": "24be27809dc1e7d3d17fafa2456000355d3ab0cc50f6f7613f9fa3d70273b716"
     },
     {
       "path": "FORK_BASE.json",
@@ -26,8 +26,8 @@
     },
     {
       "path": "INTEGRATION.md",
-      "bytes": 8769,
-      "sha256": "1a27aa7e33b933b80e99ef0bfafe2a3af7804136e6cde06a68beb2cd1c5f6690"
+      "bytes": 9185,
+      "sha256": "4024daf544be6e34379cbaad3b1094c5a4984916b7c6ae6c7a361a3d25a5ed54"
     },
     {
       "path": "LICENSE",
@@ -41,8 +41,8 @@
     },
     {
       "path": "PROJECT_STATE.md",
-      "bytes": 4525,
-      "sha256": "11eade56bb1b3b27b4d3befb4401bcfa3a08fe095d5e7d37a649b1dc1d75c401"
+      "bytes": 3521,
+      "sha256": "dc554ca4163d71206d2ffe7e2ea87f21059df478a85040d15f25e1758495ca1b"
     },
     {
       "path": "PROJECT_WORKFLOW.md",
@@ -51,18 +51,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 4654,
-      "sha256": "8a3a806096ade58798e01e13b27affef6f0c73171d25d8ece4968151d3ddfa92"
+      "bytes": 4921,
+      "sha256": "2034397d710ea0b1ad791613eebecad355c9bd137a7b219a003b7ab6caa69c0f"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 4049,
-      "sha256": "71928e7309ee17ffbd12ff5d98a5a3a725f242df155320b7b73367d1a6ce6883"
+      "bytes": 4309,
+      "sha256": "44dcade5298fc997bf5dcdfb6f4f25d45647a67792af530297c552cde4e3c5d9"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "bytes": 6410,
-      "sha256": "6b83585f238375dbf3c50bbaffcb68ce1e03906bc94cb2d7581bfd0bd7d93924"
+      "bytes": 7845,
+      "sha256": "49e8ad95463e2642ba7592ec640aa66183be04ef8d5b092b6c6b89ff3c0225e2"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -77,7 +77,12 @@
     {
       "path": "VERSION",
       "bytes": 6,
-      "sha256": "a0ad50640139a524f86591157145bf1d4674ea9c065bfea21558f0f7b04430c8"
+      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03"
+    },
+    {
+      "path": "docs/CUSTOM_PROFILE_TRIAL_REVIEW_2026-11-13.md",
+      "bytes": 2716,
+      "sha256": "db43c57bee675e44bad7d3596fd126be2e1d77e2a1d49134e7406989896d895f"
     },
     {
       "path": "docs/FILE_SUPPORT_REVIEW_2026-11-12.md",
@@ -91,8 +96,8 @@
     },
     {
       "path": "docs/NATIVE_HOSTS.md",
-      "bytes": 11380,
-      "sha256": "b42ceff6f6be27552e673f239173a645f7184d9cc1659970f101b4bdc69ed94a"
+      "bytes": 11955,
+      "sha256": "791e673a424e1157226ebefa7778bb786032a3b3252546e0ecc772b087792605"
     },
     {
       "path": "docs/NATIVE_HOST_REVIEW_2026-11-12.md",
@@ -162,7 +167,7 @@
     {
       "path": "hosts/gemini/GEMINI.md",
       "bytes": 14111,
-      "sha256": "99302d0fd940078cb5f16a8df1dfecb356c554b9a86aaebde765681a36458c02"
+      "sha256": "8dfdb26b8a82b7b18fbaf1cf8dd414a41552d2a74422f0c5aadb5e2a62e9b634"
     },
     {
       "path": "hosts/gemini/README.md",
@@ -182,12 +187,12 @@
     {
       "path": "hosts/gemini/gemini-extension.json",
       "bytes": 419,
-      "sha256": "bbdfaad41a6fbfcba46a5a6e10543ee1b6ddd0ab1cd0c3a1827610e6f92589bb"
+      "sha256": "206b25cc93a31595443a81123b1a37c3b4db70cc32b1ccfc410571294b14dab9"
     },
     {
       "path": "hosts/gemini/rules/AGENTS.md",
       "bytes": 14111,
-      "sha256": "99302d0fd940078cb5f16a8df1dfecb356c554b9a86aaebde765681a36458c02"
+      "sha256": "8dfdb26b8a82b7b18fbaf1cf8dd414a41552d2a74422f0c5aadb5e2a62e9b634"
     },
     {
       "path": "hosts/native.json",
@@ -201,8 +206,13 @@
     },
     {
       "path": "references/custom-profiles.md",
-      "bytes": 6413,
-      "sha256": "151e0eb59c7b1ab98b498cdfc9ee3e020041cd967b17a3913acd4f88d54b056b"
+      "bytes": 7074,
+      "sha256": "c972fb67f27cb92609671ced3cd00b3e8a2e4a29bb038c9994afe737b64a475b"
+    },
+    {
+      "path": "references/image-adaptation.md",
+      "bytes": 6049,
+      "sha256": "059506d198c2de379c8d193c94dc2f200f827072dba98382030b9319e81fba7e"
     },
     {
       "path": "references/inherited-cards.md",
@@ -236,8 +246,8 @@
     },
     {
       "path": "scripts/host_probe.py",
-      "bytes": 2045,
-      "sha256": "b6cc11c2147306788bcedfb3442157a7909ccd3a37be3ee8d6ffac2a049ada21"
+      "bytes": 2265,
+      "sha256": "6718cfb72ded8f47a6eaa2208c7c68f7254dae47cc1c8805cb309ae5fed168db"
     },
     {
       "path": "scripts/novel_source.py",
@@ -271,18 +281,18 @@
     },
     {
       "path": "skills/adapt-yuri-card/SKILL.md",
-      "bytes": 5631,
-      "sha256": "b7a84f7525318c6f897218b87eabca8d62cf313d21340950aac7eb8cbc18afb8"
+      "bytes": 6191,
+      "sha256": "2c396f13eabf98baf1f49ff34b8d91942608bf2ea8b1eec50dadfdb4e79938d4"
     },
     {
       "path": "skills/novel-excerpt-to-yuri-card/SKILL.md",
-      "bytes": 4502,
-      "sha256": "6fd87d3501006ec7c1f21fc9afdb9f482737a0737e3aa34d11036be1a5b35d53"
+      "bytes": 4908,
+      "sha256": "9b5632b4cbbf6fbff5d6ec811516d0fc3833197bb4d566104b7c9da355b05904"
     },
     {
       "path": "skills/post-to-yuri-card/SKILL.md",
-      "bytes": 6995,
-      "sha256": "e1504fc64f4dd0420de6c07cd8b3eff8878002915eac49488bc283323a145f61"
+      "bytes": 7401,
+      "sha256": "ccb132cd52361bf3aba67df731123b4e79b6db60e024829079474cccc00a54b0"
     },
     {
       "path": "skills/yuri-card-creator/SKILL.md",
@@ -311,8 +321,8 @@
     },
     {
       "path": "skills/yuri-card-creator/references/optional-tools.md",
-      "bytes": 2701,
-      "sha256": "1b4c80de1abfcc7e478c13996970328d036c9b0f427325035e3ff9f9e67400f1"
+      "bytes": 3254,
+      "sha256": "95bf2f2def0203d2989219aa263acae494a96b99e32ca2447d3e73eb0851cb44"
     },
     {
       "path": "skills/yuri-card-creator/references/testing.md",
@@ -322,7 +332,7 @@
     {
       "path": "skills/yuri-card-creator/scripts/create_card.py",
       "bytes": 12121,
-      "sha256": "bfbc3903d6337ec4dc6a60579ccc12a2c158df39f28e5768f5e2c1090f29715d"
+      "sha256": "a010cfc2f94a3b6738e625e9f963b7311003d456b1f714098bba65dcd4492312"
     },
     {
       "path": "skills/yuri-card-creator/scripts/vendor/FOREVERSE_LICENSE.txt",

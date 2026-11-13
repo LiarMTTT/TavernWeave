@@ -86,3 +86,12 @@ anchor was preserved, whether consent was actually given, or whether a language
 choice was followed. Read the actual output and record that review. Never call a
 checked declaration a proof of narrative compliance or a live import test. Known
 minor targets are not silently re-aged, and current player actions remain open.
+
+For inherited cards, distinguish “unchanged by this edit” from “compliant.” Read
+every greeting, not just the first: an inherited line may already prescribe the
+player's thoughts, decisions or present actions. Report that retained limitation
+with its field location; a pronoun-only edit does not resolve it. If the authorized
+scope permits an agency repair, make the smallest explicit edit and review again.
+Otherwise preserve the source and state the unresolved issue instead of claiming
+an unconditional agency pass. Separate new adaptation facts from source facts;
+custom criteria need clear evidence, not unnecessary plot additions or stereotypes.
