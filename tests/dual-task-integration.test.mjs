@@ -43,7 +43,7 @@ test('new worldbook skill and mirrors match the source inventory', () => {
   assert.equal(manifest.skillCount, 23);
   for (const file of manifest.requiredPaths) assert.ok(fs.existsSync(path.join(root, file)), file);
   assert.equal(read(`${lib}references/route-map.json`), read('docs/newbie-guide/tavernweave-route-map.json'));
-  assert.ok(read('README.md').includes('worldbook-design-and-writing'));
+  assert.ok(read('UPSTREAM_README.md').includes('worldbook-design-and-writing'));
 });
 
 test('reviewed source corrections are replayable and reject upstream drift', () => {
