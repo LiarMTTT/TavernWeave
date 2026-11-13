@@ -39,9 +39,9 @@ const addTarget = (file, marker, body) => {
 
 // Existing behavior: the Host Front Door keeps the long shared guidance core.
 addTarget("host-adapters/tavernweave-front-door.md", "tw-guidance-generated", guidanceCore);
-const skills = fs.readdirSync(path.join(root, "skills"), { withFileTypes: true })
-  .filter(item => item.isDirectory())
-  .map(item => item.name)
+// Native Yuri wrappers delegate to canonical workflows; this generator owns
+// only the shared blocks of the legacy dependency skills in the install manifest.
+const skills = [...JSON.parse(readSource("tavernweave-install-manifest.json")).skills]
   .sort((left, right) => (left < right ? -1 : left > right ? 1 : 0));
 for (const skillName of skills) {
   addTarget(`skills/${skillName}/SKILL.md`, "tw-guidance-entry", guidanceBody(skillName));

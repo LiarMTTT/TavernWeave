@@ -181,6 +181,13 @@ if (-not (Test-Path -LiteralPath $licensePath -PathType Leaf)) {
 $skillRoot = Join-Path $PluginRoot 'skills'
 $skillDirs = @(Get-ChildItem -LiteralPath $skillRoot -Directory | Sort-Object Name)
 if ($skillDirs.Count -eq 0) { Add-ValidationError 'No skill directories were found.' }
+$extensionSkillNames = @()
+$yuriHostConfig = Join-Path $PluginRoot 'extensions/yuri-creation/hosts/native.json'
+if (Test-Path -LiteralPath $yuriHostConfig -PathType Leaf) {
+    $yuriConfig = Get-Content -LiteralPath $yuriHostConfig -Raw -Encoding UTF8 | ConvertFrom-Json
+    $extensionSkillNames = @($yuriConfig.entry_points.PSObject.Properties.Name)
+}
+$dependencySkillDirs = @($skillDirs | Where-Object { $_.Name -notin $extensionSkillNames })
 
 $installManifest = $null
 $installManifestPath = Join-Path $PluginRoot 'tavernweave-install-manifest.json'
@@ -190,7 +197,7 @@ if (-not (Test-Path -LiteralPath $installManifestPath -PathType Leaf)) {
     try {
         $installManifest = Get-Content -LiteralPath $installManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
         $installSkills = @($installManifest.skills | ForEach-Object { [string]$_ })
-        $sourceSkills = @($skillDirs | ForEach-Object { $_.Name })
+        $sourceSkills = @($dependencySkillDirs | ForEach-Object { $_.Name })
         if ($installManifest.schemaVersion -ne 2) { Add-ValidationError 'Installation manifest schemaVersion must be 2.' }
         if ($installManifest.package -ne 'tavernweave-agent-skills') { Add-ValidationError 'Installation manifest package name is invalid.' }
         if ($manifest -and $installManifest.version -ne $manifest.version) { Add-ValidationError 'Installation manifest and Codex manifest versions do not match.' }
@@ -512,7 +519,7 @@ if (-not (Test-Path -LiteralPath $casePath -PathType Leaf) -or
         if ($caseIds.Count -ne @($caseIds | Sort-Object -Unique).Count) { Add-ValidationError 'Replay case IDs must be unique.' }
         if ($adversarialIds.Count -ne @($adversarialIds | Sort-Object -Unique).Count) { Add-ValidationError 'Adversarial replay IDs must be unique.' }
 
-        $skillNames = @($skillDirs | ForEach-Object { $_.Name })
+        $skillNames = @($dependencySkillDirs | ForEach-Object { $_.Name })
         $routedSkills = @($cases.cases | ForEach-Object { [string]$_.expectedPrimarySkill } | Sort-Object -Unique)
         foreach ($routedSkill in $routedSkills) {
             if ($routedSkill -notin $skillNames) { Add-ValidationError "Replay case routes to an unknown skill: $routedSkill" }
@@ -548,7 +555,7 @@ if (-not (Test-Path -LiteralPath $casePath -PathType Leaf) -or
         foreach ($extra in @($caseResultMap.Keys | Where-Object { $_ -notin $caseIds })) { Add-ValidationError "Unknown forward replay result: $extra" }
         foreach ($extra in @($adversarialResultMap.Keys | Where-Object { $_ -notin $adversarialIds })) { Add-ValidationError "Unknown adversarial replay result: $extra" }
 
-        foreach ($skillDir in $skillDirs) {
+        foreach ($skillDir in $dependencySkillDirs) {
             $property = $results.skillFingerprints.PSObject.Properties[$skillDir.Name]
             $actualFingerprint = Get-SkillFingerprint $skillDir.FullName
             if (-not $property -or [string]$property.Value -ne $actualFingerprint) {
