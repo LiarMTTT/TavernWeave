@@ -4,9 +4,16 @@
 
 [English](README.md)
 
-## 在 ChatGPT Work 中安装
+## 各宿主安装
 
-使用本仓库 `yuri-plugin` 分发分支中的 `tavernweave-yuri` 原生插件。由工作区管理员从 GitHub 导入后，在插件界面安装或启用，再开启新任务即可；不需要在本机配置 Codex。[安装说明](docs/NATIVE_HOSTS.md)列出了要填写的仓库信息和首次使用的提示词。
+| 宿主 | 分发分支 | 安装方式 |
+| --- | --- | --- |
+| Codex / ChatGPT Work | `yuri-plugin` | 导入并启用 `tavernweave-yuri` 插件 |
+| DeepSeek Harness | `DSH-plugin` 或正式版 `.tgz` | 安装 DSH 包，选择 Yuri Workbench 预设 |
+| Gemini CLI / Task 模式 | `Gemini-plugin` | 分别导入四个技能，保留完整共享目录 |
+
+Gemini 在已验收环境中不支持插件导入，也不会自动衔接插件内技能；需要时明确加载相应依赖。详见[安装及限制](docs/NATIVE_HOSTS.md)。
+
 
 ## 从哪里开始
 

@@ -1,0 +1,103 @@
+name: Release Yuri Card Workbench
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - extensions/yuri-creation/VERSION
+      - extensions/yuri-creation/RELEASE_NOTES.md
+      - .github/workflows/yuri-release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yuri-official-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository == 'imbdsssity/TavernWeave-Yuri'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Resolve accepted main and version
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          version="$(cat extensions/yuri-creation/VERSION)"
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          tag="yuri-v$version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" > "$RUNNER_TEMP/releases.json"
+          tag_name="$tag" python - <<'PY'
+          import json, os
+          from pathlib import Path
+          rows = json.loads((Path(os.environ['RUNNER_TEMP']) / 'releases.json').read_text())
+          if any(x['tag_name'] == os.environ['tag_name'] for x in rows):
+              raise SystemExit('Release already exists; refusing to overwrite it.')
+          PY
+          if git show-ref --verify --quiet "refs/tags/$tag"; then
+            test "$(git rev-list -n 1 "$tag")" = "$GITHUB_SHA"
+          fi
+      - name: Build complete host packages from this source
+        run: |
+          python extensions/yuri-creation/scripts/build_host_plugin.py --repo . --ref "$GITHUB_SHA" --output "$RUNNER_TEMP/yuri-portable"
+          python extensions/yuri-creation/scripts/build_host_plugin.py --repo . --ref "$GITHUB_SHA" --host gemini --output "$RUNNER_TEMP/yuri-gemini"
+          node scripts/build-yuri-dsh-plugin.mjs --out "$RUNNER_TEMP/yuri-assets"
+          git diff --exit-code
+      - name: Archive packages and record checksums
+        env:
+          YURI_VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, zipfile
+          from pathlib import Path
+          tmp = Path(os.environ['RUNNER_TEMP'])
+          assets = tmp / 'yuri-assets'
+          version = os.environ['YURI_VERSION']
+          receipts = {}
+          for channel in ('portable', 'gemini'):
+              root = tmp / ('yuri-' + channel) / 'tavernweave-yuri'
+              with zipfile.ZipFile(assets / f'TavernWeave-Yuri-{channel}-v{version}.zip', 'w', zipfile.ZIP_DEFLATED) as z:
+                  for path in sorted(root.rglob('*')):
+                      if path.is_file():
+                          z.write(path, path.relative_to(root.parent))
+              receipts[channel] = json.loads((root / 'NATIVE_PLUGIN.json').read_text())
+          (assets / 'SOURCE.json').write_text(json.dumps({'version': version, 'source_commit': os.environ['GITHUB_SHA'], 'repository': os.environ['GITHUB_REPOSITORY'], 'packages': receipts}, ensure_ascii=False, indent=2) + '\n')
+          lines = [hashlib.sha256(p.read_bytes()).hexdigest() + '  ' + p.name for p in sorted(assets.iterdir()) if p.is_file()]
+          (assets / 'SHA256SUMS.txt').write_text('\n'.join(lines) + '\n')
+          notes = Path('extensions/yuri-creation/RELEASE_NOTES.md').read_text().split('\n# 0.5.0 native integration checkpoint')[0]
+          (tmp / 'yuri-release-notes.md').write_text(notes + '\n\nPackages: portable ZIP for Codex/ChatGPT Work; DSH TGZ for DeepSeek Harness; Gemini ZIP for individual skill imports. Preserve each complete package. SOURCE.json records the immutable source; SHA256SUMS.txt verifies the attached artifacts.\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yuri-${{ steps.release.outputs.version }}
+          path: ${{ runner.temp }}/yuri-assets/*
+      - name: Publish namespaced tag and official GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          YURI_TAG: ${{ steps.release.outputs.tag }}
+          YURI_VERSION: ${{ steps.release.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! git show-ref --verify --quiet "refs/tags/$YURI_TAG"; then
+            git tag "$YURI_TAG" "$GITHUB_SHA"
+            git push origin "refs/tags/$YURI_TAG"
+          fi
+          gh release create "$YURI_TAG" "$RUNNER_TEMP"/yuri-assets/* --verify-tag --title "Yuri Card Workbench $YURI_VERSION" --notes-file "$RUNNER_TEMP/yuri-release-notes.md" --latest

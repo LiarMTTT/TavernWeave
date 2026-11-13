@@ -4,9 +4,17 @@ Create yuri roleplay cards through conversation, adapt an existing card, or turn
 
 [中文说明](README.zh-CN.md)
 
-## Install in ChatGPT Work
+## Install
 
-Use the native `tavernweave-yuri` plugin from this repository's `yuri-plugin` distribution branch. A workspace admin imports it from GitHub, then you install/enable it in Plugins and open a new task. No local Codex setup is required. See the short [installation guide](docs/NATIVE_HOSTS.md) for the exact repository fields and first-use prompt.
+Use the distribution for your host:
+
+| Host | Distribution | Installation |
+| --- | --- | --- |
+| Codex / ChatGPT Work | `yuri-plugin` | Import and enable `tavernweave-yuri` as a plugin |
+| DeepSeek Harness | `DSH-plugin` / release `.tgz` | Install the DSH bundle, then select its Yuri Workbench preset |
+| Gemini CLI / Task mode | `Gemini-plugin` | Import the four skills individually and retain the complete shared folder |
+
+See [installation and host limits](docs/NATIVE_HOSTS.md). Gemini does not preserve automatic plugin-wide transitions; explicitly load the required dependencies. Your agent's file tools, Python and Node must be available for export.
 
 ## Choose your starting point
 
