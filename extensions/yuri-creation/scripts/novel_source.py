@@ -20,6 +20,7 @@ def main():
         cmd.add_argument("--encoding", help="Explicit TXT encoding; UTF-8/BOM is the default")
         cmd.add_argument("--max-mib", type=int, default=256)
         if name == "init":
+            cmd.add_argument("--profile", type=Path, help="Saved ready preferences")
             cmd.add_argument("--project", type=Path, required=True); cmd.add_argument("--title", default="Supplied novel excerpt")
             selection = cmd.add_mutually_exclusive_group(required=True)
             selection.add_argument("--chapter", action="append", help="Catalog chapter ID; repeat for several chapters")
@@ -33,7 +34,7 @@ def main():
         if args.command == "index": result = n.index(args.input, args.encoding, budget, args.tavern_root)
         else:
             selected = [c['id'] for c in n.index(args.input, args.encoding, budget, args.tavern_root)['chapters']] if args.all else args.chapter
-            result = n.register(args.input, args.project, selected, args.title, args.encoding, budget, args.tavern_root, args.start, args.end)
+            result = n.register(args.input, args.project, selected, args.title, args.encoding, budget, args.tavern_root, args.start, args.end, args.profile)
         print(json.dumps(result, ensure_ascii=False, indent=2))
     except (OSError, ValueError, KeyError, TypeError, LookupError, zipfile.BadZipFile, ET.ParseError) as error:
         parser.exit(1, str(error) + "\n")

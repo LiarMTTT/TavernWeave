@@ -1,3 +1,7 @@
+# Unreleased — supported custom profiles
+
+Adds one shared saved-profile validator to original, inherited, post and novel workflows. Validates character scope/exclusions, womanhood criteria, allowed dynamics and relationship outcomes; rejects unsupported or contradictory settings. Non-default exports require a profile-bound review of the actual prose, anchors and player authorization. Default historical projects remain usable; new inherited sessions bind preferences with source/documents. Frozen legacy code and official 0.5.0 assets are unchanged. Nine focused GPT-6 Luna profile checks passed; no material or roleplay trial was repeated.
+
 # Yuri Card Workbench 0.5.0 — official release
 
 Integrates the accepted Codex/ChatGPT Work, DeepSeek Harness and Gemini CLI/Task adapters into maintained source. Four workflows cover original conversation, inherited JSON/PNG cards/worldbooks, supplied posts and bounded TXT/Markdown/EPUB excerpts. Canonical authoring and conversion code is unchanged from the accepted 0.5.0 checkpoint.

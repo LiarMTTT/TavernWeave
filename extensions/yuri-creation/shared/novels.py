@@ -155,7 +155,8 @@ def index(path, encoding=None, limit=LIMIT, tavern_root=None):
             "coverage": "catalog only; no claim that chapter prose was reviewed"}
 
 
-def register(path, project, selected, title="Supplied novel excerpt", encoding=None, limit=LIMIT, tavern_root=None, start=None, end=None):
+def register(path, project, selected, title="Supplied novel excerpt", encoding=None, limit=LIMIT, tavern_root=None, start=None, end=None, profile_path=None):
+    p.profiles.load(profile_path)  # Reject unsupported preferences before reading selected prose.
     path = Path(path); listing = index(path, encoding, limit, tavern_root)
     p.require(selected and len(set(selected)) == len(selected), "Select chapter IDs or explicitly request all chapters")
     p.require(set(selected) <= {c['id'] for c in listing['chapters']}, "Unknown chapter ID")
@@ -187,4 +188,4 @@ def register(path, project, selected, title="Supplied novel excerpt", encoding=N
               "normalization": "LF text; EPUB excludes markup, scripts, styles, navigation, ruby pronunciation and artwork; no OCR or remote fetch"}
     with tempfile.TemporaryDirectory(prefix="yuri-selected-novel-") as temp:
         source = Path(temp) / "selected.txt"; source.write_text(combined, encoding="utf-8")
-        return p.register(source, project, title, tavern_root=tavern_root, source_kind="novel", origin=origin)
+        return p.register(source, project, title, tavern_root=tavern_root, source_kind="novel", origin=origin, profile_path=profile_path)

@@ -27,7 +27,6 @@
     "live native-host acceptance",
     "DSH/Antigravity-specific yuri registration",
     "advanced schema and cross-dialect worldbook migration",
-    "full custom-profile compatibility (deferred)",
     "legacy original-file licensing (deferred)"
   ],
   "legacy_v1_2_0": "unchanged; original licensing not changed",
@@ -40,7 +39,6 @@
     "ChatGPT Work browser import guide"
   ],
   "deferred": [
-    "full custom-profile compatibility",
     "legacy original-file licensing"
   ],
   "host_registration": "not_verified",
@@ -167,5 +165,24 @@
     "reports": "user_supplied_not_rerun",
     "canonical_runtime_changes": false,
     "gemini": "individual_skill_imports_no_automatic_plugin_wide_handoff"
+  },
+  "custom_profile_compatibility": {
+    "status": "implemented_in_development",
+    "date": "2026-11-13",
+    "runtime": "shared/profiles.py",
+    "contract": "references/custom-profiles.md",
+    "workflows": [
+      "original",
+      "inherited",
+      "post",
+      "novel"
+    ],
+    "default_projects": "backward_compatible",
+    "legacy_engine_imported": false,
+    "semantic_compliance": "agent_review_not_automatically_proven",
+    "validation": "9 focused tests passed via GPT-6 Luna; no old suites or material trials repeated",
+    "released": false,
+    "test_module": "tests/test_profiles.py",
+    "primary_model_executed_tests": false
   }
 }

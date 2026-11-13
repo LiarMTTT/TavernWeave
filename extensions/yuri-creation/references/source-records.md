@@ -29,9 +29,9 @@ Keep distinct people and incidents under distinct stable record IDs. A remembere
 
 ## Adaptation plan
 
-Use `prepare` after writing the draft. It binds the source project, descriptor, reviewed records, default preferences and draft. Fill:
+Use `prepare` after writing the draft. It binds the source project, descriptor, reviewed records, saved preferences and draft. Fill:
 
-- `targets`: every main/player character, each with `record_id`, `result_woman: true`, `result_adult: true`, and a specific `reason`. Unknown source gender stays unknown in the facts; the female result is an explicit fictional adaptation. Leave background characters outside targets.
+- `targets`: exactly the characters selected by the saved scope and exclusions, each with `record_id`, `result_woman: true`, `result_adult: true`, and a specific `reason`. Unknown source gender stays unknown in the facts; the female result is an explicit fictional adaptation. Leave characters outside that scope unchanged. See [custom-profile fields and review](custom-profiles.md) for human/custom criteria and explicit relationship choices.
 - `player_binding`: the poster's `record_id` and `runtime_aliases`, listing specific source names/labels that must disappear from runtime prose. Do not list common pronouns. The built-in forbidden labels are narrator, poster and 发帖者.
 - `decisions`: unique `id`, `kind` (`identity`, `relationship`, `setting`, `invention`, `preserved`), `summary` and source `record_ids`. Relationship decisions also require nonempty `causal_record_ids` and a specific `changed_circumstance`. Declare unsupported new setting/events as invention rather than evidence. Code checks references; the agent reviews whether they actually support the change.
 - `field_sources`: unique `pointer`, `record_ids` and `decision_ids` for every populated runtime field, including the name. Whole entry pointers such as `/data/character_book/entries/0` cover that entry's prose/title/keys. Use individual fields or entries, not a blanket `/data` or whole-worldbook mapping. Every decision must affect at least one output field.

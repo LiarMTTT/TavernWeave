@@ -34,6 +34,8 @@ Ask the agent to read the matching workflow in this folder. No manual Markdown o
 
 The agent presents a playable opening, characters and a worldbook. Tell it what you want changed directly in the conversation. The default main cast consists of adult women, including author-defined virtual and nonhuman women; background identities are preserved. Your player character's current actions, thoughts and replies remain yours.
 
+On the development branch, you can change the character scope, exclude individuals, preserve relationship outcomes, request specific pairings, or supply custom criteria in conversation. The agent saves and checks those preferences across all four workflows; unsupported choices receive an explicit explanation. See [supported custom profiles](references/custom-profiles.md). These development changes are not yet part of the published 0.5.0 packages.
+
 If a retained name seems out of place, the agent explains why and suggests alternatives. You may keep the original or choose a new name; masculine-sounding names are not automatically replaced.
 
 Import the final JSON or character-card PNG into SillyTavern. Its worldbook is already embedded. The agent identifies the final file and keeps source records and adaptation notes separately. When editing an existing card, the original file stays untouched and unrelated fields, code and worldbook loading settings are preserved.
