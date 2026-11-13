@@ -10,9 +10,23 @@
 | --- | --- | --- |
 | Codex、ChatGPT Work | [yuri-plugin](https://github.com/imbdsssity/TavernWeave-Yuri/tree/yuri-plugin) | 导入并启用 `tavernweave-yuri` 插件 |
 | DeepSeek Harness | [DSH-plugin](https://github.com/imbdsssity/TavernWeave-Yuri/tree/DSH-plugin) 或正式版 DSH `.tgz` | 安装插件包，选择 Yuri Workbench 预设 |
-| Gemini CLI、Task 模式 | [Gemini-plugin](https://github.com/imbdsssity/TavernWeave-Yuri/tree/Gemini-plugin) | 分别导入四个技能，保留完整共享目录 |
+| Gemini CLI | `main` 或 [Gemini-plugin](https://github.com/imbdsssity/TavernWeave-Yuri/tree/Gemini-plugin) | 一次安装完整扩展，自动发现四个百合技能及依赖 |
+| Gemini Task 模式 | `Gemini-plugin` | 分别导入四个技能，保留完整共享目录 |
 
-具体步骤见[安装说明](extensions/yuri-creation/docs/NATIVE_HOSTS.md)。Gemini 在已验收环境中不支持插件导入；各技能之间需要明确加载依赖，无法保留插件级自动衔接。各宿主的文件权限、Python、Node 和搜索能力取决于实际环境。
+具体步骤见[安装说明](extensions/yuri-creation/docs/NATIVE_HOSTS.md)。Gemini CLI 已通过扩展导入及技能识别测试；Task 模式保留逐项导入方式。各宿主的文件权限、Python、Node 和搜索能力取决于实际环境。
+
+### Gemini CLI 扩展
+
+在系统终端运行：
+
+```sh
+gemini extensions install https://github.com/imbdsssity/TavernWeave-Yuri --ref main
+gemini extensions list
+```
+
+重启 Gemini CLI，在会话中运行 `/skills list`，应能看到下方四个百合入口及 23 个依赖技能。安装目录会保留完整共享资源，无须逐个导入。已从 `Gemini-plugin` 安装的扩展可继续使用；更新时运行 `gemini extensions update tavernweave-yuri`，然后重启。若此前单独安装过同名技能，请先移除重复项，避免其遮蔽扩展中的入口。
+
+安装依照 Gemini CLI 官方[扩展编写指南](https://geminicli.com/docs/extensions/writing-extensions/)和[安装命令参考](https://geminicli.com/docs/extensions/reference/)。扩展让技能共同可见；Agent 仍按任务加载对应工作流及依赖。
 
 ## 开始使用
 

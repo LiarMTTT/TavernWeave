@@ -195,6 +195,7 @@ function loadSkillCatalog(skillsRoot, options) {
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
     .filter((directoryName) => allowed === undefined || allowed.includes(directoryName))
+    .filter((directoryName) => !options.exclude?.includes(directoryName))
     .sort();
   const catalog = [];
   const seen = new Set();
@@ -282,7 +283,7 @@ export function apply(ctx, config = {}) {
   if (yuriCatalog.length !== YURI_WORKFLOWS.length) {
     throw new Error(`expected ${YURI_WORKFLOWS.length} yuri workflows, found ${yuriCatalog.length} in ${yuriRoot}`);
   }
-  const baseCatalog = loadSkillCatalog(baseRoot, { provider: BASE_PROVIDER });
+  const baseCatalog = loadSkillCatalog(baseRoot, { provider: BASE_PROVIDER, exclude: [...YURI_WORKFLOWS] });
   ctx.skills.registerProvider(() => createProvider(YURI_PROVIDER, yuriCatalog));
   ctx.skills.registerProvider(() => createProvider(BASE_PROVIDER, baseCatalog));
   if (config.locations !== false) {

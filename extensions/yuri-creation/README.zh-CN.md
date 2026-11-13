@@ -10,9 +10,10 @@
 | --- | --- | --- |
 | Codex / ChatGPT Work | `yuri-plugin` | 导入并启用 `tavernweave-yuri` 插件 |
 | DeepSeek Harness | `DSH-plugin` 或正式版 `.tgz` | 安装 DSH 包，选择 Yuri Workbench 预设 |
-| Gemini CLI / Task 模式 | `Gemini-plugin` | 分别导入四个技能，保留完整共享目录 |
+| Gemini CLI | `main` 或 `Gemini-plugin` | 安装完整扩展，自动发现技能 |
+| Gemini Task 模式 | `Gemini-plugin` | 分别导入四个技能，保留完整共享目录 |
 
-Gemini 在已验收环境中不支持插件导入，也不会自动衔接插件内技能；需要时明确加载相应依赖。详见[安装及限制](docs/NATIVE_HOSTS.md)。
+Gemini CLI 已通过扩展导入及技能识别测试，无须逐项导入；Task 模式仍采用单独导入方式。Agent 按任务加载对应工作流和依赖。安装命令及更新方法见[安装说明](docs/NATIVE_HOSTS.md)。
 
 
 ## 从哪里开始

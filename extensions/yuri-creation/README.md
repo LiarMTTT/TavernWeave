@@ -12,9 +12,10 @@ Use the distribution for your host:
 | --- | --- | --- |
 | Codex / ChatGPT Work | `yuri-plugin` | Import and enable `tavernweave-yuri` as a plugin |
 | DeepSeek Harness | `DSH-plugin` / release `.tgz` | Install the DSH bundle, then select its Yuri Workbench preset |
-| Gemini CLI / Task mode | `Gemini-plugin` | Import the four skills individually and retain the complete shared folder |
+| Gemini CLI | `main` or `Gemini-plugin` | Install the complete extension; bundled skills are discovered automatically |
+| Gemini Task mode | `Gemini-plugin` | Import the four skills individually and retain the complete shared folder |
 
-See [installation and host limits](docs/NATIVE_HOSTS.md). Gemini does not preserve automatic plugin-wide transitions; explicitly load the required dependencies. Your agent's file tools, Python and Node must be available for export.
+See [installation and host limits](docs/NATIVE_HOSTS.md) for the Gemini CLI extension command and Task mode fallback. Gemini CLI extension import and skill discovery passed the user's test. The agent loads canonical workflows and dependencies as needed. File tools, Python and Node must be available for export.
 
 ## Choose your starting point
 

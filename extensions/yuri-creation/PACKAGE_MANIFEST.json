@@ -1,7 +1,7 @@
 {
   "version": "0.5.0",
   "scope": "complete extension source; excludes itself; installed at extensions/yuri-creation/ in this fork",
-  "base_commit": "b871c8ffa3e55808647b3ca908d632a2c13d6f32",
+  "base_commit": "de44e46009609ca4e249a85bc4b0eb18bd1d7b2c",
   "delete_paths": [],
   "files": [
     {
@@ -36,13 +36,13 @@
     },
     {
       "path": "LICENSE_BOUNDARY.md",
-      "bytes": 4145,
-      "sha256": "dda80199b63cf4cdf1282294be5f6f89f02ee89b8935848c2fb718e3373083e6"
+      "bytes": 4534,
+      "sha256": "884f2387b496f3fa7e09fbce75ec2787fc10454c84258bf68f6f31bcf07813ed"
     },
     {
       "path": "PROJECT_STATE.md",
-      "bytes": 2988,
-      "sha256": "2414475bba4b89f580b0815729ce805d97ea4788d0e136b39745fda341e71a23"
+      "bytes": 3414,
+      "sha256": "fdd5a2a0f01eddfc3469b6971149702c70eb39e2c356c460fee3eddbef2800c1"
     },
     {
       "path": "PROJECT_WORKFLOW.md",
@@ -51,13 +51,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 4007,
-      "sha256": "98739de3ba8c6c82c6969b076fda88ee22d2a0a969cd7d4367e512e9564d8341"
+      "bytes": 4202,
+      "sha256": "cbdd62d8beaceca5db6e21c2f466dab27220bb653de77ab570e6cdbe9cedb914"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 3570,
-      "sha256": "86802b0103124f3d63d1fd51250b2136c31dd353215594e491cd2854e7fe086b"
+      "bytes": 3710,
+      "sha256": "50e0e3b277f506a1d3d0fecb7159f710203186731bfa8bfec6fb319d4de43737"
     },
     {
       "path": "RELEASE_NOTES.md",
@@ -86,13 +86,13 @@
     },
     {
       "path": "docs/HOST_ACCEPTANCE_2026-11-13.md",
-      "bytes": 2791,
-      "sha256": "c88ccc444b86ad6421074b75f3c77926013b348f5b30df083b217b73209f4524"
+      "bytes": 3764,
+      "sha256": "0ba3d775645fc3f266bd3f888aabccc260ca7a06f7630daecd7038700b48e434"
     },
     {
       "path": "docs/NATIVE_HOSTS.md",
-      "bytes": 9100,
-      "sha256": "416cfecbf29a21bcb1fc12c7311aeb4c3d91d0fdd338de2782424a6750ec544e"
+      "bytes": 11380,
+      "sha256": "b42ceff6f6be27552e673f239173a645f7184d9cc1659970f101b4bdc69ed94a"
     },
     {
       "path": "docs/NATIVE_HOST_REVIEW_2026-11-12.md",
@@ -161,13 +161,13 @@
     },
     {
       "path": "hosts/gemini/GEMINI.md",
-      "bytes": 13781,
-      "sha256": "072651ea6a61e243991d83c5070c838e124c84723e2c28ab680bdfe189c94cc8"
+      "bytes": 14111,
+      "sha256": "99302d0fd940078cb5f16a8df1dfecb356c554b9a86aaebde765681a36458c02"
     },
     {
       "path": "hosts/gemini/README.md",
-      "bytes": 1129,
-      "sha256": "7fb21530d3c80a2a390a1273a49361e1f8b0da63f8180417032dbef73c7c8318"
+      "bytes": 1441,
+      "sha256": "c493c9671cddb98b5fca4217397b1564d842c157ff63adfb5f3c0ab86a85f2b8"
     },
     {
       "path": "hosts/gemini/agents/tavernweave-yuri.md",
@@ -186,8 +186,8 @@
     },
     {
       "path": "hosts/gemini/rules/AGENTS.md",
-      "bytes": 13781,
-      "sha256": "072651ea6a61e243991d83c5070c838e124c84723e2c28ab680bdfe189c94cc8"
+      "bytes": 14111,
+      "sha256": "99302d0fd940078cb5f16a8df1dfecb356c554b9a86aaebde765681a36458c02"
     },
     {
       "path": "hosts/native.json",
@@ -221,8 +221,8 @@
     },
     {
       "path": "scripts/build_host_plugin.py",
-      "bytes": 18075,
-      "sha256": "e0458bcf48a1cf79cb2b6047054fa75d303db9f1eca670ddb7aed4bc2be56fba"
+      "bytes": 19098,
+      "sha256": "fb6f9788024dba8d19f2607a4bdea0c18530657b5388e60012c8f8bf3ec91d40"
     },
     {
       "path": "scripts/card_file.py",
