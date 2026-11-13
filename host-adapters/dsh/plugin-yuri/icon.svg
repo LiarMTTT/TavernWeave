@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="TavernWeave Yuri Workbench">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f9c9e4"/>
+      <stop offset="1" stop-color="#c9b2f4"/>
+    </linearGradient>
+    <linearGradient id="petal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#fceaf4"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="116" height="116" rx="26" fill="url(#bg)"/>
+  <g stroke="#c2185b" stroke-width="3" stroke-linejoin="round">
+    <path d="M64 102 C51 87 47 73 49 58 C51 44 58 34 64 26 C70 34 77 44 79 58 C81 73 77 87 64 102 Z" fill="url(#petal)"/>
+    <path d="M63.5 99 C43 89 31 74 27 56 C24 42 27 31 33 23 C47 34 57 48 61 63 C64 72 65 86 63.5 99 Z" fill="url(#petal)"/>
+    <path d="M64.5 99 C85 89 97 74 101 56 C104 42 101 31 95 23 C81 34 71 48 67 63 C64 72 63 86 64.5 99 Z" fill="url(#petal)"/>
+    <path d="M64 101 C57.5 93 54.5 83 55.5 73 C56.5 64 59.5 55 64 47 C68.5 55 71.5 64 72.5 73 C73.5 83 70.5 93 64 101 Z" fill="#ffffff"/>
+  </g>
+  <g stroke="#c2185b" stroke-width="3" stroke-linecap="round">
+    <line x1="64" y1="33" x2="57" y2="18"/>
+    <line x1="64" y1="33" x2="71" y2="18"/>
+    <line x1="64" y1="33" x2="64" y2="15"/>
+    <line x1="64" y1="33" x2="50" y2="26"/>
+    <line x1="64" y1="33" x2="78" y2="26"/>
+  </g>
+  <g fill="#f2a91b" stroke="#d98a06" stroke-width="2">
+    <circle cx="57" cy="19.5" r="3.4"/>
+    <circle cx="71" cy="19.5" r="3.4"/>
+    <circle cx="64" cy="16.5" r="3.4"/>
+    <circle cx="50" cy="27" r="3.4"/>
+    <circle cx="78" cy="27" r="3.4"/>
+  </g>
+</svg>

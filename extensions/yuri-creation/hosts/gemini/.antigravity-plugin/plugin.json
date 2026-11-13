@@ -1,0 +1,26 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "tavernweave-yuri",
+  "version": "0.5.0",
+  "displayName": "Yuri Card Workbench (TavernWeave-Yuri)",
+  "description": "Four yuri roleplay card creation and adaptation workflows with 23 pinned TavernWeave authoring and source-library dependencies for Gemini CLI.",
+  "author": {
+    "name": "Yuri Card Workbench contributors"
+  },
+  "homepage": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
+  "license": "PolyForm-Noncommercial-1.0.0 AND MIT",
+  "keywords": [
+    "agent-skills",
+    "gemini-cli",
+    "sillytavern",
+    "rolecard",
+    "yuri"
+  ],
+  "suggestedPrompts": [
+    "List the four yuri workflows actually available from tavernweave-yuri and identify their loaded source. Check file-tool and Python availability. Do not generate a card yet.",
+    "帮我通过对话创作一张百合角色卡，未指定的细节由你决定。",
+    "把这张 JSON 或 PNG 卡改编成百合故事，保留无关设置。",
+    "从这段帖子或小说片段制作百合角色卡，保留来源记录。"
+  ]
+}

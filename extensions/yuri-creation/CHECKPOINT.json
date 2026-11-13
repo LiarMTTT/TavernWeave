@@ -157,5 +157,15 @@
     "codex_offline_validator": "not_exposed",
     "claude_executable": "not_found",
     "previous_suites_rerun": false
+  },
+  "official_host_release": {
+    "version": "0.5.0",
+    "tag": "yuri-v0.5.0",
+    "date": "2026-11-13",
+    "authorization": "user_requested_integration_and_official_github_release",
+    "host_acceptance": "docs/HOST_ACCEPTANCE_2026-11-13.md",
+    "reports": "user_supplied_not_rerun",
+    "canonical_runtime_changes": false,
+    "gemini": "individual_skill_imports_no_automatic_plugin_wide_handoff"
   }
 }
