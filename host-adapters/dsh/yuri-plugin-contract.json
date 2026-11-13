@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "adapterVersion": "0.5.0",
+  "status": "plugin-bundle",
+  "supportLevel": "plugin-bundle",
+  "runtimeAccepted": false,
+  "modelQualityClaim": "not-evaluated",
+  "package": {
+    "name": "tavernweave-yuri-dsh",
+    "version": "0.5.0",
+    "presetId": "tavernweave-yuri",
+    "presetName": "TavernWeave Yuri Workbench",
+    "pluginRowId": "tavernweave-yuri-dsh",
+    "workflows": [
+      "yuri-card-creator",
+      "adapt-yuri-card",
+      "post-to-yuri-card",
+      "novel-excerpt-to-yuri-card"
+    ]
+  },
+  "upstream": {
+    "repository": "https://github.com/imbdsssity/TavernWeave-Yuri",
+    "branch": "yuri-dev",
+    "auditedRuntimeVersion": "0.2.2-rc.1",
+    "auditedAt": "2026-11-13",
+    "warning": "Upstream declares Developer Preview and compatibility-breaking changes. Re-audit, reinstall and rerun the gates below before claiming compatibility with another DSH build."
+  },
+  "composition": {
+    "workflowSkills": 4,
+    "dependencySkills": 23,
+    "skillRegistration": "plugin-provider",
+    "providers": {
+      "tavernweave-yuri": "the four yuri card workflows, resource base per workflow directory",
+      "tavernweave-base": "the 23 unchanged TavernWeave dependency skills, byte-identical to the source tree"
+    },
+    "layoutSection": "tavernweave-yuri:locations",
+    "resources": "skill-directory",
+    "pinnedBase": {
+      "path": "skills",
+      "verifiedModules": [
+        "skills/tavern-card-builder/SKILL.md",
+        "skills/tavern-card-builder/references/authoring-workflow.md",
+        "skills/build-work-library/scripts/work_library.py"
+      ]
+    },
+    "presetMounts": [
+      "@deepseek-ai/dsh-persona",
+      "@deepseek-ai/dsh-agent-instructions",
+      "@deepseek-ai/dsh-time-context",
+      "@deepseek-ai/dsh-tool-pwsh|@deepseek-ai/dsh-tool-bash",
+      "@deepseek-ai/dsh-tool-fs",
+      "@deepseek-ai/dsh-tool-fs-search",
+      "@deepseek-ai/dsh-tool-skill",
+      "@deepseek-ai/dsh-tool-ask-user",
+      "@deepseek-ai/dsh-tool-present",
+      "@deepseek-ai/dsh-compaction-basic",
+      "@deepseek-ai/dsh-command-compact"
+    ],
+    "omittedByDefault": [
+      "web",
+      "subagents",
+      "workflow",
+      "goal",
+      "todo",
+      "background-jobs",
+      "client-ui"
+    ]
+  },
+  "install": {
+    "desktop": "Plugins -> Add plugin -> install third-party plugin from local path or tarball, enable the bundle, then choose the TavernWeave Yuri Workbench preset in a new session.",
+    "cli": "dsh plugin --profile <profile> add <local path|tarball|git URL|package>",
+    "uninstall": "Disable and remove the bundle from the Plugins page, or dsh plugin --profile <profile> remove tavernweave-yuri-dsh."
+  },
+  "requiredRuntimeGates": [
+    "plugin-install-from-local-artifact",
+    "bundle-appears-in-plugin-page",
+    "preset-appears-in-new-session-selector",
+    "skill-catalog-reports-the-four-tavernweave-yuri-workflows-with-bundled-source",
+    "skill-catalog-reports-23-tavernweave-base-dependency-skills",
+    "skill-load-returns-current-workflow-body",
+    "layout-section-states-plugin-yuri-and-base-paths",
+    "python-export-scripts-resolve-shared-runtime",
+    "pinned-tavernweave-base-blobs-verify",
+    "file-tool-availability-checkable",
+    "plugin-disable-and-uninstall-remove-all-registrations"
+  ],
+  "forbiddenClaimsBeforeRuntimeAcceptance": [
+    "yuri-workflows-alter-or-extend-the-original-cot",
+    "sillytavern-import-or-live-roleplay-implied-by-export",
+    "account-installation-proven-by-file-discovery",
+    "cross-host-parity-without-host-testing"
+  ],
+  "evidence": {
+    "status": "pending-verification",
+    "targetDshVersion": "0.2.2-rc.1",
+    "acceptedPackageVersion": null,
+    "acceptanceNote": "The first runtime acceptance run against the current DSH build records below; until it completes, runtimeAccepted stays false.",
+    "partialChecks": []
+  },
+  "knownEnvironmentIssues": []
+}
