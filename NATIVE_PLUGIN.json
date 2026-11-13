@@ -2,7 +2,7 @@
   "schema": "yuri/native-plugin/v1",
   "name": "tavernweave-yuri",
   "version": "0.5.0",
-  "source_commit": "b871c8ffa3e55808647b3ca908d632a2c13d6f32",
+  "source_commit": "3ebc2a536dabb37328d8cc9ad05b5ad6182d8e8b",
   "source_files": 593,
   "upstream_skills": [
     "activate-tavernweave-soul",
@@ -75,6 +75,8 @@
   "host_loading": "not_observed",
   "account_installation": "not_performed",
   "host_scope": [
+    "Gemini CLI skill and extension layout (root SKILL.md, gemini-extension.json, .gemini/skills, .agents/skills)",
+    "Gemini CLI and Antigravity sub-agent task mode (agents/tavernweave-yuri.md)",
     "portable ChatGPT/Codex plugin layout",
     "Claude skills-only compatibility layout"
   ],
@@ -82,5 +84,18 @@
     "DSH/Antigravity native registration",
     "public-directory publication",
     "live host import or roleplay"
-  ]
+  ],
+  "distribution_branch": "Gemini-plugin",
+  "root_skill_entry": "SKILL.md",
+  "gemini_cli": {
+    "root_skill": "SKILL.md",
+    "extension_manifest": "gemini-extension.json",
+    "antigravity_manifest": ".antigravity-plugin/plugin.json",
+    "context_file": "GEMINI.md",
+    "always_on_rule": "rules/AGENTS.md",
+    "agents": [
+      "agents/tavernweave-yuri.md",
+      "agents/tavernweave.md"
+    ]
+  }
 }

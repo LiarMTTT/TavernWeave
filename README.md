@@ -6,6 +6,6 @@ Native skills-only plugin: original conversation, inherited JSON/PNG, supplied p
 
 Install/enable through your host, then start a new task and ask it to list the four yuri skills. This generated branch is a complete plugin folder, not the editable development source. Do not copy individual wrappers into a standalone skills folder. No hooks, MCP server, keys or global rule changes are installed.
 
-Source revision: `b871c8ffa3e55808647b3ca908d632a2c13d6f32`. See NATIVE_PLUGIN.json for package evidence. Account installation, actual skill discovery and live host execution remain separate checks.
+Source revision: `3ebc2a536dabb37328d8cc9ad05b5ad6182d8e8b`. See NATIVE_PLUGIN.json for package evidence. Account installation, actual skill discovery and live host execution remain separate checks.
 
 Licensing: original additions are MIT; the unchanged TavernWeave base retains its root LICENSE, Required Notice and third-party terms. See NATIVE_LICENSE_BOUNDARY.md and THIRD_PARTY_NOTICES.md.
