@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "scope": "official release: four workflows, supported custom profiles and reference-led image adaptation",
+  "version": "1.2.0",
+  "scope": "specialized Yuri distribution: explicit upstream synchronization and accurate layer/entry counting",
   "license_boundary_commit_before_dependency_copy": "f16de770ea0bb4d832f395d3eb026495006bf329",
   "original_additions_license": "MIT",
   "tavernweave_code_or_skill_prose_bundled": false,
@@ -77,7 +77,7 @@
       "raw_transcript_published": false
     }
   },
-  "release_readiness": "user-authorized 1.0.0 source and host distributions; no new model trials",
+  "release_readiness": "user-authorized 1.2.0 release after targeted upstream and package regressions",
   "source_workflow_validation": {
     "synthetic_unit_tests": 19,
     "fresh_agent_completed": true,
@@ -194,5 +194,17 @@
     "image_workflow": "references/image-adaptation.md",
     "additional_model_tests": false,
     "image_quality_newly_validated": false
+  },
+  "official_1_2_0": {
+    "authorization": "user_requested_implementation_and_official_v1.2.0_release",
+    "date": "2026-11-13",
+    "tag": "yuri-v1.2.0",
+    "upstream_commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+    "upstream_version": "2.4.0",
+    "upstream_decision": "retain_current_pin_no_changes",
+    "architecture": "docs/ARCHITECTURE.md",
+    "procedure": "docs/UPSTREAM_SYNC.md",
+    "review": "docs/upstream-sync/2026-11-13.json",
+    "targeted_validation": "GPT-6 Luna: 6 focused unittest cases passed; actual results in review record"
   }
 }

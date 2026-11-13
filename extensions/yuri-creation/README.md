@@ -1,6 +1,8 @@
-# Yuri Card Workbench 1.0.0
+# Yuri Card Workbench 1.2.0
 
 Create yuri roleplay cards through conversation, adapt an existing card, or turn a post or novel excerpt into a new story. Your agent handles the files; you review and revise in the conversation.
+
+This is a specialized Yuri product distribution built on TavernWeave: a retained general-purpose ecosystem, a domain-specific extension, shared execution contracts and native-host integration. Its focus is Yuri adaptation across different source media.
 
 [中文说明](README.zh-CN.md)
 
@@ -56,3 +58,7 @@ Large novels do not need to fit into one conversation message. The agent can sel
 Research, image inspection and optional artwork creation use tools available in your agent's workspace. A text-only card is complete on its own. The native package exposes these workflows; account installation and available tools still depend on your host. The protected editor keeps the original schema; structural migration or script changes require a separately scoped operation. Text-only/DOCS components use available host reading/export tools and upstream authoring rather than JSON round-tripping.
 
 [Licensing](LICENSE_BOUNDARY.md) · [Integration and supported scope](INTEGRATION.md)
+
+Four canonical Yuri workflows are exposed through four portable/Gemini discovery wrappers; DSH registers the canonical procedures directly. With 23 upstream dependency entries, each host exposes 27 discoverable entries. Internal implementation modules and canonical files behind wrappers are not additional entries. See [architecture and counting](docs/ARCHITECTURE.md).
+
+The currently integrated TavernWeave commit is its v2.4.0 release. Updates follow an explicit [upstream review and synchronization procedure](docs/UPSTREAM_SYNC.md), rather than automatic moving-branch adoption.

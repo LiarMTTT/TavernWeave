@@ -49,7 +49,7 @@ Codex uses the complete plugin folder and its native marketplace/manifest. The f
 
 ### DeepSeek Harness
 
-Download `TavernWeave-Yuri-DSH-v1.0.0.tgz` from the [official GitHub release](https://github.com/imbdsssity/TavernWeave-Yuri/releases/tag/yuri-v1.0.0). In DSH Desktop, open Plugins → Add plugin → Install third-party plugin, select the tarball, enable the bundle, then choose **TavernWeave Yuri Workbench** in a new session. The complete tarball contains four Yuri workflows and 23 dependency skills; the small source integration folder alone does not contain these resources.
+Download `TavernWeave-Yuri-DSH-v1.2.0.tgz` from the [official GitHub release](https://github.com/imbdsssity/TavernWeave-Yuri/releases/tag/yuri-v1.2.0). In DSH Desktop, open Plugins → Add plugin → Install third-party plugin, select the tarball, enable the bundle, then choose **TavernWeave Yuri Workbench** in a new session. The complete tarball contains four Yuri workflows and 23 dependency skills; the small source integration folder alone does not contain these resources.
 
 For CLI/Web profiles use `dsh plugin --profile <profile> add <tarball>`. See the [adapter guide](../../../host-adapters/dsh/plugin-yuri/README.md) and version-specific [acceptance contract](../../../host-adapters/dsh/yuri-plugin-contract.json). Built-in DSH search/sub-agent tools are not mounted by default. Other runtime versions need their own compatibility evidence.
 
@@ -99,8 +99,12 @@ The builder reuses pinned upstream package helpers, exports committed blobs only
 
 From any working directory, the packaged `extensions/yuri-creation/scripts/host_probe.py` checks entry/resource presence, runtime availability and source/authoring pins. It reports host discovery as unobserved; an agent cannot prove account installation by finding files. A fresh task selecting the native entry is the final host-discovery check.
 
-Portable and Gemini outputs are separate generated trees. Gemini templates are maintained in `hosts/gemini/`, and its plan targets `Gemini-plugin`. The DSH adapter is source-compatible; preserve its history while merging source updates normally. Before publishing, use a clean committed checkout, verify the extension manifest, and publish exactly the checked source/artifacts. Release tag `yuri-v0.5.0` points to accepted `main`; package receipts record that immutable source commit.
+Portable and Gemini outputs are separate generated trees. Gemini templates are maintained in `hosts/gemini/`, and its plan targets `Gemini-plugin`. The DSH adapter is source-compatible; preserve its history while merging source updates normally. Before publishing, use a clean committed checkout, verify the extension manifest, and publish exactly the checked source/artifacts. Release tag `yuri-v1.2.0` identifies the official product source; package receipts record that immutable source commit.
 
 ## Version 1.0.0
 
 The official 1.0.0 distributions include supported custom profiles and reference-led image adaptation. Historical host import/discovery acceptance above remains 0.5.0 evidence; no new host test was requested. Check NATIVE_PLUGIN.json.source_commit and host_probe.py package_source_commit to identify the installed generated source separately from pinned dependency versions. SOURCE.json in the release records source and generated package trees. Existing installations following a distribution branch receive its new package when updated through the host.
+
+## Version 1.2.0
+
+The product is a specialized TavernWeave distribution. See ARCHITECTURE.md for canonical/workflow/wrapper/module counts and UPSTREAM_SYNC.md for reviewed upstream adoption. Portable/Gemini receipts expose 4 canonical workflows, 4 discovery wrappers, 23 dependencies and 27 discoverable entries; DSH directly registers 4 canonical workflows plus 23 dependencies with no wrappers. SOURCE.json records the product source, upstream version/commit and review decision. This metadata is not a new native-host acceptance claim.

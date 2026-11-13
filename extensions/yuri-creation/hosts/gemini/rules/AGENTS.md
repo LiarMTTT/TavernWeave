@@ -52,7 +52,7 @@ For saved guidance and rewriting, use the bundled managers with `--host antigrav
 
 ## Yuri Card Workbench Entry Workflows (`tavernweave-yuri`)
 
-This package (`tavernweave-yuri` v1.0.0, source branch `main` or distribution branch `Gemini-plugin`) provides four primary yuri workflows in `skills/`, backed by 23 unchanged TavernWeave dependency skills. Gemini CLI discovers the bundled skills after installation as an extension. Task mode retains individual skill imports. Keep the complete shared package available:
+This package (`tavernweave-yuri` v1.2.0, source branch `main` or distribution branch `Gemini-plugin`) provides four primary yuri workflows in `skills/`, backed by 23 unchanged TavernWeave dependency skills. Gemini CLI discovers the bundled skills after installation as an extension. Task mode retains individual skill imports. Keep the complete shared package available:
 
 - `yuri-card-creator`: Wrapper at `<plugin-root>/skills/yuri-card-creator/SKILL.md` -> Canonical source at `<plugin-root>/extensions/yuri-creation/skills/yuri-card-creator/SKILL.md`.
 - `adapt-yuri-card`: Wrapper at `<plugin-root>/skills/adapt-yuri-card/SKILL.md` -> Canonical source at `<plugin-root>/extensions/yuri-creation/skills/adapt-yuri-card/SKILL.md`.
