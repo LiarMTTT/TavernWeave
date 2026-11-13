@@ -71,6 +71,10 @@ jobs:
           python -B extensions/yuri-creation/scripts/build_host_plugin.py --repo . --ref HEAD --host gemini --output "$RUNNER_TEMP/yuri-gemini"
       - name: Check supported Yuri custom policies
         run: python -B -m unittest discover -s extensions/yuri-creation/tests -p 'test_profiles.py' -v
+      - name: Verify integrated upstream pins and review tooling
+        run: |
+          python -B extensions/yuri-creation/scripts/upstream_sync.py verify --repo .
+          python -B -m unittest discover -s extensions/yuri-creation/tests -p 'test_upstream_sync.py' -v
       - name: Check Codex skills-only installation
         env:
           PYTHONUTF8: '1'

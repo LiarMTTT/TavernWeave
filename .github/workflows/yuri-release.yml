@@ -80,7 +80,8 @@ jobs:
                           z.write(path, path.relative_to(root.parent))
               receipts[channel] = json.loads((root / 'NATIVE_PLUGIN.json').read_text())
               builds[channel] = json.loads((root.parent / 'build-result.json').read_text())
-          (assets / 'SOURCE.json').write_text(json.dumps({'version': version, 'source_commit': os.environ['GITHUB_SHA'], 'repository': os.environ['GITHUB_REPOSITORY'], 'packages': receipts, 'builds': builds}, ensure_ascii=False, indent=2) + '\n')
+          upstream = json.loads(Path('extensions/yuri-creation/UPSTREAM.json').read_text())
+          (assets / 'SOURCE.json').write_text(json.dumps({'version': version, 'source_commit': os.environ['GITHUB_SHA'], 'repository': os.environ['GITHUB_REPOSITORY'], 'upstream': upstream['tavernweave'], 'upstream_review': upstream['integration_review'], 'packages': receipts, 'builds': builds}, ensure_ascii=False, indent=2) + '\n')
           lines = [hashlib.sha256(p.read_bytes()).hexdigest() + '  ' + p.name for p in sorted(assets.iterdir()) if p.is_file()]
           (assets / 'SHA256SUMS.txt').write_text('\n'.join(lines) + '\n')
           notes = Path('extensions/yuri-creation/RELEASE_NOTES.md').read_text().split('\n<!-- historical-release-notes -->')[0]
@@ -104,6 +105,8 @@ jobs:
               return subprocess.check_output(['git', *args], input=data).decode().strip()
           source = os.environ['GITHUB_SHA']
           source_tree = git('rev-parse', source + '^{tree}')
+          import runpy
+          check_source_channel = runpy.run_path('extensions/yuri-creation/scripts/upstream_sync.py')['check_source_channel']
           tmp = Path(os.environ['RUNNER_TEMP'])
           for branch, channel in [('yuri-plugin', 'portable'), ('Gemini-plugin', 'gemini'), ('DSH-plugin', None), ('yuri-dev', None)]:
               git('fetch', 'origin', 'refs/heads/' + branch)
@@ -113,7 +116,7 @@ jobs:
                   if not tree:
                       raise SystemExit('Missing generated tree for ' + branch)
               else:
-                  git('merge-base', '--is-ancestor', old, source)
+                  check_source_channel(Path.cwd(), old, source, branch)
                   tree = source_tree
               if git('rev-parse', old + '^{tree}') == tree:
                   continue
@@ -135,3 +138,14 @@ jobs:
             git push origin "refs/tags/$YURI_TAG"
           fi
           gh release create "$YURI_TAG" "$RUNNER_TEMP"/yuri-assets/* --verify-tag --title "Yuri Card Workbench $YURI_VERSION" --notes-file "$RUNNER_TEMP/yuri-release-notes.md" --latest
+          # Remove only the transient release head actually merged into this source.
+          python - <<'PY'
+          import os, subprocess
+          parents = subprocess.check_output(['git', 'show', '-s', '--format=%P', os.environ['GITHUB_SHA']], text=True).split()
+          if len(parents) == 2:
+              rows = subprocess.check_output(['git', 'ls-remote', '--heads', 'origin', 'refs/heads/release/yuri-*'], text=True).splitlines()
+              for row in rows:
+                  sha, ref = row.split()
+                  if sha == parents[-1]:
+                      subprocess.run(['git', 'push', 'origin', '--delete', ref.removeprefix('refs/heads/')], check=True)
+          PY

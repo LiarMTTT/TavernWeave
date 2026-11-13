@@ -2,10 +2,10 @@
   "tavernweave": {
     "repository": "https://github.com/LiarMTTT/TavernWeave",
     "commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
-    "relationship": "optional_external_authoring_dependency",
+    "relationship": "pinned_co_located_product_base",
     "license": "PolyForm-Noncommercial-1.0.0",
     "required_notice": "Copyright 2026 LiarMTTT",
-    "bundled_code_or_skill_prose": false,
+    "bundled_code_or_skill_prose": true,
     "modules": [
       {
         "path": "skills/tavern-card-builder/SKILL.md",
@@ -15,7 +15,9 @@
         "path": "skills/tavern-card-builder/references/authoring-workflow.md",
         "blob": "cdb1c852b13e54b2218d6cd68f46080910b76d8a"
       }
-    ]
+    ],
+    "version": "2.4.0",
+    "bundle_scope": "Base skills and resources are packaged outside the original MIT extension and retain their own license and notices."
   },
   "foreverse": {
     "repository": "https://github.com/foreverse-app/character-card-skills",
@@ -39,5 +41,14 @@
     "git_blob": "77dd8947a3b813bb91e2f2e8bc8ff1e0ea8f832e",
     "license": "PolyForm-Noncommercial-1.0.0",
     "relationship": "unchanged inventory/blob-reading/source-validation helpers executed from the surrounding source checkout"
+  },
+  "integration_review": {
+    "date": "2026-11-13",
+    "candidate_commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+    "candidate_version": "2.4.0",
+    "decision": "retain_current_pin_no_changes",
+    "reason": "Current upstream main and v2.4.0 resolve to the already integrated commit.",
+    "procedure": "docs/UPSTREAM_SYNC.md",
+    "record": "docs/upstream-sync/2026-11-13.json"
   }
 }

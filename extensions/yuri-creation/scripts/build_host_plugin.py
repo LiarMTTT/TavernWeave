@@ -82,8 +82,10 @@ def native_files(config, version, source_commit, base_names, source_count, licen
         files[f"skills/{name}/agents/openai.yaml"] = yaml.encode()
         files[f"skills/{name}/LICENSE"] = license_text
     files["README.md"] = (f"# Yuri Card Workbench {version}\n\n"
+        "A specialized Yuri product distribution built on the TavernWeave ecosystem, with its own workflows and execution contracts. "
         "Native skills-only plugin: original conversation, inherited JSON/PNG, supplied posts and novel TXT/EPUB excerpts. "
         "The four yuri entries share the packaged TavernWeave dependencies.\n\n"
+        "Counting: 4 canonical Yuri workflows, exposed through 4 discovery wrappers, plus 23 upstream dependency entries = 27 discoverable entries. The wrappers bind those workflows; they are not four additional workflows. Internal modules are not discovery entries.\n\n"
         f"[English guide]({EXT}/README.md) · [中文说明]({EXT}/README.zh-CN.md) · "
         f"[Install / 安装]({EXT}/docs/NATIVE_HOSTS.md)\n\n"
         "Install/enable through your host, then start a new task and ask it to list the four yuri skills. "
@@ -104,8 +106,12 @@ def native_files(config, version, source_commit, base_names, source_count, licen
         "The Foreverse vendor file/notice and AFV MIT notice remain independently applicable. "
         "No combined-package MIT grant is implied.\n").encode()
     files["NATIVE_PLUGIN.json"] = dump({"schema": "yuri/native-plugin/v1", "name": config["name"], "version": version,
+        "product_kind": "specialized_yuri_distribution_on_tavernweave",
         "source_commit": source_commit, "source_files": source_count, "upstream_skills": base_names,
         "entry_points": names, "skill_count": len(base_names) + len(names), "skills": sorted(base_names + names),
+        "counts": {"canonical_yuri_workflows": len(names), "yuri_discovery_wrappers": len(names),
+                   "upstream_dependency_entries": len(base_names), "packaged_discoverable_entries": len(base_names) + len(names)},
+        "counting_note": "Wrappers expose canonical workflows; implementation modules and canonical resources are not additional discoverable entries",
         "components": config["components"], "host_loading": "not_observed", "account_installation": "not_performed",
         "host_scope": ["portable ChatGPT/Codex plugin layout", "Claude skills-only compatibility layout"],
         "not_claimed": ["DSH/Antigravity native registration", "public-directory publication", "live host import or roleplay"]})
@@ -167,6 +173,7 @@ def build(repo, ref, output, emit_git_tree=False, host="portable"):
         receipt["skill_import"] = "Gemini CLI: install the complete extension; bundled skills are discovered automatically. Task mode: import skills individually and retain the complete package."
         generated["NATIVE_PLUGIN.json"] = dump(receipt)
         generated["README.md"] = ("# Yuri Card Workbench " + version + " for Gemini\n\n"
+            "A specialized Yuri product distribution built on TavernWeave. Four canonical workflows are exposed through four wrappers; with 23 upstream dependencies this gives 27 discoverable entries. Internal implementation modules are not additional entries.\n\n"
             "Install this complete bundle as a Gemini CLI extension:\n\n"
             "```sh\ngemini extensions install https://github.com/imbdsssity/TavernWeave-Yuri --ref Gemini-plugin\ngemini extensions list\n```\n\n"
             "Restart Gemini CLI, then check /skills list for the four yuri workflows. "

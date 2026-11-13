@@ -1,6 +1,8 @@
-# Integration and reuse map
+TavernWeave-Yuri is a specialized product distribution built on the retained TavernWeave ecosystem, with domain workflows, shared contracts and native-host composition.
 
-| Responsibility | Choice in 1.0.0 |
+# Product integration and reuse map
+
+| Responsibility | Choice in 1.2.0 |
 | --- | --- |
 | Original yuri policy, delegated choices, localized entry | New small MIT extension |
 | General character/worldbook/opening methods | Pinned external TavernWeave authoring documents; optional file-verified bridge |
@@ -20,11 +22,11 @@ Minimum end-to-end path: `init` â†’ agent writes `card.md` and `creation.json` â
 
 The first release uses a text-first adult main cast. Large systems, a mandatory design interview and graphics are unnecessary for this delegated first draft. Upstream does not automatically confer tested compatibility across hosts. Keep the verified v1.2.0 archive frozen.
 
-`capabilities` reports supported package commands separately from unprobed host tools. `pack-image --card PATH --avatar PATH --output NEW.png` remains the original avatar packager. The separate card_file.py adapter handles inherited containers; do not send inherited cards through Markdown conversion. Package version is 1.0.0; the compatible original creation-record contract remains 0.1.0. Custom profile enforcement is implemented in shared/profiles.py; see references/custom-profiles.md. Legacy-file licensing remains deferred.
+`capabilities` reports supported package commands separately from unprobed host tools. `pack-image --card PATH --avatar PATH --output NEW.png` remains the original avatar packager. The separate card_file.py adapter handles inherited containers; do not send inherited cards through Markdown conversion. Package version is 1.2.0; the compatible original creation-record contract remains 0.1.0. Custom profile enforcement is implemented in shared/profiles.py; see references/custom-profiles.md. Legacy-file licensing remains deferred.
 
-## Verified fork integration
+## Reviewed upstream integration
 
-Repository: https://github.com/imbdsssity/TavernWeave-Yuri. The co-located upstream base remains pinned at f9863d2b05305457fe9ed8b0c5688d52aca400a5; this native feature starts from yuri-dev at 3ebc2a536dabb37328d8cc9ad05b5ad6182d8e8b. The extension lives under extensions/yuri-creation/. Main carries the official 1.0.0 release. Pass the repository/plugin root as --tavern-root when using co-located authoring files. Source root inventories and all 23 upstream skills remain unchanged; the separate native export adds four discovery wrappers.
+Repository: https://github.com/imbdsssity/TavernWeave-Yuri. The co-located upstream base remains pinned at f9863d2b05305457fe9ed8b0c5688d52aca400a5; this native feature starts from yuri-dev at 3ebc2a536dabb37328d8cc9ad05b5ad6182d8e8b. The extension lives under extensions/yuri-creation/. Main carries the official 1.2.0 release. Pass the repository/plugin root as --tavern-root when using co-located authoring files. Source root inventories and all 23 upstream skills remain unchanged; the separate native export adds four discovery wrappers.
 
 The automated suite remains available with a historical 40-check baseline at 0.3.1. The 0.4.0 checks used one PNG and one EPUB excerpt; see docs/FILE_SUPPORT_REVIEW_2026-11-12.md. Native packaging checks are separately recorded in docs/NATIVE_HOST_REVIEW_2026-11-12.md and run by GPT-6 Luna. No earlier material trials or suites are repeated. Custom-policy checks use the focused development test in tests/test_profiles.py; legacy-license work remains deferred.
 
@@ -36,7 +38,7 @@ Use scripts/source_card.py and shared/provenance.py for source_yuri mode. The po
 
 The base work-library code stays outside the extension under its PolyForm Noncommercial terms. UPSTREAM.json pins its actual implementation blob. New bridge code and the synthetic example are MIT original additions. The original creator stays original-only; do not empty real source references to bypass that validator. references/source-records.md defines the extraction/adaptation input format for the agent.
 
-The post and novel routes support defaults only and require all registered units reviewed. novel_source.py selects TXT/Markdown chapters using the pinned splitter, or EPUB spine text using an original standard-library wrapper, then reuses the same records, quote basis and adaptation bindings. A third-person novel can introduce a player via an explicit invention decision without fabricating a source dossier.
+The post and novel routes support the shared validated profiles and require all registered units reviewed. novel_source.py selects TXT/Markdown chapters using the pinned splitter, or EPUB spine text using an original standard-library wrapper, then reuses the same records, quote basis and adaptation bindings. A third-person novel can introduce a player via an explicit invention decision without fabricating a source dossier.
 
 As of 0.3.1, new extraction/v2 candidates use per-claim quotes; the original bridge derives body/evidence while leaving the upstream record format and engine unchanged. Existing promoted v1 projects remain readable and buildable, without a retroactive claim-review assertion. Both entry points route/read before drafting and share references/name-review.md for conditional conversational name choices. Name review is agent guidance, not a tested name classifier or an inherited-card adapter.
 
@@ -59,3 +61,5 @@ scripts/host_probe.py checks materialized files, runtimes and pins from any work
 All four workflows now validate the same saved policy interface, preserve the supplied preferences, and bind non-default policy review to the profile fingerprint. Scope, exclusions, declared identity criteria and declared relationship outcomes are checked before output. Unknown choices fail rather than receive default behavior. Actual prose, free-text criteria, authorization and protected anchors remain agent-reviewed. Default historical projects remain readable; inherited v1 sessions are default-only and new v2 sessions bind their saved profiles. No legacy implementation is copied. See references/custom-profiles.md for the supported fields and review contract.
 
 Reference-led image changes reuse the pinned source-library visual observation, character-design, local prompt-spec and packaging skills. The Yuri handoff combines inspected original style with the updated narrative, passes the actual reference to image tools and presents a visually reviewed candidate for user choice. No new image engine or upstream skill changes are introduced. See references/image-adaptation.md.
+
+[Architecture and distinct counting units](docs/ARCHITECTURE.md) defines canonical workflows, wrappers, implementation modules and discoverable entries. [Upstream synchronization](docs/UPSTREAM_SYNC.md) defines the seven-stage review/adoption process and the complete pin set. The 2026-11-13 review confirms that the existing f9863d2 commit already is current upstream v2.4.0, so no upstream code or pin revision is changed for 1.2.0.

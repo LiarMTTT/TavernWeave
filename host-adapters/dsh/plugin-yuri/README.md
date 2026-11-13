@@ -25,7 +25,7 @@
 
 ### 桌面版（DSH Desktop）
 
-1. 取得已发布的 `TavernWeave-Yuri-DSH-v1.0.0.tgz`，或在源码树运行
+1. 取得已发布的 `TavernWeave-Yuri-DSH-v1.2.0.tgz`，或在源码树运行
    `node scripts/build-yuri-dsh-plugin.mjs` 重新生成同名本地包；
 2. 侧栏 **插件 → 添加插件 → 安装第三方插件**；
 3. 填入本地路径（本目录或 `.tgz`），完成安装并启用 bundle；
@@ -46,3 +46,5 @@ dsh plugin --profile <profile> add <本地路径|tarball|git 地址|包名>
 ## 验收
 
 实机验收记录与未验证项见 [`../yuri-plugin-contract.json`](../yuri-plugin-contract.json) 的 `evidence`。安装成功不代表账号内已启用或新任务已发现；以新任务中 skill 目录实际出现四个 `tavernweave-yuri` 工作流为准。
+
+This is the DSH host composition of a specialized Yuri product distribution built on TavernWeave. Providers expose four canonical Yuri workflows and 23 upstream dependency entries (27 discoverable entries); implementation modules are not separate skills, and this host does not add discovery wrappers.

@@ -1,0 +1,40 @@
+{
+  "schema": "yuri/upstream-review/v1",
+  "integrated_commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+  "candidate_commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+  "history_relation": "same",
+  "decision": "retain_current_pin_no_changes",
+  "verification": {
+    "schema": "yuri/upstream-verification/v1",
+    "integrated_commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+    "upstream_version": "2.4.0",
+    "counts": {
+      "canonical_yuri_workflows": 4,
+      "yuri_discovery_wrappers": 4,
+      "upstream_dependency_entries": 23,
+      "packaged_discoverable_entries": 27
+    },
+    "pins_valid": true,
+    "errors": [],
+    "limit": "File and declared-pin verification; not semantic or live-host acceptance"
+  },
+  "changes": [],
+  "candidate_code_executed": false,
+  "pins_updated": false,
+  "next": "Record review and targeted checks; adopt only reviewed changes and update all pin consumers together",
+  "recorded_on": "2026-11-13",
+  "reviewed_upstream_version": "2.4.0",
+  "prior_integrated_baseline": {
+    "commit": "f9863d2b05305457fe9ed8b0c5688d52aca400a5",
+    "relation_to_candidate": "same",
+    "result": "same; no upstream changes to adopt"
+  },
+  "targeted_checks": {
+    "command": "python -m unittest extensions.yuri-creation.tests.test_upstream_sync -v",
+    "result": "passed",
+    "passed": 6,
+    "failed": 0,
+    "scope": "Upstream pin/version verification, history and change classification, read-only behavior, and source-channel receipt acceptance/rejection. No semantic or live-host acceptance performed."
+  },
+  "candidate_upstream_version": "2.4.0"
+}

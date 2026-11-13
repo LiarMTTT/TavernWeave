@@ -22,6 +22,6 @@ One agent owns a given file set at a time. Repository handoff records retain com
 
 ## Upstream updates and exports
 
-Handle upstream TavernWeave changes on a separate integration branch/PR, review affected interfaces, and update UPSTREAM.json only for the reviewed pin. Do not automatically replace yuri-dev with a newer upstream snapshot or label the entire fork MIT.
+Follow docs/UPSTREAM_SYNC.md for every upstream synchronization: record the baseline, freeze and review a candidate, classify relevant changes, check Yuri callers, update the complete pin set, run scoped regressions and record actual results. Use scripts/upstream_sync.py for verification and a read-only candidate report. Handle adoption on a separate integration branch/PR and update both UPSTREAM.json and its authoring mirror only for the reviewed pin. Do not automatically replace yuri-dev with a newer upstream snapshot or label the entire fork MIT.
 
 If a Drive export is requested, export the actual published revision with exact filenames and checksums. An older Drive patch must not be reapplied over newer GitHub work. Current repository/PR state takes precedence over previous publisher prompts and the superseded separate-agent upload process.
