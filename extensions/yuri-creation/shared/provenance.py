@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 import tempfile
 from urllib.parse import urlparse
+import profiles
 
 ROOT = Path(__file__).resolve().parents[1]
 LIBRARY_PATH = "skills/build-work-library/scripts/work_library.py"
@@ -66,10 +67,11 @@ def dependencies(tavern_root=None):
     return repo, load_module("tw_source_bridge", path), creator
 
 
-def register(input_path, project, title="Supplied post", url=None, tavern_root=None, *, source_kind="post", origin=None):
+def register(input_path, project, title="Supplied post", url=None, tavern_root=None, *, source_kind="post", origin=None, profile_path=None):
     repo, tw, creator = dependencies(tavern_root)
     project, input_path = Path(project).resolve(), Path(input_path)
     require(source_kind in ("post", "novel"), "Unsupported source kind")
+    preferences = creator.profile(profile_path)
     require(not project.exists(), "Project target exists; use a fresh directory")
     require(not project.is_relative_to(repo), "Private source projects must be outside the repository")
     require(input_path.suffix.lower() in (".txt", ".md"), "This route accepts a supplied UTF-8 TXT/Markdown post")
@@ -102,7 +104,7 @@ def register(input_path, project, title="Supplied post", url=None, tavern_root=N
                   "text_sha256": src["text_sha256"], "descriptor_sha256": src["_descriptor_sha256"],
                   "coverage": "entire supplied post; no claim about omitted comments or original webpage" if source_kind == "post" else "only explicitly selected novel chapters; no claim about unread chapters",
                   "library_blob": read(ROOT / "UPSTREAM.json")["source_library"]["git_blob"]})
-        write_new(stage / "preferences.json", creator.profile())
+        write_new(stage / "preferences.json", preferences)
         os.rename(stage, project)
     return {"project": str(project), "source_units": len(src["units"]), "mode": "source_yuri"}
 
@@ -120,8 +122,7 @@ def context(project, tavern_root=None):
     src = sources[0]
     require(src["text_sha256"] == meta["text_sha256"] and src["_descriptor_sha256"] == meta["descriptor_sha256"], "Frozen source binding changed")
     require(meta["library_blob"] == read(ROOT / "UPSTREAM.json")["source_library"]["git_blob"], "Source project dependency pin changed")
-    profile = read(project / "preferences.json")
-    require(profile == creator.profile(), "This source checkpoint supports the saved default policy only")
+    creator.profile(project / "preferences.json")
     return project, library, tw, creator, src
 
 
@@ -248,6 +249,8 @@ def prepare(project, draft, output, tavern_root=None):
     value = {"schema": "yuri/adaptation/v1", "mode": "source_yuri", "bindings": bindings(project, draft, tavern_root),
              "targets": [], "player_binding": {"record_id": "", "runtime_aliases": []}, "decisions": [],
              "field_sources": [], "agent_review": {"completed": False, "notes": []}}
+    if not profiles.is_default(profiles.load(Path(project) / "preferences.json")):
+        value["policy_review"] = profiles.review_template(Path(project) / "preferences.json")
     write_new(output, value)
     return {"plan": str(output), "next": "Agent records genre choices, causal decisions and field provenance"}
 
@@ -273,14 +276,11 @@ def build(project, draft, plan_path, output, tavern_root=None):
     review = plan.get("agent_review", {})
     require(review.get("completed") is True and review.get("notes"), "Review actual adapted prose first")
     records = {r["id"]: r for r in rows}
+    preferences = creator.profile(Path(project) / "preferences.json")
+    profiles.review(preferences, plan, Path(project) / "preferences.json")
+    cast = [dict(id=r["id"], **r["yuri"]) for r in rows if r["kind"] == "character"]
     targets = plan.get("targets", [])
-    require(targets and len({t["record_id"] for t in targets}) == len(targets), "Unique adaptation targets required")
-    require({t["record_id"] for t in targets} == {r["id"] for r in rows if r["kind"] == "character" and r["yuri"]["role"] in ("main", "player")}, "Default scope covers every main/player character")
-    for target in targets:
-        record = records.get(target["record_id"], {})
-        require(record.get("kind") == "character" and record["yuri"]["role"] in ("main", "player"), "Preserve background identities")
-        require(record["yuri"]["age_status"] != "minor", "This source route does not silently re-age minor targets")
-        require(target.get("result_woman") is True and target.get("result_adult") is True and target.get("reason", "").strip(), "Document adult author-defined-women results and their adaptation basis")
+    profiles.validate_targets(preferences, targets, cast)
     player = plan.get("player_binding", {})
     player_record = records.get(player.get("record_id"), {})
     invented_player = player.get("mode") == "invented"
@@ -290,10 +290,11 @@ def build(project, draft, plan_path, output, tavern_root=None):
                 and player.get("result_woman") is True and player.get("result_adult") is True
                 and player.get("reason", "").strip(), "An invented adult female player is a novel-only creative choice, not a source fact")
     else:
-        require(player_record.get("yuri", {}).get("role") == "player" and player["record_id"] in {t["record_id"] for t in targets}, "Source player must be a selected player target")
+        require(player_record.get("yuri", {}).get("role") == "player", "Source player binding must identify the source player")
     decisions = plan.get("decisions", [])
     require(decisions and len({d["id"] for d in decisions}) == len(decisions), "Unique adaptation decisions required")
     decision_ids = {d["id"] for d in decisions}
+    profiles.relationships(preferences, decisions, {c["id"] for c in cast})
     for d in decisions:
         require(d.get("kind") in ("identity", "relationship", "setting", "invention", "preserved") and d.get("summary", "").strip(), "Describe each adaptation decision")
         require(set(d.get("record_ids", [])) <= records.keys(), "Decision cites unknown facts")
@@ -302,6 +303,7 @@ def build(project, draft, plan_path, output, tavern_root=None):
             require(causes and set(causes) <= records.keys() and d.get("changed_circumstance", "").strip(), "Relationship changes need source anchors and a specific changed circumstance")
     if invented_player:
         require(any(d["id"] == player.get("decision_id") and d["kind"] == "invention" for d in decisions), "Link the invented player to an explicit invention decision")
+        profiles.identity(preferences, player)
     card, _ = creator.serializer().build_v2(Path(draft))
     front, _ = creator.serializer().parse_front(Path(draft).read_text(encoding="utf-8"))
     if not front.get("creator"):
@@ -341,6 +343,7 @@ def build(project, draft, plan_path, output, tavern_root=None):
         write_new(stage / "worldbook.json", book)
         write_new(stage / "adaptation-record.json", {"schema": "yuri/adaptation-record/v1", "mode": "source_yuri",
                   "bindings": plan["bindings"], "plan": plan, "extraction_review": receipt,
+                  "preferences": preferences,
                   "card_sha256": sha((stage / "yuri-card.v2.json").read_bytes()),
                   "source_library_blob": read(ROOT / "UPSTREAM.json")["source_library"]["git_blob"],
                   "semantic_quality": "agent_review_not_automatically_proven", "host_import": "not_run", "live_roleplay": "not_run"})

@@ -60,7 +60,9 @@ def source_inventory(plugin_root):
     require(names == sorted(set(names)) and manifest.get("skillCount") == len(names),
             "Manifest skills must be sorted, unique, and match skillCount")
     source = plugin_root / "skills"
-    actual = sorted(path.name for path in source.iterdir() if path.is_dir())
+    config_path = plugin_root / "extensions/yuri-creation/hosts/native.json"
+    extension_names = set(json.loads(config_path.read_text(encoding="utf-8-sig"))["entry_points"]) if config_path.is_file() else set()
+    actual = sorted(path.name for path in source.iterdir() if path.is_dir() and path.name not in extension_names)
     require(actual == names, "Manifest does not match the complete source skills inventory")
     hashes = {}
     for name in names:

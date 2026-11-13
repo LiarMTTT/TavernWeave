@@ -1,0 +1,4 @@
+interface:
+  display_name: "Adapt Yuri Card"
+  short_description: "Adapt JSON or PNG cards while preserving settings"
+  default_prompt: "Use $adapt-yuri-card to adapt this card into a yuri story, preserving artwork, scripts and unrelated worldbook settings."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Novel Excerpt to Yuri Card"
+  short_description: "Adapt selected TXT or EPUB prose into a yuri card"
+  default_prompt: "Use $novel-excerpt-to-yuri-card on one short chapter or scene; retain provenance and let me review the result here."

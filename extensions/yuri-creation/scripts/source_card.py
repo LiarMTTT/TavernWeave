@@ -15,6 +15,7 @@ def main():
     sub = parser.add_subparsers(dest="command", required=True)
     c = sub.add_parser("init"); c.add_argument("--input", type=Path, required=True)
     c.add_argument("--project", type=Path, required=True); c.add_argument("--title", default="Supplied post"); c.add_argument("--url")
+    c.add_argument("--profile", type=Path, help="Saved ready preferences; omitted uses the default")
     c = sub.add_parser("read"); c.add_argument("--project", type=Path, required=True); c.add_argument("--unit")
     c = sub.add_parser("evidence"); c.add_argument("--project", type=Path, required=True)
     c.add_argument("--quote", required=True); c.add_argument("--start", type=int)
@@ -25,7 +26,7 @@ def main():
     c.add_argument("--draft", type=Path, required=True); c.add_argument("--plan", type=Path, required=True); c.add_argument("--output", type=Path, required=True)
     a = parser.parse_args()
     try:
-        if a.command == "init": result = p.register(a.input, a.project, a.title, a.url, a.tavern_root)
+        if a.command == "init": result = p.register(a.input, a.project, a.title, a.url, a.tavern_root, profile_path=a.profile)
         elif a.command == "read": result = p.units(a.project, a.unit, a.tavern_root)
         elif a.command == "evidence": result = p.evidence(a.project, a.quote, a.start, a.tavern_root)
         elif a.command == "extract": result = p.promote(a.project, a.candidate, a.tavern_root)

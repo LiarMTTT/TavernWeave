@@ -14,8 +14,10 @@ export function inspectSource(root = repository) {
   const template = JSON.parse(read(root, adapter.packageManifest));
   requireValue(template.name === install.package, "Antigravity package identity mismatch");
   requireValue(/^\d+\.\d+\.\d+$/u.test(install.version), "Invalid package version");
+  const yuriConfig = path.join(root, "extensions/yuri-creation/hosts/native.json");
+  const extensionSkills = fs.existsSync(yuriConfig) ? Object.keys(JSON.parse(fs.readFileSync(yuriConfig, "utf8")).entry_points) : [];
   const skills = fs.readdirSync(path.join(root, "skills"), { withFileTypes: true })
-    .filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
+    .filter(entry => entry.isDirectory() && !extensionSkills.includes(entry.name)).map(entry => entry.name).sort();
   requireValue(install.skillCount === skills.length && JSON.stringify(install.skills) === JSON.stringify(skills), "Skill inventory mismatch");
   for (const skill of skills) {
     requireValue(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(skill), "Unsafe skill directory name");

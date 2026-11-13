@@ -35,7 +35,7 @@ test("AGY package preserves every shared skill byte and isolates host components
   const install = readJson("tavernweave-install-manifest.json");
   assert.deepEqual(receipt.skills, install.skills);
   assert.equal(receipt.hostLoading, "not-verified");
-  const expected = files(path.join(root, "skills"));
+  const expected = files(path.join(root, "skills")).filter(name => install.skills.includes(name.split(path.sep)[0]));
   assert.deepEqual(files(path.join(output, "skills")), expected);
   for (const name of expected) assert.deepEqual(fs.readFileSync(path.join(output, "skills", name)), fs.readFileSync(path.join(root, "skills", name)), name);
   const manifest = JSON.parse(fs.readFileSync(path.join(output, ".antigravity-plugin", "plugin.json")));
