@@ -1,4 +1,4 @@
-# Development handoff — 0.5.0
+# Development handoff — 1.0.0
 
 Maintain four canonical entries in extensions/yuri-creation/skills. build_host_plugin.py generates a complete tavernweave-yuri plugin folder containing 23 unchanged upstream dependencies plus four native wrappers. Do not duplicate canonical skill policies or change the root upstream inventory to install them. The generated yuri-plugin channel contains the actual native layout; yuri-dev remains source.
 
@@ -6,4 +6,4 @@ Build only committed blobs; verify extension manifest and upstream pins first. T
 
 Run host_probe.py from a materialized complete plugin to check file layout and Python/Node/dependency availability. A readable wrapper or successful helper does not prove account installation. The user/admin must import the generated GitHub marketplace, enable the plugin and open a new task to observe actual discovery. docs/NATIVE_HOSTS.md supplies the browser workflow, without requiring local Codex.
 
-Testing belongs to cheaper GPT agents only. Use one isolated native folder; do not repeat the previous PNG/EPUB trials or old suites. No primary-model behavioral tests, new roleplay, account installation or global config changes. Record actual evidence/limits in docs/NATIVE_HOST_REVIEW_2026-11-12.md. Dedicated name interaction, custom profiles, legacy licensing and advanced migrations remain deferred. Main and frozen Workbench remain untouched.
+Testing belongs to cheaper GPT agents only. Use one isolated native folder; do not repeat the previous PNG/EPUB trials or old suites. No primary-model behavioral tests, new roleplay, account installation or global config changes. Record actual evidence/limits in docs/NATIVE_HOST_REVIEW_2026-11-12.md. Custom-profile compatibility now uses shared/profiles.py across all four workflows; read references/custom-profiles.md. Dedicated name interaction, legacy licensing and advanced migrations remain deferred. The user authorized the 1.0.0 main release; the frozen Workbench remains untouched. No additional model or material trials are requested for this release. See references/image-adaptation.md and docs/CUSTOM_PROFILE_TRIAL_REVIEW_2026-11-13.md.

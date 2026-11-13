@@ -1,6 +1,6 @@
 {
   "name": "tavernweave-yuri-dsh",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "private": true,
   "description": "TavernWeave Yuri Workbench for DeepSeek Harness: the four yuri card workflows (yuri-card-creator, adapt-yuri-card, post-to-yuri-card, novel-excerpt-to-yuri-card) plus 23 unchanged TavernWeave dependency skills in one installable bundle.",
   "type": "module",

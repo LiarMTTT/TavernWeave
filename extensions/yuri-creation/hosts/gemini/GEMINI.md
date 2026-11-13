@@ -52,7 +52,7 @@ For saved guidance and rewriting, use the bundled managers with `--host antigrav
 
 ## Yuri Card Workbench Entry Workflows (`tavernweave-yuri`)
 
-This package (`tavernweave-yuri` v0.5.0, branch `Gemini-plugin`) provides four primary yuri workflows in `skills/`, backed by 23 unchanged TavernWeave dependency skills. Import each primary skill individually and keep the complete shared package available:
+This package (`tavernweave-yuri` v1.0.0, source branch `main` or distribution branch `Gemini-plugin`) provides four primary yuri workflows in `skills/`, backed by 23 unchanged TavernWeave dependency skills. Gemini CLI discovers the bundled skills after installation as an extension. Task mode retains individual skill imports. Keep the complete shared package available:
 
 - `yuri-card-creator`: Wrapper at `<plugin-root>/skills/yuri-card-creator/SKILL.md` -> Canonical source at `<plugin-root>/extensions/yuri-creation/skills/yuri-card-creator/SKILL.md`.
 - `adapt-yuri-card`: Wrapper at `<plugin-root>/skills/adapt-yuri-card/SKILL.md` -> Canonical source at `<plugin-root>/extensions/yuri-creation/skills/adapt-yuri-card/SKILL.md`.
@@ -61,4 +61,4 @@ This package (`tavernweave-yuri` v0.5.0, branch `Gemini-plugin`) provides four p
 
 Resolve `<extension-root>` as `<plugin-root>/extensions/yuri-creation` and `<skill>` as `<extension-root>/skills/<name>`. Run `python3 <extension-root>/scripts/host_probe.py` when shell execution is available to verify packaged files and Python/Node availability.
 
-Gemini CLI and Task mode use individually imported skills in the accepted setup. Native plugin-wide skill handoffs are unavailable; explicitly load each required dependency from this complete package and continue from the saved casework. Do not claim automatic transitions or guaranteed cross-host parity. These context/agent files are optional compatibility resources, not proof that the host loaded them.
+Gemini CLI loads this context through the root gemini-extension.json and discovers bundled skills automatically. Route Yuri requests to the matching primary workflow before generic TavernWeave routing, read its wrapper and canonical instructions, then load the required dependencies and continue from saved casework. Task mode retains individual skill imports and explicit dependency loading. Verify actual host tools before file work. Extension installation and skill discovery are user-reported acceptance; do not infer completed card conversion, automatic multi-step execution or cross-host parity from discovery alone.

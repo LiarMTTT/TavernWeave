@@ -1,4 +1,4 @@
-# Yuri Card Workbench 0.5.0
+# Yuri Card Workbench 1.0.0
 
 Create yuri roleplay cards through conversation, adapt an existing card, or turn a post or novel excerpt into a new story. Your agent handles the files; you review and revise in the conversation.
 
@@ -12,9 +12,10 @@ Use the distribution for your host:
 | --- | --- | --- |
 | Codex / ChatGPT Work | `yuri-plugin` | Import and enable `tavernweave-yuri` as a plugin |
 | DeepSeek Harness | `DSH-plugin` / release `.tgz` | Install the DSH bundle, then select its Yuri Workbench preset |
-| Gemini CLI / Task mode | `Gemini-plugin` | Import the four skills individually and retain the complete shared folder |
+| Gemini CLI | `main` or `Gemini-plugin` | Install the complete extension; bundled skills are discovered automatically |
+| Gemini Task mode | `Gemini-plugin` | Import the four skills individually and retain the complete shared folder |
 
-See [installation and host limits](docs/NATIVE_HOSTS.md). Gemini does not preserve automatic plugin-wide transitions; explicitly load the required dependencies. Your agent's file tools, Python and Node must be available for export.
+See [installation and host limits](docs/NATIVE_HOSTS.md) for the Gemini CLI extension command and Task mode fallback. Gemini CLI extension import and skill discovery passed the user's test. The agent loads canonical workflows and dependencies as needed. File tools, Python and Node must be available for export.
 
 ## Choose your starting point
 
@@ -33,7 +34,11 @@ Ask the agent to read the matching workflow in this folder. No manual Markdown o
 
 The agent presents a playable opening, characters and a worldbook. Tell it what you want changed directly in the conversation. The default main cast consists of adult women, including author-defined virtual and nonhuman women; background identities are preserved. Your player character's current actions, thoughts and replies remain yours.
 
+You can change the character scope, exclude individuals, preserve relationship outcomes, request specific pairings, or supply custom criteria in conversation. The agent saves and checks those preferences across all four workflows; unsupported choices receive an explicit explanation. See [supported custom profiles](references/custom-profiles.md).
+
 If a retained name seems out of place, the agent explains why and suggests alternatives. You may keep the original or choose a new name; masculine-sounding names are not automatically replaced.
+
+When you choose to replace existing art, the agent inspects its actual visual style and combines that with the revised card’s narrative direction in an image prompt. It generates and inspects a candidate using available image tools, then shows it for your review before embedding. The original stays available. See [image adaptation](references/image-adaptation.md).
 
 Import the final JSON or character-card PNG into SillyTavern. Its worldbook is already embedded. The agent identifies the final file and keeps source records and adaptation notes separately. When editing an existing card, the original file stays untouched and unrelated fields, code and worldbook loading settings are preserved.
 

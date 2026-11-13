@@ -1,3 +1,18 @@
+# Yuri Card Workbench 1.0.0
+
+Official release authorized on 2026-11-13. Four workflows support original conversation, protected inherited JSON/PNG/worldbooks, supplied posts and bounded TXT/Markdown/EPUB excerpts, with 23 unchanged TavernWeave dependencies and retained licensing.
+
+- Supported saved custom profiles are now included in all host distributions: explicit scope/exclusions, identity criteria, relationship policies and profile-bound agent review.
+- User-chosen image replacement now requires actual original-image inspection, a prompt combining observed visual style with the updated card’s narrative direction, actual reference input to image tools, candidate inspection and user review before embedding. This reuses existing source-library, character-design, prompt-spec and packaging skills; it adds no new image engine.
+- Review instructions distinguish preserved inherited player-agency problems from compliance. The submitted DeepSeek trial supports protected JSON/custom-profile work within its stated scope; its retained alternate-greeting agency issue is documented without rewriting private artifacts.
+- Package probes report source revisions separately from dependency pins. Official portable/Gemini builds emit generated trees, recorded in SOURCE.json with immutable source and artifact checksums.
+
+Host distributions: Codex/ChatGPT Work portable plugin, DeepSeek Harness bundle, and Gemini CLI extension / Task mode individual skills. Keep each complete package. Historical host acceptance remains version-bound; this release does not claim a new host-import, image-quality or roleplay pass. No new model/card/image trials were requested or performed. Standard repository CI and release packaging remain separate from narrative validation.
+
+The original 0.5.0 release and frozen Workbench v1.2.0 remain available. Dedicated name-choice testing, legacy-code licensing, advanced migrations and broader model testing remain deferred. See docs/CUSTOM_PROFILE_TRIAL_REVIEW_2026-11-13.md and references/image-adaptation.md.
+
+<!-- historical-release-notes -->
+
 # Yuri Card Workbench 0.5.0 — official release
 
 Integrates the accepted Codex/ChatGPT Work, DeepSeek Harness and Gemini CLI/Task adapters into maintained source. Four workflows cover original conversation, inherited JSON/PNG cards/worldbooks, supplied posts and bounded TXT/Markdown/EPUB excerpts. Canonical authoring and conversion code is unchanged from the accepted 0.5.0 checkpoint.

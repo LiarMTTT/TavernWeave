@@ -1,7 +1,7 @@
 {
-  "version": "0.5.0",
+  "version": "1.0.0",
   "scope": "complete extension source; excludes itself; installed at extensions/yuri-creation/ in this fork",
-  "base_commit": "b871c8ffa3e55808647b3ca908d632a2c13d6f32",
+  "base_commit": "8676561cd03c52c60c64a0d40a5ca08e61f90d37",
   "delete_paths": [],
   "files": [
     {
@@ -11,13 +11,13 @@
     },
     {
       "path": "CHECKPOINT.json",
-      "bytes": 6826,
-      "sha256": "0e2e6129d00efaafe76a16056e5f93d4d1b85c76e8dcbdd911a64c7f57414a10"
+      "bytes": 7859,
+      "sha256": "da33979ee2c8794f528911bbd5b6fd653e2f3b2be445d02487054bb4f2ce673a"
     },
     {
       "path": "CREATION_CHECKPOINT_HANDOFF.md",
-      "bytes": 1735,
-      "sha256": "4ebf8e385ce3b68946444e5e7aa503fc5ee5579ea8e5fd06727d66ce6a2db45e"
+      "bytes": 2036,
+      "sha256": "24be27809dc1e7d3d17fafa2456000355d3ab0cc50f6f7613f9fa3d70273b716"
     },
     {
       "path": "FORK_BASE.json",
@@ -26,8 +26,8 @@
     },
     {
       "path": "INTEGRATION.md",
-      "bytes": 7921,
-      "sha256": "da98bc4aa4625e94a0b913eb7d265af6104b89ba6fc201cbd870194e8fc556b2"
+      "bytes": 9185,
+      "sha256": "4024daf544be6e34379cbaad3b1094c5a4984916b7c6ae6c7a361a3d25a5ed54"
     },
     {
       "path": "LICENSE",
@@ -36,13 +36,13 @@
     },
     {
       "path": "LICENSE_BOUNDARY.md",
-      "bytes": 4145,
-      "sha256": "dda80199b63cf4cdf1282294be5f6f89f02ee89b8935848c2fb718e3373083e6"
+      "bytes": 4534,
+      "sha256": "884f2387b496f3fa7e09fbce75ec2787fc10454c84258bf68f6f31bcf07813ed"
     },
     {
       "path": "PROJECT_STATE.md",
-      "bytes": 2988,
-      "sha256": "2414475bba4b89f580b0815729ce805d97ea4788d0e136b39745fda341e71a23"
+      "bytes": 3521,
+      "sha256": "dc554ca4163d71206d2ffe7e2ea87f21059df478a85040d15f25e1758495ca1b"
     },
     {
       "path": "PROJECT_WORKFLOW.md",
@@ -51,18 +51,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 4007,
-      "sha256": "98739de3ba8c6c82c6969b076fda88ee22d2a0a969cd7d4367e512e9564d8341"
+      "bytes": 4921,
+      "sha256": "2034397d710ea0b1ad791613eebecad355c9bd137a7b219a003b7ab6caa69c0f"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 3570,
-      "sha256": "86802b0103124f3d63d1fd51250b2136c31dd353215594e491cd2854e7fe086b"
+      "bytes": 4309,
+      "sha256": "44dcade5298fc997bf5dcdfb6f4f25d45647a67792af530297c552cde4e3c5d9"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "bytes": 5763,
-      "sha256": "025910bf00cffc8d8138270ee8316f8a3c95ad751231ee34ea2834d09b53ceb5"
+      "bytes": 7845,
+      "sha256": "49e8ad95463e2642ba7592ec640aa66183be04ef8d5b092b6c6b89ff3c0225e2"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -77,7 +77,12 @@
     {
       "path": "VERSION",
       "bytes": 6,
-      "sha256": "a0ad50640139a524f86591157145bf1d4674ea9c065bfea21558f0f7b04430c8"
+      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03"
+    },
+    {
+      "path": "docs/CUSTOM_PROFILE_TRIAL_REVIEW_2026-11-13.md",
+      "bytes": 2716,
+      "sha256": "db43c57bee675e44bad7d3596fd126be2e1d77e2a1d49134e7406989896d895f"
     },
     {
       "path": "docs/FILE_SUPPORT_REVIEW_2026-11-12.md",
@@ -86,13 +91,13 @@
     },
     {
       "path": "docs/HOST_ACCEPTANCE_2026-11-13.md",
-      "bytes": 2791,
-      "sha256": "c88ccc444b86ad6421074b75f3c77926013b348f5b30df083b217b73209f4524"
+      "bytes": 3764,
+      "sha256": "0ba3d775645fc3f266bd3f888aabccc260ca7a06f7630daecd7038700b48e434"
     },
     {
       "path": "docs/NATIVE_HOSTS.md",
-      "bytes": 9100,
-      "sha256": "416cfecbf29a21bcb1fc12c7311aeb4c3d91d0fdd338de2782424a6750ec544e"
+      "bytes": 11955,
+      "sha256": "791e673a424e1157226ebefa7778bb786032a3b3252546e0ecc772b087792605"
     },
     {
       "path": "docs/NATIVE_HOST_REVIEW_2026-11-12.md",
@@ -161,13 +166,13 @@
     },
     {
       "path": "hosts/gemini/GEMINI.md",
-      "bytes": 13781,
-      "sha256": "072651ea6a61e243991d83c5070c838e124c84723e2c28ab680bdfe189c94cc8"
+      "bytes": 14111,
+      "sha256": "8dfdb26b8a82b7b18fbaf1cf8dd414a41552d2a74422f0c5aadb5e2a62e9b634"
     },
     {
       "path": "hosts/gemini/README.md",
-      "bytes": 1129,
-      "sha256": "7fb21530d3c80a2a390a1273a49361e1f8b0da63f8180417032dbef73c7c8318"
+      "bytes": 1441,
+      "sha256": "c493c9671cddb98b5fca4217397b1564d842c157ff63adfb5f3c0ab86a85f2b8"
     },
     {
       "path": "hosts/gemini/agents/tavernweave-yuri.md",
@@ -182,12 +187,12 @@
     {
       "path": "hosts/gemini/gemini-extension.json",
       "bytes": 419,
-      "sha256": "bbdfaad41a6fbfcba46a5a6e10543ee1b6ddd0ab1cd0c3a1827610e6f92589bb"
+      "sha256": "206b25cc93a31595443a81123b1a37c3b4db70cc32b1ccfc410571294b14dab9"
     },
     {
       "path": "hosts/gemini/rules/AGENTS.md",
-      "bytes": 13781,
-      "sha256": "072651ea6a61e243991d83c5070c838e124c84723e2c28ab680bdfe189c94cc8"
+      "bytes": 14111,
+      "sha256": "8dfdb26b8a82b7b18fbaf1cf8dd414a41552d2a74422f0c5aadb5e2a62e9b634"
     },
     {
       "path": "hosts/native.json",
@@ -198,6 +203,16 @@
       "path": "licenses/TAVERNWEAVE-LICENSE.md",
       "bytes": 4574,
       "sha256": "306f6b88b74ebee4afb142f77ce3164ee585cb18f49dc1637da44eb3384dfa42"
+    },
+    {
+      "path": "references/custom-profiles.md",
+      "bytes": 7074,
+      "sha256": "c972fb67f27cb92609671ced3cd00b3e8a2e4a29bb038c9994afe737b64a475b"
+    },
+    {
+      "path": "references/image-adaptation.md",
+      "bytes": 6049,
+      "sha256": "059506d198c2de379c8d193c94dc2f200f827072dba98382030b9319e81fba7e"
     },
     {
       "path": "references/inherited-cards.md",
@@ -216,68 +231,73 @@
     },
     {
       "path": "references/source-records.md",
-      "bytes": 7066,
-      "sha256": "252e6a75607bf8faceffac73ac66420c8f7e911ddfe418e2a970bfd4ce3e6355"
+      "bytes": 7224,
+      "sha256": "a998e96523e589274b73edd22bd77af6ca2a25739ffda2de11c58a6804272bc3"
     },
     {
       "path": "scripts/build_host_plugin.py",
-      "bytes": 18075,
-      "sha256": "e0458bcf48a1cf79cb2b6047054fa75d303db9f1eca670ddb7aed4bc2be56fba"
+      "bytes": 19148,
+      "sha256": "79a4c231e8fd2723f8f16ee2f465a75f7583c891989e9ea03287c5257157d48d"
     },
     {
       "path": "scripts/card_file.py",
-      "bytes": 1504,
-      "sha256": "f0c3e1f4b429430076de5283dbc3ba862c68a7d5ab2dddbee9a065622aae894b"
+      "bytes": 1595,
+      "sha256": "6ace0da63c8cd7cb4821e929bbbc93f9967c6f54647806e573e78368b1987773"
     },
     {
       "path": "scripts/host_probe.py",
-      "bytes": 2045,
-      "sha256": "b6cc11c2147306788bcedfb3442157a7909ccd3a37be3ee8d6ffac2a049ada21"
+      "bytes": 2265,
+      "sha256": "6718cfb72ded8f47a6eaa2208c7c68f7254dae47cc1c8805cb309ae5fed168db"
     },
     {
       "path": "scripts/novel_source.py",
-      "bytes": 2328,
-      "sha256": "1e7ed0853bde2b2c9d036b5e5d9c4fa9d62bbcbb0c0b261afe1ee7824e0c7e58"
+      "bytes": 2427,
+      "sha256": "71d0db442c3b73daf40fc2f2b32c813bfa80d6d4aa1f56aa538701af250dc83a"
     },
     {
       "path": "scripts/source_card.py",
-      "bytes": 2415,
-      "sha256": "dc0390fe78b9f82f596e06dc1f2d8a274ba9f715955acf307846067a9eab82ff"
+      "bytes": 2540,
+      "sha256": "98b890daba6b0d96347dafb010093f57b4a74636deae8bfb264ab0f4e9bae848"
     },
     {
       "path": "shared/card_files.py",
-      "bytes": 15194,
-      "sha256": "2bfc79423a8d06f15c4a1a059cc36118dae4d47a64442f45857b0107b86ec9af"
+      "bytes": 17178,
+      "sha256": "b7e55a5fa9362c60a3cf500f9c8ae4c9e02f56ccc4c901c61bf511c954dd96d4"
     },
     {
       "path": "shared/novels.py",
-      "bytes": 9668,
-      "sha256": "6ec8c1bb4e5f01c5f1f286f6d1428f95f86962739fa7b730e7a2cf34b329b658"
+      "bytes": 9813,
+      "sha256": "ce1e808fcca6dfcec65e59c7c583750b44888d0c6dfecf76f1f7979d753cb4cd"
+    },
+    {
+      "path": "shared/profiles.py",
+      "bytes": 12692,
+      "sha256": "aba810a4c90c5c7f2ce7a6628bb2728da0427bcd5c4123731d1aca9dc0ec05b4"
     },
     {
       "path": "shared/provenance.py",
-      "bytes": 21932,
-      "sha256": "6f0b27c52902a86347f7d7a451e45f71a9625d0c29bb9348550a6726b50dfbf6"
+      "bytes": 21633,
+      "sha256": "de09d6b9e14c2995e914b123b93a2023ee671758edd7ea69d3cd58b25d52e998"
     },
     {
       "path": "skills/adapt-yuri-card/SKILL.md",
-      "bytes": 5261,
-      "sha256": "260d9528a6146447e40fb9d1a9421279a73190e8e808c3246a805343764d7fbb"
+      "bytes": 6191,
+      "sha256": "2c396f13eabf98baf1f49ff34b8d91942608bf2ea8b1eec50dadfdb4e79938d4"
     },
     {
       "path": "skills/novel-excerpt-to-yuri-card/SKILL.md",
-      "bytes": 4317,
-      "sha256": "98c5e7d6e87966d6e55723e372456e7b97f406896ee112bbde5ee9a08e232784"
+      "bytes": 4908,
+      "sha256": "9b5632b4cbbf6fbff5d6ec811516d0fc3833197bb4d566104b7c9da355b05904"
     },
     {
       "path": "skills/post-to-yuri-card/SKILL.md",
-      "bytes": 6755,
-      "sha256": "d48712d56250550ee219a0d3bba6fe2cdb721749ebb2aa600f05283845b9e379"
+      "bytes": 7401,
+      "sha256": "ccb132cd52361bf3aba67df731123b4e79b6db60e024829079474cccc00a54b0"
     },
     {
       "path": "skills/yuri-card-creator/SKILL.md",
-      "bytes": 8018,
-      "sha256": "fc6c5caae5135e723d79b6e4b7744e502b5a35370bebf0db3f33824ebd202329"
+      "bytes": 8440,
+      "sha256": "523e01e5063a674820d58493f925a3b0752d5b6213758185cbbb8752e9a0bcab"
     },
     {
       "path": "skills/yuri-card-creator/assets/interaction.en.json",
@@ -301,8 +321,8 @@
     },
     {
       "path": "skills/yuri-card-creator/references/optional-tools.md",
-      "bytes": 2701,
-      "sha256": "1b4c80de1abfcc7e478c13996970328d036c9b0f427325035e3ff9f9e67400f1"
+      "bytes": 3254,
+      "sha256": "95bf2f2def0203d2989219aa263acae494a96b99e32ca2447d3e73eb0851cb44"
     },
     {
       "path": "skills/yuri-card-creator/references/testing.md",
@@ -311,8 +331,8 @@
     },
     {
       "path": "skills/yuri-card-creator/scripts/create_card.py",
-      "bytes": 11933,
-      "sha256": "0e51451fdd3d5a1b12db3342e1084daf103de591250f88bd28e3f6c7ecfb4e7f"
+      "bytes": 12121,
+      "sha256": "a010cfc2f94a3b6738e625e9f963b7311003d456b1f714098bba65dcd4492312"
     },
     {
       "path": "skills/yuri-card-creator/scripts/vendor/FOREVERSE_LICENSE.txt",
@@ -333,6 +353,11 @@
       "path": "tests/test_optional_tools.py",
       "bytes": 2730,
       "sha256": "60076530721470811893bc663c3102e6947b77957f0491c74119a79e3f2976c8"
+    },
+    {
+      "path": "tests/test_profiles.py",
+      "bytes": 17015,
+      "sha256": "213070c4aa7bdb1d1420bde31723a396b19ac7c5553663e5b4f06597616b4f56"
     },
     {
       "path": "tests/test_source_workflow.py",

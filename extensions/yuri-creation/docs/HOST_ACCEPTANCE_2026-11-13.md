@@ -19,3 +19,9 @@ The original 0.5.0 canonical workflows/runtime and 23 base skills remain unchang
 ## Release verification
 
 One GPT-6 Luna package-only check covers generated portable/Gemini layouts, DSH packing, source/receipt hashes, retained notices and dependency paths. Its receipt is `docs/RELEASE_PACKAGE_CHECK_2026-11-13.json`. It does not repeat host installation, card conversion, name-choice behavior or old test suites.
+
+## Follow-up: Gemini CLI extension acceptance
+
+On 2026-11-13 the user re-imported `Gemini-plugin` as a Gemini CLI extension using the official [extension guide](https://geminicli.com/docs/extensions/writing-extensions/) and confirmed that all skills were identified correctly. The available branch at review was 9c7ace2b12d5b97f9f142c7df850bfd0ef7d6944. This supersedes the earlier Gemini CLI per-skill-only limitation recorded above. It does not change the Gemini Task mode report or establish new card conversion/roleplay acceptance.
+
+The source integration preserves main's scripts, tests, examples and other host adapters, while bringing in the extension manifest, context and four native entry wrappers. The unchanged 23-skill dependency tree remains separately pinned. Canonical Yuri authoring/conversion workflows are unchanged. Current instructions are in NATIVE_HOSTS.md; the 0.5.0 release tag and its existing attachments remain the original published snapshot.

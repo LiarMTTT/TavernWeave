@@ -173,9 +173,12 @@ function parseFrontMatter(sourceText, label) {
 }
 
 function loadSkillCatalog(skillsRoot) {
+  const manifestPath = path.join(skillsRoot, "..", "tavernweave-install-manifest.json");
+  const allowed = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, "utf8")).skills : undefined;
   const entries = readdirSync(skillsRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
+    .filter((name) => allowed === undefined || allowed.includes(name))
     .sort();
   const catalog = [];
   const seen = new Set();

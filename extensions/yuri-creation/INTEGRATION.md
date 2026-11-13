@@ -1,6 +1,6 @@
 # Integration and reuse map
 
-| Responsibility | Choice in 0.5.0 |
+| Responsibility | Choice in 1.0.0 |
 | --- | --- |
 | Original yuri policy, delegated choices, localized entry | New small MIT extension |
 | General character/worldbook/opening methods | Pinned external TavernWeave authoring documents; optional file-verified bridge |
@@ -20,13 +20,13 @@ Minimum end-to-end path: `init` → agent writes `card.md` and `creation.json` �
 
 The first release uses a text-first adult main cast. Large systems, a mandatory design interview and graphics are unnecessary for this delegated first draft. Upstream does not automatically confer tested compatibility across hosts. Keep the verified v1.2.0 archive frozen.
 
-`capabilities` reports supported package commands separately from unprobed host tools. `pack-image --card PATH --avatar PATH --output NEW.png` remains the original avatar packager. The separate card_file.py adapter handles inherited containers; do not send inherited cards through Markdown conversion. Package version is 0.5.0; the compatible original creation-record contract remains 0.1.0. Custom profile enforcement and legacy-file licensing remain deferred.
+`capabilities` reports supported package commands separately from unprobed host tools. `pack-image --card PATH --avatar PATH --output NEW.png` remains the original avatar packager. The separate card_file.py adapter handles inherited containers; do not send inherited cards through Markdown conversion. Package version is 1.0.0; the compatible original creation-record contract remains 0.1.0. Custom profile enforcement is implemented in shared/profiles.py; see references/custom-profiles.md. Legacy-file licensing remains deferred.
 
 ## Verified fork integration
 
-Repository: https://github.com/imbdsssity/TavernWeave-Yuri. The co-located upstream base remains pinned at f9863d2b05305457fe9ed8b0c5688d52aca400a5; this native feature starts from yuri-dev at 3ebc2a536dabb37328d8cc9ad05b5ad6182d8e8b. The extension lives under extensions/yuri-creation/. Main remains the accepted 0.2.0 checkpoint. Pass the repository/plugin root as --tavern-root when using co-located authoring files. Source root inventories and all 23 upstream skills remain unchanged; the separate native export adds four discovery wrappers.
+Repository: https://github.com/imbdsssity/TavernWeave-Yuri. The co-located upstream base remains pinned at f9863d2b05305457fe9ed8b0c5688d52aca400a5; this native feature starts from yuri-dev at 3ebc2a536dabb37328d8cc9ad05b5ad6182d8e8b. The extension lives under extensions/yuri-creation/. Main carries the official 1.0.0 release. Pass the repository/plugin root as --tavern-root when using co-located authoring files. Source root inventories and all 23 upstream skills remain unchanged; the separate native export adds four discovery wrappers.
 
-The automated suite remains available with a historical 40-check baseline at 0.3.1. The 0.4.0 checks used one PNG and one EPUB excerpt; see docs/FILE_SUPPORT_REVIEW_2026-11-12.md. Native packaging checks are separately recorded in docs/NATIVE_HOST_REVIEW_2026-11-12.md and run by GPT-6 Luna. No earlier material trials or suites are repeated. Keep custom-profile and legacy-license work deferred.
+The automated suite remains available with a historical 40-check baseline at 0.3.1. The 0.4.0 checks used one PNG and one EPUB excerpt; see docs/FILE_SUPPORT_REVIEW_2026-11-12.md. Native packaging checks are separately recorded in docs/NATIVE_HOST_REVIEW_2026-11-12.md and run by GPT-6 Luna. No earlier material trials or suites are repeated. Custom-policy checks use the focused development test in tests/test_profiles.py; legacy-license work remains deferred.
 
 Development and publication now run directly from this workspace through GitHub: feature branch → PR into yuri-dev → user-authorized main release. See PROJECT_WORKFLOW.md; old Drive publisher instructions are superseded.
 
@@ -53,3 +53,9 @@ scripts/build_host_plugin.py reuses the pinned upstream committed-file inventory
 The generated yuri-plugin branch is a distribution channel, not the editable source branch. Its receipt identifies the exact source commit. No source-only tests, root hooks, MCP service, API keys, global instructions or personal-skill installation are enabled. Do not merge the generated tree back into source/main. DSH/Antigravity-specific registration is outside this checkpoint.
 
 scripts/host_probe.py checks materialized files, runtimes and pins from any working directory; it never asserts account installation or actual native loading. ChatGPT Work browser users need a workspace admin to import/enable the GitHub marketplace, then a new task observing the entries. See docs/NATIVE_HOSTS.md for exact fields and evidence boundaries. This account action cannot be performed by GitHub writes.
+
+## Custom-profile development checkpoint
+
+All four workflows now validate the same saved policy interface, preserve the supplied preferences, and bind non-default policy review to the profile fingerprint. Scope, exclusions, declared identity criteria and declared relationship outcomes are checked before output. Unknown choices fail rather than receive default behavior. Actual prose, free-text criteria, authorization and protected anchors remain agent-reviewed. Default historical projects remain readable; inherited v1 sessions are default-only and new v2 sessions bind their saved profiles. No legacy implementation is copied. See references/custom-profiles.md for the supported fields and review contract.
+
+Reference-led image changes reuse the pinned source-library visual observation, character-design, local prompt-spec and packaging skills. The Yuri handoff combines inspected original style with the updated narrative, passes the actual reference to image tools and presents a visually reviewed candidate for user choice. No new image engine or upstream skill changes are introduced. See references/image-adaptation.md.

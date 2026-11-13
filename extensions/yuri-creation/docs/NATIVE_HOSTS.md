@@ -42,30 +42,46 @@ Official references: [GitHub workspace import](https://learn.chatgpt.com/docs/en
 | --- | --- | --- |
 | Codex / ChatGPT Work | `yuri-plugin` | User-reported 0.5.0 import and four-skill discovery passed |
 | DeepSeek Harness | `DSH-plugin`, or official release DSH `.tgz` | User-reported 0.5.0 import/discovery passed; contract scopes DSH 0.2.2-rc.1 |
-| Gemini CLI / Task mode | `Gemini-plugin` | User-reported individual skill imports and discovery passed |
+| Gemini CLI | `main` or `Gemini-plugin` | User-reported extension installation and bundled skill discovery passed |
+| Gemini Task mode | `Gemini-plugin` | User-reported individual skill imports and discovery passed |
 
 Codex uses the complete plugin folder and its native marketplace/manifest. The four wrappers and 23 base skills share packaged resources. Python is required for file export and Node for the upstream authoring router. Search/images use whatever host tools are actually available. Optional Claude compatibility metadata is retained but no new Claude runtime acceptance is claimed.
 
 ### DeepSeek Harness
 
-Download `TavernWeave-Yuri-DSH-v0.5.0.tgz` from the [official GitHub release](https://github.com/imbdsssity/TavernWeave-Yuri/releases/tag/yuri-v0.5.0). In DSH Desktop, open Plugins → Add plugin → Install third-party plugin, select the tarball, enable the bundle, then choose **TavernWeave Yuri Workbench** in a new session. The complete tarball contains four Yuri workflows and 23 dependency skills; the small source integration folder alone does not contain these resources.
+Download `TavernWeave-Yuri-DSH-v1.0.0.tgz` from the [official GitHub release](https://github.com/imbdsssity/TavernWeave-Yuri/releases/tag/yuri-v1.0.0). In DSH Desktop, open Plugins → Add plugin → Install third-party plugin, select the tarball, enable the bundle, then choose **TavernWeave Yuri Workbench** in a new session. The complete tarball contains four Yuri workflows and 23 dependency skills; the small source integration folder alone does not contain these resources.
 
 For CLI/Web profiles use `dsh plugin --profile <profile> add <tarball>`. See the [adapter guide](../../../host-adapters/dsh/plugin-yuri/README.md) and version-specific [acceptance contract](../../../host-adapters/dsh/yuri-plugin-contract.json). Built-in DSH search/sub-agent tools are not mounted by default. Other runtime versions need their own compatibility evidence.
 
-### Gemini CLI and Task mode
+### Gemini CLI extension
 
-Import each of these four skills individually from the complete `Gemini-plugin` folder:
+Install the entire bundle once from a system terminal:
+
+```sh
+gemini extensions install https://github.com/imbdsssity/TavernWeave-Yuri --ref main
+gemini extensions list
+```
+
+`main` now includes the root `gemini-extension.json`, `GEMINI.md`, four `skills/<workflow>/SKILL.md` wrappers and the complete shared resources. The generated `Gemini-plugin` branch is also supported: replace `main` with `Gemini-plugin` in the command. Restart Gemini CLI after installation or updates. In a CLI session, run `/skills list` to check the four yuri entries and 23 TavernWeave dependency skills. The CLI discovers bundled skills automatically and the agent activates the relevant workflow when needed; discovery does not guarantee every subsequent workflow step was executed.
+
+For an existing extension installation, run `gemini extensions update tavernweave-yuri`, then restart Gemini CLI. Updates follow the source ref used at installation. If migrating from standalone skills, remove duplicate same-name skill installations so they do not shadow the extension entries. Keep the full extension directory: the wrappers load canonical instructions under `extensions/yuri-creation/` and use the sibling dependency skills. File export still needs host file access, Python and Node. No MCP server or API key is required by this extension.
+
+For a local source checkout, `gemini extensions link <checkout-path>` links that directory for development. A folder supplied by Git or a downloaded archive remains the complete bundle, not four isolated wrappers.
+
+Official references (checked 2026-11-13): [Build extensions](https://geminicli.com/docs/extensions/writing-extensions/), [install/update/link and manifest reference](https://geminicli.com/docs/extensions/reference/), [manage Agent Skills](https://geminicli.com/docs/cli/using-agent-skills/). The user's successful re-import from `Gemini-plugin` establishes Gemini CLI extension installation and skill discovery; it supersedes the earlier CLI per-skill-only limitation. It does not establish a new card conversion, automatic multi-step execution or Task mode extension support.
+
+### Gemini Task mode: individual skills
+
+The accepted Task mode setup still imports these skills individually from the complete `Gemini-plugin` folder:
 
 - `skills/yuri-card-creator/SKILL.md`
 - `skills/adapt-yuri-card/SKILL.md`
 - `skills/post-to-yuri-card/SKILL.md`
 - `skills/novel-excerpt-to-yuri-card/SKILL.md`
 
-Keep `extensions/yuri-creation/` and the 23 base skills in the same accessible package. If the import mechanism copies only a selected wrapper, also make those sibling resources accessible and tell the agent their location. A wrapper alone is insufficient. There is no root `SKILL.md` entry.
+Keep `extensions/yuri-creation/` and the 23 base skills accessible. If the import copies only one wrapper, also make its sibling resources accessible and tell the agent their location. Explicitly load each required dependency and continue from saved casework when the host does not hand off automatically. There is no root `SKILL.md` entry. The new Gemini CLI acceptance does not change the Task mode acceptance scope.
 
-The accepted Gemini environments do not support importing this bundle as a plugin. Skills are imported separately, so plugin-wide automatic handoffs are unavailable. Explicitly read each required canonical workflow or dependency from the complete package and continue from the saved records. Optional `GEMINI.md`, rule, agent and extension descriptors are compatibility resources; their presence is not evidence that the host loaded them. These limitations do not change the saved authoring policies or permit claims of automatic cross-host parity.
-
-Gemini 在本轮验收环境中须分别导入四个技能。请保留完整共享文件夹；单独复制入口文件不足以运行。需要跨技能继续时，明确加载对应依赖并读取已有工作记录，不将插件级自动衔接记为已支持。
+Gemini CLI 可一次安装完整扩展并自动发现技能；Task 模式保留逐项导入方式，两者均须保留共享文件。若过去导入过同名独立技能，迁移时先移除重复入口，再检查扩展中的技能来源。
 
 Full reported scope and exclusions: [2026-11-13 host acceptance](HOST_ACCEPTANCE_2026-11-13.md). None of these imports constitutes a new SillyTavern conversion or roleplay trial.
 
@@ -77,10 +93,14 @@ python extensions/yuri-creation/scripts/build_host_plugin.py --repo <source-chec
 node scripts/build-yuri-dsh-plugin.mjs --out <release-assets-folder>
 ```
 
-The builder reuses pinned upstream package helpers, exports committed blobs only, verifies the extension manifest and preserves licenses. Output is a folder, not an archive. It creates four small discovery wrappers from canonical frontmatter; canonical instructions/resources remain at `extensions/yuri-creation/`. Their English reasoning and existing Chinese interaction defaults are unchanged. All 23 upstream skills remain byte-identical. Existing upstream source manifests/installers remain unchanged in yuri-dev.
+The builder reuses pinned upstream package helpers, exports committed blobs only, verifies the extension manifest and preserves licenses. Output is a folder, not an archive. It creates four small discovery wrappers from canonical frontmatter; canonical instructions/resources remain at `extensions/yuri-creation/`. Their English reasoning and existing Chinese interaction defaults are unchanged. All 23 upstream skills remain byte-identical. The legacy 23-skill install manifest remains scoped to the base; four additional native wrappers expose the canonical Yuri workflows from main. The Yuri builder validates the unchanged base using the pinned upstream helpers, excluding only those four wrappers. CI builds the original upstream packages from the pinned base commit and the complete Yuri packages from current HEAD.
 
-`native-tree-plan.json` beside the generated plugin describes a new distribution tree, including removal of source-only root folders. Its `expected_tree` is computed by Git with a temporary index; the real source index/ref are unchanged. Publish that exact tree to `yuri-plugin`, using the existing expected head if the channel already exists. Never force-push or merge the generated distribution back into yuri-dev/main. NATIVE_PLUGIN.json records the immutable source commit; the package and source versions must agree.
+`native-tree-plan.json` beside the generated plugin describes a new distribution tree, including removal of source-only root folders. Its `expected_tree` is computed by Git with a temporary index; the real source index/ref are unchanged. Publish that exact tree to `yuri-plugin`, using the existing expected head if the channel already exists. Never force-push or replace source with a generated distribution tree. When integrating distribution history, preserve source-only files and merge only the maintained adapter changes and native entry wrappers. NATIVE_PLUGIN.json records the immutable source commit; the package and source versions must agree.
 
 From any working directory, the packaged `extensions/yuri-creation/scripts/host_probe.py` checks entry/resource presence, runtime availability and source/authoring pins. It reports host discovery as unobserved; an agent cannot prove account installation by finding files. A fresh task selecting the native entry is the final host-discovery check.
 
 Portable and Gemini outputs are separate generated trees. Gemini templates are maintained in `hosts/gemini/`, and its plan targets `Gemini-plugin`. The DSH adapter is source-compatible; preserve its history while merging source updates normally. Before publishing, use a clean committed checkout, verify the extension manifest, and publish exactly the checked source/artifacts. Release tag `yuri-v0.5.0` points to accepted `main`; package receipts record that immutable source commit.
+
+## Version 1.0.0
+
+The official 1.0.0 distributions include supported custom profiles and reference-led image adaptation. Historical host import/discovery acceptance above remains 0.5.0 evidence; no new host test was requested. Check NATIVE_PLUGIN.json.source_commit and host_probe.py package_source_commit to identify the installed generated source separately from pinned dependency versions. SOURCE.json in the release records source and generated package trees. Existing installations following a distribution branch receive its new package when updated through the host.

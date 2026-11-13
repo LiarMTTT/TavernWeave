@@ -13,10 +13,14 @@ import struct
 import zlib
 from pathlib import Path
 import tempfile
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "shared"))
+import profiles
 
 HERE = Path(__file__).resolve().parent
 VERSION = "0.1.0"
-PACKAGE_VERSION = "0.5.0"
+PACKAGE_VERSION = "1.0.0"
 
 
 def read(path):
@@ -36,13 +40,7 @@ def blob(raw):
 
 
 def profile(path=None):
-    value = read(path or HERE.parent / "assets/preferences.default.json")
-    if value.get("status") != "ready":
-        raise ValueError("profile must contain ready preferences")
-    for group, key in (("definition", "womanhood_policy"), ("transformation", "scope"), ("relationships", "outcome_policy")):
-        if not isinstance(value.get(group, {}).get(key), str) or not value[group][key]:
-            raise ValueError("profile is missing a saved genre choice: " + key)
-    return value
+    return profiles.load(path)
 
 
 def probe(root):
@@ -69,11 +67,14 @@ def initialize(project, locale="zh-CN", profile_path=None):
         raise ValueError("choose an empty creation directory")
     project.mkdir(parents=True, exist_ok=True)
     write(project / "preferences.json", preferences)
-    write(project / "creation.json", {"schema_version": VERSION, "mode": "original",
+    contract = {"schema_version": VERSION, "mode": "original",
           "external_creative_sources": [], "interaction_locale": locale,
           "cast": [], "creative_choices": [],
           "player_agency": "current actions, thoughts, dialogue and consent remain with the player",
-          "agent_review": {"completed": False, "notes": []}})
+          "agent_review": {"completed": False, "notes": []}}
+    if not profiles.is_default(preferences):
+        contract["policy_review"] = profiles.review_template(project / "preferences.json")
+    write(project / "creation.json", contract)
     return {"project": str(project), "mode": "original", "next": "agent authors card.md and completes creation.json"}
 
 
@@ -88,8 +89,6 @@ def validate_contract(contract):
     main = [x for x in cast if x.get("role") == "main"]
     if not main:
         raise ValueError("record the main cast")
-    if any(x.get("author_defined_woman") is not True or x.get("adult") is not True for x in main):
-        raise ValueError("this original-creation checkpoint uses an adult, author-defined-women main cast")
     if not contract.get("creative_choices") or not all(isinstance(x, str) and x.strip() for x in contract["creative_choices"]):
         raise ValueError("record the agent's creative choices")
     review = contract.get("agent_review", {})
@@ -111,12 +110,14 @@ def capabilities(tavern_root=None):
     return {"package_version": PACKAGE_VERSION, "contract_version": VERSION,
             "authoring_dependency": probe(tavern_root), "host_registration": "not_verified",
             "commands": {"init": "new creation directory", "build": "new JSON result directory",
+                         "validate-profile": "validate supported saved policies without changing a project",
                          "pack-image": "existing v2 JSON + PNG avatar to new card PNG"},
             "research": "optional_host_search_and_page_tools_not_probed",
             "image_inspection_editing_generation": "optional_host_tools_not_probed",
             "source_adaptation": "post and novel entry points share scripts/source_card.py; pinned work library required",
             "entry_points": {"original": "yuri-card-creator", "inherited": "adapt-yuri-card via scripts/card_file.py",
                              "post": "post-to-yuri-card", "novel": "novel-excerpt-to-yuri-card via scripts/novel_source.py"},
+            "custom_profiles": "shared supported policy validation; non-default exports require bound policy_review; prose semantics remain agent-reviewed",
             "sillytavern_import": "not_run"}
 
 
@@ -174,6 +175,7 @@ def export(project, output, tavern_root=None):
     contract = read(project / "creation.json")
     validate_contract(contract)
     preferences = profile(project / "preferences.json")
+    profiles.validate_original(preferences, contract, project / "preferences.json")
     dependency = probe(tavern_root)
     module = serializer()
     draft = project / "card.md"
@@ -214,6 +216,7 @@ def main(argv=None):
     p.add_argument("--output", type=Path, required=True); p.add_argument("--tavern-root", type=Path)
     p = sub.add_parser("probe-base"); p.add_argument("--tavern-root", type=Path)
     p = sub.add_parser("capabilities"); p.add_argument("--tavern-root", type=Path)
+    p = sub.add_parser("validate-profile"); p.add_argument("--profile", type=Path, required=True)
     p = sub.add_parser("pack-image"); p.add_argument("--card", type=Path, required=True)
     p.add_argument("--avatar", type=Path, required=True); p.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
@@ -222,6 +225,7 @@ def main(argv=None):
         elif args.command == "build": result = export(args.project, args.output, args.tavern_root)
         elif args.command == "pack-image": result = pack_image(args.card, args.avatar, args.output)
         elif args.command == "capabilities": result = capabilities(args.tavern_root)
+        elif args.command == "validate-profile": result = {"preferences": profile(args.profile), "status": "supported", "prose_review": "not_run"}
         else: result = probe(args.tavern_root)
         print(json.dumps(result, ensure_ascii=False, indent=2)); return 0
     except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
