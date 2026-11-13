@@ -20,7 +20,7 @@ const YURI_WORKFLOWS = ["adapt-yuri-card", "novel-excerpt-to-yuri-card", "post-t
 test("install manifest and contract agree on the yuri DSH plugin bundle", () => {
   assert.ok(yuriManifest, "installation manifest must declare yuriDshPlugin");
   assert.equal(yuriManifest.package, "tavernweave-yuri-dsh");
-  assert.equal(yuriManifest.version, "0.5.0");
+  assert.equal(yuriManifest.version, read("extensions/yuri-creation/VERSION").trim());
   assert.equal(yuriManifest.presetId, "tavernweave-yuri");
   assert.equal(yuriManifest.sourceDir, "host-adapters/dsh/plugin-yuri");
   assert.equal(yuriManifest.patch, "host-adapters/dsh/plugin-yuri/cordis.patch.yml");

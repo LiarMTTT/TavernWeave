@@ -124,7 +124,7 @@
   "yuriDshPlugin": {
     "status": "plugin-bundle",
     "package": "tavernweave-yuri-dsh",
-    "version": "0.5.0",
+    "version": "1.0.0",
     "presetId": "tavernweave-yuri",
     "presetName": "TavernWeave Yuri Workbench",
     "contract": "host-adapters/dsh/yuri-plugin-contract.json",

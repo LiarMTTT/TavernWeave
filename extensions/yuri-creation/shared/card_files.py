@@ -156,8 +156,9 @@ def protect_code(before, after):
               "Preserve fenced code, scripts and styles; use a separate scoped engineering edit")
 
 
-def open_project(input_path, project, limit=LIMIT):
+def open_project(input_path, project, limit=LIMIT, profile_path=None):
     project, source = Path(project).resolve(), Path(input_path).resolve()
+    preferences = p.profiles.load(profile_path)
     p.require(not project.exists() and not project.is_relative_to(p.ROOT.parents[1]), "Use a new private project outside the repository")
     p.require(source.stat().st_size <= limit, "Input exceeds --max-mib")
     raw = source.read_bytes(); fmt, docs = decode(raw, limit)
@@ -166,11 +167,17 @@ def open_project(input_path, project, limit=LIMIT):
         stage = Path(temp) / "project"; stage.mkdir()
         (stage / "source.bin").write_bytes(raw)
         p.write_new(stage / "documents.json", docs)
-        p.write_new(stage / "session.json", {"schema": "yuri/card-session/v1", "source_name": source.name,
-                    "source_sha256": p.sha(raw), "format": fmt, "documents_sha256": p.sha(p.canonical(docs)), "byte_budget": limit})
-        p.write_new(stage / "edit-plan.json", {"schema": "yuri/card-edit/v1", "source_sha256": p.sha(raw),
+        p.write_new(stage / "preferences.json", preferences)
+        profile_hash = p.sha((stage / "preferences.json").read_bytes())
+        p.write_new(stage / "session.json", {"schema": "yuri/card-session/v2", "source_name": source.name,
+                    "source_sha256": p.sha(raw), "format": fmt, "documents_sha256": p.sha(p.canonical(docs)),
+                    "profile_sha256": profile_hash, "byte_budget": limit})
+        plan = {"schema": "yuri/card-edit/v1", "source_sha256": p.sha(raw), "profile_sha256": profile_hash,
                     "documents_sha256": p.sha(p.canonical(docs)), "changes": [], "decisions": [],
-                    "agent_review": {"completed": False, "notes": []}})
+                    "agent_review": {"completed": False, "notes": []}}
+        if not p.profiles.is_default(preferences):
+            plan.update(cast=[], targets=[], policy_review=p.profiles.review_template(stage / "preferences.json"))
+        p.write_new(stage / "edit-plan.json", plan)
         os.rename(stage, project)
     return {"project": str(project), "format": fmt, "documents": {k: {"kind": shape(d)[0], "data_pointer": shape(d)[1]} for k, d in docs.items()},
             "next": "Read documents.json; agent prepares exact before/after prose edits in edit-plan.json"}
@@ -180,7 +187,15 @@ def apply(project, plan_path, output):
     project, output = Path(project), Path(output)
     p.require(not output.exists(), "Output exists; use a new result directory")
     session, plan = p.read(project / "session.json"), p.read(plan_path)
-    p.require(session.get("schema") == "yuri/card-session/v1" and plan.get("schema") == "yuri/card-edit/v1", "Unsupported session/plan")
+    p.require(session.get("schema") in ("yuri/card-session/v1", "yuri/card-session/v2") and plan.get("schema") == "yuri/card-edit/v1", "Unsupported session/plan")
+    if session["schema"] == "yuri/card-session/v2":
+        preferences = p.profiles.load(project / "preferences.json")
+        p.require(p.sha((project / "preferences.json").read_bytes()) == session.get("profile_sha256") == plan.get("profile_sha256"), "Stale inherited profile binding; open a fresh session for changed preferences")
+    else:
+        p.require(not (project / "preferences.json").exists() and "profile_sha256" not in plan and "policy_review" not in plan,
+                  "Legacy sessions have default policy only; reopen to use a saved profile")
+        preferences = p.profiles.load()
+    p.profiles.review(preferences, plan, project / "preferences.json")
     raw = (project / "source.bin").read_bytes(); fmt, docs = decode(raw, session["byte_budget"])
     baseline = p.sha(p.canonical(docs))
     p.require(p.sha(raw) == session["source_sha256"] == plan["source_sha256"] and fmt == session["format"], "Stale source binding")
@@ -193,6 +208,15 @@ def apply(project, plan_path, output):
     for decision in decisions:
         p.require(isinstance(decision, dict) and decision.get("kind") in ("identity", "relationship", "name", "invention", "preserved")
                   and isinstance(decision.get("summary"), str) and decision["summary"].strip(), "Describe adaptation decisions with kind and summary")
+    if not p.profiles.is_default(preferences):
+        cast = plan.get("cast", [])
+        p.require(all(isinstance(c, dict) and c.get("source_gender") in ("woman", "man", "unknown")
+                      and c.get("age_status") in ("adult", "minor", "unknown") for c in cast), "Record inherited source gender/age without inference")
+        selected = p.profiles.validate_targets(preferences, plan.get("targets"), cast)
+        p.profiles.relationships(preferences, decisions, {c["id"] for c in cast})
+        for change in changes:
+            mentioned = p.profiles.identifiers(change.get("character_ids"), "Change character_ids")
+            p.require(mentioned <= selected, "Prose edits must stay within saved character scope; use [] for setting-only prose")
     result, touched = copy.deepcopy(docs), set()
     for change in changes:
         key, path = change["document"], change["path"]; parts = pointer(path)
@@ -256,6 +280,7 @@ def apply(project, plan_path, output):
         p.write_new(stage / "adaptation-record.json", {"schema": "yuri/inherited-record/v1",
                     "mode": "inherited_yuri" if changes else "container_copy", "source_sha256": p.sha(raw),
                     "output_sha256": p.sha(packed), "plan_sha256": p.sha(Path(plan_path).read_bytes()), "plan": plan,
+                    "preferences": preferences,
                     "unlisted_json_values": "preserved", "unrelated_png_chunks": "preserved_byte_for_byte",
                     "host_import": "not_run", "live_roleplay": "not_run"})
         os.rename(stage, output)

@@ -5,7 +5,7 @@ description: Turn a selected novel chapter or excerpt from TXT, Markdown or EPUB
 
 # Novel excerpt to yuri card
 
-Keep reasoning in English and user interaction in the user's language. Reuse the same three localized genre defaults as post-to-yuri-card. Focus on a specific yuri adaptation: independent women, character-specific tension and a changed relationship grounded in altered circumstances. Do not spend effort recreating the upstream general conversion machinery.
+Keep reasoning in English and user interaction in the user's language. Reuse a supplied ready profile under [supported saved policies](../../references/custom-profiles.md); otherwise use the same three localized genre defaults as post-to-yuri-card. Pass `--profile PATH` at novel registration and complete the bound review. Focus on a specific yuri adaptation: independent women, character-specific tension and a changed relationship grounded in altered circumstances. Do not spend effort recreating the upstream general conversion machinery.
 
 1. Read [novel input and scope](../../references/novel-inputs.md). Catalog a supplied TXT/Markdown/EPUB with `scripts/novel_source.py index` from the extension root. An EPUB catalog reads package/navigation metadata, not the entire story. Distinguish front matter, a volume, spine documents and actual chapters. Do not assume one spine item equals one literary chapter. Do not treat TXT and EPUB editions as separate supporting sources without comparing editions.
 2. Reuse the requested scope. When none is specified, choose one short substantive chapter, explain the choice briefly and proceed; do not require a design questionnaire. If the chapter is too large for the current budget, choose an explicit scene range and record its offsets. Do not silently truncate or claim review of unread material. Use available source age information honestly and keep known-minor limitations explicit.
@@ -17,3 +17,5 @@ Keep reasoning in English and user interaction in the user's language. Reuse the
 8. Deliver the card and its embedded worldbook, with a short introduction and precise scope in the user's language. Keep original novel/artwork, extraction and adaptation records private. Take feedback in conversation. Successful extraction/export is not live host or roleplay validation.
 
 TXT/EPUB ingestion and the novel entry point share the existing extraction/build layer; they do not create a second fact store. Image-only/DRM-encrypted chapters need separately available source/OCR capabilities and are not silently substituted with invented prose.
+
+For existing artwork, inspect it and offer preservation or replacement when relevant. A user-chosen replacement follows [reference-led image adaptation](../../references/image-adaptation.md): combine the original image's observed style with the updated card's narrative direction, provide the real reference image to generation/editing, inspect the candidate and show it for user review before embedding.

@@ -25,7 +25,7 @@
 
 ### 桌面版（DSH Desktop）
 
-1. 取得已发布的 `TavernWeave-Yuri-DSH-v0.5.0.tgz`，或在源码树运行
+1. 取得已发布的 `TavernWeave-Yuri-DSH-v1.0.0.tgz`，或在源码树运行
    `node scripts/build-yuri-dsh-plugin.mjs` 重新生成同名本地包；
 2. 侧栏 **插件 → 添加插件 → 安装第三方插件**；
 3. 填入本地路径（本目录或 `.tgz`），完成安装并启用 bundle；
