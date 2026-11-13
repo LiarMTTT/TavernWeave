@@ -3,7 +3,7 @@
   "adapterVersion": "0.5.0",
   "status": "plugin-bundle",
   "supportLevel": "plugin-bundle",
-  "runtimeAccepted": false,
+  "runtimeAccepted": true,
   "modelQualityClaim": "not-evaluated",
   "package": {
     "name": "tavernweave-yuri-dsh",
@@ -91,11 +91,46 @@
     "cross-host-parity-without-host-testing"
   ],
   "evidence": {
-    "status": "pending-verification",
-    "targetDshVersion": "0.2.2-rc.1",
-    "acceptedPackageVersion": null,
-    "acceptanceNote": "The first runtime acceptance run against the current DSH build records below; until it completes, runtimeAccepted stays false.",
-    "partialChecks": []
+    "status": "accepted",
+    "runtimeAcceptedAt": "2026-11-13",
+    "acceptedDshVersion": "0.2.2-rc.1",
+    "acceptedPackageVersion": "0.5.0",
+    "acceptanceNote": "First runtime acceptance on the current DSH Desktop build (0.2.2-rc.1): the packed tgz installed through the plugin manager, both rows activated, the four tavernweave-yuri workflows and the 23 tavernweave-base dependency skills appeared in the live skill catalog, the packaged host probe verified Python/Node and the pinned authoring blobs inside the installed package, and a fresh-workspace sub-agent task on the cheaper flash model listed the workflows with their loaded source without generating a card.",
+    "partialChecks": [
+      {
+        "kind": "dsh-desktop-tgz-install",
+        "date": "2026-11-13",
+        "dshVersion": "0.2.2-rc.1",
+        "howRun": "Installed the packed TavernWeave-Yuri-DSH-v0.5.0.tgz through the plugin manager into the desktop profile (pnpm hard-linked into the profile node_modules).",
+        "observed": [
+          "Installation result application: applied; bundle tavernweave-yuri-dsh 0.5.0 enabled with no warnings.",
+          "Rows tavernweave-yuri-dsh and preset-tavernweave-yuri are enabled with fiberPhase active.",
+          "preset-tavernweave-yuri projects a valid agent-preset Config schema.",
+          "The live skill catalog contains the four tavernweave-yuri workflows (source bundled, rank 600) plus the 23 tavernweave-base dependency skills.",
+          "The packaged host_probe.py exited 0 against the installed package: version 0.5.0, python 3.12.10, node available, authoring_dependency pinned_authoring_files, source_library pin_verified."
+        ],
+        "notYetVerified": [
+          "Plugins-page visual appearance and rendered icon (no browser control available for this run)",
+          "Disable/uninstall removes all registrations",
+          "Linux/WSL run and real SillyTavern acceptance"
+        ]
+      },
+      {
+        "kind": "subagent-discovery-check",
+        "date": "2026-11-13",
+        "dshVersion": "0.2.2-rc.1",
+        "model": "deepseek-account/deepseek-flash",
+        "howRun": "Opened a fresh-workspace sub-agent task on the cheaper flash model and sent the discovery prompt: list the four yuri workflows actually available from tavernweave-yuri and identify their loaded source, check file-tool and Python availability, and do not generate a card yet.",
+        "observed": [
+          "The agent listed exactly yuri-card-creator, adapt-yuri-card, post-to-yuri-card and novel-excerpt-to-yuri-card with provider tavernweave-yuri and source bundled.",
+          "The agent identified the loaded source as the installed package path <profile>/node_modules/tavernweave-yuri-dsh/extensions/yuri-creation/skills/<name>/SKILL.md.",
+          "host_probe.py ran cleanly (python 3.12.10, node available, source_library pin_verified); card_file.py, novel_source.py and source_card.py load.",
+          "File tools were verified with a scratch write/read/delete; the scratch file was removed.",
+          "No card was generated and the probe workspace stayed empty."
+        ],
+        "notYetVerified": []
+      }
+    ]
   },
   "knownEnvironmentIssues": []
 }
